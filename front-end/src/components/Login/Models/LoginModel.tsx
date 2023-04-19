@@ -7,6 +7,7 @@ import * as THREE from "three";
 import React, { useEffect, useRef } from "react";
 import { useGLTF, OrthographicCamera, useAnimations } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { handlerType } from "../../../pages/Login/Login";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -61,12 +62,14 @@ type ActionName =
   | "Plane.004Action";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
-export function Model(props: JSX.IntrinsicElements["group"]) {
+export function Model(props: JSX.IntrinsicElements["group"] & handlerType) {
   const group = useRef<THREE.Group | any>();
   const { nodes, materials, animations } = useGLTF(
     "/models/login.glb"
   ) as GLTFResult;
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
+
+  const handleClassNameToggle = props?.handler;
 
   useEffect(() => {
     // actions["Plane.002Action"]?.play();
@@ -77,27 +80,47 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <group name="Scene">
+      <group name="Scene" position={[0, 0, 0]}>
         <group
           name="Area"
           position={[0, 8.39, 0]}
           rotation={[-Math.PI / 2, 0, 0]}
+          castShadow={true}
+          receiveShadow={true}
+          onClick={() => {
+            handleClassNameToggle();
+          }}
         />
         <group
           name="Area001"
           position={[-7.17, 4.4, -4.46]}
           rotation={[-Math.PI / 2, 0, 0]}
+          castShadow={true}
+          receiveShadow={true}
+          onClick={() => {
+            handleClassNameToggle();
+          }}
         />
         <group name="Plane">
           <mesh
             name="Plane_1"
             geometry={nodes.Plane_1.geometry}
             material={materials["Material.002"]}
+            castShadow={true}
+            receiveShadow={true}
+            onClick={() => {
+              handleClassNameToggle();
+            }}
           />
           <mesh
             name="Plane_2"
             geometry={nodes.Plane_2.geometry}
             material={materials["Material.003"]}
+            castShadow={true}
+            receiveShadow={true}
+            onClick={() => {
+              handleClassNameToggle();
+            }}
           />
         </group>
         <group name="Plane001">
@@ -105,11 +128,21 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
             name="Plane001_1"
             geometry={nodes.Plane001_1.geometry}
             material={materials["Material.004"]}
+            castShadow={true}
+            receiveShadow={true}
+            onClick={() => {
+              handleClassNameToggle();
+            }}
           />
           <mesh
             name="Plane001_2"
             geometry={nodes.Plane001_2.geometry}
             material={materials["Material.005"]}
+            castShadow={true}
+            receiveShadow={true}
+            onClick={() => {
+              handleClassNameToggle();
+            }}
           />
         </group>
         <mesh
@@ -117,6 +150,11 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           geometry={nodes.Circle.geometry}
           material={materials["Material.006"]}
           position={[-0.2, 0.97, 0]}
+          castShadow={true}
+          receiveShadow={true}
+          onClick={() => {
+            handleClassNameToggle();
+          }}
         />
         {/* <mesh
           name="Plane002"
@@ -129,12 +167,19 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           geometry={nodes.Circle002.geometry}
           material={materials["Material.008"]}
           position={[-0.2, 0.97, 0]}
+          castShadow={true}
+          receiveShadow={true}
+          onClick={() => {
+            handleClassNameToggle();
+          }}
         />
         <mesh
           name="Plane003"
           geometry={nodes.Plane003.geometry}
           material={materials["Material.001"]}
           scale={18.93}
+          castShadow={true}
+          receiveShadow={true}
         />
         <mesh
           name="Plane005"
@@ -142,6 +187,11 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           material={materials["Material.003"]}
           position={[2.51, 0, -1.7]}
           rotation={[0, 0.5, 0]}
+          castShadow={true}
+          receiveShadow={true}
+          onClick={() => {
+            handleClassNameToggle();
+          }}
         >
           <mesh
             name="Circle003"
@@ -149,6 +199,8 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
             material={materials["Material.004"]}
             position={[0, 0.25, -0.34]}
             scale={0.89}
+            castShadow={true}
+            receiveShadow={true}
           />
           <mesh
             name="Circle004"
@@ -156,12 +208,16 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
             material={materials["Material.004"]}
             position={[0, 0.25, -0.66]}
             scale={0.89}
+            castShadow={true}
+            receiveShadow={true}
           />
           <mesh
             name="Plane006"
             geometry={nodes.Plane006.geometry}
             material={materials["Material.009"]}
             position={[-0.01, 0.25, 0.6]}
+            castShadow={true}
+            receiveShadow={true}
           />
         </mesh>
         <mesh
@@ -169,23 +225,37 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           geometry={nodes.Plane007.geometry}
           material={materials["Material.002"]}
           position={[1.39, 0.16, 1.2]}
+          castShadow={true}
+          receiveShadow={true}
+          onClick={() => {
+            handleClassNameToggle();
+          }}
         />
         <mesh
           name="Vert"
           geometry={nodes.Vert.geometry}
           material={materials["Material.002"]}
           position={[1.72, 0.16, 1.2]}
+          castShadow={true}
+          receiveShadow={true}
+          onClick={() => {
+            handleClassNameToggle();
+          }}
         />
         <group name="Plane008" position={[-0.64, 2.82, 0]} scale={1.18}>
           <mesh
             name="Plane009"
             geometry={nodes.Plane009.geometry}
             material={materials["Material.012"]}
+            castShadow={true}
+            receiveShadow={true}
           />
           <mesh
             name="Plane009_1"
             geometry={nodes.Plane009_1.geometry}
             material={materials["Material.010"]}
+            castShadow={true}
+            receiveShadow={true}
           />
         </group>
       </group>
@@ -193,10 +263,10 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-function LoginModel() {
+function LoginModel({ handler }: handlerType) {
   return (
     <>
-      <Model />
+      <Model handler={handler} />
     </>
   );
 }
