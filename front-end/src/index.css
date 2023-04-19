@@ -9,6 +9,10 @@
   --color-light-grey: #7c7979;
   --color-blue: #73aace;
   --color-black: #000000;
+  /* 로그인 깃허브 색상 */
+  --color-dark-blue: #24292f;
+  /* 로그인 티스토리 색상 */
+  --color-dark-red: #cb4f40;
   --hover-color: #6495ed;
 
   /* Font size */

@@ -59,18 +59,33 @@ export function CameraAndLight(props: JSX.IntrinsicElements["group"]) {
           zoom={80}
         />
 
+        {/* 빛 */}
         <pointLight
-          intensity={5}
+          intensity={3}
           decay={2}
           color="#ff6728"
           position={[-3.77, 2.82, -1.77]}
           rotation={[-Math.PI / 2, 0, -Math.PI]}
         />
         <pointLight
-          intensity={5}
+          intensity={3}
           decay={2}
           color="#ff4f28"
           position={[3.14, 2.92, -3.19]}
+          rotation={[-Math.PI / 2, 0, -Math.PI]}
+        />
+        <pointLight
+          intensity={2}
+          decay={2}
+          color="#ff4f28"
+          position={[0, 1, 20]}
+          rotation={[-Math.PI / 2, 0, -Math.PI]}
+        />
+        <pointLight
+          intensity={1}
+          decay={2}
+          color="#ff4f28"
+          position={[1, 2, 1]}
           rotation={[-Math.PI / 2, 0, -Math.PI]}
         />
       </group>
