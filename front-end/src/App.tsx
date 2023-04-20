@@ -8,6 +8,7 @@ function App() {
   // Code Splitting
   const Login = React.lazy(() => import("./pages/Login/Login"));
   const CSQuiz = React.lazy(() => import("./pages/CSQuiz/CSQuiz"));
+  const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
 
   return (
     <div className="App">
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/CSQuiz" element={<CSQuiz />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </Suspense>
