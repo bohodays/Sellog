@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 function App() {
   // Code Splitting
   const Login = React.lazy(() => import("./pages/Login/Login"));
+  const CSQuiz = React.lazy(() => import("./pages/CSQuiz/CSQuiz"));
 
   return (
     <div className="App">
@@ -15,6 +16,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/CSQuiz" element={<CSQuiz />} />
           </Routes>
         </BrowserRouter>
       </Suspense>
