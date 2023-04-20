@@ -80,7 +80,7 @@ export function Model(props: JSX.IntrinsicElements["group"] & handlerType) {
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <group name="Scene" position={[0, 0, 0]}>
+      <group name="Scene" position={[1, 0, 1]}>
         <group
           name="Area"
           position={[0, 8.39, 0]}

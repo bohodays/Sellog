@@ -7,12 +7,15 @@
   --color-dark-grey: #4d4d4d;
   --color-grey: #616161;
   --color-light-grey: #7c7979;
-  --color-blue: #73aace;
+  --color-blue: #1e57a4;
   --color-black: #000000;
   /* 로그인 깃허브 색상 */
   --color-dark-blue: #24292f;
   /* 로그인 티스토리 색상 */
   --color-dark-red: #cb4f40;
+  --color-beige: #fdeccf;
+  --color-green: #008037;
+  --color-yellow: #e9b50a;
   --hover-color: #6495ed;
 
   /* Font size */
