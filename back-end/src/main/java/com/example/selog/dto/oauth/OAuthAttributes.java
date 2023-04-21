@@ -37,6 +37,7 @@ public class OAuthAttributes implements OAuth2User, Authentication {
         if(registrationId.equals("github")){
             return ofGithub(accessToken.getTokenValue(), userNameAttributeName, attributes);
         }
+        log.info(userNameAttributeName);
         return ofGithub(accessToken.getTokenValue(), userNameAttributeName, attributes);
     }
 
