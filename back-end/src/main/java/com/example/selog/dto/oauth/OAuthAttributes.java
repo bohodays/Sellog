@@ -34,11 +34,13 @@ public class OAuthAttributes implements OAuth2User, Authentication {
     }
 
     public static OAuthAttributes of(OAuth2AccessToken accessToken, String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
+        if(registrationId.equals("github")){
+            return ofGithub(accessToken.getTokenValue(), userNameAttributeName, attributes);
+        }
         return ofGithub(accessToken.getTokenValue(), userNameAttributeName, attributes);
     }
 
     private static OAuthAttributes ofGithub(String accessToken, String userNameAttributeName, Map<String, Object> attributes) {
-        log.info(userNameAttributeName);
         log.info(attributes.toString());
         return OAuthAttributes.builder().name((String) attributes.get("name"))
                 .email((String) attributes.get("login"))
