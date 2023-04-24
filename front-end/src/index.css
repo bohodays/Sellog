@@ -1,4 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
 /* Global setup */
+
 :root {
   /* Color */
   --color-white: #ffffff;
@@ -35,11 +37,17 @@
 
   /* Animation */
   --animation-duration: 300ms;
+
+  /*Font*/
+  --neon-text-color: rgba(250, 255, 0, 1);
+  --neon-border-color: rgba(131, 270, 240, 1);
 }
 
 /* Universal tags */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {

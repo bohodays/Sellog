@@ -1,5 +1,5 @@
 import React from "react";
-import NotFoundBackground from "../../assets/imgs/retro/404NotFound.png";
+import NotFoundBackground from "@/assets/imgs/retro/404NotFound.png";
 import { SMain } from "./styles";
 
 const NotFound = () => {
