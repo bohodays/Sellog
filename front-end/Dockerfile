@@ -1,7 +1,7 @@
 FROM node:18.13.0 as build
 
 WORKDIR /app
-COPY package*.json .
+COPY package*.json ./
 
 RUN npm install 
 RUN npm install vite@4.2.2
