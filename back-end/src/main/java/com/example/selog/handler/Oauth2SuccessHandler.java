@@ -45,9 +45,11 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
         StringBuilder sb = new StringBuilder();
         sb.append(redirectUrl)
                 .append("&userId=")
-                .append(userId);
+                .append(userId)
+                .append("&accessToken=")
+                .append(oAuthAttributes.getAccessToken());
 
-//        response.sendRedirect(sb.toString());
+        response.sendRedirect(sb.toString());
 
     }
 }
