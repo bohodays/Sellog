@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
@@ -36,8 +37,9 @@ public class OAuthAttributes implements OAuth2User, Authentication {
     public static OAuthAttributes of(OAuth2AccessToken accessToken, String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
         if(registrationId.equals("github")){
             return ofGithub(accessToken.getTokenValue(), userNameAttributeName, attributes);
+        }else if(registrationId.equals("tistory")){
+            return ofTistory(accessToken.getTokenValue(), userNameAttributeName, attributes);
         }
-        log.info(userNameAttributeName);
         return ofGithub(accessToken.getTokenValue(), userNameAttributeName, attributes);
     }
 
@@ -50,6 +52,17 @@ public class OAuthAttributes implements OAuth2User, Authentication {
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }
+
+    private static OAuthAttributes ofTistory(String accessToken, String userNameAttributeName, Map<String, Object> attributes) {
+        log.info(((ArrayList<Object>) attributes.get("blogs")).get(0).toString());
+        return OAuthAttributes.builder().name((String)((Map<String, Object>)((ArrayList<Object>) attributes.get("blogs")).get(0)).get("name"))
+                .email((String) attributes.get("id"))
+                .accessToken(accessToken)
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
+    }
+
     @Override
     public Map<String, Object> getAttribute(String name) {
         return attributes;
