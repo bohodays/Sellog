@@ -1,5 +1,15 @@
-@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
 /* Global setup */
+
+/* Fonts */
+@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
+@font-face {
+  font-family: neon;
+  src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
+}
+@font-face {
+  font-family: Neoneon;
+  src: url("./assets/font/Neoneon.otf");
+}
 
 :root {
   /* Color */
