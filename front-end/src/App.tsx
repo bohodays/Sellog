@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 function App() {
   // Code Splitting
   const Login = React.lazy(() => import("./pages/Login/Login"));
+  const Main = React.lazy(() => import("./pages/Main/Main"));
   const CSQuiz = React.lazy(() => import("./pages/CSQuiz/CSQuiz"));
   const ItemShop = React.lazy(() => import("./pages/ItemShop/ItemShop"));
   const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
@@ -20,6 +21,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/csquiz" element={<CSQuiz />} />
             <Route path="/item-shop" element={<ItemShop />} />
+            <Route path="/main" element={<Main />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
