@@ -1,7 +1,9 @@
 package com.example.selog.handler;
 
+import com.example.selog.dto.member.TokenDto;
 import com.example.selog.dto.oauth.OAuthAttributes;
 import com.example.selog.entity.Member;
+import com.example.selog.jwt.TokenProvider;
 import com.example.selog.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,7 @@ import java.util.Optional;
 @Component
 public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
 
+    private final TokenProvider jwtTokenProvider;
     private final MemberRepository memberRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     @Value("${social.login.redirectUrl}")
@@ -35,19 +38,38 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
 
         OAuthAttributes oAuthAttributes = (OAuthAttributes) authentication.getPrincipal();
 
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(oAuthAttributes.getEmail(),"1234");
+
+        log.info(authenticationToken.toString());
+        // 2. 실제로 검증 (사용자 비밀번호 체크) 이 이루어지는 부분
+        Authentication auth = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+
+        TokenDto tokenDto = jwtTokenProvider.createTokenDto(auth);
+
         log.info("accessToken : {}",oAuthAttributes.getAccessToken());
         log.info("social login user email: {} ",oAuthAttributes.getEmail());
 
         Optional<Member> result = memberRepository.findByEmail(oAuthAttributes.getEmail());
         Member member = result.get();
         Long userId = member.getUserId();
+        int newUser = 0;
+
+        //새로 등록한 유저
+        if(member.getMotto() == null) {
+            member.updateRefreshToken(tokenDto.getRefreshToken());
+            newUser = 1;
+        }
+        memberRepository.save(member);
 
         StringBuilder sb = new StringBuilder();
-        sb.append(redirectUrl)
+        sb.append(redirectUrl).append("?refreshToken=")
+                .append(tokenDto.getRefreshToken())
+                .append("&accessToken=")
+                .append(tokenDto.getAccessToken())
                 .append("&userId=")
                 .append(userId)
-                .append("&accessToken=")
-                .append(oAuthAttributes.getAccessToken());
+                .append("&newUser=")
+                .append(newUser);
 
         response.sendRedirect(sb.toString());
 

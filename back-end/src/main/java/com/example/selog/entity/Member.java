@@ -23,6 +23,8 @@ public class Member extends BaseTime{
     @Column(name="email", nullable = false)
     private String email;
 
+    private String password;
+
     @Column(name = "nickname", length = 20, nullable = false)
     private String nickname;
 
@@ -40,5 +42,36 @@ public class Member extends BaseTime{
 
     @Column(name="cs_target")
     private String csTarget;
+
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
+    @Column(name="refresh_token")
+    private String refreshToken;
+
+    @Column(name="tistory")
+    private String tistory;
+
+    @Column(name="velog")
+    private String velog;
+
+    @Column(name="github")
+    private String github;
+
+    @Column(name="baekjoon")
+    private String baekjoon;
+
+    @Column(name="motto")
+    private String motto;
+
+    public void updateTistory(String tistory) {
+        this.tistory = tistory;
+    }
+    public void updateGithub(String github) {
+        this.github = github;
+    }
+    public void updateRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 
 }
