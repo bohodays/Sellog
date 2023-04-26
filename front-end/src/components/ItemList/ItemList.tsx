@@ -48,6 +48,26 @@ const dummyItemList = [
     point: 300,
     category: "DECORATION",
   },
+  {
+    name: "flower",
+    point: 300,
+    category: "decoration",
+  },
+  {
+    name: "flower",
+    point: 300,
+    category: "decoration",
+  },
+  {
+    name: "flower",
+    point: 300,
+    category: "decoration",
+  },
+  {
+    name: "flower",
+    point: 300,
+    category: "decoration",
+  },
 ];
 
 interface categoryProps {
