@@ -4,7 +4,7 @@ import CameraAndLight from "../../components/Login/Models/CameraAndLight";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { SMain } from "./styles";
-import LoginForm from "@/components/Login/LoginForm/LoginForm";
+import LoginForm from "../../components/Login/LoginForm/LoginForm";
 
 export type handlerType = {
   handler: () => void;

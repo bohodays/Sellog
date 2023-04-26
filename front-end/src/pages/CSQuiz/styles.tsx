@@ -4,7 +4,6 @@ export const SMain = styled.main`
   position: relative;
   height: 100%;
   background-color: var(--color-beige);
-  background-color: var(--color-beige);
 
   .go-to-home {
     background-color: var(--color-green);
