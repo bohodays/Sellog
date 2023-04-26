@@ -1,5 +1,6 @@
 package com.example.selog.entity;
 
+import com.example.selog.dto.member.SignUpDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,9 +21,13 @@ public class Member extends BaseTime{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
+    @Column(name = "img")
+    private String img;
+
     @Column(name="email", nullable = false)
     private String email;
 
+    @Column(name="password", nullable = false)
     private String password;
 
     @Column(name = "nickname", length = 20, nullable = false)
@@ -49,17 +54,23 @@ public class Member extends BaseTime{
     @Column(name="refresh_token")
     private String refreshToken;
 
-    @Column(name="tistory")
-    private String tistory;
+    @Column(name="tistory_token")
+    private String tistoryToken;
+
+    @Column(name="github_token")
+    private String githubToken;
 
     @Column(name="velog")
     private String velog;
 
-    @Column(name="github")
-    private String github;
-
     @Column(name="baekjoon")
     private String baekjoon;
+
+    @Column(name="tistory")
+    private String tistory;
+
+    @Column(name="github")
+    private String github;
 
     @Column(name="motto")
     private String motto;
@@ -67,14 +78,34 @@ public class Member extends BaseTime{
     @Column(name="character_id")
     private Integer characterId;
 
-    public void updateTistory(String tistory) {
-        this.tistory = tistory;
+    @Column(name = "tel")
+    private String tel;
+
+    @Column(name = "contact")
+    private String contact;
+
+    public void updateTistoryToken(String tistoryToken) {
+        this.tistoryToken = tistoryToken;
     }
-    public void updateGithub(String github) {
-        this.github = github;
+    public void updateGithubToken(String githubToken) {
+        this.githubToken = githubToken;
     }
     public void updateRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
+    public void updateImg(String img){
+        this.img = img;
+    }
 
+    public void updateSignUp(SignUpDto signUpDto){
+        this.tel = signUpDto.getTel();
+        this.contact = signUpDto.getContact();
+        this.motto = signUpDto.getMotto();
+        this.characterId = signUpDto.getCharacterId();
+
+        this.velog = signUpDto.getVelog();
+        this.baekjoon = signUpDto.getBaekjoon();
+        this.github = signUpDto.getGithub();
+        this.tistory = signUpDto.getTistory();
+    }
 }
