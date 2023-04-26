@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { SMain } from "./styles";
 import LoginForm from "@/components/Login/LoginForm/LoginForm";
+import { Room1 } from "@/components/MyRoom/Models/Room1";
 
 export type handlerType = {
   handler: () => void;
