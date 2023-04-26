@@ -64,6 +64,9 @@ public class Member extends BaseTime{
     @Column(name="motto")
     private String motto;
 
+    @Column(name="character_id")
+    private Integer characterId;
+
     public void updateTistory(String tistory) {
         this.tistory = tistory;
     }
