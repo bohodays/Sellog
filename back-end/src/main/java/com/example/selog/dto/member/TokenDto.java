@@ -3,7 +3,6 @@ package com.example.selog.dto.member;
 import lombok.*;
 
 @Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

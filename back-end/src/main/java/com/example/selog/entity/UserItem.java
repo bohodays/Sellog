@@ -1,5 +1,6 @@
 package com.example.selog.entity;
 
+import com.example.selog.dto.room.ItemDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,4 +41,17 @@ public class UserItem extends BaseTime {
     @ManyToOne
     private Item item;
 
+    public void updateItemLocation(String x, String y, String z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    public ItemDto toDto() {
+        return ItemDto.builder()
+                .id(id)
+                .roomId(room.getId())
+                .itemId(item.getId())
+                .x(x).y(y).z(z).build();
+    }
 }
