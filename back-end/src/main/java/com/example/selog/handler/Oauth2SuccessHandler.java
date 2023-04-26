@@ -57,6 +57,7 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
         //새로 등록한 유저
         if(member.getMotto() == null) {
             member.updateRefreshToken(tokenDto.getRefreshToken());
+
             newUser = 1;
         }
         memberRepository.save(member);
