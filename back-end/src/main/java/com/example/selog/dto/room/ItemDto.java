@@ -1,6 +1,5 @@
 package com.example.selog.dto.room;
 
-import com.example.selog.dto.member.MemberResponseDto;
 import com.example.selog.entity.UserItem;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
