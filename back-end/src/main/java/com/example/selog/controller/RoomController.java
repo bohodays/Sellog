@@ -1,6 +1,6 @@
 package com.example.selog.controller;
 
-import com.example.selog.dto.room.ItemDto;
+import com.example.selog.dto.room.UserItemDto;
 import com.example.selog.exception.CustomException;
 import com.example.selog.exception.error.ErrorCode;
 import com.example.selog.response.ErrorResponse;
@@ -24,8 +24,8 @@ public class RoomController {
     @GetMapping("/{room_id}")
     public ResponseEntity<?> findRoomInfoById(@PathVariable Long room_id) {
         try{
-            List<ItemDto> itemDtoList = roomService.findRoomInfoById(room_id);
-            return new ResponseEntity<>(new SuccessResponse(itemDtoList), HttpStatus.OK);
+            List<UserItemDto> userItemDtoList = roomService.findRoomInfoById(room_id);
+            return new ResponseEntity<>(new SuccessResponse(userItemDtoList), HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
@@ -34,9 +34,9 @@ public class RoomController {
     }
 
     @PutMapping
-    public ResponseEntity<?> updateItemLocation(@RequestBody List<ItemDto> itemDtoList) {
+    public ResponseEntity<?> updateItemLocation(@RequestBody List<UserItemDto> userItemDtoList) {
         try{
-            List<ItemDto> updateItemList = roomService.updateItemLocation(itemDtoList);
+            List<UserItemDto> updateItemList = roomService.updateItemLocation(userItemDtoList);
             return new ResponseEntity<>(new SuccessResponse(updateItemList), HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
@@ -48,8 +48,8 @@ public class RoomController {
     @GetMapping("items/{room_id}")
     public ResponseEntity<?> findUserItemByRoomId(@PathVariable Long room_id) {
         try{
-            List<ItemDto> itemDtoList = roomService.findUserItemByRoomId(room_id);
-            return new ResponseEntity<>(new SuccessResponse(itemDtoList), HttpStatus.OK);
+            List<UserItemDto> userItemDtoList = roomService.findUserItemByRoomId(room_id);
+            return new ResponseEntity<>(new SuccessResponse(userItemDtoList), HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
