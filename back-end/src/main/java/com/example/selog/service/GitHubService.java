@@ -147,7 +147,7 @@ public class GitHubService {
         HashMap<String, Object> requestMap = new HashMap<>();
         HashMap<String, Object> inner = new HashMap<>();
 
-        inner.put("url","http://k8a404.p.ssafy.io:8080/webhook");
+        inner.put("url","http://k8a404.p.ssafy.io:8080/api/webhook");
         inner.put("content_type","json");
         inner.put("insecure_ssl","0");
 
