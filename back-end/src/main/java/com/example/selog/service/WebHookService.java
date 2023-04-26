@@ -19,6 +19,9 @@ public class WebHookService {
     public void createRecord(HashMap<String, Object> request) {
 
         HashMap<String,Object> sender = (HashMap<String, Object>) request.get("sender");
+        HashMap<String,Object> repository = (HashMap<String, Object>) request.get("repository");
+
+        String repoName = (String)repository.get("name");
         String who = (String)sender.get("login");
 
         Optional<Member> member = memberRepository.findByEmail(who);
@@ -29,7 +32,7 @@ public class WebHookService {
 
         Record record = Record.builder()
                 .category("github")
-                .content("commit")
+                .content(repoName)
                 .member(member.get())
                 .build();
 
