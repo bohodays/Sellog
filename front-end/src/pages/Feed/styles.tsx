@@ -8,23 +8,28 @@ export const SMain = styled.main`
   border: 12px solid;
   .sticker1 {
     position: absolute;
-    left: 6vw;
+    left: 4vw;
     bottom: 3rem;
+    width: 8vw;
+  }
+  .sticker2 {
+    position: absolute;
+    right: 5vw;
+    top: 10rem;
     width: 8vw;
   }
 `;
 
 export const SHeader = styled.header`
-  height: 20%;
+  height: 15%;
   margin-bottom: 7%;
-
   .home {
     /* position: absolute; */
     width: 0px;
     height: 0px;
-    border-top: 89px solid black;
+    border-top: 7rem solid black;
     border-left: 0px solid transparent;
-    border-right: 593px solid transparent;
+    border-right: 40rem solid transparent;
   }
   .go-to-home {
     background-color: var(--color-green);
