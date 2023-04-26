@@ -8,7 +8,7 @@ import ItemList from "@/components/ItemList/ItemList";
 const ItemShop = () => {
   const repeatDots = () => {
     let arr = [];
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 10; i++) {
       arr.push(<div className="dot"></div>);
     }
     return arr;
@@ -27,7 +27,9 @@ const ItemShop = () => {
           <h6 className="item__category">furniture</h6>
           <h6 className="item__category">furniture</h6>
         </h1>
-        <ItemList></ItemList>
+        <div>
+          <ItemList></ItemList>
+        </div>
       </SContainer>
       <SGhostContainer position={"top"}>
         {repeatDots()}
