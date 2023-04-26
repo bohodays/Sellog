@@ -19,6 +19,8 @@ type ActionName = "default" | "walk";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
 export function Ilbuni(props: JSX.IntrinsicElements["group"] | any) {
+  console.log(props, 11);
+
   const userModelRef = props.userModelRef;
   const group = useRef<THREE.Group | any>();
   const camera = useRef<THREE.OrthographicCamera>(null); // 카메라의 참조값을 담을 useRef 선언
@@ -28,8 +30,8 @@ export function Ilbuni(props: JSX.IntrinsicElements["group"] | any) {
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
   useEffect(() => {
-    // actions["default"]?.play();
-    actions["walk"]?.play();
+    actions["default"]?.play();
+    // actions["walk"]?.play();
 
     if (camera.current) {
       camera.current.updateProjectionMatrix(); // 카메라의 updateProjectionMatrix() 호출

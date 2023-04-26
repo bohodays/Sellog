@@ -1,16 +1,45 @@
 // import React from 'react'
 
-import { OrbitControls, useTexture } from "@react-three/drei";
+import {
+  OrbitControls,
+  useGLTF,
+  useTexture,
+  useAnimations,
+  OrthographicCamera,
+} from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Suspense, useRef } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { SMain } from "./styles";
 import { PCFSoftShadowMap, RepeatWrapping, Vector2, Vector3 } from "three";
 import { Ilbuni } from "@/components/Main/Models/Ilbuni";
 import GridImg from "../../assets/imgs/main/grid.png";
 import { House } from "@/components/Main/Models/House";
 import { gsap } from "gsap";
+import * as THREE from "three";
+import { GLTF } from "three-stdlib";
+
+type GLTFResult = GLTF & {
+  nodes: {
+    Cube: THREE.SkinnedMesh;
+    Bone: THREE.Bone;
+    Bone003: THREE.Bone;
+    Bone005: THREE.Bone;
+  };
+  materials: {
+    Material: THREE.MeshStandardMaterial;
+  };
+};
+
+type ActionName = "default" | "walk";
+type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
 const Scene = () => {
+  const group = useRef<THREE.Group | any>();
+  const { nodes, materials, animations } = useGLTF(
+    "/models/ilbuni.glb"
+  ) as GLTFResult;
+  const { actions } = useAnimations<GLTFActions | any>(animations, group);
+
   const userModelRef = useRef<any>();
   const pointerRef = useRef<any>();
   const spotRef = useRef<any>();
@@ -49,11 +78,8 @@ const Scene = () => {
       userModelRef.current?.mixer.update(delta);
     }
 
-    // console.log(userModelRef.current, "확인");
-
     if (userModelRef.current) {
       camera.lookAt(userModelRef.current.position);
-      // console.log(userModelRef.current.position);
     }
 
     if (userModelRef.current) {
@@ -67,22 +93,15 @@ const Scene = () => {
           destinationPoint.z - userModelRef.current.position.z,
           destinationPoint.x - userModelRef.current.position.x
         );
+
         userModelRef.current.position.x += Math.cos(angle) * 0.05;
         userModelRef.current.position.z += Math.sin(angle) * 0.05;
-        // console.log(
-        //   userModelRef.current.position.x,
-        //   userModelRef.current.position.z,
-        //   gl.domElement.clientHeight,
-        //   "좌표"
-        // );
 
-        // camera.position.x = cameraPosition.x + userModelRef.current.position.x;
-        // camera.position.z = cameraPosition.z + userModelRef.current.position.z;
-        camera.position.x = cameraPosition.x;
-        camera.position.z = cameraPosition.z;
-        // console.log(camera.position, "카메라 포지션");
+        camera.position.x = cameraPosition.x + userModelRef.current.position.x;
+        camera.position.z = cameraPosition.z + userModelRef.current.position.z;
 
-        // 애니메이션 변환 추가해야 됨
+        actions["default"]?.stop();
+        actions["walk"]?.play();
 
         if (
           Math.abs(destinationPoint.x - userModelRef.current.position.x) <
@@ -112,25 +131,27 @@ const Scene = () => {
             });
             gsap.to(camera.position, {
               duration: 1,
-              y: 3,
+              y: 2.5,
             });
           }
         } else if (houseRef.current?.visible) {
           console.log("들어가");
-          houseRef.current.visible = false;
           spotRef.current.material.color.set("yellow");
           gsap.to(houseRef.current.position, {
-            duration: 5,
+            duration: 0.5,
             y: -1.3,
           });
           gsap.to(camera.position, {
             duration: 1,
             y: 4,
           });
+          setTimeout(() => {
+            houseRef.current.visible = false;
+          }, 400);
         }
       } else {
-        // 서 있는 상태
-        // 애니메이션 추가해야 됨
+        actions["walk"]?.stop();
+        actions["default"]?.play();
       }
     }
 
@@ -138,8 +159,6 @@ const Scene = () => {
   }
 
   draw();
-
-  // console.log(camera);
 
   function setSize() {
     camera.left = -(window.innerWidth / window.innerHeight);
@@ -156,7 +175,7 @@ const Scene = () => {
   function checkIntersects() {
     const intersects = raycaster?.intersectObjects(scene.children);
     for (const item of intersects) {
-      if (item.object.name === "floor") {
+      if (item.object.name === "floor" || item.object.name === "spot") {
         destinationPoint.x = item.point.x;
         destinationPoint.y = 0.3;
         destinationPoint.z = item.point.z;
@@ -175,7 +194,6 @@ const Scene = () => {
   function calculateMousePosition(e: MouseEvent | Touch) {
     mouse.x = (e.clientX / gl.domElement.clientWidth) * 2 - 1;
     mouse.y = -((e.clientY / gl.domElement.clientHeight) * 2 - 1);
-    // console.log(e.clientX, e.clientY, mouse, gl.domElement);
   }
 
   // 변환된 마우스 좌표를 이용해 레이캐스팅
@@ -190,7 +208,6 @@ const Scene = () => {
     calculateMousePosition(e);
   });
   gl.domElement.addEventListener("mouseup", (e: MouseEvent) => {
-    console.log(mouse, "왜?");
     isPressed = false;
   });
   gl.domElement.addEventListener("mousemove", (e: MouseEvent) => {
@@ -212,13 +229,6 @@ const Scene = () => {
       calculateMousePosition(e.touches[0]);
     }
   });
-
-  // useFrame(() => {
-  //   draw();
-  //   if (houseRef.current) {
-  //     console.log("visible", houseRef.current.visible);
-  //   }
-  // });
 
   return (
     <Suspense>
@@ -246,11 +256,42 @@ const Scene = () => {
       </mesh>
 
       {/* 일분이 모델 */}
-      <Ilbuni
-        userModelRef={userModelRef}
-        position={[0, 0.3, 0]}
-        name="ilbuni"
-      />
+      <group ref={group} dispose={null} position={[0, 0.3, 0]} name="ilbuni">
+        <group name="Scene">
+          {/* 카메라 */}
+          <OrthographicCamera
+            makeDefault={true}
+            left={-(window.innerWidth / window.innerHeight)}
+            right={window.innerWidth / window.innerHeight}
+            top={1}
+            bottom={-1}
+            near={-1000}
+            far={1000}
+            zoom={0.2}
+            // position={[-2, 4, 5]}
+          />
+          <group
+            name="Armature"
+            position={[0, -0.17, 0]}
+            scale={0.33}
+            castShadow={true}
+            receiveShadow={true}
+            ref={userModelRef}
+          >
+            <primitive object={nodes.Bone} />
+            <primitive object={nodes.Bone003} />
+            <primitive object={nodes.Bone005} />
+            <skinnedMesh
+              name="Cube"
+              geometry={nodes.Cube.geometry}
+              material={materials.Material}
+              skeleton={nodes.Cube.skeleton}
+              castShadow={true}
+              receiveShadow={true}
+            />
+          </group>
+        </group>
+      </group>
 
       {/* 일분이를 따라다니는 pointMesh */}
       <mesh
@@ -281,7 +322,12 @@ const Scene = () => {
       </mesh>
 
       {/* 집 */}
-      <House ref={houseRef} position={[5, -1.3, 2]} castShadow={true} />
+      <House
+        houseRef={houseRef}
+        visible={false}
+        position={[5, -1.3, 2]}
+        castShadow={true}
+      />
     </Suspense>
   );
 };
@@ -290,12 +336,6 @@ const Main = () => {
   return (
     <SMain>
       <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
-        <OrbitControls
-          enableRotate={false}
-          enableZoom={false}
-          // 쉬프트 마우스 왼쪽 이동 막는 기능
-          enablePan={false}
-        />
         <Scene />
       </Canvas>
     </SMain>

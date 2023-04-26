@@ -17,10 +17,10 @@ type GLTFResult = GLTF & {
   };
 };
 
-export function House(props: JSX.IntrinsicElements["group"]) {
+export function House(props: JSX.IntrinsicElements["group"] | any) {
   const { nodes, materials } = useGLTF("/models/house.glb") as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group ref={props.houseRef} {...props} dispose={null}>
       <mesh geometry={nodes.Cube.geometry} material={materials.Material} />
     </group>
   );
