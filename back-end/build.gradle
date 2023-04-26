@@ -1,7 +1,15 @@
+buildscript {
+	ext {
+		querydslVer = '5.0.0'
+		querydslPluginVer = '1.0.10'
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.10'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id "com.ewerk.gradle.plugins.querydsl" version "${querydslPluginVer}"
 }
 
 group = 'com.example'
@@ -37,6 +45,37 @@ dependencies {
 	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+	//querydsl
+	implementation "com.querydsl:querydsl-jpa:${querydslVer}"
+	implementation "com.querydsl:querydsl-apt:${querydslVer}"
+
+}
+// querydsl 사용할 경로 지정합니다. 현재 지정한 부분은 .gitignore에 포함되므로 git에 올라가지 않습니다.
+def querydslDir = "$buildDir/generated/'querydsl'"
+
+// JPA 사용여부 및 사용 경로 설정
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+
+// build시 사용할 sourceSet 추가 설정
+sourceSets {
+	main.java.srcDir querydslDir
+}
+
+
+// querydsl 컴파일 시 사용할 옵션 설정
+compileQuerydsl {
+	options.annotationProcessorPath = configurations.querydsl
+}
+
+// querydsl이 compileClassPath를 상속하도록 설정
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	querydsl.extendsFrom compileClasspath
 }
 
 tasks.named('test') {

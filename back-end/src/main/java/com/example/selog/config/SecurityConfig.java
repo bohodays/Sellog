@@ -93,7 +93,7 @@ public class SecurityConfig {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/oauth2/**").permitAll()
+                .antMatchers("/oauth2/**","/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .apply(new JwtSecurityConfig(tokenProvider))
