@@ -5,16 +5,18 @@ export const SMain = styled.main`
   width: 100%;
   position: relative;
   background-color: #1a1830;
-  padding: 3%;
+  padding: 2%;
 
   .item__category-container {
     text-align: center;
     font-size: 2rem;
     font-weight: 900;
-    /* font-style: italic; */
+    font-style: italic;
     font-family: "Exo 2", sans-serif;
     color: yellow;
     padding: 0.5% 1.5%;
+    margin-left: 3%;
+    margin-top: 3%;
     /* padding: 4rem 6rem 5.5rem; */
     border: 0.3rem solid rgba(137, 239, 245, 1);
     border-radius: 2rem;
@@ -134,13 +136,13 @@ export const SGhostContainer = styled.div<any>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 40%;
+  width: 35%;
 
   position: absolute;
-  bottom: ${(props) => (props.position === "bottom" ? "4%" : null)};
-  left: ${(props) => (props.position === "bottom" ? "3%" : null)};
-  top: ${(props) => (props.position === "top" ? "4%" : null)};
-  right: ${(props) => (props.position === "top" ? "3%" : null)};
+  bottom: ${(props) => (props.position === "bottom" ? "1.5%" : null)};
+  left: ${(props) => (props.position === "bottom" ? "1.5%" : null)};
+  top: ${(props) => (props.position === "top" ? "1.5%" : null)};
+  right: ${(props) => (props.position === "top" ? "1.5%" : null)};
 
   .dot {
     width: 11px;
@@ -163,6 +165,6 @@ export const SGhostContainer = styled.div<any>`
 
 export const SContainer = styled.div`
   display: flex;
-  margin-left: 2%;
-  margin-top: 3%;
+  /* margin-left: 7.5%; */
+  /* margin-top: 3%; */
 `;

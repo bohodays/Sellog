@@ -1,6 +1,6 @@
 import React from "react";
 import ItemItem from "../ItemItem/ItemItem";
-import { SSection } from "./styles";
+import { SSection, SDiv } from "./styles";
 
 const dummyItemList = [
   {
@@ -23,14 +23,42 @@ const dummyItemList = [
     point: 300,
     category: "decoration",
   },
+  {
+    name: "flower",
+    point: 300,
+    category: "decoration",
+  },
+  {
+    name: "flower",
+    point: 300,
+    category: "decoration",
+  },
+  {
+    name: "flower",
+    point: 300,
+    category: "decoration",
+  },
+  {
+    name: "flower",
+    point: 300,
+    category: "decoration",
+  },
 ];
 
 const ItemList = () => {
   return (
     <SSection>
-      {dummyItemList.map((item, index) => (
-        <ItemItem item={item}></ItemItem>
-      ))}
+      <SDiv>
+        {dummyItemList.map((item, index) => (
+          <ItemItem item={item}></ItemItem>
+        ))}
+      </SDiv>
+      <div className="item__pagenation--wrapper">
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+      </div>
     </SSection>
   );
 };
