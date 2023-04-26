@@ -82,20 +82,21 @@ public class CustomOauth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     private void save(OAuthAttributes attributes, OAuth2UserRequest userRequest) {
 
-        Member member = memberRepository.save(
-                Member
-                        .builder()
-                        .email(attributes.getEmail())
-                        .nickname(attributes.getName())
-                        .points(0)
-                        .bojTarget("1")
-                        .blogTarget("1")
-                        .csTarget("1")
-                        .feedTarget("1")
-                        .authority(Authority.ROLE_USER)
-                        .password(passwordEncoder.encode("1234"))
-                        .build()
-        );
+        Member member = memberRepository.findByEmail(attributes.getEmail())
+                .orElse(memberRepository.save(
+                                Member
+                                        .builder()
+                                        .email(attributes.getEmail())
+                                        .nickname(attributes.getName())
+                                        .points(0)
+                                        .bojTarget("1")
+                                        .blogTarget("1")
+                                        .csTarget("1")
+                                        .feedTarget("1")
+                                        .authority(Authority.ROLE_USER)
+                                        .password(passwordEncoder.encode("1234"))
+                                        .build()
+                        ));
 
         if(userRequest.getClientRegistration().getRegistrationId().equals("tistory")){
             member.updateTistory(userRequest.getAccessToken().getTokenValue());

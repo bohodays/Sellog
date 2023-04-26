@@ -3,8 +3,10 @@ package com.example.selog.handler;
 import com.example.selog.dto.member.TokenDto;
 import com.example.selog.dto.oauth.OAuthAttributes;
 import com.example.selog.entity.Member;
+import com.example.selog.entity.Room;
 import com.example.selog.jwt.TokenProvider;
 import com.example.selog.repository.MemberRepository;
+import com.example.selog.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +29,7 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
 
     private final TokenProvider jwtTokenProvider;
     private final MemberRepository memberRepository;
+    private final RoomRepository roomRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     @Value("${social.login.redirectUrl}")
     private String redirectUrl;
@@ -57,6 +60,11 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
         //새로 등록한 유저
         if(member.getMotto() == null) {
             member.updateRefreshToken(tokenDto.getRefreshToken());
+            //방 생성
+            roomRepository.save(Room
+                    .builder()
+                    .member(member)
+                    .build());
             newUser = 1;
         }
         memberRepository.save(member);
