@@ -45,7 +45,7 @@ public class RoomController {
         }
     }
 
-    @GetMapping("items/{room_id}")
+    @GetMapping("/items/{room_id}")
     public ResponseEntity<?> findUserItemByRoomId(@PathVariable Long room_id) {
         try{
             List<UserItemDto> userItemDtoList = roomService.findUserItemByRoomId(room_id);

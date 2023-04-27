@@ -70,4 +70,19 @@ public class MemberService {
         member.updateSignUp(signUpDto);
         return MemberDto.of(memberRepository.save(member));
     }
+
+    @Transactional
+    public void logout(Long userId){
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
+        member.updateRefreshToken(null);
+        memberRepository.save(member);
+    }
+
+    @Transactional
+    public void deleteMember(Long userId){
+        memberRepository.delete(
+                memberRepository.findById(userId).orElseThrow(() -> new CustomException(ErrorCode.NO_USER))
+        );
+    }
 }

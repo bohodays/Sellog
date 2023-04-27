@@ -84,6 +84,9 @@ public class Member extends BaseTime{
     @Column(name = "contact")
     private String contact;
 
+    @OneToOne(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private Room room;
+
     public void updateTistoryToken(String tistoryToken) {
         this.tistoryToken = tistoryToken;
     }
