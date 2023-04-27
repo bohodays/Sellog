@@ -11,6 +11,7 @@ function App() {
   const CSQuiz = React.lazy(() => import("./pages/CSQuiz/CSQuiz"));
   const ItemShop = React.lazy(() => import("./pages/ItemShop/ItemShop"));
   const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
+  const Feed = React.lazy(() => import("@/pages/Feed/Feed"));
 
   return (
     <div className="App">
@@ -22,6 +23,8 @@ function App() {
             <Route path="/csquiz" element={<CSQuiz />} />
             <Route path="/item-shop" element={<ItemShop />} />
             <Route path="/main" element={<Main />} />
+            <Route path="/main" element={<Main />} />
+            <Route path="/feed" element={<Feed />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
