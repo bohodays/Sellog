@@ -23,19 +23,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<?> findMemberInfoById(@PathVariable String userId) {
-        try{
-            MemberDto memberDto = memberService.findMemberInfoByUserId(Long.valueOf(userId));
-            return new ResponseEntity<>(new SuccessResponse(memberDto), HttpStatus.OK);
-        } catch(CustomException e){
-            return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
-        } catch (Exception e){
-            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/me")
+    @GetMapping
     public ResponseEntity<?> findMemberInfoById() {
         try{
             MemberDto memberDto = memberService.findMemberInfoByUserId(SecurityUtil.getCurrentMemberId());
@@ -64,6 +52,30 @@ public class MemberController {
         try{
             MemberDto memberDto = memberService.signup(signUpDto);
             return new ResponseEntity<>(new SuccessResponse(memberDto), HttpStatus.OK);
+        } catch(CustomException e){
+            return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
+        } catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout() {
+        try {
+            memberService.logout(SecurityUtil.getCurrentMemberId());
+            return new ResponseEntity<>(new SuccessResponse("로그아웃 성공"), HttpStatus.OK);
+        } catch(CustomException e){
+            return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
+        } catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteMember(){
+        try{
+            memberService.deleteMember(SecurityUtil.getCurrentMemberId());
+            return new ResponseEntity<>(new SuccessResponse("멤버 삭제 되었습니다."),HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
