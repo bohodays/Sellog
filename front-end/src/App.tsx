@@ -23,7 +23,6 @@ function App() {
             <Route path="/csquiz" element={<CSQuiz />} />
             <Route path="/item-shop" element={<ItemShop />} />
             <Route path="/main" element={<Main />} />
-            <Route path="/main" element={<Main />} />
             <Route path="/feed" element={<Feed />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
