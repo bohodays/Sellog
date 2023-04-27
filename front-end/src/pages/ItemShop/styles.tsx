@@ -7,7 +7,7 @@ export const SMain = styled.main`
   background-color: #1a1830;
   padding: 2%;
 
-  .item__category-container {
+  .item__category--container {
     text-align: center;
     font-size: 2rem;
     font-weight: 900;
@@ -15,7 +15,7 @@ export const SMain = styled.main`
     font-family: "Exo 2", sans-serif;
     color: yellow;
     padding: 0.5% 1.5%;
-    margin-left: 3%;
+    /* margin-left: 1%; */
     margin-top: 3%;
     /* padding: 4rem 6rem 5.5rem; */
     border: 0.3rem solid rgba(137, 239, 245, 1);
@@ -32,18 +32,22 @@ export const SMain = styled.main`
       inset 0 0 0.5rem var(--neon-border-color);
   }
 
-  .item__category-container::-moz-selection {
+  .item__category--container::-moz-selection {
     background-color: var(--neon-border-color);
     color: var(--neon-text-color);
   }
 
-  .item__category-container::selection {
+  .item__category--container::selection {
     background-color: var(--neon-border-color);
     color: var(--neon-text-color);
   }
 
-  .item__category-container:focus {
+  .item__category--container:focus {
     outline: none;
+  }
+
+  .item__category {
+    cursor: pointer;
   }
 
   @keyframes flicker {
@@ -88,7 +92,7 @@ export const SMain = styled.main`
     font-size: 3rem;
   }
 
-  .sign__title-container {
+  .sign__title--container {
     /* padding: 1%; */
     /* font-style: italic; */
     font-family: "Exo 2", sans-serif;
@@ -165,6 +169,8 @@ export const SGhostContainer = styled.div<any>`
 
 export const SContainer = styled.div`
   display: flex;
+  width: 100%;
+  height: 70%;
   /* margin-left: 7.5%; */
   /* margin-top: 3%; */
 `;
