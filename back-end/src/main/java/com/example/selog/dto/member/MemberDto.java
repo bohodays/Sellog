@@ -38,7 +38,7 @@ public class MemberDto {
         return MemberDto.builder()
                 .userId(member.getUserId()).nickname(member.getNickname()).img(member.getImg()).email(member.getEmail())
                 .bojTarget(member.getBojTarget()).blogTarget(member.getBlogTarget()).feedTarget(member.getFeedTarget()).csTarget(member.getCsTarget())
-                .velog(member.getVelog()).baekjoon(member.getBaekjoon()).tistory(member.getTistory()).github(member.getGithub())
+                .velog(member.getVelog()).tistory(member.getTistory()).github(member.getGithub())
                 .motto(member.getMotto()).characterId(member.getCharacterId()).tel(member.getTel()).contact(member.getContact())
                 .build();
     }

@@ -1,18 +1,16 @@
 package com.example.selog.dto.room;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class StoreItemDto {
-    Long itemId;
+    Long id; //itemId
     String name;
     Integer point;
     String category;
-    boolean possession; //이미 가지고 있는지 여부
+    Integer possession; //이미 가지고 있는지 여부
 }

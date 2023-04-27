@@ -22,5 +22,5 @@ public class SignUpDto {
     private String tistory;
     private String velog;
     private String github;
-    private String baekjoon;
+//    private String baekjoon;
 }
