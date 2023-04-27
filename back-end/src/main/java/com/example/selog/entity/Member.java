@@ -63,8 +63,8 @@ public class Member extends BaseTime{
     @Column(name="velog")
     private String velog;
 
-    @Column(name="baekjoon")
-    private String baekjoon;
+//    @Column(name="baekjoon")
+//    private String baekjoon;
 
     @Column(name="tistory")
     private String tistory;
@@ -104,7 +104,7 @@ public class Member extends BaseTime{
         this.characterId = signUpDto.getCharacterId();
 
         this.velog = signUpDto.getVelog();
-        this.baekjoon = signUpDto.getBaekjoon();
+//        this.baekjoon = signUpDto.getBaekjoon();
         this.github = signUpDto.getGithub();
         this.tistory = signUpDto.getTistory();
     }
