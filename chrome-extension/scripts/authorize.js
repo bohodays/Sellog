@@ -80,6 +80,7 @@ const localAuth = {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           const username = JSON.parse(xhr.responseText).login;
+          // sendMessage를 통해 background.js request로 전달
           chrome.runtime.sendMessage({
             closeWebPage: true,
             isSuccess: true,

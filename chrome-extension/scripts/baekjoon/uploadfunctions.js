@@ -1,9 +1,5 @@
 /** 푼 문제들에 대한 단일 업로드는 uploadGit 함수로 합니다.
  * 파라미터는 아래와 같습니다.
- * @param {string} filePath - 업로드할 파일의 경로
- * @param {string} sourceCode - 업로드하는 소스코드 내용
- * @param {string} readme - 업로드하는 README 내용
- * @param {string} filename - 업로드할 파일명
  * @param {string} commitMessage - 커밋 메시지
  * @param {function} cb - 콜백 함수 (ex. 업로드 후 로딩 아이콘 처리 등)
  * @returns {Promise<void>}
@@ -15,7 +11,7 @@ async function uploadOneSolveProblemOnGit(bojData, cb) {
     console.error('token or hook is null', token, hook);
     return;
   }
-  return upload(token, hook, bojData.code, bojData.readme, bojData.directory, bojData.fileName, bojData.message, cb);
+  return upload(token, hook, bojData.message, cb);
 }
 
 /** Github api를 사용하여 업로드를 합니다.

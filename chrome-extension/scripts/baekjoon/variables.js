@@ -118,28 +118,6 @@
     "Whitespace": "ws"
 }
 
-// // If a new language is added, perform the update manually using the script below.
-// // parsing all languages on https://help.acmicpc.net/language/info/all
-// [...document.querySelectorAll('div.card')]
-//   .map((x) => [x.querySelector('header > h3'), x.querySelector('ul > li:nth-child(2) > code')])
-//   .filter((x) => !!x[0] && !!x[1])
-//   .map((x) => x.map((el) => el.innerText))
-//   .map((x) => [x[0].trim(), x[1].match(/Main\.(?!exe)(?!jar)([a-zA-Z]+)/)])
-//   .filter((x) => !!x[0] && !!x[1])
-//   .sort((a, b) => a[0].localeCompare(b[0]))
-//   .forEach((x) => (languages[x[0]] = x[1][1]));
-// languages['Coq'] = 'v';
-// // sort languages by key
-// languages = Object.entries(languages)
-//   .sort((a, b) => a[0].localeCompare(b[0]))
-//   .reduce((acc, cur) => {
-//     acc[cur[0]] = cur[1];
-//     return acc;
-//   }, {});
-// // get length of languages
-// console.log("languages length: ", Object.keys(languages).length);
-// console.log("languages: ", languages);
-
 // BOJ Levels
 const bj_level = {
   0: 'Unrated',
