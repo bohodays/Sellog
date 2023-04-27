@@ -51,8 +51,8 @@ export function Ilbuni(props: JSX.IntrinsicElements["group"] | any) {
           bottom={-1}
           near={-1000}
           far={1000}
-          zoom={0.2}
-          // position={[-2, 4, 5]}
+          zoom={1.2}
+          position={[0, 0, 5]}
         />
         <group
           name="Armature"
