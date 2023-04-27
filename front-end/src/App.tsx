@@ -29,6 +29,7 @@ function App() {
             <Route path="/mygoals" element={<MyGoals />} />
             <Route path="/csquiz" element={<CSQuiz />} />
             <Route path="/item-shop" element={<ItemShop />} />
+            <Route path="/mygoals" element={<MyGoals />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
