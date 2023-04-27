@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const SArticle = styled.article`
   /* height: 30vh; */
-  width: fit-content;
+  width: 20%;
+  height: 60%;
   color: white;
   padding: 1%;
-  margin: 0% 2%;
+  margin: 0% 1%;
   margin-bottom: 2%;
   border: 0.2rem solid rgba(137, 239, 245);
   border-radius: 2rem;
@@ -19,10 +20,9 @@ export const SArticle = styled.article`
 
   .item__img {
     border-radius: 10%;
-    height: 210px;
-    width: 220px;
+    height: 80%;
+    width: 100%;
   }
-
   .item__description__wrapper {
     display: flex;
     flex-direction: column;
