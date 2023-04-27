@@ -19,13 +19,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
-<<<<<<< Updated upstream
             <Route path="/main" element={<Main />} />
-            <Route path="/csquiz" element={<CSQuiz />} />
-=======
             <Route path="/CSQuiz" element={<CSQuiz />} />
             <Route path="/feed" element={<Feed />} />
->>>>>>> Stashed changes
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

@@ -12,6 +12,12 @@ export const SMain = styled.main`
     bottom: 3rem;
     width: 8vw;
   }
+  .sticker2 {
+    position: absolute;
+    width: 9vw;
+    right: 5vw;
+    top: 15vh;
+  }
 `;
 
 export const SHeader = styled.header`

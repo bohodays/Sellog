@@ -1,6 +1,7 @@
 import React from "react";
 import { SMain, SHeader, SBody, SSection, SArticle } from "./styles";
 import LargeSmile from "@/assets/imgs/retro/smile_large.png";
+import GreenFlower from "@/assets/imgs/retro/green_flower.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
@@ -21,6 +22,7 @@ export default function Feed() {
           <div className="feed">Feed</div>
         </div>
         {/* <h2 className="logo">Logo</h2> */}
+        <img className="sticker2" src={GreenFlower} alt="green flower" />
       </SHeader>
       <SBody>
         <SSection>
