@@ -4,6 +4,8 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { CineonToneMapping, PCFSoftShadowMap, sRGBEncoding } from "three";
 import { Room1 } from "../Models/Room1";
+import { Room2 } from "../Models/Room2";
+import { Room3 } from "../Models/Room3";
 
 const Scene = () => {
   const { gl } = useThree();
@@ -29,6 +31,8 @@ const Scene = () => {
           shadow-normalBias={0.05}
         />
         <Room1 />
+        {/* <Room2 /> */}
+        {/* <Room3 /> */}
       </Suspense>
     </>
   );
