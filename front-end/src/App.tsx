@@ -10,6 +10,7 @@ function App() {
   const Main = React.lazy(() => import("./pages/Main/Main"));
   const CSQuiz = React.lazy(() => import("./pages/CSQuiz/CSQuiz"));
   const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
+  const Feed = React.lazy(() => import("@/pages/Feed/Feed"));
 
   return (
     <div className="App">
@@ -18,8 +19,13 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
+<<<<<<< Updated upstream
             <Route path="/main" element={<Main />} />
             <Route path="/csquiz" element={<CSQuiz />} />
+=======
+            <Route path="/CSQuiz" element={<CSQuiz />} />
+            <Route path="/feed" element={<Feed />} />
+>>>>>>> Stashed changes
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
