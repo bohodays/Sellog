@@ -19,7 +19,7 @@ const ItemItem = ({ item }: ItemProps) => {
             <img src={coin} className="coin"></img>
             {item.point}
           </div>
-          {item.category}
+          {/* {item.category} */}
           <button className="buy__btn">Buy</button>
         </div>
       </div>
