@@ -1,6 +1,6 @@
 package com.example.selog.service;
 
-import com.example.selog.dto.room.ItemDto;
+import com.example.selog.dto.room.UserItemDto;
 import com.example.selog.entity.Room;
 import com.example.selog.entity.UserItem;
 import com.example.selog.exception.CustomException;
@@ -23,49 +23,49 @@ public class RoomService {
     private final UserItemRepository userItemRepository;
 
     @Transactional(readOnly = true)
-    public List<ItemDto> findRoomInfoById(Long roomId) {
+    public List<UserItemDto> findRoomInfoById(Long roomId) {
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_ROOM));
 
         List<UserItem> userItemList = userItemRepository.findByRoomAndXIsNotNull(room);
-        List<ItemDto> itemDtoList = new ArrayList<>();
+        List<UserItemDto> userItemDtoList = new ArrayList<>();
 
         // room에 설치되어 있는 아이템
         for(UserItem userItem : userItemList){
-            itemDtoList.add(userItem.toDto());
+            userItemDtoList.add(userItem.toDto());
         }
-        return itemDtoList;
+        return userItemDtoList;
     }
 
     @Transactional
-    public List<ItemDto> updateItemLocation(List<ItemDto> itemDtoList){
-        List<ItemDto> updateItemDtoList = new ArrayList<>();
-        for(ItemDto itemDto : itemDtoList){
-            UserItem userItem = userItemRepository.findById(itemDto.getRoomId())
+    public List<UserItemDto> updateItemLocation(List<UserItemDto> userItemDtoList){
+        List<UserItemDto> updateUserItemDtoList = new ArrayList<>();
+        for(UserItemDto userItemDto : userItemDtoList){
+            UserItem userItem = userItemRepository.findById(userItemDto.getRoomId())
                     .orElseThrow(() -> new CustomException(ErrorCode.NO_ITEM));
-            userItem.updateItemLocation(itemDto.getX(), itemDto.getY(), itemDto.getZ());
+            userItem.updateItemLocation(userItemDto.getX(), userItemDto.getY(), userItemDto.getZ());
 
             UserItem updateItem = userItemRepository.save(userItem);
             if(updateItem.getX() != null){
-                updateItemDtoList.add(updateItem.toDto());
+                updateUserItemDtoList.add(updateItem.toDto());
             }
         }
 
-        return updateItemDtoList;
+        return updateUserItemDtoList;
     }
 
     @Transactional(readOnly = true)
-    public List<ItemDto> findUserItemByRoomId(Long roomId) {
+    public List<UserItemDto> findUserItemByRoomId(Long roomId) {
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_ROOM));
 
         List<UserItem> userItemList = userItemRepository.findByRoomAndXIsNull(room);
-        List<ItemDto> itemDtoList = new ArrayList<>();
+        List<UserItemDto> userItemDtoList = new ArrayList<>();
 
         // 보유한 설치하지 않은 아이템
         for(UserItem userItem : userItemList){
-            itemDtoList.add(userItem.toDto());
+            userItemDtoList.add(userItem.toDto());
         }
-        return itemDtoList;
+        return userItemDtoList;
     }
 }

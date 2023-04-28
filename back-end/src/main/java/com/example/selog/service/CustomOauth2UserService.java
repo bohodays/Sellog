@@ -4,7 +4,6 @@ import com.example.selog.dto.oauth.OAuthAttributes;
 import com.example.selog.entity.Authority;
 import com.example.selog.entity.Member;
 import com.example.selog.repository.MemberRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
@@ -24,7 +23,6 @@ import org.springframework.core.ParameterizedTypeReference;
 
 
 import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -81,13 +79,14 @@ public class CustomOauth2UserService implements OAuth2UserService<OAuth2UserRequ
     }
 
     private void save(OAuthAttributes attributes, OAuth2UserRequest userRequest) {
-
+        log.info("!!!!{}",attributes.getAttributes());
         Member member = memberRepository.findByEmail(attributes.getEmail())
                 .orElse(memberRepository.save(
                                 Member
                                         .builder()
                                         .email(attributes.getEmail())
                                         .nickname(attributes.getName())
+                                        .img("1")
                                         .points(0)
                                         .bojTarget("1")
                                         .blogTarget("1")
@@ -99,9 +98,10 @@ public class CustomOauth2UserService implements OAuth2UserService<OAuth2UserRequ
                         ));
 
         if(userRequest.getClientRegistration().getRegistrationId().equals("tistory")){
-            member.updateTistory(userRequest.getAccessToken().getTokenValue());
+            member.updateTistoryToken(userRequest.getAccessToken().getTokenValue());
         }else if(userRequest.getClientRegistration().getRegistrationId().equals("github")){
-            member.updateGithub(userRequest.getAccessToken().getTokenValue());
+            member.updateGithubToken(userRequest.getAccessToken().getTokenValue());
+            member.updateImg(attributes.getAttributes().get("avatar_url").toString());
         }
         memberRepository.save(member);
     }

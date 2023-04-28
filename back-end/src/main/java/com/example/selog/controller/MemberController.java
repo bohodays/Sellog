@@ -1,6 +1,7 @@
 package com.example.selog.controller;
 
-import com.example.selog.dto.member.MemberResponseDto;
+import com.example.selog.dto.member.MemberDto;
+import com.example.selog.dto.member.SignUpDto;
 import com.example.selog.dto.member.TokenDto;
 import com.example.selog.dto.member.TokenRequestDto;
 import com.example.selog.exception.CustomException;
@@ -22,23 +23,11 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<?> findMemberInfoById(@PathVariable String userId) {
-        try{
-            MemberResponseDto memberResponseDto = memberService.findMemberInfoByUserId(Long.valueOf(userId));
-            return new ResponseEntity<>(new SuccessResponse(memberResponseDto), HttpStatus.OK);
-        } catch(CustomException e){
-            return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
-        } catch (Exception e){
-            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/me")
+    @GetMapping
     public ResponseEntity<?> findMemberInfoById() {
         try{
-            MemberResponseDto memberResponseDto = memberService.findMemberInfoByUserId(SecurityUtil.getCurrentMemberId());
-            return new ResponseEntity<>(new SuccessResponse(memberResponseDto), HttpStatus.OK);
+            MemberDto memberDto = memberService.findMemberInfoByUserId(SecurityUtil.getCurrentMemberId());
+            return new ResponseEntity<>(new SuccessResponse(memberDto), HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
@@ -51,6 +40,42 @@ public class MemberController {
         try{
             TokenDto tokenDto = memberService.reissue(tokenRequestDto);
             return new ResponseEntity<>(new SuccessResponse(tokenDto), HttpStatus.OK);
+        } catch(CustomException e){
+            return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
+        } catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/signup")
+    public ResponseEntity<?> signup(@RequestBody SignUpDto signUpDto){
+        try{
+            MemberDto memberDto = memberService.signup(signUpDto);
+            return new ResponseEntity<>(new SuccessResponse(memberDto), HttpStatus.OK);
+        } catch(CustomException e){
+            return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
+        } catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout() {
+        try {
+            memberService.logout(SecurityUtil.getCurrentMemberId());
+            return new ResponseEntity<>(new SuccessResponse("로그아웃 성공"), HttpStatus.OK);
+        } catch(CustomException e){
+            return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
+        } catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteMember(){
+        try{
+            memberService.deleteMember(SecurityUtil.getCurrentMemberId());
+            return new ResponseEntity<>(new SuccessResponse("멤버 삭제 되었습니다."),HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){

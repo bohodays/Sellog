@@ -1,6 +1,7 @@
 package com.example.selog.service;
 
-import com.example.selog.dto.member.MemberResponseDto;
+import com.example.selog.dto.member.MemberDto;
+import com.example.selog.dto.member.SignUpDto;
 import com.example.selog.dto.member.TokenDto;
 import com.example.selog.dto.member.TokenRequestDto;
 import com.example.selog.entity.Member;
@@ -25,9 +26,9 @@ public class MemberService {
     private final TokenProvider tokenProvider;
 
     @Transactional(readOnly = true)
-    public MemberResponseDto findMemberInfoByUserId(Long userId) {
+    public MemberDto findMemberInfoByUserId(Long userId) {
         return memberRepository.findById(userId)
-                .map(MemberResponseDto::of)
+                .map(MemberDto::of)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
     }
 
@@ -58,7 +59,30 @@ public class MemberService {
         member.updateRefreshToken(tokenDto.getRefreshToken());
         memberRepository.save(member);
 
-        // 4. 토큰 발급
         return tokenDto;
+    }
+
+    @Transactional
+    public MemberDto signup(SignUpDto signUpDto){
+        Member member = memberRepository.findById(signUpDto.getUserId())
+                .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
+
+        member.updateSignUp(signUpDto);
+        return MemberDto.of(memberRepository.save(member));
+    }
+
+    @Transactional
+    public void logout(Long userId){
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
+        member.updateRefreshToken(null);
+        memberRepository.save(member);
+    }
+
+    @Transactional
+    public void deleteMember(Long userId){
+        memberRepository.delete(
+                memberRepository.findById(userId).orElseThrow(() -> new CustomException(ErrorCode.NO_USER))
+        );
     }
 }

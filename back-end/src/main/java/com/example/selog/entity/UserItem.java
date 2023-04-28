@@ -1,6 +1,6 @@
 package com.example.selog.entity;
 
-import com.example.selog.dto.room.ItemDto;
+import com.example.selog.dto.room.UserItemDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -47,8 +47,8 @@ public class UserItem extends BaseTime {
         this.z = z;
     }
 
-    public ItemDto toDto() {
-        return ItemDto.builder()
+    public UserItemDto toDto() {
+        return UserItemDto.builder()
                 .id(id)
                 .roomId(room.getId())
                 .itemId(item.getId())

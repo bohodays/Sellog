@@ -1,6 +1,5 @@
 package com.example.selog.dto.room;
 
-import com.example.selog.dto.member.MemberResponseDto;
 import com.example.selog.entity.UserItem;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemDto {
+public class UserItemDto {
     Long id;
     Long roomId;
     Long itemId;
