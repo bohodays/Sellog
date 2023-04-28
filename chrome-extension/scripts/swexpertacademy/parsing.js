@@ -82,7 +82,7 @@ async function parseData() {
 async function makeData(origin) {
   const { link, problemId, level, extension, title, runtime, memory, code, length } = origin;
   const directory = `SWEA/${level}/${problemId}. ${convertSingleCharToDoubleChar(title)}`;
-  const message = `[${level}] Title: ${title}, Time: ${runtime}, Memory: ${memory} -BaekjoonHub`;
+  const message = `[${level}] Title: ${title}, Time: ${runtime}, Memory: ${memory} -Sellog`;
   const fileName = `${convertSingleCharToDoubleChar(title)}.${extension}`;
   // prettier-ignore
   const readme =

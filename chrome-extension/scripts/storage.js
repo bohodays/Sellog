@@ -1,6 +1,6 @@
 /* Sync to local storage */
 chrome.storage.local.get('isSync', (data) => {
-  keys = ['BaekjoonHub_token', 'BaekjoonHub_username', 'pipe_baekjoonhub', 'stats', 'BaekjoonHub_hook', 'mode_type'];
+  keys = ['Sellog_token', 'Sellog_username', 'pipe_Sellog', 'stats', 'mode_type'];
   if (!data || !data.isSync) {
     keys.forEach((key) => {
       chrome.storage.sync.get(key, (data) => {
@@ -9,13 +9,13 @@ chrome.storage.local.get('isSync', (data) => {
     });
     chrome.storage.local.set({ isSync: true }, (data) => {
       // if (debug)
-      console.log('BaekjoonHub Synced to local values');
+      console.log('Sellog Synced to local values');
     });
   } else {
     // if (debug)
     // console.log('Upload Completed. Local Storage status:', data);
     // if (debug)
-    console.log('BaekjoonHub Local storage already synced!');
+    console.log('Sellog Local storage already synced!');
   }
 });
 
@@ -133,23 +133,19 @@ async function removeObjectFromSyncStorage(keys) {
 }
 
 async function getToken() {
-  return await getObjectFromLocalStorage('BaekjoonHub_token');
+  return await getObjectFromLocalStorage('Sellog_token');
 }
 
 // async function getPipe() {
-//   return await getObjectFromLocalStorage('pipe_baekjoonhub');
+//   return await getObjectFromLocalStorage('pipe_Sellog');
 // }
 
 async function getGithubUsername() {
-  return await getObjectFromLocalStorage('BaekjoonHub_username');
+  return await getObjectFromLocalStorage('Sellog_username');
 }
 
 async function getStats() {
   return await getObjectFromLocalStorage('stats');
-}
-
-async function getHook() {
-  return await getObjectFromLocalStorage('BaekjoonHub_hook');
 }
 
 async function getModeType() {
@@ -157,133 +153,9 @@ async function getModeType() {
 }
 
 async function saveToken(token) {
-  return await saveObjectInLocalStorage({ BaekjoonHub_token: token });
+  return await saveObjectInLocalStorage({ Sellog_token: token });
 }
 
 async function saveStats(stats) {
   return await saveObjectInLocalStorage({ stats });
-}
-
-/**
- * update stats from path recursively
- * ex) updateOptimizedStatsfromPath('_owner/_repo/백준/README.md', '1342259dssd') -> stats.submission.append({_owner: {_repo: {백준: {README.md: '1342259dssd'}}}})
- * updateOptimizedStatsfromPath('_owner/_repo/백준/1000.테스트/테스트.cpp', 'sfgbdksalf144') -> stats.submission.append({_owner: {_repo: {백준: {'1000.테스트': {'테스트.cpp': 'sfgbdksalf144'}}}}}})
- * updateOptimizedStatsfromPath('_owner/_repo/백준/1000.테스트/aaa/README.md', '123savvsvfffbb') -> stats.submission.append({_owner: {_repo: {백준: {'1000.테스트': {'aaa': {'README.md': '123savvsvfffbb'}}}}}})
- * @param {string} path - path to file
- * @param {string} sha - sha of file
- * @returns {Promise<void>}
- */
-async function updateStatsSHAfromPath(path, sha) {
-  const stats = await getStats();
-  updateObjectDatafromPath(stats.submission, path, sha);
-  await saveStats(stats);
-}
-
-function updateObjectDatafromPath(obj, path, data) {
-  let current = obj;
-  // split path into array and filter out empty strings
-  const pathArray = _swexpertacademyRankRemoveFilter(_baekjoonSpaceRemoverFilter(_programmersRankRemoverFilter(_baekjoonRankRemoverFilter(path))))
-    .split('/')
-    .filter((p) => p !== '');
-  for (const path of pathArray.slice(0, -1)) {
-    if (isNull(current[path])) {
-      current[path] = {};
-    }
-    current = current[path];
-  }
-  current[pathArray.pop()] = data;
-}
-
-/**
- * get stats from path recursively
- * @param {string} path - path to file
- * @returns {Promise<string>} - sha of file
- */
-async function getStatsSHAfromPath(path) {
-  const stats = await getStats();
-  return getObjectDatafromPath(stats.submission, path);
-}
-
-function getObjectDatafromPath(obj, path) {
-  let current = obj;
-  const pathArray = _swexpertacademyRankRemoveFilter(_baekjoonSpaceRemoverFilter(_programmersRankRemoverFilter(_baekjoonRankRemoverFilter(path))))
-    .split('/')
-    .filter((p) => p !== '');
-  for (const path of pathArray.slice(0, -1)) {
-    if (isNull(current[path])) {
-      return null;
-    }
-    current = current[path];
-  }
-  return current[pathArray.pop()];
-}
-
-/* github repo에 있는 모든 파일 목록을 가져와서 stats 갱신 */
-async function updateLocalStorageStats() {
-  const hook = await getHook();
-  const token = await getToken();
-  const git = new GitHub(hook, token);
-  const stats = await getStats();
-  const tree_items = [];
-  await git.getTree().then((tree) => {
-    tree.forEach((item) => {
-      if (item.type === 'blob') {
-        tree_items.push(item);
-      }
-    });
-  });
-  const { submission } = stats;
-  tree_items.forEach((item) => {
-    updateObjectDatafromPath(submission, `${hook}/${item.path}`, item.sha);
-  });
-  const default_branch = await git.getDefaultBranchOnRepo();
-  stats.branches[hook] = default_branch;
-  await saveStats(stats);
-  log('update stats', stats);
-  return stats;
-}
-
-/**
- * @deprecated
- * level과 관련된 경로를 지우는 임의의 함수 (문제 level이 변경되는 경우 중복된 업로드 파일이 생성됨을 방지하기 위한 목적)
- * ex) _owner/_repo/백준/Gold/1000.테스트/테스트.cpp -> _owner/_repo/백준/1000.테스트/테스트.cpp
- *     _owner/_repo/백준/Silver/1234.테스트/테스트.cpp -> _owner/_repo/백준/1234.테스트/테스트.cpp
- * @param {string} path - 파일의 경로 문자열
- * @returns {string} - 레벨과 관련된 경로를 제거한 문자열
- */
-function _baekjoonRankRemoverFilter(path) {
-  return path.replace(/\/(Unrated|Silver|Bronze|Gold|Platinum|Diamond|Ruby|Master)\//g, '/');
-}
-
-/**
- * @deprecated
- * level과 관련된 경로를 지우는 임의의 함수 (문제 level이 변경되는 경우 중복된 업로드 파일이 생성됨을 방지하기 위한 목적)
- * @param {string} path - 파일의 경로 문자열
- * @returns {string} - 레벨과 관련된 경로를 제거한 문자열
- */
-function _programmersRankRemoverFilter(path) {
-  return path.replace(/\/(lv[0-9]|unrated)\//g, '/');
-}
-
-/**
- * @deprecated
- * 경로에 존재하는 공백을 제거하는 임의의 함수 (기존의 업로드한 문제들이 이중으로 업로드 되는 오류를 방지)
- * ex) _owner/_repo/백준/1000. 테스트/테스트.cpp -> _owner/_repo/백준/1000.테스트/테스트.cpp
- *     _owner/_repo/백준/1234.%20테스트/테스트.cpp -> _owner/_repo/백준/1234.테스트/테스트.cpp
- *     _owner/_repo/백준/1234.테스트/테%E2%80%85스%E2%80%85트.cpp -> _owner/_repo/백준/1234.테스트/테스트.cpp
- * @param {string} path - 파일의 경로 문자열
- * @returns {string} - 공백과 관련된 값을 제거한 문자열
- */
-function _baekjoonSpaceRemoverFilter(path) {
-  return path.replace(/( | |&nbsp|&#160|&#8197|%E2%80%85|%20)/g, '');
-}
-
-/**
- * @deprecated
- * 경로에 존재하는 레벨과 관련된 경로를 지우는 임의의 함수 (문제 level이 변경되는 경우 중복된 업로드 파일이 생성됨을 방지하기 위한 목적)
- * @param {string} path - 파일의 경로 문자열
- * @returns {string} - 레벨과 관련된 경로를 제거한 문자열
- */
-function _swexpertacademyRankRemoveFilter(path) {
-  return path.replace(/\/D([0-8]+)\//g, '/');
 }

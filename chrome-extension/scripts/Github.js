@@ -1,31 +1,24 @@
 class GitHub {
-  constructor(hook, token) {
-    log('GitHub constructor', hook, token);
-    this.hook = hook;
+  constructor(token) {
     this.token = token;
   }
 
-  async createCommit(message, treeSHA, refSHA) {
-    // hook, token, message, tree, parent
-    log('GitHub createCommit', 'message:', message, 'treeSHA:', treeSHA, 'refSHA:', refSHA);
-    return createCommit(this.hook, this.token, message, treeSHA, refSHA);
+  async createRecord(type, message) {
+    // token, message, tree, parent
+    log('createRecord', 'message:', message, 'type:', type);
+    return createRecord(this.token, message, type);
   }
 }
 
-/** create a commit in git
- * @see https://docs.github.com/en/rest/reference/git#create-a-commit
- * @param {string} hook - the github repository
- * @param {string} token - the github token
+/** create record
+ * @param {string} token - the token
  * @param {string} message - the commit message
- * @param {string} treeSHA - the tree sha
- * @param {string} refSHA - the parent sha
- * @return {Promise} - the promise for the commit sha
  */
-async function createCommit(hook, token, message, treeSHA, refSHA) {
-  return fetch(`https://api.github.com/repos/${hook}/git/commits`, {
+async function createRecord(token, message, type) {
+  return fetch(`https://k8a404.p.ssafy.io/api/record`, {
     method: 'POST',
-    body: JSON.stringify({ message, tree: treeSHA, parents: [refSHA] }),
-    headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json', 'content-type': 'application/json' },
+    body: JSON.stringify({ message, type: type }),
+    headers: { Authorization: `Bearer ${token}`, 'content-type': 'application/json' },
   })
     .then((res) => res.json())
     .then((data) => {

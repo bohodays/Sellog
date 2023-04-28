@@ -1,8 +1,8 @@
-#BaekjoonHub_progress_anchor_element {
+#Sellog_progress_anchor_element {
   margin-right: 20px !important;
 }
 
-.BaekjoonHub_progress {
+.Sellog_progress {
   display: inline-block;
   pointer-events: none;
   width: 1.7em;
@@ -19,7 +19,7 @@
   }
 }
 
-#BaekjoonHub_progress_elem.markuploadfailed {
+#Sellog_progress_elem.markuploadfailed {
   display: inline-block;
   transform: rotate(45deg);
   width: 0.9em;
@@ -28,7 +28,7 @@
   border-right: 3px solid red;
 }
 
-#BaekjoonHub_progress_elem.markuploaded {
+#Sellog_progress_elem.markuploaded {
   display: inline-block;
   transform: rotate(45deg);
   width: 0.9em;
