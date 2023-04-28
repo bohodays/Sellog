@@ -12,11 +12,12 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { SMain } from "./styles";
 import { PCFSoftShadowMap, RepeatWrapping, Vector2, Vector3 } from "three";
 import { Ilbuni } from "@/components/Main/Models/Ilbuni";
-import GridImg from "../../assets/imgs/main/grid.png";
+import GridImg from "../../assets/imgs/main/grid_test.png";
 import { House } from "@/components/Main/Models/House";
 import { gsap } from "gsap";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
+import { AirBalloon } from "@/components/Main/Models/AirBalloon";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -44,6 +45,7 @@ const Scene = () => {
   const pointerRef = useRef<any>();
   const spotRef = useRef<any>();
   const houseRef = useRef<any>();
+  const airBalloonRef = useRef<any>();
 
   // Texture
   const floorTexture = useTexture(GridImg);
@@ -126,7 +128,7 @@ const Scene = () => {
             spotRef.current.material.color.set("seagreen");
             gsap.to(houseRef.current.position, {
               duration: 1,
-              y: 1,
+              y: 0,
               ease: "Bounce.easeOut",
             });
             gsap.to(camera.position, {
@@ -139,7 +141,7 @@ const Scene = () => {
           spotRef.current.material.color.set("yellow");
           gsap.to(houseRef.current.position, {
             duration: 0.5,
-            y: -1.3,
+            y: -5,
           });
           gsap.to(camera.position, {
             duration: 1,
@@ -233,10 +235,10 @@ const Scene = () => {
   return (
     <Suspense>
       {/* 빛 */}
-      <ambientLight color={"white"} intensity={0.5} />
+      <ambientLight color={"white"} intensity={0.8} />
       <directionalLight
         color={"white"}
-        intensity={0.5}
+        intensity={0.7}
         position={[1, 1, 1]}
         castShadow={true}
         shadow-mapSize-width={2048}
@@ -325,9 +327,12 @@ const Scene = () => {
       <House
         houseRef={houseRef}
         visible={false}
-        position={[5, -1.3, 2]}
+        position={[5, -5, 3]}
         castShadow={true}
       />
+
+      {/* 열기구 */}
+      <AirBalloon ref={airBalloonRef} position={[-5, 5, 0]} castShadow={true} />
     </Suspense>
   );
 };
