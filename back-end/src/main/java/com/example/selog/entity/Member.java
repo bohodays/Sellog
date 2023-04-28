@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "member")
@@ -34,6 +36,7 @@ public class Member extends BaseTime{
     private String nickname;
 
     @Column(name="points", nullable = false)
+    @ColumnDefault("0")
     private Integer points;
 
     @Column(name="boj_target")
@@ -63,8 +66,8 @@ public class Member extends BaseTime{
     @Column(name="velog")
     private String velog;
 
-//    @Column(name="baekjoon")
-//    private String baekjoon;
+    @Column(name="baekjoon")
+    private String baekjoon;
 
     @Column(name="tistory")
     private String tistory;
@@ -86,6 +89,9 @@ public class Member extends BaseTime{
 
     @OneToOne(mappedBy = "member", cascade = CascadeType.REMOVE)
     private Room room;
+
+    @Column(name = "start_date")
+    private LocalDateTime start_date;
 
     public void updateTistoryToken(String tistoryToken) {
         this.tistoryToken = tistoryToken;
@@ -110,5 +116,9 @@ public class Member extends BaseTime{
 //        this.baekjoon = signUpDto.getBaekjoon();
         this.github = signUpDto.getGithub();
         this.tistory = signUpDto.getTistory();
+    }
+
+    public void updatePoint(int point) {
+        this.points += point;
     }
 }

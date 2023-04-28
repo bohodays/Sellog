@@ -5,11 +5,13 @@ import com.example.selog.entity.Record;
 import com.example.selog.repository.MemberRepository;
 import com.example.selog.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Optional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class WebHookService {
@@ -24,16 +26,23 @@ public class WebHookService {
         String repoName = (String)repository.get("name");
         String who = (String)sender.get("login");
 
-        Optional<Member> member = memberRepository.findByEmail(who);
+        log.info("유저네임 {}",who);
+        Optional<Member> result = memberRepository.findByEmail(who);
+
         //사용자가 아닌 다른 유저가 push 했으므로 무시
-        if(!member.isPresent()) {
-            return;
-        }
+        if(!result.isPresent()) return;
+
+        Member member = result.get();
+
+        log.info("포인트 증가시키기");
+        member.updatePoint(10);
+
+        memberRepository.save(member);
 
         Record record = Record.builder()
                 .category("github")
                 .content(repoName)
-                .member(member.get())
+                .member(member)
                 .build();
 
         recordRepository.save(record);
