@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Builder
@@ -25,6 +26,9 @@ public class Record extends BaseTime {
 
     @Column
     private String category;
+
+    @Column
+    private LocalDateTime writing_time;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
