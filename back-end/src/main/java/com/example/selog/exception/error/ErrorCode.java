@@ -14,8 +14,12 @@ public enum ErrorCode {
     USER_DUPLICATION(HttpStatus.CONFLICT, "409", "이미 존재하는 사용자입니다."),
     NO_USER(HttpStatus.NOT_FOUND, "404", "없는 사용자입니다."),
     INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "400", "비밀번호가 옳지 않습니다."),
+    INVALID_REQUEST(HttpStatus.BAD_REQUEST,"400","올바르지 않은 요청"),
     NO_LOGIN(HttpStatus.UNAUTHORIZED, "401", "로그인이 필요합니다"),
-    NO_TOKEN(HttpStatus.UNAUTHORIZED, "401", "Refresh Token 이 유효하지 않습니다.");
+    NO_TOKEN(HttpStatus.UNAUTHORIZED, "401", "Refresh Token 이 유효하지 않습니다."),
+
+    NO_ROOM(HttpStatus.NOT_FOUND, "404", "방이 존재하지 않습니다."),
+    NO_ITEM(HttpStatus.NOT_FOUND, "404", "아이템을 소유하고 있지 않습니다.");
 
     private HttpStatus httpStatus;
     private String code;

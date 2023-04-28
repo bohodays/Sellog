@@ -1,24 +1,34 @@
 package com.example.selog.config;
 
 
+import com.example.selog.exception.JwtAccessDeniedHandler;
+import com.example.selog.exception.JwtAuthenticationEntryPoint;
 import com.example.selog.handler.CustomRequestEntityConverter;
 import com.example.selog.handler.CustomTokenResponseConverter;
 import com.example.selog.handler.Oauth2FailHandler;
 import com.example.selog.handler.Oauth2SuccessHandler;
+import com.example.selog.jwt.JwtSecurityConfig;
+import com.example.selog.jwt.TokenProvider;
+import com.example.selog.repository.MemberRepository;
 import com.example.selog.service.CustomOauth2UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.endpoint.DefaultAuthorizationCodeTokenResponseClient;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
 import org.springframework.security.oauth2.client.http.OAuth2ErrorResponseErrorHandler;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CsrfFilter;
@@ -35,9 +45,17 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final TokenProvider tokenProvider;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint; // 유효한 자격 증명을 제공하지 않고 접근하려고 할때 401
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler; // 필요한 권한이 존재하지 않은 경우 403 에러
     private final Oauth2SuccessHandler oauth2SuccessHandler;
     private final Oauth2FailHandler oauth2FailHandler;
-    private final CustomOauth2UserService customOauth2UserService;
+    private final MemberRepository memberRepository;
+    private final Converter<OAuth2UserRequest, RequestEntity<?>> requestEntityConverter;
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     // h2-console
     @Bean
@@ -53,26 +71,32 @@ public class SecurityConfig {
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
 
+        CustomOauth2UserService customOauth2UserService = new CustomOauth2UserService(memberRepository, requestEntityConverter, passwordEncoder());
+
         http
                 .addFilterBefore(filter, CsrfFilter.class)
                 .csrf().disable() // CSRF 설정 Disable (토큰을 사용하기 때문에)
 
                 // exception handling
                 .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
 
                 .and()
                 .headers()
                 .frameOptions()
                 .sameOrigin()
 
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/oauth2/**").permitAll()
+                .antMatchers("/oauth2/**","/api/**").permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .apply(new JwtSecurityConfig(tokenProvider))
 
                 // cors 설정 적용
                 .and()

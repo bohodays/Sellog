@@ -1,13 +1,15 @@
 package com.example.selog.service;
 
 import com.example.selog.dto.oauth.OAuthAttributes;
+import com.example.selog.entity.Authority;
 import com.example.selog.entity.Member;
 import com.example.selog.repository.MemberRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -21,15 +23,21 @@ import org.springframework.core.ParameterizedTypeReference;
 
 
 import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
-@RequiredArgsConstructor
 @Service
 public class CustomOauth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private final MemberRepository memberRepository;
     private final Converter<OAuth2UserRequest, RequestEntity<?>> requestEntityConverter;
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public CustomOauth2UserService(MemberRepository memberRepository, Converter<OAuth2UserRequest, RequestEntity<?>> requestEntityConverter, PasswordEncoder passwordEncoder) {
+        this.memberRepository = memberRepository;
+        this.requestEntityConverter = requestEntityConverter;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -53,7 +61,7 @@ public class CustomOauth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         OAuthAttributes attributes = OAuthAttributes.of(userRequest.getAccessToken(), registrationId, userNameAttributeName,
                 userAttributes);
-        save(attributes);
+        save(attributes, userRequest);
 
         return attributes;
     }
@@ -70,18 +78,31 @@ public class CustomOauth2UserService implements OAuth2UserService<OAuth2UserRequ
         return responseEntity;
     }
 
-    private void save(OAuthAttributes attributes) {
+    private void save(OAuthAttributes attributes, OAuth2UserRequest userRequest) {
+        log.info("!!!!{}",attributes.getAttributes());
+        Member member = memberRepository.findByEmail(attributes.getEmail())
+                .orElse(memberRepository.save(
+                                Member
+                                        .builder()
+                                        .email(attributes.getEmail())
+                                        .nickname(attributes.getName())
+                                        .img("1")
+                                        .points(0)
+                                        .bojTarget("1")
+                                        .blogTarget("1")
+                                        .csTarget("1")
+                                        .feedTarget("1")
+                                        .authority(Authority.ROLE_USER)
+                                        .password(passwordEncoder.encode("1234"))
+                                        .build()
+                        ));
 
-        String email = attributes.getEmail();
-        Optional<Member> member = memberRepository.findByEmail(email);
-
-        //기존에 저장된 것이 없었다면
-        if(!member.isPresent()) {
-                memberRepository.save(
-                    Member
-                    .builder()
-                    .email(attributes.getEmail()).nickname(attributes.getName()).points(0)
-                    .build());
+        if(userRequest.getClientRegistration().getRegistrationId().equals("tistory")){
+            member.updateTistoryToken(userRequest.getAccessToken().getTokenValue());
+        }else if(userRequest.getClientRegistration().getRegistrationId().equals("github")){
+            member.updateGithubToken(userRequest.getAccessToken().getTokenValue());
+            member.updateImg(attributes.getAttributes().get("avatar_url").toString());
         }
+        memberRepository.save(member);
     }
 }
