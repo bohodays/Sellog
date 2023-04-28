@@ -19,10 +19,10 @@ const Scene = () => {
   return (
     <>
       <Suspense>
-        <ambientLight color={"#ffffff"} intensity={1} />
+        <ambientLight color={"#ffffff"} intensity={0.7} />
         <directionalLight
           color={"#ffffff"}
-          intensity={3}
+          intensity={1}
           position={[1.5, 7, 3]}
           castShadow={true}
           shadow-camera-far={20}
