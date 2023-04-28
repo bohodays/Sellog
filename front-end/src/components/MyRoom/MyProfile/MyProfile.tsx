@@ -9,20 +9,25 @@ import coin from "@/assets/imgs/retro/coin.png";
 const MyProfile = () => {
   return (
     <SProfile>
-      <div className="head"> About me</div>
+      <div className="head"> ABOUT ME</div>
       <img className="sticker__smilebottom" src={smileBottom} alt="" />
-      <div className="profile__body">
-        <div className="container__userinfo">
-          <img src={profilePic} alt="profile pic" />
-          <div>
+      <div className="body__profile">
+        <div className="container__baseinfo">
+          <img className="img__profile" src={profilePic} alt="profile pic" />
+          <div className="container__userinfo">
             <p className="username">Kim Do Hyun</p>
-            <p>
-              {" "}
-              <img className="sticker__coin" src={coin} alt="coin" /> 5700
-            </p>
+            <div className="point__container">
+              <img className="sticker__coin" src={coin} alt="coin" />
+              <p>1000</p>
+            </div>
           </div>
         </div>
-        <p>어제의 내가 오늘의 나를 만든다.</p>
+        <div className="bottom__profile">
+          어제의 내가 오늘의 나를 만든다.
+          <button>
+            <FontAwesomeIcon icon={faPenToSquare} />
+          </button>
+        </div>
         <hr />
         <div className="container__habit">
           <div className="container__habit-stats">
@@ -50,14 +55,13 @@ const MyProfile = () => {
             Feed
             <div className="progress__bar progress__bar--Feed">오늘의 피드</div>
           </div>
-          <button className="">목표설정</button>
+          <button className="button__goal">목표설정</button>
         </div>
         <div className="container__contact">
           <div className="contact__text">Contact</div>
           <div className="contact__info">
             <p>
-              <FontAwesomeIcon icon={faEnvelope} />
-              sjsj@gmail.com
+              <FontAwesomeIcon icon={faEnvelope} /> sjsj@gmail.com
             </p>
             <br />
           </div>
@@ -67,9 +71,6 @@ const MyProfile = () => {
             <img src={github} className="sticker__github" alt="github Icon" />
             <img src={tistory} className="sticker__tistory" alt="" />
           </div>
-          <button>
-            <FontAwesomeIcon icon={faPenToSquare} />
-          </button>
         </div>
       </div>
     </SProfile>

@@ -9,12 +9,14 @@ export const SProfile = styled.section`
     margin-top: 2%;
     padding-left: 5%;
     height: 8%;
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-family: "Chicle", cursive;
     color: #cb4f4f;
     text-shadow: 3px 3px #484743;
     transform: rotate(-7.58deg);
     margin-bottom: 12%;
+  }
+  .img__profile {
   }
   .sticker__smilebottom {
     position: absolute;
@@ -23,27 +25,54 @@ export const SProfile = styled.section`
     top: 5vh;
   }
   .sticker__coin {
-    width: 2%;
+    /* position: absolute; */
+    height: 100%;
   }
-  .profile__body {
+  .body__profile {
     text-align: center;
   }
-  .container__userinfo {
+  .img__profile {
+    width: 10rem;
+    transform: matrix(1, 0.1, -0.1, 0.99, 0, 0);
+  }
+  .container__baseinfo {
     display: flex;
     justify-content: space-around;
     text-align: center;
     font-family: "Slackey", cursive;
-
-    img {
-      width: 30%;
-
-      transform: matrix(1, 0.1, -0.1, 0.99, 0, 0);
-    }
+    padding-inline: 5%;
 
     .username {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
+      padding-right: 10%;
     }
   }
+  .container__userinfo {
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+  .point__container {
+    display: flex;
+    justify-content: space-evenly;
+    height: 25%;
+    width: 45%;
+    text-align: center;
+    align-items: center;
+    background-color: #dfc490;
+    box-shadow: 1px 1px 1px 1px grey;
+    transform: rotate(3deg);
+    img {
+      width: 30%;
+    }
+  }
+
+  .bottom__profile {
+    margin-top: 4%;
+  }
+
   .container__habit {
     display: flex;
     flex-direction: column;
@@ -56,10 +85,11 @@ export const SProfile = styled.section`
   }
   .container__habit-stats {
     display: flex;
-    width: 95%;
+    width: 99%;
     /* border: solid black; */
     justify-content: space-between;
     align-items: center;
+    font-size: 1rem;
   }
   .progress__bar {
     width: 70%;
@@ -73,29 +103,44 @@ export const SProfile = styled.section`
   }
   .progress__bar--github {
     background-color: #484743;
+    transform: rotate(-1.85deg);
   }
   .progress__bar--blog {
     background-color: #c7553f;
+    transform: rotate(0.21deg);
   }
   .progress__bar--algorithm {
     background-color: #e1b34b;
+    transform: rotate(-1.48deg);
   }
   .progress__bar--CS {
     background-color: #6eb78d;
+    transform: rotate(0.52deg);
   }
   .progress__bar--Feed {
     background-color: #5488a1;
+    transform: rotate(-1.21deg);
+  }
+  .button__goal {
+    text-align: center;
+    align-items: center;
+    height: 2rem;
+    display: flex;
+    align-self: flex-end;
+    background-color: #ffcc00;
+    border: solid 1px;
+    border-radius: 1rem 1rem 1rem 1rem;
+    box-shadow: 1px 1px 1px 1px grey;
   }
   .container__contact {
-    margin-top: 5%;
+    /* border: solid 1px; */
+    margin-top: 2%;
     display: flex;
     justify-content: space-around;
-    align-items: start;
-    text-align: start;
   }
   .contact__text {
-    border: solid 1px;
-    padding-top: 3%;
+    /* border: solid 1px; */
+    /* padding-top: 3%; */
     font-size: 1rem;
     font-family: "Slackey", cursive;
     color: #817d7d;
@@ -115,7 +160,7 @@ export const SProfile = styled.section`
   }
   .sticker__tistory {
     position: absolute;
-    width: 4%;
+    width: 4rem;
     left: 5vw;
     bottom: 0vh;
   }
