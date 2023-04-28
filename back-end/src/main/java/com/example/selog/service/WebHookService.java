@@ -34,7 +34,8 @@ public class WebHookService {
 
         Member member = result.get();
 
-        log.info("포인트 증가시키기");
+        //목표 달성했을 때만 유저 포인트 증가
+
         member.updatePoint(10);
 
         memberRepository.save(member);

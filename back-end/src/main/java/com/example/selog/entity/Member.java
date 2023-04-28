@@ -48,6 +48,9 @@ public class Member extends BaseTime{
     @Column(name="feed_target")
     private String feedTarget;
 
+    @Column(name="github_target")
+    private String githubTarget;
+
     @Column(name="cs_target")
     private String csTarget;
 
