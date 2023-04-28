@@ -9,6 +9,7 @@ function App() {
   const Login = React.lazy(() => import("./pages/Login/Login"));
   const Main = React.lazy(() => import("./pages/Main/Main"));
   const CSQuiz = React.lazy(() => import("./pages/CSQuiz/CSQuiz"));
+  const ItemShop = React.lazy(() => import("./pages/ItemShop/ItemShop"));
   const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
   const Feed = React.lazy(() => import("@/pages/Feed/Feed"));
   const MyRoom = React.lazy(() => import("./pages/MyRoom/MyRoom"));
@@ -20,6 +21,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/item-shop" element={<ItemShop />} />
             <Route path="/main" element={<Main />} />
             <Route path="/feed" element={<Feed />} />
             <Route path="/csquiz" element={<CSQuiz />} />
