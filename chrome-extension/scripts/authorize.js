@@ -8,13 +8,8 @@ const localAuth = {
    * Initialize
    */
   init() {
-    this.KEY = 'BaekjoonHub_token';
-    this.ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token';
-    this.AUTHORIZATION_URL = 'https://github.com/login/oauth/authorize';
-    this.CLIENT_ID = '975f8d5cf6686dd1faed';
-    this.CLIENT_SECRET = '934b2bfc3bb3ad239bc67bdfa81a378b1616dd1e';
-    this.REDIRECT_URL = 'https://github.com/'; // for example, https://github.com
-    this.SCOPES = ['repo'];
+    this.KEY = 'Sellog_token';
+    this.ACCESS_TOKEN_URL = 'https://k8a404.p.ssafy.io/oauth2/authorization/github';
   },
 
   /**
@@ -39,20 +34,16 @@ const localAuth = {
   /**
    * Request Token
    *
-   * @param code The access code returned by provider.
+   * @param url The access code returned by provider.
    */
-  requestToken(code) {
+  requestToken(url) {
     const that = this;
-    const data = new FormData();
-    data.append('client_id', this.CLIENT_ID);
-    data.append('client_secret', this.CLIENT_SECRET);
-    data.append('code', code);
-
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('readystatechange', function () {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          that.finish(xhr.responseText.match(/access_token=([^&]*)/)[1]);
+          console.log(xhr.responseText);
+          that.finish(xhr.responseText.match(/accessToken=([^&]*)/)[1]);
         } else {
           chrome.runtime.sendMessage({
             closeWebPage: true,
@@ -61,8 +52,8 @@ const localAuth = {
         }
       }
     });
-    xhr.open('POST', this.ACCESS_TOKEN_URL, true);
-    xhr.send(data);
+    xhr.open('GET', this.ACCESS_TOKEN_URL, true);
+    xhr.send();
   },
 
   /**
@@ -73,13 +64,14 @@ const localAuth = {
   finish(token) {
     /* Get username */
     // To validate user, load user object from GitHub.
-    const AUTHENTICATION_URL = 'https://api.github.com/user';
+    const AUTHENTICATION_URL = 'https://k8a404.p.ssafy.io/api/user';
 
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('readystatechange', function () {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          const username = JSON.parse(xhr.responseText).login;
+          const username = JSON.parse(xhr.responseText).nickname;
+          // sendMessage를 통해 background.js request로 전달
           chrome.runtime.sendMessage({
             closeWebPage: true,
             isSuccess: true,
@@ -91,7 +83,7 @@ const localAuth = {
       }
     });
     xhr.open('GET', AUTHENTICATION_URL, true);
-    xhr.setRequestHeader('Authorization', `token ${token}`);
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
     xhr.send();
   },
 };
@@ -101,8 +93,8 @@ const link = window.location.href;
 
 /* Check for open pipe */
 if (window.location.host === 'github.com') {
-  chrome.storage.local.get('pipe_baekjoonhub', (data) => {
-    if (data && data.pipe_baekjoonhub) {
+  chrome.storage.local.get('pipe_Sellog', (data) => {
+    if (data && data.pipe_Sellog) {
       localAuth.parseAccessCode(link);
     }
   });

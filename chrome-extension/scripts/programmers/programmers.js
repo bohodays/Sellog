@@ -48,24 +48,12 @@ async function beginUpload(bojData) {
     startUpload();
 
     const stats = await getStats();
-    const hook = await getHook();
 
     const currentVersion = stats.version;
-    /* 버전 차이가 발생하거나, 해당 hook에 대한 데이터가 없는 경우 localstorage의 Stats 값을 업데이트하고, version을 최신으로 변경한다 */
-    if (isNull(currentVersion) || currentVersion !== getVersion() || isNull(await getStatsSHAfromPath(hook))) {
+    /* version을 최신으로 변경한다 */
+    if (isNull(currentVersion) || currentVersion !== getVersion()) {
       await versionUpdate();
     }
-
-    /* 현재 제출하려는 소스코드가 기존 업로드한 내용과 같다면 중지 */
-    cachedSHA = await getStatsSHAfromPath(`${hook}/${bojData.directory}/${bojData.fileName}`)
-    calcSHA = calculateBlobSHA(bojData.code)
-    log('cachedSHA', cachedSHA, 'calcSHA', calcSHA)
-    if (cachedSHA == calcSHA) {
-      markUploadedCSS();
-      console.log(`현재 제출번호를 업로드한 기록이 있습니다. problemIdID ${bojData.problemId}`);
-      return;
-    }
-    /* 신규 제출 번호라면 새롭게 커밋  */
     await uploadOneSolveProblemOnGit(bojData, markUploadedCSS);
   }
 }
@@ -78,10 +66,3 @@ async function versionUpdate() {
   await saveStats(stats);
   log('stats updated.', stats);
 }
-
-// /* TODO: 하나의 데이터만 가져오는 구조이므로 page를 계속적으로
-//   아래 있는 네이베이션바의 "다음"버튼이 비활성화 될때까지 반복으로 진행한다.
-//   진행하며 존재하는 알고리즘 카드인 div.col-item > div.card-algorithm > a 의 href 속성값을 가져와 리스트화하고,
-//   이를 차후 fetch GET를 진행하여 작성한 알고리즘을 가져와 github에 업로드를 진행한다.
-//   */
-// function get_all_problems() {}

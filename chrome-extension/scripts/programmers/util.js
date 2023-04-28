@@ -2,14 +2,14 @@
  * 로딩 버튼 추가
  */
 function startUpload() {
-  let elem = document.getElementById('BaekjoonHub_progress_anchor_element');
+  let elem = document.getElementById('Sellog_progress_anchor_element');
   if (elem !== undefined) {
     elem = document.createElement('span');
-    elem.id = 'BaekjoonHub_progress_anchor_element';
+    elem.id = 'Sellog_progress_anchor_element';
     elem.className = 'runcode-wrapper__8rXm';
     elem.style = 'margin-left: 10px;padding-top: 0px;';
   }
-  elem.innerHTML = `<div id="BaekjoonHub_progress_elem" class="BaekjoonHub_progress"></div>`;
+  elem.innerHTML = `<div id="Sellog_progress_elem" class="Sellog_progress"></div>`;
   const target = document.querySelector('#modal-dialog > div.modal-dialog > div.modal-content > div.modal-footer');
   if (!isNull(target)) {
     target.prepend(elem);
@@ -23,7 +23,7 @@ function startUpload() {
  */
 function markUploadedCSS() {
   uploadState.uploading = false;
-  const elem = document.getElementById('BaekjoonHub_progress_elem');
+  const elem = document.getElementById('Sellog_progress_elem');
   elem.className = 'markuploaded';
 }
 
@@ -32,7 +32,7 @@ function markUploadedCSS() {
  */
 function markUploadFailedCSS() {
   uploadState.uploading = false;
-  const elem = document.getElementById('BaekjoonHub_progress_elem');
+  const elem = document.getElementById('Sellog_progress_elem');
   elem.className = 'markuploadfailed';
 }
 

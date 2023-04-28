@@ -11,7 +11,7 @@ const currentUrl = window.location.href;
 
 // SWEA 연습 문제 주소임을 확인하고, 맞는 파서를 실행
 if (currentUrl.includes('/main/solvingProblem/solvingProblem.do') && document.querySelector('header > h1 > span').textContent === '모의 테스트') startLoader();
-else if (currentUrl.includes('/main/code/problem/problemSolver.do') && currentUrl.includes('extension=BaekjoonHub')) parseAndUpload();
+else if (currentUrl.includes('/main/code/problem/problemSolver.do') && currentUrl.includes('extension=Sellog')) parseAndUpload();
 
 function parseAndUpload() {
   //async wrapper
@@ -37,7 +37,7 @@ function startLoader() {
           + `/main/code/problem/problemSolver.do?`
           + `contestProbId=${contestProbId}&`
           + `nickName=${getNickname()}&`
-          + `extension=BaekjoonHub`);
+          + `extension=Sellog`);
       } catch (error) {
         log(error);
       }
@@ -59,24 +59,12 @@ async function beginUpload(bojData) {
   startUpload();
   if (isNotEmpty(bojData)) {
     const stats = await getStats();
-    const hook = await getHook();
 
     const currentVersion = stats.version;
-    /* 버전 차이가 발생하거나, 해당 hook에 대한 데이터가 없는 경우 localstorage의 Stats 값을 업데이트하고, version을 최신으로 변경한다 */
-    if (isNull(currentVersion) || currentVersion !== getVersion() || isNull(await getStatsSHAfromPath(hook))) {
+    /* version을 최신으로 변경한다 */
+    if (isNull(currentVersion) || currentVersion !== getVersion()) {
       await versionUpdate();
     }
-
-    /* 현재 제출하려는 소스코드가 기존 업로드한 내용과 같다면 중지 */
-    cachedSHA = await getStatsSHAfromPath(`${hook}/${bojData.directory}/${bojData.fileName}`)
-    calcSHA = calculateBlobSHA(bojData.code)
-    log('cachedSHA', cachedSHA, 'calcSHA', calcSHA)
-    if (cachedSHA == calcSHA) {
-      markUploadedCSS();
-      console.log(`현재 제출번호를 업로드한 기록이 있습니다. problemIdID ${bojData.problemId}`);
-      return;
-    }
-    /* 신규 제출 번호라면 새롭게 커밋  */
     await uploadOneSolveProblemOnGit(bojData, markUploadedCSS);
   }
 }

@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "백준허브(BaekjoonHub)",
-  "description": "Automatically integrate your BOJ submissions to GitHub",
-  "homepage_url": "https://github.com/BaekjoonHub/BaekjoonHub",
+  "name": "sellog",
+  "description": "Automatically integrate your algo submissions to sellog",
+  "version": "1.0.0",
+  "homepage_url": "https://k8a404.p.ssafy.io",
   "action": {
     "default_icon": "assets/thumbnail.png",
     "default_popup": "popup.html"
@@ -33,7 +34,7 @@
   "host_permissions": [
     "https://www.acmicpc.net/",
     "https://school.programmers.co.kr/",
-    "https://github.com/",
+    "https://k8a404.p.ssafy.io/",
     "https://swexpertacademy.com/",
     "https://solved.ac/api/v3/*"
   ],
