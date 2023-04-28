@@ -52,6 +52,9 @@ public class Member extends BaseTime{
     @Column(name="velog")
     private String velog;
 
+    @Column(name="baekjoon")
+    private String baekjoon;
+
     @Column(name="github")
     private String github;
 
