@@ -5,6 +5,7 @@ let action = false;
 
 $('#authenticate').on('click', () => {
   if (action) {
+    console.log("auth");
     oAuth2.begin();
   }
 });

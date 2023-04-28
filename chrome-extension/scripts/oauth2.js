@@ -14,10 +14,12 @@ const oAuth2 = {
   begin() {
     this.init(); // secure token params.
     
+    let url = `${this.AUTHORIZATION_URL}`;
+
     chrome.storage.local.set({ pipe_Sellog: true }, () => {
       // opening pipe temporarily
 
-      chrome.tabs.create({ ACCESS_TOKEN_URL, selected: true }, function () {
+      chrome.tabs.create({ url, selected: true }, function () {
         window.close();
         chrome.tabs.getCurrent(function (tab) {
           // chrome.tabs.remove(tab.id, function () {});
