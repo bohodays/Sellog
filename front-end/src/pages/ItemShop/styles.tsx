@@ -9,7 +9,7 @@ export const SMain = styled.main`
 
   .item__category--container {
     text-align: center;
-    font-size: 2rem;
+    font-size: calc(2.5vw - 10px);
     font-weight: 900;
     font-style: italic;
     font-family: "Exo 2", sans-serif;
@@ -89,7 +89,7 @@ export const SMain = styled.main`
   .sign__title {
     font-family: Neoneon;
     color: #f582dd;
-    font-size: 3rem;
+    font-size: calc(2.5vw - 10px);
   }
 
   .sign__title--container {
@@ -98,7 +98,7 @@ export const SMain = styled.main`
     font-family: "Exo 2", sans-serif;
     padding: 1% 3%;
     /* padding: 4rem 6rem 5.5rem; */
-    border: 0.4rem solid #fff;
+    border: calc(1vw - 10px) solid #fff;
     border-radius: 0.5rem;
     text-transform: uppercase;
     animation: flicker2 1.5s infinite alternate;
@@ -149,20 +149,20 @@ export const SGhostContainer = styled.div<any>`
   right: ${(props) => (props.position === "top" ? "1.5%" : null)};
 
   .dot {
-    width: 11px;
-    height: 11px;
+    width: calc(0.5vw);
+    height: calc(0.5vw);
     background: #ffffff;
     border-radius: 50%;
   }
 
   .red__ghost {
-    height: 90px;
-    width: 90px;
+    height: calc(4vw);
+    width: calc(4vw);
   }
 
   .yellow__ghost {
-    height: 90px;
-    width: 90px;
+    height: calc(4vw);
+    width: calc(4vw);
     transform: scaleX(-1);
   }
 `;
@@ -170,7 +170,7 @@ export const SGhostContainer = styled.div<any>`
 export const SContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 70%;
+  height: 90%;
   /* margin-left: 7.5%; */
   /* margin-top: 3%; */
 `;

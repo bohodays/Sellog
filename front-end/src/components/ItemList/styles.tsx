@@ -20,9 +20,9 @@ export const SSection = styled.section<any>`
     align-items: center;
     justify-content: center;
     padding: 0.5% 3%;
-    position: absolute;
-    bottom: -30%;
-    left: 40%;
+    /* position: absolute; */
+    /* bottom: -30%; */
+    /* left: 40%; */
   }
 
   .page__btn {
