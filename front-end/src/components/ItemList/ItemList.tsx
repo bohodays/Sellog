@@ -91,7 +91,7 @@ const ItemList = ({ category }: categoryProps) => {
 
   const pages = () => {
     let arr = [];
-    for (let i = 1; i < selectedItemList.length / 4 + 1; i++) {
+    for (let i = 1; i < selectedItemList.length / perPage + 1; i++) {
       arr.push(
         <button
           className={i === page ? "page__btn--active" : "page__btn"}
