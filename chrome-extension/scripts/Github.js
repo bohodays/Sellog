@@ -15,7 +15,7 @@ class GitHub {
  * @param {string} message - the commit message
  */
 async function createRecord(token, message, type) {
-  return fetch(`https://k8a404.p.ssafy.io/api/record`, {
+  return fetch(`https://k8a404.p.ssafy.io/api/webhook/chrome`, {
     method: 'POST',
     body: JSON.stringify({ message, type: type }),
     headers: { Authorization: `Bearer ${token}`, 'content-type': 'application/json' },

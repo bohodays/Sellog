@@ -11,7 +11,7 @@ function handleMessage(request, sender, sendResponse) {
   if (request && request.closeWebPage === true && request.isSuccess === true) {
     /* Set username */
     chrome.storage.local.set(
-      { Sellog_username: request.nickname } /* , () => {
+      { Sellog_username: request.username } /* , () => {
       window.localStorage.Sellog_username = request.username;
     } */,
     );

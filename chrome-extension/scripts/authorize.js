@@ -12,48 +12,24 @@ const localAuth = {
     this.ACCESS_TOKEN_URL = 'https://k8a404.p.ssafy.io/oauth2/authorization/github';
   },
 
-  /**
-   * Parses Access Code
-   *
-   * @param url The url containing the access code.
-   */
-  parseAccessCode(url) {
+  requestToken(url) {
+    const that = this;
     if (url.match(/\?error=(.+)/)) {
       chrome.tabs.getCurrent(function (tab) {
         chrome.tabs.remove(tab.id, function () {});
       });
     } else {
       // eslint-disable-next-line
-      const accessCode = url.match(/\?code=([\w\/\-]+)/);
-      if (accessCode) {
-        this.requestToken(accessCode[1]);
+      const accessToken = url.match(/\&accessToken=([\w\/\-.,]+)/);
+      if (accessToken) {
+        that.finish(accessToken[1]);
+      }else {
+        chrome.runtime.sendMessage({
+          closeWebPage: true,
+          isSuccess: false,
+        });
       }
     }
-  },
-
-  /**
-   * Request Token
-   *
-   * @param url The access code returned by provider.
-   */
-  requestToken(url) {
-    const that = this;
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('readystatechange', function () {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          console.log(xhr.responseText);
-          that.finish(xhr.responseText.match(/accessToken=([^&]*)/)[1]);
-        } else {
-          chrome.runtime.sendMessage({
-            closeWebPage: true,
-            isSuccess: false,
-          });
-        }
-      }
-    });
-    xhr.open('GET', this.ACCESS_TOKEN_URL, true);
-    xhr.send();
   },
 
   /**
@@ -92,10 +68,10 @@ localAuth.init(); // load params.
 const link = window.location.href;
 
 /* Check for open pipe */
-if (window.location.host === 'github.com') {
+if (window.location.host === 'k8a404.p.ssafy.io' && link.includes("refreshToken") && link.includes("accessToken")) {
   chrome.storage.local.get('pipe_Sellog', (data) => {
     if (data && data.pipe_Sellog) {
-      localAuth.parseAccessCode(link);
+      localAuth.requestToken(link);
     }
   });
 }

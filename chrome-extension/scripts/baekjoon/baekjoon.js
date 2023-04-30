@@ -65,12 +65,3 @@ async function beginUpload(bojData) {
     await uploadOneSolveProblemOnGit(bojData, markUploadedCSS);
   }
 }
-
-async function versionUpdate() {
-  log('start versionUpdate');
-  const stats = await updateLocalStorageStats();
-  // update version.
-  stats.version = getVersion();
-  await saveStats(stats);
-  log('stats updated.', stats);
-}
