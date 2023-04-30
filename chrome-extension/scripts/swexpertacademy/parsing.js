@@ -21,11 +21,7 @@ function updateTextSourceEvent() {
 
 /*
   문제 요약과 코드를 파싱합니다.
-  - directory : 레포에 기록될 폴더명
-  - message : 커밋 메시지
-  - fileName : 파일명
-  - readme : README.md에 작성할 내용
-  - code : 소스코드 내용
+  - message : 메시지
 */
 async function parseData() {
   const nickname = document.querySelector('#searchinput').value;
@@ -81,18 +77,6 @@ async function parseData() {
 
 async function makeData(origin) {
   const { link, problemId, level, extension, title, runtime, memory, code, length } = origin;
-  const directory = `SWEA/${level}/${problemId}. ${convertSingleCharToDoubleChar(title)}`;
-  const message = `[${level}] Title: ${title}, Time: ${runtime}, Memory: ${memory} -Sellog`;
-  const fileName = `${convertSingleCharToDoubleChar(title)}.${extension}`;
-  // prettier-ignore
-  const readme =
-    `# [${level}] ${title} - ${problemId} \n\n`
-    + `[문제 링크](${link}) \n\n`
-    + `### 성능 요약\n\n`
-    + `메모리: ${memory}, `
-    + `시간: ${runtime}, `
-    + `코드길이: ${length} Bytes\n\n`
-    + `\n\n`
-    + `> 출처: SW Expert Academy, https://swexpertacademy.com/main/code/problem/problemList.do`;
-  return { problemId, directory, message, fileName, readme, code };
+  const message = `[SWEA/${level}] Title: ${title}, Time: ${runtime}, Memory: ${memory} -Sellog`;
+  return { problemId,  message };
 }
