@@ -58,22 +58,7 @@ async function beginUpload(bojData) {
   log('bojData', bojData);
   startUpload();
   if (isNotEmpty(bojData)) {
-    const stats = await getStats();
-
-    const currentVersion = stats.version;
-    /* version을 최신으로 변경한다 */
-    if (isNull(currentVersion) || currentVersion !== getVersion()) {
-      await versionUpdate();
-    }
     await uploadOneSolveProblemOnGit(bojData, markUploadedCSS);
   }
 }
 
-async function versionUpdate() {
-  log('start versionUpdate');
-  const stats = await updateLocalStorageStats();
-  // update version.
-  stats.version = getVersion();
-  await saveStats(stats);
-  log('stats updated.', stats);
-}
