@@ -14,7 +14,7 @@ const oAuth2 = {
   begin() {
     this.init(); // secure token params.
     
-    let url = `${this.AUTHORIZATION_URL}`;
+    let url = `${this.ACCESS_TOKEN_URL}`;
 
     chrome.storage.local.set({ pipe_Sellog: true }, () => {
       // opening pipe temporarily
