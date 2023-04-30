@@ -30,6 +30,9 @@ public class Record extends BaseTime {
     @Column
     private LocalDateTime writing_time;
 
+    @Column(name = "problem_id")
+    private String problemId;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Member member;
