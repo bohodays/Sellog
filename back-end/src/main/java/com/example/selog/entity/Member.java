@@ -124,4 +124,8 @@ public class Member extends BaseTime{
     public void updatePoint(int point) {
         this.points += point;
     }
+
+    public void updateStartDate(LocalDateTime today) {
+        this.start_date = today;
+    }
 }
