@@ -1,6 +1,6 @@
-import { atom } from "recoil";
+// import { atom } from "recoil";
 
-const myNewAtom = atom({
-  key: "myNewAtom",
-  default: value,
-});
+// const myNewAtom = atom({
+//   key: "myNewAtom",
+//   default: value,
+// });
