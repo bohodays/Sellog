@@ -1,53 +1,49 @@
 // import React from 'react'
-import { TiChevronRight, TiChevronLeft } from "react-icons/ti";
+import {
+  TiChevronRight,
+  TiChevronLeft,
+  TiChevronLeftOutline,
+  TiChevronRightOutline,
+} from "react-icons/ti";
 import { SSection } from "./styles";
 import { Ilbuni } from "@/components/Main/Models/Ilbuni";
-import { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-
-const Scene = () => {
-  return (
-    <Suspense>
-      <ambientLight intensity={0.7} />
-      <Ilbuni />
-    </Suspense>
-  );
-};
+import UserCharacter from "../UserCharacter/UserCharacter";
 
 const UserInfoForm = () => {
+  const [active, setActive] = useState<number>(0);
+  const [name, setName] = useState<string>();
+  const [introduce, setIntroduce] = useState<string>();
+  const [email, setEmail] = useState<string>();
+  const [github, setGithub] = useState<string>();
+  const [blog, setBlog] = useState<string>();
+
+  const handleLeftActive = () => {
+    if (active > 0) setActive((prev) => prev - 1);
+  };
+
+  const handleRightActive = () => {
+    if (active < 5) setActive((prev) => prev + 1);
+  };
+
   return (
     <SSection>
       <div className="button__wrapper">
         <div className="left-wrapper">
           <div className="character__select">
-            <div className="canvas__wrapper">
-              <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
-                <OrbitControls
-                  // maxPolarAngle={Math.PI / 2.8}
-                  // zoom0={20}
-                  enableZoom={false}
-                  enableRotate={true}
-                  // minZoom={5}
-                  // maxZoom={10}
-                  // 쉬프트 마우스 왼쪽 이동 막는 기능
-                  enablePan={false}
-                />
-                <Scene />
-              </Canvas>
-            </div>
-            <div className="button-wrapper">
-              <button className="nav left">
-                <TiChevronLeft />
-              </button>
-              <button className="nav right">
-                <TiChevronRight />
-              </button>
-            </div>
+            <UserCharacter
+              active={active}
+              handleLeftActive={handleLeftActive}
+              handleRightActive={handleRightActive}
+            />
           </div>
           <div className="right-wapper">
             <div className="input__wrapper name">
               <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 type="text"
                 className="input-name"
                 placeholder="이름을 입력해주세요."
@@ -55,6 +51,8 @@ const UserInfoForm = () => {
             </div>
             <div className="input__wrapper introduce">
               <input
+                value={introduce}
+                onChange={(e) => setIntroduce(e.target.value)}
                 type="text"
                 className="input-nintroduceame"
                 placeholder="한 문장으로 나를 표현해주세요."
@@ -62,6 +60,8 @@ const UserInfoForm = () => {
             </div>
             <div className="input__wrapper email">
               <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 type="text"
                 className="input-email"
                 placeholder="이메일을 입력해주세요. (선택사항)"
@@ -69,6 +69,8 @@ const UserInfoForm = () => {
             </div>
             <div className="input__wrapper github">
               <input
+                value={github}
+                onChange={(e) => setGithub(e.target.value)}
                 type="text"
                 className="input-github"
                 placeholder="깃허브 주소를 입력해주세요. (선택사항)"
