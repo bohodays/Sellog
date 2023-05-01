@@ -3,3 +3,4 @@
 //   key: "myNewAtom",
 //   default: value,
 // });
+export {};
