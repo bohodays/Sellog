@@ -19,7 +19,9 @@ public enum ErrorCode {
     NO_TOKEN(HttpStatus.UNAUTHORIZED, "401", "Refresh Token 이 유효하지 않습니다."),
 
     NO_ROOM(HttpStatus.NOT_FOUND, "404", "방이 존재하지 않습니다."),
-    NO_ITEM(HttpStatus.NOT_FOUND, "404", "아이템을 소유하고 있지 않습니다.");
+    NO_ITEM(HttpStatus.NOT_FOUND, "404", "아이템을 소유하고 있지 않습니다."),
+
+    CONFLICT_ALGO(HttpStatus.CONFLICT, "409", "이미 기록한 문제입니다.");
 
     private HttpStatus httpStatus;
     private String code;

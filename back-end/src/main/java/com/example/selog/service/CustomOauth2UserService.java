@@ -23,6 +23,7 @@ import org.springframework.core.ParameterizedTypeReference;
 
 
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -79,23 +80,24 @@ public class CustomOauth2UserService implements OAuth2UserService<OAuth2UserRequ
     }
 
     private void save(OAuthAttributes attributes, OAuth2UserRequest userRequest) {
-        log.info("!!!!{}",attributes.getAttributes());
-        Member member = memberRepository.findByEmail(attributes.getEmail())
-                .orElse(memberRepository.save(
-                                Member
-                                        .builder()
-                                        .email(attributes.getEmail())
-                                        .nickname(attributes.getName())
-                                        .img("1")
-                                        .points(0)
-                                        .bojTarget("1")
-                                        .blogTarget("1")
-                                        .csTarget("1")
-                                        .feedTarget("1")
-                                        .authority(Authority.ROLE_USER)
-                                        .password(passwordEncoder.encode("1234"))
-                                        .build()
-                        ));
+        Optional<Member> optionalMember = memberRepository.findByEmail(attributes.getEmail());
+        Member member;
+        if (optionalMember.isPresent()) {
+            member = optionalMember.get();
+        } else {
+            member = Member.builder()
+                    .email(attributes.getEmail())
+                    .nickname(attributes.getName())
+                    .img("1")
+                    .points(0)
+                    .bojTarget("1")
+                    .blogTarget("1")
+                    .csTarget("1")
+                    .feedTarget("1")
+                    .authority(Authority.ROLE_USER)
+                    .password(passwordEncoder.encode("1234"))
+                    .build();
+        }
 
         if(userRequest.getClientRegistration().getRegistrationId().equals("tistory")){
             member.updateTistoryToken(userRequest.getAccessToken().getTokenValue());

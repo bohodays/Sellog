@@ -1,17 +1,23 @@
 package com.example.selog.service;
 
+import com.example.selog.dto.record.RecordDto;
 import com.example.selog.entity.Member;
 import com.example.selog.entity.Record;
+import com.example.selog.exception.CustomException;
+import com.example.selog.exception.error.ErrorCode;
 import com.example.selog.repository.MemberRepository;
 import com.example.selog.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.asm.Advice;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.time.LocalDateTime;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +29,8 @@ public class WebHookService {
 
     private final RecordRepository recordRepository;
     private final MemberRepository memberRepository;
+
+    @Transactional
     public void createRecord(HashMap<String, Object> request) {
 
         HashMap<String,Object> sender = (HashMap<String, Object>) request.get("sender");
@@ -32,17 +40,16 @@ public class WebHookService {
         String who = (String)sender.get("login");
 
         log.info("유저네임 {}",who);
-        Optional<Member> result = memberRepository.findByEmail(who);
-
-        //사용자가 아닌 다른 유저가 push 했으므로 무시
-        if(!result.isPresent()) return;
-
-        Member member = result.get();
+        Member member = memberRepository.findByEmail(who)
+                .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
         //시작 날짜를 포함하므로 1더함
         long diff = calculateDiff(member.getStart_date(),LocalDateTime.now()) + 1;
 
         log.info("두 날짜의 차이 : {}",diff);
+
+        //목표 달성했을 때만 유저 포인트 증가
+        member.updatePoint(10);
 
         String target = member.getGithubTarget();
         int day = (target.charAt(0) - '0');
