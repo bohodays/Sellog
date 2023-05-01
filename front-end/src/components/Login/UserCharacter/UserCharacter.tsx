@@ -21,7 +21,7 @@ const UserCharacter = ({
   return (
     <>
       <div className="canvas__wrapper">
-        <UserCharacterWrapper />
+        <UserCharacterWrapper active={active} />
       </div>
       <div className="button-wrapper">
         <button className="nav left" onClick={handleLeftActive}>
