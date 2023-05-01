@@ -11,9 +11,9 @@ const MyRoom = () => {
 
   async function getUserInfo() {
     // Api 함수 호출 + 리턴 값 저장
-    const response = await apiGetUserInfo();
+    // const response = await apiGetUserInfo();
     // user 값 변경 (recoil)
-    setUser(response.data);
+    // setUser(response.data);
   }
 
   useEffect(() => {
