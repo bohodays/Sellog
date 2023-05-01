@@ -5,11 +5,7 @@
 
 /*
   bojData를 초기화하는 함수로 문제 요약과 코드를 파싱합니다.
-  - directory : 레포에 기록될 폴더명
-  - message : 커밋 메시지
-  - fileName : 파일명
-  - readme : README.md에 작성할 내용
-  - code : 소스코드 내용
+  - message : 메시지
 */
 async function parseData() {
   const link = document.querySelector('head > meta[name$=url]').content.replace(/\?.*/g, '').trim();
@@ -42,22 +38,6 @@ async function parseData() {
 
 async function makeData(origin) {
   const { problem_description, problemId, level, result_message, division, language_extension, title, runtime, memory, code } = origin;
-  const directory = `프로그래머스/${level}/${problemId}. ${convertSingleCharToDoubleChar(title)}`;
-  const message = `[${level.replace('lv', 'level ')}] Title: ${title}, Time: ${runtime}, Memory: ${memory} -Sellog`;
-  const fileName = `${convertSingleCharToDoubleChar(title)}.${language_extension}`;
-  // prettier-ignore
-  const readme =
-    `# [${level.replace('lv', 'level ')}] ${title} - ${problemId} \n\n`
-    + `[문제 링크](${link}) \n\n`
-    + `### 성능 요약\n\n`
-    + `메모리: ${memory}, `
-    + `시간: ${runtime}\n\n`
-    + `### 구분\n\n`
-    + `${division.replace('/', ' > ')}\n\n`
-    + `### 채점결과\n\n`
-    + `${result_message}\n\n`
-    + `### 문제 설명\n\n`
-    + `${problem_description}\n\n`
-    + `> 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges`;
-  return { problemId, directory, message, fileName, readme, code };
+  const message = `[Programmers/${level.replace('lv', 'level ')}] Title: ${title}, Time: ${runtime}, Memory: ${memory} -Sellog`;
+  return { problemId, message };
 }

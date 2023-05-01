@@ -36,7 +36,7 @@ async function findData(data) {
 }
  
 /**
- * 문제의 상세 정보를 가지고, 문제의 업로드할 디렉토리, 파일명, 커밋 메시지, 문제 설명을 파싱하여 반환합니다.
+ * 문제의 상세 정보를 가지고, 문제의 업로드할 메시지, 문제 설명을 파싱하여 반환합니다.
  * @param {Object} data
  * @returns {Object} { message }
  */
@@ -44,7 +44,7 @@ function makeDetailMessageAndReadme(data) {
   const { problemId, title, level } = data;
 
   // prettier-ignore-start
-  const message = `# [${level}] ${title} - ${problemId} \n\n`
+  const message = `# [${level}] ${title} - ${problemId} \n`
     + `[문제 링크](https://www.acmicpc.net/problem/${problemId})`;
   // prettier-ignore-end
   return {
