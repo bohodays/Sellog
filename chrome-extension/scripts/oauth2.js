@@ -5,16 +5,24 @@ const oAuth2 = {
    */
   init() {
     this.KEY = 'Sellog_token';
-    this.ACCESS_TOKEN_URL = 'https://k8a404.p.ssafy.io/oauth2/authorization/github';
+    this.GITHUB_ACCESS_TOKEN_URL = 'https://k8a404.p.ssafy.io/oauth2/authorization/github';
+    this.TISTORY_ACCESS_TOKEN_URL = 'https://k8a404.p.ssafy.io/oauth2/authorization/tistory';
   },
 
   /**
    * Begin
    */
-  begin() {
+  begin(type) {
     this.init(); // secure token params.
     
-    let url = `${this.ACCESS_TOKEN_URL}`;
+    var url = '';
+    
+    if(type === 'github'){
+      url = `${this.GITHUB_ACCESS_TOKEN_URL}`;
+    }else{
+      url = `${this.TISTORY_ACCESS_TOKEN_URL}`;
+    }
+    
 
     chrome.storage.local.set({ pipe_Sellog: true }, () => {
       // opening pipe temporarily

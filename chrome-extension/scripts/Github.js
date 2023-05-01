@@ -23,5 +23,8 @@ async function createRecord(token, message, type) {
     .then((res) => res.json())
     .then((data) => {
       return data.sha;
+    })
+    .catch((error)=>{
+      console.log(error);
     });
 }

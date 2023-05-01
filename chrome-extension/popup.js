@@ -3,10 +3,15 @@
 
 let action = false;
 
-$('#authenticate').on('click', () => {
+$('#authenticateGithub').on('click', () => {
   if (action) {
-    console.log("auth");
-    oAuth2.begin();
+    oAuth2.begin("github");
+  }
+});
+
+$('#authenticateTistory').on('click', () => {
+  if (action) {
+    oAuth2.begin("tistory");
   }
 });
 
