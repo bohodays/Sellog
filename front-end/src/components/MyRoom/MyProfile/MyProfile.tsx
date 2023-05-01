@@ -6,7 +6,9 @@ import github from "@/assets/imgs/retro/github.png";
 import tistory from "@/assets/imgs/retro/tistoryIcon.png";
 import smileBottom from "@/assets/imgs/retro/smile_bottom.png";
 import coin from "@/assets/imgs/retro/coin.png";
-const MyProfile = () => {
+const MyProfile = (props: any) => {
+  console.log(props);
+
   return (
     <SProfile>
       <div className="head"> ABOUT ME</div>
