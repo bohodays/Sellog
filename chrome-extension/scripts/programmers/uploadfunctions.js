@@ -10,7 +10,7 @@ async function uploadOneSolveProblemOnGit(bojData, cb) {
     console.error('token is null', token);
     return;
   }
-  return upload(token, bojData.message, cb);
+  return upload(token, bojData.message, bojData.problemId, cb);
 }
 
 /** 업로드
@@ -18,7 +18,7 @@ async function uploadOneSolveProblemOnGit(bojData, cb) {
  * @param {string} message - 기록 정보
  * @param {function} cb - 콜백 함수 (ex. 업로드 후 로딩 아이콘 처리 등)
  */
-async function upload(token, message, cb) {
+async function upload(token, message, problemId, cb) {
   const git = new GitHub(token);
   const stats = await getStats();
   await git.createRecord("programmers", message, problemId);
