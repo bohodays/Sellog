@@ -69,6 +69,7 @@ export function Weather(props: JSX.IntrinsicElements["group"]) {
     actions["Roundcube.010Action.004"]?.play();
     actions["CurveAction"]?.play();
   }, []);
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">

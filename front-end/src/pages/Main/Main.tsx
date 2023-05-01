@@ -21,6 +21,7 @@ import { ItemShopMap } from "@/components/Main/Models/ItemShopMap";
 import { CSquiz } from "@/components/Main/Models/CSquiz";
 import { Flower } from "@/components/Main/Models/Flower";
 import { Weather } from "@/components/Main/Models/Weather";
+import { NewCsQuiz } from "@/components/Main/Models/NewCsQuiz";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -452,7 +453,7 @@ const Scene = () => {
         />
       </mesh>
 
-      <CSquiz
+      <NewCsQuiz
         csquizRef={csquizRef}
         visible={false}
         position={[-15, -1, -16]}
