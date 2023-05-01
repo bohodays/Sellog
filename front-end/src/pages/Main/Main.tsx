@@ -11,40 +11,46 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { SMain } from "./styles";
 import { PCFSoftShadowMap, RepeatWrapping, Vector2, Vector3 } from "three";
-import { Ilbuni } from "@/components/Main/Models/Ilbuni";
 import GridImg from "../../assets/imgs/main/grid_test.png";
 import { House } from "@/components/Main/Models/House";
 import { gsap } from "gsap";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 import { AirBalloon } from "@/components/Main/Models/AirBalloon";
+import { ItemShopMap } from "@/components/Main/Models/ItemShopMap";
+import { CSquiz } from "@/components/Main/Models/CSquiz";
+import { Flower } from "@/components/Main/Models/Flower";
+import { Weather } from "@/components/Main/Models/Weather";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Cube: THREE.SkinnedMesh;
-    Bone: THREE.Bone;
-    Bone003: THREE.Bone;
-    Bone005: THREE.Bone;
+    f_1: THREE.SkinnedMesh;
+    root: THREE.Bone;
+    ["MCH-torsoparent"]: THREE.Bone;
   };
   materials: {
-    Material: THREE.MeshStandardMaterial;
+    characters: THREE.MeshStandardMaterial;
   };
 };
 
-type ActionName = "default" | "walk";
+type ActionName = "Idle" | "Run" | "Sad" | "Song Jump" | "Walk" | "Win";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
 const Scene = () => {
   const group = useRef<THREE.Group | any>();
   const { nodes, materials, animations } = useGLTF(
-    "/models/ilbuni.glb"
+    "/models/characters/f1.glb"
   ) as GLTFResult;
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
   const userModelRef = useRef<any>();
   const pointerRef = useRef<any>();
   const spotRef = useRef<any>();
+  const spotRef2 = useRef<any>();
+  const spotRef3 = useRef<any>();
   const houseRef = useRef<any>();
+  const itemshopRef = useRef<any>();
+  const csquizRef = useRef<any>();
   const airBalloonRef = useRef<any>();
 
   // Texture
@@ -96,14 +102,14 @@ const Scene = () => {
           destinationPoint.x - userModelRef.current.position.x
         );
 
-        userModelRef.current.position.x += Math.cos(angle) * 0.05;
-        userModelRef.current.position.z += Math.sin(angle) * 0.05;
+        userModelRef.current.position.x += Math.cos(angle) * 0.06;
+        userModelRef.current.position.z += Math.sin(angle) * 0.06;
 
         camera.position.x = cameraPosition.x + userModelRef.current.position.x;
         camera.position.z = cameraPosition.z + userModelRef.current.position.z;
 
-        actions["default"]?.stop();
-        actions["walk"]?.play();
+        actions["Idle"]?.stop();
+        actions["Run"]?.play();
 
         if (
           Math.abs(destinationPoint.x - userModelRef.current.position.x) <
@@ -114,6 +120,7 @@ const Scene = () => {
           console.log("멈춤");
         }
 
+        // 마이룸
         if (
           Math.abs(
             spotRef.current.position.x - userModelRef.current.position.x
@@ -123,7 +130,7 @@ const Scene = () => {
           ) < 1.5
         ) {
           if (!houseRef.current.visible) {
-            console.log("나와!");
+            console.log("집 나와!");
             houseRef.current.visible = true;
             spotRef.current.material.color.set("seagreen");
             gsap.to(houseRef.current.position, {
@@ -137,7 +144,7 @@ const Scene = () => {
             });
           }
         } else if (houseRef.current?.visible) {
-          console.log("들어가");
+          console.log("집 들어가");
           spotRef.current.material.color.set("yellow");
           gsap.to(houseRef.current.position, {
             duration: 0.5,
@@ -150,13 +157,87 @@ const Scene = () => {
           setTimeout(() => {
             houseRef.current.visible = false;
           }, 400);
+          //  상점
+        } else if (
+          Math.abs(
+            spotRef2.current.position.x - userModelRef.current.position.x
+          ) < 1.5 &&
+          Math.abs(
+            spotRef2.current.position.z - userModelRef.current.position.z
+          ) < 1.5
+        ) {
+          if (!itemshopRef.current.visible) {
+            console.log("상점 나와!");
+            itemshopRef.current.visible = true;
+            spotRef2.current.material.color.set("seagreen");
+            gsap.to(itemshopRef.current.position, {
+              duration: 1,
+              y: 0,
+              ease: "Bounce.easeOut",
+            });
+            gsap.to(camera.position, {
+              duration: 1,
+              y: 2.5,
+            });
+          }
+        } else if (itemshopRef.current?.visible) {
+          console.log("상점 들어가");
+          spotRef2.current.material.color.set("yellow");
+          gsap.to(itemshopRef.current.position, {
+            duration: 0.5,
+            y: -2,
+          });
+          gsap.to(camera.position, {
+            duration: 1,
+            y: 4,
+          });
+          setTimeout(() => {
+            itemshopRef.current.visible = false;
+          }, 400);
+        } else if (
+          Math.abs(
+            spotRef3.current.position.x - userModelRef.current.position.x
+          ) < 1.5 &&
+          Math.abs(
+            spotRef3.current.position.z - userModelRef.current.position.z
+          ) < 1.5
+        ) {
+          if (!csquizRef.current.visible) {
+            console.log("cs퀴즈 나와!");
+            csquizRef.current.visible = true;
+            spotRef3.current.material.color.set("seagreen");
+            gsap.to(csquizRef.current.position, {
+              duration: 1,
+              y: 0.5,
+              ease: "Bounce.easeOut",
+            });
+            gsap.to(camera.position, {
+              duration: 1,
+              y: 2.5,
+            });
+          }
+        } else if (csquizRef.current?.visible) {
+          console.log("cs퀴즈 들어가");
+          spotRef3.current.material.color.set("yellow");
+          gsap.to(csquizRef.current.position, {
+            duration: 0.5,
+            y: -1,
+          });
+          gsap.to(camera.position, {
+            duration: 1,
+            y: 4,
+          });
+          setTimeout(() => {
+            csquizRef.current.visible = false;
+          }, 400);
         }
       } else {
-        actions["walk"]?.stop();
-        actions["default"]?.play();
+        actions["Run"]?.stop();
+        actions["Idle"]?.play();
       }
     }
 
+    gl.render(scene, camera);
     gl.setAnimationLoop(draw);
   }
 
@@ -177,7 +258,12 @@ const Scene = () => {
   function checkIntersects() {
     const intersects = raycaster?.intersectObjects(scene.children);
     for (const item of intersects) {
-      if (item.object.name === "floor" || item.object.name === "spot") {
+      if (
+        item.object.name === "floor" ||
+        item.object.name === "spot" ||
+        item.object.name === "spot2" ||
+        item.object.name === "spot3"
+      ) {
         destinationPoint.x = item.point.x;
         destinationPoint.y = 0.3;
         destinationPoint.z = item.point.z;
@@ -250,6 +336,16 @@ const Scene = () => {
         shadow-camera-near={-100}
         shadow-camera-far={100}
       />
+      <OrthographicCamera
+        makeDefault={true}
+        left={-(window.innerWidth / window.innerHeight)}
+        right={window.innerWidth / window.innerHeight}
+        top={1}
+        bottom={-1}
+        near={-1000}
+        far={1000}
+        zoom={80}
+      />
 
       {/* 맵 바닥 */}
       <mesh name="floor" rotation={[-Math.PI / 2, 0, 0]} receiveShadow={true}>
@@ -257,37 +353,23 @@ const Scene = () => {
         <meshStandardMaterial map={floorTexture} />
       </mesh>
 
-      {/* 일분이 모델 */}
-      <group ref={group} dispose={null} position={[0, 0.3, 0]} name="ilbuni">
+      {/* 유저 캐릭터 */}
+      <group ref={group} dispose={null} position={[0, 0.3, 0]}>
         <group name="Scene">
-          {/* 카메라 */}
-          <OrthographicCamera
-            makeDefault={true}
-            left={-(window.innerWidth / window.innerHeight)}
-            right={window.innerWidth / window.innerHeight}
-            top={1}
-            bottom={-1}
-            near={-1000}
-            far={1000}
-            zoom={0.2}
-            // position={[-2, 4, 5]}
-          />
           <group
-            name="Armature"
+            name="rig"
             position={[0, -0.17, 0]}
-            scale={0.33}
             castShadow={true}
             receiveShadow={true}
             ref={userModelRef}
           >
-            <primitive object={nodes.Bone} />
-            <primitive object={nodes.Bone003} />
-            <primitive object={nodes.Bone005} />
+            <primitive object={nodes.root} />
+            <primitive object={nodes["MCH-torsoparent"]} />
             <skinnedMesh
-              name="Cube"
-              geometry={nodes.Cube.geometry}
-              material={materials.Material}
-              skeleton={nodes.Cube.skeleton}
+              name="f_1"
+              geometry={nodes.f_1.geometry}
+              material={materials.characters}
+              skeleton={nodes.f_1.skeleton}
               castShadow={true}
               receiveShadow={true}
             />
@@ -295,7 +377,7 @@ const Scene = () => {
         </group>
       </group>
 
-      {/* 일분이를 따라다니는 pointMesh */}
+      {/* 유저 캐릭터를 따라다니는 pointMesh */}
       <mesh
         ref={pointerRef}
         name="point"
@@ -331,8 +413,62 @@ const Scene = () => {
         castShadow={true}
       />
 
+      {/* 상점을 보이게 하는 spotMesh */}
+      <mesh
+        ref={spotRef2}
+        name="spot2"
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[5, 0.005, -10]}
+        receiveShadow={true}
+      >
+        <planeGeometry args={[3, 3]} />
+        <meshStandardMaterial
+          color={"yellow"}
+          transparent={true}
+          opacity={0.5}
+        />
+      </mesh>
+
+      <ItemShopMap
+        itemshopRef={itemshopRef}
+        visible={false}
+        position={[5.5, -2, -12]}
+        castShadow={true}
+      />
+
+      {/* cs quiz를 보이게 하는 spotMesh */}
+      <mesh
+        ref={spotRef3}
+        name="spot3"
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[-14, 0.005, -14]}
+        receiveShadow={true}
+      >
+        <planeGeometry args={[3, 3]} />
+        <meshStandardMaterial
+          color={"yellow"}
+          transparent={true}
+          opacity={0.5}
+        />
+      </mesh>
+
+      <CSquiz
+        csquizRef={csquizRef}
+        visible={false}
+        position={[-15, -1, -16]}
+        castShadow={true}
+      />
+
+      {/* 장식들 */}
+
       {/* 열기구 */}
-      <AirBalloon ref={airBalloonRef} position={[-5, 5, 0]} castShadow={true} />
+      <AirBalloon ref={airBalloonRef} position={[-5, 3, 0]} castShadow={true} />
+
+      {/* 꽃 */}
+      <Flower position={[-2, 0, -22]} castShadow={true} />
+
+      {/* 해와 구름비 */}
+      <Weather position={[24, 5, -5]} castShadow={true} />
     </Suspense>
   );
 };
