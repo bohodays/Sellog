@@ -14,7 +14,7 @@ export const apiGetMyRoom = async (roomId: number) => {
 
 // 아이템 위치 수정, 삭제 / 삭제 시 x,y,z에 null 넣어서 보내기
 export const apiUpdateMyRoom = async (data: any) => {
-  // formData 형식
+  // 요청 data 형식
   const dataForm = [
     {
       id: 1,
