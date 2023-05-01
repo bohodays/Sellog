@@ -6,6 +6,7 @@ import { CineonToneMapping, PCFSoftShadowMap, sRGBEncoding } from "three";
 import { Room1 } from "../Models/Room1";
 import { Room2 } from "../Models/Room2";
 import { Room3 } from "../Models/Room3";
+import { Room15 } from "../Models/Room15";
 
 const Scene = () => {
   const { gl } = useThree();
@@ -30,9 +31,10 @@ const Scene = () => {
           shadow-mapSize-height={2048}
           shadow-normalBias={0.05}
         />
-        <Room1 />
+        {/* <Room1 /> */}
         {/* <Room2 /> */}
         {/* <Room3 /> */}
+        <Room15 />
       </Suspense>
     </>
   );
