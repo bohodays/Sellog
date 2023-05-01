@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const SArticle = styled.article`
   /* height: 30vh; */
-  width: 20%;
-  height: 60%;
+  width: calc(20% - 10px);
+  height: fit-content;
   color: white;
   padding: 1%;
   margin: 0% 1%;
@@ -20,8 +20,10 @@ export const SArticle = styled.article`
 
   .item__img {
     border-radius: 10%;
-    height: 80%;
-    width: 100%;
+    /* height: 80%; */
+    width: calc(100%);
+    height: calc(25vh);
+    /* width: 100%; */
   }
   .item__description__wrapper {
     display: flex;
@@ -46,7 +48,7 @@ export const SArticle = styled.article`
 
   .item__name {
     margin: 2% 5%;
-    font-size: 1rem;
+    font-size: calc(2vw - 15px);
     font-weight: 600;
   }
 
