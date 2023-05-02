@@ -18,7 +18,6 @@ import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 import { AirBalloon } from "@/components/Main/Models/AirBalloon";
 import { ItemShopMap } from "@/components/Main/Models/ItemShopMap";
-import { CSquiz } from "@/components/Main/Models/CSquiz";
 import { Flower } from "@/components/Main/Models/Flower";
 import { Weather } from "@/components/Main/Models/Weather";
 import { NewCsQuiz } from "@/components/Main/Models/NewCsQuiz";
