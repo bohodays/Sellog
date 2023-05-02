@@ -9,7 +9,7 @@ import {
 } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { SMain } from "./styles";
+import { SButtonWrapper, SMain } from "./styles";
 import { PCFSoftShadowMap, RepeatWrapping, Vector2, Vector3 } from "three";
 import GridImg from "../../assets/imgs/main/grid_test.png";
 import { House } from "@/components/Main/Models/House";
@@ -21,6 +21,7 @@ import { ItemShopMap } from "@/components/Main/Models/ItemShopMap";
 import { Flower } from "@/components/Main/Models/Flower";
 import { Weather } from "@/components/Main/Models/Weather";
 import { NewCsQuiz } from "@/components/Main/Models/NewCsQuiz";
+import { F1_Main } from "@/components/Main/Models/F1_Main";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -474,11 +475,19 @@ const Scene = () => {
 };
 
 const Main = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
   return (
     <SMain>
       <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
         <Scene />
       </Canvas>
+      <SButtonWrapper isVisible={isVisible}>
+        <div className="btn-info">
+          😘 습관을 통해 포인트를 얻어 마이룸을 꾸며보세요 ! 😘
+        </div>
+        <button className="btn">이동</button>
+      </SButtonWrapper>
     </SMain>
   );
 };
