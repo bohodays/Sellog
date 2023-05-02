@@ -1,6 +1,6 @@
 package com.example.selog.service;
 
-import com.example.selog.dto.record.RecordDto;
+import com.example.selog.dto.record.RecordRequestDto;
 import com.example.selog.entity.Member;
 import com.example.selog.entity.Record;
 import com.example.selog.exception.CustomException;
@@ -9,14 +9,12 @@ import com.example.selog.repository.MemberRepository;
 import com.example.selog.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.asm.Advice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.LocalDateTime;
 
 import java.util.HashMap;
 import java.util.List;
@@ -55,21 +53,21 @@ public class WebHookService {
     }
 
     @Transactional
-    public void createAlgoRecord(RecordDto recordDto, Long userId){
+    public void createAlgoRecord(RecordRequestDto recordRequestDto, Long userId){
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
-        Optional<Record> record = recordRepository.findByProblemIdAndCategory(recordDto.getProblemId(), recordDto.getType());
+        Optional<Record> record = recordRepository.findByProblemIdAndCategory(recordRequestDto.getProblemId(), recordRequestDto.getType());
         if(record.isPresent()){
             throw new CustomException(ErrorCode.CONFLICT_ALGO);
         }else{
             earnPoints(member);
             recordRepository.save(
                     Record.builder()
-                            .category(recordDto.getType())
-                            .content(recordDto.getMessage())
+                            .category(recordRequestDto.getType())
+                            .content(recordRequestDto.getMessage())
                             .member(member)
-                            .problemId(recordDto.getProblemId())
+                            .problemId(recordRequestDto.getProblemId())
                             .writing_time(LocalDateTime.now())
                             .build()
             );
