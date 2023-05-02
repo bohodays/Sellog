@@ -5,4 +5,3 @@
 //   get: ({ get }) => get(myAtom),
 //   set: ({ set }, newValue) => set(myAtom, newValue),
 // });
-export {};

@@ -19,8 +19,8 @@ type userInfo = {
   contact: string;
 };
 
-export const user = atom<userInfo>({
-  key: "DHK",
+export const userInfoState = atom<userInfo>({
+  key: "UserInfo",
   default: {
     userId: 1,
     nickname: "Mojung",
