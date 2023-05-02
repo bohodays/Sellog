@@ -3,7 +3,7 @@ import { SGhostContainer, SMain, SContainer } from "./styles";
 import red_ghost from "@/assets/imgs/retro/red_ghost.png";
 import yellow_ghost from "@/assets/imgs/retro/yellow_ghost.png";
 import { Link } from "react-router-dom";
-import ItemList from "@/components/ItemShop/ItemList/ItemList";
+import ItemList from "@/components/ItemList/ItemList";
 
 const ItemShop = () => {
   const [selectedCategory, setSelectedCategory] = useState("ALL");
