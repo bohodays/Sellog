@@ -5,7 +5,7 @@ const SettingButtons = () => {
   return (
     <SArticle>
       <button>
-        <p className="item1 purple">commt</p>
+        <p className="item1 purple">commit</p>
         <p className="item2">1 일 1 commit</p>
       </button>
       <button>
