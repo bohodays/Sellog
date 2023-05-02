@@ -21,7 +21,9 @@ public enum ErrorCode {
     NO_ROOM(HttpStatus.NOT_FOUND, "404", "방이 존재하지 않습니다."),
     NO_ITEM(HttpStatus.NOT_FOUND, "404", "아이템을 소유하고 있지 않습니다."),
 
-    CONFLICT_ALGO(HttpStatus.CONFLICT, "409", "이미 기록한 문제입니다.");
+    CONFLICT_ALGO(HttpStatus.CONFLICT, "409", "이미 기록한 문제입니다."),
+    CONFLICT_ROOM(HttpStatus.CONFLICT, "409", "이미 방이 존재합니다."),
+    NO_TARGET(HttpStatus.NOT_FOUND, "404", "목표 설정이 되어 있지 않아 기록이 되지 않습니다.");
 
     private HttpStatus httpStatus;
     private String code;
