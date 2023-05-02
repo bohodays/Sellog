@@ -23,7 +23,7 @@ const OauthRedirect = () => {
     if (isNewUser === 1) {
       navigate("/login", {
         state: {
-          userInfoUpdate: false,
+          userInfoUpdate: true,
           userId,
         },
       });
