@@ -13,7 +13,7 @@ const GoalsSetting = () => {
     <SSection>
       <div className="title__wrapper">
         <p className="title">MY GOALS</p>
-        <span>kepp running to achieve your goal !</span>
+        <span>keep running to achieve your goal !</span>
         <img
           className="sticker retro__pencil"
           src={RetroPencil}
