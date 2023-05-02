@@ -18,9 +18,7 @@ const MyRoom = () => {
 
   useEffect(() => {
     // api/user | API get userInfo 마운트 될 때
-    // getUserInfo().then(() => console.log(userAtom));
-    // console.log(user);
-    console.log("HI");
+    getUserInfo().then(() => console.log(userAtom));
   }, []);
   return (
     <SMain>

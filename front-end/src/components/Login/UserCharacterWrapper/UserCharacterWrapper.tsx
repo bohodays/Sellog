@@ -32,7 +32,7 @@ const Scene = ({ active }: ActiveType) => {
         <M3 />
       )}
       {/* <F1 /> */}
-      <OrthographicCamera
+      {/* <OrthographicCamera
         makeDefault={true}
         left={-(window.innerWidth / window.innerHeight)}
         right={window.innerWidth / window.innerHeight}
@@ -42,7 +42,7 @@ const Scene = ({ active }: ActiveType) => {
         far={1000}
         zoom={1.2}
         position={[0, 0, 5]}
-      />
+      /> */}
     </Suspense>
   );
 };

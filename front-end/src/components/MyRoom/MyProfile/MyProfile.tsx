@@ -6,8 +6,8 @@ import github from "@/assets/imgs/retro/github.png";
 import tistory from "@/assets/imgs/retro/tistoryIcon.png";
 import smileBottom from "@/assets/imgs/retro/smile_bottom.png";
 import coin from "@/assets/imgs/retro/coin.png";
-const MyProfile = ({ userData }: any) => {
-  console.log(userData, "component");
+const MyProfile = (props: any) => {
+  console.log(props);
 
   return (
     <SProfile>
@@ -17,7 +17,7 @@ const MyProfile = ({ userData }: any) => {
         <div className="container__baseinfo">
           <img className="img__profile" src={profilePic} alt="profile pic" />
           <div className="container__userinfo">
-            <p className="username">{userData.nickname}</p>
+            <p className="username">Kim Do Hyun</p>
             <div className="point__container">
               <img className="sticker__coin" src={coin} alt="coin" />
               <p>1000</p>
@@ -25,7 +25,7 @@ const MyProfile = ({ userData }: any) => {
           </div>
         </div>
         <div className="bottom__profile">
-          {userData.motto}
+          어제의 내가 오늘의 나를 만든다.
           <button>
             <FontAwesomeIcon icon={faPenToSquare} />
           </button>
@@ -33,19 +33,17 @@ const MyProfile = ({ userData }: any) => {
         <hr />
         <div className="container__habit">
           <div className="container__habit-stats">
-            github
+            github{" "}
             <div className="progress__bar progress__bar--github">1일 1커밋</div>
           </div>
           <div className="container__habit-stats">
-            blog
-            <div className="progress__bar progress__bar--blog">
-              {userData.blogTarget}
-            </div>
+            blog{" "}
+            <div className="progress__bar progress__bar--blog">1일 1포스팅</div>
           </div>
           <div className="container__habit-stats">
-            algorithm
+            algorithm{" "}
             <div className="progress__bar progress__bar--algorithm">
-              {userData.bojTarget}
+              1일 1알고
             </div>
           </div>
           <div className="container__habit-stats">
@@ -65,19 +63,15 @@ const MyProfile = ({ userData }: any) => {
           <div className="contact__text">Contact</div>
           <div className="contact__info">
             <p>
-              <FontAwesomeIcon icon={faEnvelope} /> {userData.contact}
+              <FontAwesomeIcon icon={faEnvelope} /> sjsj@gmail.com
             </p>
             <br />
           </div>
         </div>
         <div className="platform-address">
           <div>
-            <a href={`${userData.github}`}>
-              <img src={github} className="sticker__github" alt="github Icon" />
-            </a>
-            <a href={`${userData.tistory}`}>
-              <img src={tistory} className="sticker__tistory" alt="" />
-            </a>
+            <img src={github} className="sticker__github" alt="github Icon" />
+            <img src={tistory} className="sticker__tistory" alt="" />
           </div>
         </div>
       </div>
