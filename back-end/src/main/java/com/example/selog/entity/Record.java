@@ -1,5 +1,6 @@
 package com.example.selog.entity;
 
+import com.example.selog.dto.record.RecordDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Builder
@@ -36,4 +38,13 @@ public class Record extends BaseTime {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Member member;
+
+    public RecordDto toRecordDto(){
+        return RecordDto.builder()
+                .message(content)
+                .type(category)
+                .writing_time(writing_time.format(DateTimeFormatter.ofPattern("yyyyMMdd")))
+                .problemId(problemId)
+                .build();
+    }
 }
