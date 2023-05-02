@@ -36,17 +36,11 @@ const Login = () => {
   const userInfoUpdate = location.state?.userInfoUpdate;
   const userId = location.state?.userId;
 
-  useEffect(() => {
-    if (userInfoUpdate) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, []);
-
   const handleClassNameToggle = () => {
     setVisible(!isVisible);
   };
+
+  console.log(userInfoUpdate, "유저 정보 업데이트 상태");
 
   return (
     <SMain>
@@ -58,7 +52,7 @@ const Login = () => {
       {/* <LoginForm isVisible={isVisible} /> */}
 
       {/* 유저 정보 입력 폼 */}
-      {isLoggedIn ? <UserInfoForm /> : <LoginForm isVisible={isVisible} />}
+      {userInfoUpdate ? <UserInfoForm /> : <LoginForm isVisible={isVisible} />}
 
       <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
         <OrbitControls
