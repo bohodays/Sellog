@@ -1,6 +1,6 @@
 import GoalsSetting from "@/components/MyGoals/GoalsSetting/GoalsSetting";
 import { SMain } from "./styles";
-import Chart from "@/components/MyGoals/Chart/Chart";
+import Achievement from "@/components/MyGoals/Achievement/Achievement";
 
 const MyGoals = () => {
   return (
@@ -9,7 +9,7 @@ const MyGoals = () => {
       <GoalsSetting />
 
       {/* 목표 통계 */}
-      <Chart />
+      <Achievement />
     </SMain>
   );
 };

@@ -3,6 +3,8 @@
 
 /* Fonts */
 @import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
+@import url(https://fonts.googleapis.com/css2?family=Voces&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Bangers&family=Hahmlet:wght@500&family=IBM+Plex+Sans+KR&family=Nanum+Gothic+Coding&display=swap);
 @font-face {
   font-family: neon;
   src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
