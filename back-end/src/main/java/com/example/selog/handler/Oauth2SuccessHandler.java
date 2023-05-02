@@ -60,11 +60,6 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
         //새로 등록한 유저
         if(member.getRoom() == null) {
             member.updateRefreshToken(tokenDto.getRefreshToken());
-            //방 생성
-            roomRepository.save(Room
-                    .builder()
-                    .member(member)
-                    .build());
             newUser = 1;
         }
         memberRepository.save(member);

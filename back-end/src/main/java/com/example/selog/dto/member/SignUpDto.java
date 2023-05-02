@@ -13,14 +13,12 @@ import javax.persistence.Column;
 @NoArgsConstructor
 public class SignUpDto {
     private Long userId;
-    private String tel;
-    private String contact;
-    private String motto;
-    private Integer characterId;
+    private String contact; //선택
+    private String nickname; //닉네임
+    private String motto; //선택
+    private Integer characterId; //필수
 
     //계정 정보
-    private String tistory;
-    private String velog;
+    private String blog;
     private String github;
-//    private String baekjoon;
 }
