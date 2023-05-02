@@ -43,6 +43,44 @@ public class WebHookService {
         Member member = memberRepository.findByEmail(who)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
+        earnPoints(member);
+
+        Record record = Record.builder()
+                .category("github")
+                .content(repoName)
+                .member(member)
+                .build();
+
+        recordRepository.save(record);
+    }
+
+    @Transactional
+    public void createAlgoRecord(RecordDto recordDto, Long userId){
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
+
+        Optional<Record> record = recordRepository.findByProblemIdAndCategory(recordDto.getProblemId(), recordDto.getType());
+        if(record.isPresent()){
+            throw new CustomException(ErrorCode.CONFLICT_ALGO);
+        }else{
+            earnPoints(member);
+            recordRepository.save(
+                    Record.builder()
+                            .category(recordDto.getType())
+                            .content(recordDto.getMessage())
+                            .member(member)
+                            .problemId(recordDto.getProblemId())
+                            .writing_time(LocalDateTime.now())
+                            .build()
+            );
+        }
+    }
+
+    /**
+     * 포인트 적립
+     * @param member
+     */
+    public void earnPoints(Member member){
         //시작 날짜를 포함하므로 1더함
         long diff = calculateDiff(member.getStart_date(),LocalDateTime.now()) + 1;
 
@@ -103,16 +141,7 @@ public class WebHookService {
                 updatePoint(member);
             }
         }
-
-        Record record = Record.builder()
-                .category("github")
-                .content(repoName)
-                .member(member)
-                .build();
-
-        recordRepository.save(record);
     }
-
     public long calculateDiff(LocalDateTime date1, LocalDateTime date2) {
 
         LocalDate start = date1.toLocalDate();
