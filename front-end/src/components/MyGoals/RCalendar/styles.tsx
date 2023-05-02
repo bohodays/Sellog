@@ -43,10 +43,10 @@ export const StyledCalendar = styled(Calendar)`
   }
 
   // 오늘날짜
-  .react-calendar__tile--now {
+  /* .react-calendar__tile--now {
     background: #e9b50a;
     border-radius: 50%;
-  }
+  } */
 
   // 요일 section
   .react-calendar__month-view__weekdays {
@@ -66,5 +66,10 @@ export const StyledCalendar = styled(Calendar)`
 
   .react-calendar__month-view__weekdays__weekday--weekend {
     color: red;
+  }
+
+  .selected__day {
+    background: #e9b50a;
+    border-radius: 50%;
   }
 `;
