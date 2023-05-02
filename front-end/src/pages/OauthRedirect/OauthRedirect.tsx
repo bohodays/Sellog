@@ -24,6 +24,7 @@ const OauthRedirect = () => {
       navigate("/login", {
         state: {
           userInfoUpdate: false,
+          userId,
         },
       });
       // 기존 유저이면
