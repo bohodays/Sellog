@@ -28,13 +28,27 @@ public class QRecordRepositoryImpl implements QRecordRepository{
     }
 
     @Override
-    public List<RecordDto> findRecordByMonth(Long userId, String year, String month) {
+    public List<Record> findRecordByMonth(Long userId, String year, String month) {
         return jpaQueryFactory
-                .select(Projections.bean(RecordDto.class, record.category, record.content, record.problemId, Expressions.dateTemplate(String.class, "%Y-%m-%d %T", record.writing_time)))
-                .from(record)
+                //                .select(Projections.bean(RecordDto.class, record.category, record.content, record.problemId, Expressions.dateTemplate(String.class, "%Y-%m-%d %T", record.writing_time)))
+                .selectFrom(record)
                 .where(record.member.userId.eq(userId).and(record.writing_time.year().eq(Integer.valueOf(year)).and(record.writing_time.month().eq(Integer.valueOf(month)))))
 //                .groupBy(Expressions.dateTemplate(String.class, "%Y-%m-%d", record.writing_time))
                 .orderBy(record.writing_time.asc())
                 .fetch();
+    }
+
+    @Override
+    public List<Record> findRecordByToday(Long userId, Integer year, Integer month, Integer day) {
+        return jpaQueryFactory
+                .selectFrom(record)
+                .where(record.member.userId.eq(userId).and(record.writing_time.year().eq(year)).and(record.writing_time.month().eq(month)).and(record.writing_time.dayOfMonth().eq(day)))
+                .orderBy(record.writing_time.asc())
+                .fetch();
+    }
+
+    @Override
+    public List<Record> findRecordByStartDay(Long userId, LocalDateTime startDate, LocalDateTime now) {
+        return null;
     }
 }
