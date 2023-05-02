@@ -15,6 +15,9 @@ function App() {
   const Feed = React.lazy(() => import("@/pages/Feed/Feed"));
   const MyRoom = React.lazy(() => import("./pages/MyRoom/MyRoom"));
   const MyGoals = React.lazy(() => import("./pages/MyGoals/MyGoals"));
+  const OauthRedirect = React.lazy(
+    () => import("./pages/OauthRedirect/OauthRedirect")
+  );
 
   return (
     <div className="App">
@@ -32,6 +35,7 @@ function App() {
               <Route path="/csquiz" element={<CSQuiz />} />
               <Route path="/item-shop" element={<ItemShop />} />
               <Route path="/mygoals" element={<MyGoals />} />
+              <Route path="/oauth-login" element={<OauthRedirect />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
