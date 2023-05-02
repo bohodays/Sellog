@@ -69,9 +69,10 @@ public class RecordService {
     public Map<String, Map<String, List<RecordDto>>> toHashMap(List<Record> recordList){
 
         Map<String, Map<String, List<RecordDto>>> result = new HashMap<>(); // <날짜, <타입,기록List>>
-        Map<String, List<RecordDto>> categoryList = new HashMap<>();
+
         for(Record record : recordList){
             List<RecordDto> list = new ArrayList<>();
+            Map<String, List<RecordDto>> categoryList = new HashMap<>();
             String time = record.getWriting_time().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
             if(result.containsKey(time)){
                 categoryList = result.get(time);
