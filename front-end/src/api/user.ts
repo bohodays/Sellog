@@ -1,3 +1,4 @@
+import { IUserSignup } from "@/typeModels/user/userSignup";
 import getApiInstance from "./http";
 
 const api = getApiInstance();
@@ -26,6 +27,16 @@ export const apiGetUserInfo = async () => {
 export const apiUpdateUserInfo = async () => {
   try {
     const response = await api.put(`/user`);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// 유저 회원가입 정보 수정
+export const apiUpdateUserSignupInfo = async (data: IUserSignup) => {
+  try {
+    const response = await api.put(`/user/signup`, data);
     return response;
   } catch (e) {
     console.log(e);
