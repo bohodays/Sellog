@@ -5,6 +5,8 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import Tistory from "../../../assets/imgs/tistory_logo.png";
 
 const LoginForm = ({ isVisible }: any) => {
+  const SOCIAL_LOGIN_URL = "https://k8a404.p.ssafy.io";
+
   return (
     <SSection isVisible={isVisible}>
       <div className="button__wrapper">
@@ -13,7 +15,7 @@ const LoginForm = ({ isVisible }: any) => {
           <button
             className="github"
             onClick={() =>
-              (window.location.href = `/oauth2/authorization/github`)
+              (window.location.href = `${SOCIAL_LOGIN_URL}/oauth2/authorization/github`)
             }
           >
             <FontAwesomeIcon className="icon" icon={faGithub} />
