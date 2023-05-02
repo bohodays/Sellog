@@ -52,7 +52,7 @@ public class RecordController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/start")
     public ResponseEntity<?> findRecordByStartDay() {
         try{
             Map<String, Map<String, List<RecordDto>>> result = recordService.findRecordByStartDay(SecurityUtil.getCurrentMemberId());
