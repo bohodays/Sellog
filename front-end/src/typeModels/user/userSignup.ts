@@ -1,9 +1,9 @@
 export interface IUserSignup {
-  userId: number;
-  nickname: string;
-  contact: string | null;
-  motto: string;
-  characterId: number;
-  github: string | null;
-  blog: string | null;
+  userId: number | undefined;
+  nickname: string | undefined;
+  contact: string | undefined;
+  motto: string | undefined;
+  characterId: number | undefined;
+  github: string | undefined;
+  blog: string | undefined;
 }
