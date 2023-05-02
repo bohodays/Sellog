@@ -3,3 +3,5 @@ export interface Item {
   point?: number;
   category?: string;
 }
+
+export {};
