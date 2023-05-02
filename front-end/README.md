@@ -1,3 +1,3 @@
 front-end
 project
-.머지용
+.머지
