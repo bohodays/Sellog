@@ -47,6 +47,7 @@ public class WebHookService {
                 .category("github")
                 .content(repoName)
                 .member(member)
+                .writing_time(LocalDateTime.now())
                 .build();
 
         recordRepository.save(record);
@@ -79,6 +80,8 @@ public class WebHookService {
      * @param member
      */
     public void earnPoints(Member member){
+        if(member.getStart_date() == null) throw new CustomException(ErrorCode.NO_TARGET);
+
         //시작 날짜를 포함하므로 1더함
         long diff = calculateDiff(member.getStart_date(),LocalDateTime.now()) + 1;
 

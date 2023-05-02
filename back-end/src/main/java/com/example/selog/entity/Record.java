@@ -43,7 +43,7 @@ public class Record extends BaseTime {
         return RecordDto.builder()
                 .message(content)
                 .type(category)
-                .writing_time(writing_time.format(DateTimeFormatter.ofPattern("yyyyMMdd")))
+                .writing_time(writing_time.toString())
                 .problemId(problemId)
                 .build();
     }

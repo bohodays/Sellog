@@ -32,23 +32,8 @@ public class RecordService {
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
         List<Record> recordList = recordRepository.findRecordByMonth(userId, year, month);
-        Map<String, Map<String, List<RecordDto>>> result = new HashMap<>(); // <날짜, <타입,기록List>>
-        Map<String, List<RecordDto>> categoryList = new HashMap<>();
-        for(Record record : recordList){
-            List<RecordDto> list = new ArrayList<>();
-            String time = record.getWriting_time().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-            if(result.containsKey(time)){
-                categoryList = result.get(time);
-                if(categoryList.containsKey(record.getCategory())){
-                    list = result.get(time).get(record.getCategory());
-                }
-            }
-            list.add(record.toRecordDto());
-            categoryList.put(record.getCategory(), list);
-            result.put(time, categoryList);
-        }
 
-        return result;
+        return toHashMap(recordList);
     }
 
     @Transactional
@@ -78,6 +63,27 @@ public class RecordService {
 
         LocalDateTime now = LocalDateTime.now();
         List<Record> recordList = recordRepository.findRecordByStartDay(userId, member.getStart_date(), now);
-        return null;
+        return toHashMap(recordList);
+    }
+
+    public Map<String, Map<String, List<RecordDto>>> toHashMap(List<Record> recordList){
+
+        Map<String, Map<String, List<RecordDto>>> result = new HashMap<>(); // <날짜, <타입,기록List>>
+
+        for(Record record : recordList){
+            List<RecordDto> list = new ArrayList<>();
+            Map<String, List<RecordDto>> categoryList = new HashMap<>();
+            String time = record.getWriting_time().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+            if(result.containsKey(time)){
+                categoryList = result.get(time);
+                if(categoryList.containsKey(record.getCategory())){
+                    list = result.get(time).get(record.getCategory());
+                }
+            }
+            list.add(record.toRecordDto());
+            categoryList.put(record.getCategory(), list);
+            result.put(time, categoryList);
+        }
+        return result;
     }
 }
