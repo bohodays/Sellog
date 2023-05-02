@@ -66,14 +66,11 @@ public class Member extends BaseTime{
     @Column(name="github_token")
     private String githubToken;
 
-    @Column(name="velog")
-    private String velog;
-
     @Column(name="baekjoon")
     private String baekjoon;
 
-    @Column(name="tistory")
-    private String tistory;
+    @Column(name="blog")
+    private String blog;
 
     @Column(name="github")
     private String github;
@@ -83,9 +80,6 @@ public class Member extends BaseTime{
 
     @Column(name="character_id")
     private Integer characterId;
-
-    @Column(name = "tel")
-    private String tel;
 
     @Column(name = "contact")
     private String contact;
@@ -110,15 +104,13 @@ public class Member extends BaseTime{
     }
 
     public void updateSignUp(SignUpDto signUpDto){
-        this.tel = signUpDto.getTel();
         this.contact = signUpDto.getContact();
         this.motto = signUpDto.getMotto();
         this.characterId = signUpDto.getCharacterId();
-
-        this.velog = signUpDto.getVelog();
-//        this.baekjoon = signUpDto.getBaekjoon();
+        //        this.baekjoon = signUpDto.getBaekjoon();
         this.github = signUpDto.getGithub();
-        this.tistory = signUpDto.getTistory();
+        this.blog = signUpDto.getBlog();
+        this.nickname = signUpDto.getNickname();
     }
 
     public void updatePoint(int point) {

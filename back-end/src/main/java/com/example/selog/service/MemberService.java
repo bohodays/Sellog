@@ -5,10 +5,12 @@ import com.example.selog.dto.member.SignUpDto;
 import com.example.selog.dto.member.TokenDto;
 import com.example.selog.dto.member.TokenRequestDto;
 import com.example.selog.entity.Member;
+import com.example.selog.entity.Room;
 import com.example.selog.exception.CustomException;
 import com.example.selog.exception.error.ErrorCode;
 import com.example.selog.jwt.TokenProvider;
 import com.example.selog.repository.MemberRepository;
+import com.example.selog.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -24,6 +27,7 @@ import java.util.ArrayList;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final TokenProvider tokenProvider;
+    private final RoomRepository roomRepository;
 
     @Transactional(readOnly = true)
     public MemberDto findMemberInfoByUserId(Long userId) {
@@ -66,6 +70,14 @@ public class MemberService {
     public MemberDto signup(SignUpDto signUpDto){
         Member member = memberRepository.findById(signUpDto.getUserId())
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
+
+        Optional<Room> room = roomRepository.findByMember(member);
+        if(room.isPresent()) new CustomException(ErrorCode.CONFLICT_ROOM);
+        //방 생성
+        roomRepository.save(Room
+                .builder()
+                .member(member)
+                .build());
 
         member.updateSignUp(signUpDto);
         return MemberDto.of(memberRepository.save(member));

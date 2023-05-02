@@ -31,11 +31,12 @@ public class RecordController {
     @GetMapping("/month")
     public ResponseEntity<?> findRecordByMonth(@RequestParam String year, @RequestParam String month) {
         try{
-            Map<String, Map<String, List<RecordDto>>> result = recordService.findRecordByMonth(year, month, SecurityUtil.getCurrentMemberId());
+            Map<String, Map<String, List<RecordDto>>> result = recordService.findRecordByMonth(year, month, 1L);
             return new ResponseEntity<>(new SuccessResponse(result), HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
+            log.info(e.getMessage());
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -43,11 +44,12 @@ public class RecordController {
     @GetMapping
     public ResponseEntity<?> findRecordByToday() {
         try{
-            Map<String, List<RecordDto>> result = recordService.findRecordByToday(SecurityUtil.getCurrentMemberId());
+            Map<String, List<RecordDto>> result = recordService.findRecordByToday(1L);
             return new ResponseEntity<>(new SuccessResponse(result), HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
+            log.info(e.getMessage());
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -55,11 +57,12 @@ public class RecordController {
     @GetMapping("/start")
     public ResponseEntity<?> findRecordByStartDay() {
         try{
-            Map<String, Map<String, List<RecordDto>>> result = recordService.findRecordByStartDay(SecurityUtil.getCurrentMemberId());
+            Map<String, Map<String, List<RecordDto>>> result = recordService.findRecordByStartDay(1L);
             return new ResponseEntity<>(new SuccessResponse(result), HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
+            log.info(e.getMessage());
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
