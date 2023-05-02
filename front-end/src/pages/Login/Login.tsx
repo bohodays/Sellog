@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import LoginModel from "../../components/Login/Models/LoginModel";
 import CameraAndLight from "../../components/Login/Models/CameraAndLight";
 import { Canvas } from "@react-three/fiber";
@@ -8,6 +8,7 @@ import LoginForm from "@/components/Login/LoginForm/LoginForm";
 import UserInfoForm from "@/components/Login/UserInfoForm/UserInfoForm";
 import { useRecoilState } from "recoil";
 import { loginState } from "@/recoil/user/atom";
+import { useLocation } from "react-router-dom";
 
 export type handlerType = {
   handler: () => void;
@@ -31,8 +32,17 @@ const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
   const [isVisible, setVisible] = useState(false);
 
-  // 임시 변수
-  // 나중에는 ... 로컬스토리지에 토큰 여부로 확인해야 될듯?
+  const location = useLocation();
+  const userInfoUpdate = location.state?.userInfoUpdate;
+  const userId = location.state?.userId;
+
+  useEffect(() => {
+    if (userInfoUpdate) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
   const handleClassNameToggle = () => {
     setVisible(!isVisible);
