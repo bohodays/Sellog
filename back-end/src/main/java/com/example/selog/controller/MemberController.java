@@ -1,9 +1,6 @@
 package com.example.selog.controller;
 
-import com.example.selog.dto.member.MemberDto;
-import com.example.selog.dto.member.SignUpDto;
-import com.example.selog.dto.member.TokenDto;
-import com.example.selog.dto.member.TokenRequestDto;
+import com.example.selog.dto.member.*;
 import com.example.selog.exception.CustomException;
 import com.example.selog.exception.error.ErrorCode;
 import com.example.selog.response.ErrorResponse;
@@ -79,6 +76,19 @@ public class MemberController {
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/target")
+    public ResponseEntity<?> updateTarget(@RequestBody TargetDto targetDto){
+        try{
+            memberService.updateTarget(targetDto, SecurityUtil.getCurrentMemberId());
+            return new ResponseEntity<>(new SuccessResponse(targetDto),HttpStatus.OK);
+        } catch(CustomException e){
+            return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
+        } catch (Exception e){
+            log.info(e.getMessage());
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
