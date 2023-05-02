@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { MyRoomProps } from "@/typeModels/MyRoom/MyroomInterfaces";
+import { MyRoomProps } from "@/typeModels/MyRoom/myroomInterfaces";
 
 export const SMyRoom = styled.section<MyRoomProps>`
   height: 100%;

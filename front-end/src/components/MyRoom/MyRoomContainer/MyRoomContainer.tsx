@@ -3,7 +3,7 @@ import { SMyRoom } from "./styles";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { CineonToneMapping, PCFSoftShadowMap, sRGBEncoding } from "three";
-import { MyRoomProps } from "@/typeModels/MyRoom/MyroomInterfaces";
+import { MyRoomProps } from "@/typeModels/MyRoom/myroomInterfaces";
 import { Room1 } from "../Models/Room1";
 import { Room2 } from "../Models/Room2";
 import { Room3 } from "../Models/Room3";
