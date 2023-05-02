@@ -36,7 +36,8 @@
     "https://school.programmers.co.kr/",
     "https://k8a404.p.ssafy.io/",
     "https://swexpertacademy.com/",
-    "https://solved.ac/api/v3/*"
+    "https://solved.ac/api/v3/*",
+    "https://*.tistory.com/"
   ],
   "web_accessible_resources": [
     {
@@ -133,6 +134,22 @@
         "scripts/swexpertacademy/parsing.js",
         "scripts/swexpertacademy/uploadfunctions.js",
         "scripts/swexpertacademy/swexpertacademy.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.tistory.com/*"
+      ],
+      "js": [
+        "library/sha1.min.js",
+        "scripts/util.js",
+        "scripts/Github.js",
+        "scripts/authorize.js",
+        "scripts/storage.js",
+        "scripts/enable.js",
+        "scripts/tistory/tistory.js",
+        "scripts/tistory/uploadfunctions.js"
       ],
       "run_at": "document_idle"
     }
