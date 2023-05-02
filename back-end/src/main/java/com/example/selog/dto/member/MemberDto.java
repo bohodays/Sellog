@@ -20,8 +20,8 @@ public class MemberDto {
     private String githubTarget;
     private String bojTarget;
     private String blogTarget;
-    private String feedTarget;
-    private String csTarget;
+    private Boolean feedTarget;
+    private Boolean csTarget;
 
     //주소
     private String baekjoon;
