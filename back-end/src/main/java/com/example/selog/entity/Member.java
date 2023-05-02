@@ -1,6 +1,7 @@
 package com.example.selog.entity;
 
 import com.example.selog.dto.member.SignUpDto;
+import com.example.selog.dto.member.TargetDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -46,13 +47,13 @@ public class Member extends BaseTime{
     private String blogTarget;
 
     @Column(name="feed_target")
-    private String feedTarget;
+    private Boolean feedTarget;
 
     @Column(name="github_target")
     private String githubTarget;
 
     @Column(name="cs_target")
-    private String csTarget;
+    private Boolean csTarget;
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
@@ -111,6 +112,14 @@ public class Member extends BaseTime{
         this.github = signUpDto.getGithub();
         this.blog = signUpDto.getBlog();
         this.nickname = signUpDto.getNickname();
+    }
+
+    public void updateTarget(TargetDto targetDto){
+        this.bojTarget = targetDto.getBojTarget();
+        this.blogTarget = targetDto.getBlogTarget();
+        this.feedTarget = targetDto.getFeedTarget();
+        this.githubTarget = targetDto.getGithubTarget();
+        this.csTarget = targetDto.getCsTarget();
     }
 
     public void updatePoint(int point) {
