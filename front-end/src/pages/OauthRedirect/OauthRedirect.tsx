@@ -1,10 +1,13 @@
+import { loginState } from "@/recoil/user/atom";
 import { localData } from "@/utils/token";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 
 const OauthRedirect = () => {
   const params = useLocation();
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
 
   useEffect(() => {
     const search = params.search;
@@ -18,6 +21,7 @@ const OauthRedirect = () => {
 
     localStorage.setItem("refreshToken", splitedSearch[0].slice(14));
     localStorage.setItem("accessToken", splitedSearch[1].slice(12));
+    setIsLoggedIn(true);
 
     // 신규 유저이면
     if (isNewUser === 1) {

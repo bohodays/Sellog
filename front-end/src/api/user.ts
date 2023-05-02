@@ -35,6 +35,8 @@ export const apiUpdateUserInfo = async () => {
 
 // 유저 회원가입 정보 수정
 export const apiUpdateUserSignupInfo = async (data: IUserSignup) => {
+  console.log(data, "회원정보 수정 api 보내기 전 데이터");
+
   try {
     const response = await api.put(`/user/signup`, data);
     return response;
