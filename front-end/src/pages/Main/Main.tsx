@@ -37,7 +37,7 @@ type GLTFResult = GLTF & {
 type ActionName = "Idle" | "Run" | "Sad" | "Song Jump" | "Walk" | "Win";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
-const Scene = () => {
+const Scene = ({ setIsVisible }: any) => {
   const group = useRef<THREE.Group | any>();
   const { nodes, materials, animations } = useGLTF(
     "/models/characters/f1.glb"
@@ -480,7 +480,7 @@ const Main = () => {
   return (
     <SMain>
       <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
-        <Scene />
+        <Scene setIsVisible={setIsVisible} />
       </Canvas>
       <SButtonWrapper isVisible={isVisible}>
         <div className="btn-info">
