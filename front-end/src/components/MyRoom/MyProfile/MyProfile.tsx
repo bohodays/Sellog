@@ -6,9 +6,14 @@ import github from "@/assets/imgs/retro/github.png";
 import tistory from "@/assets/imgs/retro/tistoryIcon.png";
 import smileBottom from "@/assets/imgs/retro/smile_bottom.png";
 import coin from "@/assets/imgs/retro/coin.png";
-const MyProfile = ({ userData }: any) => {
+const MyProfile = ({ userData, setActivePage }: any) => {
   console.log(userData, "component");
 
+  const handleActivePage = () => {
+    setActivePage((prev: string) => {
+      return prev === "myprofile" ? "myitems" : "myprofile";
+    });
+  };
   return (
     <SProfile>
       <div className="head"> ABOUT ME</div>
@@ -59,7 +64,9 @@ const MyProfile = ({ userData }: any) => {
             Feed
             <div className="progress__bar progress__bar--Feed">오늘의 피드</div>
           </div>
-          <button className="button__goal">목표설정</button>
+          <button className="button__goal" onClick={handleActivePage}>
+            목표설정
+          </button>
         </div>
         <div className="container__contact">
           <div className="contact__text">Contact</div>
