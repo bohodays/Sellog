@@ -1,9 +1,6 @@
 package com.example.selog.service;
 
-import com.example.selog.dto.member.MemberDto;
-import com.example.selog.dto.member.SignUpDto;
-import com.example.selog.dto.member.TokenDto;
-import com.example.selog.dto.member.TokenRequestDto;
+import com.example.selog.dto.member.*;
 import com.example.selog.entity.Member;
 import com.example.selog.entity.Room;
 import com.example.selog.exception.CustomException;
@@ -96,5 +93,13 @@ public class MemberService {
         memberRepository.delete(
                 memberRepository.findById(userId).orElseThrow(() -> new CustomException(ErrorCode.NO_USER))
         );
+    }
+
+    @Transactional
+    public void updateTarget(TargetDto targetDto, Long userId){
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
+        member.updateTarget(targetDto);
+        memberRepository.save(member);
     }
 }
