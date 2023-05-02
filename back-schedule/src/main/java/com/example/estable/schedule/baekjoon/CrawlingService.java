@@ -28,7 +28,8 @@ public class CrawlingService {
     private final MemberRepository memberRepository;
     private final RecordRepository recordRepository;
 
-    @Scheduled(fixedRate = 1000 * 10)
+    //1시간 마다 실행
+    @Scheduled(fixedRate = 1000 * 60 * 60)
     public void crawling() {
         //크롤링 작업 해오기
 
