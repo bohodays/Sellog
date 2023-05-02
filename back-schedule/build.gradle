@@ -28,7 +28,9 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	//jsoup
 	implementation group: 'org.jsoup', name: 'jsoup', version: '1.15.3'
-
+	implementation 'commons-io:commons-io:2.11.0'
+	// https://mvnrepository.com/artifact/rome/rome
+	implementation group: 'rome', name: 'rome', version: '1.0'
 
 }
 
