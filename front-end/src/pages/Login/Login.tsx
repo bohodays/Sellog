@@ -6,6 +6,8 @@ import { OrbitControls } from "@react-three/drei";
 import { SMain } from "./styles";
 import LoginForm from "@/components/Login/LoginForm/LoginForm";
 import UserInfoForm from "@/components/Login/UserInfoForm/UserInfoForm";
+import { useRecoilState } from "recoil";
+import { loginState } from "@/recoil/user/atom";
 
 export type handlerType = {
   handler: () => void;
@@ -26,11 +28,11 @@ const Scene = ({ handler }: handlerType) => {
 };
 
 const Login = () => {
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
   const [isVisible, setVisible] = useState(false);
 
   // 임시 변수
   // 나중에는 ... 로컬스토리지에 토큰 여부로 확인해야 될듯?
-  let flag = true;
 
   const handleClassNameToggle = () => {
     setVisible(!isVisible);
@@ -38,13 +40,15 @@ const Login = () => {
 
   return (
     <SMain>
-      {!flag && <div className="info">Please click on the game console.</div>}
+      {!isLoggedIn && (
+        <div className="info">Please click on the game console.</div>
+      )}
 
       {/* 로그인 폼 */}
       {/* <LoginForm isVisible={isVisible} /> */}
 
       {/* 유저 정보 입력 폼 */}
-      {flag ? <UserInfoForm /> : <LoginForm isVisible={isVisible} />}
+      {isLoggedIn ? <UserInfoForm /> : <LoginForm isVisible={isVisible} />}
 
       <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
         <OrbitControls

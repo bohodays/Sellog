@@ -1,7 +1,7 @@
 import MyProfile from "@/components/MyRoom/MyProfile/MyProfile";
 import { SMain } from "./styles";
 import MyRoomContainer from "@/components/MyRoom/MyRoomContainer/MyRoomContainer";
-import { user as userAtom } from "@/recoil/myroom/atoms";
+import { userInfoState as userAtom } from "@/recoil/myroom/atoms";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 

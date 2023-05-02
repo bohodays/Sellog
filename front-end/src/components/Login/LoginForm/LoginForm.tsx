@@ -10,11 +10,21 @@ const LoginForm = ({ isVisible }: any) => {
       <div className="button__wrapper">
         <h1>서비스 이름</h1>
         <div>
-          <button className="github">
+          <button
+            className="github"
+            onClick={() =>
+              (window.location.href = `/oauth2/authorization/github`)
+            }
+          >
             <FontAwesomeIcon className="icon" icon={faGithub} />
             <span>깃허브로 로그인하기</span>
           </button>
-          <button className="tistory">
+          <button
+            className="tistory"
+            onClick={() =>
+              (window.location.href = `/oauth2/authorization/tistory`)
+            }
+          >
             <img
               className="icon__tistory"
               src={Tistory}
