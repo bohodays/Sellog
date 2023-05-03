@@ -17,6 +17,7 @@ public enum ErrorCode {
     INVALID_REQUEST(HttpStatus.BAD_REQUEST,"400","올바르지 않은 요청"),
     NO_LOGIN(HttpStatus.UNAUTHORIZED, "401", "로그인이 필요합니다"),
     NO_TOKEN(HttpStatus.UNAUTHORIZED, "401", "Refresh Token 이 유효하지 않습니다."),
+    NO_GITHUB_TOKEN(HttpStatus.UNAUTHORIZED, "401", "Github Token 이 없습니다."),
 
     NO_ROOM(HttpStatus.NOT_FOUND, "404", "방이 존재하지 않습니다."),
     NO_ITEM(HttpStatus.NOT_FOUND, "404", "아이템을 소유하고 있지 않습니다."),
