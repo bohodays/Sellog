@@ -48,11 +48,12 @@ const Login = () => {
         <div className="info">Please click on the game console.</div>
       )}
 
-      {/* 로그인 폼 */}
-      {/* <LoginForm isVisible={isVisible} /> */}
-
       {/* 유저 정보 입력 폼 */}
-      {userInfoUpdate ? <UserInfoForm /> : <LoginForm isVisible={isVisible} />}
+      {userInfoUpdate ? (
+        <UserInfoForm userId={userId} />
+      ) : (
+        <LoginForm isVisible={isVisible} />
+      )}
 
       <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
         <OrbitControls

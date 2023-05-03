@@ -4,7 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import Tistory from "../../../assets/imgs/tistory_logo.png";
 
-const LoginForm = ({ isVisible }: any) => {
+type PropsType = {
+  isVisible: boolean;
+};
+
+const LoginForm = ({ isVisible }: PropsType) => {
   const SOCIAL_LOGIN_URL = "https://k8a404.p.ssafy.io";
 
   return (
