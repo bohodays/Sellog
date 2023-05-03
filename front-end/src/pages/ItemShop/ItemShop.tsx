@@ -15,7 +15,7 @@ const ItemShop = () => {
     return arr;
   };
 
-  const handleCategory = (e: React.MouseEvent<HTMLElement>) => {
+  const handleSelectedCategory = (e: React.MouseEvent<HTMLElement>) => {
     const eventTarget = e.target as HTMLElement;
     setSelectedCategory(eventTarget.innerText);
   };
@@ -27,19 +27,19 @@ const ItemShop = () => {
       </div>
       <SContainer>
         <div className="item__category--container">
-          <h6 className="item__category" onClick={handleCategory}>
+          <h6 className="item__category" onClick={handleSelectedCategory}>
             ALL
           </h6>
-          <h6 className="item__category" onClick={handleCategory}>
+          <h6 className="item__category" onClick={handleSelectedCategory}>
             FURNITURE
           </h6>
-          <h6 className="item__category" onClick={handleCategory}>
+          <h6 className="item__category" onClick={handleSelectedCategory}>
             ELECTRONICS
           </h6>
-          <h6 className="item__category" onClick={handleCategory}>
+          <h6 className="item__category" onClick={handleSelectedCategory}>
             DECORATION
           </h6>
-          <h6 className="item__category" onClick={handleCategory}>
+          <h6 className="item__category" onClick={handleSelectedCategory}>
             ETC
           </h6>
         </div>

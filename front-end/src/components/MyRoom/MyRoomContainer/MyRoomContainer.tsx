@@ -3,7 +3,7 @@ import { SMyRoom } from "./styles";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { CineonToneMapping, PCFSoftShadowMap, sRGBEncoding } from "three";
-import { MyRoomProps } from "@/typeModels/MyRoom/myroomInterfaces";
+import { IMyRoomProps } from "@/typeModels/MyRoom/myRoomInterfaces";
 import { Room1 } from "../Models/Room1";
 import { Room2 } from "../Models/Room2";
 import { Room3 } from "../Models/Room3";
@@ -41,7 +41,12 @@ const Scene = () => {
   );
 };
 
-const MyRoomContainer = (props: MyRoomProps) => {
+const MyRoomContainer = (props: IMyRoomProps) => {
+  const handleActivePage = () => {
+    props.setActivePage((prev: string) => {
+      return prev === "myprofile" ? "myitems" : "myprofile";
+    });
+  };
   return (
     <SMyRoom activePage={props.activePage}>
       <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
@@ -54,6 +59,9 @@ const MyRoomContainer = (props: MyRoomProps) => {
         />
         <Scene />
       </Canvas>
+      <button className="myitems__btn" onClick={handleActivePage}>
+        My Items
+      </button>
     </SMyRoom>
   );
 };

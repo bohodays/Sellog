@@ -4,7 +4,7 @@ import MyRoomContainer from "@/components/MyRoom/MyRoomContainer/MyRoomContainer
 import { userInfoState as userAtom } from "@/recoil/myroom/atoms";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
-import MyItems from "@/components/MyRoom/MyItems/MyItems";
+import MyItems from "@/pages/MyRoom/MyItems/MyItems";
 
 const MyRoom = () => {
   const [user, setUser] = useRecoilState(userAtom);
@@ -29,14 +29,17 @@ const MyRoom = () => {
     <SMain>
       {/* 좌측 내 프로필 */}
       {activePage === "myprofile" ? (
-        <MyProfile userData={user} setActivePage={setActivePage}></MyProfile>
+        <MyProfile userData={user}></MyProfile>
       ) : (
         <MyItems></MyItems>
       )}
       {/* <MyProfile userData={user} setActivePage={setActivePage}></MyProfile> */}
 
       {/* 우측 마이룸 */}
-      <MyRoomContainer activePage={activePage}></MyRoomContainer>
+      <MyRoomContainer
+        activePage={activePage}
+        setActivePage={setActivePage}
+      ></MyRoomContainer>
     </SMain>
   );
 };
