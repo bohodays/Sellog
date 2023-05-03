@@ -22,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 
 
+import javax.transaction.Transactional;
 import java.util.Map;
 import java.util.Optional;
 
@@ -41,6 +42,7 @@ public class CustomOauth2UserService implements OAuth2UserService<OAuth2UserRequ
     }
 
     @Override
+    @Transactional
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
         Map<String, Object> userAttributes = null;

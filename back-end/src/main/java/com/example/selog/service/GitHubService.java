@@ -26,6 +26,7 @@ public class GitHubService {
     private final MemberRepository memberRepository;
     private final GitHubRepository gitHubRepository;
 
+    @Transactional
     public void synchronize(Long user_id) {
 
         Member member = memberRepository.findById(user_id).get();

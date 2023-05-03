@@ -14,6 +14,7 @@ import org.jsoup.select.Elements;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -30,6 +31,7 @@ public class CrawlingService {
 
     //1시간 마다 실행
     @Scheduled(fixedRate = 1000 * 60 * 60)
+    @Transactional
     public void crawling() {
         //크롤링 작업 해오기
 
