@@ -30,7 +30,7 @@ public class CrawlingService {
     private final RecordRepository recordRepository;
 
     //1시간 마다 실행
-    @Scheduled(fixedRate = 1000 * 60 * 60)
+    //@Scheduled(fixedRate = 1000 * 60 * 60)
     @Transactional
     public void crawling() {
         //크롤링 작업 해오기
