@@ -10,7 +10,7 @@ export const SDiv = styled.div`
     justify-content: center;
     background-color: rgba(193, 176, 146, 0.7);
     margin: 0.5vw 0.3vw;
-    padding: 1vw;
+    padding: 0.5vw;
     border-radius: 10px;
     height: 25vh;
   }

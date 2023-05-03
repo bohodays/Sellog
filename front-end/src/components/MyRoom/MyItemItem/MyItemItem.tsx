@@ -9,7 +9,7 @@ const MyItemItem = ({ item }: IItemProps) => {
     <SDiv>
       <div className="item__wrapper">
         <ItemWrapper item={item}></ItemWrapper>
-        <div className="item__name">{item.name}</div>
+        <div className="item__name">{item?.name}</div>
       </div>
     </SDiv>
   );

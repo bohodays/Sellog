@@ -1,6 +1,7 @@
 import React from "react";
 import MyItemItem from "../MyItemItem/MyItemItem";
-import { SSection } from "./styles";
+import { SSection, SDiv } from "./styles";
+import { TiChevronRightOutline, TiChevronLeftOutline } from "react-icons/ti";
 
 const dummyMyItemList = [
   {
@@ -23,13 +24,13 @@ const dummyMyItemList = [
   },
   {
     id: 4,
-    name: "clock",
+    name: "wood_shelve",
     point: 300,
     category: "decoration",
   },
   {
     id: 5,
-    name: "clock",
+    name: "red_fan",
     point: 300,
     category: "decoration",
   },
@@ -44,9 +45,17 @@ const dummyMyItemList = [
 const MyItemList = () => {
   return (
     <SSection>
-      {dummyMyItemList.map((item, index) => (
-        <MyItemItem item={item} key={item.id}></MyItemItem>
-      ))}
+      <button>
+        <TiChevronLeftOutline size={40} color="white"></TiChevronLeftOutline>
+      </button>
+      <SDiv>
+        {dummyMyItemList.map((item, index) => (
+          <MyItemItem item={item} key={item.id}></MyItemItem>
+        ))}
+      </SDiv>
+      <button>
+        <TiChevronRightOutline size={40} color="white"></TiChevronRightOutline>
+      </button>
     </SSection>
   );
 };

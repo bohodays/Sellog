@@ -5,5 +5,5 @@ export interface IItem {
 }
 
 export interface IItemProps {
-  item: IItem;
+  item?: IItem;
 }

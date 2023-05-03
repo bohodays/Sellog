@@ -1,12 +1,12 @@
 import React from "react";
 import { SArticle } from "./styles";
-import { Item } from "@/typeModels/ItemShop/iteminterfaces";
+import { IItem } from "@/typeModels/ItemShop/iteminterfaces";
 import item_sample from "@/assets/imgs/retro/item_sample.png";
 import coin from "@/assets/imgs/retro/coin.png";
 import ItemWrapper from "../ItemWrapper/ItemWrapper";
 
 interface ItemProps {
-  item: Item;
+  item: IItem;
 }
 
 const ItemItem = ({ item }: ItemProps) => {

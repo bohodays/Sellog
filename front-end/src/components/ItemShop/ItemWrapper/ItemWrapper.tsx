@@ -6,6 +6,7 @@ import { OrbitControls } from "@react-three/drei";
 import { PerspectiveCamera } from "@react-three/drei";
 import { IItemProps } from "@/typeModels/ItemShop/iteminterfaces";
 import { WoodDesk } from "../ItemItem/Models/WoodDesk";
+import { WoodShelve } from "../ItemItem/Models/WoodShelve";
 
 const Scene = ({ item }: IItemProps) => {
   const itemName = item?.name;
@@ -20,6 +21,8 @@ const Scene = ({ item }: IItemProps) => {
         <Bed />
       ) : itemName === "desk" ? (
         <WoodDesk />
+      ) : itemName === "wood_shelve" ? (
+        <WoodShelve />
       ) : null}
     </Suspense>
   );

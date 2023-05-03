@@ -22,7 +22,7 @@ const MyItems = () => {
   return (
     <SSection>
       <div className="title__wrapper">
-        <img src={blueEye}></img>
+        <img className="blueeye__img" src={blueEye}></img>
         <div className="title">My Items</div>
       </div>
       <div className="categories__box">

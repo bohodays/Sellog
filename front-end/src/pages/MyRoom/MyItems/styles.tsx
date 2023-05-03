@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const SSection = styled.section`
-  height: 100%;
-  width: 40%;
+  height: 100vh;
+  width: 40vw;
   background-color: #e4d1b0;
   transform: translateX(-100%);
   animation: slide-in 1s ease-out forwards;
@@ -16,6 +16,7 @@ export const SSection = styled.section`
       transform: translateX(0);
     }
   }
+
   .title__wrapper {
     display: flex;
   }
@@ -29,6 +30,10 @@ export const SSection = styled.section`
     font-size: 2.5vw;
     margin-left: 1vw;
     margin-top: 0.5vw;
+  }
+
+  .blueeye__img {
+    height: 8vh;
   }
 
   .categories__box {
