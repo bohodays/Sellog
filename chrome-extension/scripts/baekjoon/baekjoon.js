@@ -57,11 +57,6 @@ async function beginUpload(bojData) {
   log('bojData', bojData);
   if (isNotEmpty(bojData)) {
     const stats = await getStats();
-
-    const currentVersion = stats.version;
-    if (isNull(currentVersion) || currentVersion !== getVersion()) {
-      await versionUpdate();
-    }
     await uploadOneSolveProblemOnGit(bojData, markUploadedCSS);
   }
 }
