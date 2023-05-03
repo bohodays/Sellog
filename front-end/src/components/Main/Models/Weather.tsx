@@ -54,21 +54,21 @@ export function Weather(props: JSX.IntrinsicElements["group"]) {
   ) as GLTFResult;
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
-  useEffect(() => {
-    actions["Roundcube.002Action.001"]?.play();
-    actions["Roundcube.003Action.003"]?.play();
-    actions["Roundcube.003Action.004"]?.play();
-    actions["Roundcube.003Action.005"]?.play();
-    actions["Roundcube.003Action.006"]?.play();
-    actions["Roundcube.003Action.007"]?.play();
-    actions["Roundcube.003Action.002"]?.play();
-    actions["Roundcube.010Action.001"]?.play();
-    actions["Roundcube.010Action.002"]?.play();
-    actions["Roundcube.010Action"]?.play();
-    actions["Roundcube.010Action.003"]?.play();
-    actions["Roundcube.010Action.004"]?.play();
-    actions["CurveAction"]?.play();
-  }, []);
+  // useEffect(() => {
+  //   actions["Roundcube.002Action.001"]?.play();
+  //   actions["Roundcube.003Action.003"]?.play();
+  //   actions["Roundcube.003Action.004"]?.play();
+  //   actions["Roundcube.003Action.005"]?.play();
+  //   actions["Roundcube.003Action.006"]?.play();
+  //   actions["Roundcube.003Action.007"]?.play();
+  //   actions["Roundcube.003Action.002"]?.play();
+  //   actions["Roundcube.010Action.001"]?.play();
+  //   actions["Roundcube.010Action.002"]?.play();
+  //   actions["Roundcube.010Action"]?.play();
+  //   actions["Roundcube.010Action.003"]?.play();
+  //   actions["Roundcube.010Action.004"]?.play();
+  //   actions["CurveAction"]?.play();
+  // }, []);
 
   return (
     <group ref={group} {...props} dispose={null}>

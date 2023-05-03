@@ -6,6 +6,7 @@ import { TiChevronRightOutline, TiChevronLeftOutline } from "react-icons/ti";
 import MobileStepper from "@mui/material/MobileStepper";
 import { Button } from "@mui/material";
 import { KeyboardArrowLeft } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const steps = [
   "Computer Architecture",
@@ -17,13 +18,11 @@ const steps = [
 ];
 
 const CSQuiz = () => {
+  const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = steps.length;
 
   const handleNext = () => {
-    console.log("right");
-    console.log(activeStep);
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -33,7 +32,9 @@ const CSQuiz = () => {
 
   return (
     <SMain>
-      <button className="go-to-home">HOME</button>
+      <button className="go-to-home" onClick={() => navigate("/main")}>
+        HOME
+      </button>
       <div className="main__info">
         <div className="check-pattern">
           <img className="sticker1" src={SmileComputer} alt="스마일이미지1" />

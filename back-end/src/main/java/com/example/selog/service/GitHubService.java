@@ -35,11 +35,11 @@ public class GitHubService {
             throw new CustomException(ErrorCode.NO_USER);
         }
 
-        String gitAccessToken = member.getGithub();
+        String gitAccessToken = member.getGithubToken();
 
         //엑세스 토큰 없다면
         if(gitAccessToken == null) {
-            throw new CustomException(ErrorCode.NO_TOKEN);
+            throw new CustomException(ErrorCode.NO_GITHUB_TOKEN);
         }
 
         //액세스 토큰 있다면 github api에서 가져오기
@@ -158,10 +158,13 @@ public class GitHubService {
 
         HttpEntity<Map<String, Object>> webhookEntity  = new HttpEntity<>(requestMap,webhookHeader);
 
-        ParameterizedTypeReference<HashMap<String, Object>> responseType = new ParameterizedTypeReference<HashMap<String, Object>>() {};
+        try {
+            ParameterizedTypeReference<HashMap<String, Object>> responseType = new ParameterizedTypeReference<HashMap<String, Object>>() {};
+            ResponseEntity<HashMap<String, Object>> responseEntity = restTemplate.exchange(url.toString(), HttpMethod.POST, webhookEntity, responseType);
+            HashMap<String, Object> responseMap = responseEntity.getBody();
+        } catch(Exception e) {
+            throw new CustomException(ErrorCode.WEBHOOK_CONFLICT);
+        }
 
-        ResponseEntity<HashMap<String, Object>> responseEntity = restTemplate.exchange(url.toString(), HttpMethod.POST, webhookEntity, responseType);
-
-        HashMap<String, Object> responseMap = responseEntity.getBody();
     }
 }
