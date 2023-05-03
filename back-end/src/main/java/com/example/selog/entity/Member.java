@@ -11,6 +11,8 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "member")
@@ -86,8 +88,12 @@ public class Member extends BaseTime{
     @Column(name = "contact")
     private String contact;
 
-    @OneToOne(mappedBy = "member", cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Room room;
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<GitHub> githubList = new ArrayList<>();
 
     @Column(name = "start_date")
     private LocalDateTime start_date;
