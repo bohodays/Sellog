@@ -45,18 +45,6 @@ const Login = () => {
 
   console.log(userInfoUpdate, "유저 정보 업데이트 상태");
 
-  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-
-  useEffect(() => {
-    const accessToken = localData.getAccessToken();
-    if (accessToken) {
-      apiGetUserInfo().then((res) => {
-        setUserInfo(res?.data.response);
-        console.log(res?.data.response);
-      });
-    }
-  }, []);
-
   return (
     <SMain>
       {!isLoggedIn && (
