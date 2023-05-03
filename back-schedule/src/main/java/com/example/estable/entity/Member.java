@@ -46,9 +46,6 @@ public class Member extends BaseTime{
     @Column(name="refresh_token")
     private String refreshToken;
 
-    @Column(name="tistory")
-    private String tistory;
-
     @Column(name="velog")
     private String velog;
 
@@ -64,9 +61,6 @@ public class Member extends BaseTime{
     @Column(name="character_id")
     private Integer characterId;
 
-    public void updateTistory(String tistory) {
-        this.tistory = tistory;
-    }
     public void updateGithub(String github) {
         this.github = github;
     }
