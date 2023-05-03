@@ -21,6 +21,7 @@ function App() {
   const OauthRedirect = React.lazy(
     () => import("./pages/OauthRedirect/OauthRedirect")
   );
+  const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse/TermsOfUse"));
 
   return (
     <div className="App">
@@ -36,9 +37,9 @@ function App() {
               <Route path="/myroom" element={<MyRoom />} />
               <Route path="/mygoals" element={<MyGoals />} />
               <Route path="/csquiz" element={<CSQuiz />} />
-              <Route path="/item-shop" element={<ItemShop />} />
               <Route path="/mygoals" element={<MyGoals />} />
               <Route path="/oauth-login" element={<OauthRedirect />} />
+              <Route path="/termsOfUse" element={<TermsOfUse />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
