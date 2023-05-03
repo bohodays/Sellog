@@ -93,8 +93,8 @@ public class CustomOauth2UserService implements OAuth2UserService<OAuth2UserRequ
                     .githubTarget("1-1")
                     .bojTarget("1-1")
                     .blogTarget("7-1")
-                    .csTarget("1-1")
-                    .feedTarget("1-1")
+                    .csTarget(false)
+                    .feedTarget(false)
                     .authority(Authority.ROLE_USER)
                     .password(passwordEncoder.encode("1234"))
                     .build();
