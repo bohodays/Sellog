@@ -5,7 +5,7 @@ class GitHub {
 
   async createRecord(type, message, problemId) {
     // token, message, tree, parent
-    log('createRecord', 'message:', message, 'type:', type, 'problemId:', problemId);
+    console.log('createRecord', 'message:', message, 'type:', type, 'problemId:', problemId);
     return createRecord(this.token, message, type, problemId);
   }
 }

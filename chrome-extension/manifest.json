@@ -37,7 +37,8 @@
     "https://k8a404.p.ssafy.io/",
     "https://swexpertacademy.com/",
     "https://solved.ac/api/v3/*",
-    "https://*.tistory.com/"
+    "https://*.tistory.com/",
+    "https://velog.io/*"
   ],
   "web_accessible_resources": [
     {
@@ -150,6 +151,22 @@
         "scripts/enable.js",
         "scripts/tistory/tistory.js",
         "scripts/tistory/uploadfunctions.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://velog.io/*"
+      ],
+      "js": [
+        "library/sha1.min.js",
+        "scripts/util.js",
+        "scripts/Github.js",
+        "scripts/authorize.js",
+        "scripts/storage.js",
+        "scripts/enable.js",
+        "scripts/velog/tistory.js",
+        "scripts/velog/uploadfunctions.js"
       ],
       "run_at": "document_idle"
     }
