@@ -5,7 +5,7 @@ import Accumulate from "../Accumulate/Accumulate";
 import RCalendar from "../RCalendar/RCalendar";
 import DailyDoneList from "../DailyDoneList/DailyDoneList";
 
-const Achievement = () => {
+const Record = () => {
   const [selectedDateProps, setSelectedDateProps] = useState(new Date());
   return (
     <SSection>
@@ -21,4 +21,4 @@ const Achievement = () => {
   );
 };
 
-export default Achievement;
+export default Record;

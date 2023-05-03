@@ -3,6 +3,8 @@ import { SSection } from "./styles";
 import cool from "@/assets/imgs/itemShop/cool.png";
 import rainbow from "@/assets/imgs/itemShop/rainbow.png";
 import DailyDoneItem from "../DailyDoneItem/DailyDoneItem";
+import { apiGetMonthlyRecordList, apiGetTodayRecord } from "@/api/record";
+
 interface ISelectedDate {
   selectedDateProps: Date;
 }
@@ -14,6 +16,12 @@ const dummyDoneList = [
   { type: "feed", doneCount: 2 },
 ];
 const DailyDoneList = ({ selectedDateProps }: ISelectedDate) => {
+  // apiGetMonthlyRecordList(2023, 5).then((r) => {
+  //   console.log(r);
+  // });
+  // apiGetTodayRecord().then((r) => {
+  //   console.log("오늘", r);
+  // });
   return (
     <SSection>
       <div className="selected__date">

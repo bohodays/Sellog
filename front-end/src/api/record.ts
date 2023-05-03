@@ -3,7 +3,7 @@ import getApiInstance from "./http";
 const api = getApiInstance();
 
 // 월별 기록 조회
-export const apiGetMonthlyRecordList = async ( {year, month} : any) => {
+export const apiGetMonthlyRecordList = async (year: number, month: number) => {
   try {
     const response = await api.get(`/record/month?year=${year}&month=${month}`);
     return response;
