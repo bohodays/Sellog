@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -120,6 +121,7 @@ public class Member extends BaseTime{
         this.feedTarget = targetDto.getFeedTarget();
         this.githubTarget = targetDto.getGithubTarget();
         this.csTarget = targetDto.getCsTarget();
+        this.start_date = LocalDateTime.now(); // 시작 시간 재 시작
     }
 
     public void updatePoint(int point) {
