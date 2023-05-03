@@ -23,6 +23,11 @@ import { NewCsQuiz } from "@/components/Main/Models/NewCsQuiz";
 import { F1_Main } from "@/components/Main/Models/F1_Main";
 import { useNavigate } from "react-router-dom";
 import { apiGetUserInfo } from "@/api/user";
+import { F2_Main } from "@/components/Main/Models/F2_Main";
+import { F3_Main } from "@/components/Main/Models/F3_Main";
+import { M2_Main } from "@/components/Main/Models/M2_Main";
+import { M1_Main } from "@/components/Main/Models/M1_Main";
+import { M3_Main } from "@/components/Main/Models/M3_Main";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -53,7 +58,6 @@ const Scene = ({ buttonRef }: any) => {
       console.log(userInfo);
     });
   }, []);
-  console.log(userInfo);
 
   const userModelRef = useRef<any>();
   const pointerRef = useRef<any>();
@@ -374,14 +378,25 @@ const Scene = ({ buttonRef }: any) => {
         far={1000}
         zoom={80}
       /> */}
-
       {/* 맵 바닥 */}
       <mesh name="floor" rotation={[-Math.PI / 2, 0, 0]} receiveShadow={true}>
         <planeGeometry args={[100, 100]} />
         <meshStandardMaterial map={floorTexture} />
       </mesh>
-
-      <F1_Main userModelRef={userModelRef} group={group} />
+      {userInfo && userInfo!.characterId === 0 ? (
+        <F1_Main userModelRef={userModelRef} group={group} />
+      ) : userInfo && userInfo!.characterId === 1 ? (
+        <F2_Main userModelRef={userModelRef} group={group} />
+      ) : userInfo && userInfo!.characterId === 2 ? (
+        <F3_Main userModelRef={userModelRef} group={group} />
+      ) : userInfo && userInfo!.characterId === 3 ? (
+        <M1_Main userModelRef={userModelRef} group={group} />
+      ) : userInfo && userInfo!.characterId === 4 ? (
+        <M2_Main userModelRef={userModelRef} group={group} />
+      ) : (
+        <M3_Main userModelRef={userModelRef} group={group} />
+      )}
+      {/* <F1_Main userModelRef={userModelRef} group={group} /> */}
       {/* 유저 캐릭터 */}
       {/* <group ref={group} dispose={null} position={[0, 0.3, 0]}>
         <group name="Scene">
@@ -405,7 +420,6 @@ const Scene = ({ buttonRef }: any) => {
           </group>
         </group>
       </group> */}
-
       {/* 유저 캐릭터를 따라다니는 pointMesh */}
       <mesh
         ref={pointerRef}
@@ -417,7 +431,6 @@ const Scene = ({ buttonRef }: any) => {
         <planeGeometry args={[1, 1]} />
         <meshBasicMaterial color={"crimson"} transparent={true} opacity={0.5} />
       </mesh>
-
       {/* 집을 보이게 하는 spotMesh */}
       <mesh
         ref={spotRef}
@@ -433,7 +446,6 @@ const Scene = ({ buttonRef }: any) => {
           opacity={0.5}
         />
       </mesh>
-
       {/* 집 */}
       <House
         houseRef={houseRef}
@@ -441,7 +453,6 @@ const Scene = ({ buttonRef }: any) => {
         position={[5, -5, 3]}
         castShadow={true}
       />
-
       {/* 상점을 보이게 하는 spotMesh */}
       <mesh
         ref={spotRef2}
@@ -457,14 +468,12 @@ const Scene = ({ buttonRef }: any) => {
           opacity={0.5}
         />
       </mesh>
-
       <ItemShopMap
         itemshopRef={itemshopRef}
         visible={false}
         position={[5.5, -2, -12]}
         castShadow={true}
       />
-
       {/* cs quiz를 보이게 하는 spotMesh */}
       <mesh
         ref={spotRef3}
@@ -480,22 +489,17 @@ const Scene = ({ buttonRef }: any) => {
           opacity={0.5}
         />
       </mesh>
-
       <NewCsQuiz
         csquizRef={csquizRef}
         visible={false}
         position={[-15, -1, -16]}
         castShadow={true}
       />
-
       {/* 장식들 */}
-
       {/* 열기구 */}
       <AirBalloon ref={airBalloonRef} position={[-5, 3, 0]} castShadow={true} />
-
       {/* 꽃 */}
       <Flower position={[-2, 0, -22]} castShadow={true} />
-
       {/* 해와 구름비 */}
       <Weather position={[24, 5, -5]} castShadow={true} />
     </Suspense>
