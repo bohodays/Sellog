@@ -9,6 +9,9 @@ import UserInfoForm from "@/components/Login/UserInfoForm/UserInfoForm";
 import { useRecoilState } from "recoil";
 import { loginState } from "@/recoil/user/atom";
 import { useLocation } from "react-router-dom";
+import { apiGetUserInfo } from "@/api/user";
+import { localData } from "@/utils/token";
+import { userInfoState } from "@/recoil/myroom/atoms";
 
 export type handlerType = {
   handler: () => void;

@@ -46,7 +46,13 @@ const Scene = ({ buttonRef }: any) => {
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
   // 유저 정보
-  const userInfo = apiGetUserInfo();
+  let userInfo;
+  useEffect(() => {
+    apiGetUserInfo().then((res) => {
+      userInfo = res?.data.response;
+      console.log(userInfo);
+    });
+  }, []);
   console.log(userInfo);
 
   const userModelRef = useRef<any>();

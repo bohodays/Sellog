@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
@@ -41,8 +42,9 @@ public class FeedService {
             "https://medium.com/feed/daangn",
     "https://toss.tech/rss.xml"};
 
-    //12시간마다 반복
-    @Scheduled(fixedRate = 1000 * 60 * 60 * 12)
+    //24시간마다 반복
+    @Scheduled(fixedRate = 1000 * 60 * 60 * 24)
+    @Transactional
     public void realTimeFeed() throws Exception{
 
         //회사 기술블로그에 맞춰 반복

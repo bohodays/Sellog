@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Builder
 @AllArgsConstructor
@@ -15,6 +17,7 @@ public class MemberDto {
     private String nickname;
     private String img;
     private String email;
+    private Integer points;
 
     // 목표 설정
     private String githubTarget;
@@ -31,6 +34,7 @@ public class MemberDto {
     private String motto;
     private Integer characterId;
     private String contact;
+    private LocalDateTime start_date;
 
 
     public static MemberDto of(Member member) {
@@ -39,6 +43,7 @@ public class MemberDto {
                 .githubTarget(member.getGithubTarget()).bojTarget(member.getBojTarget()).blogTarget(member.getBlogTarget()).feedTarget(member.getFeedTarget()).csTarget(member.getCsTarget())
                 .baekjoon(member.getBaekjoon()).blog(member.getBlog()).github(member.getGithub())
                 .motto(member.getMotto()).characterId(member.getCharacterId()).contact(member.getContact())
+                .points(member.getPoints()).start_date(member.getStart_date())
                 .build();
     }
 }
