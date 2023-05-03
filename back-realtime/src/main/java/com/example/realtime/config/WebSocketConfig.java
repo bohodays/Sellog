@@ -19,7 +19,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry){
-        registry.addEndpoint("/ws")    // 웹소켓 엔드포인트 정의
+        registry.addEndpoint("/real-time")    // 웹소켓 엔드포인트 정의
                 .setAllowedOriginPatterns("*")
                 .withSockJS();
     }
