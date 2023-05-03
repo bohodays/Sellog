@@ -165,7 +165,7 @@
         "scripts/authorize.js",
         "scripts/storage.js",
         "scripts/enable.js",
-        "scripts/velog/tistory.js",
+        "scripts/velog/velog.js",
         "scripts/velog/uploadfunctions.js"
       ],
       "run_at": "document_idle"
