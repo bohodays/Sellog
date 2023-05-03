@@ -13,8 +13,6 @@ const OauthRedirect = () => {
     const search = params.search;
     const splitedSearch = search.split("&");
 
-    console.log({ splitedSearch });
-
     const userId = +splitedSearch[2].slice(7);
 
     // 기존 유저면 0
