@@ -158,10 +158,13 @@ public class GitHubService {
 
         HttpEntity<Map<String, Object>> webhookEntity  = new HttpEntity<>(requestMap,webhookHeader);
 
-        ParameterizedTypeReference<HashMap<String, Object>> responseType = new ParameterizedTypeReference<HashMap<String, Object>>() {};
+        try {
+            ParameterizedTypeReference<HashMap<String, Object>> responseType = new ParameterizedTypeReference<HashMap<String, Object>>() {};
+            ResponseEntity<HashMap<String, Object>> responseEntity = restTemplate.exchange(url.toString(), HttpMethod.POST, webhookEntity, responseType);
+            HashMap<String, Object> responseMap = responseEntity.getBody();
+        } catch(Exception e) {
+            throw new CustomException(ErrorCode.WEBHOOK_CONFLICT);
+        }
 
-        ResponseEntity<HashMap<String, Object>> responseEntity = restTemplate.exchange(url.toString(), HttpMethod.POST, webhookEntity, responseType);
-
-        HashMap<String, Object> responseMap = responseEntity.getBody();
     }
 }

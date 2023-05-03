@@ -9,6 +9,7 @@ import com.example.selog.repository.MemberRepository;
 import com.example.selog.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.bridge.IMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,8 +34,10 @@ public class WebHookService {
 
         HashMap<String,Object> sender = (HashMap<String, Object>) request.get("sender");
         HashMap<String,Object> repository = (HashMap<String, Object>) request.get("repository");
+        HashMap<String,Object> head_commit = (HashMap<String, Object>) request.get("head_commit");
 
         String repoName = (String)repository.get("name");
+        String content = (String)head_commit.get("message");
         String who = (String)sender.get("login");
 
         log.info("유저네임 {}",who);
@@ -45,7 +48,7 @@ public class WebHookService {
 
         Record record = Record.builder()
                 .category("github")
-                .content(repoName)
+                .content(repoName + "/"+content)
                 .member(member)
                 .writing_time(LocalDateTime.now())
                 .build();
