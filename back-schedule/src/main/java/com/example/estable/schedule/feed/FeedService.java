@@ -42,8 +42,8 @@ public class FeedService {
             "https://medium.com/feed/daangn",
     "https://toss.tech/rss.xml"};
 
-    //12시간마다 반복
-    @Scheduled(fixedRate = 1000 * 60 * 60 * 12)
+    //24시간마다 반복
+    @Scheduled(fixedRate = 1000 * 60 * 60 * 24)
     @Transactional
     public void realTimeFeed() throws Exception{
 
