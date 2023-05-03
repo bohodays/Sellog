@@ -9,6 +9,9 @@ import UserInfoForm from "@/components/Login/UserInfoForm/UserInfoForm";
 import { useRecoilState } from "recoil";
 import { loginState } from "@/recoil/user/atom";
 import { useLocation } from "react-router-dom";
+import { apiGetUserInfo } from "@/api/user";
+import { localData } from "@/utils/token";
+import { userInfoState } from "@/recoil/myroom/atoms";
 
 export type handlerType = {
   handler: () => void;
@@ -41,6 +44,18 @@ const Login = () => {
   };
 
   console.log(userInfoUpdate, "유저 정보 업데이트 상태");
+
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+
+  useEffect(() => {
+    const accessToken = localData.getAccessToken();
+    if (accessToken) {
+      apiGetUserInfo().then((res) => {
+        setUserInfo(res?.data.response);
+        console.log(res?.data.response);
+      });
+    }
+  }, []);
 
   return (
     <SMain>

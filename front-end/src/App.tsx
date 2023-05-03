@@ -1,9 +1,12 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilState } from "recoil";
+import { localData } from "./utils/token";
+import { apiGetUserInfo } from "./api/user";
+import { userInfoState } from "./recoil/myroom/atoms";
 
 function App() {
   // Code Splitting
