@@ -7,8 +7,10 @@ export const SMain = styled.main`
 `;
 
 export const SButtonWrapper = styled.div<any>`
-  z-index: ${(props) => (props.isVisible ? 100 : -1)};
-  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  /* z-index: ${(props) => (props.isVisible ? 100 : -1)}; */
+  z-index: -1;
+  /* opacity: ${(props) => (props.isVisible ? 1 : 0)}; */
+  opacity: 0;
   transition: all var(--animation-duration) linear;
   position: absolute;
   bottom: 5rem;

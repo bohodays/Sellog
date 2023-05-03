@@ -29,15 +29,12 @@ export function F1_Main(props: JSX.IntrinsicElements["group"] | any) {
   ) as GLTFResult;
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
-  useEffect(() => {});
-  if (props.isRun) {
-    actions["Run"]?.play();
-  } else {
+  useEffect(() => {
     actions["Idle"]?.play();
-  }
+  }, []);
 
   return (
-    <group ref={group} dispose={null} position={[0, 0.3, 0]}>
+    <group ref={props.group} dispose={null} position={[0, 0.3, 0]}>
       <group name="Scene">
         <group
           name="rig"
