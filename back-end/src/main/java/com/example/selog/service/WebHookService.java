@@ -62,7 +62,7 @@ public class WebHookService {
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
         Optional<Record> record = recordRepository.findByProblemIdAndCategory(recordRequestDto.getProblemId(), recordRequestDto.getType());
-        if(record.isPresent()){
+        if(record.isPresent() && !recordRequestDto.getType().equals("tistory") && !recordRequestDto.getType().equals("velog")){
             throw new CustomException(ErrorCode.CONFLICT_ALGO);
         }else{
             earnPoints(member);
