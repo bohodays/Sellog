@@ -30,10 +30,12 @@ const UserInfoForm = ({ userId }: UserInformType) => {
 
   const handleLeftActive = () => {
     if (active > 0) setActive((prev) => prev - 1);
+    console.log(active);
   };
 
   const handleRightActive = () => {
     if (active < 5) setActive((prev) => prev + 1);
+    console.log(active);
   };
 
   const handleUpdateUserInfo = () => {

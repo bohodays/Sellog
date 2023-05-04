@@ -59,12 +59,6 @@ const Scene = ({ buttonRef }: any) => {
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
-  useFrame(() => {
-    console.log(1);
-
-    // console.log(userModelRef.current.position);
-  });
-
   const userModelRef = useRef<any>();
   const pointerRef = useRef<any>();
   const spotRef = useRef<any>();
@@ -389,6 +383,8 @@ const Scene = ({ buttonRef }: any) => {
       calculateMousePosition(e.touches[0]);
     }
   });
+
+  console.log(userInfo.characterId);
 
   return (
     <Suspense>
