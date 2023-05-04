@@ -1,9 +1,14 @@
 package com.example.selog.repository;
 
+import com.example.selog.dto.feed.FeedDto;
 import com.example.selog.entity.Feed;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+
+import java.util.List;
+
+import static com.example.selog.entity.QFeed.feed;
 
 public class QFeedRepositoryImpl implements QFeedRepository{
 
@@ -14,7 +19,14 @@ public class QFeedRepositoryImpl implements QFeedRepository{
     }
 
     @Override
-    public Slice<Feed> findAllFeedByDate(Pageable pageable) {
-        return null;
+    public List<Feed> findAllFeedByDate(Pageable pageable) {
+        return jpaQueryFactory
+                .selectFrom(feed)
+                .orderBy(feed.id.asc())
+                .limit(pageable.getPageSize()+1)
+                .fetch();
+
+
+
     }
 }
