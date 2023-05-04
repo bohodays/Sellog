@@ -8,7 +8,7 @@ import { IMyRoomProps } from "@/typeModels/MyRoom/MyroomInterfaces";
 import { Room1 } from "../Models/Room1";
 import { Room2 } from "../Models/Room2";
 import { Room3 } from "../Models/Room3";
-import { Room15 } from "../Models/Room15";
+import { Room4 } from "../Models/Room4";
 
 const Scene = () => {
   const { gl } = useThree();
@@ -36,7 +36,7 @@ const Scene = () => {
         {/* <Room1 /> */}
         {/* <Room2 /> */}
         {/* <Room3 /> */}
-        <Room15 />
+        <Room4 />
       </Suspense>
     </>
   );
