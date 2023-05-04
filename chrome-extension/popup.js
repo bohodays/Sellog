@@ -16,7 +16,7 @@ $('#authenticateTistory').on('click', () => {
 });
 
 /* Get URL for welcome page */
-$('#welcome_URL').attr('href', `chrome-extension://${chrome.runtime.id}/welcome.html`);
+//$('#welcome_URL').attr('href', `chrome-extension://${chrome.runtime.id}/welcome.html`);
 
 chrome.storage.local.get('Sellog_token', (data) => {
   const token = data.Sellog_token;
