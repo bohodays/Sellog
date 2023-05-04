@@ -10,6 +10,7 @@ import com.example.selog.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.bridge.IMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,15 +20,27 @@ import java.time.temporal.ChronoUnit;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
-@RequiredArgsConstructor
 @Service
 public class WebHookService {
 
-    private final RecordRepository recordRepository;
-    private final MemberRepository memberRepository;
+    private RecordRepository recordRepository;
+    private MemberRepository memberRepository;
+    private Map<String,Integer> score;
+
+    @Autowired
+    public WebHookService(RecordRepository recordRepository, MemberRepository memberRepository) {
+        this.recordRepository = recordRepository;
+        this.memberRepository = memberRepository;
+
+        this.score = new HashMap<>();
+        score.put("github",10);
+        score.put("blog",20);
+        score.put("algo",15);
+    }
 
     @Transactional
     public void createRecord(HashMap<String, Object> request) {
@@ -44,7 +57,7 @@ public class WebHookService {
         Member member = memberRepository.findByEmail(who)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
-        earnPoints(member);
+        earnPoints(member,"github");
 
         Record record = Record.builder()
                 .category("github")
@@ -61,14 +74,14 @@ public class WebHookService {
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
-        if(!recordRequestDto.getType().equals("tistory") || !recordRequestDto.getType().equals("velog")){
+        if(!recordRequestDto.getProblemId().equals("")){
             Optional<Record> record = recordRepository.findByProblemIdAndCategory(recordRequestDto.getProblemId(), recordRequestDto.getType());
             if(record.isPresent()){
                 throw new CustomException(ErrorCode.CONFLICT_ALGO);
             }
         }
 
-        earnPoints(member);
+        earnPoints(member,recordRequestDto.getType());
         recordRepository.save(
                 Record.builder()
                         .category(recordRequestDto.getType())
@@ -84,7 +97,7 @@ public class WebHookService {
      * 포인트 적립
      * @param member
      */
-    public void earnPoints(Member member){
+    public void earnPoints(Member member,String category){
         if(member.getStart_date() == null) throw new CustomException(ErrorCode.NO_TARGET);
 
         //시작 날짜를 포함하므로 1더함
@@ -93,9 +106,12 @@ public class WebHookService {
         log.info("두 날짜의 차이 : {}",diff);
 
         //목표 달성했을 때만 유저 포인트 증가
-        member.updatePoint(10);
+        member.updatePoint(score.getOrDefault(category,0));
 
         String target = member.getGithubTarget();
+
+        if(target == null) throw new CustomException(ErrorCode.NO_TARGET);
+
         int day = (target.charAt(0) - '0');
         int cnt = (target.charAt(2) - '0');
 
@@ -112,7 +128,6 @@ public class WebHookService {
                     LocalDateTime.now(),
                     "github");
             progress = true;
-
         }
         //현재 날짜 구간을 포함하는 앞부분
         else {
@@ -136,7 +151,7 @@ public class WebHookService {
                     "github");
 
             if(recordList.size() +1 == cnt) {
-                updatePoint(member);
+                updatePoint(member,score.getOrDefault(category,0));
             }
         }
 
@@ -144,7 +159,11 @@ public class WebHookService {
             //꾸준히 해왔다면 point증가
             if(rList.size() + 1 == cnt) {
                 log.info("{} 포인트 증가",member.getNickname());
-                updatePoint(member);
+                updatePoint(member,score.getOrDefault(category,0));
+                //1일 1커밋이면서 누적 보상을 받을 수 있다면
+                if(day == 1 && cnt == 1 && diff % 10 == 0) {
+                    updatePoint(member,score.getOrDefault(category,0));
+                }
             }
         }
     }
@@ -156,8 +175,8 @@ public class WebHookService {
         return ChronoUnit.DAYS.between(start,end);
     }
 
-    public void updatePoint(Member member) {
-        member.updatePoint(10);
+    public void updatePoint(Member member, int point) {
+        member.updatePoint(point);
         memberRepository.save(member);
     }
 }

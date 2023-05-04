@@ -57,11 +57,11 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
         Long userId = member.getUserId();
         int newUser = 0;
 
+        member.updateRefreshToken(tokenDto.getRefreshToken());
+
         //새로 등록한 유저
-        if(member.getRoom() == null) {
-            member.updateRefreshToken(tokenDto.getRefreshToken());
-            newUser = 1;
-        }
+        if(member.getRoom() == null) newUser = 1;
+
         memberRepository.save(member);
 
         StringBuilder sb = new StringBuilder();

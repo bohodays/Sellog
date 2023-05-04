@@ -1,10 +1,12 @@
 package com.example.selog.service;
 
 import com.example.selog.dto.room.UserItemDto;
+import com.example.selog.entity.Member;
 import com.example.selog.entity.Room;
 import com.example.selog.entity.UserItem;
 import com.example.selog.exception.CustomException;
 import com.example.selog.exception.error.ErrorCode;
+import com.example.selog.repository.MemberRepository;
 import com.example.selog.repository.RoomRepository;
 import com.example.selog.repository.UserItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import java.util.List;
 public class RoomService {
     private final RoomRepository roomRepository;
     private final UserItemRepository userItemRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional(readOnly = true)
     public List<UserItemDto> findRoomInfoById(Long roomId) {
@@ -63,6 +66,22 @@ public class RoomService {
         List<UserItemDto> userItemDtoList = new ArrayList<>();
 
         // 보유한 설치하지 않은 아이템
+        for(UserItem userItem : userItemList){
+            userItemDtoList.add(userItem.toDto());
+        }
+        return userItemDtoList;
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserItemDto> findAllUserItem(Long userId){
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
+        Room room = roomRepository.findByMember(member)
+                .orElseThrow(() -> new CustomException(ErrorCode.NO_ROOM));
+
+        List<UserItemDto> userItemDtoList = new ArrayList<>();
+        List<UserItem> userItemList = userItemRepository.findByRoom(room);
+
         for(UserItem userItem : userItemList){
             userItemDtoList.add(userItem.toDto());
         }

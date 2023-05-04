@@ -6,6 +6,7 @@ import com.example.selog.exception.error.ErrorCode;
 import com.example.selog.response.ErrorResponse;
 import com.example.selog.response.SuccessResponse;
 import com.example.selog.service.RoomService;
+import com.example.selog.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -49,6 +50,18 @@ public class RoomController {
     public ResponseEntity<?> findUserItemByRoomId(@PathVariable Long room_id) {
         try{
             List<UserItemDto> userItemDtoList = roomService.findUserItemByRoomId(room_id);
+            return new ResponseEntity<>(new SuccessResponse(userItemDtoList), HttpStatus.OK);
+        } catch(CustomException e){
+            return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
+        } catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/items")
+    public ResponseEntity<?> findAllUserItem() {
+        try{
+            List<UserItemDto> userItemDtoList = roomService.findAllUserItem(SecurityUtil.getCurrentMemberId());
             return new ResponseEntity<>(new SuccessResponse(userItemDtoList), HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
