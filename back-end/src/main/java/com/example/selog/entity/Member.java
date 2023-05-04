@@ -96,6 +96,10 @@ public class Member extends BaseTime{
     @Builder.Default
     private List<GitHub> githubList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<Record> recordList = new ArrayList<>();
+
     @Column(name = "start_date")
     private LocalDateTime start_date;
 
