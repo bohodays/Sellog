@@ -61,21 +61,23 @@ public class WebHookService {
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
-        Optional<Record> record = recordRepository.findByProblemIdAndCategory(recordRequestDto.getProblemId(), recordRequestDto.getType());
-        if(record.isPresent() && (!recordRequestDto.getType().equals("tistory") || !recordRequestDto.getType().equals("velog"))){
-            throw new CustomException(ErrorCode.CONFLICT_ALGO);
-        }else{
-            earnPoints(member);
-            recordRepository.save(
-                    Record.builder()
-                            .category(recordRequestDto.getType())
-                            .content(recordRequestDto.getMessage())
-                            .member(member)
-                            .problemId(recordRequestDto.getProblemId())
-                            .writing_time(LocalDateTime.now())
-                            .build()
-            );
+        if(!recordRequestDto.getType().equals("tistory") || !recordRequestDto.getType().equals("velog")){
+            Optional<Record> record = recordRepository.findByProblemIdAndCategory(recordRequestDto.getProblemId(), recordRequestDto.getType());
+            if(record.isPresent()){
+                throw new CustomException(ErrorCode.CONFLICT_ALGO);
+            }
         }
+
+        earnPoints(member);
+        recordRepository.save(
+                Record.builder()
+                        .category(recordRequestDto.getType())
+                        .content(recordRequestDto.getMessage())
+                        .member(member)
+                        .problemId(recordRequestDto.getProblemId())
+                        .writing_time(LocalDateTime.now())
+                        .build()
+        );
     }
 
     /**
