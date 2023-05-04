@@ -54,22 +54,6 @@ export function Weather(props: JSX.IntrinsicElements["group"]) {
   ) as GLTFResult;
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
-  // useEffect(() => {
-  //   actions["Roundcube.002Action.001"]?.play();
-  //   actions["Roundcube.003Action.003"]?.play();
-  //   actions["Roundcube.003Action.004"]?.play();
-  //   actions["Roundcube.003Action.005"]?.play();
-  //   actions["Roundcube.003Action.006"]?.play();
-  //   actions["Roundcube.003Action.007"]?.play();
-  //   actions["Roundcube.003Action.002"]?.play();
-  //   actions["Roundcube.010Action.001"]?.play();
-  //   actions["Roundcube.010Action.002"]?.play();
-  //   actions["Roundcube.010Action"]?.play();
-  //   actions["Roundcube.010Action.003"]?.play();
-  //   actions["Roundcube.010Action.004"]?.play();
-  //   actions["CurveAction"]?.play();
-  // }, []);
-
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
@@ -83,48 +67,7 @@ export function Weather(props: JSX.IntrinsicElements["group"]) {
           position={[0.54, -3.36, 1.32]}
           rotation={[1.41, 0.16, 3.14]}
         />
-        <group name="Empty006" position={[0.02, -0.89, 0]} scale={1.39}>
-          <mesh
-            name="Roundcube008"
-            geometry={nodes.Roundcube008.geometry}
-            material={materials["Material.004"]}
-            position={[0, 0.08, 0]}
-            rotation={[0, 0, -Math.PI / 6]}
-            scale={0.04}
-          />
-          <mesh
-            name="Roundcube009"
-            geometry={nodes.Roundcube009.geometry}
-            material={materials["Material.004"]}
-            position={[0.28, 0.08, 0]}
-            rotation={[0, 0, -Math.PI / 6]}
-            scale={0.04}
-          />
-          <mesh
-            name="Roundcube010"
-            geometry={nodes.Roundcube010.geometry}
-            material={materials["Material.004"]}
-            position={[-0.27, 0.08, 0]}
-            rotation={[0, 0, -Math.PI / 6]}
-            scale={0.04}
-          />
-          <mesh
-            name="Roundcube011"
-            geometry={nodes.Roundcube011.geometry}
-            material={materials["Material.004"]}
-            position={[-0.14, -0.12, 0]}
-            rotation={[0, 0, -Math.PI / 6]}
-            scale={0.04}
-          />
-          <mesh
-            name="Roundcube012"
-            geometry={nodes.Roundcube012.geometry}
-            material={materials["Material.004"]}
-            position={[0.14, -0.12, 0]}
-            rotation={[0, 0, -Math.PI / 6]}
-            scale={0.04}
-          />
-        </group>
+
         <mesh
           name="Roundcube002"
           geometry={nodes.Roundcube002.geometry}

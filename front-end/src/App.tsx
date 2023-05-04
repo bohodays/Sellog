@@ -23,27 +23,40 @@ function App() {
   );
   const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse/TermsOfUse"));
 
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  console.log(userInfo);
+
+  useEffect(() => {
+    const accessToken = localData.getAccessToken();
+    if (accessToken) {
+      apiGetUserInfo().then((res) => {
+        const userInfo = res?.data.response;
+        setUserInfo(userInfo);
+      });
+    }
+  }, []);
+
   return (
     <div className="App">
       {/* fallback 추가해야 됨 */}
       <Suspense>
-        <RecoilRoot>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/item-shop" element={<ItemShop />} />
-              <Route path="/main" element={<Main />} />
-              <Route path="/feed" element={<Feed />} />
-              <Route path="/myroom" element={<MyRoom />} />
-              <Route path="/mygoals" element={<MyGoals />} />
-              <Route path="/csquiz" element={<CSQuiz />} />
-              <Route path="/mygoals" element={<MyGoals />} />
-              <Route path="/oauth-login" element={<OauthRedirect />} />
-              <Route path="/termsOfUse" element={<TermsOfUse />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </RecoilRoot>
+        {/* <RecoilRoot> */}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/item-shop" element={<ItemShop />} />
+            <Route path="/main" element={<Main />} />
+            <Route path="/feed" element={<Feed />} />
+            <Route path="/myroom" element={<MyRoom />} />
+            <Route path="/mygoals" element={<MyGoals />} />
+            <Route path="/csquiz" element={<CSQuiz />} />
+            <Route path="/mygoals" element={<MyGoals />} />
+            <Route path="/oauth-login" element={<OauthRedirect />} />
+            <Route path="/termsOfUse" element={<TermsOfUse />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+        {/* </RecoilRoot> */}
       </Suspense>
     </div>
   );

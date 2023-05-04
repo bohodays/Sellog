@@ -32,7 +32,13 @@ const CSQuiz = () => {
 
   return (
     <SMain>
-      <button className="go-to-home" onClick={() => navigate("/main")}>
+      <button
+        className="go-to-home"
+        onClick={() => {
+          navigate("/main");
+          window.location.reload();
+        }}
+      >
         HOME
       </button>
       <div className="main__info">

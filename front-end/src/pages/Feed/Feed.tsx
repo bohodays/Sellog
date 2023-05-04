@@ -8,12 +8,23 @@ import {
   faTag,
   faFireFlameCurved,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 export default function Feed() {
+  const navigate = useNavigate();
+
   return (
     <SMain>
       <SHeader>
         <div className="home">
-          <button className="go-to-home">HOME</button>
+          <button
+            className="go-to-home"
+            onClick={() => {
+              navigate("/main");
+              window.location.reload();
+            }}
+          >
+            HOME
+          </button>
         </div>
         <div className="title__container">
           <div className="developer">
