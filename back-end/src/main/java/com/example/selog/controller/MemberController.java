@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RestController
@@ -89,6 +90,18 @@ public class MemberController {
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
             log.info(e.getMessage());
+            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity<?> updateMember(@RequestPart("memberUpdateDto") MemberUpdateDto memberUpdateDto, @RequestPart(value = "img", required = false) final MultipartFile multipartFile){
+        try{
+            MemberDto memberDto = memberService.updateMember(memberUpdateDto, multipartFile, SecurityUtil.getCurrentMemberId());
+            return new ResponseEntity<>(new SuccessResponse(memberDto),HttpStatus.OK);
+        } catch(CustomException e){
+            return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
+        } catch (Exception e){
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
