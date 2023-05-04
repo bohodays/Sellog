@@ -5,11 +5,13 @@ import { userInfoState as userAtom } from "@/recoil/myroom/atoms";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import MyItems from "@/pages/MyRoom/MyItems/MyItems";
+import EditProfile from "@/components/MyRoom/EditProfile/EditProfile";
 
 const MyRoom = () => {
   const [user, setUser] = useRecoilState(userAtom);
   const [activePage, setActivePage] = useState<string>("myprofile");
 
+  const [isEdit, setIsEdit] = useState<boolean>(false);
   // mount될 때 회원정보 넣어주기.
 
   async function getUserInfo() {
@@ -28,10 +30,23 @@ const MyRoom = () => {
   return (
     <SMain>
       {/* 좌측 내 프로필 */}
-      {activePage === "myprofile" ? (
-        <MyProfile userData={user}></MyProfile>
-      ) : (
+
+      {!isEdit && activePage === "myprofile" ? (
+        <MyProfile
+          userData={user}
+          setUserData={setUser}
+          setIsEdit={setIsEdit}
+          isEdit={isEdit}
+        ></MyProfile>
+      ) : !isEdit && activePage == "myitems" ? (
         <MyItems></MyItems>
+      ) : (
+        <EditProfile
+          userData={user}
+          setUserData={setUser}
+          setIsEdit={setIsEdit}
+          isEdit={isEdit}
+        ></EditProfile>
       )}
       {/* <MyProfile userData={user} setActivePage={setActivePage}></MyProfile> */}
 
