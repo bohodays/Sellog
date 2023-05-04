@@ -1,11 +1,12 @@
-import React from "react";
+import { useState } from "react";
 import { SSection, SArticle } from "./styles";
 import Chart from "../Chart/Chart";
 import Accumulate from "../Accumulate/Accumulate";
 import RCalendar from "../RCalendar/RCalendar";
 import DailyDoneList from "../DailyDoneList/DailyDoneList";
 
-const Achievement = () => {
+const Record = () => {
+  const [selectedDateProps, setSelectedDateProps] = useState(new Date());
   return (
     <SSection>
       <SArticle>
@@ -13,11 +14,11 @@ const Achievement = () => {
         <Chart></Chart>
       </SArticle>
       <SArticle>
-        <RCalendar></RCalendar>
-        <DailyDoneList></DailyDoneList>
+        <RCalendar setSelectedDateProps={setSelectedDateProps}></RCalendar>
+        <DailyDoneList selectedDateProps={selectedDateProps}></DailyDoneList>
       </SArticle>
     </SSection>
   );
 };
 
-export default Achievement;
+export default Record;

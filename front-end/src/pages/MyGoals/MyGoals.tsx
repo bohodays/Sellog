@@ -1,6 +1,6 @@
 import GoalsSetting from "@/components/MyGoals/GoalsSetting/GoalsSetting";
 import { SMain } from "./styles";
-import Achievement from "@/components/MyGoals/Achievement/Achievement";
+import Record from "@/components/MyGoals/Record/Record";
 
 const MyGoals = () => {
   return (
@@ -9,7 +9,7 @@ const MyGoals = () => {
       <GoalsSetting />
 
       {/* 목표 통계 */}
-      <Achievement />
+      <Record />
     </SMain>
   );
 };
