@@ -20,9 +20,7 @@ type GLTFResult = GLTF & {
 };
 
 export function Chair(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF(
-    "/models/itemShop/chair.glb"
-  ) as GLTFResult;
+  const { nodes, materials } = useGLTF("/models/items/chair.glb") as GLTFResult;
   return (
     <group {...props} dispose={null} position={[0, -2, 0]} scale={2}>
       <mesh
@@ -41,4 +39,4 @@ export function Chair(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/itemShop/chair.glb");
+useGLTF.preload("/models/items/chair.glb");

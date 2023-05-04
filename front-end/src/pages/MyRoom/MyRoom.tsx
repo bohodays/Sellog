@@ -3,10 +3,13 @@ import { SMain } from "./styles";
 import MyRoomContainer from "@/components/MyRoom/MyRoomContainer/MyRoomContainer";
 import { userInfoState as userAtom } from "@/recoil/myroom/atoms";
 import { useRecoilState } from "recoil";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import MyItems from "@/pages/MyRoom/MyItems/MyItems";
 
 const MyRoom = () => {
   const [user, setUser] = useRecoilState(userAtom);
+  const [activePage, setActivePage] = useState<string>("myprofile");
+
   // mount될 때 회원정보 넣어주기.
 
   async function getUserInfo() {
@@ -25,11 +28,18 @@ const MyRoom = () => {
   return (
     <SMain>
       {/* 좌측 내 프로필 */}
-      {/*  */}
-      <MyProfile userData={user}></MyProfile>
+      {activePage === "myprofile" ? (
+        <MyProfile userData={user}></MyProfile>
+      ) : (
+        <MyItems></MyItems>
+      )}
+      {/* <MyProfile userData={user} setActivePage={setActivePage}></MyProfile> */}
 
       {/* 우측 마이룸 */}
-      <MyRoomContainer></MyRoomContainer>
+      <MyRoomContainer
+        activePage={activePage}
+        setActivePage={setActivePage}
+      ></MyRoomContainer>
     </SMain>
   );
 };
