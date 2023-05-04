@@ -45,12 +45,22 @@ public class OAuthAttributes implements OAuth2User, Authentication {
 
     private static OAuthAttributes ofGithub(String accessToken, String userNameAttributeName, Map<String, Object> attributes) {
         log.info(attributes.toString());
-        return OAuthAttributes.builder().name((String) attributes.get("name"))
-                .email((String) attributes.get("login"))
-                .accessToken(accessToken)
-                .attributes(attributes)
-                .nameAttributeKey(userNameAttributeName)
-                .build();
+        if(attributes.get("name") == null){
+            return OAuthAttributes.builder().name("익명")
+                    .email((String) attributes.get("login"))
+                    .accessToken(accessToken)
+                    .attributes(attributes)
+                    .nameAttributeKey(userNameAttributeName)
+                    .build();
+        }else{
+            return OAuthAttributes.builder().name((String) attributes.get("name"))
+                    .email((String) attributes.get("login"))
+                    .accessToken(accessToken)
+                    .attributes(attributes)
+                    .nameAttributeKey(userNameAttributeName)
+                    .build();
+        }
+
     }
 
     private static OAuthAttributes ofTistory(String accessToken, String userNameAttributeName, Map<String, Object> attributes) {
