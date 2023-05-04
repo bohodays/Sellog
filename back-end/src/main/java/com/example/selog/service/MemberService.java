@@ -14,7 +14,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -25,6 +27,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final TokenProvider tokenProvider;
     private final RoomRepository roomRepository;
+    private final S3Uploader s3Uploader;
 
     @Transactional(readOnly = true)
     public MemberDto findMemberInfoByUserId(Long userId) {
@@ -101,5 +104,19 @@ public class MemberService {
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
         member.updateTarget(targetDto);
         memberRepository.save(member);
+    }
+
+    @Transactional
+    public MemberDto updateMember(MemberUpdateDto memberUpdateDto, MultipartFile multipartFile, Long userId) throws IOException {
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
+
+        if(multipartFile !=null) {
+            String storedFileName = s3Uploader.upload(multipartFile);
+            member.updateImg(storedFileName);
+        }
+
+        member.updateMemberInfo(memberUpdateDto);
+        return MemberDto.of(memberRepository.save(member));
     }
 }

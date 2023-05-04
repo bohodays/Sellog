@@ -1,5 +1,6 @@
 package com.example.selog.entity;
 
+import com.example.selog.dto.member.MemberUpdateDto;
 import com.example.selog.dto.member.SignUpDto;
 import com.example.selog.dto.member.TargetDto;
 import lombok.AllArgsConstructor;
@@ -128,6 +129,14 @@ public class Member extends BaseTime{
         this.githubTarget = targetDto.getGithubTarget();
         this.csTarget = targetDto.getCsTarget();
         this.start_date = LocalDateTime.now(); // 시작 시간 재 시작
+    }
+
+    public void updateMemberInfo(MemberUpdateDto memberUpdateDto){
+        this.contact = memberUpdateDto.getContact();
+        this.motto = memberUpdateDto.getMotto();
+        this.github = memberUpdateDto.getGithub();
+        this.blog = memberUpdateDto.getBlog();
+        this.nickname = memberUpdateDto.getNickname();
     }
 
     public void updatePoint(int point) {
