@@ -23,14 +23,14 @@ function startLoader() {
       count ++;
       if(count > 1) return;
       stopLoader();
-      window.addEventListener('beforeunload', () => {
+      window.addEventListener('beforeunload', async() => {
         try {
           const title = document.querySelector("#post-title-inp").textContent;
           const url = document.querySelector("#editor-root > div:nth-child(42) > div > div > div > form > fieldset > div.layer_body > div > dl:nth-child(5) > dd > span").textContent + title;
           const message = `[Tistory] Title: ${title}`+'\n'+ `URL: ${url}`;
 
           console.log(message);
-          uploadOnePostingOnSellog(message);
+          await uploadOnePostingOnSellog(message);
         } catch(error){
           console.log(error);
         }

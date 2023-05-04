@@ -9,7 +9,8 @@ async function uploadOnePostingOnSellog(message) {
 }
 
 async function upload(token, message) {
+  console.log(token);
   const git = new GitHub(token);
   const stats = await getStats();
-  await git.createRecord("tistory", message, "");
+  await git.createRecord("blog", message, "");
 }

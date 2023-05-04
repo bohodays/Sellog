@@ -26,7 +26,7 @@ function makeSubmitButton(link) {
     elem.style = 'cursor:pointer';
     elem.href = link;
   }
-  elem.innerHTML = '백준허브로 업로드';
+  elem.innerHTML = 'sellog로 업로드';
   const target = document.querySelector('body > div.popup_layer.show > div > div');
   if (!isNull(target)) {
     target.append(elem);

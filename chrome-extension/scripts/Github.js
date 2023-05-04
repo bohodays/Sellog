@@ -19,6 +19,7 @@ async function createRecord(token, message, type, problemId) {
     method: 'POST',
     body: JSON.stringify({ message, type: type, problemId }),
     headers: { Authorization: `Bearer ${token}`, 'content-type': 'application/json' },
+    mode: 'cors'
   })
     .then((res) => res.json())
     .then((data) => {

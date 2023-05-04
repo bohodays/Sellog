@@ -21,7 +21,7 @@ async function uploadOneSolveProblemOnGit(bojData, cb) {
 async function upload(token, message, problemId, cb) {
   const git = new GitHub(token);
   const stats = await getStats();
-  await git.createRecord("baekjoon", message, problemId);
+  await git.createRecord("algo", message, problemId);
 
   // 콜백 함수 실행
   if (typeof cb === 'function') cb();

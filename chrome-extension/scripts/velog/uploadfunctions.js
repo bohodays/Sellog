@@ -11,6 +11,6 @@ async function uploadOnePostingOnSellog(message) {
   async function upload(token, message) {
     const git = new GitHub(token);
     const stats = await getStats();
-    await git.createRecord("velog", message, "");
+    await git.createRecord("blog", message, "");
   }
   
