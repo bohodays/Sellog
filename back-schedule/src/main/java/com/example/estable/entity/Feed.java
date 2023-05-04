@@ -34,6 +34,6 @@ public class Feed {
     @Column(name = "link")
     private String link;
 
-    @Column(name = "pubDate")
+    @Column(name = "pub_date")
     private LocalDateTime pub_date;
 }
