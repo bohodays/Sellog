@@ -30,15 +30,15 @@ const dummyMyItemList = [
   },
   {
     id: 5,
-    name: "red_fan",
+    name: "leopard_chair",
     point: 300,
-    category: "decoration",
+    category: "furniture",
   },
   {
     id: 6,
-    name: "clock",
+    name: "elec_guitar",
     point: 300,
-    category: "decoration",
+    category: "etc",
   },
 ];
 
