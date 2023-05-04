@@ -9,6 +9,8 @@ import smileBottom from "@/assets/imgs/retro/smile_bottom.png";
 import coin from "@/assets/imgs/retro/coin.png";
 import { useRef, useState } from "react";
 import { apiUpdateUserInfo } from "@/api/user";
+import { IMyProfileUpdate } from "@/typeModels/user/userEditInfo";
+
 interface MyProfileProps {
   userData: any;
   setUserData: any;
@@ -33,7 +35,17 @@ function EditProfile(props: MyProfileProps) {
       tistory: tistoryRef.current.value,
       github: githubRef.current.value,
     });
-    console.log(props.setUserData);
+    // console.log("after", props.userData);
+    const editUserData: IMyProfileUpdate = {
+      nickname: nicknameRef.current.value,
+      email: emailRef.current.value,
+      motto: mottoRef.current.value,
+      tistory: tistoryRef.current.value,
+      github: githubRef.current.value,
+    };
+    console.log(typeof editUserData);
+
+    apiUpdateUserInfo(editUserData);
     // console.log(props.isEdit);
     // api userinfo put request 인자 포함한 함수.
     // apiUpdateUserInfo(nicknameRef.current.value,emailRef.current.value,mottoRef.current.value,tistoryRef.current.value,githubRef.current.value);
@@ -104,7 +116,7 @@ function EditProfile(props: MyProfileProps) {
           </div>
         </div>
         <button className="button__goal" onClick={editHandler}>
-          <p>수정하기</p>
+          <p>Confirm</p>
         </button>
         <hr />
         <div className="platform-address">
