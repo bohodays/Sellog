@@ -9,6 +9,9 @@ import UserInfoForm from "@/components/Login/UserInfoForm/UserInfoForm";
 import { useRecoilState } from "recoil";
 import { loginState } from "@/recoil/user/atom";
 import { useLocation } from "react-router-dom";
+import { apiGetUserInfo } from "@/api/user";
+import { localData } from "@/utils/token";
+import { userInfoState } from "@/recoil/myroom/atoms";
 
 export type handlerType = {
   handler: () => void;
@@ -47,9 +50,6 @@ const Login = () => {
       {!isLoggedIn && (
         <div className="info">Please click on the game console.</div>
       )}
-
-      {/* 로그인 폼 */}
-      {/* <LoginForm isVisible={isVisible} /> */}
 
       {/* 유저 정보 입력 폼 */}
       {userInfoUpdate ? (

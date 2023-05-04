@@ -1,9 +1,12 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilState } from "recoil";
+import { localData } from "./utils/token";
+import { apiGetUserInfo } from "./api/user";
+import { userInfoState } from "./recoil/myroom/atoms";
 
 function App() {
   // Code Splitting
@@ -18,6 +21,7 @@ function App() {
   const OauthRedirect = React.lazy(
     () => import("./pages/OauthRedirect/OauthRedirect")
   );
+  const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse/TermsOfUse"));
 
   return (
     <div className="App">
@@ -33,9 +37,9 @@ function App() {
               <Route path="/myroom" element={<MyRoom />} />
               <Route path="/mygoals" element={<MyGoals />} />
               <Route path="/csquiz" element={<CSQuiz />} />
-              <Route path="/item-shop" element={<ItemShop />} />
               <Route path="/mygoals" element={<MyGoals />} />
               <Route path="/oauth-login" element={<OauthRedirect />} />
+              <Route path="/termsOfUse" element={<TermsOfUse />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

@@ -1,15 +1,14 @@
 // import React from 'react'
 
 import {
-  OrbitControls,
   useGLTF,
   useTexture,
   useAnimations,
-  OrthographicCamera,
+  PerspectiveCamera,
 } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { SMain } from "./styles";
+import { SButtonWrapper, SMain } from "./styles";
 import { PCFSoftShadowMap, RepeatWrapping, Vector2, Vector3 } from "three";
 import GridImg from "../../assets/imgs/main/grid_test.png";
 import { House } from "@/components/Main/Models/House";
@@ -21,6 +20,9 @@ import { ItemShopMap } from "@/components/Main/Models/ItemShopMap";
 import { Flower } from "@/components/Main/Models/Flower";
 import { Weather } from "@/components/Main/Models/Weather";
 import { NewCsQuiz } from "@/components/Main/Models/NewCsQuiz";
+import { F1_Main } from "@/components/Main/Models/F1_Main";
+import { useNavigate } from "react-router-dom";
+import { apiGetUserInfo } from "@/api/user";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -36,12 +38,22 @@ type GLTFResult = GLTF & {
 type ActionName = "Idle" | "Run" | "Sad" | "Song Jump" | "Walk" | "Win";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
-const Scene = () => {
+const Scene = ({ buttonRef }: any) => {
   const group = useRef<THREE.Group | any>();
   const { nodes, materials, animations } = useGLTF(
     "/models/characters/f1.glb"
   ) as GLTFResult;
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
+
+  // 유저 정보
+  let userInfo;
+  useEffect(() => {
+    apiGetUserInfo().then((res) => {
+      userInfo = res?.data.response;
+      console.log(userInfo);
+    });
+  }, []);
+  console.log(userInfo);
 
   const userModelRef = useRef<any>();
   const pointerRef = useRef<any>();
@@ -75,7 +87,7 @@ const Scene = () => {
   let moving = false;
 
   // 카메라 위치
-  const cameraPosition = new Vector3(-2, 4, 5);
+  const cameraPosition = new Vector3(-3.5, 10, 10);
   camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
   camera.updateProjectionMatrix();
 
@@ -131,6 +143,10 @@ const Scene = () => {
         ) {
           if (!houseRef.current.visible) {
             console.log("집 나와!");
+            buttonRef.current.style.zIndex = 100;
+            buttonRef.current.style.opacity = 1;
+            // console.log(buttonRef.current.children[0].innerText);
+
             houseRef.current.visible = true;
             spotRef.current.material.color.set("seagreen");
             gsap.to(houseRef.current.position, {
@@ -140,11 +156,13 @@ const Scene = () => {
             });
             gsap.to(camera.position, {
               duration: 1,
-              y: 2.5,
+              y: 4.5,
             });
           }
         } else if (houseRef.current?.visible) {
           console.log("집 들어가");
+          buttonRef.current.style.zIndex = -1;
+          buttonRef.current.style.opacity = 0;
           spotRef.current.material.color.set("yellow");
           gsap.to(houseRef.current.position, {
             duration: 0.5,
@@ -152,7 +170,7 @@ const Scene = () => {
           });
           gsap.to(camera.position, {
             duration: 1,
-            y: 4,
+            y: 8,
           });
           setTimeout(() => {
             houseRef.current.visible = false;
@@ -168,6 +186,12 @@ const Scene = () => {
         ) {
           if (!itemshopRef.current.visible) {
             console.log("상점 나와!");
+            buttonRef.current.style.zIndex = 100;
+            buttonRef.current.style.opacity = 1;
+            buttonRef.current.children[0].innerText =
+              "😘 포인트로 원하는 아이템을 구매해보세요 ! 😘";
+            // console.log(buttonRef.current.children[0].innerText);
+
             itemshopRef.current.visible = true;
             spotRef2.current.material.color.set("seagreen");
             gsap.to(itemshopRef.current.position, {
@@ -177,11 +201,13 @@ const Scene = () => {
             });
             gsap.to(camera.position, {
               duration: 1,
-              y: 2.5,
+              y: 4.5,
             });
           }
         } else if (itemshopRef.current?.visible) {
           console.log("상점 들어가");
+          buttonRef.current.style.zIndex = -1;
+          buttonRef.current.style.opacity = 0;
           spotRef2.current.material.color.set("yellow");
           gsap.to(itemshopRef.current.position, {
             duration: 0.5,
@@ -189,7 +215,7 @@ const Scene = () => {
           });
           gsap.to(camera.position, {
             duration: 1,
-            y: 4,
+            y: 8,
           });
           setTimeout(() => {
             itemshopRef.current.visible = false;
@@ -204,6 +230,10 @@ const Scene = () => {
         ) {
           if (!csquizRef.current.visible) {
             console.log("cs퀴즈 나와!");
+            buttonRef.current.style.zIndex = 100;
+            buttonRef.current.style.opacity = 1;
+            buttonRef.current.children[0].innerText =
+              "😘 cs 퀴즈를 풀어보세요 ! 😘";
             csquizRef.current.visible = true;
             spotRef3.current.material.color.set("seagreen");
             gsap.to(csquizRef.current.position, {
@@ -213,11 +243,13 @@ const Scene = () => {
             });
             gsap.to(camera.position, {
               duration: 1,
-              y: 2.5,
+              y: 4.5,
             });
           }
         } else if (csquizRef.current?.visible) {
           console.log("cs퀴즈 들어가");
+          buttonRef.current.style.zIndex = -1;
+          buttonRef.current.style.opacity = 0;
           spotRef3.current.material.color.set("yellow");
           gsap.to(csquizRef.current.position, {
             duration: 0.5,
@@ -225,7 +257,7 @@ const Scene = () => {
           });
           gsap.to(camera.position, {
             duration: 1,
-            y: 4,
+            y: 8,
           });
           setTimeout(() => {
             csquizRef.current.visible = false;
@@ -244,11 +276,6 @@ const Scene = () => {
   draw();
 
   function setSize() {
-    camera.left = -(window.innerWidth / window.innerHeight);
-    camera.right = window.innerWidth / window.innerHeight;
-    camera.top = 1;
-    camera.bottom = -1;
-
     camera.updateProjectionMatrix();
     gl.setSize(window.innerWidth, window.innerHeight);
   }
@@ -336,7 +363,8 @@ const Scene = () => {
         shadow-camera-near={-100}
         shadow-camera-far={100}
       />
-      <OrthographicCamera
+      <PerspectiveCamera makeDefault={true} far={1000} zoom={1.2} />
+      {/* <OrthographicCamera
         makeDefault={true}
         left={-(window.innerWidth / window.innerHeight)}
         right={window.innerWidth / window.innerHeight}
@@ -345,7 +373,7 @@ const Scene = () => {
         near={-1000}
         far={1000}
         zoom={80}
-      />
+      /> */}
 
       {/* 맵 바닥 */}
       <mesh name="floor" rotation={[-Math.PI / 2, 0, 0]} receiveShadow={true}>
@@ -353,8 +381,9 @@ const Scene = () => {
         <meshStandardMaterial map={floorTexture} />
       </mesh>
 
+      <F1_Main userModelRef={userModelRef} group={group} />
       {/* 유저 캐릭터 */}
-      <group ref={group} dispose={null} position={[0, 0.3, 0]}>
+      {/* <group ref={group} dispose={null} position={[0, 0.3, 0]}>
         <group name="Scene">
           <group
             name="rig"
@@ -375,7 +404,7 @@ const Scene = () => {
             />
           </group>
         </group>
-      </group>
+      </group> */}
 
       {/* 유저 캐릭터를 따라다니는 pointMesh */}
       <mesh
@@ -474,11 +503,33 @@ const Scene = () => {
 };
 
 const Main = () => {
+  const navigate = useNavigate();
+  const buttonRef = useRef<any>();
+  console.log(buttonRef.current);
+
+  const handleRouterMove = () => {
+    if (buttonRef.current.children[0].innerText.includes("cs")) {
+      navigate("/csquiz");
+    } else if (buttonRef.current.children[0].innerText.includes("구매")) {
+      navigate("/item-shop");
+    } else if (buttonRef.current.children[0].innerText.includes("꾸며")) {
+      navigate("/myroom");
+    }
+  };
+
   return (
     <SMain>
       <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
-        <Scene />
+        <Scene buttonRef={buttonRef} />
       </Canvas>
+      <SButtonWrapper ref={buttonRef}>
+        <div className="btn-info">
+          😘 습관을 통해 포인트를 얻어 마이룸을 꾸며보세요 ! 😘
+        </div>
+        <button className="btn" onClick={handleRouterMove}>
+          이동
+        </button>
+      </SButtonWrapper>
     </SMain>
   );
 };
