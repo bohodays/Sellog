@@ -96,6 +96,9 @@ public class WebHookService {
         member.updatePoint(10);
 
         String target = member.getGithubTarget();
+
+        if(target == null) throw new CustomException(ErrorCode.NO_TARGET);
+
         int day = (target.charAt(0) - '0');
         int cnt = (target.charAt(2) - '0');
 
@@ -112,7 +115,6 @@ public class WebHookService {
                     LocalDateTime.now(),
                     "github");
             progress = true;
-
         }
         //현재 날짜 구간을 포함하는 앞부분
         else {
@@ -136,7 +138,7 @@ public class WebHookService {
                     "github");
 
             if(recordList.size() +1 == cnt) {
-                updatePoint(member);
+                updatePoint(member,10);
             }
         }
 
@@ -144,7 +146,11 @@ public class WebHookService {
             //꾸준히 해왔다면 point증가
             if(rList.size() + 1 == cnt) {
                 log.info("{} 포인트 증가",member.getNickname());
-                updatePoint(member);
+                updatePoint(member,10);
+                //1일 1커밋이면서 누적 보상을 받을 수 있다면
+                if(day == 1 && cnt == 1 && diff % 10 == 0) {
+                    updatePoint(member,10);
+                }
             }
         }
     }
@@ -156,8 +162,8 @@ public class WebHookService {
         return ChronoUnit.DAYS.between(start,end);
     }
 
-    public void updatePoint(Member member) {
-        member.updatePoint(10);
+    public void updatePoint(Member member, int point) {
+        member.updatePoint(point);
         memberRepository.save(member);
     }
 }
