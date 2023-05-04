@@ -29,6 +29,8 @@ export const SProfile = styled.section`
     height: 100%;
   }
   .body__profile {
+    display: flex;
+    flex-direction: column;
     text-align: center;
   }
   .img__profile {
@@ -56,7 +58,6 @@ export const SProfile = styled.section`
     align-items: end;
     justify-content: center;
   }
-
   .point__container {
     display: flex;
     justify-content: space-evenly;
@@ -76,84 +77,67 @@ export const SProfile = styled.section`
 
   .bottom__profile {
     margin-top: 4%;
-    display: flex;
-    align-content: space-around;
-    justify-content: space-around;
-    font-size: 1.4rem;
-    P {
-      font-size: 1.2rem;
-    }
   }
-
-  .container__habit {
+  .container__edit {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-inline: 8%;
-    font-family: "Slackey", cursive;
-    font-size: large;
-    font-weight: 700;
-    height: 40%;
-    margin-block: 4%;
+    /* border: solid 1px; */
+    /* padding-inline: 4%; */
+    padding-block: 2%;
+    align-items: self-start;
+    p {
+      width: 45%;
+    }
+    input {
+      background-color: rgb(255, 255, 255, 0);
+      border: none;
+      border-bottom: #484743 solid 1px;
+      width: 50%;
+      height: 1.2rem;
+      font-size: 1.1rem;
+    }
   }
-  .container__habit-stats {
+  .box__name {
+  }
+  .box__motto {
+  }
+  .box__email {
+  }
+  .box__tistory {
+  }
+  .box__github {
+  }
+  .box__phonenum {
+  }
+  .box__edit {
     display: flex;
-    width: 99%;
-    /* border: solid black; */
     justify-content: space-between;
-    align-items: center;
-    font-size: 1rem;
-  }
-  .progress__bar {
-    width: 60%;
-    height: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-block: 3%;
-
-    /* background-color: red; */
-  }
-  .progress__bar--github {
-    background-color: #484743;
-    transform: rotate(-1.85deg);
-  }
-  .progress__bar--blog {
-    background-color: #c7553f;
-    transform: rotate(0.21deg);
-  }
-  .progress__bar--algorithm {
-    background-color: #e1b34b;
-    transform: rotate(-1.48deg);
-  }
-  .progress__bar--CS {
-    background-color: #6eb78d;
-    transform: rotate(0.52deg);
-  }
-  .progress__bar--Feed {
-    background-color: #5488a1;
-    transform: rotate(-1.21deg);
-  }
-
-  .checked__today {
-    align-self: center;
-    justify-self: center;
-    width: 3vw;
-    height: 3vw;
-    font-size: 1.5rem;
-    text-align: center;
+    padding-block: 3%;
+    width: 90%;
   }
 
   .button__goal {
-    text-align: center;
-    align-items: center;
-    height: 2rem;
+    align-self: center;
     display: flex;
-    align-self: flex-end;
+    align-items: center;
+    justify-content: center;
+    /* justify-self: end; */
+    /* align-self: flex-end; */
+    height: 2rem;
+    /* width: 4rem; */
+    margin: 0%;
+    margin-bottom: 3%;
+
     background-color: #ffcc00;
     border: solid 1px;
     border-radius: 1rem 1rem 1rem 1rem;
     box-shadow: 1px 1px 1px 1px grey;
+    width: 5vw;
+    text-align: center;
+    p {
+      margin: 0%;
+      padding: 0%;
+    }
   }
   .container__contact {
     /* border: solid 1px; */
