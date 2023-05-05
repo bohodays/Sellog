@@ -19,7 +19,7 @@ function EditProfileModal(props: EditProps) {
   return (
     <SModal>
       <div className="modal__content">
-        <p>정보를 수정 하시겠습니까?</p>
+        <p>정보를 수정 하시겠습니까??</p>
         <div className="box__button">
           <button className="button__yes" onClick={yesHandler}>
             Yes
