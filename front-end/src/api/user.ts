@@ -1,4 +1,5 @@
 import { IUserSignup } from "@/typeModels/user/userSignup";
+import { IMyProfileUpdate } from "@/typeModels/user/userEditInfo";
 import getApiInstance from "./http";
 
 const api = getApiInstance();
@@ -24,7 +25,7 @@ export const apiGetUserInfo = async () => {
 };
 
 // 유저 목표, 포인트, 정보 수정
-export const apiUpdateUserInfo = async () => {
+export const apiUpdateUsergoal = async () => {
   try {
     const response = await api.put(`/user`);
     return response;
@@ -39,6 +40,19 @@ export const apiUpdateUserSignupInfo = async (data: IUserSignup) => {
 
   try {
     const response = await api.put(`/user/signup`, data);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// 유저 개인 정보 수정
+// 수정된 정보만 보내는 함수
+export const apiUpdateUserInfo = async (data: IMyProfileUpdate) => {
+  console.log(typeof data, "개인정보 수정 api 보내기 전 데이터", data);
+
+  try {
+    const response = await api.put(`/user/`, data);
     return response;
   } catch (e) {
     console.log(e);

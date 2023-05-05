@@ -128,8 +128,11 @@ export const SProfile = styled.section`
     margin: 0%;
     margin-bottom: 3%;
 
+    font-family: "Chicle";
+    font-size: 1.2rem;
+
     background-color: #ffcc00;
-    border: solid 1px;
+    border: solid 3px;
     border-radius: 1rem 1rem 1rem 1rem;
     box-shadow: 1px 1px 1px 1px grey;
     width: 5vw;

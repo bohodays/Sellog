@@ -9,6 +9,10 @@ import smileBottom from "@/assets/imgs/retro/smile_bottom.png";
 import coin from "@/assets/imgs/retro/coin.png";
 import { useRef, useState } from "react";
 import { apiUpdateUserInfo } from "@/api/user";
+import { IMyProfileUpdate } from "@/typeModels/user/userEditInfo";
+import { localData } from "@/utils/token";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
+
 interface MyProfileProps {
   userData: any;
   setUserData: any;
@@ -23,6 +27,8 @@ function EditProfile(props: MyProfileProps) {
   const tistoryRef: any = useRef("");
   const githubRef: any = useRef("");
 
+  const [isModal, setIsModal] = useState<boolean>(false);
+
   const editHandler = () => {
     // api put 함수 넣기
     props.setUserData({
@@ -33,12 +39,27 @@ function EditProfile(props: MyProfileProps) {
       tistory: tistoryRef.current.value,
       github: githubRef.current.value,
     });
-    console.log(props.setUserData);
+    // console.log("after", props.userData);
+    const editUserData: IMyProfileUpdate = {
+      nickname: nicknameRef.current.value,
+      motto: mottoRef.current.value,
+      contact: emailRef.current.value,
+      blog: tistoryRef.current.value,
+      github: githubRef.current.value,
+    };
+    console.log(typeof editUserData);
+    const accessToken = localData.getAccessToken();
+    if (accessToken) {
+      apiUpdateUserInfo(editUserData).then((res) => {
+        console.log("????????????????", res?.data.response);
+      });
+    }
     // console.log(props.isEdit);
     // api userinfo put request 인자 포함한 함수.
     // apiUpdateUserInfo(nicknameRef.current.value,emailRef.current.value,mottoRef.current.value,tistoryRef.current.value,githubRef.current.value);
-    props.setIsEdit(!props.isEdit);
+    setIsModal(!isModal);
   };
+  // props.setIsEdit(!props.isEdit);
   return (
     <SProfile>
       <div className="head"> EDIT ME</div>
@@ -104,7 +125,7 @@ function EditProfile(props: MyProfileProps) {
           </div>
         </div>
         <button className="button__goal" onClick={editHandler}>
-          <p>수정하기</p>
+          <p>Confirm</p>
         </button>
         <hr />
         <div className="platform-address">
@@ -118,6 +139,14 @@ function EditProfile(props: MyProfileProps) {
           </div>
         </div>
       </div>
+      {isModal && (
+        <EditProfileModal
+          isModal={isModal}
+          setIsModal={setIsModal}
+          isEdit={props.isEdit}
+          setIsEdit={props.setIsEdit}
+        ></EditProfileModal>
+      )}
     </SProfile>
   );
 }

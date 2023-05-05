@@ -36,7 +36,7 @@ const Scene = () => {
         {/* <Room1 /> */}
         {/* <Room2 /> */}
         {/* <Room3 /> */}
-        <Room4 />
+        {/* <Room4 /> */}
       </Suspense>
     </>
   );
@@ -63,6 +63,11 @@ const MyRoomContainer = (props: IMyRoomProps) => {
       <button className="myitems__btn" onClick={handleActivePage}>
         My Items
       </button>
+      {props.activePage == "myitems" && (
+        <button className="myitemsGoback__btn" onClick={handleActivePage}>
+          Go Back
+        </button>
+      )}
     </SMyRoom>
   );
 };

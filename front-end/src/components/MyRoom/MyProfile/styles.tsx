@@ -145,15 +145,21 @@ export const SProfile = styled.section`
   }
 
   .button__goal {
-    text-align: center;
-    align-items: center;
     height: 2rem;
+    width: 6rem;
     display: flex;
+    /* text-align: center; */
+    justify-content: center;
     align-self: flex-end;
     background-color: #ffcc00;
-    border: solid 1px;
+    border: solid 3px;
     border-radius: 1rem 1rem 1rem 1rem;
     box-shadow: 1px 1px 1px 1px grey;
+    font-family: "Chicle";
+    font-size: 1.3rem;
+    a {
+      color: black;
+    }
   }
   .container__contact {
     /* border: solid 1px; */
