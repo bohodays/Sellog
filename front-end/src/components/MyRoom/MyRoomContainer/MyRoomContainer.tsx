@@ -33,7 +33,7 @@ const Scene = () => {
           shadow-mapSize-height={2048}
           shadow-normalBias={0.05}
         />
-        <Room1 />
+        {/* <Room1 /> */}
         {/* <Room2 /> */}
         {/* <Room3 /> */}
         {/* <Room4 /> */}

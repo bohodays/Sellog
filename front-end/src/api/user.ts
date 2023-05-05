@@ -49,7 +49,7 @@ export const apiUpdateUserSignupInfo = async (data: IUserSignup) => {
 // 유저 개인 정보 수정
 // 수정된 정보만 보내는 함수
 export const apiUpdateUserInfo = async (data: IMyProfileUpdate) => {
-  console.log(data, "개인정보 수정 api 보내기 전 데이터");
+  console.log(typeof data, "개인정보 수정 api 보내기 전 데이터", data);
 
   try {
     const response = await api.put(`/user/`, data);

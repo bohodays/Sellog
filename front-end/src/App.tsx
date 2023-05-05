@@ -24,7 +24,7 @@ function App() {
   const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse/TermsOfUse"));
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  console.log(userInfo);
+  // console.log(userInfo);
 
   useEffect(() => {
     const accessToken = localData.getAccessToken();

@@ -1,7 +1,7 @@
 export interface IMyProfileUpdate {
   nickname: string;
-  email: string;
+  contact: string;
   motto: string;
-  tistory: string;
+  blog: string;
   github: string;
 }
