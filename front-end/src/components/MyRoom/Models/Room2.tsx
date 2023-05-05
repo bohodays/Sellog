@@ -373,7 +373,11 @@ export function Room2(props: JSX.IntrinsicElements["group"]) {
         scale={[1, 1, 0.46]}
       />
       <mesh geometry={nodes.Plane.geometry} material={materials.Wall} />
-      <mesh geometry={nodes.Plane_1.geometry} material={materials.Floor} />
+      <mesh
+        geometry={nodes.Plane_1.geometry}
+        material={materials.Floor}
+        userData={{ ground: true }}
+      />
       <mesh geometry={nodes.Plane_2.geometry} material={materials.Rim} />
     </group>
   );
