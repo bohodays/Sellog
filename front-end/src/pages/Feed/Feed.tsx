@@ -1,5 +1,5 @@
-import React from "react";
-import { SMain, SHeader, SBody, SSection, SArticle } from "./styles";
+import React, { ReactNode } from "react";
+import { SMain, SHeader, SBody, SSection } from "./styles";
 import LargeSmile from "@/assets/imgs/retro/smile_large.png";
 import GreenFlower from "@/assets/imgs/retro/green_flower.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,8 +9,27 @@ import {
   faFireFlameCurved,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import FeedComponent from "@/components/Feed/FeedComponent";
+import { getFeedApi } from "@/api/feed";
 export default function Feed() {
   const navigate = useNavigate();
+  const [newsfeed, setNewsFeed] = useState<any>();
+  const [isFeed, setIsFeed] = useState<boolean>(false);
+
+  useEffect(() => {
+    getFeedApi().then(
+      ({ data }: any | undefined) => setNewsFeed(data.response)
+      // console.log(data.response)
+    );
+    // console.log(datata, "feeeeed");
+  }, []);
+  useEffect(() => {
+    console.log("feed updated", newsfeed);
+    if (newsfeed != undefined) {
+      setIsFeed(true);
+    }
+  }, [newsfeed]);
 
   return (
     <SMain>
@@ -68,22 +87,14 @@ export default function Feed() {
             </div>
           </div>
         </SSection>
-        <SArticle>
-          <div className="feed__card">
-            <p>
-              Feed Title Feed Title Feed Title Feed Title Feed Title Feed
-              TitleFeed TitleFeed TitleFeed Title ed Title Feed Title Feed
-              TitleFeed TitleFeed TitleFeed Title
-            </p>
-            <div className="feed__card-info">
-              <p className="feed__card-source">출처: 당근마켓</p>
-              <div className="feed__card-detail">
-                <p> 42view </p>
-                <p> 2023-04-26</p>
-              </div>
-            </div>
-          </div>
-        </SArticle>
+        <div className="feed__box">
+          {isFeed &&
+            newsfeed.map((feed: ReactNode) => {
+              // <p> {feed.company}</p>;
+
+              return <FeedComponent props={feed}></FeedComponent>;
+            })}
+        </div>
         <img className="sticker1" src={LargeSmile} alt="스마일 큰거" />
       </SBody>
     </SMain>
