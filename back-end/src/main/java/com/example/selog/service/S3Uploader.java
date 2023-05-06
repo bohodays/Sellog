@@ -50,7 +50,7 @@ public class S3Uploader {
         } catch (StringIndexOutOfBoundsException e) {
             url = null;
         }
-        return url;
+        return getThumbnailPath(url);
     }
 
     private static String getUuid() {
@@ -77,5 +77,8 @@ public class S3Uploader {
         }
     }
 
+    public String getThumbnailPath(String path) {
+        return amazonS3Client.getUrl(bucket, path).toString();
+    }
 
 }
