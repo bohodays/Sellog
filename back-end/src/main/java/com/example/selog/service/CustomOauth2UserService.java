@@ -106,7 +106,7 @@ public class CustomOauth2UserService implements OAuth2UserService<OAuth2UserRequ
             member.updateTistoryToken(userRequest.getAccessToken().getTokenValue());
         }else if(userRequest.getClientRegistration().getRegistrationId().equals("github")){
             member.updateGithubToken(userRequest.getAccessToken().getTokenValue());
-            member.updateImg(attributes.getAttributes().get("avatar_url").toString());
+            if(!optionalMember.isPresent()) member.updateImg(attributes.getAttributes().get("avatar_url").toString());
         }
         memberRepository.save(member);
     }
