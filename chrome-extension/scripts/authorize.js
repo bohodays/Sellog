@@ -46,13 +46,15 @@ const localAuth = {
     xhr.addEventListener('readystatechange', function () {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          const username = JSON.parse(xhr.responseText).nickname;
+          const username = JSON.parse(xhr.responseText).response.nickname;
+          const img = JSON.parse(xhr.responseText).response.img;
           // sendMessage를 통해 background.js request로 전달
           chrome.runtime.sendMessage({
             closeWebPage: true,
             isSuccess: true,
             token,
             username,
+            img,
             KEY: this.KEY,
           });
         }

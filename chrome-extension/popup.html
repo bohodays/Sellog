@@ -3,24 +3,25 @@
   <head>
     <link rel="stylesheet" href="css/popup.css" />
     <script src="/library/jquery-3.3.1.min.js"></script>
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet" />
     <script src="/library/semantic.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chicle&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
-    <div class="ui grid container">
+    <div class="container">
       <div class="sixteen wide center aligned column">
-        <h1 id="title">Sel<span style="color: #0078c3">log</span></h1>
-        <p id="caption">Sync your activity to Seloog</p>
+        <h1 id="title">SELLOG</h1>
         <br />
         <!-- Authentication mode -->
         <div id="auth_mode" hidden>
-          <p class="onboarding">
-            <br />
-            Developer Self-Management
-            <strong>Sellog</strong>
-          </p>
+          <a title="HomePage" href="https://k8a404.p.ssafy.io/" target="_blank">
+            <img src="assets/logo.png" width="180" height="180"><br>
+          </a>
+
           <button id="authenticateGithub" class="ui secondary button">
             <i class="icon github"></i>
             GitHub
@@ -32,28 +33,30 @@
         </div>
 
         <div id="commit_mode" hidden>
-          <p id="repo_url" class="ui small header" style="margin-top: 5px; margin-bottom: 6px !important"></p>
-          <div class="ui small header" style="margin-bottom: 5px; margin-top: 0px !important">
-            Want more features?
-            <a style="color: rgb(10, 89, 92) !important" target="_blank" href="https://k8a404.p.ssafy.io">HomePage</a>
-          </div>
+          <img src="assets/tag.png" width="70" height="70" style="float: right; position: absolute; right: 10px; top:65px !important">
+          <div id="userImg"></div>
+          <a title="HomePage" href="https://k8a404.p.ssafy.io/" target="_blank">
+            <!-- <img src="assets/ribbon.png" width="250" height="50" style="margin-top: 5px !important"> -->
+          </a>
+          
+          <p id="nickname" class="ui small header" style="margin-top: 5px !important"></p>
         </div>
 
+        <img src="assets/smile.png" width="50" height="50" style="float: left; position: absolute; left: 45px !important">
+        <br>
         <!-- 기능 on/off -->
-        <div style="margin-top: 10px">
-          <input type="checkbox" id="onffbox" />
-          <label for="onffbox" id="onffmain">
-            <span id="onffball"></span>
-          </label>
+        <div>
+          <div style="margin-top: 10px">
+            <input type="checkbox" id="onffbox" />
+              <label for="onffbox" id="onffmain">
+                <span id="onffball"></span>
+              </label>
+          </div>
+          <a title="HomePage" href="https://k8a404.p.ssafy.io/" target="_blank"><i class="ui grey home icon"></i></a>
         </div>
+        
       </div>
-
-      <!-- Generate Socials -->
-      <div id="socials" class="sixteen wide column">
-        <a title="Email" href="mailto:dlwltn0350@gmail.com" target="_blank"><i class="ui red envelope icon"></i></a>
-        <a title="Sellog Home" href="https://k8a404.p.ssafy.io/" target="_blank"><i class="ui grey home icon"></i></a>
-      </div>
-    </div>
+    </div>  
 
     <script src="scripts/oauth2.js"></script>
     <script type="text/javascript" src="popup.js"></script>

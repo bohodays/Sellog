@@ -1,35 +1,31 @@
 body {
-  width: 350px;
-  background-color: white !important;
+  width: 200px;
+  background-color: #E4D1B0 !important;
+  background-image : url('../assets/tornado.png') !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
   padding: 10px;
   text-align: center;
   transition: background-color 0.75s ease;
+  height: 400px !important;
   font-size: 13px;
+  font-family: "Chicle", sans-serif;
+}
 
-  font-family: 'Helvetica Neue', 'Lucida Grande', sans-serif;
+.container {
+  border: 3px solid rgb(81, 79, 79);
+  /* padding: 20px; */
+  margin: 15px;
+  height: 95%;
 }
 
 #title {
-  font-family: 'Norwester', 'Helvetica Neue', 'Lucida Grande', sans-serif;
-  font-size: 30px;
-  font-weight: bold;
+  font-family: "Chicle", sans-serif;
+  font-size: 50px;
+  color: #871005;
+  /* font-weight: bold; */
   margin-bottom: 0px;
-  margin-top: 10px;
-}
-
-#caption {
-  font-family: 'Norwester', 'Helvetica Neue', 'Lucida Grande', sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  margin-bottom: 0px;
-}
-
-.onboarding {
-  font-family: sans-serif;
-  border-top: solid black 1px;
-  font-weight: 500;
-  padding-top: 2%;
-  font-size: medium;
+  margin-top: 20px;
 }
 
 #onffbox {
@@ -70,4 +66,8 @@ body {
   left: 30px;
   border: 0px solid #2f5496;
   background: #2f5496;
+}
+
+#userImg{
+  transform: matrix(1, 0.1, -0.1, 0.99, 0, 0);
 }

@@ -24,32 +24,23 @@ chrome.storage.local.get('Sellog_token', (data) => {
     action = true;
     $('#auth_mode').show();
   } else {
-    const AUTHENTICATION_URL = 'https://k8a404.p.ssafy.io/api/user';
+    $('#commit_mode').show();
+    chrome.storage.local.get(['Sellog_username'], (data3) => {
+      // console.log(JSON.parse(xhr.responseText).response.nickname);
+      const nickname = data3.Sellog_username;
+      if (nickname) {
+        $('#nickname').html(`<a target="blank" style="color: black !important;">${nickname}</a>`);
+      }    
+    });
 
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('readystatechange', function () {
-      if (xhr.readyState === 4) { //데이터를 전부 받은 상태
-        if (xhr.status === 200) {
-          /* Show MAIN FEATURES */
-          chrome.storage.local.get('mode_type', (data2) => {
-            if (data2 && data2.mode_type === 'commit') {
-              $('#commit_mode').show();
-            } 
-          });
-        } else if (xhr.status === 401) {
-          // bad oAuth
-          // reset token and redirect to authorization process again!
-          chrome.storage.local.set({ Sellog_token: null }, () => {
-            console.log('BAD token!!! Redirecting back to oAuth process');
-            action = true;
-            $('#auth_mode').show();
-          });
-        }
+    chrome.storage.local.get(['Sellog_img'], (data4) => {
+      const img = data4.Sellog_img;
+      if (img && img === 1) {
+        $('#userImg').html(`<img src="assets/profile1.png" width="150" height="150"></img>`);
+      } else {
+        $('#userImg').html(`<img src="${img}" width="150" height="150"></img>`);
       }
     });
-    xhr.open('GET', AUTHENTICATION_URL, true);
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
-    xhr.send();
   }
 });
 

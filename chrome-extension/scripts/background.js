@@ -23,6 +23,11 @@ function handleMessage(request, sender, sendResponse) {
     } */,
     );
 
+    /* Set img */
+    chrome.storage.local.set(
+      { Sellog_img: request.img }
+    );
+
     /* Close pipe */
     chrome.storage.local.set({ pipe_Sellog: false }, () => {
       console.log('Closed pipe.');
