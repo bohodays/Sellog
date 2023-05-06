@@ -74,7 +74,7 @@ public class WebHookService {
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
-        if(!recordRequestDto.getProblemId().equals("") || recordRequestDto.getProblemId() != null){
+        if(!recordRequestDto.getProblemId().equals("")){
             Optional<Record> record = recordRepository.findByProblemIdAndCategory(recordRequestDto.getProblemId(), recordRequestDto.getType());
             if(record.isPresent()){
                 throw new CustomException(ErrorCode.CONFLICT_ALGO);
