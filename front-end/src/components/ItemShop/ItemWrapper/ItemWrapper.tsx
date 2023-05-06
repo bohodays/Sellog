@@ -4,7 +4,7 @@ import { Bed } from "../ItemItem/Models/Bed";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { PerspectiveCamera } from "@react-three/drei";
-import { IItemProps } from "@/typeModels/ItemShop/itemInterfaces";
+import { IItemProps } from "@/typeModels/ItemShop/iteminterfaces";
 import { WoodDesk } from "../ItemItem/Models/WoodDesk";
 import { WoodShelve } from "../ItemItem/Models/WoodShelve";
 import { LeopardChair1 } from "../ItemItem/Models/LeopardChair1";

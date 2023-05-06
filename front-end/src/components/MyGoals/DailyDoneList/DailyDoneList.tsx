@@ -20,12 +20,24 @@ const countDone = [
   { type: "feed", doneCount: 2 },
 ];
 const DailyDoneList = ({ selectedDateProps }: ISelectedDate) => {
-  const [doneList, setDoneList] = useState<IDoneList | null>(null);
+  let selectedDate = selectedDateProps.toLocaleDateString().split(".");
+
+  const [selectedYear, setSelectedYear] = useState(Number(selectedDate[0]));
+  const [selectedMonth, setSelectedMonth] = useState(Number(selectedDate[1]));
+  const [monthlyDoneList, setMonthlyDoneList] = useState<IDoneList | null>(
+    null
+  );
+
+  // today 없어도 될듯 수정
   const [todayDoneList, setTodayDoneList] = useState<IDoneList | null>(null);
+
+  // type ["algo" : [{IDoneItem}, {IDoneItem} ... ]] 수정
+  const [dailyDoneList, setDailyDoneList] = useState<any | null>(null);
   const [countDoneList, setCountDoneList] = useState<ICountDoneItem[] | null>(
     []
   );
 
+  // 수정
   useEffect(() => {
     apiGetTodayRecord().then((r) => {
       setTodayDoneList(() => r?.data.response);
@@ -40,12 +52,24 @@ const DailyDoneList = ({ selectedDateProps }: ISelectedDate) => {
     });
   }, []);
 
+  // 선택 날짜가 바뀔 때마다 한달 기록에서 선택 날짜와 같은 데이터를 filter후 setDailyDoneList 갱신
   useEffect(() => {
-    apiGetMonthlyRecordList(2023, 5).then((r) => {
-      setDoneList(r?.data.response);
-      console.log("롸", doneList);
+    const selectedRecordList = monthlyDoneList
+      ? [selectedDateProps.toISOString().slice(0, 10).replaceAll("-", "")]
+      : null;
+    if (selectedRecordList) {
+      setDailyDoneList(selectedRecordList);
+    }
+  }, [selectedDate]);
+
+  // selectedYear, selectedMonth 중 하나가 바뀌면 한달 기록 요청 보내서 setMonthlyDoneList 갱신
+  useEffect(() => {
+    apiGetMonthlyRecordList(selectedYear, selectedMonth).then((r) => {
+      setMonthlyDoneList(r?.data.response);
+      console.log(r?.data.response);
+      console.log("롸", monthlyDoneList);
     });
-  }, []);
+  }, [selectedYear, selectedMonth]);
 
   return (
     <SSection>
