@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SSection } from "./styles";
 import blueEye from "@/assets/imgs/retro/blue_eye.png";
-import MyItemList from "../../../components/MyRoom/MyItemList/MyItemList";
+import MyItemList from "@/components/MyRoom/MyItemList/MyItemList";
 
 const itemCategories = ["all", "furniture", "electronics", "decoration", "etc"];
 
