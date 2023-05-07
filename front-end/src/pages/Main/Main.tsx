@@ -35,6 +35,7 @@ import { MyRoomFont } from "@/components/Main/Models/Myroom_font";
 import { ItemShopFont } from "@/components/Main/Models/ItemShop_font";
 import { CSQuizFont } from "@/components/Main/Models/Csquiz_font";
 import { FeedFont } from "@/components/Main/Models/Feed_font";
+import { Car } from "@/components/Main/Models/Car";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -328,7 +329,8 @@ const Scene = ({ buttonRef }: any) => {
         item.object.name === "spot" ||
         item.object.name === "spot2" ||
         item.object.name === "spot3" ||
-        item.object.name === "spot4"
+        item.object.name === "spot4" ||
+        item.object.name === "Scene"
       ) {
         destinationPoint.x = item.point.x;
         destinationPoint.y = 0.3;
@@ -554,6 +556,8 @@ const Scene = ({ buttonRef }: any) => {
       <Flower position={[-2, 0, -22]} castShadow={true} />
       {/* 해와 구름비 */}
       <Weather position={[24, 5, -5]} castShadow={true} />
+      {/* 자동차 */}
+      <Car position={[-5, 0, 20]} castShadow={true} />
     </Suspense>
   );
 };
