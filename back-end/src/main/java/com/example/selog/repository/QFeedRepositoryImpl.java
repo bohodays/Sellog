@@ -22,7 +22,7 @@ public class QFeedRepositoryImpl implements QFeedRepository{
     public List<Feed> findAllFeedByDate(Pageable pageable) {
         return jpaQueryFactory
                 .selectFrom(feed)
-                .orderBy(feed.id.asc())
+                .orderBy(feed.pub_date.desc())
                 .limit(pageable.getPageSize()+1)
                 .fetch();
 

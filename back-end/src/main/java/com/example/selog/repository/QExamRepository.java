@@ -8,4 +8,5 @@ import java.util.List;
 public interface QExamRepository {
 
     public List<Exam> getExamListByRandom(Long start, Long end);
+    public List<Exam> getExamListByCategory(String category);
 }
