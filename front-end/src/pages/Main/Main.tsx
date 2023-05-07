@@ -36,6 +36,11 @@ import { ItemShopFont } from "@/components/Main/Models/ItemShop_font";
 import { CSQuizFont } from "@/components/Main/Models/Csquiz_font";
 import { FeedFont } from "@/components/Main/Models/Feed_font";
 import { Car } from "@/components/Main/Models/Car";
+import { Ground } from "@/components/Main/Models/Ground";
+import { Tree } from "@/components/Main/Models/Tree";
+import { Stone } from "@/components/Main/Models/Stone";
+import { Grass } from "@/components/Main/Models/Grass";
+import { Floor } from "@/components/Main/Models/Floor";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -77,11 +82,11 @@ const Scene = ({ buttonRef }: any) => {
   const airBalloonRef = useRef<any>();
 
   // Texture
-  const floorTexture = useTexture(GridImg);
-  floorTexture.wrapS = RepeatWrapping;
-  floorTexture.wrapT = RepeatWrapping;
-  floorTexture.repeat.x = 10;
-  floorTexture.repeat.y = 10;
+  // const floorTexture = useTexture(GridImg);
+  // floorTexture.wrapS = RepeatWrapping;
+  // floorTexture.wrapT = RepeatWrapping;
+  // floorTexture.repeat.x = 10;
+  // floorTexture.repeat.y = 10;
 
   // Renderer
   const { gl, raycaster, clock, camera, scene } = useThree<any>();
@@ -330,7 +335,7 @@ const Scene = ({ buttonRef }: any) => {
         item.object.name === "spot2" ||
         item.object.name === "spot3" ||
         item.object.name === "spot4" ||
-        item.object.name === "Scene"
+        item.object.name === "stone"
       ) {
         destinationPoint.x = item.point.x;
         destinationPoint.y = 0.3;
@@ -410,10 +415,12 @@ const Scene = ({ buttonRef }: any) => {
       <PerspectiveCamera makeDefault={true} far={1000} zoom={1.2} />
 
       {/* 맵 바닥 */}
-      <mesh name="floor" rotation={[-Math.PI / 2, 0, 0]} receiveShadow={true}>
-        <planeGeometry args={[100, 100]} />
-        <meshStandardMaterial map={floorTexture} />
-      </mesh>
+      {/* <Ground name="floor" position={[0, 0, 0]} receiveShadow={true} /> */}
+      {/* <mesh name="floor" rotation={[-Math.PI / 2, 0, 0]} receiveShadow={true}>
+        <planeGeometry args={[50, 50]} />
+        <meshStandardMaterial color={"#5A9720"} />
+      </mesh> */}
+      <Floor scale={7} castShadow={true} />
       {userInfo && userInfo!.characterId === 0 ? (
         <F1_Main userModelRef={userModelRef} group={group} />
       ) : userInfo && userInfo!.characterId === 1 ? (
@@ -436,7 +443,8 @@ const Scene = ({ buttonRef }: any) => {
         position={[0, 0.01, 0]}
         receiveShadow={true}
       >
-        <planeGeometry args={[1, 1]} />
+        {/* <planeGeometry args={[1, 1]} /> */}
+        <circleGeometry args={[0.2, 32]} />
         <meshBasicMaterial color={"crimson"} transparent={true} opacity={0.5} />
       </mesh>
 
@@ -445,10 +453,11 @@ const Scene = ({ buttonRef }: any) => {
         ref={spotRef}
         name="spot"
         rotation={[-Math.PI / 2, 0, 0]}
-        position={[5, 0.005, 5]}
+        position={[10, 0.005, 10]}
         receiveShadow={true}
       >
-        <planeGeometry args={[3, 3]} />
+        {/* <planeGeometry args={[3, 3]} /> */}
+        <circleGeometry args={[2, 32]} />
         <meshStandardMaterial
           color={"yellow"}
           transparent={true}
@@ -460,13 +469,13 @@ const Scene = ({ buttonRef }: any) => {
       <House
         houseRef={houseRef}
         visible={false}
-        position={[5, -5, 3]}
+        position={[10, -5, 8]}
         castShadow={true}
       />
       {/* 집 font */}
       <MyRoomFont
         houseFontRef={houseFontRef}
-        position={[1, -1, 5]}
+        position={[6, -1, 10]}
         castShadow={true}
       />
 
@@ -475,10 +484,11 @@ const Scene = ({ buttonRef }: any) => {
         ref={spotRef2}
         name="spot2"
         rotation={[-Math.PI / 2, 0, 0]}
-        position={[5, 0.005, -10]}
+        position={[10, 0.005, -10]}
         receiveShadow={true}
       >
-        <planeGeometry args={[3, 3]} />
+        {/* <planeGeometry args={[3, 3]} /> */}
+        <circleGeometry args={[2, 32]} />
         <meshStandardMaterial
           color={"yellow"}
           transparent={true}
@@ -489,11 +499,10 @@ const Scene = ({ buttonRef }: any) => {
       <ItemShopMap
         itemshopRef={itemshopRef}
         visible={false}
-        position={[5.5, -2, -12]}
+        position={[10.5, -2, -12]}
         castShadow={true}
       />
       {/* 아이템샵 폰트 */}
-      {/* <ItemShopFont position={[1, 0, -10]} /> */}
       <ItemShopFont itemshopFontRef={itemshopFontRef} castShadow={true} />
 
       {/* cs quiz를 보이게 하는 spotMesh */}
@@ -501,10 +510,11 @@ const Scene = ({ buttonRef }: any) => {
         ref={spotRef3}
         name="spot3"
         rotation={[-Math.PI / 2, 0, 0]}
-        position={[-14, 0.005, -14]}
+        position={[-10, 0.005, -10]}
         receiveShadow={true}
       >
-        <planeGeometry args={[3, 3]} />
+        {/* <planeGeometry args={[3, 3]} /> */}
+        <circleGeometry args={[2, 32]} />
         <meshStandardMaterial
           color={"yellow"}
           transparent={true}
@@ -515,13 +525,13 @@ const Scene = ({ buttonRef }: any) => {
       <NewCsQuiz
         csquizRef={csquizRef}
         visible={false}
-        position={[-15, -1, -16]}
+        position={[-11, -1, -12]}
         castShadow={true}
       />
       <CSQuizFont
         csquizFontRef={csquizFontRef}
         castShadow={true}
-        position={[-18, -0.5, -13.5]}
+        position={[-14, -0.5, -9.5]}
       />
 
       {/* Feed를 보이게 하는 spotMesh */}
@@ -529,10 +539,11 @@ const Scene = ({ buttonRef }: any) => {
         ref={spotRef4}
         name="spot4"
         rotation={[-Math.PI / 2, 0, 0]}
-        position={[-14, 0.005, 5]}
+        position={[-10, 0.005, 10]}
         receiveShadow={true}
       >
-        <planeGeometry args={[3, 3]} />
+        {/* <planeGeometry args={[3, 3]} /> */}
+        <circleGeometry args={[2, 32]} />
         <meshStandardMaterial
           color={"yellow"}
           transparent={true}
@@ -547,17 +558,120 @@ const Scene = ({ buttonRef }: any) => {
         position={[5.5, -2, -12]}
         castShadow={true}
       /> */}
-      <FeedFont position={[-17.5, 0, 5]} />
+      <FeedFont position={[-13.5, 0, 10]} />
 
       {/* 장식들 */}
       {/* 열기구 */}
-      <AirBalloon ref={airBalloonRef} position={[-5, 3, 0]} castShadow={true} />
+      <AirBalloon
+        ref={airBalloonRef}
+        position={[-15, 3, 0]}
+        castShadow={true}
+      />
       {/* 꽃 */}
-      <Flower position={[-2, 0, -22]} castShadow={true} />
+      <Flower position={[-2, 0, -20]} castShadow={true} />
       {/* 해와 구름비 */}
-      <Weather position={[24, 5, -5]} castShadow={true} />
+      <Weather position={[15, 5, 0]} castShadow={true} />
       {/* 자동차 */}
       <Car position={[-5, 0, 20]} castShadow={true} />
+      {/* 나무들 */}
+      <Tree position={[-3, 0, -20]} castShadow={true} />
+      <Tree position={[3, 0, -18]} castShadow={true} />
+      <Tree position={[4, 0, -22]} castShadow={true} />
+      <Tree position={[9, 0, -20]} castShadow={true} />
+      {/* 잔디 */}
+      {/* <Grass position={[3, 0, 0]} castShadow={true} /> */}
+      {/* <Grass position={[-4, 0, -0.5]} castShadow={true} /> */}
+      {/* 돌담길 */}
+      <group position={[0, 0, 0]}>
+        {/* 집 방향 안내 돌달김 */}
+        <Stone
+          scale={1.1}
+          rotation={[0, THREE.MathUtils.degToRad(30), 0]}
+          position={[3, 0, 3]}
+          castShadow={true}
+        />
+        <Stone
+          scale={0.55}
+          position={[7, 0, 7]}
+          rotation={[0, THREE.MathUtils.degToRad(30), 0]}
+          castShadow={true}
+        />
+        {/* 상점 방향 안내 돌담길 */}
+        <Stone
+          scale={1.1}
+          position={[3, 0, -4]}
+          rotation={[0, THREE.MathUtils.degToRad(120), 0]}
+          castShadow={true}
+        />
+        <Stone
+          scale={0.5}
+          position={[7, 0, -8]}
+          rotation={[0, THREE.MathUtils.degToRad(100), 0]}
+          castShadow={true}
+        />
+        {/* CS 퀴즈 방향 안내 돌담길 */}
+        <Stone
+          scale={1.1}
+          rotation={[0, THREE.MathUtils.degToRad(30), 0]}
+          position={[-3.5, 0, -4]}
+          castShadow={true}
+        />
+        <Stone
+          scale={0.7}
+          rotation={[0, THREE.MathUtils.degToRad(30), 0]}
+          position={[-7, 0, -6.5]}
+          castShadow={true}
+        />
+        {/* FEED 방향 안내 돌담길 */}
+        <Stone
+          scale={1.3}
+          rotation={[0, THREE.MathUtils.degToRad(120), 0]}
+          position={[-4, 0, 4]}
+          castShadow={true}
+        />
+        <Stone
+          scale={0.6}
+          rotation={[0, THREE.MathUtils.degToRad(120), 0]}
+          position={[-6.2, 0, 7.8]}
+          castShadow={true}
+        />
+        {/* <Stone position={[0, 0, 0]} castShadow={true} />
+        <Stone
+          position={[1, 0, 1.4]}
+          // rotation={[0, THREE.MathUtils.degToRad(20), 0]}
+          castShadow={true}
+        />
+        <Stone
+          position={[2, 0, 3]}
+          // rotation={[0, -THREE.MathUtils.degToRad(20), 0]}
+          castShadow={true}
+        />
+        <Stone
+          position={[2, 0, 5]}
+          // rotation={[0, THREE.MathUtils.degToRad(60), 0]}
+          castShadow={true}
+        />
+        <Stone
+          position={[1.2, 0, 7]}
+          // rotation={[0, THREE.MathUtils.degToRad(60), 0]}
+          castShadow={true}
+        />
+        <Stone
+          position={[0.5, 0, 9]}
+          // rotation={[0, THREE.MathUtils.degToRad(60), 0]}
+          castShadow={true}
+        />
+        <Stone
+          position={[0.5, 0, 9]}
+          // rotation={[0, THREE.MathUtils.degToRad(60), 0]}
+          castShadow={true}
+        />
+        <Stone
+          position={[8.4, 0, 8.4]}
+          // rotation={[0, THREE.MathUtils.degToRad(60), 0]}
+          castShadow={true}
+        /> */}
+      </group>
     </Suspense>
   );
 };
@@ -580,7 +694,11 @@ const Main = () => {
   return (
     <SMain>
       <ToggleButton />
-      <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
+      <Canvas
+        style={{ background: "skyblue" }}
+        shadows={true}
+        gl={{ preserveDrawingBuffer: true }}
+      >
         <Scene buttonRef={buttonRef} />
       </Canvas>
       <SButtonWrapper ref={buttonRef}>
