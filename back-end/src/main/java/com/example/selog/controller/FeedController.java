@@ -37,7 +37,7 @@ public class FeedController {
         }
     }
 
-    @GetMapping("/{feed_id}")
+    @PutMapping("/{feed_id}")
     public ResponseEntity<?> feedDetail(HttpServletRequest request, HttpServletResponse response, @PathVariable Long feed_id) {
         log.info("get feedDetail 호출!");
 
