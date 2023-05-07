@@ -38,6 +38,7 @@ async function parseData() {
 
 async function makeData(origin) {
   const { problem_description, problemId, level, result_message, division, language_extension, title, runtime, memory, code } = origin;
-  const message = `[Programmers/${level.replace('lv', 'level ')}] Title: ${title}, Time: ${runtime}, Memory: ${memory} -Sellog`;
+  const message = `[Programmers/${level.replace('lv', 'level ')}] ${title} - ${problemId} \n`
+  + `[문제 링크](${link})`;
   return { problemId, message };
 }

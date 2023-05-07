@@ -7,6 +7,20 @@ async function SolvedApiCall(problemId) {
     .then((query) => query.json());
 }
 
+// 알림을 띄워주는 함수
+function sendNotification(point) {
+  chrome.notifications.create({
+    type: "basic",
+    title: "SELLOG",
+    iconUrl: "../assets/logo.png",
+    message: point + "포인트가 적립되었습니다.",
+    priority: 2, // -2 to 2 (highest)
+
+    eventTime: Date.now(),
+  }, () => {
+  });
+}
+
 function handleMessage(request, sender, sendResponse) {
   if (request && request.closeWebPage === true && request.isSuccess === true) {
     /* Set username */
@@ -23,6 +37,11 @@ function handleMessage(request, sender, sendResponse) {
     } */,
     );
 
+    /* Set img */
+    chrome.storage.local.set(
+      { Sellog_img: request.img }
+    );
+
     /* Close pipe */
     chrome.storage.local.set({ pipe_Sellog: false }, () => {
       console.log('Closed pipe.');
@@ -33,8 +52,8 @@ function handleMessage(request, sender, sendResponse) {
     // });
 
     /* Go to onboarding for UX */
-    const urlOnboarding = `chrome-extension://${chrome.runtime.id}/welcome.html`;
-    chrome.tabs.create({ url: urlOnboarding, selected: true }); // creates new tab
+    // const urlOnboarding = `chrome-extension://${chrome.runtime.id}/welcome.html`;
+    // chrome.tabs.create({ url: urlOnboarding, selected: true }); // creates new tab
   } else if (request && request.closeWebPage === true && request.isSuccess === true) {
     alert('Something went wrong while trying to authenticate your profile!');
     chrome.tabs.getSelected(null, function (tab) {
@@ -43,6 +62,10 @@ function handleMessage(request, sender, sendResponse) {
   } else if (request && request.sender == "baekjoon" && request.task == "SolvedApiCall") {
     SolvedApiCall(request.problemId).then((res) => sendResponse(res));
     //sendResponse(SolvedApiCall(request.problemId))
+  } else if (request && request.message == "alarm") {
+    sendNotification(
+      request.payload.point,
+    );
   }
   return true;
 }

@@ -19,18 +19,27 @@ function startLoader() {
     const publishBtn = document.querySelector("#publish-btn");
     // const content = document.querySelector("#tinymce").textContent;
 
+    count ++;
+    if (count > 1) return;
+    
     publishBtn.addEventListener('click', (e) => {
-      count ++;
-      if(count > 1) return;
-      stopLoader();
-      window.addEventListener('beforeunload', async() => {
+      window.addEventListener('beforeunload', (e) => {
         try {
+          e.preventDefault();
+          console.log("이벤트막아")
+          stopLoader();
           const title = document.querySelector("#post-title-inp").textContent;
           const url = document.querySelector("#editor-root > div:nth-child(42) > div > div > div > form > fieldset > div.layer_body > div > dl:nth-child(5) > dd > span").textContent + title;
           const message = `[Tistory] Title: ${title}`+'\n'+ `URL: ${url}`;
 
           console.log(message);
-          await uploadOnePostingOnSellog(message);
+          uploadOnePostingOnSellog(message)
+            .then(() => {
+              // 페이지 이동
+              console.log("다시 이동해");
+              publishBtn.click();
+            })
+          
         } catch(error){
           console.log(error);
         }
@@ -39,12 +48,9 @@ function startLoader() {
     });
 
     
-  }, 1000);
+  }, 500);
 }
 
-function clickEvent() {
-  
-}
 function stopLoader() {
   clearInterval(loader);
   loader = null;

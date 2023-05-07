@@ -45,7 +45,7 @@ function getSolvedResult() {
 async function beginUpload(bojData) {
   log('bojData', bojData);
   if (isNotEmpty(bojData)) {
-    startUpload();
-    await uploadOneSolveProblemOnGit(bojData, markUploadedCSS);
+    // startUpload();
+    await uploadOneSolveProblemOnGit(bojData);
   }
 }
