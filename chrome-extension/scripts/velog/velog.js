@@ -29,13 +29,14 @@ function startLoader() {
 
   loader = setInterval(async () => {
     // 기능 Off시 작동하지 않도록 함
-
+    console.log(ispublish);
     if (document.querySelector('[data-testid="publish"]') && !ispublish) {
       ispublish = true;
       const publishBtn = document.querySelector('[data-testid="publish"]');
 
       const publishHandler = async (e) => {
-        // stopLoader();
+        
+        stopLoader();
         try {
           const elements = document.querySelectorAll('h4');
           let title = '';
@@ -53,11 +54,12 @@ function startLoader() {
           console.log(message);
           uploadOnePostingOnSellog(message);
           console.log("전송완");
-          
         } catch(error){
           console.log(error);
         } finally {
           ispublish = false;
+          console.log("변경");
+          startLoader();
         }
       }
 

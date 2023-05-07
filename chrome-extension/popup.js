@@ -52,7 +52,7 @@ chrome.storage.local.get('Sellog_token', (data) => {
 
           chrome.storage.local.get(['Sellog_img'], (data4) => {
             const img = data4.Sellog_img;
-            if (img && img === 1) {
+            if (img && img === "1") {
               $('#userImg').html(`<img src="assets/profile1.png" width="150" height="150"></img>`);
             } else {
               $('#userImg').html(`<img src="${img}" width="150" height="150"></img>`);
