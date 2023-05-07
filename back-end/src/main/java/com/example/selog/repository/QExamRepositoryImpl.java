@@ -22,4 +22,12 @@ public class QExamRepositoryImpl implements QExamRepository{
                 .where(exam.id.between(start,end))
                 .fetch();
     }
+
+    @Override
+    public List<Exam> getExamListByCategory(String category) {
+        return jpaQueryFactory
+                .selectFrom(exam)
+                .where(exam.category.eq(category))
+                .fetch();
+    }
 }
