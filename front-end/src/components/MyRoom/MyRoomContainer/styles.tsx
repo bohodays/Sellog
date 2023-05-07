@@ -76,4 +76,18 @@ export const SMyRoom = styled.section<any>`
     left: 14.5vw;
     display: ${(props) => (props.activePage === "myitems" ? "" : "none")};
   }
+
+  .myitemsGoback__btn {
+    padding: 8px;
+    font-family: "Chicle";
+    background-color: #ffcc00;
+    border-radius: 30px;
+    font-size: 1.5vw;
+    border: 3px solid black;
+    box-shadow: 1px 1px 3px black;
+    position: absolute;
+    bottom: 3.5vh;
+    right: 2.5vw;
+    display: ${(props) => (props.activePage === "myitems" ? "" : "none")};
+  }
 `;

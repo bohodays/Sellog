@@ -121,6 +121,12 @@ const MyRoomContainer = (props: IMyRoomProps) => {
           <button className="myitem__delete">Delete</button>
         </>
       )}
+      {props.activePage == "myitems" && (
+        <button className="myitemsGoback__btn" onClick={handleActivePage}>
+          Go Back
+        </button>
+      )}
+
       {/* {isEdit && (
         <>
           <button
