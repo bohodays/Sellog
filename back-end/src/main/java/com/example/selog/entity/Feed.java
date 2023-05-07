@@ -47,6 +47,7 @@ public class Feed {
     public FeedDto toFeedDto() {
         return FeedDto.builder()
                 .title(title)
+                .feedId(id)
                 .company(company)
                 .views(views)
                 .link(link)

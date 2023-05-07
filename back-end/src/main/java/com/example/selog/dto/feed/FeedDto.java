@@ -20,4 +20,5 @@ public class FeedDto {
     private String link;
 
     private LocalDateTime pub_date;
+    private Long feedId;
 }
