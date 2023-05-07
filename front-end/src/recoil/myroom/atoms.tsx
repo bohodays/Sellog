@@ -38,3 +38,8 @@ export const userInfoState = atom<userInfo>({
     contact: "hojung@gmail.com",
   },
 });
+
+export const itemTargetState = atom<null | string>({
+  key: "ItemTarget",
+  default: null,
+});
