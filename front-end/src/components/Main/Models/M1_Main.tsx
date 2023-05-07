@@ -30,7 +30,7 @@ export function M1_Main(props: JSX.IntrinsicElements["group"] | any) {
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
   return (
-    <group ref={props.group} dispose={null} position={[0, 0.3, 0]}>
+    <group ref={props.group} dispose={null} position={[0, 0.2, 0]}>
       <group name="Scene">
         <group
           name="rig"

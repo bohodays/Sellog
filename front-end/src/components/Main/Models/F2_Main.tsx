@@ -34,7 +34,7 @@ export function F2_Main(props: JSX.IntrinsicElements["group"] | any) {
   // }, []);
 
   return (
-    <group ref={props.group} dispose={null} position={[0, 0.3, 0]}>
+    <group ref={props.group} dispose={null} position={[0, 0.2, 0]}>
       <group name="Scene">
         <group
           name="rig"

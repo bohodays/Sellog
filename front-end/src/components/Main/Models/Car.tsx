@@ -44,25 +44,9 @@ type GLTFResult = GLTF & {
   };
 };
 
-type ActionName =
-  | "Empty"
-  | "Circle"
-  | "Circle.001"
-  | "VertAction"
-  | "Vert.001"
-  | "Vert.002"
-  | "Vert.003"
-  | "Vert.004"
-  | "Circle.015"
-  | "Circle.016"
-  | "Circle.017";
-type GLTFActions = Record<ActionName, THREE.AnimationAction>;
-
 export function Car(props: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group | any>();
-  const { nodes, materials, animations } = useGLTF(
-    "/models/car.glb"
-  ) as GLTFResult;
+  const { nodes, materials } = useGLTF("/models/car.glb") as GLTFResult;
 
   return (
     <group ref={group} {...props} dispose={null} scale={3}>
