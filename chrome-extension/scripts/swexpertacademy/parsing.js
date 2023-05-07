@@ -77,6 +77,7 @@ async function parseData() {
 
 async function makeData(origin) {
   const { link, problemId, level, extension, title, runtime, memory, code, length } = origin;
-  const message = `[SWEA/${level}] Title: ${title}, Time: ${runtime}, Memory: ${memory} -Sellog`;
+  const message = `[SWEA/${level}] ${title} - ${problemId} \n`
+  + `[문제 링크](${link})`;
   return { problemId,  message };
 }

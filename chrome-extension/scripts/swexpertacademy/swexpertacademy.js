@@ -56,9 +56,9 @@ function stopLoader() {
 /* 파싱 직후 실행되는 함수 */
 async function beginUpload(bojData) {
   log('bojData', bojData);
-  startUpload();
+  // startUpload();
   if (isNotEmpty(bojData)) {
-    await uploadOneSolveProblemOnGit(bojData, markUploadedCSS);
+    await uploadOneSolveProblemOnGit(bojData);
   }
 }
 

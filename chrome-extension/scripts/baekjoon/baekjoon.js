@@ -32,7 +32,7 @@ function startLoader() {
         if (username === findUsername() && resultCategory.includes(RESULT_CATEGORY.RESULT_ACCEPTED)) {
           stopLoader();
           console.log('풀이가 맞았습니다. 업로드를 시작합니다.');
-          startUpload();
+          // startUpload();
           const bojData = await findData();
           await beginUpload(bojData);
         }
@@ -57,6 +57,6 @@ async function beginUpload(bojData) {
   log('bojData', bojData);
   if (isNotEmpty(bojData)) {
     const stats = await getStats();
-    await uploadOneSolveProblemOnGit(bojData, markUploadedCSS);
+    await uploadOneSolveProblemOnGit(bojData);
   }
 }

@@ -44,7 +44,7 @@ function makeDetailMessageAndReadme(data) {
   const { problemId, title, level } = data;
 
   // prettier-ignore-start
-  const message = `# [${level}] ${title} - ${problemId} \n`
+  const message = `[BOJ/${level}] ${title} - ${problemId} \n`
     + `[문제 링크](https://www.acmicpc.net/problem/${problemId})`;
   // prettier-ignore-end
   return {

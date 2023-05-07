@@ -33,6 +33,8 @@ function createRecord(token, message, type, problemId) {
       });
     }
     return JSON.parse(xhr.responseText);
+  } else if (xhr.status === 409) {
+    console.log("이미 제출 이력이 있습니다.")
   } else {
     console.log(`Error: ${xhr.status} - ${xhr.statusText}`);
     throw new Error(xhr.statusText);
