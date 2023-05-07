@@ -8,6 +8,7 @@ import tistory from "@/assets/imgs/retro/tistoryIcon.png";
 import smileBottom from "@/assets/imgs/retro/smile_bottom.png";
 import coin from "@/assets/imgs/retro/coin.png";
 import { useRef, useState } from "react";
+import { Link, Router } from "react-router-dom";
 interface MyProfileProps {
   userData: any;
   setUserData: any;
@@ -18,7 +19,7 @@ interface MyProfileProps {
 const MyProfile = (props: MyProfileProps) => {
   const profileImg: any = useRef(props.userData.img);
   const [newProfileImg, setNewProfileImg] = useState(profileImg.current);
-  console.log(props.userData.img, "component");
+  // console.log(props.userData.img, "component");
 
   const isSolvedQuiz = false;
 
@@ -45,13 +46,8 @@ const MyProfile = (props: MyProfileProps) => {
 
   // 유저 개인정보 수정하는 함수
   const userInfoHandler = () => {
-    console.log("user info handler");
+    // console.log("user info handler");
     props.setIsEdit(!props.isEdit);
-  };
-
-  // 습관 목표 설정하는 탭으로 넘어가는 함수
-  const myGoalHandler = () => {
-    console.log("my goal handler");
   };
 
   const csQuizHandler = () => {};
@@ -92,6 +88,7 @@ const MyProfile = (props: MyProfileProps) => {
         </div>
         <hr />
         <div className="container__habit">
+          Today
           <div className="container__habit-stats">
             github
             <div className="progress__bar progress__bar--github">1일 1커밋</div>
@@ -130,7 +127,6 @@ const MyProfile = (props: MyProfileProps) => {
               {/* <FontAwesomeIcon icon={faSquareCheck} /> */}
             </div>
           </div>
-
           <div className="container__habit-stats">
             Feed
             <div className="progress__bar progress__bar--Feed">오늘의 피드</div>
@@ -139,8 +135,8 @@ const MyProfile = (props: MyProfileProps) => {
               {/* <FontAwesomeIcon icon={faSquareCheck} /> */}
             </div>
           </div>
-          <button className="button__goal" onClick={myGoalHandler}>
-            목표설정
+          <button className="button__goal">
+            <Link to={"/mygoals"}>Set Target</Link>
           </button>
         </div>
         <div className="container__contact">
