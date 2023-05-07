@@ -49,7 +49,7 @@ function startLoader() {
         const message = `[Velog] Title: ${title}`+'\n'+ `URL: ${url}`;
 
         console.log(message);
-        await uploadOnePostingOnSellog(message);
+        uploadOnePostingOnSellog(message);
         
       } catch(error){
         console.log(error);

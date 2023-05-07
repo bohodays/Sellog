@@ -7,6 +7,20 @@ async function SolvedApiCall(problemId) {
     .then((query) => query.json());
 }
 
+// 알림을 띄워주는 함수
+function sendNotification(point) {
+  chrome.notifications.create({
+    type: "basic",
+    title: "SELLOG",
+    iconUrl: "../assets/logo.png",
+    message: point + "포인트가 적립되었습니다.",
+    priority: 2, // -2 to 2 (highest)
+
+    eventTime: Date.now(),
+  }, () => {
+  });
+}
+
 function handleMessage(request, sender, sendResponse) {
   if (request && request.closeWebPage === true && request.isSuccess === true) {
     /* Set username */
@@ -48,6 +62,10 @@ function handleMessage(request, sender, sendResponse) {
   } else if (request && request.sender == "baekjoon" && request.task == "SolvedApiCall") {
     SolvedApiCall(request.problemId).then((res) => sendResponse(res));
     //sendResponse(SolvedApiCall(request.problemId))
+  } else if (request && request.message == "alarm") {
+    sendNotification(
+      request.payload.point,
+    );
   }
   return true;
 }
