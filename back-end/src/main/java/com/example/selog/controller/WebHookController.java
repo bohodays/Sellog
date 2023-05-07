@@ -39,9 +39,10 @@ public class WebHookController {
     @PostMapping("/chrome")
     public ResponseEntity<?> createAlgoRecord(@RequestBody RecordRequestDto recordRequestDto) {
         try{
-            webHookService.createAlgoRecord(recordRequestDto, SecurityUtil.getCurrentMemberId());
-            return new ResponseEntity<>(new SuccessResponse("success"), HttpStatus.OK);
+            int result = webHookService.createAlgoRecord(recordRequestDto, SecurityUtil.getCurrentMemberId());
+            return new ResponseEntity<>(new SuccessResponse(result), HttpStatus.OK);
         } catch(CustomException e){
+            e.printStackTrace();
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
             e.printStackTrace();

@@ -70,7 +70,7 @@ public class WebHookService {
     }
 
     @Transactional
-    public void createAlgoRecord(RecordRequestDto recordRequestDto, Long userId){
+    public int createAlgoRecord(RecordRequestDto recordRequestDto, Long userId){
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
@@ -81,7 +81,7 @@ public class WebHookService {
             }
         }
 
-        earnPoints(member,recordRequestDto.getType());
+        int result = earnPoints(member,recordRequestDto.getType());
         recordRepository.save(
                 Record.builder()
                         .category(recordRequestDto.getType())
@@ -91,13 +91,12 @@ public class WebHookService {
                         .writing_time(LocalDateTime.now())
                         .build()
         );
+
+        return result;
     }
 
-    /**
-     * 포인트 적립
-     * @param member
-     */
-    public void earnPoints(Member member,String category){
+    public int earnPoints(Member member,String category){
+        int result = 0;
         if(member.getStart_date() == null) throw new CustomException(ErrorCode.NO_TARGET);
 
         //시작 날짜를 포함하므로 1더함
@@ -106,7 +105,7 @@ public class WebHookService {
         log.info("두 날짜의 차이 : {}",diff);
 
         //목표 달성했을 때만 유저 포인트 증가
-        member.updatePoint(score.getOrDefault(category,0));
+//        member.updatePoint(score.getOrDefault(category,0));
 
         String target = getType(member,category);
 
@@ -152,6 +151,7 @@ public class WebHookService {
 
             if(recordList.size() +1 == cnt) {
                 updatePoint(member,score.getOrDefault(category,0));
+                result += score.getOrDefault(category,0);
             }
         }
 
@@ -160,12 +160,17 @@ public class WebHookService {
             if(rList.size() + 1 == cnt) {
                 log.info("{} 포인트 증가",member.getNickname());
                 updatePoint(member,score.getOrDefault(category,0));
+                result += score.getOrDefault(category,0);
+
                 //1일 1커밋이면서 누적 보상을 받을 수 있다면
                 if(day == 1 && cnt == 1 && diff % 10 == 0) {
-                    updatePoint(member,score.getOrDefault(category,0));
+                    updatePoint(member, score.getOrDefault(category, 0));
+                    result += score.getOrDefault(category,0);
                 }
             }
         }
+
+        return result;
     }
 
     public String getType(Member member,String category) {
