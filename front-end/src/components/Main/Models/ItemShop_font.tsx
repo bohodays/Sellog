@@ -42,7 +42,7 @@ export function ItemShopFont(props: JSX.IntrinsicElements["group"] | any) {
       ref={props.itemshopFontRef}
       dispose={null}
       scale={3}
-      position={[6, -1, -10]}
+      position={[5.5, -1, -10]}
     >
       <mesh
         geometry={nodes.Object_9.geometry}
