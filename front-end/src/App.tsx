@@ -22,6 +22,9 @@ function App() {
     () => import("./pages/OauthRedirect/OauthRedirect")
   );
   const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse/TermsOfUse"));
+  const CSQuizProgress = React.lazy(
+    () => import("./pages/CSQuizProgress/CSQuizProgress")
+  );
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   // console.log(userInfo);
@@ -50,6 +53,7 @@ function App() {
             <Route path="/myroom" element={<MyRoom />} />
             <Route path="/mygoals" element={<MyGoals />} />
             <Route path="/csquiz" element={<CSQuiz />} />
+            <Route path="/csquiz-progress" element={<CSQuizProgress />} />
             <Route path="/mygoals" element={<MyGoals />} />
             <Route path="/oauth-login" element={<OauthRedirect />} />
             <Route path="/termsOfUse" element={<TermsOfUse />} />
