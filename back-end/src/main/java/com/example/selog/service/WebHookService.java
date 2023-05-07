@@ -107,7 +107,7 @@ public class WebHookService {
         //목표 달성했을 때만 유저 포인트 증가
 //        member.updatePoint(score.getOrDefault(category,0));
 
-        String target = member.getGithubTarget();
+        String target = getType(member,category);
 
         if(target == null) throw new CustomException(ErrorCode.NO_TARGET);
 
@@ -171,6 +171,14 @@ public class WebHookService {
         }
 
         return result;
+    }
+
+    public String getType(Member member,String category) {
+        if(category.equals("github")) return member.getGithubTarget();
+        else if(category.equals("algo")) return member.getBojTarget();
+        else if(category.equals("blog")) return member.getBlogTarget();
+
+        return "1-1";//oops
     }
     public long calculateDiff(LocalDateTime date1, LocalDateTime date2) {
 
