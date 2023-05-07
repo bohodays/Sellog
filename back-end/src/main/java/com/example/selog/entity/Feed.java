@@ -30,8 +30,7 @@ public class Feed {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "views")
-    @ColumnDefault("0")
+    @Column(name = "views",columnDefinition = "integer default 0")
     private Integer views;
 
     @Column(name = "link")
@@ -39,6 +38,11 @@ public class Feed {
 
     @Column(name = "pub_date")
     private LocalDateTime pub_date;
+
+    public Feed updateViews() {
+        this.views+=1;
+        return this;
+    }
 
     public FeedDto toFeedDto() {
         return FeedDto.builder()

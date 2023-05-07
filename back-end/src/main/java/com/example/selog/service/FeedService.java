@@ -25,4 +25,11 @@ public class FeedService {
                 .map(Feed::toFeedDto)
                 .collect(Collectors.toList());
     }
+
+    public void updateViews(Long feed_id) {
+
+        feedRepository.findById(feed_id)
+                .map(Feed::updateViews)
+                .map(feedRepository::save);
+    }
 }
