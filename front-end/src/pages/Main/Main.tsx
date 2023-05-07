@@ -475,7 +475,7 @@ const Scene = ({ buttonRef }: any) => {
       {/* 집 font */}
       <MyRoomFont
         houseFontRef={houseFontRef}
-        position={[6, -1, 10]}
+        position={[5.8, -1, 10]}
         castShadow={true}
       />
 
@@ -531,7 +531,7 @@ const Scene = ({ buttonRef }: any) => {
       <CSQuizFont
         csquizFontRef={csquizFontRef}
         castShadow={true}
-        position={[-14, -0.5, -9.5]}
+        position={[-14.3, -0.5, -9.5]}
       />
 
       {/* Feed를 보이게 하는 spotMesh */}
@@ -558,7 +558,7 @@ const Scene = ({ buttonRef }: any) => {
         position={[5.5, -2, -12]}
         castShadow={true}
       /> */}
-      <FeedFont position={[-13.5, 0, 10]} />
+      <FeedFont position={[-13.8, 0, 10]} />
 
       {/* 장식들 */}
       {/* 열기구 */}
@@ -635,42 +635,6 @@ const Scene = ({ buttonRef }: any) => {
           position={[-6.2, 0, 7.8]}
           castShadow={true}
         />
-        {/* <Stone position={[0, 0, 0]} castShadow={true} />
-        <Stone
-          position={[1, 0, 1.4]}
-          // rotation={[0, THREE.MathUtils.degToRad(20), 0]}
-          castShadow={true}
-        />
-        <Stone
-          position={[2, 0, 3]}
-          // rotation={[0, -THREE.MathUtils.degToRad(20), 0]}
-          castShadow={true}
-        />
-        <Stone
-          position={[2, 0, 5]}
-          // rotation={[0, THREE.MathUtils.degToRad(60), 0]}
-          castShadow={true}
-        />
-        <Stone
-          position={[1.2, 0, 7]}
-          // rotation={[0, THREE.MathUtils.degToRad(60), 0]}
-          castShadow={true}
-        />
-        <Stone
-          position={[0.5, 0, 9]}
-          // rotation={[0, THREE.MathUtils.degToRad(60), 0]}
-          castShadow={true}
-        />
-        <Stone
-          position={[0.5, 0, 9]}
-          // rotation={[0, THREE.MathUtils.degToRad(60), 0]}
-          castShadow={true}
-        />
-        <Stone
-          position={[8.4, 0, 8.4]}
-          // rotation={[0, THREE.MathUtils.degToRad(60), 0]}
-          castShadow={true}
-        /> */}
       </group>
     </Suspense>
   );
