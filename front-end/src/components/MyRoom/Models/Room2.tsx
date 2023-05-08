@@ -210,11 +210,11 @@ export function Room2(props: JSX.IntrinsicElements["group"]) {
         position={[-2.69, 1.93, -4.17]}
         scale={[0.83, 1, 1]}
       />
-      <mesh
+      {/* <mesh
         geometry={nodes.Cylinder004.geometry}
         material={materials.Silver}
         position={[3.34, 1.98, -0.67]}
-      />
+      /> */}
       <mesh
         geometry={nodes.Cube009.geometry}
         material={materials.Wall}

@@ -46,7 +46,18 @@ export const SMyRoom = styled.section<any>`
     position: absolute;
     bottom: 3.5vh;
     left: 2.5vw;
-    display: ${(props) => (props.activePage === "myitems" ? "" : "none")};
+    display: ${(props) => (props.activePage === "myitems" ? "flex" : "none")};
+    justify-content: center;
+    align-items: center;
+
+    p {
+      margin: 0 1rem;
+      user-select: none;
+    }
+  }
+
+  .rotation__button-icon {
+    font-size: 1.5vw;
   }
 
   .myitem__delete {
@@ -59,8 +70,9 @@ export const SMyRoom = styled.section<any>`
     box-shadow: 1px 1px 3px black;
     position: absolute;
     bottom: 3.5vh;
-    left: 9vw;
+    left: 13vw;
     display: ${(props) => (props.activePage === "myitems" ? "" : "none")};
+    user-select: none;
   }
 
   .myitem__complete {
