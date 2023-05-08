@@ -6,8 +6,6 @@ import CSQuizContents from "@/components/CSQuiz/CSQuizContents/CSQuizContents";
 const CSQuizProgress = () => {
   return (
     <SMain>
-      <CSQuizTimer />
-
       <CSQuizContents />
     </SMain>
   );

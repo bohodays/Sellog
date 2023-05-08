@@ -13,6 +13,9 @@ function App() {
   const Login = React.lazy(() => import("./pages/Login/Login"));
   const Main = React.lazy(() => import("./pages/Main/Main"));
   const CSQuiz = React.lazy(() => import("./pages/CSQuiz/CSQuiz"));
+  const CSQuizResult = React.lazy(
+    () => import("./pages/CSQuizResult/CSQuizResult")
+  );
   const ItemShop = React.lazy(() => import("./pages/ItemShop/ItemShop"));
   const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
   const Feed = React.lazy(() => import("@/pages/Feed/Feed"));
@@ -54,6 +57,7 @@ function App() {
             <Route path="/mygoals" element={<MyGoals />} />
             <Route path="/csquiz" element={<CSQuiz />} />
             <Route path="/csquiz-progress" element={<CSQuizProgress />} />
+            <Route path="/csquiz-result" element={<CSQuizResult />} />
             <Route path="/mygoals" element={<MyGoals />} />
             <Route path="/oauth-login" element={<OauthRedirect />} />
             <Route path="/termsOfUse" element={<TermsOfUse />} />
