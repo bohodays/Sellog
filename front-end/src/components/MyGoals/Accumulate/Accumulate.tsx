@@ -13,7 +13,7 @@ const dummyAccumulateList = [
     number: 15,
   },
   {
-    goal: "algorithm",
+    goal: "algo",
     number: 20,
   },
   {
@@ -21,7 +21,7 @@ const dummyAccumulateList = [
     number: 25,
   },
   {
-    goal: "cs quiz",
+    goal: "cs",
     number: 13,
   },
 ];
