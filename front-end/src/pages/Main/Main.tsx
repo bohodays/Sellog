@@ -5,6 +5,8 @@ import {
   useTexture,
   useAnimations,
   PerspectiveCamera,
+  OrbitControls,
+  OrthographicCamera,
 } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
@@ -161,6 +163,8 @@ const Scene = ({ buttonRef }: any) => {
             console.log("집 나와!");
             buttonRef.current.style.zIndex = 100;
             buttonRef.current.style.opacity = 1;
+            buttonRef.current.children[0].innerText =
+              "😘 포인트로 원하는 아이템을 구매해보세요 ! 😘";
             // console.log(buttonRef.current.children[0].innerText);
 
             houseRef.current.visible = true;
@@ -196,7 +200,7 @@ const Scene = ({ buttonRef }: any) => {
           });
           gsap.to(camera.position, {
             duration: 1,
-            y: 8,
+            y: 10,
           });
           setTimeout(() => {
             houseRef.current.visible = false;
@@ -216,8 +220,6 @@ const Scene = ({ buttonRef }: any) => {
             buttonRef.current.style.opacity = 1;
             buttonRef.current.children[0].innerText =
               "😘 포인트로 원하는 아이템을 구매해보세요 ! 😘";
-            // console.log(buttonRef.current.children[0].innerText);
-
             itemshopRef.current.visible = true;
             spotRef2.current.material.color.set("seagreen");
             gsap.to(itemshopRef.current.position, {
@@ -250,7 +252,7 @@ const Scene = ({ buttonRef }: any) => {
           });
           gsap.to(camera.position, {
             duration: 1,
-            y: 8,
+            y: 10,
           });
           setTimeout(() => {
             itemshopRef.current.visible = false;
@@ -301,7 +303,7 @@ const Scene = ({ buttonRef }: any) => {
           });
           gsap.to(camera.position, {
             duration: 1,
-            y: 8,
+            y: 10,
           });
           setTimeout(() => {
             csquizRef.current.visible = false;
@@ -412,15 +414,15 @@ const Scene = ({ buttonRef }: any) => {
         shadow-camera-far={100}
       />
       {/* 카메라 */}
-      <PerspectiveCamera makeDefault={true} far={1000} zoom={1.2} />
+      <PerspectiveCamera makeDefault={true} far={1000} zoom={1} />
 
       {/* 맵 바닥 */}
       {/* <Ground name="floor" position={[0, 0, 0]} receiveShadow={true} /> */}
-      {/* <mesh name="floor" rotation={[-Math.PI / 2, 0, 0]} receiveShadow={true}>
+      <mesh name="floor" rotation={[-Math.PI / 2, 0, 0]} receiveShadow={true}>
         <planeGeometry args={[50, 50]} />
         <meshStandardMaterial color={"#5A9720"} />
-      </mesh> */}
-      <Floor scale={7} castShadow={true} />
+      </mesh>
+      {/* <Floor scale={7} castShadow={true} /> */}
       {userInfo && userInfo!.characterId === 0 ? (
         <F1_Main userModelRef={userModelRef} group={group} />
       ) : userInfo && userInfo!.characterId === 1 ? (
@@ -579,12 +581,12 @@ const Scene = ({ buttonRef }: any) => {
       <Tree position={[4, 0, -22]} castShadow={true} />
       <Tree position={[9, 0, -20]} castShadow={true} />
       {/* 잔디 */}
-      {/* <Grass position={[3, 0, 0]} castShadow={true} /> */}
+      <Grass position={[3, 0, 0]} castShadow={true} />
       {/* <Grass position={[-4, 0, -0.5]} castShadow={true} /> */}
       {/* 돌담길 */}
       <group position={[0, 0, 0]}>
         {/* 집 방향 안내 돌달김 */}
-        <Stone
+        {/* <Stone
           scale={1.1}
           rotation={[0, THREE.MathUtils.degToRad(30), 0]}
           position={[3, 0, 3]}
@@ -595,9 +597,9 @@ const Scene = ({ buttonRef }: any) => {
           position={[7, 0, 7]}
           rotation={[0, THREE.MathUtils.degToRad(30), 0]}
           castShadow={true}
-        />
+        /> */}
         {/* 상점 방향 안내 돌담길 */}
-        <Stone
+        {/* <Stone
           scale={1.1}
           position={[3, 0, -4]}
           rotation={[0, THREE.MathUtils.degToRad(120), 0]}
@@ -608,9 +610,9 @@ const Scene = ({ buttonRef }: any) => {
           position={[7, 0, -8]}
           rotation={[0, THREE.MathUtils.degToRad(100), 0]}
           castShadow={true}
-        />
+        /> */}
         {/* CS 퀴즈 방향 안내 돌담길 */}
-        <Stone
+        {/* <Stone
           scale={1.1}
           rotation={[0, THREE.MathUtils.degToRad(30), 0]}
           position={[-3.5, 0, -4]}
@@ -621,9 +623,9 @@ const Scene = ({ buttonRef }: any) => {
           rotation={[0, THREE.MathUtils.degToRad(30), 0]}
           position={[-7, 0, -6.5]}
           castShadow={true}
-        />
+        /> */}
         {/* FEED 방향 안내 돌담길 */}
-        <Stone
+        {/* <Stone
           scale={1.3}
           rotation={[0, THREE.MathUtils.degToRad(120), 0]}
           position={[-4, 0, 4]}
@@ -634,7 +636,7 @@ const Scene = ({ buttonRef }: any) => {
           rotation={[0, THREE.MathUtils.degToRad(120), 0]}
           position={[-6.2, 0, 7.8]}
           castShadow={true}
-        />
+        /> */}
       </group>
     </Suspense>
   );
@@ -646,7 +648,9 @@ const Main = () => {
   console.log(buttonRef.current);
 
   const handleRouterMove = () => {
-    if (buttonRef.current.children[0].innerText.includes("cs")) {
+    if (buttonRef.current.children[0].innerText.includes("포인트")) {
+      navigate("/myroom");
+    } else if (buttonRef.current.children[0].innerText.includes("cs")) {
       navigate("/csquiz");
     } else if (buttonRef.current.children[0].innerText.includes("구매")) {
       navigate("/item-shop");
@@ -664,6 +668,12 @@ const Main = () => {
         gl={{ preserveDrawingBuffer: true }}
       >
         <Scene buttonRef={buttonRef} />
+        {/* <OrbitControls
+          enableZoom={true}
+          // enableRotate={true}
+          // 쉬프트 마우스 왼쪽 이동 막는 기능
+          enablePan={false}
+        /> */}
       </Canvas>
       <SButtonWrapper ref={buttonRef}>
         <div className="btn-info">

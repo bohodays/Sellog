@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const SDiv = styled.div<any>`
+  margin-bottom: 3rem;
   font-family: "Offside", cursive;
 
   p {
