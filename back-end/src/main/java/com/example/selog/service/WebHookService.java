@@ -40,6 +40,8 @@ public class WebHookService {
         score.put("github",10);
         score.put("blog",20);
         score.put("algo",15);
+        score.put("feed",5);
+        score.put("cs",2);
     }
 
     @Transactional
@@ -152,6 +154,43 @@ public class WebHookService {
             if(recordList.size() +1 == cnt) {
                 updatePoint(member,score.getOrDefault(category,0));
                 result += score.getOrDefault(category,0);
+
+                //누적 보상 계산
+                if(category.equals("github") || category.equals("algo")) {
+                    if(day == 1 && cnt == 1 && (diff+1) % 5 == 0) {
+                        //21,66일 추가 보상
+                        if(diff+1 == 21) {
+                            updatePoint(member,20);
+                            result += 20;
+                        }
+
+                        else if(diff+1 ==66) {
+                            updatePoint(member,20);
+                            result += 20;
+                        }
+
+                        updatePoint(member, score.getOrDefault(category, 0));
+                        result += score.getOrDefault(category,0);
+                    }
+                }
+
+                else if(category.equals("blog")) {
+                    if(day == 7 && cnt == 1) {
+                        //21,66일 추가 보상
+                        if(diff+1 >= 21 && diff+1 <=27) {
+                            updatePoint(member,20);
+                            result += 20;
+                        }
+
+                        else if(diff+1 >= 63 && diff +1 <= 69) {
+                            updatePoint(member,20);
+                            result += 20;
+                        }
+
+                        updatePoint(member, score.getOrDefault(category, 0));
+                        result += score.getOrDefault(category,0);
+                    }
+                }
             }
         }
 
@@ -161,12 +200,6 @@ public class WebHookService {
                 log.info("{} 포인트 증가",member.getNickname());
                 updatePoint(member,score.getOrDefault(category,0));
                 result += score.getOrDefault(category,0);
-
-                //1일 1커밋이면서 누적 보상을 받을 수 있다면
-                if(day == 1 && cnt == 1 && diff % 10 == 0) {
-                    updatePoint(member, score.getOrDefault(category, 0));
-                    result += score.getOrDefault(category,0);
-                }
             }
         }
 
