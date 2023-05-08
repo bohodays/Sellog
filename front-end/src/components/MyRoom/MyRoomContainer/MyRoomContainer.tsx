@@ -84,9 +84,7 @@ const MyRoomContainer = (props: IMyRoomProps) => {
           maxPolarAngle={Math.PI / 2.8}
           minZoom={50}
           maxZoom={200}
-          // 아이템 추가 탭에서만 false로 바꾸기 (나중에 수정)
-          // 내 정보 페이지에서는 true
-          enableRotate={false}
+          enableRotate={true}
           // 쉬프트 마우스 왼쪽 이동 막는 기능
           enablePan={false}
         />

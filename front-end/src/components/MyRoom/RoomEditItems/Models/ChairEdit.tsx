@@ -23,7 +23,9 @@ type GLTFResult = GLTF & {
 };
 
 export function ChairEdit(props: JSX.IntrinsicElements["group"] | any) {
-  const { nodes, materials } = useGLTF("/models/items/chair.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF(
+    "/models/items/white_chair_1.glb"
+  ) as GLTFResult;
 
   // 좌표 (서버에 저장된 좌표로 수정하기)
   const [position, setPosition] = useState({ x: 0, y: -2.5, z: 0 });
@@ -139,4 +141,4 @@ export function ChairEdit(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/chair.glb");
+useGLTF.preload("/models/items/white_chair_1.glb");
