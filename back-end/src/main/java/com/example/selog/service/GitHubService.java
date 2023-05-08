@@ -171,4 +171,54 @@ public class GitHubService {
         }
 
     }
+
+    //깃허브에서 웹훅 삭제
+    @Transactional
+    public void deleteWebHook(Long userId) {
+
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(()-> new CustomException(ErrorCode.NO_USER));
+
+        List<GitHub> repoList = gitHubRepository.getAllRepositoryByMember(userId);
+
+        if(repoList == null) throw new CustomException(ErrorCode.EMPTY_REPOSITORY);
+
+        String gitAccessToken = member.getGithubToken();
+
+        //엑세스 토큰 없다면
+        if(gitAccessToken == null) {
+            throw new CustomException(ErrorCode.NO_GITHUB_TOKEN);
+        }
+
+        String baseUrl = "https://api.github.com/repos/";
+
+        for(GitHub g : repoList) {
+            RestTemplate restTemplate = new RestTemplate();
+
+            StringBuilder url = new StringBuilder();
+
+            url.append(baseUrl)
+                    .append(member.getEmail()+"/")
+                    .append(g.getName()+"/")
+                    .append("hooks/")
+                    .append(g.getWebhook_id());
+
+            log.info("request url : {}", url);
+
+            HttpHeaders webhookHeader = new HttpHeaders();
+            webhookHeader.setContentType(MediaType.APPLICATION_JSON);
+            webhookHeader.set("Authorization", "Bearer "+gitAccessToken);
+
+            HttpEntity<Void> webhookEntity  = new HttpEntity<>(webhookHeader);
+
+            ResponseEntity<Void> response = restTemplate.exchange(url.toString(),HttpMethod.DELETE,webhookEntity,Void.class);
+
+            //정상 요청이 아닌 경우
+            if(response.getStatusCode() != HttpStatus.NO_CONTENT) {
+                throw new CustomException(ErrorCode.API_EXCEPTION);
+            }
+        }
+        //디비 삭제
+        gitHubRepository.deleteAllByMember(userId);
+    }
 }

@@ -38,7 +38,7 @@ public class GitHubController {
         log.info("webhook 삭제 컨트롤러 호출");
 
         try {
-            gitHubService.synchronize(user_id);
+            gitHubService.deleteWebHook(user_id);
             return new ResponseEntity<>(new SuccessResponse("success"), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
