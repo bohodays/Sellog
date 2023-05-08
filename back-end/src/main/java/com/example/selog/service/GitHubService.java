@@ -29,12 +29,8 @@ public class GitHubService {
     @Transactional
     public void synchronize(Long user_id) {
 
-        Member member = memberRepository.findById(user_id).get();
-
-        //유저가 없다면
-        if(member == null) {
-            throw new CustomException(ErrorCode.NO_USER);
-        }
+        Member member = memberRepository.findById(user_id)
+                .orElseThrow(()-> new CustomException(ErrorCode.NO_USER));
 
         String gitAccessToken = member.getGithubToken();
 
@@ -73,14 +69,7 @@ public class GitHubService {
                 //gitHubList에 없다면 webhook등록
                 if(!isIn(gitHubList,repoName,ownerName)) {
                     log.info("webhook 등록!");
-                    makeWebHook(gitAccessToken,repoName,ownerName, member.getEmail());
-
-                    GitHub github = GitHub.builder()
-                            .name(repoName)
-                            .member(member)
-                            .build();
-
-                    gitHubRepository.save(github);
+                    makeWebHook(gitAccessToken,repoName,ownerName, member);
                 }
             }
 
@@ -123,7 +112,7 @@ public class GitHubService {
         return set.contains(dto);
     }
     @Transactional
-    public void makeWebHook(String gitAccessToken,String rName, String oName,String userName) {
+    public void makeWebHook(String gitAccessToken,String rName, String oName,Member member) {
         //DB에 없는 레포지토리라면 webhook 생성해주기
 
         log.info("페로 이름 : {}",rName);
@@ -134,7 +123,7 @@ public class GitHubService {
         StringBuilder url = new StringBuilder();
 
         url.append("https://api.github.com/repos/")
-                .append(userName+"/")
+                .append(member.getEmail()+"/")
                 .append(rName+"/")
                 .append("hooks");
 
@@ -163,7 +152,21 @@ public class GitHubService {
             ParameterizedTypeReference<HashMap<String, Object>> responseType = new ParameterizedTypeReference<HashMap<String, Object>>() {};
             ResponseEntity<HashMap<String, Object>> responseEntity = restTemplate.exchange(url.toString(), HttpMethod.POST, webhookEntity, responseType);
             HashMap<String, Object> responseMap = responseEntity.getBody();
+
+            Integer webhook_id = (Integer)responseMap.get("id"); //webhook id가져오기
+
+            log.info("webhook_id {}",webhook_id);
+
+            GitHub github = GitHub.builder()
+                    .name(rName)
+                    .webhook_id(webhook_id)
+                    .member(member)
+                    .build();
+
+            gitHubRepository.save(github);
+
         } catch(Exception e) {
+            e.printStackTrace();
             throw new CustomException(ErrorCode.WEBHOOK_CONFLICT);
         }
 

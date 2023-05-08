@@ -21,12 +21,15 @@ public class GitHub extends BaseTime {
     private Long id;
 
     //레포지토리 이름
-    @Column
+    @Column(name = "name")
     private String name;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Member member;
+
+    @Column(name = "webhook_id")
+    private Integer webhook_id;
 
     public GitHubDto toGitHubDto() {
         return GitHubDto.builder()
