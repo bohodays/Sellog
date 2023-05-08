@@ -63,7 +63,7 @@ type GLTFResult = GLTF & {
   };
 };
 
-export function Red_car_1(props: JSX.IntrinsicElements["group"]) {
+export function Red_car_1(props: JSX.IntrinsicElements["group"] | any) {
   const { nodes, materials } = useGLTF(
     "/models/items/red_car_1.glb"
   ) as GLTFResult;

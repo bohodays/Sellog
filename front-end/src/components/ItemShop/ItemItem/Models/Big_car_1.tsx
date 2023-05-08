@@ -83,11 +83,10 @@ export function Big_car_1(props: JSX.IntrinsicElements["group"]) {
   console.log(nodes);
 
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} scale={0.7} position={[0, -2.5, 0]}>
       <mesh
         geometry={nodes.Alfa_Spider.geometry}
         material={materials.Car}
-        position={[0, 0.16, -0.09]}
         scale={1.54}
       >
         <group position={[0.84, 0.34, 1.26]}>

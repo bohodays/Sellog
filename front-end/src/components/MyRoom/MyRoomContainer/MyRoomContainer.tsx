@@ -12,20 +12,30 @@ import { Room4 } from "../Models/Room4";
 import RoomEditContainer from "../RoomEditContainer/RoomEditContainer";
 import { useRecoilState } from "recoil";
 import { itemTargetState } from "@/recoil/myroom/atoms";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 
 const Scene = ({
   // target,
   // setTarget,
+  activePage,
   editButtonRef,
-  rotationButtonRef,
+  rotationLeftButtonRef,
+  rotationRigthButtonRef,
 }: any) => {
-  const { gl } = useThree();
+  const { gl, camera } = useThree();
   gl.outputEncoding = sRGBEncoding;
   gl.toneMapping = CineonToneMapping;
   gl.toneMappingExposure = 1.75;
   gl.shadowMap.enabled = true;
   gl.shadowMap.type = PCFSoftShadowMap;
   gl.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
+
+  if (activePage === "myitems") {
+    camera.position.x = 30.609999999999996;
+    camera.position.y = 33.06;
+    camera.position.z = 30.61;
+  }
 
   return (
     <>
@@ -50,10 +60,12 @@ const Scene = ({
 
         {/* 방에 있는 아이템 */}
         <RoomEditContainer
+          activePage={activePage}
           // target={target}
           // setTarget={setTarget}
           editButtonRef={editButtonRef}
-          rotationButtonRef={rotationButtonRef}
+          rotationLeftButtonRef={rotationLeftButtonRef}
+          rotationRigthButtonRef={rotationRigthButtonRef}
         />
       </Suspense>
     </>
@@ -67,7 +79,8 @@ const MyRoomContainer = (props: IMyRoomProps) => {
 
   // const [target, setTarget] = useState(null);
   const editButtonRef = useRef<any>();
-  const rotationButtonRef = useRef<any>();
+  const rotationLeftButtonRef = useRef<any>();
+  const rotationRigthButtonRef = useRef<any>();
 
   const handleActivePage = () => {
     props.setActivePage((prev: string) => {
@@ -84,15 +97,15 @@ const MyRoomContainer = (props: IMyRoomProps) => {
           maxPolarAngle={Math.PI / 2.8}
           minZoom={50}
           maxZoom={200}
-          enableRotate={true}
+          enableRotate={props.activePage === "myitems" ? false : true}
           // 쉬프트 마우스 왼쪽 이동 막는 기능
           enablePan={false}
         />
         <Scene
-          target={target}
-          setTarget={setTarget}
+          activePage={props.activePage}
           editButtonRef={editButtonRef}
-          rotationButtonRef={rotationButtonRef}
+          rotationLeftButtonRef={rotationLeftButtonRef}
+          rotationRigthButtonRef={rotationRigthButtonRef}
         />
       </Canvas>
       <button className="myitems__btn" onClick={handleActivePage}>
@@ -113,9 +126,21 @@ const MyRoomContainer = (props: IMyRoomProps) => {
       )} */}
       {target && (
         <>
-          <button ref={rotationButtonRef} className="myitem__rotation">
-            Rotation
-          </button>
+          <div className="myitem__rotation">
+            <button ref={rotationLeftButtonRef}>
+              <FontAwesomeIcon
+                className="rotation__button-icon"
+                icon={faCaretLeft}
+              />
+            </button>
+            <p>Rotation</p>
+            <button ref={rotationRigthButtonRef}>
+              <FontAwesomeIcon
+                className="rotation__button-icon"
+                icon={faCaretRight}
+              />
+            </button>
+          </div>
           <button className="myitem__delete">Delete</button>
         </>
       )}

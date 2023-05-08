@@ -22,7 +22,7 @@ type GLTFResult = GLTF & {
   };
 };
 
-export function Green_sofa_1(props: JSX.IntrinsicElements["group"]) {
+export function Green_sofa_1(props: JSX.IntrinsicElements["group"] | any) {
   const { nodes, materials } = useGLTF(
     "/models/items/green_sofa_1.glb"
   ) as GLTFResult;
