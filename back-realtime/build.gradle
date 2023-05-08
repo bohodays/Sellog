@@ -31,7 +31,13 @@ dependencies {
 	implementation group: 'org.webjars', name: 'stomp-websocket', version: '2.3.3'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
+	//rabbitmq
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 
+	//security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {

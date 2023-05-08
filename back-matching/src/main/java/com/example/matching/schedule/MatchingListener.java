@@ -31,6 +31,5 @@ public class MatchingListener {
 
         // 매칭 대기자 추가
         matchingWaitList.getMatchingList().add(matchingDto);
-
     }
 }

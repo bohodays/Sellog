@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class SendMatching {
 
-    final String url = "https://k8a404.p.ssafy.io/api/matching/result";
+    final String url = "http://k8a404.p.ssafy.io:8083/api/matching/result";
     public void sendMatching(List<MatchingDto> send) {
 
         log.info("send : {} "+send.toString());
