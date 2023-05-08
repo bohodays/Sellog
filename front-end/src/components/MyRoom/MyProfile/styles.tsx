@@ -16,8 +16,7 @@ export const SProfile = styled.section`
     transform: rotate(-7.58deg);
     margin-bottom: 12%;
   }
-  .img__profile {
-  }
+
   .sticker__smilebottom {
     position: absolute;
     width: 7rem;
@@ -32,7 +31,7 @@ export const SProfile = styled.section`
     text-align: center;
   }
   .img__profile {
-    width: 10rem;
+    width: 8rem;
     transform: matrix(1, 0.1, -0.1, 0.99, 0, 0);
   }
   .container__baseinfo {
@@ -41,7 +40,7 @@ export const SProfile = styled.section`
     text-align: center;
     font-family: "Slackey", cursive;
     padding-inline: 5%;
-
+    height: 40%;
     .username {
       font-size: 1.3rem;
       padding-right: 10%;
@@ -93,7 +92,6 @@ export const SProfile = styled.section`
     font-family: "Slackey", cursive;
     font-size: large;
     font-weight: 700;
-    height: 40%;
     margin-block: 4%;
   }
   .container__habit-stats {
@@ -182,15 +180,9 @@ export const SProfile = styled.section`
     }
   }
   .sticker__github {
-    position: absolute;
-    left: 2vw;
     width: 2.7rem;
-    bottom: 1.6vh;
   }
   .sticker__tistory {
-    position: absolute;
     width: 4rem;
-    left: 5vw;
-    bottom: 0vh;
   }
 `;

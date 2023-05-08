@@ -48,11 +48,30 @@ export const apiUpdateUserSignupInfo = async (data: IUserSignup) => {
 
 // 유저 개인 정보 수정
 // 수정된 정보만 보내는 함수
-export const apiUpdateUserInfo = async (data: IMyProfileUpdate) => {
-  console.log(typeof data, "개인정보 수정 api 보내기 전 데이터", data);
+export const apiUpdateUserInfo = async (data: any, pic?: any) => {
+  // console.log("개인정보 수정 api 보내기 전 데이터", data, pic);
+  const formData = new FormData();
+  console.log(typeof pic);
+
+  const blob = new Blob([JSON.stringify(data)], {
+    type: "application/json",
+  });
+  if (data != null) {
+    formData.append("memberUpdateDto", blob);
+    // console.log("???????", [JSON.stringify(data)]);
+    // console.log("formData", formData);
+  }
+
+  formData.append("img", pic);
+
+  // console.log(formData.get("img"));
 
   try {
-    const response = await api.put(`/user/`, data);
+    const response = await api.put(`/user`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response;
   } catch (e) {
     console.log(e);
