@@ -1,6 +1,6 @@
 import React from "react";
 import { SArticle } from "./styles";
-import { IItem } from "@/typeModels/ItemShop/iteminterfaces";
+import { IItem } from "@/typeModels/ItemShop/itemInterfaces";
 import item_sample from "@/assets/imgs/retro/item_sample.png";
 import coin from "@/assets/imgs/retro/coin.png";
 import ItemWrapper from "../ItemWrapper/ItemWrapper";

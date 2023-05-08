@@ -1,5 +1,5 @@
 import React from "react";
-import { IItemProps } from "@/typeModels/ItemShop/iteminterfaces";
+import { IItemProps } from "@/typeModels/ItemShop/itemInterfaces";
 import { Chair } from "@/components/ItemShop/ItemItem/Models/Chair";
 import ItemWrapper from "@/components/ItemShop/ItemWrapper/ItemWrapper";
 import { SDiv } from "./styles";
