@@ -1,7 +1,7 @@
 import { atom } from "recoil";
-import { ITodayRecord } from "@/typeModels/mygoals/myRecordInterface";
+import { IDoneItem } from "@/typeModels/mygoals/myRecordInterface";
 
-export const todayRecordState = atom<ITodayRecord>({
+export const todayRecordState = atom<IDoneItem>({
   key: "TodayRecord",
   default: {
     type: "github",

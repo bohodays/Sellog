@@ -1,17 +1,19 @@
-export interface ITodayRecord {
+export interface IDoneItem {
   type: string;
   message: string;
   problemId: number | null;
   writing_time: Date;
 }
 
-// {
-//     "baekjoon": [
-//     {
-//     "type": "baekjoon",
-//     "message": "23234",
-//     "problemId": null,
-//     "writing_time": "2023-05-02T08:56:25.595546"
-//     }
-//     ]
-// }
+export interface IDoneList {
+  [key: string]: IDoneItem[] | null;
+}
+
+export interface IDoneItemProps {
+  doneItem: IDoneItem;
+}
+
+export interface ICountDoneItem {
+  type: string;
+  count: number;
+}

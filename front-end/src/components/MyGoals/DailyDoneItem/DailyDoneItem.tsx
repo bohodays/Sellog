@@ -1,15 +1,18 @@
 import { SDiv } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareCheck } from "@fortawesome/free-regular-svg-icons";
+import {
+  ICountDoneItem,
+  IDoneItemProps,
+} from "@/typeModels/mygoals/myRecordInterface";
 
-const DailyDoneItem = ({ doneItem }: any) => {
+// interface ICountDoneProps {
+//   doneItem: ICountDoneItem;
+// }
+const DailyDoneItem = ({ doneItem }: IDoneItemProps) => {
   return (
     <SDiv>
-      <div className="doneItem__wrapper">
-        <FontAwesomeIcon icon={faSquareCheck} />
-        <div>{doneItem?.type}</div>
-        <div>{doneItem?.doneCount}</div>
-      </div>
+      <div className="doneItem__wrapper">{doneItem?.message}</div>
     </SDiv>
   );
 };
