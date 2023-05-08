@@ -29,12 +29,8 @@ public class GitHubService {
     @Transactional
     public void synchronize(Long user_id) {
 
-        Member member = memberRepository.findById(user_id).get();
-
-        //유저가 없다면
-        if(member == null) {
-            throw new CustomException(ErrorCode.NO_USER);
-        }
+        Member member = memberRepository.findById(user_id)
+                .orElseThrow(()-> new CustomException(ErrorCode.NO_USER));
 
         String gitAccessToken = member.getGithubToken();
 
@@ -73,14 +69,7 @@ public class GitHubService {
                 //gitHubList에 없다면 webhook등록
                 if(!isIn(gitHubList,repoName,ownerName)) {
                     log.info("webhook 등록!");
-                    makeWebHook(gitAccessToken,repoName,ownerName, member.getEmail());
-
-                    GitHub github = GitHub.builder()
-                            .name(repoName)
-                            .member(member)
-                            .build();
-
-                    gitHubRepository.save(github);
+                    makeWebHook(gitAccessToken,repoName,ownerName, member);
                 }
             }
 
@@ -123,7 +112,7 @@ public class GitHubService {
         return set.contains(dto);
     }
     @Transactional
-    public void makeWebHook(String gitAccessToken,String rName, String oName,String userName) {
+    public void makeWebHook(String gitAccessToken,String rName, String oName,Member member) {
         //DB에 없는 레포지토리라면 webhook 생성해주기
 
         log.info("페로 이름 : {}",rName);
@@ -134,7 +123,7 @@ public class GitHubService {
         StringBuilder url = new StringBuilder();
 
         url.append("https://api.github.com/repos/")
-                .append(userName+"/")
+                .append(member.getEmail()+"/")
                 .append(rName+"/")
                 .append("hooks");
 
@@ -163,9 +152,73 @@ public class GitHubService {
             ParameterizedTypeReference<HashMap<String, Object>> responseType = new ParameterizedTypeReference<HashMap<String, Object>>() {};
             ResponseEntity<HashMap<String, Object>> responseEntity = restTemplate.exchange(url.toString(), HttpMethod.POST, webhookEntity, responseType);
             HashMap<String, Object> responseMap = responseEntity.getBody();
+
+            Integer webhook_id = (Integer)responseMap.get("id"); //webhook id가져오기
+
+            log.info("webhook_id {}",webhook_id);
+
+            GitHub github = GitHub.builder()
+                    .name(rName)
+                    .webhook_id(webhook_id)
+                    .member(member)
+                    .build();
+
+            gitHubRepository.save(github);
+
         } catch(Exception e) {
+            e.printStackTrace();
             throw new CustomException(ErrorCode.WEBHOOK_CONFLICT);
         }
 
+    }
+
+    //깃허브에서 웹훅 삭제
+    @Transactional
+    public void deleteWebHook(Long userId) {
+
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(()-> new CustomException(ErrorCode.NO_USER));
+
+        List<GitHub> repoList = gitHubRepository.getAllRepositoryByMember(userId);
+
+        if(repoList == null) throw new CustomException(ErrorCode.EMPTY_REPOSITORY);
+
+        String gitAccessToken = member.getGithubToken();
+
+        //엑세스 토큰 없다면
+        if(gitAccessToken == null) {
+            throw new CustomException(ErrorCode.NO_GITHUB_TOKEN);
+        }
+
+        String baseUrl = "https://api.github.com/repos/";
+
+        for(GitHub g : repoList) {
+            RestTemplate restTemplate = new RestTemplate();
+
+            StringBuilder url = new StringBuilder();
+
+            url.append(baseUrl)
+                    .append(member.getEmail()+"/")
+                    .append(g.getName()+"/")
+                    .append("hooks/")
+                    .append(g.getWebhook_id());
+
+            log.info("request url : {}", url);
+
+            HttpHeaders webhookHeader = new HttpHeaders();
+            webhookHeader.setContentType(MediaType.APPLICATION_JSON);
+            webhookHeader.set("Authorization", "Bearer "+gitAccessToken);
+
+            HttpEntity<Void> webhookEntity  = new HttpEntity<>(webhookHeader);
+
+            ResponseEntity<Void> response = restTemplate.exchange(url.toString(),HttpMethod.DELETE,webhookEntity,Void.class);
+
+            //정상 요청이 아닌 경우
+            if(response.getStatusCode() != HttpStatus.NO_CONTENT) {
+                throw new CustomException(ErrorCode.API_EXCEPTION);
+            }
+        }
+        //디비 삭제
+        gitHubRepository.deleteAllByMember(userId);
     }
 }

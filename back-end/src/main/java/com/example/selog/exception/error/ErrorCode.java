@@ -25,7 +25,10 @@ public enum ErrorCode {
     CONFLICT_ALGO(HttpStatus.CONFLICT, "409", "이미 기록한 문제입니다."),
     CONFLICT_ROOM(HttpStatus.CONFLICT, "409", "이미 방이 존재합니다."),
     NO_TARGET(HttpStatus.NOT_FOUND, "404", "목표 설정이 되어 있지 않아 기록이 되지 않습니다."),
-    WEBHOOK_CONFLICT(HttpStatus.BAD_REQUEST, "405", "웹훅이 이미 설정 되어있습니다.");
+    WEBHOOK_CONFLICT(HttpStatus.BAD_REQUEST, "405", "웹훅이 이미 설정 되어있습니다."),
+    EMPTY_REPOSITORY(HttpStatus.NOT_FOUND, "404", "저장소에 레포지토리가 없습니다."),
+    API_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "500", "GITHUB API 요청시 에러.");
+
 
     private HttpStatus httpStatus;
     private String code;

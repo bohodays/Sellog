@@ -1,6 +1,7 @@
 package com.example.selog.controller;
 
 import com.example.selog.dto.record.RecordDto;
+import com.example.selog.dto.record.RecordMaintainDto;
 import com.example.selog.entity.Record;
 import com.example.selog.exception.CustomException;
 import com.example.selog.exception.error.ErrorCode;
@@ -36,7 +37,7 @@ public class RecordController {
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
-            log.info(e.getMessage());
+            e.printStackTrace();
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -49,7 +50,7 @@ public class RecordController {
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
-            log.info(e.getMessage());
+            e.printStackTrace();
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -62,7 +63,20 @@ public class RecordController {
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
-            log.info(e.getMessage());
+            e.printStackTrace();
+            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/maintain")
+    public ResponseEntity<?> findByMaintain() {
+        try{
+            Map<String, RecordMaintainDto> result = recordService.findByMaintain(SecurityUtil.getCurrentMemberId());
+            return new ResponseEntity<>(new SuccessResponse(result), HttpStatus.OK);
+        } catch(CustomException e){
+            return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
+        } catch (Exception e){
+            e.printStackTrace();
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

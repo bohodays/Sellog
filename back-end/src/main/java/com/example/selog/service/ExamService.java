@@ -35,9 +35,9 @@ public class ExamService {
 
         log.info("결과 개수 : {}",result.size());
 
-        int offset = (int)(Math.random() * (result.size() -5)+1);
+        int offset = (int)(Math.random() * (result.size() -6)+1);
 
-        return result.subList(offset,offset+4)
+        return result.subList(offset,offset+5)
                 .stream()
                 .map(Exam::toExamDto)
                 .collect(Collectors.toList());

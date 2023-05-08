@@ -20,4 +20,10 @@ public class QGitHubRepositoryImpl implements QGitHubRepository{
                 .fetch();
     }
 
+    @Override
+    public void deleteAllByMember(Long user_id) {
+        jpaQueryFactory.delete(gitHub)
+                .where(gitHub.member.userId.eq(user_id))
+                .execute();
+    }
 }

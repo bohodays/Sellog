@@ -125,7 +125,7 @@ public class WebHookService {
             rList = recordRepository.getUserRecordByUserIdAfterStartDate(member.getUserId(),
                     member.getStart_date(),
                     LocalDateTime.now(),
-                    "github");
+                    category);
             progress = true;
         }
         //현재 날짜 구간을 포함하는 앞부분
@@ -133,7 +133,7 @@ public class WebHookService {
             rList = recordRepository.getUserRecordByUserIdAfterStartDate(member.getUserId(),
                     member.getStart_date().plusDays(offset * day),
                     member.getStart_date().plusDays((offset+1) * day-1),
-                    "github");
+                    category);
         }
 
         //현재 구간날짜가 아니면서
@@ -147,7 +147,7 @@ public class WebHookService {
             List<Record> recordList = recordRepository.getUserRecordByUserIdAfterStartDate(member.getUserId(),
                     member.getStart_date().plusDays((offset+1) * day),
                     LocalDateTime.now(),
-                    "github");
+                    category);
 
             if(recordList.size() +1 == cnt) {
                 updatePoint(member,score.getOrDefault(category,0));
