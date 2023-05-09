@@ -31,6 +31,7 @@ function EditProfile(props: MyProfileProps) {
 
   const profileImg: any = useRef(props.userData.img);
   const [newProfileImg, setNewProfileImg] = useState(profileImg.current);
+  const [imgFile, setImgFile] = useState(""); // 미리보기 실제 파일(저장을 위한)
 
   // 프로필 사진 바꾸는 로직
   function profileHandler() {
@@ -45,12 +46,15 @@ function EditProfile(props: MyProfileProps) {
     if (currentImg) {
       const newImgReader = new FileReader();
       // 인스턴스 생성 되었을때
+      newImgReader.readAsDataURL(currentImg);
       newImgReader.onload = () => {
         // 미리보기 만들어주는 코드
         const imageDataURL = newImgReader.result;
+
+        const base64 = imageDataURL?.toString();
         setNewProfileImg(imageDataURL);
+        setImgFile(currentImg);
       };
-      newImgReader.readAsDataURL(currentImg);
     } else {
       console.log("change error", profilePic);
     }
@@ -87,7 +91,7 @@ function EditProfile(props: MyProfileProps) {
     const accessToken = localData.getAccessToken();
 
     if (accessToken) {
-      apiUpdateUserInfo(editUserData, newProfileImg).then((res) => {
+      apiUpdateUserInfo(editUserData, imgFile).then((res) => {
         console.log("returned response", res?.data.response);
       });
     }

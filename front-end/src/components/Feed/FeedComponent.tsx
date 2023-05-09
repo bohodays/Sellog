@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SArticle } from "./styles";
-import { IFeedProps } from "@/typeModels/Feed/feedinterfaces";
 import { Link } from "react-router-dom";
-export default function FeedComponent({ props }: any) {
-  console.log(props.company, "aa");
+import { addVisitApi } from "@/api/feed";
 
+export default function FeedComponent({ props }: any) {
+  // console.log(props.company, "aa");
+  function feedHandler() {
+    console.log(props.feedId, "feedId");
+    addVisitApi(props.feedId);
+  }
+  // useEffect(() => {
+  //   console.log("feedId", props.feedId, "feed view", props.views);
+  // }, [props.visit]);
   return (
     <SArticle>
       <div className="feed__card">
-        <Link rel="stylesheet" to={props.link}>
+        <Link rel="stylesheet" to={props.link} onClick={feedHandler}>
           <p>{props.title}</p>
         </Link>
         <div className="feed__card-info">
