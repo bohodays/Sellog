@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { SMyRoom } from "./styles";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -9,16 +9,21 @@ import { Room1 } from "../Models/Room1";
 import { Room2 } from "../Models/Room2";
 import { Room3 } from "../Models/Room3";
 import { Room4 } from "../Models/Room4";
-import RoomEditContainer from "../RoomEditContainer/RoomEditContainer";
 import { useRecoilState } from "recoil";
 import { itemTargetState } from "@/recoil/myroom/atoms";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import Loading from "@/components/Loading/Loading";
+import pMinDelay from "p-min-delay";
+
+const RoomEditContainer = React.lazy(
+  () => import("@/components/MyRoom/RoomEditContainer/RoomEditContainer")
+);
 
 const Scene = ({
-  // target,
-  // setTarget,
   activePage,
+  upButtonRef,
+  downButtonRef,
   editButtonRef,
   rotationLeftButtonRef,
   rotationRigthButtonRef,
@@ -61,8 +66,8 @@ const Scene = ({
         {/* 방에 있는 아이템 */}
         <RoomEditContainer
           activePage={activePage}
-          // target={target}
-          // setTarget={setTarget}
+          upButtonRef={upButtonRef}
+          downButtonRef={downButtonRef}
           editButtonRef={editButtonRef}
           rotationLeftButtonRef={rotationLeftButtonRef}
           rotationRigthButtonRef={rotationRigthButtonRef}
@@ -81,6 +86,8 @@ const MyRoomContainer = (props: IMyRoomProps) => {
   const editButtonRef = useRef<any>();
   const rotationLeftButtonRef = useRef<any>();
   const rotationRigthButtonRef = useRef<any>();
+  const upButtonRef = useRef<any>();
+  const downButtonRef = useRef<any>();
 
   const handleActivePage = () => {
     props.setActivePage((prev: string) => {
@@ -103,6 +110,8 @@ const MyRoomContainer = (props: IMyRoomProps) => {
         />
         <Scene
           activePage={props.activePage}
+          upButtonRef={upButtonRef}
+          downButtonRef={downButtonRef}
           editButtonRef={editButtonRef}
           rotationLeftButtonRef={rotationLeftButtonRef}
           rotationRigthButtonRef={rotationRigthButtonRef}
@@ -111,21 +120,14 @@ const MyRoomContainer = (props: IMyRoomProps) => {
       <button className="myitems__btn" onClick={handleActivePage}>
         My Items
       </button>
-      {/* {target && (
-        <button
-          ref={editButtonRef}
-          className="myitem__edit"
-          onClick={() => {
-            if (!isEdit) {
-              setIsEdit(true);
-            }
-          }}
-        >
-          Edit
-        </button>
-      )} */}
       {target && (
         <>
+          <button ref={upButtonRef} className="myitem__up">
+            Up
+          </button>
+          <button ref={downButtonRef} className="myitem__down">
+            Down
+          </button>
           <div className="myitem__rotation">
             <button ref={rotationLeftButtonRef}>
               <FontAwesomeIcon
@@ -149,21 +151,6 @@ const MyRoomContainer = (props: IMyRoomProps) => {
           Go Back
         </button>
       )}
-
-      {/* {isEdit && (
-        <>
-          <button
-            className="myitem__complete"
-            onClick={() => {
-              if (isEdit) {
-                setIsEdit(false);
-              }
-            }}
-          >
-            Complete
-          </button>
-        </>
-      )} */}
     </SMyRoom>
   );
 };

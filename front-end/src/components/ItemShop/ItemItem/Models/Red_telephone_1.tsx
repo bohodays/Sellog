@@ -153,4 +153,4 @@ export function Red_telephone_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/red_telephone_1.glb");
+// useGLTF.preload("/models/items/red_telephone_1.glb");

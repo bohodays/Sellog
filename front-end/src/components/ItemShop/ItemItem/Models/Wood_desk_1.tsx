@@ -120,4 +120,4 @@ export function Wood_desk_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/wood_desk_1.glb");
+// useGLTF.preload("/models/items/wood_desk_1.glb");

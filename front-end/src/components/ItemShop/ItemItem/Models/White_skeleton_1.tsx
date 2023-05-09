@@ -162,4 +162,4 @@ export function White_skeleton_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/white_skeleton_1.glb");
+// useGLTF.preload("/models/items/white_skeleton_1.glb");

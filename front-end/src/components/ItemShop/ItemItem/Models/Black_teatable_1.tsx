@@ -160,4 +160,4 @@ export function Black_teatable_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/black_teatable_1.glb");
+// useGLTF.preload("/models/items/black_teatable_1.glb");

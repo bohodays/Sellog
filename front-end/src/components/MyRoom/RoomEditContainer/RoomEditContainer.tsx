@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Bedside_light_1 } from "@/components/ItemShop/ItemItem/Models/Bedside_light_1";
-import { Big_car_1 } from "@/components/ItemShop/ItemItem/Models/Big_car_1";
 import { Black_chair_1 } from "@/components/ItemShop/ItemItem/Models/Black_chair_1";
 import { Black_coffeemachine_1 } from "@/components/ItemShop/ItemItem/Models/Black_coffeemachine_1";
 import { Black_cup_1 } from "@/components/ItemShop/ItemItem/Models/Black_cup_1";
@@ -8,7 +7,6 @@ import { Black_leather_sofa_1 } from "@/components/ItemShop/ItemItem/Models/Blac
 import { Black_speaker_1 } from "@/components/ItemShop/ItemItem/Models/Black_speaker_1";
 import { Black_teatable_1 } from "@/components/ItemShop/ItemItem/Models/Black_teatable_1";
 import { Blue_bed } from "@/components/ItemShop/ItemItem/Models/Blue_bed";
-import { Blue_car_1 } from "@/components/ItemShop/ItemItem/Models/Blue_car_1";
 import { Blue_chair_1 } from "@/components/ItemShop/ItemItem/Models/Blue_chair_1";
 import { Blue_chair_2 } from "@/components/ItemShop/ItemItem/Models/Blue_chair_2";
 import { Blue_sofa_1 } from "@/components/ItemShop/ItemItem/Models/Blue_sofa_1";
@@ -38,7 +36,6 @@ import { Old_tv_1 } from "@/components/ItemShop/ItemItem/Models/Old_tv_1";
 import { Orange_sofa_1 } from "@/components/ItemShop/ItemItem/Models/Orange_sofa_1";
 import { Photo_frame_1 } from "@/components/ItemShop/ItemItem/Models/Photo_frame_1";
 import { Photo_frame_2 } from "@/components/ItemShop/ItemItem/Models/Photo_frame_2";
-import { Red_car_1 } from "@/components/ItemShop/ItemItem/Models/Red_car_1";
 import { Red_chair_1 } from "@/components/ItemShop/ItemItem/Models/Red_chair_1";
 import { Red_lights_1 } from "@/components/ItemShop/ItemItem/Models/Red_lights_1";
 import { Red_sofa_1 } from "@/components/ItemShop/ItemItem/Models/Red_sofa_1";
@@ -65,395 +62,647 @@ import { Wood_drawer_1 } from "@/components/ItemShop/ItemItem/Models/Wood_drawer
 import { Wood_shelve } from "@/components/ItemShop/ItemItem/Models/Wood_shelve";
 import { Wood_table_1 } from "@/components/ItemShop/ItemItem/Models/Wood_table_1";
 import { Yellow_sofa_1 } from "@/components/ItemShop/ItemItem/Models/Yellow_sofa_1";
-
-// type PropsType = {
-//   isDragging: boolean;
-//   setIsDragging: any;
-// };
+import { useRecoilState } from "recoil";
+import { myItemsState } from "@/recoil/myroom/atoms";
 
 const RoomEditContainer = ({
-  // target,
-  // setTarget,
   activePage,
+  upButtonRef,
+  downButtonRef,
   editButtonRef,
   rotationLeftButtonRef,
   rotationRigthButtonRef,
 }: any) => {
-  // 여기서 유저가 가지고 있는 아이템 API 호출해서 가지고 있는 아이템들 리턴할 예정
+  const [myItems, setMyItems] = useRecoilState(myItemsState);
 
   return (
     <>
-      {/* <Bedside_light_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Big_car_1 /> */}
-      {/* <Black_chair_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      />
-      <Black_coffeemachine_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Black_cup_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Black_leather_sofa_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Black_speaker_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Black_teatable_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Blue_bed
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Blue_car_1 /> */}
-      {/* <Blue_chair_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Blue_chair_2
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Blue_sofa_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Brown_table_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Brown_table_2
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Brown_table_3
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-        /> */}
-      {/* <Brown_table_4
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Coffee_cup_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Elec_guitar_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Elec_guitar_2
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Elec_guitar_3
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-        /> */}
-      {/* <Giant_sofa_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Green_sofa_1 /> */}
-      {/* <Grey_bin_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Group_guitar_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <House_tree_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Imac_computer_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Katana_decoration_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Leopard_chair_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-        /> */}
-      {/* <Low_table_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Marble_table_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Marble_table_2
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Old_computer_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Old_computer_2
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Old_microwave_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Old_tv_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Orange_sofa_1 /> */}
-      {/* <Photo_frame_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Photo_frame_2
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Red_car_1 /> */}
-      {/* <Red_chair_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-        /> */}
-      {/* <Red_lights_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Red_sofa_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Red_telephone_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-        /> */}
-      {/* <Retro_arcadegame_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Round_table_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Small_speaker_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Stall_white_chair_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Starwars_trooper_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Teddybear_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Tree_vase_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Trooper_figure_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <White_chair_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <White_controller_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <White_skeleton_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <White_sofa_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <White_table_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Wine_glass_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Wood_chair_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Wood_desk_0
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Wood_desk_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Wood_desk_2
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Wood_drawer_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Wood_shelve
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      {/* <Wood_table_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      /> */}
-      <Yellow_sofa_1
-        activePage={activePage}
-        editButtonRef={editButtonRef}
-        rotationLeftButtonRef={rotationLeftButtonRef}
-        rotationRigthButtonRef={rotationRigthButtonRef}
-      />
+      {myItems.length &&
+        myItems.map((item) => {
+          if (item.itemId === 1) {
+            return (
+              <Bedside_light_1
+                itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.deg}
+                activePage={activePage}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 2) {
+            return (
+              <Black_chair_1
+                itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.deg}
+                activePage={activePage}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 3) {
+            return (
+              <Black_coffeemachine_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 4) {
+            return (
+              <Black_cup_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 5) {
+            return (
+              <Black_leather_sofa_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 6) {
+            return (
+              <Black_speaker_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 7) {
+            return (
+              <Black_teatable_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 8) {
+            return (
+              <Blue_bed
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 9) {
+            return (
+              <Blue_chair_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 10) {
+            return (
+              <Blue_chair_2
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 11) {
+            return (
+              <Blue_sofa_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 12) {
+            return (
+              <Brown_table_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 13) {
+            return (
+              <Brown_table_2
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 14) {
+            return (
+              <Brown_table_3
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 15) {
+            return (
+              <Brown_table_4
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 16) {
+            return (
+              <Coffee_cup_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 17) {
+            return (
+              <Elec_guitar_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 18) {
+            return (
+              <Elec_guitar_2
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 19) {
+            return (
+              <Elec_guitar_3
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 20) {
+            return (
+              <Giant_sofa_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 21) {
+            return <Green_sofa_1 />;
+          } else if (item.itemId === 22) {
+            return (
+              <Grey_bin_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 23) {
+            return (
+              <Group_guitar_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 24) {
+            return (
+              <House_tree_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 25) {
+            return (
+              <Imac_computer_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 26) {
+            return (
+              <Katana_decoration_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 27) {
+            return (
+              <Leopard_chair_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 28) {
+            return (
+              <Low_table_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 29) {
+            return (
+              <Marble_table_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 30) {
+            return (
+              <Marble_table_2
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 31) {
+            return (
+              <Old_computer_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 32) {
+            return (
+              <Old_computer_2
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 33) {
+            return (
+              <Old_microwave_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 34) {
+            return (
+              <Old_tv_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 35) {
+            return <Orange_sofa_1 />;
+          } else if (item.itemId === 36) {
+            return (
+              <Photo_frame_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 37) {
+            return (
+              <Photo_frame_2
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 38) {
+            return (
+              <Red_chair_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 39) {
+            return (
+              <Red_lights_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 40) {
+            return (
+              <Red_sofa_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 41) {
+            return (
+              <Red_telephone_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 42) {
+            return (
+              <Retro_arcadegame_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 43) {
+            return (
+              <Round_table_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 44) {
+            return (
+              <Small_speaker_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 45) {
+            return (
+              <Stall_white_chair_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 46) {
+            return (
+              <Starwars_trooper_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 47) {
+            return (
+              <Teddybear_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 48) {
+            return (
+              <Tree_vase_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 49) {
+            return (
+              <Trooper_figure_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 50) {
+            return (
+              <White_chair_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 51) {
+            return (
+              <White_controller_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 52) {
+            return (
+              <White_skeleton_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 53) {
+            return (
+              <White_sofa_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 54) {
+            return (
+              <White_table_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 55) {
+            return (
+              <Wine_glass_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 56) {
+            return (
+              <Wood_chair_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 57) {
+            return (
+              <Wood_desk_0
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 58) {
+            return (
+              <Wood_desk_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 59) {
+            return (
+              <Wood_desk_2
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 60) {
+            return (
+              <Wood_drawer_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 61) {
+            return (
+              <Wood_shelve
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 62) {
+            return (
+              <Wood_table_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          } else if (item.itemId === 63) {
+            return (
+              <Yellow_sofa_1
+                itemId={item.itemId}
+                activePage={activePage}
+                editButtonRef={editButtonRef}
+                rotationLeftButtonRef={rotationLeftButtonRef}
+                rotationRigthButtonRef={rotationRigthButtonRef}
+              />
+            );
+          }
+        })}
     </>
   );
 };

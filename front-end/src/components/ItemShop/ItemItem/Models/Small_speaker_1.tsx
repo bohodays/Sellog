@@ -122,4 +122,4 @@ export function Small_speaker_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/small_speaker_1.glb");
+// useGLTF.preload("/models/items/small_speaker_1.glb");

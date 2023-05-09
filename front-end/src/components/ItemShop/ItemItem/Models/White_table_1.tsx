@@ -122,4 +122,4 @@ export function White_table_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/white_table_1.glb");
+// useGLTF.preload("/models/items/white_table_1.glb");

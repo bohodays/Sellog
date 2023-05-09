@@ -126,4 +126,4 @@ export function Wood_table_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/wood_table_1.glb");
+// useGLTF.preload("/models/items/wood_table_1.glb");

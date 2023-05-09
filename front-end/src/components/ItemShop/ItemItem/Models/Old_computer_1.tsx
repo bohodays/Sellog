@@ -146,4 +146,4 @@ export function Old_computer_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/old_computer_1.glb");
+// useGLTF.preload("/models/items/old_computer_1.glb");

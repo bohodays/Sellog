@@ -150,4 +150,4 @@ export function Old_microwave_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/old_microwave_1.glb");
+// useGLTF.preload("/models/items/old_microwave_1.glb");

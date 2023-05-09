@@ -130,4 +130,4 @@ export function Yellow_sofa_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/yellow_sofa_1.glb");
+// useGLTF.preload("/models/items/yellow_sofa_1.glb");

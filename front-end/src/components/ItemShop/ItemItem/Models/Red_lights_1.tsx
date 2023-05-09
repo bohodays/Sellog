@@ -136,4 +136,4 @@ export function Red_lights_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/red_lights_1.glb");
+// useGLTF.preload("/models/items/red_lights_1.glb");
