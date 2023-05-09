@@ -8,7 +8,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { useRecoilState } from "recoil";
-import { itemTargetState } from "@/recoil/myroom/atoms";
+import { itemTargetState, myItemsState } from "@/recoil/myroom/atoms";
 import { useFrame, useThree } from "@react-three/fiber";
 
 type GLTFResult = GLTF & {
@@ -30,15 +30,15 @@ export function Yellow_sofa_1(props: JSX.IntrinsicElements["group"] | any) {
     "/models/items/yellow_sofa_1.glb"
   ) as GLTFResult;
 
+  const [propsX, propsY, propsZ] = props.position;
+  const propsDeg = props.deg;
+
   // 좌표 (서버에 저장된 좌표로 수정하기)
-  const [position, setPosition] = useState({ x: 0, y: -2.5, z: 0 });
+  const [position, setPosition] = useState({ x: propsX, y: propsY, z: propsZ });
   const [isDragging, setIsDragging] = useState(false);
 
-  // 회전 유무 판단
-  const [isRotation, setIsRotation] = useState(false);
-
   // 회전 정보 (서버에 저장된 좌표로 수정하기)
-  const [rotation, setRotation] = useState(0);
+  const [rotation, setRotation] = useState(propsDeg);
 
   // 타겟 정보
   const [target, setTarget] = useRecoilState(itemTargetState);
@@ -51,20 +51,61 @@ export function Yellow_sofa_1(props: JSX.IntrinsicElements["group"] | any) {
     return raycaster.intersectObjects(scene.children);
   }
 
+  const [myItems, setMyItems] = useRecoilState(myItemsState);
+
+  const updateTagetItemPosition = (
+    id: number,
+    x: number,
+    y: number,
+    z: number,
+    deg: number
+  ) => {
+    myItems.forEach((item, i) => {
+      // itemId가 일치하는 아이템 선별
+      if (item.itemId === id) {
+        // 변화된 포지션 저장
+        let newItemPosition = {
+          ...item,
+          x,
+          y,
+          z,
+          deg,
+        };
+        // 불변성 유지를 위한 새로운 배열 생성
+        const newItems = [...myItems];
+        newItems[i] = newItemPosition;
+
+        // 새로운 배열을 atom에 저장
+        setMyItems(newItems);
+      }
+    });
+  };
+
   useEffect(() => {
+    const handleWindowClick = (e: MouseEvent) => {
+      if (isDragging) {
+        setIsDragging(false);
+      }
+    };
+
     if (props.activePage === "myitems") {
-      gl.domElement.addEventListener("click", () => {
-        if (isDragging) {
-          setIsDragging(false);
-        }
-      });
+      gl.domElement.addEventListener("click", handleWindowClick);
+
+      // atom에 변화된 포지션 저장
+      updateTagetItemPosition(
+        props.itemId,
+        position.x,
+        position.y,
+        position.z,
+        rotation
+      );
     }
 
-    // const handleWindowClick = (e: MouseEvent) => {
-    //   if (isDragging) {
-    //     setIsDragging(false);
-    //   }
-    // };
+    return () => {
+      if (props.activePage === "myitems") {
+        gl.domElement.removeEventListener("click", handleWindowClick);
+      }
+    };
   }, [isDragging]);
 
   useFrame(({ mouse }) => {
@@ -78,7 +119,7 @@ export function Yellow_sofa_1(props: JSX.IntrinsicElements["group"] | any) {
 
             // 물체가 마우스와 만난 지점으로 위치를 업데이트하기
             const newPosition = found[i].point;
-            setPosition({ x: newPosition.x, y: -2.5, z: newPosition.z });
+            setPosition({ x: newPosition.x, y: position.y, z: newPosition.z });
             break;
           }
         }
@@ -89,15 +130,54 @@ export function Yellow_sofa_1(props: JSX.IntrinsicElements["group"] | any) {
   // 물체 회전
   if (
     props.rotationLeftButtonRef.current &&
-    props.rotationRigthButtonRef.current
+    props.rotationRigthButtonRef.current &&
+    props.upButtonRef.current &&
+    props.downButtonRef.current
   ) {
+    const leftRotation = () => {
+      let newRotation = (rotation - 10) % 360;
+      setRotation(newRotation);
+    };
+
+    const rightRotation = () => {
+      let newRotation = (rotation + 10) % 360;
+      setRotation(newRotation);
+    };
+
+    const positionUp = () => {
+      if (position.y < 3) {
+        const newY = position.y + 0.2;
+        setPosition({ x: position.x, y: newY, z: position.z });
+      }
+    };
+
+    const positionDown = () => {
+      if (position.y > -2.5) {
+        const newY = position.y - 0.2;
+        setPosition({ x: position.x, y: newY, z: position.z });
+      }
+    };
+
     if (target === "Yellow_sofa_1") {
-      props.rotationLeftButtonRef.current.addEventListener("click", () => {
-        setRotation((rotation - 10) % 360);
-      });
-      props.rotationRigthButtonRef.current.addEventListener("click", () => {
-        setRotation((rotation + 10) % 360);
-      });
+      props.rotationLeftButtonRef.current.addEventListener(
+        "click",
+        leftRotation
+      );
+      props.rotationRigthButtonRef.current.addEventListener(
+        "click",
+        rightRotation
+      );
+      props.upButtonRef.current.addEventListener("click", positionUp);
+      props.downButtonRef.current.addEventListener("click", positionDown);
+    } else {
+      props.rotationLeftButtonRef.current.removeEventListener(
+        "click",
+        leftRotation
+      );
+      props.rotationRigthButtonRef.current.removeEventListener(
+        "click",
+        rightRotation
+      );
     }
   }
 

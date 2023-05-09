@@ -84,7 +84,7 @@ const RoomEditContainer = ({
               <Bedside_light_1
                 itemId={item.itemId}
                 position={[item.x, item.y, item.z]}
-                deg={item.deg}
+                deg={item.rotation}
                 activePage={activePage}
                 upButtonRef={upButtonRef}
                 downButtonRef={downButtonRef}
@@ -98,7 +98,7 @@ const RoomEditContainer = ({
               <Black_chair_1
                 itemId={item.itemId}
                 position={[item.x, item.y, item.z]}
-                deg={item.deg}
+                deg={item.rotation}
                 activePage={activePage}
                 upButtonRef={upButtonRef}
                 downButtonRef={downButtonRef}
@@ -112,6 +112,10 @@ const RoomEditContainer = ({
               <Black_coffeemachine_1
                 itemId={item.itemId}
                 activePage={activePage}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
                 rotationRigthButtonRef={rotationRigthButtonRef}
@@ -121,6 +125,10 @@ const RoomEditContainer = ({
             return (
               <Black_cup_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -131,6 +139,10 @@ const RoomEditContainer = ({
             return (
               <Black_leather_sofa_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -141,6 +153,10 @@ const RoomEditContainer = ({
             return (
               <Black_speaker_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -151,6 +167,10 @@ const RoomEditContainer = ({
             return (
               <Black_teatable_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -161,6 +181,10 @@ const RoomEditContainer = ({
             return (
               <Blue_bed
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -171,6 +195,10 @@ const RoomEditContainer = ({
             return (
               <Blue_chair_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -181,6 +209,10 @@ const RoomEditContainer = ({
             return (
               <Blue_chair_2
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -191,6 +223,10 @@ const RoomEditContainer = ({
             return (
               <Blue_sofa_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -201,6 +237,10 @@ const RoomEditContainer = ({
             return (
               <Brown_table_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -211,6 +251,10 @@ const RoomEditContainer = ({
             return (
               <Brown_table_2
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -221,6 +265,10 @@ const RoomEditContainer = ({
             return (
               <Brown_table_3
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -231,6 +279,10 @@ const RoomEditContainer = ({
             return (
               <Brown_table_4
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -241,6 +293,10 @@ const RoomEditContainer = ({
             return (
               <Coffee_cup_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -251,6 +307,10 @@ const RoomEditContainer = ({
             return (
               <Elec_guitar_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -261,6 +321,10 @@ const RoomEditContainer = ({
             return (
               <Elec_guitar_2
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -271,6 +335,10 @@ const RoomEditContainer = ({
             return (
               <Elec_guitar_3
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -281,6 +349,10 @@ const RoomEditContainer = ({
             return (
               <Giant_sofa_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -293,6 +365,10 @@ const RoomEditContainer = ({
             return (
               <Grey_bin_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -303,6 +379,10 @@ const RoomEditContainer = ({
             return (
               <Group_guitar_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -313,6 +393,10 @@ const RoomEditContainer = ({
             return (
               <House_tree_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -323,6 +407,10 @@ const RoomEditContainer = ({
             return (
               <Imac_computer_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -333,6 +421,10 @@ const RoomEditContainer = ({
             return (
               <Katana_decoration_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -343,6 +435,10 @@ const RoomEditContainer = ({
             return (
               <Leopard_chair_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -353,6 +449,10 @@ const RoomEditContainer = ({
             return (
               <Low_table_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -363,6 +463,10 @@ const RoomEditContainer = ({
             return (
               <Marble_table_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -373,6 +477,10 @@ const RoomEditContainer = ({
             return (
               <Marble_table_2
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -383,6 +491,10 @@ const RoomEditContainer = ({
             return (
               <Old_computer_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -393,6 +505,10 @@ const RoomEditContainer = ({
             return (
               <Old_computer_2
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -403,6 +519,10 @@ const RoomEditContainer = ({
             return (
               <Old_microwave_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -413,6 +533,10 @@ const RoomEditContainer = ({
             return (
               <Old_tv_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -425,6 +549,10 @@ const RoomEditContainer = ({
             return (
               <Photo_frame_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -435,6 +563,10 @@ const RoomEditContainer = ({
             return (
               <Photo_frame_2
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -445,6 +577,10 @@ const RoomEditContainer = ({
             return (
               <Red_chair_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -455,6 +591,10 @@ const RoomEditContainer = ({
             return (
               <Red_lights_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -465,6 +605,10 @@ const RoomEditContainer = ({
             return (
               <Red_sofa_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -475,6 +619,10 @@ const RoomEditContainer = ({
             return (
               <Red_telephone_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -485,6 +633,10 @@ const RoomEditContainer = ({
             return (
               <Retro_arcadegame_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -495,6 +647,10 @@ const RoomEditContainer = ({
             return (
               <Round_table_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -505,6 +661,10 @@ const RoomEditContainer = ({
             return (
               <Small_speaker_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -515,6 +675,10 @@ const RoomEditContainer = ({
             return (
               <Stall_white_chair_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -525,6 +689,10 @@ const RoomEditContainer = ({
             return (
               <Starwars_trooper_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -535,6 +703,10 @@ const RoomEditContainer = ({
             return (
               <Teddybear_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -545,6 +717,10 @@ const RoomEditContainer = ({
             return (
               <Tree_vase_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -555,6 +731,10 @@ const RoomEditContainer = ({
             return (
               <Trooper_figure_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -565,6 +745,10 @@ const RoomEditContainer = ({
             return (
               <White_chair_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -575,6 +759,10 @@ const RoomEditContainer = ({
             return (
               <White_controller_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -585,6 +773,10 @@ const RoomEditContainer = ({
             return (
               <White_skeleton_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -595,6 +787,10 @@ const RoomEditContainer = ({
             return (
               <White_sofa_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -605,6 +801,10 @@ const RoomEditContainer = ({
             return (
               <White_table_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -615,6 +815,10 @@ const RoomEditContainer = ({
             return (
               <Wine_glass_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -625,6 +829,10 @@ const RoomEditContainer = ({
             return (
               <Wood_chair_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -635,6 +843,10 @@ const RoomEditContainer = ({
             return (
               <Wood_desk_0
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -655,6 +867,10 @@ const RoomEditContainer = ({
             return (
               <Wood_desk_2
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -665,6 +881,10 @@ const RoomEditContainer = ({
             return (
               <Wood_drawer_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -675,6 +895,10 @@ const RoomEditContainer = ({
             return (
               <Wood_shelve
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -685,6 +909,10 @@ const RoomEditContainer = ({
             return (
               <Wood_table_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}
@@ -695,6 +923,10 @@ const RoomEditContainer = ({
             return (
               <Yellow_sofa_1
                 itemId={item.itemId}
+                position={[item.x, item.y, item.z]}
+                deg={item.rotation}
+                upButtonRef={upButtonRef}
+                downButtonRef={downButtonRef}
                 activePage={activePage}
                 editButtonRef={editButtonRef}
                 rotationLeftButtonRef={rotationLeftButtonRef}

@@ -51,11 +51,12 @@ type myItems = {
   id: number | null;
   roomId: number | null;
   itemId: number | null;
+  name: string;
   x: number | null;
   y: number | null;
   z: number | null;
   category: string;
-  deg: number | null;
+  rotation: number | null;
   point: number | null;
 };
 
@@ -66,22 +67,12 @@ export const myItemsState = atom<Array<myItems>>({
       id: 1,
       roomId: 1,
       itemId: 1,
+      name: "Bedside_light_1",
       x: 0,
       y: -2.5,
       z: 0,
       category: "furniture",
-      deg: 0,
-      point: 50,
-    },
-    {
-      id: 1,
-      roomId: 1,
-      itemId: 2,
-      x: 0,
-      y: -2.5,
-      z: 0,
-      category: "furniture",
-      deg: 0,
+      rotation: 0,
       point: 50,
     },
   ],

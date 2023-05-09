@@ -132,11 +132,13 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
     props.downButtonRef.current
   ) {
     const leftRotation = () => {
-      setRotation((rotation - 10) % 360);
+      let newRotation = (rotation - 10) % 360;
+      setRotation(newRotation);
     };
 
     const rightRotation = () => {
-      setRotation((rotation + 10) % 360);
+      let newRotation = (rotation + 10) % 360;
+      setRotation(newRotation);
     };
 
     const positionUp = () => {
