@@ -33,9 +33,36 @@ export const SSection = styled.section<any>`
 
   .recommended__goal__wrapper {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .custom__goal__wrapper {
     display: flex;
+    font-family: "Noto Sans";
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .memo__png {
+    position: absolute;
+    bottom: 8%;
+    left: 5%;
+  }
+
+  .update__btn {
+    padding: 3px 8px;
+    background-color: #e8dda1;
+    border: 2px solid #083d4f;
+    border-radius: 20px;
+    font-family: "Bangers", Times, serif;
+    font-weight: 900;
+  }
+
+  .set__goal {
+    padding: 0.5vw;
+    border: 2px solid #083d4f;
+    border-radius: 30px;
+    background-color: #e8dda1;
   }
 `;
