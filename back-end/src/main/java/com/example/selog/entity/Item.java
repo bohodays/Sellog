@@ -23,6 +23,7 @@ public class Item {
     private String name;
     private Integer point;
     private String category;
+    private String path; //이미지 경로
 
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Builder.Default

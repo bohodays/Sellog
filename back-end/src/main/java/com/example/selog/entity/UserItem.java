@@ -58,6 +58,7 @@ public class UserItem extends BaseTime {
                 .itemId(item.getId())
                 .x(x).y(y).z(z).rotation(rotation)
                 .name(item.getName()).point(item.getPoint()).category(item.getCategory())
+                .path(item.getPath())
                 .build();
     }
 }
