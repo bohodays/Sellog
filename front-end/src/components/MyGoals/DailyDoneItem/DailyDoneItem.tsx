@@ -4,8 +4,7 @@ import { faSquareCheck } from "@fortawesome/free-regular-svg-icons";
 import {
   ICountDoneItem,
   IDoneItemProps,
-} from "@/typeModels/mygoals/myRecordInterface";
-
+} from "@/typeModels/mygoals/myRecordInterfaces";
 // interface ICountDoneProps {
 //   doneItem: ICountDoneItem;
 // }

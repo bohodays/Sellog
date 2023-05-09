@@ -15,8 +15,8 @@ const SettingButtons = ({ setIsOpen, setActiveGoal }: IModalProps) => {
 
   return (
     <SArticle>
-      <button onClick={() => handleModalOpen("commit")}>
-        <p className="item1 purple">commit</p>
+      <button onClick={() => handleModalOpen("github")}>
+        <p className="item1 purple">github</p>
         <p className="item2">1 일 1 commit</p>
       </button>
       <button onClick={() => handleModalOpen("blog")}>

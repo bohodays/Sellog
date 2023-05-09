@@ -1,8 +1,6 @@
 import { atom } from "recoil";
-import {
-  IDoneItem,
-  IUserGoalSetting,
-} from "@/typeModels/mygoals/myRecordInterface";
+import { IDoneItem } from "@/typeModels/mygoals/myRecordInterfaces";
+import { IUserGoalSetting } from "@/typeModels/mygoals/myGoalInterfaces";
 
 export const todayRecordState = atom<IDoneItem>({
   key: "TodayRecord",

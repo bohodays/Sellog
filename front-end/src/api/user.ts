@@ -1,5 +1,5 @@
 import { IUserSignup } from "@/typeModels/user/userSignup";
-import { IUserGoalSetting } from "@/typeModels/mygoals/myRecordInterface";
+import { IUserGoalSetting } from "@/typeModels/mygoals/myGoalInterfaces";
 import { IMyProfileUpdate } from "@/typeModels/user/userEditInfo";
 import getApiInstance from "./http";
 

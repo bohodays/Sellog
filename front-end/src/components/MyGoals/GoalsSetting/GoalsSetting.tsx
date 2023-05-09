@@ -9,9 +9,9 @@ import YellowFlower from "@/assets/imgs/retro/yellow_flower.png";
 import SmileAndLight from "@/assets/imgs/retro/smile_and_light.png";
 import GoalsSettingModal from "../GoalsSettingModal/GoalsSettingModal";
 
-const GoalsSetting = () => {
+const GoalsSetting: any = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [activeGoal, setActiveGoal] = useState<string>("");
+  const [activeGoal, setActiveGoal] = useState<string>("github");
 
   return (
     <SSection isOpen={isOpen}>

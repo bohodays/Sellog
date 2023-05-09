@@ -30,4 +30,12 @@ export const SSection = styled.section<any>`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+
+  .recommended__goal__wrapper {
+    display: flex;
+  }
+
+  .custom__goal__wrapper {
+    display: flex;
+  }
 `;
