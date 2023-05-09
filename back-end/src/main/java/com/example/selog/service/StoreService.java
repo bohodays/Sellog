@@ -14,6 +14,7 @@ import com.example.selog.repository.RoomRepository;
 import com.example.selog.repository.UserItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,14 +30,14 @@ public class StoreService {
     private final UserItemRepository userItemRepository;
 
     @Transactional(readOnly = true)
-    public List<StoreItemDto> findAllItem(Long userId, String category) {
+    public List<StoreItemDto> findAllItem(Long userId, String category, Pageable pageable) {
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
         Room room = roomRepository.findByMember(member)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_ROOM));
 
-        return itemRepository.getAllItem(room.getId(), category);
+        return itemRepository.getAllItem(room.getId(), category, pageable);
     }
 
     @Transactional
