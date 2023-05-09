@@ -19,6 +19,7 @@ public class UserItemDto {
     private String y;
     private String z;
     private String rotation;
+    private String path;
 
     public UserItem toEntity(){
         return UserItem.builder()
