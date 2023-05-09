@@ -126,6 +126,19 @@ public class RecordService {
         return result;
     }
 
+    @Transactional
+    public Map<String, Long> getAllRecordCount(Long userId){
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
+
+        Map<String, Long> result = recordRepository.findAllRecordCount(userId);
+        String[] category = {"algo", "blog", "cs", "feed", "github"};
+        for(String str : category){
+            if(!result.containsKey(str)) result.put(str, 0L);
+        }
+        return result;
+    }
+
     public Map<String, Map<String, List<RecordDto>>> toHashMap(List<Record> recordList){
 
         Map<String, Map<String, List<RecordDto>>> result = new HashMap<>(); // <날짜, <타입,기록List>>

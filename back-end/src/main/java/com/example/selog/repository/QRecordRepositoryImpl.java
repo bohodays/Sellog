@@ -2,12 +2,15 @@ package com.example.selog.repository;
 
 import com.example.selog.dto.record.RecordDto;
 import com.example.selog.entity.Record;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.selog.entity.QRecord.record;
 
@@ -54,5 +57,21 @@ public class QRecordRepositoryImpl implements QRecordRepository{
                 .where(record.member.userId.eq(userId).and(record.writing_time.between(startDate, now)))
                 .orderBy(record.writing_time.asc())
                 .fetch();
+    }
+
+    @Override
+    public Map<String, Long> findAllRecordCount(Long userId) {
+        Map<String, Long> result = new HashMap<>();
+        List<Tuple> tupleList = jpaQueryFactory
+                .select(record.category, record.count())
+                .from(record)
+                .where(record.member.userId.eq(userId))
+                .groupBy(record.category)
+                .fetch();
+
+        for(Tuple tuple : tupleList){
+            result.put(tuple.get(record.category), tuple.get(record.count()));
+        }
+        return result;
     }
 }
