@@ -1,6 +1,9 @@
 package com.example.realtime.handler;
 
+import com.example.realtime.jwt.TokenProvider;
 import com.example.realtime.service.MatchingService;
+import com.example.realtime.util.SecurityUtil;
+import io.jsonwebtoken.MalformedJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +12,10 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.Optional;
 
@@ -20,7 +26,8 @@ import java.util.Optional;
 public class StompHandler implements ChannelInterceptor {
 
     private final MatchingService matchingService;
-
+    private final TokenProvider tokenProvider;
+    private static final String BEARER_PREFIX = "Bearer ";
 
     /**
      * interceptor 역할
@@ -31,9 +38,22 @@ public class StompHandler implements ChannelInterceptor {
 
         StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
 
-        if (StompCommand.SUBSCRIBE == accessor.getCommand()) { // 채팅룸 구독 요청 (pub)
+        if(StompCommand.CONNECT == accessor.getCommand()){
+            String authorizationHeader = String.valueOf(accessor.getFirstNativeHeader("Authorization"));
 
-            // header에서 destination 정보를 얻고, roomId를 추출한다.
+            if(authorizationHeader == null || authorizationHeader.equals("null")){
+                throw new MalformedJwtException("JWT");
+            }
+
+            String jwt = authorizationHeader.substring(BEARER_PREFIX.length());
+
+            if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
+                Authentication authentication = tokenProvider.getAuthentication(jwt);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }// 토큰 검증
+        }
+        else if (StompCommand.SUBSCRIBE == accessor.getCommand()) {
+
             String roomId = getRoomId(Optional.ofNullable((String) message.getHeaders().get("simpDestination")).orElse("InvalidRoomId"));
             log.info(roomId);
             log.info(message.getHeaders().toString());
