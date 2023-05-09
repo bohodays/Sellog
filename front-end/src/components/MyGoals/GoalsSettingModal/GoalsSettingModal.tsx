@@ -5,6 +5,7 @@ import { IRecommendedGoals } from "@/typeModels/mygoals/myGoalInterfaces";
 import { apiUpdateUsergoal } from "@/api/user";
 import { useRecoilState } from "recoil";
 import { userInfoState } from "@/recoil/myroom/atoms";
+import memo from "@/assets/imgs/retro/memo.png";
 
 interface IGoalSettingModalProps {
   isOpen: boolean;
@@ -99,57 +100,74 @@ const GoalsSettingModal = ({
 
   // feed, cs quiz setting button
   const handleOXBtn = () => {
-    setDoIt((prev) => !prev);
+    setDoIt((prev: boolean) => !prev);
   };
 
   return (
     <SSection isOpen={isOpen} onClick={handleModalClose}>
       <SDiv onClick={handleModalClick}>
         <div className="modal">
-          <div>{activeGoal}</div>
+          {/* <div>{activeGoal}</div> */}
           <div className="recommended__goal__wrapper">
             <h1>추천 설정</h1>
-            <div>{recommendedGoals[activeGoal]}</div>
+            <div className="set__goal">{recommendedGoals[activeGoal]}</div>
           </div>
           <div className="custom__goal__wrapper">
             <h1>사용자 설정</h1>
-            {activeGoal === "feed" || activeGoal === "cs quiz" ? (
-              <button onClick={handleOXBtn}>{doIt ? "O" : "X"}</button>
-            ) : (
-              <div>
-                <TextField
-                  id="custom__goal__day"
-                  variant="outlined"
-                  type="number"
-                  sx={{
-                    width: "3vw",
-                    height: "3vh",
-                    "& .MuiInputBase-input": { p: 0.5 },
-                  }}
-                  onChange={handleDaysChange}
-                />
-                일
-                <TextField
-                  id="custom__goal__cnt"
-                  variant="outlined"
-                  type="number"
-                  sx={{
-                    width: "3vw",
-                    height: "3vh",
-                    "& .MuiInputBase-input": { p: 0.5 },
-                  }}
-                  onChange={handleCountChange}
-                />
-                회
-              </div>
-            )}
+            <div className="set__goal">
+              {activeGoal === "feed" || activeGoal === "cs quiz" ? (
+                <button onClick={handleOXBtn} className="OX_btn">
+                  {doIt ? "O" : "X"}
+                </button>
+              ) : (
+                <>
+                  <TextField
+                    id="custom__goal__day"
+                    variant="outlined"
+                    type="number"
+                    placeholder={
+                      userInfo &&
+                      userInfo[goalNameToTargetName[activeGoal]] &&
+                      userInfo[goalNameToTargetName[activeGoal]][0]
+                    }
+                    sx={{
+                      width: "2.5vw",
+                      height: "100%",
+                      marginRight: "0.5vw",
+                      "& .MuiInputBase-input": { p: 0.5 },
+                    }}
+                    onChange={handleDaysChange}
+                  />
+                  일
+                  <TextField
+                    id="custom__goal__cnt"
+                    placeholder={
+                      userInfo &&
+                      userInfo[goalNameToTargetName[activeGoal]] &&
+                      userInfo[goalNameToTargetName[activeGoal]][2]
+                    }
+                    variant="outlined"
+                    type="number"
+                    sx={{
+                      width: "2.5vw",
+                      height: "100%",
+                      margin: "0vw 0.5vw",
+                      "& .MuiInputBase-input": { p: 0.5 },
+                    }}
+                    onChange={handleCountChange}
+                  />
+                  회
+                </>
+              )}
+            </div>
           </div>
           <button
-            style={{ backgroundColor: "tomato" }}
+            className="update__btn"
             onClick={() => updateMyGoal(activeGoal)}
           >
             완료
           </button>
+          <img src={memo} className="memo__png"></img>
         </div>
       </SDiv>
     </SSection>

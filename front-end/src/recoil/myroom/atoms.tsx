@@ -17,10 +17,10 @@ export interface IUserInfo {
   characterId: number | null;
   tel: string;
   contact: string;
-  [key: string]: string | number | boolean | null;
+  [key: string | number]: string | number | boolean | null;
 }
 
-export const userInfoState = atom<IUserInfo>({
+export const userInfoState = atom<IUserInfo | any>({
   key: "UserInfo",
   default: {
     userId: 1,
