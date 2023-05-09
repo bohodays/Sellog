@@ -11,6 +11,8 @@ import com.example.selog.repository.RoomRepository;
 import com.example.selog.repository.UserItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -86,5 +88,13 @@ public class RoomService {
             userItemDtoList.add(userItem.toDto());
         }
         return userItemDtoList;
+    }
+
+    public Page<UserItemDto> getItemByCategory(String category, Long userId, Pageable pageable) {
+
+        memberRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
+
+        return userItemRepository.getItemByCategory(pageable,category,userId);
     }
 }

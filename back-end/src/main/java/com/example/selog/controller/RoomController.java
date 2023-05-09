@@ -9,6 +9,8 @@ import com.example.selog.service.RoomService;
 import com.example.selog.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,6 +68,18 @@ public class RoomController {
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/items/{category}/users/{user_id}")
+    public ResponseEntity<?> findItemByCategory(@PathVariable String category,
+                                                @PathVariable Long user_id,
+                                                @PageableDefault Pageable pageable) {
+
+        try{
+            return new ResponseEntity<>(new SuccessResponse(roomService.getItemByCategory(category,user_id,pageable)), HttpStatus.OK);
+        }  catch (Exception e){
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
