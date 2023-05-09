@@ -116,9 +116,11 @@ const GoalsSettingModal = ({
             <h1>사용자 설정</h1>
             <div className="set__goal">
               {activeGoal === "feed" || activeGoal === "cs quiz" ? (
-                <button onClick={handleOXBtn}>{doIt ? "O" : "X"}</button>
+                <button onClick={handleOXBtn} className="OX_btn">
+                  {doIt ? "O" : "X"}
+                </button>
               ) : (
-                <div>
+                <>
                   <TextField
                     id="custom__goal__day"
                     variant="outlined"
@@ -129,8 +131,9 @@ const GoalsSettingModal = ({
                       userInfo[goalNameToTargetName[activeGoal]][0]
                     }
                     sx={{
-                      width: "3vw",
-                      height: "3vh",
+                      width: "2.5vw",
+                      height: "100%",
+                      marginRight: "0.5vw",
                       "& .MuiInputBase-input": { p: 0.5 },
                     }}
                     onChange={handleDaysChange}
@@ -146,14 +149,15 @@ const GoalsSettingModal = ({
                     variant="outlined"
                     type="number"
                     sx={{
-                      width: "3vw",
-                      height: "3vh",
+                      width: "2.5vw",
+                      height: "100%",
+                      margin: "0vw 0.5vw",
                       "& .MuiInputBase-input": { p: 0.5 },
                     }}
                     onChange={handleCountChange}
                   />
                   회
-                </div>
+                </>
               )}
             </div>
           </div>
