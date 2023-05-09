@@ -31,6 +31,9 @@ public class UserItem extends BaseTime {
     @Column(name = "z")
     private String z;
 
+    @Column(name = "rotation")
+    private String rotation;
+
     @JoinColumn(name = "room_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne
@@ -41,10 +44,11 @@ public class UserItem extends BaseTime {
     @ManyToOne
     private Item item;
 
-    public void updateItemLocation(String x, String y, String z) {
+    public void updateItemLocation(String x, String y, String z, String rotation) {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.rotation = rotation;
     }
 
     public UserItemDto toDto() {
@@ -52,6 +56,9 @@ public class UserItem extends BaseTime {
                 .id(id)
                 .roomId(room.getId())
                 .itemId(item.getId())
-                .x(x).y(y).z(z).build();
+                .x(x).y(y).z(z).rotation(rotation)
+                .name(item.getName()).point(item.getPoint()).category(item.getCategory())
+                .path(item.getPath())
+                .build();
     }
 }
