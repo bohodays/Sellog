@@ -11,6 +11,8 @@ import com.example.selog.repository.RoomRepository;
 import com.example.selog.repository.UserItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,7 +48,7 @@ public class RoomService {
         for(UserItemDto userItemDto : userItemDtoList){
             UserItem userItem = userItemRepository.findById(userItemDto.getRoomId())
                     .orElseThrow(() -> new CustomException(ErrorCode.NO_ITEM));
-            userItem.updateItemLocation(userItemDto.getX(), userItemDto.getY(), userItemDto.getZ());
+            userItem.updateItemLocation(userItemDto.getX(), userItemDto.getY(), userItemDto.getZ(), userItemDto.getRotation());
 
             UserItem updateItem = userItemRepository.save(userItem);
             if(updateItem.getX() != null){
@@ -72,19 +74,16 @@ public class RoomService {
         return userItemDtoList;
     }
 
+
     @Transactional(readOnly = true)
-    public List<UserItemDto> findAllUserItem(Long userId){
-        Member member = memberRepository.findById(userId)
+    public List<UserItemDto> getItemByCategory(String category, Long userId, Pageable pageable) {
+        memberRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
-        Room room = roomRepository.findByMember(member)
-                .orElseThrow(() -> new CustomException(ErrorCode.NO_ROOM));
 
-        List<UserItemDto> userItemDtoList = new ArrayList<>();
-        List<UserItem> userItemList = userItemRepository.findByRoom(room);
-
-        for(UserItem userItem : userItemList){
-            userItemDtoList.add(userItem.toDto());
+        if(category.equals("all")){
+            return userItemRepository.getAllItem(pageable, userId);
+        }else{
+            return userItemRepository.getItemByCategory(pageable, category, userId);
         }
-        return userItemDtoList;
     }
 }

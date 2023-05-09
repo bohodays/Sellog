@@ -12,6 +12,8 @@ import com.example.selog.service.StoreService;
 import com.example.selog.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +27,9 @@ import java.util.List;
 public class StoreController {
     private final StoreService storeService;
     @GetMapping("/{category}")
-    public ResponseEntity<?> findAllItem(@PathVariable String category) {
+    public ResponseEntity<?> findAllItem(@PathVariable String category, @PageableDefault(size = 8) Pageable pageable) {
         try{
-            List<StoreItemDto> userItemDtoList = storeService.findAllItem(SecurityUtil.getCurrentMemberId(), category);
+            List<StoreItemDto> userItemDtoList = storeService.findAllItem(SecurityUtil.getCurrentMemberId(), category, pageable);
             return new ResponseEntity<>(new SuccessResponse(userItemDtoList), HttpStatus.OK);
         } catch(CustomException e){
             log.info(e.getMessage());
