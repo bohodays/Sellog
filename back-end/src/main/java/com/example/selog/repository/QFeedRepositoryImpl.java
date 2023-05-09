@@ -23,7 +23,8 @@ public class QFeedRepositoryImpl implements QFeedRepository{
         return jpaQueryFactory
                 .selectFrom(feed)
                 .orderBy(feed.pub_date.desc())
-                .limit(pageable.getPageSize()+1)
+                .offset(pageable.getOffset()) //페이지 번호
+                .limit(pageable.getPageSize()) //페이지 사이즈
                 .fetch();
 
 
