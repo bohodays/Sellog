@@ -134,4 +134,4 @@ export function House_tree_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/house_tree_1.glb");
+// useGLTF.preload("/models/items/house_tree_1.glb");

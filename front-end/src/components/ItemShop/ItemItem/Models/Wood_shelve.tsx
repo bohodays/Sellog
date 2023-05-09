@@ -116,4 +116,4 @@ export function Wood_shelve(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/wood_shelve.glb");
+// useGLTF.preload("/models/items/wood_shelve.glb");

@@ -3,13 +3,13 @@ import { SSection } from "./styles";
 import blueEye from "@/assets/imgs/retro/blue_eye.png";
 import MyItemList from "@/components/MyRoom/MyItemList/MyItemList";
 
-const itemCategories = ["all", "furniture", "electronics", "decoration", "etc"];
-
-const dummyItem = {
-  name: "flower",
-  point: 300,
-  category: "decoration",
-};
+const itemCategories = [
+  "all",
+  "furniture",
+  "electronics",
+  "decoration",
+  "appliance",
+];
 
 const MyItems = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");

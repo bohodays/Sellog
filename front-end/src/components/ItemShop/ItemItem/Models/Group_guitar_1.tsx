@@ -763,4 +763,4 @@ export function Group_guitar_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/group_guitar_1.glb");
+// useGLTF.preload("/models/items/group_guitar_1.glb");

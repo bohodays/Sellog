@@ -62,4 +62,4 @@ export function Green_sofa_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/green_sofa_1.glb");
+// useGLTF.preload("/models/items/green_sofa_1.glb");

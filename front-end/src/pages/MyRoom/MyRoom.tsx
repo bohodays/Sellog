@@ -1,11 +1,15 @@
 import MyProfile from "@/components/MyRoom/MyProfile/MyProfile";
 import { SMain } from "./styles";
-import MyRoomContainer from "@/components/MyRoom/MyRoomContainer/MyRoomContainer";
+// import MyRoomContainer from "@/components/MyRoom/MyRoomContainer/MyRoomContainer";
 import { userInfoState as userAtom } from "@/recoil/myroom/atoms";
 import { useRecoilState } from "recoil";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MyItems from "@/pages/MyRoom/MyItems/MyItems";
 import EditProfile from "@/components/MyRoom/EditProfile/EditProfile";
+
+const MyRoomContainer = React.lazy(
+  () => import("@/components/MyRoom/MyRoomContainer/MyRoomContainer")
+);
 
 const MyRoom = () => {
   const [user, setUser] = useRecoilState(userAtom);
@@ -27,6 +31,9 @@ const MyRoom = () => {
     // console.log(user);
     // console.log("HI");
   }, []);
+
+  // 여기서 유저가 가지고 있는 아이템 API 호출해서 가지고 있는 아이템들 myItemsState atom에 넣기
+
   return (
     <SMain>
       {/* 좌측 내 프로필 */}

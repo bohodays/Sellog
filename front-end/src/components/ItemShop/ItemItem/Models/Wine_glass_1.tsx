@@ -119,4 +119,4 @@ export function Wine_glass_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/wine_glass_1.glb");
+// useGLTF.preload("/models/items/wine_glass_1.glb");

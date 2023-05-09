@@ -120,4 +120,4 @@ export function Round_table_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/round_table_1.glb");
+// useGLTF.preload("/models/items/round_table_1.glb");

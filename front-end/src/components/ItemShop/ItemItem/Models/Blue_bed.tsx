@@ -143,4 +143,4 @@ export function Blue_bed(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-useGLTF.preload("/models/items/blue_bed.glb");
+// useGLTF.preload("/models/items/blue_bed.glb");
