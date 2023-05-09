@@ -9,10 +9,11 @@ async function SolvedApiCall(problemId) {
 
 // 알림을 띄워주는 함수
 function sendNotification(point) {
+  console.log("알림창");
   chrome.notifications.create({
     type: "basic",
     title: "SELLOG",
-    iconUrl: "../assets/logo.png",
+    iconUrl: "../assets/sellogo.png",
     message: point + "포인트가 적립되었습니다.",
     priority: 2, // -2 to 2 (highest)
 
