@@ -5,6 +5,7 @@ import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class QItemUserItemRepositoryImpl implements QItemUserItemRepository{
         this.jpaQueryFactory = jpaQueryFactory;
     }
     @Override
-    public List<StoreItemDto> getAllItem(Long roomId, String category) {
+    public List<StoreItemDto> getAllItem(Long roomId, String category, Pageable pageable) {
         return jpaQueryFactory
                 .selectDistinct(Projections.bean(StoreItemDto.class, item.id, item.category, item.name, item.point,
                         ExpressionUtils
@@ -28,6 +29,7 @@ public class QItemUserItemRepositoryImpl implements QItemUserItemRepository{
                 .from(item)
                 .leftJoin(userItem).on(item.id.eq(userItem.item.id), userItem.room.id.eq(roomId))
                 .where(item.category.eq(category))
+                .limit(pageable.getPageSize())
                 .fetch();
     }
 }
