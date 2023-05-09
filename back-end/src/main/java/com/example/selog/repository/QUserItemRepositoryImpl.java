@@ -25,29 +25,48 @@ public class QUserItemRepositoryImpl implements QUserItemRepository{
     }
 
     @Override
-    public Page<UserItemDto> getItemByCategory(Pageable pageable, String category, Long user_id) {
-        List<UserItemDto> items = jpaQueryFactory
+    public List<UserItemDto> getItemByCategory(Pageable pageable, String category, Long user_id) {
+        return jpaQueryFactory
                 .select(Projections.fields(UserItemDto.class,
                         userItem.id,
                         room.id.as("roomId"),
-                        item.id.as("itemId"),
-                        item.name,
-                        item.point,
-                        item.category,
+                        userItem.item.id.as("itemId"),
+                        userItem.item.name,
+                        userItem.item.point,
+                        userItem.item.category,
                         userItem.x,
                         userItem.y,
-                        userItem.z)
+                        userItem.z,
+                        userItem.rotation)
                 )
                 .from(userItem)
                 .innerJoin(userItem.room,room)
-                .innerJoin(userItem.item,item)
-                .where(item.category.eq(category).and(room.member.userId.eq(user_id)))
+                .where(userItem.item.category.eq(category).and(room.member.userId.eq(user_id)))
                 .offset(pageable.getOffset()) //페이지 번호
                 .limit(pageable.getPageSize()) //페이지 사이즈
                 .fetch();
+    }
 
-        log.info("item 개수 {}",items.size());
-
-        return new PageImpl<>(items);
+    @Override
+    public List<UserItemDto> getAllItem(Pageable pageable, Long user_id) {
+        return jpaQueryFactory
+                .select(Projections.fields(UserItemDto.class,
+                        userItem.id,
+                        room.id.as("roomId"),
+                        userItem.item.id.as("itemId"),
+                        userItem.item.name,
+                        userItem.item.point,
+                        userItem.item.category,
+                        userItem.x,
+                        userItem.y,
+                        userItem.z,
+                        userItem.rotation)
+                )
+                .from(userItem)
+                .innerJoin(userItem.room,room)
+                .where(room.member.userId.eq(user_id))
+                .offset(pageable.getOffset()) //페이지 번호
+                .limit(pageable.getPageSize()) //페이지 사이즈
+                .fetch();
     }
 }

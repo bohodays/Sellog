@@ -60,26 +60,14 @@ public class RoomController {
         }
     }
 
-    @GetMapping("/items")
-    public ResponseEntity<?> findAllUserItem() {
+    @GetMapping("/items/{category}/users")
+    public ResponseEntity<?> findItemByCategory(@PathVariable String category,
+                                                @PageableDefault Pageable pageable) {
         try{
-            List<UserItemDto> userItemDtoList = roomService.findAllUserItem(SecurityUtil.getCurrentMemberId());
-            return new ResponseEntity<>(new SuccessResponse(userItemDtoList), HttpStatus.OK);
+            return new ResponseEntity<>(new SuccessResponse(roomService.getItemByCategory(category, SecurityUtil.getCurrentMemberId(), pageable)), HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
-            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/items/{category}/users/{user_id}")
-    public ResponseEntity<?> findItemByCategory(@PathVariable String category,
-                                                @PathVariable Long user_id,
-                                                @PageableDefault Pageable pageable) {
-
-        try{
-            return new ResponseEntity<>(new SuccessResponse(roomService.getItemByCategory(category,user_id,pageable)), HttpStatus.OK);
-        }  catch (Exception e){
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

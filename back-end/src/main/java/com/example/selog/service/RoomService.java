@@ -48,7 +48,7 @@ public class RoomService {
         for(UserItemDto userItemDto : userItemDtoList){
             UserItem userItem = userItemRepository.findById(userItemDto.getRoomId())
                     .orElseThrow(() -> new CustomException(ErrorCode.NO_ITEM));
-            userItem.updateItemLocation(userItemDto.getX(), userItemDto.getY(), userItemDto.getZ());
+            userItem.updateItemLocation(userItemDto.getX(), userItemDto.getY(), userItemDto.getZ(), userItemDto.getRotation());
 
             UserItem updateItem = userItemRepository.save(userItem);
             if(updateItem.getX() != null){
@@ -74,27 +74,16 @@ public class RoomService {
         return userItemDtoList;
     }
 
+
     @Transactional(readOnly = true)
-    public List<UserItemDto> findAllUserItem(Long userId){
-        Member member = memberRepository.findById(userId)
-                .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
-        Room room = roomRepository.findByMember(member)
-                .orElseThrow(() -> new CustomException(ErrorCode.NO_ROOM));
-
-        List<UserItemDto> userItemDtoList = new ArrayList<>();
-        List<UserItem> userItemList = userItemRepository.findByRoom(room);
-
-        for(UserItem userItem : userItemList){
-            userItemDtoList.add(userItem.toDto());
-        }
-        return userItemDtoList;
-    }
-
-    public Page<UserItemDto> getItemByCategory(String category, Long userId, Pageable pageable) {
-
+    public List<UserItemDto> getItemByCategory(String category, Long userId, Pageable pageable) {
         memberRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
-        return userItemRepository.getItemByCategory(pageable,category,userId);
+        if(category.equals("all")){
+            return userItemRepository.getAllItem(pageable, userId);
+        }else{
+            return userItemRepository.getItemByCategory(pageable, category, userId);
+        }
     }
 }
