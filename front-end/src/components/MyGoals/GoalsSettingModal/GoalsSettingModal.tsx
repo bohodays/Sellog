@@ -1,15 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { SDiv, SSection } from "./styles";
 import { TextField } from "@mui/material";
-import {
-  IRecommendedGoals,
-  IUserGoalSetting,
-} from "@/typeModels/mygoals/myGoalInterfaces";
+import { IRecommendedGoals } from "@/typeModels/mygoals/myGoalInterfaces";
 import { apiUpdateUsergoal } from "@/api/user";
 import { useRecoilState } from "recoil";
-import { myGoalState } from "@/recoil/mygoals/atoms";
+import { userInfoState } from "@/recoil/myroom/atoms";
 
-interface IModalProps {
+interface IGoalSettingModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   activeGoal: string;
@@ -24,25 +21,32 @@ const goalNameToTargetName: any = {
 };
 
 const recommendedGoals: IRecommendedGoals = {
-  github: "1일 1커밋",
-  blog: "7일 1포스팅",
-  algorithm: "1일 1문제",
-  feed: "1일 1피드",
-  "cs quiz": "1일 1문제",
+  github: "1 일 1 커밋",
+  blog: "7 일 1 포스팅",
+  algorithm: "1 일 1 문제",
+  feed: "1 일 1 피드",
+  "cs quiz": "1 일 1 문제",
 };
 
-const GoalsSettingModal = ({ isOpen, setIsOpen, activeGoal }: IModalProps) => {
-  const [day, setDay] = useState(1);
-  const [cnt, setCnt] = useState(1);
-  const [myGoal, setMyGoal] = useRecoilState(myGoalState);
+const GoalsSettingModal = ({
+  isOpen,
+  setIsOpen,
+  activeGoal,
+}: IGoalSettingModalProps) => {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
-  // const [data, setData] = useState<IUserGoalSetting>({
-  //   bojTarget: "1-1",
-  //   blogTarget: "7-1",
-  //   feedTarget: true,
-  //   githubTarget: "1-1",
-  //   csTarget: true,
-  // });
+  // feed, cs true false 여부
+  const [doIt, setDoIt] = useState(userInfo[goalNameToTargetName[activeGoal]]);
+
+  let day = 1;
+  let cnt = 1;
+  const [myGoal, setMyGoal] = useState({
+    githubTarget: userInfo["githubTarget"],
+    blogTarget: userInfo["blogTarget"],
+    feedTarget: userInfo["feedTarget"],
+    bojTarget: userInfo["bojTarget"],
+    csTarget: userInfo["csTarget"],
+  });
 
   const handleModalClose = () => {
     setIsOpen(false);
@@ -54,42 +58,48 @@ const GoalsSettingModal = ({ isOpen, setIsOpen, activeGoal }: IModalProps) => {
   };
 
   const handleDaysChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("day", event.target.value);
-    console.log("day", Number(event.target.value));
-    setDay(Number(event.target.value));
-    setMyGoal({
-      ...myGoal,
-      [goalNameToTargetName[activeGoal]]: `${Number(
-        event.target.value
-      )}-${cnt}`,
-    });
+    day = Number(event.target.value);
   };
 
   const handleCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("cnt", event.target.value);
-
-    setCnt(Number(event.target.value));
-    setMyGoal({
-      ...myGoal,
-      [goalNameToTargetName[activeGoal]]: `${day}-${Number(
-        event.target.value
-      )}`,
-    });
+    cnt = Number(event.target.value);
   };
 
-  const updateMyGoal = () => {
-    apiUpdateUsergoal(myGoal)
+  // myGoal 수정 요청
+  const updateMyGoal = (activeGoal: string) => {
+    let data: any = {};
+    if (activeGoal === "cs quiz" || activeGoal === "feed") {
+      data = {
+        ...myGoal,
+        [goalNameToTargetName[activeGoal]]: doIt,
+      };
+    } else {
+      data = {
+        ...myGoal,
+        [goalNameToTargetName[activeGoal]]: `${day}-${cnt}`,
+      };
+    }
+    apiUpdateUsergoal(data)
       .then((r) => {
-        console.log("답", r);
         setMyGoal(r?.data.response);
         handleModalClose();
+        setUserInfo({
+          ...userInfo,
+          githubTarget: r?.data.response.githubTarget,
+          bojTarget: r?.data.response.bojTarget,
+          blogTarget: r?.data.response.blogTarget,
+          feedTarget: r?.data.response.feedTarget,
+          csTarget: r?.data.response.csTarget,
+        });
       })
-      // .then(() => {
-      //   console.log("recoil", myGoal);
-      // })
       .catch((e) => {
         console.log(e);
       });
+  };
+
+  // feed, cs quiz setting button
+  const handleOXBtn = () => {
+    setDoIt((prev) => !prev);
   };
 
   return (
@@ -103,32 +113,41 @@ const GoalsSettingModal = ({ isOpen, setIsOpen, activeGoal }: IModalProps) => {
           </div>
           <div className="custom__goal__wrapper">
             <h1>사용자 설정</h1>
-            <TextField
-              id="custom__goal__day"
-              variant="outlined"
-              type="number"
-              sx={{
-                width: "3vw",
-                height: "3vh",
-                "& .MuiInputBase-input": { p: 0.5 },
-              }}
-              onChange={handleDaysChange}
-            />
-            일
-            <TextField
-              id="custom__goal__cnt"
-              variant="outlined"
-              type="number"
-              sx={{
-                width: "3vw",
-                height: "3vh",
-                "& .MuiInputBase-input": { p: 0.5 },
-              }}
-              onChange={handleCountChange}
-            />
-            회
+            {activeGoal === "feed" || activeGoal === "cs quiz" ? (
+              <button onClick={handleOXBtn}>{doIt ? "O" : "X"}</button>
+            ) : (
+              <div>
+                <TextField
+                  id="custom__goal__day"
+                  variant="outlined"
+                  type="number"
+                  sx={{
+                    width: "3vw",
+                    height: "3vh",
+                    "& .MuiInputBase-input": { p: 0.5 },
+                  }}
+                  onChange={handleDaysChange}
+                />
+                일
+                <TextField
+                  id="custom__goal__cnt"
+                  variant="outlined"
+                  type="number"
+                  sx={{
+                    width: "3vw",
+                    height: "3vh",
+                    "& .MuiInputBase-input": { p: 0.5 },
+                  }}
+                  onChange={handleCountChange}
+                />
+                회
+              </div>
+            )}
           </div>
-          <button style={{ backgroundColor: "tomato" }} onClick={updateMyGoal}>
+          <button
+            style={{ backgroundColor: "tomato" }}
+            onClick={() => updateMyGoal(activeGoal)}
+          >
             완료
           </button>
         </div>
