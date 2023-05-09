@@ -3,7 +3,7 @@ import { SSection, SDiv } from "./styles";
 import cool from "@/assets/imgs/itemShop/cool.png";
 import rainbow from "@/assets/imgs/itemShop/rainbow.png";
 import { apiGetMonthlyRecordList, apiGetTodayRecord } from "@/api/record";
-import { IDoneList } from "@/typeModels/mygoals/myRecordInterface";
+import { IDoneList } from "@/typeModels/mygoals/myRecordInterfaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareCheck } from "@fortawesome/free-regular-svg-icons";
 import moment from "moment";
@@ -72,7 +72,7 @@ const DailyDoneList = ({ selectedDateProps }: ISelectedDate) => {
               <span className="type">github</span>
             </div>
             <span className="count">
-              commits {dailyDoneList?.["github"]?.length}
+              github {dailyDoneList?.["github"]?.length}
             </span>
             {isOpen && activeType === "github" && (
               <DailyDoneModal

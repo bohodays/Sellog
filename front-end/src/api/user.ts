@@ -1,4 +1,5 @@
 import { IUserSignup } from "@/typeModels/user/userSignup";
+import { IUserGoalSetting } from "@/typeModels/mygoals/myGoalInterfaces";
 import { IMyProfileUpdate } from "@/typeModels/user/userEditInfo";
 import getApiInstance from "./http";
 
@@ -24,10 +25,10 @@ export const apiGetUserInfo = async () => {
   }
 };
 
-// 유저 목표, 포인트, 정보 수정
-export const apiUpdateUsergoal = async () => {
+// 유저 목표 수정
+export const apiUpdateUsergoal = async (data: IUserGoalSetting) => {
   try {
-    const response = await api.put(`/user`);
+    const response = await api.put(`/user/target`, data);
     return response;
   } catch (e) {
     console.log(e);
