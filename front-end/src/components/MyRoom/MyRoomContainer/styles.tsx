@@ -70,7 +70,39 @@ export const SMyRoom = styled.section<any>`
     box-shadow: 1px 1px 3px black;
     position: absolute;
     bottom: 3.5vh;
-    left: 13vw;
+    left: 12vw;
+    display: ${(props) => (props.activePage === "myitems" ? "" : "none")};
+    user-select: none;
+  }
+
+  .myitem__up {
+    padding: 8px;
+    font-family: "Chicle";
+    background-color: #ffcc00;
+    border-radius: 30px;
+    font-size: 1.5vw;
+    border: 3px solid black;
+    box-shadow: 1px 1px 3px black;
+    position: absolute;
+    bottom: 11vh;
+    left: 2.5vw;
+    width: 4vw;
+    display: ${(props) => (props.activePage === "myitems" ? "" : "none")};
+    user-select: none;
+  }
+
+  .myitem__down {
+    padding: 8px;
+    font-family: "Chicle";
+    background-color: #ffcc00;
+    border-radius: 30px;
+    font-size: 1.5vw;
+    border: 3px solid black;
+    box-shadow: 1px 1px 3px black;
+    position: absolute;
+    bottom: 11vh;
+    left: 7vw;
+    width: 4vw;
     display: ${(props) => (props.activePage === "myitems" ? "" : "none")};
     user-select: none;
   }
