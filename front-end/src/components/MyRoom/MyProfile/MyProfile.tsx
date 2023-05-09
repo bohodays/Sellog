@@ -7,7 +7,7 @@ import github from "@/assets/imgs/retro/github.png";
 import tistory from "@/assets/imgs/retro/tistoryIcon.png";
 import smileBottom from "@/assets/imgs/retro/smile_bottom.png";
 import coin from "@/assets/imgs/retro/coin.png";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, Router } from "react-router-dom";
 interface MyProfileProps {
   userData: any;
@@ -19,34 +19,16 @@ interface MyProfileProps {
 const MyProfile = (props: MyProfileProps) => {
   const profileImg: any = useRef(props.userData.img);
   const [newProfileImg, setNewProfileImg] = useState(profileImg.current);
-  // console.log(props.userData.img, "component");
 
   const isSolvedQuiz = false;
 
-  // 프로필 사진 바꾸는 로직
-  function profileHandler() {
-    console.log("profileHandler??", typeof profileImg);
-    profileImg.current.click();
-  }
-  const onChange: any = (e: any) => {
-    console.log(e.target.value);
-    if (e.target.value) {
-      const newImg: any = URL.createObjectURL(e.target.value);
-      const blob = new Blob([newImg], { type: "text/plain" });
-      console.log(blob, "!!!!!!!!!!!");
-      // setNewProfileImg(blob);
-      // setUserData(...userData, userData.img : e.target.value);
-    } else {
-      console.log(profilePic);
-      // setNewProfileImg(profilePic);
-
-      // setUserData(profilePic);
-    }
-  };
+  // useEffect(() => {
+  //   console.log("something changed", props.userData);
+  // }, [props.userData]);
 
   // 유저 개인정보 수정하는 함수
   const userInfoHandler = () => {
-    // console.log("user info handler");
+    // console.log("user info", props.userData);
     props.setIsEdit(!props.isEdit);
   };
 
@@ -63,7 +45,6 @@ const MyProfile = (props: MyProfileProps) => {
               className="img__profile"
               src={newProfileImg}
               alt="profile pic"
-              onClick={profileHandler}
             />
           </label>
           <input
@@ -71,7 +52,6 @@ const MyProfile = (props: MyProfileProps) => {
             style={{ display: "none" }}
             accept="image/jpg,impge/png,image/jpeg"
             name="profile_img"
-            onChange={onChange}
             ref={profileImg}
           />
           <div className="container__userinfo">
@@ -147,8 +127,6 @@ const MyProfile = (props: MyProfileProps) => {
             </p>
             <br />
           </div>
-        </div>
-        <div className="platform-address">
           <div>
             <a href={`${props.userData.github}`}>
               <img src={github} className="sticker__github" alt="github Icon" />
@@ -158,6 +136,7 @@ const MyProfile = (props: MyProfileProps) => {
             </a>
           </div>
         </div>
+        <div className="platform-address"></div>
       </div>
     </SProfile>
   );

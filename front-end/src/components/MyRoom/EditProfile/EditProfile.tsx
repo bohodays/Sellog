@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { SProfile } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -29,37 +29,75 @@ function EditProfile(props: MyProfileProps) {
 
   const [isModal, setIsModal] = useState<boolean>(false);
 
+  const profileImg: any = useRef(props.userData.img);
+  const [newProfileImg, setNewProfileImg] = useState(profileImg.current);
+  const [imgFile, setImgFile] = useState(""); // 미리보기 실제 파일(저장을 위한)
+
+  // 프로필 사진 바꾸는 로직
+  function profileHandler() {
+    // console.log("profileHandler??", typeof profileImg);
+    profileImg.current.click();
+  }
+
+  // 이미지변화 생겼을때
+  const onChange: any = (e: any) => {
+    const currentImg = e.target.files[0];
+    console.log("currentImg", currentImg); // 바뀐 파일 불러와짐
+    if (currentImg) {
+      const newImgReader = new FileReader();
+      // 인스턴스 생성 되었을때
+      newImgReader.readAsDataURL(currentImg);
+      newImgReader.onload = () => {
+        // 미리보기 만들어주는 코드
+        const imageDataURL = newImgReader.result;
+
+        const base64 = imageDataURL?.toString();
+        setNewProfileImg(imageDataURL);
+        setImgFile(currentImg);
+      };
+    } else {
+      console.log("change error", profilePic);
+    }
+  };
+
   const editHandler = () => {
     // api put 함수 넣기
+    console.log({ newProfileImg });
+
     props.setUserData({
       ...props.userData,
+      img: newProfileImg,
       nickname: nicknameRef.current.value,
       email: emailRef.current.value,
       motto: mottoRef.current.value,
       tistory: tistoryRef.current.value,
       github: githubRef.current.value,
     });
-    // console.log("after", props.userData);
-    const editUserData: IMyProfileUpdate = {
+
+    // console.log("after", props.userData); IMyProfileUpdate
+    const editUserData: any = {
       nickname: nicknameRef.current.value,
       motto: mottoRef.current.value,
       contact: emailRef.current.value,
       blog: tistoryRef.current.value,
       github: githubRef.current.value,
     };
-    console.log(typeof editUserData);
+
+    // console.log(JSON.stringify(editUserData));
+    // console.log("eidt", editUserData);
+
+    // console.log("blob", blob);
+
     const accessToken = localData.getAccessToken();
+
     if (accessToken) {
-      apiUpdateUserInfo(editUserData).then((res) => {
-        console.log("????????????????", res?.data.response);
+      apiUpdateUserInfo(editUserData, imgFile).then((res) => {
+        console.log("returned response", res?.data.response);
       });
     }
-    // console.log(props.isEdit);
-    // api userinfo put request 인자 포함한 함수.
-    // apiUpdateUserInfo(nicknameRef.current.value,emailRef.current.value,mottoRef.current.value,tistoryRef.current.value,githubRef.current.value);
     setIsModal(!isModal);
   };
-  // props.setIsEdit(!props.isEdit);
+
   return (
     <SProfile>
       <div className="head"> EDIT ME</div>
@@ -69,10 +107,19 @@ function EditProfile(props: MyProfileProps) {
           <label htmlFor="file-input">
             <img
               className="img__profile"
-              src={props.userData.img}
+              src={newProfileImg}
               alt="profile pic"
+              onClick={profileHandler}
             />
           </label>
+          <input
+            type="file"
+            style={{ display: "none" }}
+            accept="image/jpg,impge/png,image/jpeg"
+            name="profile_img"
+            onChange={onChange}
+            ref={profileImg}
+          />
 
           <div className="container__userinfo">
             <p className="username">{props.userData.nickname}</p>

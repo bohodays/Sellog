@@ -9,14 +9,55 @@ import {
   faFireFlameCurved,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import FeedComponent from "@/components/Feed/FeedComponent";
 import { getFeedApi } from "@/api/feed";
+
 export default function Feed() {
+  interface IntersectionObserverInit {
+    root?: Element | Document | null;
+    rootMargin?: string;
+    threshold?: number | number[];
+  }
   const navigate = useNavigate();
   const [newsfeed, setNewsFeed] = useState<any>();
   const [isFeed, setIsFeed] = useState<boolean>(false);
 
+  type IntersectHandler = (
+    entry: IntersectionObserverEntry,
+    observer: IntersectionObserver
+  ) => void;
+
+  const useIntersect = (
+    onIntersect: IntersectHandler,
+    options?: IntersectionObserverInit
+  ) => {
+    const ref = useRef<HTMLDivElement>(null);
+    const callback = useCallback(
+      (
+        entries: IntersectionObserverEntry[],
+        observer: IntersectionObserver
+      ) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) onIntersect(entry, observer);
+        });
+      },
+      [onIntersect]
+    );
+
+    useEffect(() => {
+      if (!ref.current) return;
+      const observer = new IntersectionObserver(callback, options);
+      observer.observe(ref.current);
+      return () => observer.disconnect();
+    }, [ref, options, callback]);
+
+    return ref;
+  };
+
+  const observerRef = useRef(null);
+
+  // 피드 불러오기
   useEffect(() => {
     getFeedApi().then(
       ({ data }: any | undefined) => setNewsFeed(data.response)
@@ -25,11 +66,13 @@ export default function Feed() {
     // console.log(datata, "feeeeed");
   }, []);
   useEffect(() => {
-    console.log("feed updated", newsfeed);
+    // console.log("feed updated", newsfeed);
     if (newsfeed != undefined) {
       setIsFeed(true);
     }
   }, [newsfeed]);
+
+  // 조회수 증가
 
   return (
     <SMain>
@@ -89,10 +132,10 @@ export default function Feed() {
         </SSection>
         <div className="feed__box">
           {isFeed &&
-            newsfeed.map((feed: ReactNode) => {
+            newsfeed.map((feed: ReactNode, index: Number) => {
               // <p> {feed.company}</p>;
 
-              return <FeedComponent props={feed}></FeedComponent>;
+              return <FeedComponent key={index} props={feed}></FeedComponent>;
             })}
         </div>
         <img className="sticker1" src={LargeSmile} alt="스마일 큰거" />
