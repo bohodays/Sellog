@@ -1,6 +1,6 @@
-package com.example.matching.schedule;
+package com.example.realtime.schedule;
 
-import com.example.matching.dto.MatchingDto;
+import com.example.realtime.dto.MatchingDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
