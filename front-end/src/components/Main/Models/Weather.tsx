@@ -68,5 +68,3 @@ export function Weather(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-useGLTF.preload("/models/weather.glb");

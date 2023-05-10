@@ -30,5 +30,3 @@ export function Grass(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-useGLTF.preload("/models/grass.glb");

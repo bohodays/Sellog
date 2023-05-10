@@ -39,5 +39,3 @@ export function Stone(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-useGLTF.preload("/models/stone.glb");

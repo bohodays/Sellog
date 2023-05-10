@@ -92,5 +92,3 @@ export function CSQuizFont(props: JSX.IntrinsicElements["group"] | any) {
     </group>
   );
 }
-
-useGLTF.preload("/models/font/csquiz_font.glb");

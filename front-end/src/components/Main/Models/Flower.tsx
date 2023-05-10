@@ -136,5 +136,3 @@ export function Flower(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-useGLTF.preload("/models/flower.glb");

@@ -54,5 +54,3 @@ export function M3_Main(props: JSX.IntrinsicElements["group"] | any) {
     </group>
   );
 }
-
-useGLTF.preload("/models/characters/m3.glb");

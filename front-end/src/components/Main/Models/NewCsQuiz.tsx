@@ -208,5 +208,3 @@ export function NewCsQuiz(props: JSX.IntrinsicElements["group"] | any) {
     </group>
   );
 }
-
-useGLTF.preload("/models/newCsQuiz.glb");
