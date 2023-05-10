@@ -42,8 +42,10 @@ public class RoomController {
             List<UserItemDto> updateItemList = roomService.updateItemLocation(userItemDtoList);
             return new ResponseEntity<>(new SuccessResponse(updateItemList), HttpStatus.OK);
         } catch(CustomException e){
+            e.printStackTrace();
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
+            e.printStackTrace();
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -64,6 +66,7 @@ public class RoomController {
     public ResponseEntity<?> findItemByCategory(@PathVariable String category,
                                                 @PageableDefault Pageable pageable) {
         try{
+            log.info("페이지 : {}",pageable);
             return new ResponseEntity<>(new SuccessResponse(roomService.getItemByCategory(category, SecurityUtil.getCurrentMemberId(), pageable)), HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
@@ -72,10 +75,10 @@ public class RoomController {
         }
     }
 
-    @GetMapping("/items/{category}/users/all")
-    public ResponseEntity<?> findAllItemByCategory(@PathVariable String category) {
+    @GetMapping("/items/all")
+    public ResponseEntity<?> findAllItem() {
         try{
-            return new ResponseEntity<>(new SuccessResponse(roomService.getIAllItemByCategory(category, SecurityUtil.getCurrentMemberId())), HttpStatus.OK);
+            return new ResponseEntity<>(new SuccessResponse(roomService.getAllItem(SecurityUtil.getCurrentMemberId())), HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
