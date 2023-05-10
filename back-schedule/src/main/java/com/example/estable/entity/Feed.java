@@ -31,7 +31,7 @@ public class Feed {
     @Column(name = "views")
     private Integer views;
 
-    @Column(name = "link")
+    @Column(columnDefinition = "TEXT")
     private String link;
 
     @Column(name = "pub_date")
