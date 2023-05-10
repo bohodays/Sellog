@@ -58,5 +58,3 @@ export function F1_Main(props: JSX.IntrinsicElements["group"] | any) {
     </group>
   );
 }
-
-useGLTF.preload("/models/characters/f1.glb");

@@ -47,7 +47,7 @@ export const itemTargetState = atom<null | string>({
   default: null,
 });
 
-type myItems = {
+export type myItemsType = {
   id: number | null;
   roomId: number | null;
   itemId: number | null;
@@ -58,22 +58,10 @@ type myItems = {
   category: string;
   rotation: number | null;
   point: number | null;
+  path: string | null;
 };
 
-export const myItemsState = atom<Array<myItems>>({
+export const myItemsState = atom<Array<myItemsType>>({
   key: "MyItems",
-  default: [
-    {
-      id: 1,
-      roomId: 1,
-      itemId: 1,
-      name: "Bedside_light_1",
-      x: 0,
-      y: -2.5,
-      z: 0,
-      category: "furniture",
-      rotation: 0,
-      point: 50,
-    },
-  ],
+  default: [],
 });

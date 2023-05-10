@@ -31,5 +31,3 @@ export function Floor(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-useGLTF.preload("/models/floor.glb");

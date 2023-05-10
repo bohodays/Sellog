@@ -5,7 +5,11 @@ Command: npx gltfjsx@6.1.4 ./public/models/room/room2.glb -t
 
 import * as THREE from "three";
 import React, { useRef } from "react";
-import { OrthographicCamera, useGLTF } from "@react-three/drei";
+import {
+  OrthographicCamera,
+  PerspectiveCamera,
+  useGLTF,
+} from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
@@ -80,7 +84,7 @@ type GLTFResult = GLTF & {
   };
 };
 
-export function Room2(props: JSX.IntrinsicElements["group"]) {
+function Room2(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/models/room/room2.glb") as GLTFResult;
   return (
     <group {...props} dispose={null} position={[0, -2.5, 0]}>
@@ -92,6 +96,7 @@ export function Room2(props: JSX.IntrinsicElements["group"]) {
         rotation={[-0.79, 0.62, 0.52]}
         zoom={62}
       />
+      {/* <PerspectiveCamera makeDefault={true} far={1000} zoom={3} /> */}
       <mesh
         // geometry={nodes.Windows.geometry}
         material={materials["default"]}
@@ -382,5 +387,7 @@ export function Room2(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
+
+export default React.memo(Room2);
 
 // useGLTF.preload("/models/room/room2.glb");

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SDiv = styled.div`
-  width: 40%;
+  /* width: 40%; */
 
   .item__wrapper {
     display: flex;
@@ -12,12 +12,22 @@ export const SDiv = styled.div`
     margin: 0.5vw 0.3vw;
     padding: 0.5vw;
     border-radius: 10px;
-    height: 25vh;
+    /* height: 25vh; */
+    /* width: vw; */
   }
 
   .item__name {
     font-family: "Bangers";
     font-size: 1.1vw;
     margin-top: 1vh;
+  }
+
+  .name-hidden {
+    visibility: hidden;
+  }
+
+  .item__img {
+    width: 14vw;
+    height: 32vh;
   }
 `;
