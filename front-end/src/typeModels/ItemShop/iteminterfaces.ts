@@ -1,9 +1,12 @@
 export interface IItem {
-  name?: string;
-  point?: number;
-  category?: string;
+  id: number;
+  name: string;
+  point: number;
+  category: string;
+  possession: number;
+  path: string;
 }
 
 export interface IItemProps {
-  item?: IItem;
+  item: IItem;
 }

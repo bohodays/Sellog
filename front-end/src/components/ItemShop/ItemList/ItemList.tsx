@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import ItemItem from "../ItemItem/ItemItem";
 import { SSection, SDiv } from "./styles";
+import { apiGetCategorizedItemList } from "@/api/store";
+import { IItem } from "@/typeModels/ItemShop/itemInterfaces";
 
 const dummyItemList = [
   {
@@ -81,42 +83,62 @@ const ItemList = ({ category }: categoryProps) => {
   const startIndex = (page - 1) * perPage;
   const endIndex = startIndex + perPage;
 
+  const [itemList, setItemList] = useState<IItem[] | null>(null);
+
   useEffect(() => {
     setPage(1);
   }, [category]);
 
-  const selectedItemList = dummyItemList.filter((item, index) =>
+  useEffect(() => {
+    apiGetCategorizedItemList("furniture", 2)
+      .then((r) => {
+        console.log(page, r?.data.response);
+        console.log("응답", page, r);
+        setItemList(r?.data.response);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
+  const selectedItemList = itemList?.filter((item, index) =>
     category === "ALL" ? item : item.category === category
   );
 
   const pages = () => {
     let arr = [];
-    for (let i = 1; i < selectedItemList.length / perPage + 1; i++) {
-      arr.push(
-        <button
-          className={i === page ? "page__btn--active" : "page__btn"}
-          onClick={() => setPage(i)}
-        >
-          {i}
-        </button>
-      );
+    if (selectedItemList != undefined) {
+      for (let i = 1; i < selectedItemList.length / perPage + 1; i++) {
+        arr.push(
+          <button
+            className={i === page ? "page__btn--active" : "page__btn"}
+            onClick={() => setPage(i)}
+          >
+            {i}
+          </button>
+        );
+      }
     }
     return arr;
   };
   return (
-    <SSection isEmpty={selectedItemList.length}>
-      <SDiv>
-        {dummyItemList
-          .filter((item, index) =>
-            category === "ALL" ? item : item.category === category
-          )
-          .slice(startIndex, endIndex)
-          .map((item, index) => (
-            <ItemItem item={item} key={`${index}`}></ItemItem>
-          ))}
-      </SDiv>
-      <div className="item__pagenation--wrapper">{pages()}</div>
-    </SSection>
+    <>
+      {itemList && selectedItemList && (
+        <SSection isEmpty={selectedItemList?.length}>
+          <SDiv>
+            {itemList
+              .filter((item, index) =>
+                category === "ALL" ? item : item.category === category
+              )
+              .slice(startIndex, endIndex)
+              .map((item, index) => (
+                <ItemItem item={item} key={`${item.name}+${index}`}></ItemItem>
+              ))}
+          </SDiv>
+          <div className="item__pagenation--wrapper">{pages()}</div>
+        </SSection>
+      )}
+    </>
   );
 };
 
