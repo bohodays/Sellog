@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
 @Getter
 @Builder
 @Table(name = "feed")
@@ -30,6 +32,7 @@ public class Feed {
     private String title;
 
     @ColumnDefault("0")
+    @Column(name = "views", nullable = false)
     private Integer views;
 
     @Column(columnDefinition = "TEXT")
