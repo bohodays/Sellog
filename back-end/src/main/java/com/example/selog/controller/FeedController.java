@@ -25,6 +25,19 @@ public class FeedController {
 
     private final FeedService feedService;
 
+    @GetMapping("/views")
+    public ResponseEntity<?> getFeedByViews() {
+        log.info("조회수가장 높은 피드 호출");
+
+        try {
+            return new ResponseEntity<>(new SuccessResponse(feedService.getFeedsByViews()), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+    }
+
     @GetMapping
     public ResponseEntity<?> getFeeds(@PageableDefault(size = 8) Pageable pageable) {
         log.info("get feeds 호출!");
