@@ -54,6 +54,10 @@ public class StoreService {
         Room room = roomRepository.findByMember(member)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_ROOM));
 
+        if(userItemRepository.findByItemAndRoom(item, room).isPresent()){
+            throw new CustomException(ErrorCode.CONFLICT_ITEM);
+        }
+
         if(member.getPoints() - item.getPoint() < 0){
             throw new CustomException(ErrorCode.LACK_POINTS);
         }
