@@ -41,3 +41,13 @@ export const apiGetAccumulatedRecordList = async () => {
     console.log(e);
   }
 };
+
+// 통계
+export const apiGetChartList = async () => {
+  try {
+    const response = await api.get(`/record/statistics`);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};

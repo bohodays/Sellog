@@ -42,8 +42,6 @@ const Accumulate = () => {
       });
   }, []);
 
-  console.log("accu", accumulatedList);
-
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = 5;
 
@@ -54,9 +52,6 @@ const Accumulate = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
-  accumulatedList &&
-    console.log(accumulatedList[dummyAccumulateList[activeStep].goal]);
 
   return (
     <SSection>

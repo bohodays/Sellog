@@ -17,7 +17,7 @@ const SettingButtons = ({ setIsOpen, setActiveGoal }: IModalProps) => {
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
-  console.log(userInfo);
+  // console.log(userInfo);
 
   return (
     <SArticle>
