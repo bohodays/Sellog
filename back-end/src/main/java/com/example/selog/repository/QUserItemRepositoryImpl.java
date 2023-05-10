@@ -35,7 +35,8 @@ public class QUserItemRepositoryImpl implements QUserItemRepository{
                         userItem.x,
                         userItem.y,
                         userItem.z,
-                        userItem.rotation)
+                        userItem.rotation,
+                        userItem.item.path)
                 )
                 .from(userItem)
                 .innerJoin(userItem.room,room)
@@ -68,7 +69,8 @@ public class QUserItemRepositoryImpl implements QUserItemRepository{
                         userItem.x,
                         userItem.y,
                         userItem.z,
-                        userItem.rotation)
+                        userItem.rotation,
+                        userItem.item.path)
                 )
                 .from(userItem)
                 .innerJoin(userItem.room,room)
