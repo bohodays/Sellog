@@ -95,10 +95,9 @@ public class RoomService {
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
-        Room room = roomRepository.findById(member.getUserId())
-                .orElseThrow(() -> new CustomException(ErrorCode.NO_ROOM));
+        if(member.getRoom() == null) throw new CustomException(ErrorCode.NO_ROOM);
 
-        return userItemRepository.findByRoom(room).stream()
+        return userItemRepository.findByRoom(member.getRoom()).stream()
                 .map(UserItem::toDto)
                 .collect(Collectors.toList());
     }

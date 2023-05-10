@@ -30,7 +30,7 @@ public class Feed {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "views",columnDefinition = "integer default 0")
+    @ColumnDefault("0")
     private Integer views;
 
     @Column(columnDefinition = "TEXT")
