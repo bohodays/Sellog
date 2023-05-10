@@ -20,6 +20,13 @@ export interface IAccumulatedRecordItem {
   start: number[],
 }
 
+export interface IAccumulatedRecordItem {
+  day: number;
+  last: number[];
+  mid: number[];
+  start: number[];
+}
+
 export interface IAccumulatedRecordList {
   [key: string]: IAccumulatedRecordItem | null;
 }

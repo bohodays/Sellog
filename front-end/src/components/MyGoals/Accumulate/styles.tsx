@@ -24,15 +24,103 @@ export const SSection = styled.section`
 
   .accumulate__container {
     text-align: center;
+    height: 90%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
   }
 
   .number {
     background-color: #ff9d9d;
     border-radius: 20px;
+    width: 80%;
     padding: 8px;
     font-family: "ZCOOL KuaiLe", sans-serif;
     text-align: center;
     font-weight: 600;
     font-size: 1vw;
+  }
+  .acc__day__wrapper {
+    width: 100%;
+    height: 3vh;
+  }
+  .goal__container {
+    display: flex;
+
+    justify-content: space-around;
+  }
+  .reward__container {
+  }
+  .start__div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background-color: #494c53;
+    font-size: 0.8rem;
+  }
+
+  .acc__reward__wrapper {
+    width: 100%;
+  }
+  .reward__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+  }
+  .reward__div {
+    background-color: #ffb300;
+    color: white;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .reward2 {
+    background-color: #ffb300;
+  }
+  .reward3__div {
+    color: white;
+    background-color: #a65401;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    font-size: 0.8rem;
+  }
+  .inner_idv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: 50%;
+    background-color: #f4940c;
+  }
+  .reward3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: 50%;
+
+    background-color: #ab5a00;
   }
 `;
