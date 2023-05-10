@@ -5,6 +5,7 @@ import com.example.selog.entity.Feed;
 import com.example.selog.repository.FeedRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,13 @@ public class FeedService {
         feedRepository.findById(feed_id)
                 .map(Feed::updateViews)
                 .map(feedRepository::save);
+    }
+
+    public List<FeedDto> getFeedsByViews() {
+
+        return feedRepository.findFeedByViews()
+                .stream()
+                .map(Feed::toFeedDto)
+                .collect(Collectors.toList());
     }
 }

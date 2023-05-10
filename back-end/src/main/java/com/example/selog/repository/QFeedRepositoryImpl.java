@@ -3,6 +3,7 @@ package com.example.selog.repository;
 import com.example.selog.dto.feed.FeedDto;
 import com.example.selog.entity.Feed;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 
@@ -23,10 +24,17 @@ public class QFeedRepositoryImpl implements QFeedRepository{
         return jpaQueryFactory
                 .selectFrom(feed)
                 .orderBy(feed.pub_date.desc())
-                .limit(pageable.getPageSize()+1)
+                .offset(pageable.getOffset()) //페이지 번호
+                .limit(pageable.getPageSize()) //페이지 사이즈
                 .fetch();
+    }
 
-
-
+    @Override
+    public List<Feed> findFeedByViews() {
+        return jpaQueryFactory
+                .selectFrom(feed)
+                .orderBy(feed.views.desc(),feed.pub_date.desc())
+                .limit(10)
+                .fetch();
     }
 }
