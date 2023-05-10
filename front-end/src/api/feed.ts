@@ -27,7 +27,7 @@ export const addVisitApi = async (feedId: Number) => {
 // 조회순으로 높은 피드 가져오기
 export const getMostView = async () => {
   try {
-    const response = await api.get(`/feeds/mostview`);
+    const response = await api.get(`/feeds/views`);
     return response;
   } catch (error) {
     console.log(error);
