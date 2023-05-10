@@ -163,14 +163,14 @@ export function Elec_guitar_2(props: JSX.IntrinsicElements["group"] | any) {
 
     const positionUp = () => {
       if (position.y < 3) {
-        const newY = position.y + 0.2;
+        const newY = Number(position.y) + 0.2;
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };
 
     const positionDown = () => {
       if (position.y > -2.5) {
-        const newY = position.y - 0.2;
+        const newY = Number(position.y) - 0.2;
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };

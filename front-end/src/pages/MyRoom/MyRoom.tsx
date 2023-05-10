@@ -66,4 +66,4 @@ const MyRoom = () => {
   );
 };
 
-export default React.memo(MyRoom);
+export default MyRoom;

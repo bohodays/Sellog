@@ -23,7 +23,7 @@ const MyItemItem = ({ item }: IItemProps) => {
     const viewItem = {
       ...targetItem[0],
       x: 0,
-      y: itemPositionY,
+      y: Number(itemPositionY),
       z: 0,
       rotation: 0,
     };
@@ -57,4 +57,4 @@ const MyItemItem = ({ item }: IItemProps) => {
   );
 };
 
-export default React.memo(MyItemItem);
+export default MyItemItem;

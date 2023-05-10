@@ -388,6 +388,6 @@ function Room2(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-export default React.memo(Room2);
+export default Room2;
 
 // useGLTF.preload("/models/room/room2.glb");

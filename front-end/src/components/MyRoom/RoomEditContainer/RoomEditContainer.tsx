@@ -72,6 +72,7 @@ const RoomEditContainer = ({
   editButtonRef,
   rotationLeftButtonRef,
   rotationRigthButtonRef,
+  deleteButtonRef,
 }: any) => {
   const [myItems, setMyItems] = useRecoilState(myItemsState);
 
@@ -92,6 +93,7 @@ const RoomEditContainer = ({
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
                 />
               );
             } else if (item.itemId === 2) {
@@ -106,6 +108,7 @@ const RoomEditContainer = ({
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
                 />
               );
             } else if (item.itemId === 3) {

@@ -108,7 +108,7 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
         gl.domElement.removeEventListener("click", handleWindowClick);
       }
     };
-  }, [isDragging]);
+  }, [isDragging, isDragging, position.x, position.y, position.z, rotation]);
 
   useFrame(({ mouse }) => {
     if (props.activePage === "myitems") {
@@ -121,7 +121,7 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
 
             // 물체가 마우스와 만난 지점으로 위치를 업데이트하기
             const newPosition = found[i].point;
-            setPosition({ x: newPosition.x, y: -2.5, z: newPosition.z });
+            setPosition({ x: newPosition.x, y: position.y, z: newPosition.z });
             break;
           }
         }
@@ -137,23 +137,25 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
     props.downButtonRef.current
   ) {
     const leftRotation = () => {
-      setRotation((rotation - 10) % 360);
+      let newRotation = (rotation - 10) % 360;
+      setRotation(newRotation);
     };
 
     const rightRotation = () => {
-      setRotation((rotation + 10) % 360);
+      let newRotation = (rotation + 10) % 360;
+      setRotation(newRotation);
     };
 
     const positionUp = () => {
       if (position.y < 3) {
-        const newY = position.y + 0.2;
+        const newY = Number(position.y) + 0.2;
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };
 
     const positionDown = () => {
       if (position.y > -2.5) {
-        const newY = position.y - 0.2;
+        const newY = Number(position.y) - 0.2;
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };
@@ -170,8 +172,6 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
       props.upButtonRef.current.addEventListener("click", positionUp);
       props.downButtonRef.current.addEventListener("click", positionDown);
     } else {
-      console.log(target, "왜 돌아가지?");
-
       props.rotationLeftButtonRef.current.removeEventListener(
         "click",
         leftRotation

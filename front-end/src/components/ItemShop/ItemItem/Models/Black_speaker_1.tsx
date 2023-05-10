@@ -71,9 +71,13 @@ export function Black_speaker_1(props: JSX.IntrinsicElements["group"] | any) {
     z: number,
     deg: number
   ) => {
+    console.log(x, y, z, "atom 갱신");
+
     myItems.forEach((item, i) => {
       // itemId가 일치하는 아이템 선별
       if (item.itemId === id) {
+        console.log(item, "타겟 아톰 아이템");
+
         // 변화된 포지션 저장
         let newItemPosition = {
           ...item,
@@ -101,7 +105,6 @@ export function Black_speaker_1(props: JSX.IntrinsicElements["group"] | any) {
 
     if (props.activePage === "myitems") {
       gl.domElement.addEventListener("click", handleWindowClick);
-
       // atom에 변화된 포지션 저장
       updateTagetItemPosition(
         props.itemId,
@@ -117,7 +120,7 @@ export function Black_speaker_1(props: JSX.IntrinsicElements["group"] | any) {
         gl.domElement.removeEventListener("click", handleWindowClick);
       }
     };
-  }, [isDragging]);
+  }, [isDragging, position.x, position.y, position.z, rotation]);
 
   useFrame(({ mouse }) => {
     if (props.activePage === "myitems") {
@@ -157,14 +160,16 @@ export function Black_speaker_1(props: JSX.IntrinsicElements["group"] | any) {
 
     const positionUp = () => {
       if (position.y < 3) {
-        const newY = position.y + 0.2;
+        const newY = Number(position.y) + 0.2;
+        console.log(newY, position);
+
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };
 
     const positionDown = () => {
       if (position.y > -2.5) {
-        const newY = position.y - 0.2;
+        const newY = Number(position.y) - 0.2;
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };

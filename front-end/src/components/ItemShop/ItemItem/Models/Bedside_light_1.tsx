@@ -52,10 +52,10 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
 
   const updateTagetItemPosition = (
     id: number,
-    x: number,
-    y: number,
-    z: number,
-    deg: number
+    x: number | null,
+    y: number | null,
+    z: number | null,
+    deg: number | null
   ) => {
     myItems.forEach((item, i) => {
       // itemId가 일치하는 아이템 선별
@@ -71,6 +71,8 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
         // 불변성 유지를 위한 새로운 배열 생성
         const newItems = [...myItems];
         newItems[i] = newItemPosition;
+
+        console.log({ newItems });
 
         // 새로운 배열을 atom에 저장
         setMyItems(newItems);
@@ -129,7 +131,8 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
     props.rotationLeftButtonRef.current &&
     props.rotationRigthButtonRef.current &&
     props.upButtonRef.current &&
-    props.downButtonRef.current
+    props.downButtonRef.current &&
+    props.deleteButtonRef.current
   ) {
     const leftRotation = () => {
       let newRotation = (rotation - 10) % 360;
@@ -143,16 +146,23 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
 
     const positionUp = () => {
       if (position.y < 3) {
-        const newY = position.y + 0.2;
+        console.log(myItems);
+
+        const newY = Number(position.y) + 0.2;
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };
 
     const positionDown = () => {
       if (position.y > -2.5) {
-        const newY = position.y - 0.2;
+        const newY = Number(position.y) - 0.2;
         setPosition({ x: position.x, y: newY, z: position.z });
       }
+    };
+
+    const itemDelete = () => {
+      console.log(target, "test");
+      updateTagetItemPosition(props.itemId, null, null, null, null);
     };
 
     if (target === "Bedside_light_1") {
@@ -166,6 +176,7 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
       );
       props.upButtonRef.current.addEventListener("click", positionUp);
       props.downButtonRef.current.addEventListener("click", positionDown);
+      props.deleteButtonRef.current.addEventListener("click", itemDelete);
     } else {
       props.rotationLeftButtonRef.current.removeEventListener(
         "click",
@@ -175,6 +186,7 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
         "click",
         rightRotation
       );
+      props.deleteButtonRef.current.removeEventListener("click", itemDelete);
     }
   }
 

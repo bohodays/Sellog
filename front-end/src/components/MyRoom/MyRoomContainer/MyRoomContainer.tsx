@@ -28,6 +28,7 @@ const Scene = ({
   editButtonRef,
   rotationLeftButtonRef,
   rotationRigthButtonRef,
+  deleteButtonRef,
 }: any) => {
   const { gl, camera } = useThree();
   gl.outputEncoding = sRGBEncoding;
@@ -72,6 +73,7 @@ const Scene = ({
           editButtonRef={editButtonRef}
           rotationLeftButtonRef={rotationLeftButtonRef}
           rotationRigthButtonRef={rotationRigthButtonRef}
+          deleteButtonRef={deleteButtonRef}
         />
       </Suspense>
     </>
@@ -89,14 +91,11 @@ const MyRoomContainer = (props: IMyRoomProps) => {
   const rotationRigthButtonRef = useRef<any>();
   const upButtonRef = useRef<any>();
   const downButtonRef = useRef<any>();
+  const deleteButtonRef = useRef<any>();
 
   const [myItems, setMyItems] = useRecoilState(myItemsState);
 
   const handleActivePage = () => {
-    props.setActivePage((prev: string) => {
-      return prev === "myprofile" ? "myitems" : "myprofile";
-    });
-
     if (props.activePage === "myitems") {
       const apiRequesArray: any = [];
       myItems.forEach((item) => {
@@ -116,6 +115,10 @@ const MyRoomContainer = (props: IMyRoomProps) => {
         console.log(res, "고백 버튼 결과");
       });
     }
+
+    props.setActivePage((prev: string) => {
+      return prev === "myprofile" ? "myitems" : "myprofile";
+    });
   };
 
   console.log(target);
@@ -138,6 +141,7 @@ const MyRoomContainer = (props: IMyRoomProps) => {
           editButtonRef={editButtonRef}
           rotationLeftButtonRef={rotationLeftButtonRef}
           rotationRigthButtonRef={rotationRigthButtonRef}
+          deleteButtonRef={deleteButtonRef}
         />
       </Canvas>
       <button className="myitems__btn" onClick={handleActivePage}>
@@ -166,7 +170,9 @@ const MyRoomContainer = (props: IMyRoomProps) => {
               />
             </button>
           </div>
-          <button className="myitem__delete">Delete</button>
+          <button ref={deleteButtonRef} className="myitem__delete">
+            Delete
+          </button>
         </>
       )}
       {props.activePage == "myitems" && (

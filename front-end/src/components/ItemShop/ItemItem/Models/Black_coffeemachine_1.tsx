@@ -77,6 +77,7 @@ export function Black_coffeemachine_1(
         // 불변성 유지를 위한 새로운 배열 생성
         const newItems = [...myItems];
         newItems[i] = newItemPosition;
+        console.log(newItems, "확인");
 
         // 새로운 배열을 atom에 저장
         setMyItems(newItems);
@@ -149,14 +150,14 @@ export function Black_coffeemachine_1(
 
     const positionUp = () => {
       if (position.y < 3) {
-        const newY = position.y + 0.2;
+        const newY = Number(position.y) + 0.2;
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };
 
     const positionDown = () => {
       if (position.y > -2.5) {
-        const newY = position.y - 0.2;
+        const newY = Number(position.y) - 0.2;
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };

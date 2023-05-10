@@ -2,7 +2,7 @@ import React, { Suspense, useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { RecoilRoot, useRecoilState } from "recoil";
 import { localData } from "./utils/token";
 import { apiGetUserInfo } from "./api/user";
@@ -30,7 +30,6 @@ function App() {
   );
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  // console.log(userInfo);
 
   useEffect(() => {
     const accessToken = localData.getAccessToken();
