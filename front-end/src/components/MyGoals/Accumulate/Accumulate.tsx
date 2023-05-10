@@ -90,31 +90,29 @@ const Accumulate = () => {
         {/* map 돌리는 코드로 바꾸기 */}
         <div className="acc__day__wrapper">
           {accumulatedList && (
-            <span className="goal__bar">
-              <div className="goal__container">
-                <div className="start__div">
-                  {
-                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                      ?.start?.[0]
-                  }
-                  일
-                </div>
-                <div className="start__div">
-                  {
-                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                      ?.mid?.[0]
-                  }
-                  일
-                </div>
-                <div className="start__div">
-                  {
-                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                      ?.last?.[0]
-                  }
-                  일
-                </div>
+            <div className="goal__container">
+              <div className="start__div">
+                {
+                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                    ?.start?.[0]
+                }
+                일
               </div>
-            </span>
+              <div className="start__div">
+                {
+                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                    ?.mid?.[0]
+                }
+                일
+              </div>
+              <div className="start__div">
+                {
+                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                    ?.last?.[0]
+                }
+                일
+              </div>
+            </div>
           )}
         </div>
         <div className="acc__reward__wrapper">
