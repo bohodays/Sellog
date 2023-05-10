@@ -33,6 +33,7 @@ public class Feed {
     private String title;
 
     @ColumnDefault("0")
+    @Column(name = "views", nullable = false)
     private Integer views;
 
     @Column(columnDefinition = "TEXT")
