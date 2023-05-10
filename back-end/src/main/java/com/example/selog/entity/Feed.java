@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
 @Getter
 @Builder
 @Table(name = "feed")
@@ -30,7 +32,8 @@ public class Feed {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "views",columnDefinition = "integer default 0")
+    @ColumnDefault("0")
+    @Column(name = "views", nullable = false)
     private Integer views;
 
     @Column(columnDefinition = "TEXT")

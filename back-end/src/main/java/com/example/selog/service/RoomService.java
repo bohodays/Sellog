@@ -1,6 +1,7 @@
 package com.example.selog.service;
 
 import com.example.selog.dto.room.UserItemDto;
+import com.example.selog.entity.Feed;
 import com.example.selog.entity.Member;
 import com.example.selog.entity.Room;
 import com.example.selog.entity.UserItem;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -91,10 +93,15 @@ public class RoomService {
         }
     }
 
-    public List<UserItemDto> getIAllItemByCategory(String category, Long userId) {
-        memberRepository.findById(userId)
+    @Transactional(readOnly = true)
+    public List<UserItemDto> getAllItem(Long userId) {
+        Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
-        return userItemRepository.findAllItemsByCategoryAndUserId(category,userId);
+        if(member.getRoom() == null) throw new CustomException(ErrorCode.NO_ROOM);
+
+        return userItemRepository.findByRoom(member.getRoom()).stream()
+                .map(UserItem::toDto)
+                .collect(Collectors.toList());
     }
 }
