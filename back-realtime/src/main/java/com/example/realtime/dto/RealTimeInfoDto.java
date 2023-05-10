@@ -8,9 +8,11 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class RealTimeInfoDto {
-    private String sender;
+    private String roomId;
+    private Long sender;
     private Double x;
     private Double y;
-    private Double z;
-    private Long room;
+//    private Double z;
+    private String nickname;
+    private Integer characterId;
 }

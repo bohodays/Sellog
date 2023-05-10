@@ -16,7 +16,7 @@ public class RealTimeController {
 
     // 클라이언트에서 /pub/{id} 로 메시지를 발생
     @MessageMapping("/{id}")
-    public void message(@DestinationVariable Long id, Message<RealTimeInfoDto> message) {
+    public void message(@DestinationVariable String id, Message<RealTimeInfoDto> message) {
         // /sub/channel/채널아이디에 구독중인 클라이언트에게 메시지 전송
 
         RealTimeInfoDto info = message.getPayload();
