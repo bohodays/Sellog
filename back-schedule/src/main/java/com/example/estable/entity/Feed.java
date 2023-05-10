@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,7 +29,7 @@ public class Feed {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "views")
+    @ColumnDefault("0")
     private Integer views;
 
     @Column(columnDefinition = "TEXT")
