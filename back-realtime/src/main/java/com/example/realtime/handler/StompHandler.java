@@ -62,7 +62,7 @@ public class StompHandler implements ChannelInterceptor {
 
             String sessionId = (String) message.getHeaders().get("simpSessionId");
 
-            if(sp[1].equals("matching")){
+            if(sp.length>=6 && sp[5].equals("matching")){
                 accessor.getSessionAttributes().put("socketType", "matching");
                 matchingService.addMatchingMember(roomId, sessionId);
             }

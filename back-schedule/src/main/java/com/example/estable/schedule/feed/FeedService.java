@@ -82,6 +82,7 @@ public class FeedService {
                         .link(link)
                         .company(company[i])
                         .pub_date(publishedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())
+                        .views(0)
                         .build();
 
                 feedRepository.save(feedDto.toEntity());
