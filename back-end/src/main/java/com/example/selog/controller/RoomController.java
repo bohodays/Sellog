@@ -71,4 +71,15 @@ public class RoomController {
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/items/{category}/users/all")
+    public ResponseEntity<?> findAllItemByCategory(@PathVariable String category) {
+        try{
+            return new ResponseEntity<>(new SuccessResponse(roomService.getIAllItemByCategory(category, SecurityUtil.getCurrentMemberId())), HttpStatus.OK);
+        } catch(CustomException e){
+            return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
+        } catch (Exception e){
+            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -76,7 +77,7 @@ public class RoomService {
 
 
     @Transactional(readOnly = true)
-    public List<UserItemDto> getItemByCategory(String category, Long userId, Pageable pageable) {
+    public Slice<UserItemDto> getItemByCategory(String category, Long userId, Pageable pageable) {
         memberRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
@@ -85,5 +86,12 @@ public class RoomService {
         }else{
             return userItemRepository.getItemByCategory(pageable, category, userId);
         }
+    }
+
+    public List<UserItemDto> getIAllItemByCategory(String category, Long userId) {
+        memberRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
+
+        return userItemRepository.findAllItemsByCategoryAndUserId(category,userId);
     }
 }
