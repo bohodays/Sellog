@@ -52,15 +52,16 @@ public class StoreService {
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_ROOM));
 
         if(member.getPoints() - item.getPoint() < 0){
-            new CustomException(ErrorCode.LACK_POINTS);
+            throw new CustomException(ErrorCode.LACK_POINTS);
         }
 
         UserItem userItem = UserItem.builder()
                 .room(room)
                 .item(item)
                 .build();
+
         userItemRepository.save(userItem);
-        member.updatePoint(item.getPoint());
+        member.purchasePoint(item.getPoint());
 
         return memberRepository.save(member).getPoints();
     }
