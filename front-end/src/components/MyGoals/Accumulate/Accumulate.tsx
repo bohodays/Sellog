@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SSection } from "./styles";
 import { presetsObj } from "@react-three/drei/helpers/environment-assets";
 import { TiChevronRightOutline, TiChevronLeftOutline } from "react-icons/ti";
+import { apiGetAccumulatedRecordList } from "@/api/record";
+import { IAccumulatedRecordList } from "@/typeModels/mygoals/myRecordInterface";
 
 const dummyAccumulateList = [
   {
@@ -29,6 +31,19 @@ const dummyAccumulateList = [
 const Accumulate = () => {
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = 5;
+  const [accumulatedList, setAccumulatedList] =
+    useState<IAccumulatedRecordList | null>(null);
+
+  useEffect(() => {
+    apiGetAccumulatedRecordList()
+      .then((r) => {
+        // console.log(r?.data.response);
+        setAccumulatedList(r?.data.response);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -67,9 +82,6 @@ const Accumulate = () => {
           {dummyAccumulateList[activeStep].goal}
         </div>
         <div className="number">
-<<<<<<< Updated upstream
-          {dummyAccumulateList[activeStep].number}일째 유지 중입니다
-=======
           {accumulatedList &&
             accumulatedList[dummyAccumulateList[activeStep].goal]?.day}
           일째 유지 중입니다
@@ -129,7 +141,6 @@ const Accumulate = () => {
               </div>
             </div>
           )}
->>>>>>> Stashed changes
         </div>
       </div>
     </SSection>

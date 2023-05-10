@@ -33,6 +33,8 @@ export default function Feed() {
     threshold: 1.0,
   };
   let callback = (entries: any, observer: any) => {
+    console.log(newsfeed, "callback");
+
     entries.forEach((entry: any) => {
       // 관찰중인 태그가 교차할때 root와
       if (entry.isIntersecting) {
@@ -42,9 +44,9 @@ export default function Feed() {
         getFeedApi(page).then(({ data }: any) => {
           console.log({ page });
 
-          console.log("inf scroll data", [...data.response]);
-          console.log("prev newsfeed", [...newsfeed]);
-          console.log(newsfeed);
+          console.log("inf scroll data", data.response);
+          console.log("prev newsfeed", newsfeed);
+          // const newLoadedFeed = news
 
           setNewsFeed([...newsfeed, ...data.response]);
         });
@@ -56,10 +58,14 @@ export default function Feed() {
   // 피드 불러오기
   useEffect(() => {
     // 초기 데이터 불러오기
-    getFeedApi(page).then(({ data }: any | undefined) => {
-      setNewsFeed(data.response);
-      // console.log(data.response);
-    });
+    if (newsfeed === undefined) {
+      console.log("hi");
+
+      getFeedApi(page).then(({ data }: any | undefined) => {
+        setNewsFeed(data.response);
+        // console.log(data.response);
+      });
+    }
     getMostView().then((data: any) => {
       setMostViewFeed(data.response);
     });
@@ -67,6 +73,13 @@ export default function Feed() {
 
   // 무한 스크롤
   useEffect(() => {
+    if (newsfeed != undefined) {
+      setIsFeed(true);
+    }
+    if (mostViewFeed != undefined) {
+      setIsMostView(true);
+    }
+    console.log("useEffect", newsfeed);
     //observer  생성
     let observer = new IntersectionObserver(callback, options);
     // console.log("target", target);
@@ -79,18 +92,7 @@ export default function Feed() {
       observer.disconnect();
       console.log("disconnect", target);
     };
-  }, [target]);
-
-  // undefined 값 처리
-  useEffect(() => {
-    if (newsfeed != undefined) {
-      setIsFeed(true);
-    }
-    if (mostViewFeed != undefined) {
-      setIsMostView(true);
-    }
-    console.log("useEffect", newsfeed);
-  }, [newsfeed, mostViewFeed]);
+  }, [target, newsfeed, mostViewFeed]);
 
   const feedHandler = () => {
     console.log({ newsfeed }, { page });
