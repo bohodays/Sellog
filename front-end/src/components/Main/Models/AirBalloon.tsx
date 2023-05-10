@@ -124,5 +124,3 @@ export function AirBalloon(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-useGLTF.preload("/models/clouds.glb");

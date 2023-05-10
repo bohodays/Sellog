@@ -116,5 +116,3 @@ export function MyRoomFont(props: JSX.IntrinsicElements["group"] | any) {
     </group>
   );
 }
-
-useGLTF.preload("/models/font/myroom_font.glb");

@@ -6,15 +6,16 @@ import { CineonToneMapping, PCFSoftShadowMap, sRGBEncoding } from "three";
 // import { IMyRoomProps } from "@/typeModels/MyRoom/myRoomInterfaces";
 import { IMyRoomProps } from "@/typeModels/MyRoom/MyroomInterfaces";
 import { Room1 } from "../Models/Room1";
-import { Room2 } from "../Models/Room2";
 import { Room3 } from "../Models/Room3";
 import { Room4 } from "../Models/Room4";
 import { useRecoilState } from "recoil";
-import { itemTargetState } from "@/recoil/myroom/atoms";
+import { itemTargetState, myItemsState } from "@/recoil/myroom/atoms";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import Loading from "@/components/Loading/Loading";
 import pMinDelay from "p-min-delay";
+import Room2 from "../Models/Room2";
+import { IUpdateMyRoom, apiUpdateMyRoom } from "@/api/room";
 
 const RoomEditContainer = React.lazy(
   () => import("@/components/MyRoom/RoomEditContainer/RoomEditContainer")
@@ -89,10 +90,32 @@ const MyRoomContainer = (props: IMyRoomProps) => {
   const upButtonRef = useRef<any>();
   const downButtonRef = useRef<any>();
 
+  const [myItems, setMyItems] = useRecoilState(myItemsState);
+
   const handleActivePage = () => {
     props.setActivePage((prev: string) => {
       return prev === "myprofile" ? "myitems" : "myprofile";
     });
+
+    if (props.activePage === "myitems") {
+      const apiRequesArray: any = [];
+      myItems.forEach((item) => {
+        const requestObj: any = {};
+        requestObj["x"] = item.x;
+        requestObj["y"] = item.y;
+        requestObj["z"] = item.z;
+        requestObj["rotation"] = item.rotation;
+        requestObj["id"] = item.id;
+        requestObj["roomId"] = item.roomId;
+        requestObj["itemId"] = item.itemId;
+
+        apiRequesArray.push(requestObj);
+      });
+      console.log(apiRequesArray);
+      apiUpdateMyRoom(apiRequesArray).then((res) => {
+        console.log(res, "고백 버튼 결과");
+      });
+    }
   };
 
   console.log(target);

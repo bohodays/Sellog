@@ -36,5 +36,3 @@ export function Ground(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-useGLTF.preload("/models/ground.glb");

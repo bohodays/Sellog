@@ -17,7 +17,7 @@ const SettingButtons = ({ setIsOpen, setActiveGoal }: IModalProps) => {
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
-  console.log(userInfo);
+  // console.log(userInfo);
 
   return (
     <SArticle>
@@ -25,9 +25,9 @@ const SettingButtons = ({ setIsOpen, setActiveGoal }: IModalProps) => {
         <p className="item1 purple">github</p>
         <p className="item2">
           {userInfo["githubTarget"] ? (
-            <div>
+            <>
               {`${userInfo["githubTarget"][0]} 일 ${userInfo["githubTarget"][2]} 커밋`}
-            </div>
+            </>
           ) : (
             "목표를 설정해주세요."
           )}
@@ -37,9 +37,9 @@ const SettingButtons = ({ setIsOpen, setActiveGoal }: IModalProps) => {
         <p className="item1 red">blog</p>
         <p className="item2">
           {userInfo["blogTarget"] ? (
-            <div>
+            <>
               {`${userInfo["blogTarget"][0]} 일 ${userInfo["blogTarget"][2]} 포스팅`}
-            </div>
+            </>
           ) : (
             "목표를 설정해주세요."
           )}
@@ -49,9 +49,9 @@ const SettingButtons = ({ setIsOpen, setActiveGoal }: IModalProps) => {
         <p className="item1 yellow">algorithm</p>
         <p className="item2">
           {userInfo["bojTarget"] ? (
-            <div>
+            <>
               {`${userInfo["bojTarget"][0]} 일 ${userInfo["bojTarget"][2]} 문제`}
-            </div>
+            </>
           ) : (
             "목표를 설정해주세요."
           )}

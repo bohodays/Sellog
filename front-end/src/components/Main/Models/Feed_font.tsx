@@ -55,5 +55,3 @@ export function FeedFont(props: JSX.IntrinsicElements["group"] | any) {
     </group>
   );
 }
-
-useGLTF.preload("/models/font/feed_font.glb");

@@ -41,6 +41,16 @@ export const apiGetAccumulatedRecordList = async () => {
   }
 };
 
+// 유지 일수, 누적 보상 조회
+export const apiGetAccumulatedRecordList = async () => {
+  try {
+    const response = await api.get(`/record/maintain`);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 // 통계
 export const apiGetChartList = async () => {
   try {

@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { SSection } from "./styles";
-import { presetsObj } from "@react-three/drei/helpers/environment-assets";
 import { TiChevronRightOutline, TiChevronLeftOutline } from "react-icons/ti";
 import { apiGetAccumulatedRecordList } from "@/api/record";
-import { IAccumulatedRecordList } from "@/typeModels/mygoals/myRecordInterface";
+import { IAccumulatedRecordList } from "@/typeModels/mygoals/myRecordInterfaces";
 
 const dummyAccumulateList = [
   {
-    goal: "github",
+    goal: "algo",
     number: 13,
   },
   {
@@ -15,7 +14,7 @@ const dummyAccumulateList = [
     number: 15,
   },
   {
-    goal: "algo",
+    goal: "github",
     number: 20,
   },
   {
@@ -29,6 +28,20 @@ const dummyAccumulateList = [
 ];
 
 const Accumulate = () => {
+  const [accumulatedList, setAccumulatedList] =
+    useState<IAccumulatedRecordList | null>(null);
+
+  useEffect(() => {
+    apiGetAccumulatedRecordList()
+      .then((r) => {
+        // console.log(r?.data.response);
+        setAccumulatedList(r?.data.response);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = 5;
   const [accumulatedList, setAccumulatedList] =
@@ -52,6 +65,7 @@ const Accumulate = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
   return (
     <SSection>
       <div className="accumulate__container">
@@ -81,6 +95,7 @@ const Accumulate = () => {
         <div style={{ fontFamily: "ZCOOL KuaiLe" }}>
           {dummyAccumulateList[activeStep].goal}
         </div>
+
         <div className="number">
           {accumulatedList &&
             accumulatedList[dummyAccumulateList[activeStep].goal]?.day}

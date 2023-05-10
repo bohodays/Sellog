@@ -7,6 +7,20 @@ export const SSection = styled.section`
   transform: translateX(-100%);
   animation: slide-in 1s ease-out forwards;
   padding: 0.8vw;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+  }
 
   @keyframes slide-in {
     from {
