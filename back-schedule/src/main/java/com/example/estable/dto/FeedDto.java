@@ -2,12 +2,14 @@ package com.example.estable.dto;
 
 import com.example.estable.entity.Feed;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Builder
+@DynamicInsert
 @NoArgsConstructor
 @AllArgsConstructor
 public class FeedDto {
