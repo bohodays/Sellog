@@ -107,6 +107,8 @@ const UserInfoForm = ({ userId }: UserInformType) => {
             </div>
             <div className="input__wrapper blog">
               <input
+                value={blog}
+                onChange={(e) => setBlog(e.target.value)}
                 type="text"
                 className="input-blog"
                 placeholder="블로그 주소를 입력해주세요. (선택사항)"

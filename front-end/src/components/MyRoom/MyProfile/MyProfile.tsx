@@ -9,6 +9,9 @@ import smileBottom from "@/assets/imgs/retro/smile_bottom.png";
 import coin from "@/assets/imgs/retro/coin.png";
 import { useEffect, useRef, useState } from "react";
 import { Link, Router } from "react-router-dom";
+import NoTarget from "../NoTarget/NoTarget";
+import { apiGetAchievedRecordList, apiGetTodayRecord } from "@/api/record";
+import InstallModal from "../InstallModal/InstallModal";
 interface MyProfileProps {
   userData: any;
   setUserData: any;
@@ -19,20 +22,56 @@ interface MyProfileProps {
 const MyProfile = (props: MyProfileProps) => {
   const profileImg: any = useRef(props.userData.img);
   const [newProfileImg, setNewProfileImg] = useState(profileImg.current);
+  // 습관 설정이 하나도 안되어 있을 때 컴포넌트 나타남
+  const [isTarget, setIsTarget] = useState<string | null>(
+    props.userData.start_date
+  );
+  // 크롬 확장자 구현 되면 false로 초기화하기
+  const [isInstalled, setIsInstalled] = useState<boolean>(true);
+  // 오늘 목표 달성 했는지
+  const [isTodayGithub, setIsTodayGithub] = useState<boolean>(false);
+  const [isTodayAlgo, setIsTodayAlgo] = useState<boolean>(false);
+  const [isTodayBlog, setIsTodayBlog] = useState<boolean>(false);
+  const [isTodayCS, setIsTodayCS] = useState<boolean>(false);
+  const [isTodayFeed, setIsTodayFeed] = useState<boolean>(false);
 
-  const isSolvedQuiz = false;
+  useEffect(() => {
+    console.log("something changed", props.userData, isInstalled);
+  }, [props.userData, isInstalled]);
 
-  // useEffect(() => {
-  //   console.log("something changed", props.userData);
-  // }, [props.userData]);
-
+  useEffect(() => {
+    apiGetAchievedRecordList().then((data: any) => {
+      if (data.response) {
+        console.log(data.response);
+        setIsInstalled(true);
+      }
+    });
+    apiGetTodayRecord().then((data: any) => {
+      console.log(data.response);
+      if (data.response) {
+        if (data.response.algo) {
+          setIsTodayAlgo(true);
+        }
+        if (data.response.github) {
+          setIsTodayGithub(true);
+        }
+        if (data.response.blog) {
+          setIsTodayBlog(true);
+        }
+        if (data.response.cs) {
+          setIsTodayCS(true);
+        }
+        if (data.response.feed) {
+          setIsTodayFeed(true);
+        }
+      }
+    });
+  }, []);
   // 유저 개인정보 수정하는 함수
   const userInfoHandler = () => {
     // console.log("user info", props.userData);
     props.setIsEdit(!props.isEdit);
   };
-
-  const csQuizHandler = () => {};
 
   return (
     <SProfile>
@@ -58,7 +97,7 @@ const MyProfile = (props: MyProfileProps) => {
             <p className="username">{props.userData.nickname}</p>
             <div className="point__container">
               <img className="sticker__coin" src={coin} alt="coin" />
-              <p>1000</p>
+              <p>{props.userData.points}</p>
             </div>
           </div>
         </div>
@@ -67,58 +106,103 @@ const MyProfile = (props: MyProfileProps) => {
           <FontAwesomeIcon icon={faPenToSquare} onClick={userInfoHandler} />
         </div>
         <hr />
-        <div className="container__habit">
-          Today
-          <div className="container__habit-stats">
-            github
-            <div className="progress__bar progress__bar--github">1일 1커밋</div>
-            <div className="checked__today">
-              <FontAwesomeIcon icon={faSquareCheck} />
-              {/* <FontAwesomeIcon icon={faSquare} /> */}
+        {/* component 갈아끼우기 */}
+
+        {isTarget == null ? (
+          <NoTarget />
+        ) : (
+          <div className="container__habit">
+            Today
+            <div className="container__habit-stats">
+              github
+              <div className="progress__bar progress__bar--github">
+                {props.userData.blogTarget ? (
+                  props.userData.blogTarget
+                ) : (
+                  <p>깃 허브 습관 설정 하세요</p>
+                )}
+              </div>
+              <div className="checked__today">
+                {isTodayGithub ? (
+                  <FontAwesomeIcon icon={faSquareCheck} />
+                ) : (
+                  <FontAwesomeIcon icon={faSquare} />
+                )}
+              </div>
             </div>
+            <div className="container__habit-stats">
+              blog
+              <div className="progress__bar progress__bar--blog">
+                {props.userData.blogTarget ? (
+                  props.userData.blogTarget
+                ) : (
+                  <p> 블로그 습관을 설정 하세요</p>
+                )}
+              </div>
+              <div className="checked__today">
+                {isTodayBlog ? (
+                  <FontAwesomeIcon icon={faSquareCheck} />
+                ) : (
+                  <FontAwesomeIcon icon={faSquare} />
+                )}
+              </div>
+            </div>
+            <div className="container__habit-stats">
+              algorithm
+              <div className="progress__bar progress__bar--algorithm">
+                {props.userData.bojTarget ? (
+                  props.userData.bojTarget
+                ) : (
+                  <p> 알고리즘 습관을 설정 하세요</p>
+                )}
+              </div>
+              <div className="checked__today">
+                {isTodayAlgo ? (
+                  <FontAwesomeIcon icon={faSquareCheck} />
+                ) : (
+                  <FontAwesomeIcon icon={faSquare} />
+                )}
+              </div>
+            </div>
+            <div className="container__habit-stats">
+              CS
+              <div className="progress__bar progress__bar--CS">
+                {props.userData.csTarget ? (
+                  props.userData.csTarget
+                ) : (
+                  <p>매일 CS 문제 풀기</p>
+                )}
+              </div>
+              <div className="checked__today">
+                {isTodayCS ? (
+                  <FontAwesomeIcon icon={faSquareCheck} />
+                ) : (
+                  <FontAwesomeIcon icon={faSquare} />
+                )}
+              </div>
+            </div>
+            <div className="container__habit-stats">
+              Feed
+              <div className="progress__bar progress__bar--Feed">
+                {props.userData.feedTarget ? (
+                  props.userData.feedTarget
+                ) : (
+                  <p> 뉴스 피드 습관을 설정하세요</p>
+                )}
+              </div>
+              <div className="checked__today">
+                {isTodayFeed ? (
+                  <FontAwesomeIcon icon={faSquareCheck} />
+                ) : (
+                  <FontAwesomeIcon icon={faSquare} />
+                )}
+              </div>
+            </div>
+            <button className="button__goal">
+              <Link to={"/mygoals"}>Set Target</Link>
+            </button>
           </div>
-          <div className="container__habit-stats">
-            blog
-            <div className="progress__bar progress__bar--blog">
-              {props.userData.blogTarget}
-            </div>
-            <div className="checked__today">
-              <FontAwesomeIcon icon={faSquareCheck} />
-              {/* <FontAwesomeIcon icon={faSquare} /> */}
-            </div>
-          </div>
-          <div className="container__habit-stats">
-            algorithm
-            <div className="progress__bar progress__bar--algorithm">
-              {props.userData.bojTarget}
-            </div>
-            <div className="checked__today">
-              <FontAwesomeIcon icon={faSquareCheck} />
-              {/* <FontAwesomeIcon icon={faSquare} /> */}
-            </div>
-          </div>
-          <div className="container__habit-stats">
-            CS
-            <div className="progress__bar progress__bar--CS">
-              오늘의 CS 풀기
-            </div>
-            <div className="checked__today">
-              <FontAwesomeIcon icon={faSquare} />
-              {/* <FontAwesomeIcon icon={faSquareCheck} /> */}
-            </div>
-          </div>
-          <div className="container__habit-stats">
-            Feed
-            <div className="progress__bar progress__bar--Feed">오늘의 피드</div>
-            <div className="checked__today">
-              <FontAwesomeIcon icon={faSquareCheck} />
-              {/* <FontAwesomeIcon icon={faSquareCheck} /> */}
-            </div>
-          </div>
-          <button className="button__goal">
-            <Link to={"/mygoals"}>Set Target</Link>
-          </button>
-        </div>
+        )}
         <div className="container__contact">
           <div className="contact__text">Contact</div>
           <div className="contact__info">
@@ -131,13 +215,19 @@ const MyProfile = (props: MyProfileProps) => {
             <a href={`${props.userData.github}`}>
               <img src={github} className="sticker__github" alt="github Icon" />
             </a>
-            <a href={`${props.userData.tistory}`}>
+            <a href={`${props.userData.blog}`}>
               <img src={tistory} className="sticker__tistory" alt="" />
             </a>
           </div>
         </div>
         <div className="platform-address"></div>
       </div>
+      {isInstalled ? null : (
+        <InstallModal
+          isInstalled={isInstalled}
+          setIsInstalled={setIsInstalled}
+        />
+      )}
     </SProfile>
   );
 };

@@ -67,7 +67,69 @@ const Accumulate = () => {
           {dummyAccumulateList[activeStep].goal}
         </div>
         <div className="number">
+<<<<<<< Updated upstream
           {dummyAccumulateList[activeStep].number}일째 유지 중입니다
+=======
+          {accumulatedList &&
+            accumulatedList[dummyAccumulateList[activeStep].goal]?.day}
+          일째 유지 중입니다
+        </div>
+
+        {/* map 돌리는 코드로 바꾸기 */}
+        <div className="acc__day__wrapper">
+          {accumulatedList && (
+            <div className="goal__container">
+              <div className="start__div">
+                {
+                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                    ?.start?.[0]
+                }
+                일
+              </div>
+              <div className="mid__div">
+                {
+                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                    ?.mid?.[0]
+                }
+                일
+              </div>
+              <div className="end__div">
+                {
+                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                    ?.last?.[0]
+                }
+                일
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="acc__reward__wrapper">
+          {accumulatedList && (
+            <div className="reward__container">
+              <div className="reward1__div">
+                {
+                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                    ?.start?.[1]
+                }
+                코인
+              </div>
+              <div className="reward2__div">
+                {
+                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                    ?.mid?.[1]
+                }
+                코인
+              </div>
+              <div className="reward3__div">
+                {
+                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                    ?.last?.[1]
+                }
+                코인
+              </div>
+            </div>
+          )}
+>>>>>>> Stashed changes
         </div>
       </div>
     </SSection>

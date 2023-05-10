@@ -24,15 +24,33 @@ export const SSection = styled.section`
 
   .accumulate__container {
     text-align: center;
+    height: 90%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
   }
 
   .number {
     background-color: #ff9d9d;
     border-radius: 20px;
+    width: 80%;
     padding: 8px;
     font-family: "ZCOOL KuaiLe", sans-serif;
     text-align: center;
     font-weight: 600;
     font-size: 1vw;
+  }
+  .acc__day__wrapper {
+    width: 100%;
+  }
+  .goal__container {
+    display: flex;
+
+    justify-content: space-around;
+  }
+  .reward__container {
+    display: flex;
   }
 `;
