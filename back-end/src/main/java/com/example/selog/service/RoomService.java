@@ -46,9 +46,12 @@ public class RoomService {
     @Transactional
     public List<UserItemDto> updateItemLocation(List<UserItemDto> userItemDtoList){
         List<UserItemDto> updateUserItemDtoList = new ArrayList<>();
+
         for(UserItemDto userItemDto : userItemDtoList){
-            UserItem userItem = userItemRepository.findById(userItemDto.getRoomId())
+
+            UserItem userItem = userItemRepository.findById(userItemDto.getId())
                     .orElseThrow(() -> new CustomException(ErrorCode.NO_ITEM));
+
             userItem.updateItemLocation(userItemDto.getX(), userItemDto.getY(), userItemDto.getZ(), userItemDto.getRotation());
 
             UserItem updateItem = userItemRepository.save(userItem);
