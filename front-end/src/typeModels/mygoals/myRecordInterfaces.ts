@@ -13,8 +13,13 @@ export interface IDoneList {
 export interface IDoneItemProps {
   doneItem: IDoneItem;
 }
+export interface IAccumulatedRecordItem {
+  day: number,
+  last: number[],
+  mid: number[],
+  start: number[],
+}
 
-export interface ICountDoneItem {
-  type: string;
-  count: number;
+export interface IAccumulatedRecordList {
+  [key: string]: IAccumulatedRecordItem | null;
 }
