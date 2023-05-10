@@ -44,6 +44,7 @@ export const SSection = styled.section`
   }
   .acc__day__wrapper {
     width: 100%;
+    height: 3vh;
   }
   .goal__container {
     display: flex;
@@ -51,6 +52,75 @@ export const SSection = styled.section`
     justify-content: space-around;
   }
   .reward__container {
+  }
+  .start__div {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background-color: #494c53;
+    font-size: 0.8rem;
+  }
+
+  .acc__reward__wrapper {
+    width: 100%;
+  }
+  .reward__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+  }
+  .reward__div {
+    background-color: #ffb300;
+    color: white;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .reward2 {
+    background-color: #ffb300;
+  }
+  .reward3__div {
+    color: white;
+    background-color: #a65401;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    font-size: 0.8rem;
+  }
+  .inner_idv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: 50%;
+    background-color: #f4940c;
+  }
+  .reward3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: 50%;
+
+    background-color: #ab5a00;
   }
 `;

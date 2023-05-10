@@ -98,7 +98,11 @@ export default function Feed() {
       console.log(element["title"]);
     });
   };
-
+  const viewHandler = (i: number) => {
+    console.log(i);
+    if (i < 8) {
+    }
+  };
   return (
     <SMain>
       <SHeader>
@@ -149,7 +153,13 @@ export default function Feed() {
             newsfeed.map((feed: ReactNode, index: number) => {
               // <p> {feed.company}</p>;
 
-              return <FeedComponent key={index} props={feed}></FeedComponent>;
+              return (
+                <FeedComponent
+                  key={index}
+                  props={feed}
+                  onclick={viewHandler(index)}
+                ></FeedComponent>
+              );
             })}
           <div ref={observerRef}></div>
         </div>

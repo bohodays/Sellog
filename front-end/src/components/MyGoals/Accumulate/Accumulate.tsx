@@ -90,54 +90,59 @@ const Accumulate = () => {
         {/* map 돌리는 코드로 바꾸기 */}
         <div className="acc__day__wrapper">
           {accumulatedList && (
-            <div className="goal__container">
-              <div className="start__div">
-                {
-                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                    ?.start?.[0]
-                }
-                일
+            <span className="goal__bar">
+              <div className="goal__container">
+                <div className="start__div">
+                  {
+                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                      ?.start?.[0]
+                  }
+                  일
+                </div>
+                <div className="start__div">
+                  {
+                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                      ?.mid?.[0]
+                  }
+                  일
+                </div>
+                <div className="start__div">
+                  {
+                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                      ?.last?.[0]
+                  }
+                  일
+                </div>
               </div>
-              <div className="mid__div">
-                {
-                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                    ?.mid?.[0]
-                }
-                일
-              </div>
-              <div className="end__div">
-                {
-                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                    ?.last?.[0]
-                }
-                일
-              </div>
-            </div>
+            </span>
           )}
         </div>
         <div className="acc__reward__wrapper">
           {accumulatedList && (
             <div className="reward__container">
-              <div className="reward1__div">
-                {
-                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                    ?.start?.[1]
-                }
-                코인
+              <div className="reward__div reward1">
+                <div className="inner_idv">
+                  {
+                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                      ?.start?.[1]
+                  }
+                </div>
               </div>
-              <div className="reward2__div">
-                {
-                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                    ?.mid?.[1]
-                }
-                코인
+              <div className="reward__div reward2">
+                <div className="inner_idv">
+                  {
+                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                      ?.mid?.[1]
+                  }
+                </div>
               </div>
               <div className="reward3__div">
-                {
-                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                    ?.last?.[1]
-                }
-                코인
+                <div className="reward3">
+                  {
+                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                      ?.last?.[1]
+                  }
+                </div>
               </div>
             </div>
           )}
