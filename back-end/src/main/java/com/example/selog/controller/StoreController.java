@@ -43,8 +43,8 @@ public class StoreController {
     @PostMapping
     public ResponseEntity<?> insertItem(@RequestBody ItemDto itemDto) {
         try{
-            UserItemDto userItemDto = storeService.insertItem(itemDto.getItemId(), SecurityUtil.getCurrentMemberId());
-            return new ResponseEntity<>(new SuccessResponse(userItemDto), HttpStatus.OK);
+            Integer result = storeService.insertItem(itemDto.getItemId(), SecurityUtil.getCurrentMemberId());
+            return new ResponseEntity<>(new SuccessResponse(result), HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){

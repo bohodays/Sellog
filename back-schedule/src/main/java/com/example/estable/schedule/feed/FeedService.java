@@ -35,11 +35,11 @@ public class FeedService {
 
     private final FeedRepository feedRepository;
 
-    private String[] company = {"MUSINSA","NHN Toast","당근","토스"};
+    private String[] company = {"마켓컬리","NHN Toast","Watcha","토스"};
     private String[] urls = {
-            "https://medium.com/feed/musinsa-tech",
+            "https://helloworld.kurly.com/feed.xml",
             "https://meetup.toast.com/rss",
-            "https://medium.com/feed/daangn",
+            "https://medium.com/feed/watcha",
     "https://toss.tech/rss.xml"};
 
     //24시간마다 반복
