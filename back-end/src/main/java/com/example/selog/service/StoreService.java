@@ -41,7 +41,7 @@ public class StoreService {
     }
 
     @Transactional
-    public UserItemDto insertItem(Long itemId, Long userId){
+    public Integer insertItem(Long itemId, Long userId){
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_ITEM));
 
@@ -51,11 +51,17 @@ public class StoreService {
         Room room = roomRepository.findByMember(member)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_ROOM));
 
+        if(member.getPoints() - item.getPoint() < 0){
+            new CustomException(ErrorCode.LACK_POINTS);
+        }
+
         UserItem userItem = UserItem.builder()
                 .room(room)
                 .item(item)
                 .build();
+        userItemRepository.save(userItem);
+        member.updatePoint(item.getPoint());
 
-        return userItemRepository.save(userItem).toDto();
+        return memberRepository.save(member).getPoints();
     }
 }
