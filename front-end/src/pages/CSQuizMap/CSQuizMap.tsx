@@ -1,6 +1,7 @@
 // import React from 'react'
-// import Stomp from "stompjs";
-// import SockJS from "sockjs-client";
+import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
+import { localData } from "@/utils/token";
 
 import {
   useGLTF,
@@ -23,7 +24,6 @@ import { F3_Main } from "@/components/Main/Models/F3_Main";
 import { M2_Main } from "@/components/Main/Models/M2_Main";
 import { M1_Main } from "@/components/Main/Models/M1_Main";
 import { M3_Main } from "@/components/Main/Models/M3_Main";
-import ToggleButton from "@/components/Main/ToggleButton/ToggleButton";
 import { useRecoilState } from "recoil";
 import { userInfoState } from "@/recoil/myroom/atoms";
 
@@ -50,6 +50,9 @@ const Scene = ({ buttonRef }: any) => {
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
+  const [client, setClient] = useState<Stomp.Client | null>(null);
+  const accessToken = localData.getAccessToken();
+
   const userModelRef = useRef<any>();
   const pointerRef = useRef<any>();
 
@@ -72,10 +75,38 @@ const Scene = ({ buttonRef }: any) => {
   camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
   camera.updateProjectionMatrix();
 
-  // websocket
-  // const socket = new SockJS("https://k8a404.p.ssafy.io/real-time");
-  // const ws = Stomp.over(socket);
+  // 소켓 연결
+  useEffect(() => {
+    const socket = new SockJS("http://localhost:8083/real-time");
+    const ws = Stomp.over(socket);
 
+    ws.connect({ Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY4Mzc3MDEyOH0.2h7jab-hgJA8sHcMZskP779jv865_k8iu_eGySuA3ZjusNXTXZxGtYaMLFKJj8JNH5KJ1CeeKWZMnplCyv1LDw` }, () => {
+      setClient(ws);
+
+      ws.subscribe('/sub/1-2', (message) => {
+        console.log(message.body);
+        console.log("!!!!");
+      });
+    });
+
+    return () => {
+      if (ws !== null) {
+        ws.disconnect(() => {});
+      }
+    };
+  }, []);
+
+  function send(mouseX:number, mouseY:number) {
+    const message = {
+        roomId: "1-2",
+        sender: 1,
+        x: mouseX,
+        y: mouseY,
+        characterId: 1,
+        nickname: "닉네임"
+    };
+    client?.send("/pub/1-2", {}, JSON.stringify(message));
+  }
 
   function draw() {
     const delta = clock.getDelta();
@@ -163,6 +194,8 @@ const Scene = ({ buttonRef }: any) => {
   function calculateMousePosition(e: MouseEvent | Touch) {
     mouse.x = (e.clientX / gl.domElement.clientWidth) * 2 - 1;
     mouse.y = -((e.clientY / gl.domElement.clientHeight) * 2 - 1);
+    send(mouse.x, mouse.y);
+    console.log(mouse.x + " : "+ mouse.y);
   }
 
   // 변환된 마우스 좌표를 이용해 레이캐스팅
@@ -174,29 +207,13 @@ const Scene = ({ buttonRef }: any) => {
   // 마우스 이벤트
   gl.domElement.addEventListener("mousedown", (e: MouseEvent) => {
     isPressed = true;
-    calculateMousePosition(e);
+    calculateMousePosition(e); // 연속 4번으로 온다...
   });
   gl.domElement.addEventListener("mouseup", (e: MouseEvent) => {
     isPressed = false;
   });
-  gl.domElement.addEventListener("mousemove", (e: MouseEvent) => {
-    if (isPressed) {
-      calculateMousePosition(e);
-    }
-  });
-
-  // 터치 이벤트
-  gl.domElement.addEventListener("touchstart", (e: TouchEvent) => {
-    isPressed = true;
-    calculateMousePosition(e.touches[0]);
-  });
-  gl.domElement.addEventListener("touchend", (e: TouchEvent) => {
-    isPressed = false;
-  });
   gl.domElement.addEventListener("touchmove", (e: TouchEvent) => {
-    if (isPressed) {
-      calculateMousePosition(e.touches[0]);
-    }
+    isPressed = false;
   });
 
   console.log(userInfo.characterId);
@@ -225,7 +242,7 @@ const Scene = ({ buttonRef }: any) => {
       {/* 맵 바닥 */}
       {/* <Ground name="floor" position={[0, 0, 0]} receiveShadow={true} /> */}
       <mesh name="floor" rotation={[-Math.PI / 2, 0, 0]} receiveShadow={true}>
-        <planeGeometry args={[50, 50]} />
+        <planeGeometry args={[35, 20]} />
         <meshStandardMaterial color={"#5A9720"} />
       </mesh>
       {/* <Floor scale={7} castShadow={true} /> */}
@@ -266,7 +283,6 @@ const Main = () => {
 
   return (
     <SMain>
-      <ToggleButton />
       <Canvas
         style={{ background: "skyblue" }}
         shadows={true}
