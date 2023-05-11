@@ -85,7 +85,9 @@ public class WebHookService {
             if(record.isPresent()){
                 throw new CustomException(ErrorCode.CONFLICT_ALGO);
             }
+        }
 
+        else {
             //message parsing
             StringTokenizer st = new StringTokenizer(recordRequestDto.getMessage()," \n:");
 
