@@ -79,21 +79,18 @@ export const SBody = styled.div`
   height: 70%;
   justify-content: space-evenly;
   display: flex;
+  /* overflow-y: auto; */
   ::-webkit-scrollbar {
-    width: 0rem;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: #000000;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: #888;
+    display: none;
   }
   .feed__box {
     /* height: 90%; */
     overflow-y: auto;
     width: 60%;
+    ::-webkit-scrollbar {
+      /* display: hidden; */
+      visibility: hidden;
+    }
   }
 `;
 
@@ -106,16 +103,7 @@ export const SSection = styled.section`
     width: 95%;
     height: 15%;
   }
-  .search {
-    background-color: var(--color-white);
-    margin-bottom: 10%;
-    border-radius: 20px;
-    /* height: 40%; */
-    padding: 10%;
-    padding-bottom: 20%;
-    box-shadow: 2px 2px 1px 1px grey;
-    overflow-y: hidden;
-  }
+
   .keyword__button {
     background-color: var(--color-dark-white);
     border-radius: 4px;
@@ -133,14 +121,6 @@ export const SSection = styled.section`
 
   .mostviewed ::-webkit-scrollbar {
     width: 0rem;
-  }
-
-  .mostviewed ::-webkit-scrollbar-track {
-    background-color: #000000;
-  }
-
-  .mostviewed::-webkit-scrollbar-thumb {
-    background-color: #888;
   }
 
   .mostview__element {

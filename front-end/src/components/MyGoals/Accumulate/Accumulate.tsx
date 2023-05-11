@@ -44,19 +44,6 @@ const Accumulate = () => {
 
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = 5;
-  const [accumulatedList, setAccumulatedList] =
-    useState<IAccumulatedRecordList | null>(null);
-
-  useEffect(() => {
-    apiGetAccumulatedRecordList()
-      .then((r) => {
-        // console.log(r?.data.response);
-        setAccumulatedList(r?.data.response);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
