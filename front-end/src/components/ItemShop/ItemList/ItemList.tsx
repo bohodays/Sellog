@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ItemItem from "../ItemItem/ItemItem";
 import { SSection, SDiv } from "./styles";
 import { apiGetCategorizedItemList } from "@/api/store";
-import { IShopItem } from "@/typeModels/ItemShop/itemInterfaces";
+import { IItemProps, IShopItem } from "@/typeModels/ItemShop/iteminterfaces";
 
 const dummyItemList = [
   {
@@ -116,8 +116,8 @@ const ItemList = ({ category }: categoryProps) => {
       {itemList && (
         <SSection isEmpty={totalPage}>
           <SDiv>
-            {itemList.map((item: any, index: number) => (
-              <ItemItem item={item} key={item.id}></ItemItem>
+            {itemList.map((item: IShopItem, index: number) => (
+              <ItemItem shopItem={item} key={item.id}></ItemItem>
             ))}
           </SDiv>
           <div className="item__pagenation--wrapper">{pages()}</div>

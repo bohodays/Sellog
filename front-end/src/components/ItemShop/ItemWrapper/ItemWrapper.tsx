@@ -2,9 +2,9 @@ import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { PerspectiveCamera } from "@react-three/drei";
-import { IItemProps } from "@/typeModels/ItemShop/itemInterfaces";
+import { IShopItemProps } from "@/typeModels/ItemShop/iteminterfaces";
 
-const ItemWrapper = ({ item }: IItemProps) => {
+const ItemWrapper = ({ shopItem }: IShopItemProps) => {
   return <></>;
 };
 

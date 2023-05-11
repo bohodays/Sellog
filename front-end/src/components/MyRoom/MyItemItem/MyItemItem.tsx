@@ -1,24 +1,24 @@
 import React, { useState } from "react";
-import { IItemProps } from "@/typeModels/ItemShop/itemInterfaces";
+import { IItemProps } from "@/typeModels/ItemShop/iteminterfaces";
 import ItemWrapper from "@/components/ItemShop/ItemWrapper/ItemWrapper";
 import { SDiv } from "./styles";
 import { useRecoilState } from "recoil";
 import { myItemsState } from "@/recoil/myroom/atoms";
 import { itemDefaultInfo } from "@/utils/itemDefaultInfo";
 
-const MyItemItem = ({ myItem }: IItemProps) => {
+const MyItemItem = ({ item }: IItemProps) => {
   const [myItems, setMyItems] = useRecoilState(myItemsState);
 
   const handleViewItem = () => {
     let targetIndex;
 
     const targetItem = myItems.filter((getItem, i) => {
-      if (getItem.itemId === myItem?.itemId) {
+      if (getItem.itemId === item?.itemId) {
         targetIndex = i;
-        return getItem.itemId === myItem?.itemId;
+        return getItem.itemId === item?.itemId;
       }
     });
-    const itemPositionY = itemDefaultInfo(myItem?.itemId);
+    const itemPositionY = itemDefaultInfo(item?.itemId);
 
     const viewItem = {
       ...targetItem[0],
@@ -39,20 +39,18 @@ const MyItemItem = ({ myItem }: IItemProps) => {
     <SDiv>
       <div className="item__wrapper" onClick={handleViewItem}>
         {/* <ItemWrapper item={item}></ItemWrapper> */}
-        {myItem?.path ? (
-          <img className="item__img" src={myItem?.path} alt="" />
+        {item?.path ? (
+          <img className="item__img" src={item?.path} alt="" />
         ) : (
           <div style={{ width: "14vw", height: "32vh" }}></div>
         )}
 
         <div
           className={
-            myItem?.name === "undefined"
-              ? "item__name name-hidden"
-              : "item__name"
+            item?.name === "undefined" ? "item__name name-hidden" : "item__name"
           }
         >
-          {myItem?.name}
+          {item?.name}
         </div>
       </div>
     </SDiv>
