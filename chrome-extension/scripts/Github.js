@@ -24,7 +24,7 @@ function createRecord(token, message, type, problemId) {
     console.log(xhr.responseText);
     const point = JSON.parse(xhr.responseText).response;
 
-    if (point != 0) {
+    if (point > 0 || point === -1) {
       // 메시지
       console.log(point);
       chrome.runtime.sendMessage({

@@ -73,6 +73,8 @@ function startLoader() {
       // 기존의 이벤트 리스너 제거 후, 다시 등록
       publishBtn.removeEventListener('click', publishHandler);
       publishBtn.addEventListener('click', publishHandler); 
+    }else if(!document.querySelector('[data-testid="publish"]')){
+      ispublish = false;
     }
 
   }, 1000);
