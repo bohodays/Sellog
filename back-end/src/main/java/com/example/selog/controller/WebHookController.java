@@ -38,6 +38,7 @@ public class WebHookController {
 
     @PostMapping("/chrome")
     public ResponseEntity<?> createAlgoRecord(@RequestBody RecordRequestDto recordRequestDto) {
+        log.info("webhook 확장 프로그램 controller 실행");
         try{
             int result = webHookService.createAlgoRecord(recordRequestDto, SecurityUtil.getCurrentMemberId());
             return new ResponseEntity<>(new SuccessResponse(result), HttpStatus.OK);

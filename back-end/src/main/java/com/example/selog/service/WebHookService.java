@@ -20,10 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -89,11 +86,28 @@ public class WebHookService {
                 throw new CustomException(ErrorCode.CONFLICT_ALGO);
             }
 
+            //message parsing
+            StringTokenizer st = new StringTokenizer(recordRequestDto.getMessage()," \n:");
+
+            String title = null;
+            String content = null;
+
+            while(st.hasMoreTokens()) {
+
+                if(st.nextToken().contains("Title")) {
+                    title = st.nextToken();
+                } else if(st.nextToken().contains("CONTENT")) {
+                    content = st.nextToken();
+                }
+            }
+
+            log.info("title {}, content {}",title,content);
             //chat gpt로 글 검증해서 가져오기
             for(int i=0;i<10;++i) {
 
+
                 if(i==9) return -1;
-                String response = chatGptResponse("컴퓨터","컴퓨터는 매우 흥미로운 것입니다. 왜그럴까요?? 아무도 그이유를 모르겠지만 아주 먼옛날 폰 노이만에 의해 발견된 장치입니다." );
+                String response = chatGptResponse(title,content);
 
                 log.info("chatgpt response : {}",response);
                 //블로그 글이 검증된경우
