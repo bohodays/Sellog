@@ -25,5 +25,7 @@ public class JasyptConfigTest {
         config.setIvGeneratorClassName("org.jasypt.iv.RandomIvGenerator");
         config.setStringOutputType("base64");
         spe.setConfig(config);
+
+
     }
 }
