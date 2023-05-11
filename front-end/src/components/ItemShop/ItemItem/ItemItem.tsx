@@ -10,11 +10,17 @@ import { useRecoilState } from "recoil";
 const ItemItem = ({ item }: IItemProps) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [mypoint, setMypoint] = useState(userInfo.points);
+  const [possession, setPossession] = useState(item.possession);
 
+  // 이미 갖고 있는 아이템 possession 검사해서 못사게 하는거 추가
   const buyItem = () => {
     apiBuyItem(item?.id)
       .then((r) => {
         setMypoint(r?.data.response);
+        setPossession(1);
+        alert(
+          `구입이 완료 되었습니다. 내 포인트: ${mypoint} => ${r?.data.response}`
+        );
       })
       .catch((e) => {
         console.log(e);
@@ -33,7 +39,7 @@ const ItemItem = ({ item }: IItemProps) => {
             {item?.point}
           </div>
           {/* {item.category} */}
-
+          {possession}
           <button className="buy__btn" onClick={buyItem}>
             Buy
           </button>
