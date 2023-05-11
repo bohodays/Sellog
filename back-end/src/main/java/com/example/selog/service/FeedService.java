@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,12 +20,10 @@ public class FeedService {
 
     private final FeedRepository feedRepository;
 
-    public List<FeedDto> getFeeds(Pageable pageable) {
+    public Slice<FeedDto> getFeeds(Pageable pageable) {
 
-        return feedRepository.findAllFeedByDate(pageable)
-                .stream()
-                .map(Feed::toFeedDto)
-                .collect(Collectors.toList());
+        return feedRepository.findAllFeedByDate(pageable);
+
     }
 
     public void updateViews(Long feed_id) {
