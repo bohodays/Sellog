@@ -164,7 +164,7 @@ const Scene = ({ buttonRef }: any) => {
             buttonRef.current.style.zIndex = 100;
             buttonRef.current.style.opacity = 1;
             buttonRef.current.children[0].innerText =
-              "😘 포인트로 원하는 아이템을 구매해보세요 ! 😘";
+              "😘 습관을 통해 포인트를 얻어 마이룸을 꾸며보세요 ! 😘";
             // console.log(buttonRef.current.children[0].innerText);
 
             houseRef.current.visible = true;
@@ -648,14 +648,14 @@ const Main = () => {
   console.log(buttonRef.current);
 
   const handleRouterMove = () => {
-    if (buttonRef.current.children[0].innerText.includes("포인트")) {
+    if (buttonRef.current.children[0].innerText.includes("마이룸")) {
       navigate("/myroom");
     } else if (buttonRef.current.children[0].innerText.includes("cs")) {
       navigate("/csquiz");
     } else if (buttonRef.current.children[0].innerText.includes("구매")) {
       navigate("/item-shop");
-    } else if (buttonRef.current.children[0].innerText.includes("꾸며")) {
-      navigate("/myroom");
+    } else if (buttonRef.current.children[0].innerText.includes("ff")) {
+      navigate("/feed");
     }
   };
 

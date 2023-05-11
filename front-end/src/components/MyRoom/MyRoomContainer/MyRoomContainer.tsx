@@ -9,7 +9,11 @@ import { Room1 } from "../Models/Room1";
 import { Room3 } from "../Models/Room3";
 import { Room4 } from "../Models/Room4";
 import { useRecoilState } from "recoil";
-import { itemTargetState, myItemsState } from "@/recoil/myroom/atoms";
+import {
+  itemTargetState,
+  itemsHeightState,
+  myItemsState,
+} from "@/recoil/myroom/atoms";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import Loading from "@/components/Loading/Loading";
@@ -29,6 +33,7 @@ const Scene = ({
   rotationLeftButtonRef,
   rotationRigthButtonRef,
   deleteButtonRef,
+  goBackButtonRef,
 }: any) => {
   const { gl, camera } = useThree();
   gl.outputEncoding = sRGBEncoding;
@@ -74,6 +79,7 @@ const Scene = ({
           rotationLeftButtonRef={rotationLeftButtonRef}
           rotationRigthButtonRef={rotationRigthButtonRef}
           deleteButtonRef={deleteButtonRef}
+          goBackButtonRef={goBackButtonRef}
         />
       </Suspense>
     </>
@@ -92,16 +98,18 @@ const MyRoomContainer = (props: IMyRoomProps) => {
   const upButtonRef = useRef<any>();
   const downButtonRef = useRef<any>();
   const deleteButtonRef = useRef<any>();
+  const goBackButtonRef = useRef<any>();
 
   const [myItems, setMyItems] = useRecoilState(myItemsState);
+  const [itemsHeigth, setItemsHeight] = useRecoilState(itemsHeightState);
 
   const handleActivePage = () => {
     if (props.activePage === "myitems") {
       const apiRequesArray: any = [];
-      myItems.forEach((item) => {
+      myItems.forEach((item, i) => {
         const requestObj: any = {};
         requestObj["x"] = item.x;
-        requestObj["y"] = item.y;
+        requestObj["y"] = itemsHeigth[i].y;
         requestObj["z"] = item.z;
         requestObj["rotation"] = item.rotation;
         requestObj["id"] = item.id;
@@ -111,8 +119,9 @@ const MyRoomContainer = (props: IMyRoomProps) => {
         apiRequesArray.push(requestObj);
       });
       console.log(apiRequesArray);
+
       apiUpdateMyRoom(apiRequesArray).then((res) => {
-        console.log(res, "고백 버튼 결과");
+        console.log(res?.data.response, "고백 버튼 결과");
       });
     }
 
@@ -121,7 +130,7 @@ const MyRoomContainer = (props: IMyRoomProps) => {
     });
   };
 
-  console.log(target);
+  // console.log(target);
 
   return (
     <SMyRoom activePage={props.activePage}>
@@ -142,6 +151,7 @@ const MyRoomContainer = (props: IMyRoomProps) => {
           rotationLeftButtonRef={rotationLeftButtonRef}
           rotationRigthButtonRef={rotationRigthButtonRef}
           deleteButtonRef={deleteButtonRef}
+          goBackButtonRef={goBackButtonRef}
         />
       </Canvas>
       <button className="myitems__btn" onClick={handleActivePage}>
@@ -176,7 +186,11 @@ const MyRoomContainer = (props: IMyRoomProps) => {
         </>
       )}
       {props.activePage == "myitems" && (
-        <button className="myitemsGoback__btn" onClick={handleActivePage}>
+        <button
+          ref={goBackButtonRef}
+          className="myitemsGoback__btn"
+          onClick={handleActivePage}
+        >
           Go Back
         </button>
       )}

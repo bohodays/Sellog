@@ -36,9 +36,6 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
   const [position, setPosition] = useState({ x: propsX, y: propsY, z: propsZ });
   const [isDragging, setIsDragging] = useState(false);
 
-  // 회전 유무 판단
-  const [isRotation, setIsRotation] = useState(false);
-
   // 회전 정보 (서버에 저장된 좌표로 수정하기)
   const [rotation, setRotation] = useState(propsDeg);
 
@@ -57,10 +54,10 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
 
   const updateTagetItemPosition = (
     id: number,
-    x: number,
-    y: number,
-    z: number,
-    deg: number
+    x: number | null,
+    y: number | null,
+    z: number | null,
+    deg: number | null
   ) => {
     myItems.forEach((item, i) => {
       // itemId가 일치하는 아이템 선별
@@ -108,7 +105,7 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
         gl.domElement.removeEventListener("click", handleWindowClick);
       }
     };
-  }, [isDragging, isDragging, position.x, position.y, position.z, rotation]);
+  }, [isDragging, target]);
 
   useFrame(({ mouse }) => {
     if (props.activePage === "myitems") {
@@ -134,8 +131,11 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
     props.rotationLeftButtonRef.current &&
     props.rotationRigthButtonRef.current &&
     props.upButtonRef.current &&
-    props.downButtonRef.current
+    props.downButtonRef.current &&
+    props.deleteButtonRef.current
   ) {
+    console.log({ target }, "Black_chair_1");
+
     const leftRotation = () => {
       let newRotation = (rotation - 10) % 360;
       setRotation(newRotation);
@@ -156,11 +156,24 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
     const positionDown = () => {
       if (position.y > -2.5) {
         const newY = Number(position.y) - 0.2;
+        // atom에 변화된 포지션 저장
+        updateTagetItemPosition(
+          props.itemId,
+          position.x,
+          newY,
+          position.z,
+          rotation
+        );
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };
 
+    const itemDelete = () => {
+      updateTagetItemPosition(props.itemId, null, null, null, null);
+    };
+
     if (target === "Black_chair_1") {
+      console.log("버튼 실행", "Black_chair_1");
       props.rotationLeftButtonRef.current.addEventListener(
         "click",
         leftRotation
@@ -171,6 +184,7 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
       );
       props.upButtonRef.current.addEventListener("click", positionUp);
       props.downButtonRef.current.addEventListener("click", positionDown);
+      props.deleteButtonRef.current.addEventListener("click", itemDelete);
     } else {
       props.rotationLeftButtonRef.current.removeEventListener(
         "click",
@@ -180,6 +194,7 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
         "click",
         rightRotation
       );
+      props.deleteButtonRef.current.removeEventListener("click", itemDelete);
     }
   }
 

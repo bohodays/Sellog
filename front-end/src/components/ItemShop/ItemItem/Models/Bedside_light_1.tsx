@@ -7,9 +7,14 @@ import * as THREE from "three";
 import React, { useRef, useState, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
-import { useRecoilState } from "recoil";
-import { itemTargetState, myItemsState } from "@/recoil/myroom/atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  itemTargetState,
+  itemsHeightState,
+  myItemsState,
+} from "@/recoil/myroom/atoms";
 import { useFrame, useThree } from "@react-three/fiber";
+import { apiUpdateMyRoom } from "@/api/room";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -50,6 +55,8 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
 
   const [myItems, setMyItems] = useRecoilState(myItemsState);
 
+  const setItemsHeight = useSetRecoilState(itemsHeightState);
+
   const updateTagetItemPosition = (
     id: number,
     x: number | null,
@@ -71,8 +78,6 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
         // 불변성 유지를 위한 새로운 배열 생성
         const newItems = [...myItems];
         newItems[i] = newItemPosition;
-
-        console.log({ newItems });
 
         // 새로운 배열을 atom에 저장
         setMyItems(newItems);
@@ -134,6 +139,8 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
     props.downButtonRef.current &&
     props.deleteButtonRef.current
   ) {
+    console.log({ target }, "Beside_light_1");
+
     const leftRotation = () => {
       let newRotation = (rotation - 10) % 360;
       setRotation(newRotation);
@@ -146,9 +153,17 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
 
     const positionUp = () => {
       if (position.y < 3) {
-        console.log(myItems);
-
         const newY = Number(position.y) + 0.2;
+        const copyArray = [...myItems];
+        myItems.forEach((getItem, index) => {
+          if (getItem.itemId === props.itemId) {
+            const newObj: any = { ...getItem };
+            newObj["y"] = newY;
+
+            copyArray[index] = newObj;
+          }
+        });
+        setItemsHeight([...copyArray]);
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };
@@ -156,16 +171,27 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
     const positionDown = () => {
       if (position.y > -2.5) {
         const newY = Number(position.y) - 0.2;
+        const copyArray = [...myItems];
+        myItems.forEach((getItem, index) => {
+          if (getItem.itemId === props.itemId) {
+            const newObj: any = { ...getItem };
+            newObj["y"] = newY;
+
+            copyArray[index] = newObj;
+          }
+        });
+        setItemsHeight([...copyArray]);
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };
 
     const itemDelete = () => {
-      console.log(target, "test");
       updateTagetItemPosition(props.itemId, null, null, null, null);
     };
 
     if (target === "Bedside_light_1") {
+      console.log("버튼 실행", "Bedside_light_1");
+
       props.rotationLeftButtonRef.current.addEventListener(
         "click",
         leftRotation
@@ -186,6 +212,8 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
         "click",
         rightRotation
       );
+      props.upButtonRef.current.removeEventListener("click", positionUp);
+      props.downButtonRef.current.removeEventListener("click", positionDown);
       props.deleteButtonRef.current.removeEventListener("click", itemDelete);
     }
   }

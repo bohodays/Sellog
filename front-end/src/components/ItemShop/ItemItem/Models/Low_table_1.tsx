@@ -51,10 +51,10 @@ export function Low_table_1(props: JSX.IntrinsicElements["group"] | any) {
 
   const updateTagetItemPosition = (
     id: number,
-    x: number,
-    y: number,
-    z: number,
-    deg: number
+    x: number | null,
+    y: number | null,
+    z: number | null,
+    deg: number | null
   ) => {
     myItems.forEach((item, i) => {
       // itemId가 일치하는 아이템 선별
@@ -128,7 +128,8 @@ export function Low_table_1(props: JSX.IntrinsicElements["group"] | any) {
     props.rotationLeftButtonRef.current &&
     props.rotationRigthButtonRef.current &&
     props.upButtonRef.current &&
-    props.downButtonRef.current
+    props.downButtonRef.current &&
+    props.deleteButtonRef.current
   ) {
     const leftRotation = () => {
       let newRotation = (rotation - 10) % 360;
@@ -154,6 +155,10 @@ export function Low_table_1(props: JSX.IntrinsicElements["group"] | any) {
       }
     };
 
+    const itemDelete = () => {
+      updateTagetItemPosition(props.itemId, null, null, null, null);
+    };
+
     if (target === "Low_table_1") {
       props.rotationLeftButtonRef.current.addEventListener(
         "click",
@@ -165,6 +170,7 @@ export function Low_table_1(props: JSX.IntrinsicElements["group"] | any) {
       );
       props.upButtonRef.current.addEventListener("click", positionUp);
       props.downButtonRef.current.addEventListener("click", positionDown);
+      props.deleteButtonRef.current.addEventListener("click", itemDelete);
     } else {
       props.rotationLeftButtonRef.current.removeEventListener(
         "click",
@@ -174,6 +180,7 @@ export function Low_table_1(props: JSX.IntrinsicElements["group"] | any) {
         "click",
         rightRotation
       );
+      props.deleteButtonRef.current.removeEventListener("click", itemDelete);
     }
   }
 

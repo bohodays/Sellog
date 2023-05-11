@@ -65,8 +65,6 @@ const MyItems = () => {
     setCurrentPage(currentPage + 1);
   };
 
-  console.log(currentItemList, "현재 아이템");
-
   return (
     <SSection>
       <div className="title__wrapper">
