@@ -23,7 +23,7 @@ public class QItemUserItemRepositoryImpl implements QItemUserItemRepository{
     @Override
     public Page<StoreItemDto> getAllStoreItemByCategory(Long roomId, String category, Pageable pageable) {
         List<StoreItemDto> result = jpaQueryFactory
-                .selectDistinct(Projections.bean(StoreItemDto.class, item.id, item.category, item.name, item.point,
+                .selectDistinct(Projections.bean(StoreItemDto.class, item.id, item.category, item.name, item.point, item.path,
                         ExpressionUtils
                                 .as(new CaseBuilder()
                                         .when(userItem.item.id.isNull())
@@ -47,7 +47,7 @@ public class QItemUserItemRepositoryImpl implements QItemUserItemRepository{
     @Override
     public Page<StoreItemDto> getAllStoreItem(Long roomId, Pageable pageable) {
         List<StoreItemDto> result = jpaQueryFactory
-                .selectDistinct(Projections.bean(StoreItemDto.class, item.id, item.category, item.name, item.point,
+                .selectDistinct(Projections.bean(StoreItemDto.class, item.id, item.category, item.name, item.point, item.path,
                         ExpressionUtils
                                 .as(new CaseBuilder()
                                         .when(userItem.item.id.isNull())

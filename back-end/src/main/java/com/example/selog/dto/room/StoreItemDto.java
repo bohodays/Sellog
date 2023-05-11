@@ -12,5 +12,6 @@ public class StoreItemDto {
     String name;
     Integer point;
     String category;
+    String path;
     Integer possession; //이미 가지고 있는지 여부
 }
