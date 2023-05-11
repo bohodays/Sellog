@@ -247,7 +247,7 @@ const MyProfile = (props: MyProfileProps) => {
         <div className="platform-address"></div>
       </div>
       {/*  */}
-      {isInstalled && isTarget ? null : (
+      {isInstalled || isTarget ? null : (
         <InstallModal
           isInstalled={isInstalled}
           setIsInstalled={setIsInstalled}

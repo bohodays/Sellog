@@ -8,8 +8,8 @@ interface IInstallProps {
 }
 
 function InstallModal(props: IInstallProps) {
-  console.log(props.isInstalled);
-  console.log(props.setIsInstalled);
+  // console.log(props.isInstalled);
+  // console.log(props.setIsInstalled);
 
   return (
     <SInstallModal>

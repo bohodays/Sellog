@@ -29,7 +29,7 @@ function EditProfile(props: MyProfileProps) {
   const nicknameRef: any = useRef("");
   const mottoRef: any = useRef("");
   const emailRef: any = useRef("");
-  const tistoryRef: any = useRef("");
+  const blogRef: any = useRef("");
   const githubRef: any = useRef("");
 
   const [isModal, setIsModal] = useState<boolean>(false);
@@ -64,17 +64,92 @@ function EditProfile(props: MyProfileProps) {
     }
   };
 
+  // 개인정보 유효성 검사.
+
+  // 닉네임 유효성
+  function isValidNickName(nick: string) {
+    const nicknameRegex = /^[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9_-]{2,16}$/;
+    return nicknameRegex.test(nick);
+  }
+  // 좌우명 유효성
+  function isValidMotto(mo: string) {
+    const mottoRegex = /^[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9_-]{2,16}$/;
+    return mottoRegex.test(mo);
+  }
+  // 이메일 유효성
+  function isValidEmail(email: string) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  // 깃허브 유효성
+  // function isValidGithub(git: string) {
+  //   const githubRegex = /^[^\s@]+github[^\s@]+\.[^\s@]+$/;
+  // }
+  // 블로그 유효성
+  function isValidBlog(blog: string) {
+    const blogRegex =
+      /^(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+)\.([a-zA-Z0-9-.]+)(?:\/[^\s]*)?$/;
+    console.log(blog);
+
+    const matches = blog.match(blogRegex);
+    console.log(matches);
+
+    if (matches && matches.length >= 3) {
+      const subdomain = matches[1];
+      const topLevelDomain = matches[2];
+      return topLevelDomain === "tistory.com";
+    }
+    return false;
+  }
+
+  // 입력된 값 테스트
+  function isValid() {
+    let validNum = 0;
+    if (!isValidNickName(nicknameRef.current.value)) {
+      console.log("Nick Name", isValidNickName(nicknameRef.current.value));
+    } else {
+      // valid nickname
+      validNum++;
+    }
+    if (!isValidMotto(mottoRef.current.value)) {
+      console.log("Motto", isValidMotto(mottoRef.current.value));
+    } else {
+      // valid motto
+      validNum++;
+    }
+    if (!isValidEmail(emailRef.current.value)) {
+      console.log("Email");
+    } else {
+      // valid email
+      validNum++;
+    }
+    if (!isValidBlog(blogRef.current.value)) {
+      console.log("blog");
+    } else {
+      //valid blog
+      validNum++;
+    }
+    // 모두 만족하면 true 리턴
+    if (validNum === 4) {
+      return true;
+    } else {
+      return false;
+    }
+
+    // isValidGithub(githubRef.current.value);
+    // validNum ++
+  }
+  // 프로필 수정하는 함수
   const editHandler = () => {
     // api put 함수 넣기
     console.log({ newProfileImg });
-
     props.setUserData({
       ...props.userData,
       img: newProfileImg,
       nickname: nicknameRef.current.value,
       email: emailRef.current.value,
       motto: mottoRef.current.value,
-      tistory: tistoryRef.current.value,
+      blog: blogRef.current.value,
       github: githubRef.current.value,
     });
 
@@ -83,7 +158,7 @@ function EditProfile(props: MyProfileProps) {
       nickname: nicknameRef.current.value,
       motto: mottoRef.current.value,
       contact: emailRef.current.value,
-      blog: tistoryRef.current.value,
+      blog: blogRef.current.value,
       github: githubRef.current.value,
     };
 
@@ -100,7 +175,12 @@ function EditProfile(props: MyProfileProps) {
     props.setIsEdit(!props.isEdit);
   };
   const confirmModalHandler = () => {
-    setIsModal(!isModal);
+    if (isValid()) {
+      setIsModal(!isModal);
+    } else {
+      return;
+      // 유효성 검사 실패한 부분 알려주기
+    }
   };
 
   return (
@@ -163,16 +243,8 @@ function EditProfile(props: MyProfileProps) {
             <p>BLOG</p>
             <input
               type="text"
-              placeholder={props.userData.tistory}
-              ref={tistoryRef}
-            />
-          </div>
-          <div className="box__edit box__github">
-            <p>GITHUB</p>
-            <input
-              type="text"
-              placeholder={props.userData.github}
-              ref={githubRef}
+              placeholder="ex) https://example.tistory.com"
+              ref={blogRef}
             />
           </div>
         </div>

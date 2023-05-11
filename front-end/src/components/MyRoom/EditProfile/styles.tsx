@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const SProfile = styled.section`
   height: 100%;
@@ -16,8 +16,7 @@ export const SProfile = styled.section`
     transform: rotate(-7.58deg);
     margin-bottom: 12%;
   }
-  .img__profile {
-  }
+
   .sticker__smilebottom {
     position: absolute;
     width: 7rem;
@@ -95,10 +94,15 @@ export const SProfile = styled.section`
       width: 50%;
       height: 1.2rem;
       font-size: 1.1rem;
+      ${({ error }: any) =>
+        error &&
+        css`
+          border: red solid 1px;
+          background-color: black;
+        `}
     }
   }
-  .box__name {
-  }
+
   .box__motto {
   }
   .box__email {
