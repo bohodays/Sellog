@@ -41,7 +41,7 @@ type GLTFResult = GLTF & {
 type ActionName = "Idle" | "Run" | "Sad" | "Song Jump" | "Walk" | "Win";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
-const Scene = ({ buttonRef }: any) => {
+const Scene = ({ buttonRef, send }: any) => {
   const group = useRef<THREE.Group | any>();
   const { nodes, materials, animations } = useGLTF(
     "/models/characters/f1.glb"
@@ -49,9 +49,6 @@ const Scene = ({ buttonRef }: any) => {
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-
-  const [client, setClient] = useState<Stomp.Client | null>(null);
-  const accessToken = localData.getAccessToken();
 
   const userModelRef = useRef<any>();
   const pointerRef = useRef<any>();
@@ -74,39 +71,6 @@ const Scene = ({ buttonRef }: any) => {
   const cameraPosition = new Vector3(-3.5, 10, 10);
   camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
   camera.updateProjectionMatrix();
-
-  // 소켓 연결
-  useEffect(() => {
-    const socket = new SockJS("http://localhost:8083/real-time");
-    const ws = Stomp.over(socket);
-
-    ws.connect({ Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY4Mzc3MDEyOH0.2h7jab-hgJA8sHcMZskP779jv865_k8iu_eGySuA3ZjusNXTXZxGtYaMLFKJj8JNH5KJ1CeeKWZMnplCyv1LDw` }, () => {
-      setClient(ws);
-
-      ws.subscribe('/sub/1-2', (message) => {
-        console.log(message.body);
-        console.log("!!!!");
-      });
-    });
-
-    return () => {
-      if (ws !== null) {
-        ws.disconnect(() => {});
-      }
-    };
-  }, []);
-
-  function send(mouseX:number, mouseY:number) {
-    const message = {
-        roomId: "1-2",
-        sender: 1,
-        x: mouseX,
-        y: mouseY,
-        characterId: 1,
-        nickname: "닉네임"
-    };
-    client?.send("/pub/1-2", {}, JSON.stringify(message));
-  }
 
   function draw() {
     const delta = clock.getDelta();
@@ -258,7 +222,7 @@ const Scene = ({ buttonRef }: any) => {
         <M2_Main userModelRef={userModelRef} group={group} />
       ) : (
         <M3_Main userModelRef={userModelRef} group={group} />
-      )}
+      )}      
 
       {/* 유저 캐릭터를 따라다니는 pointMesh */}
       <mesh
@@ -276,10 +240,136 @@ const Scene = ({ buttonRef }: any) => {
   );
 };
 
+const Other = () => {
+  const group = useRef<THREE.Group | any>();
+  const { animations } = useGLTF(
+    "/models/characters/f1.glb"
+  ) as GLTFResult;
+  const { actions } = useAnimations<GLTFActions | any>(animations, group);
+
+  const userModelRef = useRef<any>();
+
+  // Renderer
+  const { gl, clock} = useThree<any>();
+
+  //raycaster
+  let destinationPoint = new Vector3();
+  let mouse = new Vector2();
+  let angle = 0;
+  let moving = false;
+
+  function draw() {
+    const delta = clock.getDelta();
+
+    if (userModelRef.current?.mixer) {
+      userModelRef.current?.mixer.update(delta);
+    }
+
+    if (userModelRef.current) {
+
+      if (moving) {
+        // 걸어가는 상태
+        angle = Math.atan2(
+          destinationPoint.z - userModelRef.current.position.z,
+          destinationPoint.x - userModelRef.current.position.x
+        );
+
+        userModelRef.current.position.x += Math.cos(angle) * 0.08;
+        userModelRef.current.position.z += Math.sin(angle) * 0.08;
+
+        actions["Idle"]?.stop();
+        actions["Run"]?.play();
+
+        if (
+          Math.abs(destinationPoint.x - userModelRef.current.position.x) <
+            0.04 &&
+          Math.abs(destinationPoint.z - userModelRef.current.position.z) < 0.03
+        ) {
+          moving = false;
+          console.log("멈춤");
+        }
+
+      } else {
+        actions["Run"]?.stop();
+        actions["Idle"]?.play();
+      }
+    }
+
+    // gl.setAnimationLoop(draw);
+  }
+
+  draw();
+
+  // 마우스 좌표를 three.js에 맞게 변환
+  function calculateMousePosition(e: MouseEvent | Touch) {
+    mouse.x = (e.clientX / gl.domElement.clientWidth) * 2 - 1;
+    mouse.y = -((e.clientY / gl.domElement.clientHeight) * 2 - 1);
+  }
+
+  return (
+    <Suspense>
+      {/* 빛 */}
+      <ambientLight color={"white"} intensity={0.8} />
+      <directionalLight
+        color={"white"}
+        intensity={0.7}
+        position={[1, 1, 1]}
+        castShadow={true}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-camera-left={-100}
+        shadow-camera-right={100}
+        shadow-camera-top={100}
+        shadow-camera-bottom={-100}
+        shadow-camera-near={-100}
+        shadow-camera-far={100}
+      />
+      <M3_Main userModelRef={userModelRef} group={group} />
+
+    </Suspense>
+  );
+};
+
 const Main = () => {
   const navigate = useNavigate();
   const buttonRef = useRef<any>();
   console.log(buttonRef.current);
+
+  const [client, setClient] = useState<Stomp.Client | null>(null);
+  const accessToken = localData.getAccessToken();
+
+  // 소켓 연결
+  useEffect(() => {
+    const socket = new SockJS("http://localhost:8083/real-time");
+    const ws = Stomp.over(socket);
+
+    ws.connect({ Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY4Mzg2NzYyNn0.8plb7Hync2YS_ZqJau_7fxDzPqgmapGB-6U7-RRSO0y0-nQdfogzT00TSJ8ix2qKuzB-_XtfLjkXGHaXDHlUZg` }, () => {
+      setClient(ws);
+
+      ws.subscribe('/sub/1', (message) => {
+        console.log(message.body);
+        console.log("!!!!");
+      },{ Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY4Mzg2NzYyNn0.8plb7Hync2YS_ZqJau_7fxDzPqgmapGB-6U7-RRSO0y0-nQdfogzT00TSJ8ix2qKuzB-_XtfLjkXGHaXDHlUZg` });
+    });
+
+    return () => {
+      if (ws !== null) {
+        ws.disconnect(() => {});
+      }
+    };
+  }, []);
+
+  function send(mouseX:number, mouseY:number) {
+    const message = {
+        roomId: "1",
+        sender: 1,
+        x: mouseX,
+        y: mouseY,
+        characterId: 1,
+        nickname: "닉네임"
+    };
+    client?.send("/pub/1", {}, JSON.stringify(message));
+  }
 
   return (
     <SMain>
@@ -288,7 +378,8 @@ const Main = () => {
         shadows={true}
         gl={{ preserveDrawingBuffer: true }}
       >
-        <Scene buttonRef={buttonRef} />
+        <Scene buttonRef={buttonRef} send={send} key={1}/>
+        <Other />
       </Canvas>
     </SMain>
   );
