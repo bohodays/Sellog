@@ -1,59 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MyItemItem from "../MyItemItem/MyItemItem";
 import { SSection, SDiv } from "./styles";
 import { TiChevronRightOutline, TiChevronLeftOutline } from "react-icons/ti";
+import { apiGetMyItemList } from "@/api/room";
+import { myItemsType } from "@/recoil/myroom/atoms";
+import { IItem } from "@/typeModels/ItemShop/itemInterfaces";
 
-const dummyMyItemList = [
-  {
-    id: 1,
-    name: "chair",
-    point: 300,
-    category: "furniture",
-  },
-  {
-    id: 2,
-    name: "bed",
-    point: 300,
-    category: "furniture",
-  },
-  {
-    id: 3,
-    name: "desk",
-    point: 300,
-    category: "electronics",
-  },
-  {
-    id: 4,
-    name: "wood_shelve",
-    point: 300,
-    category: "decoration",
-  },
-  {
-    id: 5,
-    name: "leopard_chair",
-    point: 300,
-    category: "furniture",
-  },
-  {
-    id: 6,
-    name: "elec_guitar",
-    point: 300,
-    category: "etc",
-  },
-];
+type PropsType = {
+  currentItemList: Array<IItem>;
+  handlePrevPage: () => void;
+  handleNextPage: () => void;
+  currentPage: number;
+  isLast: boolean;
+};
 
-const MyItemList = () => {
+const MyItemList = ({
+  isLast,
+  currentItemList,
+  handlePrevPage,
+  handleNextPage,
+  currentPage,
+}: PropsType) => {
   return (
     <SSection>
-      <button>
+      <button
+        className="prev__page"
+        onClick={handlePrevPage}
+        disabled={currentPage === 0 ? true : false}
+      >
         <TiChevronLeftOutline size={40} color="white"></TiChevronLeftOutline>
       </button>
       <SDiv>
-        {dummyMyItemList.map((item, index) => (
-          <MyItemItem item={item} key={item.id}></MyItemItem>
-        ))}
+        {currentItemList.length &&
+          currentItemList.map((item, index) => (
+            <MyItemItem item={item} key={index}></MyItemItem>
+          ))}
       </SDiv>
-      <button>
+      <button
+        className="next__page"
+        onClick={handleNextPage}
+        disabled={isLast ? true : false}
+      >
         <TiChevronRightOutline size={40} color="white"></TiChevronRightOutline>
       </button>
     </SSection>

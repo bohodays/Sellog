@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import { SProfile } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPenToSquare,
+  faEnvelope,
+  faLeftLong,
+} from "@fortawesome/free-solid-svg-icons";
 import profilePic from "@/assets/imgs/retro/profilePic.jpeg";
 import github from "@/assets/imgs/retro/github.png";
 import tistory from "@/assets/imgs/retro/tistoryIcon.png";
@@ -35,7 +39,6 @@ function EditProfile(props: MyProfileProps) {
 
   // 프로필 사진 바꾸는 로직
   function profileHandler() {
-    // console.log("profileHandler??", typeof profileImg);
     profileImg.current.click();
   }
 
@@ -125,7 +128,7 @@ function EditProfile(props: MyProfileProps) {
             <p className="username">{props.userData.nickname}</p>
             <div className="point__container">
               <img className="sticker__coin" src={coin} alt="coin" />
-              <p>1000</p>
+              <p>{props.userData.points}</p>
             </div>
           </div>
         </div>
@@ -155,7 +158,7 @@ function EditProfile(props: MyProfileProps) {
             />
           </div>
           <div className="box__edit box__tistory">
-            <p>TISTORY</p>
+            <p>BLOG</p>
             <input
               type="text"
               placeholder={props.userData.tistory}
@@ -171,9 +174,12 @@ function EditProfile(props: MyProfileProps) {
             />
           </div>
         </div>
-        <button className="button__goal" onClick={editHandler}>
-          <p>Confirm</p>
-        </button>
+        <div className="button__edit">
+          <FontAwesomeIcon icon={faLeftLong} />
+          <button className="button__goal" onClick={editHandler}>
+            <p>Confirm</p>
+          </button>
+        </div>
         <hr />
         <div className="platform-address">
           <div>

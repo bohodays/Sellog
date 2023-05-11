@@ -11,69 +11,98 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef, useCallback } from "react";
 import FeedComponent from "@/components/Feed/FeedComponent";
-import { getFeedApi } from "@/api/feed";
+import { getFeedApi, getMostView } from "@/api/feed";
 
 export default function Feed() {
-  interface IntersectionObserverInit {
-    root?: Element | Document | null;
-    rootMargin?: string;
-    threshold?: number | number[];
-  }
   const navigate = useNavigate();
   const [newsfeed, setNewsFeed] = useState<any>();
+  const [mostViewFeed, setMostViewFeed] = useState<any>();
+  // intersecting 판별용 상태
+  const [isLoading, setIsLoading] = useState(false);
   const [isFeed, setIsFeed] = useState<boolean>(false);
-
-  type IntersectHandler = (
-    entry: IntersectionObserverEntry,
-    observer: IntersectionObserver
-  ) => void;
-
-  const useIntersect = (
-    onIntersect: IntersectHandler,
-    options?: IntersectionObserverInit
-  ) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const callback = useCallback(
-      (
-        entries: IntersectionObserverEntry[],
-        observer: IntersectionObserver
-      ) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) onIntersect(entry, observer);
-        });
-      },
-      [onIntersect]
-    );
-
-    useEffect(() => {
-      if (!ref.current) return;
-      const observer = new IntersectionObserver(callback, options);
-      observer.observe(ref.current);
-      return () => observer.disconnect();
-    }, [ref, options, callback]);
-
-    return ref;
-  };
-
+  const [isMostView, setIsMostView] = useState<boolean>(false);
+  const [page, setPage] = useState(1);
+  // let page = 1;
   const observerRef = useRef(null);
+
+  // 무한 스크롤
+  // intersection observer options
+  let options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 1.0,
+  };
+  let callback = (entries: any, observer: any) => {
+    if (page < 9) {
+      entries.forEach((entry: any) => {
+        // 관찰중인 태그가 교차할때 root와
+        // page++;
+        if (entry.isIntersecting) {
+          // api call
+          console.log({ page }, "???????????");
+
+          getFeedApi(page).then(({ data }: any) => {
+            setNewsFeed([...newsfeed, ...data.response]);
+            setPage((prev) => prev + 1);
+          });
+        }
+      });
+    }
+  };
+  let target: any = observerRef.current;
 
   // 피드 불러오기
   useEffect(() => {
-    getFeedApi().then(
-      ({ data }: any | undefined) => setNewsFeed(data.response)
-      // console.log(data.response)
-    );
-    // console.log(datata, "feeeeed");
+    // 초기 데이터 불러오기
+    if (newsfeed === undefined) {
+      getFeedApi(page).then(({ data }: any | undefined) => {
+        setNewsFeed(data.response);
+      });
+    }
+    if (mostViewFeed === undefined) {
+      console.log("hi");
+      getMostView().then(({ data }: any) => {
+        setMostViewFeed(data.response);
+      });
+    }
   }, []);
+
+  // 무한 스크롤
   useEffect(() => {
-    // console.log("feed updated", newsfeed);
     if (newsfeed != undefined) {
       setIsFeed(true);
     }
-  }, [newsfeed]);
 
-  // 조회수 증가
+    console.log("useEffect", mostViewFeed);
+    //observer  생성
+    let observer = new IntersectionObserver(callback, options);
+    // 감지할 대상이 undefined가 아닐때
+    if (target) {
+      observer.observe(target); //callback 실행
+    }
+    return () => {
+      observer.disconnect();
+      console.log("disconnect", target);
+    };
+  }, [target, newsfeed]);
 
+  useEffect(() => {
+    if (mostViewFeed != undefined) {
+      setIsMostView(true);
+    }
+  }, [mostViewFeed]);
+
+  const feedHandler = () => {
+    console.log({ newsfeed }, { page });
+    mostViewFeed.forEach((element: ReactNode) => {
+      console.log(element["title"]);
+    });
+  };
+  const viewHandler = (i: number) => {
+    console.log(i);
+    if (i < 8) {
+    }
+  };
   return (
     <SMain>
       <SHeader>
@@ -96,47 +125,43 @@ export default function Feed() {
         </div>
         {/* <h2 className="logo">Logo</h2> */}
         <img className="sticker2" src={GreenFlower} alt="green flower" />
+        <button onClick={feedHandler}> panic button</button>
       </SHeader>
       <SBody>
         <SSection>
-          <div className="search">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-            <span>검색하기</span>
-            <br />
-            <br />
-            <input type="text" placeholder="검색창" />
-            <br />
-            <hr />
-            <FontAwesomeIcon icon={faTag} />
-            <span>추천 키워드 </span>
-            <br />
-            <br />
-            <div>
-              <button className="keyword__button">AI</button>
-              <button className="keyword__button">클라우드</button>
-              <button className="keyword__button">빅데이터</button>
-              <button className="keyword__button">운영체제</button>
-              <button className="keyword__button">알고리즘</button>
-            </div>
-          </div>
           <div className="mostviewed">
-            <FontAwesomeIcon icon={faFireFlameCurved} />
+            <FontAwesomeIcon
+              icon={faFireFlameCurved}
+              style={{ color: "red" }}
+            />
             <span> 가장 많이 본 피드</span>
             <div className="mostviewed__list">
-              <li> 피드 이름 1</li>
-              <li> ㅍ드 이름 2</li>
-              <li> 피드 이름 3</li>
-              <li> 피드 이름 4</li>
+              {/* <p> {mostViewFeed}</p> */}
+              {isMostView &&
+                mostViewFeed.map((element: ReactNode, index: number) => {
+                  return (
+                    <li key={index} className="mostview__element">
+                      {element["title"]}
+                    </li>
+                  );
+                })}
             </div>
           </div>
         </SSection>
         <div className="feed__box">
           {isFeed &&
-            newsfeed.map((feed: ReactNode, index: Number) => {
+            newsfeed.map((feed: ReactNode, index: number) => {
               // <p> {feed.company}</p>;
 
-              return <FeedComponent key={index} props={feed}></FeedComponent>;
+              return (
+                <FeedComponent
+                  key={index}
+                  props={feed}
+                  onclick={viewHandler(index)}
+                ></FeedComponent>
+              );
             })}
+          <div ref={observerRef}></div>
         </div>
         <img className="sticker1" src={LargeSmile} alt="스마일 큰거" />
       </SBody>

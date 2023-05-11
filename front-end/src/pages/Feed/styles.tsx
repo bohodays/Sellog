@@ -6,6 +6,7 @@ export const SMain = styled.main`
   background-color: var(--color-beige);
   border-color: black;
   border: 12px solid;
+
   .sticker1 {
     position: absolute;
     left: 6vw;
@@ -78,14 +79,18 @@ export const SBody = styled.div`
   height: 70%;
   justify-content: space-evenly;
   display: flex;
+  /* overflow-y: auto; */
+  ::-webkit-scrollbar {
+    display: none;
+  }
   .feed__box {
     /* height: 90%; */
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 60%;
-  }
-  .feed__box ::-webkit-scrollbar {
-    scrollbar-width: none;
-    display: none;
+    ::-webkit-scrollbar {
+      /* display: hidden; */
+      visibility: hidden;
+    }
   }
 `;
 
@@ -98,16 +103,7 @@ export const SSection = styled.section`
     width: 95%;
     height: 15%;
   }
-  .search {
-    background-color: var(--color-white);
-    margin-bottom: 10%;
-    border-radius: 20px;
-    /* height: 40%; */
-    padding: 10%;
-    padding-bottom: 20%;
-    box-shadow: 2px 2px 1px 1px grey;
-    overflow-y: hidden;
-  }
+
   .keyword__button {
     background-color: var(--color-dark-white);
     border-radius: 4px;
@@ -117,12 +113,23 @@ export const SSection = styled.section`
     background-color: var(--color-white);
     margin-block: 5%;
     border-radius: 20px;
-    /* height: 40%; */
+    height: 90%;
     padding: 4%;
     padding-inline: 8%;
     box-shadow: 2px 2px 1px 1px grey;
   }
+
+  .mostviewed ::-webkit-scrollbar {
+    width: 0rem;
+  }
+
+  .mostview__element {
+    overflow-x: hidden;
+    margin-block: 10%;
+  }
   .mostviewed__list {
     padding: 5%;
+    height: 90%;
+    overflow: auto;
   }
 `;

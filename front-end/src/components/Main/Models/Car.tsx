@@ -219,5 +219,3 @@ export function Car(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-useGLTF.preload("/models/car.glb");

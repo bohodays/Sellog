@@ -45,5 +45,3 @@ export function Tree(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-useGLTF.preload("/models/tree.glb");

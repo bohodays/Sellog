@@ -117,7 +117,7 @@ export const SProfile = styled.section`
   }
 
   .button__goal {
-    align-self: center;
+    /* align-self: center; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -126,7 +126,6 @@ export const SProfile = styled.section`
     height: 2rem;
     /* width: 4rem; */
     margin: 0%;
-    margin-bottom: 3%;
 
     font-family: "Chicle";
     font-size: 1.2rem;
@@ -173,5 +172,11 @@ export const SProfile = styled.section`
     width: 4rem;
     left: 5vw;
     bottom: 0vh;
+  }
+  .button__edit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3%;
   }
 `;

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { addVisitApi } from "@/api/feed";
 
 export default function FeedComponent({ props }: any) {
-  // console.log(props.company, "aa");
+  // console.log(props, "aa");
   function feedHandler() {
     console.log(props.feedId, "feedId");
     addVisitApi(props.feedId);

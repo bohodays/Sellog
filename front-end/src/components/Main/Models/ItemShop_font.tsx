@@ -117,5 +117,3 @@ export function ItemShopFont(props: JSX.IntrinsicElements["group"] | any) {
     </group>
   );
 }
-
-useGLTF.preload("/models/font/itemShop_font.glb");
