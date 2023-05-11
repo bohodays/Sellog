@@ -28,7 +28,8 @@ public enum ErrorCode {
     WEBHOOK_CONFLICT(HttpStatus.BAD_REQUEST, "405", "웹훅이 이미 설정 되어있습니다."),
     EMPTY_REPOSITORY(HttpStatus.NOT_FOUND, "404", "저장소에 레포지토리가 없습니다."),
     API_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "500", "GITHUB API 요청시 에러."),
-    LACK_POINTS(HttpStatus.OK, "200", "포인트가 부족합니다.");
+    LACK_POINTS(HttpStatus.OK, "200", "포인트가 부족합니다."),
+    CONFLICT_ITEM(HttpStatus.CONFLICT, "409", "이미 아이템을 소유하고 있습니다.");
 
 
     private HttpStatus httpStatus;
