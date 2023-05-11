@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IItemProps } from "@/typeModels/ItemShop/itemInterfaces";
+import { IItemProps } from "@/typeModels/ItemShop/iteminterfaces";
 import ItemWrapper from "@/components/ItemShop/ItemWrapper/ItemWrapper";
 import { SDiv } from "./styles";
 import { useRecoilState } from "recoil";

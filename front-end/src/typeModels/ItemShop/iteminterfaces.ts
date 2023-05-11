@@ -22,5 +22,9 @@ export interface IShopItem {
 }
 
 export interface IItemProps {
-  item: IShopItem;
+  item: IItem;
+}
+
+export interface IShopItemProps {
+  shopItem: IShopItem;
 }
