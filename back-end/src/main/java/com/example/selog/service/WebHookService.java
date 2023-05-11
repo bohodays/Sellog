@@ -89,19 +89,11 @@ public class WebHookService {
 
         else {
             //message parsing
-            StringTokenizer st = new StringTokenizer(recordRequestDto.getMessage()," \n:");
+            StringTokenizer st = new StringTokenizer(recordRequestDto.getMessage(),"\n");
 
-            String title = null;
-            String content = null;
-
-            while(st.hasMoreTokens()) {
-
-                if(st.nextToken().contains("Title")) {
-                    title = st.nextToken();
-                } else if(st.nextToken().contains("CONTENT")) {
-                    content = st.nextToken();
-                }
-            }
+            String title = st.nextToken();
+            st.nextToken();
+            String content = st.nextToken();
 
             log.info("title {}, content {}",title,content);
             //chat gpt로 글 검증해서 가져오기
@@ -139,7 +131,7 @@ public class WebHookService {
     public String chatGptResponse(String title,String content) {
 
         StringBuilder question = new StringBuilder();
-        question.append("title : " + title).append("\n");
+        question.append(title).append("\n");
         question.append(content+"\n");
         question.append("Please read the above text and evaluate it according to the following criteria.\n" +
                 "1.Does the writing exceed 300 characters in length in korean? (25 points)\n" +
