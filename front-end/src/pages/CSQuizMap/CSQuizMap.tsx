@@ -41,7 +41,7 @@ type GLTFResult = GLTF & {
 type ActionName = "Idle" | "Run" | "Sad" | "Song Jump" | "Walk" | "Win";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
-const Scene = ({ buttonRef, send }: any) => {
+const Scene = ({ buttonRef, send, other }: any) => {
   const group = useRef<THREE.Group | any>();
   const { nodes, materials, animations } = useGLTF(
     "/models/characters/f1.glb"
@@ -49,7 +49,7 @@ const Scene = ({ buttonRef, send }: any) => {
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-
+  
   const userModelRef = useRef<any>();
   const pointerRef = useRef<any>();
 
@@ -171,7 +171,7 @@ const Scene = ({ buttonRef, send }: any) => {
   // 마우스 이벤트
   gl.domElement.addEventListener("mousedown", (e: MouseEvent) => {
     isPressed = true;
-    calculateMousePosition(e); // 연속 4번으로 온다...
+    calculateMousePosition(e);
   });
   gl.domElement.addEventListener("mouseup", (e: MouseEvent) => {
     isPressed = false;
@@ -179,8 +179,6 @@ const Scene = ({ buttonRef, send }: any) => {
   gl.domElement.addEventListener("touchmove", (e: TouchEvent) => {
     isPressed = false;
   });
-
-  console.log(userInfo.characterId);
 
   return (
     <Suspense>
@@ -232,40 +230,52 @@ const Scene = ({ buttonRef, send }: any) => {
         position={[0, 0.01, 0]}
         receiveShadow={true}
       >
-        {/* <planeGeometry args={[1, 1]} /> */}
         <circleGeometry args={[0.2, 32]} />
         <meshBasicMaterial color={"crimson"} transparent={true} opacity={0.5} />
       </mesh>
+
+      {other && other.map((other:any) => (
+        other.character
+      ))}
+
     </Suspense>
+
+    
   );
 };
 
-const Other = () => {
+const Main = () => {
+  const navigate = useNavigate();
+  const buttonRef = useRef<any>();
+  console.log(buttonRef.current);
+
+  const [client, setClient] = useState<Stomp.Client | null>(null);
+  const [other, setOther] = useState<any>([]);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const accessToken = localData.getAccessToken();
   const group = useRef<THREE.Group | any>();
+  const userModelRef = useRef<any>();
   const { animations } = useGLTF(
     "/models/characters/f1.glb"
   ) as GLTFResult;
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
-  const userModelRef = useRef<any>();
-
-  // Renderer
-  const { gl, clock} = useThree<any>();
-
   //raycaster
   let destinationPoint = new Vector3();
-  let mouse = new Vector2();
   let angle = 0;
+  let isPressed = false; // 마우스를 누르고 있는 상태
   let moving = false;
 
-  function draw() {
-    const delta = clock.getDelta();
-
-    if (userModelRef.current?.mixer) {
-      userModelRef.current?.mixer.update(delta);
-    }
-
+  function draw({ other }:any) {
     if (userModelRef.current) {
+      if (isPressed) {
+        destinationPoint.x = other.message.x;
+        destinationPoint.y = 0.3;
+        destinationPoint.z = other.message.y;
+        userModelRef.current.lookAt(destinationPoint);
+
+        moving = true;
+      }
 
       if (moving) {
         // 걸어가는 상태
@@ -294,49 +304,7 @@ const Other = () => {
         actions["Idle"]?.play();
       }
     }
-
-    // gl.setAnimationLoop(draw);
   }
-
-  draw();
-
-  // 마우스 좌표를 three.js에 맞게 변환
-  function calculateMousePosition(e: MouseEvent | Touch) {
-    mouse.x = (e.clientX / gl.domElement.clientWidth) * 2 - 1;
-    mouse.y = -((e.clientY / gl.domElement.clientHeight) * 2 - 1);
-  }
-
-  return (
-    <Suspense>
-      {/* 빛 */}
-      <ambientLight color={"white"} intensity={0.8} />
-      <directionalLight
-        color={"white"}
-        intensity={0.7}
-        position={[1, 1, 1]}
-        castShadow={true}
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
-        shadow-camera-left={-100}
-        shadow-camera-right={100}
-        shadow-camera-top={100}
-        shadow-camera-bottom={-100}
-        shadow-camera-near={-100}
-        shadow-camera-far={100}
-      />
-      <M3_Main userModelRef={userModelRef} group={group} />
-
-    </Suspense>
-  );
-};
-
-const Main = () => {
-  const navigate = useNavigate();
-  const buttonRef = useRef<any>();
-  console.log(buttonRef.current);
-
-  const [client, setClient] = useState<Stomp.Client | null>(null);
-  const accessToken = localData.getAccessToken();
 
   // 소켓 연결
   useEffect(() => {
@@ -347,8 +315,63 @@ const Main = () => {
       setClient(ws);
 
       ws.subscribe('/sub/1', (message) => {
-        console.log(message.body);
-        console.log("!!!!");
+        const received = JSON.parse(message.body);
+        let data = {};
+        if (received.sender != userInfo.userId) {
+          console.log(received.sender);
+          {
+            received && received!.characterId === 0 ? (
+              data = {
+                message: received,
+                character : <F1_Main userModelRef={userModelRef} group={group} />
+              }
+            ) : received && received!.characterId === 1 ? (
+              data = {
+                message: received,
+                character : <F2_Main userModelRef={userModelRef} group={group} />
+              }
+            
+            ) : received && received!.characterId === 2 ? (
+              data = {
+                message: received,
+                character : <F3_Main userModelRef={userModelRef} group={group} />
+              }
+            ) : received && received!.characterId === 3 ? (
+              data = {
+                message: received,
+                character : <M1_Main userModelRef={userModelRef} group={group} />
+              }
+            
+          ) : received && received!.characterId === 4 ? (
+              data = {
+                message: received,
+                character: <M2_Main userModelRef={userModelRef} group={group} />
+                }
+          ) : (
+              data = {
+                message: received,
+                character : <M3_Main userModelRef={userModelRef} group={group} />
+              }
+            
+            )
+          }
+
+          draw(data);
+
+          setOther((other:any) => {
+            const index = other.findIndex((item:any) => item.message.sender === received.sender);
+            if (index === -1) {
+              return [...other, data];
+            } else {
+              return [
+                ...other.slice(0, index),
+                data,
+                ...other.slice(index + 1)
+              ];
+            }
+          });
+          
+        }
       },{ Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY4Mzg2NzYyNn0.8plb7Hync2YS_ZqJau_7fxDzPqgmapGB-6U7-RRSO0y0-nQdfogzT00TSJ8ix2qKuzB-_XtfLjkXGHaXDHlUZg` });
     });
 
@@ -359,14 +382,18 @@ const Main = () => {
     };
   }, []);
 
+  useEffect(() => {
+    
+  }, []);
+
   function send(mouseX:number, mouseY:number) {
     const message = {
         roomId: "1",
-        sender: 1,
+        sender: userInfo.userId,
         x: mouseX,
         y: mouseY,
-        characterId: 1,
-        nickname: "닉네임"
+        characterId: userInfo.characterId,
+        nickname: userInfo.nickname
     };
     client?.send("/pub/1", {}, JSON.stringify(message));
   }
@@ -378,8 +405,11 @@ const Main = () => {
         shadows={true}
         gl={{ preserveDrawingBuffer: true }}
       >
-        <Scene buttonRef={buttonRef} send={send} key={1}/>
-        <Other />
+        <Scene
+          buttonRef={buttonRef}
+          send={send}
+          other = {other}
+        />
       </Canvas>
     </SMain>
   );
