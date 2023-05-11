@@ -156,7 +156,7 @@ public class WebHookService {
         requestBody.put("model", "text-davinci-003");
 
         // 완료시 생성할 최대 토큰수
-        requestBody.put("max_tokens", 100);
+        requestBody.put("max_tokens", 1500);
 
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, headers);
 
