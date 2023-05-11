@@ -1,5 +1,7 @@
 package com.example.realtime.service;
 
+import com.example.realtime.dto.MemberDto;
+import com.example.realtime.entity.Member;
 import com.example.realtime.exception.CustomException;
 import com.example.realtime.exception.error.ErrorCode;
 import com.example.realtime.repository.MemberRepository;
@@ -16,8 +18,9 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional(readOnly = true)
-    public void findMemberInfoByUserId(Long userId) {
-        memberRepository.findById(userId)
+    public MemberDto findMemberInfoByUserId(Long userId) {
+        return memberRepository.findById(userId)
+                .map(Member::toDto)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
     }
 }

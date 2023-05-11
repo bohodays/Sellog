@@ -1,5 +1,6 @@
 package com.example.realtime.entity;
 
+import com.example.realtime.dto.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -85,5 +86,13 @@ public class Member{
 
     @Column(name = "start_date")
     private LocalDateTime start_date;
+
+    public MemberDto toDto() {
+        return MemberDto.builder()
+                .userId(userId)
+                .nickname(nickname)
+                .characterId(characterId)
+                .build();
+    }
 
 }
