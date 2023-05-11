@@ -7,10 +7,12 @@ import com.example.selog.exception.CustomException;
 import com.example.selog.exception.error.ErrorCode;
 import com.example.selog.repository.MemberRepository;
 import com.example.selog.repository.RecordRepository;
+import io.github.flashvayne.chatgpt.service.ChatgptService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.bridge.IMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,11 +32,15 @@ public class WebHookService {
     private RecordRepository recordRepository;
     private MemberRepository memberRepository;
     private Map<String,Integer> score;
+    private ChatgptService chatgptService;
 
     @Autowired
-    public WebHookService(RecordRepository recordRepository, MemberRepository memberRepository) {
+    public WebHookService(RecordRepository recordRepository,
+                          MemberRepository memberRepository,
+                          ChatgptService chatgptService) {
         this.recordRepository = recordRepository;
         this.memberRepository = memberRepository;
+        this.chatgptService = chatgptService;
 
         this.score = new HashMap<>();
         score.put("github",10);
@@ -76,10 +82,28 @@ public class WebHookService {
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
 
+        //블로그인 경우
         if(!recordRequestDto.getProblemId().equals("")){
             Optional<Record> record = recordRepository.findByProblemIdAndCategory(recordRequestDto.getProblemId(), recordRequestDto.getType());
             if(record.isPresent()){
                 throw new CustomException(ErrorCode.CONFLICT_ALGO);
+            }
+
+            //chat gpt로 글 검증해서 가져오기
+            for(int i=0;i<10;++i) {
+
+                if(i==9) return -1;
+                String response = chatGptResponse("컴퓨터","컴퓨터는 매우 흥미로운 것입니다. 왜그럴까요?? 아무도 그이유를 모르겠지만 아주 먼옛날 폰 노이만에 의해 발견된 장치입니다." );
+
+                log.info("chatgpt response : {}",response);
+                //블로그 글이 검증된경우
+                if(response.contains("pass")) {
+                    break;
+                }
+                //블로그 글이 검증 실패
+                else if(response.contains("fail")){
+                    return -1;
+                }
             }
         }
 
@@ -91,10 +115,25 @@ public class WebHookService {
                         .member(member)
                         .problemId(recordRequestDto.getProblemId())
                         .writing_time(LocalDateTime.now())
-                        .build()
-        );
+                        .build());
 
         return result;
+    }
+
+    public String chatGptResponse(String title,String content) {
+
+        StringBuilder question = new StringBuilder();
+        question.append("title : " + title).append("\n");
+        question.append(content+"\n");
+        question.append("Please read the above text and evaluate it according to the following criteria.\n" +
+                "1.Does the writing exceed 300 characters in length in korean? (25 points)\n" +
+                "2.Is there a correlation between the title of the writing and its content? (25 points)\n" +
+                "3.Is there a repetition of meaningless words or phrases? (25 points)\n" +
+                "4.Are the spellings and grammar correct? (25 points)\n" +
+                "\n" +
+                "question: \"Please return 'pass' if the total score is 50 or higher, and 'fail' if it is lower, using no more than 10 characters.\"");
+
+        return chatgptService.sendMessage(question.toString());
     }
 
     public int earnPoints(Member member,String category){
