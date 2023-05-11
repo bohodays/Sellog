@@ -21,13 +21,13 @@ function InstallModal(props: IInstallProps) {
             to={`https://chrome.google.com/webstore/detail/sellog/baafapflapkopdlopohcmebnadhkambm?hl=ko&authuser=0`}
             onClick={() => props.setIsInstalled(true)}
           >
-            설치하러 가기
+            설치하기
           </Link>
           <button
             className="button__yes"
             onClick={() => props.setIsInstalled(true)}
           >
-            나중에 하기
+            나중에
           </button>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { SProfile } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -86,11 +87,6 @@ function EditProfile(props: MyProfileProps) {
       github: githubRef.current.value,
     };
 
-    // console.log(JSON.stringify(editUserData));
-    // console.log("eidt", editUserData);
-
-    // console.log("blob", blob);
-
     const accessToken = localData.getAccessToken();
 
     if (accessToken) {
@@ -98,6 +94,12 @@ function EditProfile(props: MyProfileProps) {
         console.log("returned response", res?.data.response);
       });
     }
+  };
+
+  const gobackHandler = () => {
+    props.setIsEdit(!props.isEdit);
+  };
+  const confirmModalHandler = () => {
     setIsModal(!isModal);
   };
 
@@ -175,8 +177,11 @@ function EditProfile(props: MyProfileProps) {
           </div>
         </div>
         <div className="button__edit">
-          <FontAwesomeIcon icon={faLeftLong} />
-          <button className="button__goal" onClick={editHandler}>
+          {/* <FontAwesomeIcon icon={faLeftLong} onClick={gobackHandler} /> */}
+          <button className="button__goal" onClick={gobackHandler}>
+            <p>Go Back</p>
+          </button>
+          <button className="button__goal" onClick={confirmModalHandler}>
             <p>Confirm</p>
           </button>
         </div>
@@ -198,6 +203,7 @@ function EditProfile(props: MyProfileProps) {
           setIsModal={setIsModal}
           isEdit={props.isEdit}
           setIsEdit={props.setIsEdit}
+          editHandler={editHandler}
         ></EditProfileModal>
       )}
     </SProfile>

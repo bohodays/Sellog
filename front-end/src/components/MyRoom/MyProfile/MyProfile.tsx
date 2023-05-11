@@ -8,7 +8,7 @@ import tistory from "@/assets/imgs/retro/tistoryIcon.png";
 import smileBottom from "@/assets/imgs/retro/smile_bottom.png";
 import coin from "@/assets/imgs/retro/coin.png";
 import { useEffect, useRef, useState } from "react";
-import { Link, Router } from "react-router-dom";
+import { Link, Router, useNavigate } from "react-router-dom";
 import NoTarget from "../NoTarget/NoTarget";
 import { apiGetAchievedRecordList, apiGetTodayRecord } from "@/api/record";
 import InstallModal from "../InstallModal/InstallModal";
@@ -27,7 +27,7 @@ const MyProfile = (props: MyProfileProps) => {
     props.userData.start_date
   );
   // 크롬 확장자 구현 되면 false로 초기화하기
-  const [isInstalled, setIsInstalled] = useState<boolean>(true);
+  const [isInstalled, setIsInstalled] = useState<boolean>(false);
   // 오늘 목표 달성 했는지
   const [isTodayGithub, setIsTodayGithub] = useState<boolean>(false);
   const [isTodayAlgo, setIsTodayAlgo] = useState<boolean>(false);
@@ -35,8 +35,17 @@ const MyProfile = (props: MyProfileProps) => {
   const [isTodayCS, setIsTodayCS] = useState<boolean>(false);
   const [isTodayFeed, setIsTodayFeed] = useState<boolean>(false);
 
+  // 오늘 CS 문제, 피드 가는 링크
+  const csNavigator = useNavigate();
+  const feedNavigator = useNavigate();
+
   useEffect(() => {
-    console.log("something changed", props.userData, isInstalled);
+    console.log(
+      "something changed",
+      props.userData,
+      { isInstalled },
+      { isTarget }
+    );
   }, [props.userData, isInstalled]);
 
   useEffect(() => {
@@ -72,6 +81,12 @@ const MyProfile = (props: MyProfileProps) => {
     // console.log("user info", props.userData);
     props.setIsEdit(!props.isEdit);
   };
+  const todayCSHandler = () => {
+    csNavigator("/csquiz");
+  };
+  const todayFeedHandler = () => {
+    feedNavigator("/feed");
+  };
 
   return (
     <SProfile>
@@ -103,7 +118,9 @@ const MyProfile = (props: MyProfileProps) => {
         </div>
         <div className="bottom__profile">
           <p>{props.userData.motto}</p>
-          <FontAwesomeIcon icon={faPenToSquare} onClick={userInfoHandler} />
+          <button className="button__goal" onClick={userInfoHandler}>
+            Edit
+          </button>
         </div>
         <hr />
         {/* component 갈아끼우기 */}
@@ -166,9 +183,12 @@ const MyProfile = (props: MyProfileProps) => {
             </div>
             <div className="container__habit-stats">
               CS
-              <div className="progress__bar progress__bar--CS">
+              <div
+                className="progress__bar progress__bar--CS"
+                onClick={todayCSHandler}
+              >
                 {props.userData.csTarget ? (
-                  props.userData.csTarget
+                  <p>오늘의 CS 문제</p>
                 ) : (
                   <p>매일 CS 문제 풀기</p>
                 )}
@@ -183,9 +203,12 @@ const MyProfile = (props: MyProfileProps) => {
             </div>
             <div className="container__habit-stats">
               Feed
-              <div className="progress__bar progress__bar--Feed">
+              <div
+                className="progress__bar progress__bar--Feed"
+                onClick={todayFeedHandler}
+              >
                 {props.userData.feedTarget ? (
-                  props.userData.feedTarget
+                  <p> 오늘의 피드 </p>
                 ) : (
                   <p> 뉴스 피드 습관을 설정하세요</p>
                 )}
@@ -204,12 +227,13 @@ const MyProfile = (props: MyProfileProps) => {
           </div>
         )}
         <div className="container__contact">
-          <div className="contact__text">Contact</div>
-          <div className="contact__info">
-            <p>
-              <FontAwesomeIcon icon={faEnvelope} /> {props.userData.contact}
-            </p>
-            <br />
+          <div className="contact__text">
+            Contact
+            <div className="contact__info">
+              <p>
+                <FontAwesomeIcon icon={faEnvelope} /> {props.userData.contact}
+              </p>
+            </div>
           </div>
           <div>
             <a href={`${props.userData.github}`}>
@@ -222,7 +246,8 @@ const MyProfile = (props: MyProfileProps) => {
         </div>
         <div className="platform-address"></div>
       </div>
-      {isInstalled ? null : (
+      {/*  */}
+      {isInstalled && isTarget ? null : (
         <InstallModal
           isInstalled={isInstalled}
           setIsInstalled={setIsInstalled}

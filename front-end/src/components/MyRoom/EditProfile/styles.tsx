@@ -175,7 +175,7 @@ export const SProfile = styled.section`
   }
   .button__edit {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     margin: 3%;
   }
