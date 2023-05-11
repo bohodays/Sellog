@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ItemItem from "../ItemItem/ItemItem";
 import { SSection, SDiv } from "./styles";
 import { apiGetCategorizedItemList } from "@/api/store";
-import { IItem } from "@/typeModels/ItemShop/itemInterfaces";
+import { IShopItem } from "@/typeModels/ItemShop/itemInterfaces";
 
 const dummyItemList = [
   {
@@ -80,7 +80,7 @@ const ItemList = ({ category }: categoryProps) => {
   const [page, setPage] = useState(0); // 현재 페이지
   const [totalPage, setTotalPage] = useState(0);
 
-  const [itemList, setItemList] = useState<IItem[] | null>(null);
+  const [itemList, setItemList] = useState<IShopItem[] | null>(null);
 
   useEffect(() => {
     setPage(0);
