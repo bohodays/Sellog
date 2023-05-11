@@ -7,7 +7,6 @@ export const SArticle = styled.article`
   color: white;
   padding: 1%;
   margin: 0% 1%;
-  margin-bottom: 2%;
   border: 0.2rem solid rgba(137, 239, 245);
   border-radius: 2rem;
   max-width: 100%;
@@ -19,10 +18,9 @@ export const SArticle = styled.article`
     inset 0 0 0.3rem var(--neon-border-color);
 
   .item__img {
-    border-radius: 10%;
     /* height: 80%; */
     width: calc(100%);
-    height: calc(25vh);
+    height: calc(24vh);
     /* width: 100%; */
   }
   .item__description__wrapper {
@@ -48,7 +46,7 @@ export const SArticle = styled.article`
 
   .item__name {
     margin: 2% 5%;
-    font-size: calc(2vw - 15px);
+    font-size: calc(0.9vw);
     font-weight: 600;
   }
 

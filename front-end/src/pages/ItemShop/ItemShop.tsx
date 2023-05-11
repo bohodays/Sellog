@@ -37,10 +37,10 @@ const ItemShop = () => {
             ELECTRONICS
           </h6>
           <h6 className="item__category" onClick={handleSelectedCategory}>
-            DECORATION
+            APPLIANCE
           </h6>
           <h6 className="item__category" onClick={handleSelectedCategory}>
-            ETC
+            DECORATION
           </h6>
         </div>
         {/* <div> */}
