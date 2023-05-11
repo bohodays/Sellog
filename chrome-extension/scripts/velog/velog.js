@@ -3,6 +3,8 @@
 
 let loader;
 let ispublish  = false;
+let content = '';
+let title = '';
 
 const currentUrl = window.location.href;
 console.log(currentUrl);
@@ -38,19 +40,22 @@ function startLoader() {
         
         stopLoader();
         try {
-          const elements = document.querySelectorAll('h4');
-          let title = '';
-          if (elements.length > 0) {
-            title = elements[elements.length - 1].textContent;
-            // 마지막 요소에 대한 로직을 작성합니다.
-          }else{
-            title = document.querySelector('h4').textContent;
-          }
-          console.log(title);
+          title = document.querySelector("#preview > h1").textContent
+          
+          // let title = '';
+          // const elements = document.querySelectorAll('h4');
+          // if (elements.length > 0) {
+          //   title = elements[elements.length - 1].textContent;
+          //   // 마지막 요소에 대한 로직을 작성합니다.
+          // }else{
+          //   title = document.querySelector('h4').textContent;
+          // }
+
+          content = document.querySelector("#preview > div").textContent;
           const url = "https://velog.io" + document.querySelector('.username').textContent + title;
           console.log(url);
-          const message = `[Velog] Title: ${title}`+'\n'+ `URL: ${url}`;
-  
+          const message = `[Velog] Title: ${title}`+'\n'+ `URL: ${url}`+'\n' + `CONTENT : ${content}`;
+
           console.log(message);
           uploadOnePostingOnSellog(message);
           console.log("전송완");
@@ -59,6 +64,8 @@ function startLoader() {
         } finally {
           ispublish = false;
           console.log("변경");
+          content = '';
+          title = '';
           startLoader();
         }
       }
