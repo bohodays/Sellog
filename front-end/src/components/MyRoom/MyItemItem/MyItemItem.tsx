@@ -6,19 +6,19 @@ import { useRecoilState } from "recoil";
 import { myItemsState } from "@/recoil/myroom/atoms";
 import { itemDefaultInfo } from "@/utils/itemDefaultInfo";
 
-const MyItemItem = ({ item }: IItemProps) => {
+const MyItemItem = ({ myItem }: IItemProps) => {
   const [myItems, setMyItems] = useRecoilState(myItemsState);
 
   const handleViewItem = () => {
     let targetIndex;
 
     const targetItem = myItems.filter((getItem, i) => {
-      if (getItem.itemId === item?.itemId) {
+      if (getItem.itemId === myItem?.itemId) {
         targetIndex = i;
-        return getItem.itemId === item?.itemId;
+        return getItem.itemId === myItem?.itemId;
       }
     });
-    const itemPositionY = itemDefaultInfo(item?.itemId);
+    const itemPositionY = itemDefaultInfo(myItem?.itemId);
 
     const viewItem = {
       ...targetItem[0],
@@ -39,18 +39,20 @@ const MyItemItem = ({ item }: IItemProps) => {
     <SDiv>
       <div className="item__wrapper" onClick={handleViewItem}>
         {/* <ItemWrapper item={item}></ItemWrapper> */}
-        {item?.path ? (
-          <img className="item__img" src={item?.path} alt="" />
+        {myItem?.path ? (
+          <img className="item__img" src={myItem?.path} alt="" />
         ) : (
           <div style={{ width: "14vw", height: "32vh" }}></div>
         )}
 
         <div
           className={
-            item?.name === "undefined" ? "item__name name-hidden" : "item__name"
+            myItem?.name === "undefined"
+              ? "item__name name-hidden"
+              : "item__name"
           }
         >
-          {item?.name}
+          {myItem?.name}
         </div>
       </div>
     </SDiv>
