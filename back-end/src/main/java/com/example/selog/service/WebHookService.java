@@ -4,18 +4,20 @@ import com.example.selog.dto.record.RecordRequestDto;
 import com.example.selog.entity.Member;
 import com.example.selog.entity.Record;
 import com.example.selog.exception.CustomException;
+import com.example.selog.exception.OpenAIException;
 import com.example.selog.exception.error.ErrorCode;
 import com.example.selog.repository.MemberRepository;
 import com.example.selog.repository.RecordRepository;
-import io.github.flashvayne.chatgpt.service.ChatgptService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.bridge.IMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
+import org.springframework.http.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -29,15 +31,18 @@ public class WebHookService {
     private RecordRepository recordRepository;
     private MemberRepository memberRepository;
     private Map<String,Integer> score;
-    private ChatgptService chatgptService;
+    private final RestTemplate restTemplate = restTemplate();
+
+    @Value("${OPEN_AI_KEY}")
+    private String OPEN_AI_KEY;
+
+    private static final String Endpoint = "https://api.openai.com/v1/completions";
 
     @Autowired
     public WebHookService(RecordRepository recordRepository,
-                          MemberRepository memberRepository,
-                          ChatgptService chatgptService) {
+                          MemberRepository memberRepository) {
         this.recordRepository = recordRepository;
         this.memberRepository = memberRepository;
-        this.chatgptService = chatgptService;
 
         this.score = new HashMap<>();
         score.put("github",10);
@@ -46,7 +51,6 @@ public class WebHookService {
         score.put("feed",5);
         score.put("cs",2);
     }
-
     @Transactional
     public void createRecord(HashMap<String, Object> request) {
 
@@ -96,12 +100,15 @@ public class WebHookService {
             String content = st.nextToken();
 
             log.info("title {}, content {}",title,content);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setBearerAuth(OPEN_AI_KEY);
+
             //chat gpt로 글 검증해서 가져오기
             for(int i=0;i<10;++i) {
 
-
                 if(i==9) return -1;
-                String response = chatGptResponse(title,content);
+                String response = chatGptResponse(title,content,headers);
 
                 log.info("chatgpt response : {}",response);
                 //블로그 글이 검증된경우
@@ -128,7 +135,7 @@ public class WebHookService {
         return result;
     }
 
-    public String chatGptResponse(String title,String content) {
+    public String chatGptResponse(String title,String content,HttpHeaders headers) {
 
         StringBuilder question = new StringBuilder();
         question.append(title).append("\n");
@@ -141,7 +148,38 @@ public class WebHookService {
                 "\n" +
                 "question: \"Please return 'pass' if the total score is 50 or higher, and 'fail' if it is lower, using no more than 10 characters.\"");
 
-        return chatgptService.sendMessage(question.toString());
+        Map<String, Object> requestBody = new HashMap<>();
+        // 요청 질문
+        requestBody.put("prompt", question.toString());
+
+        // 요청에 사용될 모델 설정
+        requestBody.put("model", "text-davinci-003");
+
+        // 완료시 생성할 최대 토큰수
+        requestBody.put("max_tokens", 100);
+
+        HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, headers);
+
+        try {
+            ResponseEntity<String> response = restTemplate.postForEntity(Endpoint, request, String.class);
+            return response.getBody();
+        } catch (RestClientException e) {
+            throw new OpenAIException("OpenAI API 호출 중 오류가 발생하였습니다.", e);
+        }
+    }
+
+    public RestTemplate restTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+
+        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+        interceptors.add((request, body, execution) -> {
+            request.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+            request.getHeaders().setBearerAuth(OPEN_AI_KEY);
+            return execution.execute(request, body);
+        });
+        restTemplate.setInterceptors(interceptors);
+
+        return restTemplate;
     }
 
     public int earnPoints(Member member,String category){
