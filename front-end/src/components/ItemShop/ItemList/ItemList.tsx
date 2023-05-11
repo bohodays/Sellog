@@ -77,63 +77,48 @@ interface categoryProps {
 }
 
 const ItemList = ({ category }: categoryProps) => {
-  // dummyData filter해서 page 정하려고 임시로 만듦
-  const [page, setPage] = useState(1); // 현재 페이지
-  const perPage = 8; // 페이지당 보여줄 카드의 개수
-  const startIndex = (page - 1) * perPage;
-  const endIndex = startIndex + perPage;
+  const [page, setPage] = useState(0); // 현재 페이지
+  const [totalPage, setTotalPage] = useState(0);
 
   const [itemList, setItemList] = useState<IItem[] | null>(null);
 
   useEffect(() => {
-    setPage(1);
+    setPage(0);
   }, [category]);
 
   useEffect(() => {
-    apiGetCategorizedItemList("furniture", 2)
+    apiGetCategorizedItemList(category.toLowerCase(), page)
       .then((r) => {
-        console.log(page, r?.data.response);
-        console.log("응답", page, r);
-        setItemList(r?.data.response);
+        setItemList(r?.data.response.content);
+        setTotalPage(r?.data.response.totalPages);
       })
       .catch((e) => {
         console.log(e);
       });
-  }, []);
-
-  const selectedItemList = itemList?.filter((item, index) =>
-    category === "ALL" ? item : item.category === category
-  );
+  }, [category, page]);
 
   const pages = () => {
     let arr = [];
-    if (selectedItemList != undefined) {
-      for (let i = 1; i < selectedItemList.length / perPage + 1; i++) {
-        arr.push(
-          <button
-            className={i === page ? "page__btn--active" : "page__btn"}
-            onClick={() => setPage(i)}
-          >
-            {i}
-          </button>
-        );
-      }
+    for (let i = 0; i < totalPage; i++) {
+      arr.push(
+        <button
+          className={i === page ? "page__btn--active" : "page__btn"}
+          onClick={() => setPage(i)}
+        >
+          {i + 1}
+        </button>
+      );
     }
     return arr;
   };
   return (
     <>
-      {itemList && selectedItemList && (
-        <SSection isEmpty={selectedItemList?.length}>
+      {itemList && (
+        <SSection isEmpty={totalPage}>
           <SDiv>
-            {itemList
-              .filter((item, index) =>
-                category === "ALL" ? item : item.category === category
-              )
-              .slice(startIndex, endIndex)
-              .map((item, index) => (
-                <ItemItem item={item} key={`${item.name}+${index}`}></ItemItem>
-              ))}
+            {itemList.map((item: any, index: number) => (
+              <ItemItem item={item} key={item.id}></ItemItem>
+            ))}
           </SDiv>
           <div className="item__pagenation--wrapper">{pages()}</div>
         </SSection>

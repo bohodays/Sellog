@@ -16,10 +16,10 @@ export const apiGetCategorizedItemList = async (
 };
 
 // 아이템 구입
-export const apiBuyItem = async (data: any) => {
+export const apiBuyItem = async (itemId: number) => {
   // 요청 data 형식
-  let dataForm = {
-    itemId: 1,
+  const data = {
+    itemId: itemId,
   };
 
   try {

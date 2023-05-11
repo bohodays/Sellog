@@ -16,6 +16,7 @@ export interface IUserInfo {
   motto: string;
   characterId: number | null;
   tel: string;
+  points: number;
   contact: string;
   [key: string | number]: string | number | boolean | null;
 }
@@ -39,6 +40,7 @@ export const userInfoState = atom<IUserInfo | any>({
     characterId: 2,
     tel: "010-1234-5678",
     contact: "hojung@gmail.com",
+    points: 0,
   },
 });
 

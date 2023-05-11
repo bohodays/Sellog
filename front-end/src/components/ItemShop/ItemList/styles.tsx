@@ -6,7 +6,7 @@ export const SSection = styled.section<any>`
   /* justify-content: center; */
   align-items: center;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   /* margin: 3%; */
   margin-left: 10%;
   position: relative;
@@ -19,6 +19,7 @@ export const SSection = styled.section<any>`
     align-items: center;
     justify-content: center;
     padding: 0.5% 3%;
+    /* width: fit-content; */
     /* position: absolute; */
     /* bottom: -30%; */
     /* left: 40%; */
@@ -29,7 +30,7 @@ export const SSection = styled.section<any>`
     font-weight: 600;
     color: navy;
     border-radius: 50%;
-    margin: 0% 10%;
+    margin: 0% 1%;
     background-color: white;
     /* border: none; */
     padding: 5px 10px;
@@ -40,7 +41,7 @@ export const SSection = styled.section<any>`
     font-weight: 600;
     color: white;
     border-radius: 50%;
-    margin: 0% 10%;
+    margin: 0% 1%;
     background-color: navy;
     /* border: none; */
     padding: 5px 10px;
@@ -49,10 +50,10 @@ export const SSection = styled.section<any>`
 
 export const SDiv = styled.div`
   display: flex;
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
   flex-wrap: wrap;
-  margin-top: -3%;
+  /* margin-top: -3%; */
   /* overflow: hidden; */
   /* justify-content: center; */
   /* display: grid; */
