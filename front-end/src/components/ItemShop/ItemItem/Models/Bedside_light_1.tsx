@@ -44,6 +44,12 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
 
   // 타겟 정보
   const [target, setTarget] = useRecoilState(itemTargetState);
+  const [stateTarget, setStateTarget] = useState(target);
+  console.log(stateTarget, "과연");
+
+  useEffect(() => {
+    setStateTarget(target);
+  }, [target]);
 
   const { scene, camera, gl } = useThree();
   const raycaster = new THREE.Raycaster();
@@ -73,7 +79,7 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
           x,
           y,
           z,
-          deg,
+          rotation: deg,
         };
         // 불변성 유지를 위한 새로운 배열 생성
         const newItems = [...myItems];
@@ -123,7 +129,11 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
 
             // 물체가 마우스와 만난 지점으로 위치를 업데이트하기
             const newPosition = found[i].point;
-            setPosition({ x: newPosition.x, y: position.y, z: newPosition.z });
+            setPosition({
+              x: newPosition.x,
+              y: position.y,
+              z: newPosition.z,
+            });
             break;
           }
         }
@@ -132,6 +142,7 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
   });
 
   // 물체 회전
+  console.log({ target }, "Bedside_light_1", "2");
   if (
     props.rotationLeftButtonRef.current &&
     props.rotationRigthButtonRef.current &&
@@ -139,32 +150,55 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
     props.downButtonRef.current &&
     props.deleteButtonRef.current
   ) {
-    console.log({ target }, "Beside_light_1");
+    console.log({ target }, "Bedside_light_1");
 
     const leftRotation = () => {
       let newRotation = (rotation - 10) % 360;
       setRotation(newRotation);
+      const copyArray = [...myItems];
+      myItems.forEach((getItem, index) => {
+        if (getItem.itemId === props.itemId) {
+          const newObj: any = { ...getItem };
+          newObj["rotation"] = newRotation;
+
+          copyArray[index] = newObj;
+        }
+      });
+      setItemsHeight([...copyArray]);
     };
 
     const rightRotation = () => {
       let newRotation = (rotation + 10) % 360;
       setRotation(newRotation);
+      const copyArray = [...myItems];
+      myItems.forEach((getItem, index) => {
+        if (getItem.itemId === props.itemId) {
+          const newObj: any = { ...getItem };
+          newObj["rotation"] = newRotation;
+
+          copyArray[index] = newObj;
+        }
+      });
+      setItemsHeight([...copyArray]);
     };
 
     const positionUp = () => {
-      if (position.y < 3) {
-        const newY = Number(position.y) + 0.2;
-        const copyArray = [...myItems];
-        myItems.forEach((getItem, index) => {
-          if (getItem.itemId === props.itemId) {
-            const newObj: any = { ...getItem };
-            newObj["y"] = newY;
+      if (target === "Bedside_light_1") {
+        console.log("함수 안의 타겟", target);
+        if (position.y < 3) {
+          const newY = Number(position.y) + 0.2;
+          const copyArray = [...myItems];
+          myItems.forEach((getItem, index) => {
+            if (getItem.itemId === props.itemId) {
+              const newObj: any = { ...getItem };
+              newObj["y"] = newY;
 
-            copyArray[index] = newObj;
-          }
-        });
-        setItemsHeight([...copyArray]);
-        setPosition({ x: position.x, y: newY, z: position.z });
+              copyArray[index] = newObj;
+            }
+          });
+          setItemsHeight([...copyArray]);
+          setPosition({ x: position.x, y: newY, z: position.z });
+        }
       }
     };
 
@@ -187,10 +221,12 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
 
     const itemDelete = () => {
       updateTagetItemPosition(props.itemId, null, null, null, null);
+      setTarget(null);
     };
 
     if (target === "Bedside_light_1") {
       console.log("버튼 실행", "Bedside_light_1");
+      console.log("조건문 안에 있는 타겟", target);
 
       props.rotationLeftButtonRef.current.addEventListener(
         "click",
@@ -204,6 +240,8 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
       props.downButtonRef.current.addEventListener("click", positionDown);
       props.deleteButtonRef.current.addEventListener("click", itemDelete);
     } else {
+      console.log(target, "remove");
+
       props.rotationLeftButtonRef.current.removeEventListener(
         "click",
         leftRotation
@@ -218,6 +256,8 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
     }
   }
 
+  console.log(props.rotationLeftButtonRef.current);
+
   return (
     <group
       {...props}
@@ -226,8 +266,10 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
       position={[position.x, position.y, position.z]}
       userData={{ draggable: true, name: "Bedside_light_1" }}
       onClick={() => {
+        console.log(target, "!!!!");
         if (props.activePage === "myitems") {
           if (!isDragging) setIsDragging(true);
+
           setTarget("Bedside_light_1");
         }
       }}

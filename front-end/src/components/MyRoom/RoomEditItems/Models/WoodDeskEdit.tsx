@@ -9,7 +9,7 @@ import { OrbitControls, OrthographicCamera, useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { Scale } from "@mui/icons-material";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { itemTargetState } from "@/recoil/myroom/atoms";
 
 type GLTFResult = GLTF & {

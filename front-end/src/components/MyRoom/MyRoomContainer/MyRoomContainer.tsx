@@ -8,7 +8,7 @@ import { IMyRoomProps } from "@/typeModels/MyRoom/MyroomInterfaces";
 import { Room1 } from "../Models/Room1";
 import { Room3 } from "../Models/Room3";
 import { Room4 } from "../Models/Room4";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   itemTargetState,
   itemsHeightState,
@@ -43,11 +43,11 @@ const Scene = ({
   gl.shadowMap.type = PCFSoftShadowMap;
   gl.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 
-  if (activePage === "myitems") {
-    camera.position.x = 30.609999999999996;
-    camera.position.y = 33.06;
-    camera.position.z = 30.61;
-  }
+  // if (activePage === "myitems") {
+  //   camera.position.x = 30.609999999999996;
+  //   camera.position.y = 33.06;
+  //   camera.position.z = 30.61;
+  // }
 
   return (
     <>
@@ -111,7 +111,7 @@ const MyRoomContainer = (props: IMyRoomProps) => {
         requestObj["x"] = item.x;
         requestObj["y"] = itemsHeigth[i].y;
         requestObj["z"] = item.z;
-        requestObj["rotation"] = item.rotation;
+        requestObj["rotation"] = itemsHeigth[i].rotation;
         requestObj["id"] = item.id;
         requestObj["roomId"] = item.roomId;
         requestObj["itemId"] = item.itemId;
@@ -130,8 +130,6 @@ const MyRoomContainer = (props: IMyRoomProps) => {
     });
   };
 
-  // console.log(target);
-
   return (
     <SMyRoom activePage={props.activePage}>
       <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
@@ -139,7 +137,7 @@ const MyRoomContainer = (props: IMyRoomProps) => {
           maxPolarAngle={Math.PI / 2.8}
           minZoom={50}
           maxZoom={200}
-          enableRotate={props.activePage === "myitems" ? false : true}
+          enableRotate={props.activePage === "myitems" ? true : true}
           // 쉬프트 마우스 왼쪽 이동 막는 기능
           enablePan={false}
         />

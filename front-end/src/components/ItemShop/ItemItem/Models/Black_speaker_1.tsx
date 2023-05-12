@@ -7,8 +7,12 @@ import * as THREE from "three";
 import React, { useRef, useState, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
-import { useRecoilState } from "recoil";
-import { itemTargetState, myItemsState } from "@/recoil/myroom/atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  itemTargetState,
+  itemsHeightState,
+  myItemsState,
+} from "@/recoil/myroom/atoms";
 import { useFrame, useThree } from "@react-three/fiber";
 
 type GLTFResult = GLTF & {
@@ -64,6 +68,8 @@ export function Black_speaker_1(props: JSX.IntrinsicElements["group"] | any) {
 
   const [myItems, setMyItems] = useRecoilState(myItemsState);
 
+  const setItemsHeight = useSetRecoilState(itemsHeightState);
+
   const updateTagetItemPosition = (
     id: number,
     x: number | null,
@@ -71,20 +77,16 @@ export function Black_speaker_1(props: JSX.IntrinsicElements["group"] | any) {
     z: number | null,
     deg: number | null
   ) => {
-    console.log(x, y, z, "atom 갱신");
-
     myItems.forEach((item, i) => {
       // itemId가 일치하는 아이템 선별
       if (item.itemId === id) {
-        console.log(item, "타겟 아톰 아이템");
-
         // 변화된 포지션 저장
         let newItemPosition = {
           ...item,
           x,
           y,
           z,
-          deg,
+          rotation: deg,
         };
         // 불변성 유지를 위한 새로운 배열 생성
         const newItems = [...myItems];
@@ -120,7 +122,7 @@ export function Black_speaker_1(props: JSX.IntrinsicElements["group"] | any) {
         gl.domElement.removeEventListener("click", handleWindowClick);
       }
     };
-  }, [isDragging, position.x, position.y, position.z, rotation]);
+  }, [isDragging]);
 
   useFrame(({ mouse }) => {
     if (props.activePage === "myitems") {
@@ -152,11 +154,31 @@ export function Black_speaker_1(props: JSX.IntrinsicElements["group"] | any) {
     const leftRotation = () => {
       let newRotation = (rotation - 10) % 360;
       setRotation(newRotation);
+      const copyArray = [...myItems];
+      myItems.forEach((getItem, index) => {
+        if (getItem.itemId === props.itemId) {
+          const newObj: any = { ...getItem };
+          newObj["rotation"] = newRotation;
+
+          copyArray[index] = newObj;
+        }
+      });
+      setItemsHeight([...copyArray]);
     };
 
     const rightRotation = () => {
       let newRotation = (rotation + 10) % 360;
       setRotation(newRotation);
+      const copyArray = [...myItems];
+      myItems.forEach((getItem, index) => {
+        if (getItem.itemId === props.itemId) {
+          const newObj: any = { ...getItem };
+          newObj["rotation"] = newRotation;
+
+          copyArray[index] = newObj;
+        }
+      });
+      setItemsHeight([...copyArray]);
     };
 
     const positionUp = () => {
@@ -170,7 +192,6 @@ export function Black_speaker_1(props: JSX.IntrinsicElements["group"] | any) {
           position.z,
           rotation
         );
-        console.log(newY, position);
 
         setPosition({ x: position.x, y: newY, z: position.z });
       }
@@ -193,6 +214,7 @@ export function Black_speaker_1(props: JSX.IntrinsicElements["group"] | any) {
 
     const itemDelete = () => {
       updateTagetItemPosition(props.itemId, null, null, null, null);
+      setTarget(null);
     };
 
     if (target === "Black_speaker_1") {

@@ -62,7 +62,7 @@ import { Wood_drawer_1 } from "@/components/ItemShop/ItemItem/Models/Wood_drawer
 import { Wood_shelve } from "@/components/ItemShop/ItemItem/Models/Wood_shelve";
 import { Wood_table_1 } from "@/components/ItemShop/ItemItem/Models/Wood_table_1";
 import { Yellow_sofa_1 } from "@/components/ItemShop/ItemItem/Models/Yellow_sofa_1";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { myItemsState } from "@/recoil/myroom/atoms";
 
 const RoomEditContainer = ({

@@ -7,8 +7,12 @@ import * as THREE from "three";
 import React, { useRef, useState, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
-import { useRecoilState } from "recoil";
-import { itemTargetState, myItemsState } from "@/recoil/myroom/atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  itemTargetState,
+  itemsHeightState,
+  myItemsState,
+} from "@/recoil/myroom/atoms";
 import { useFrame, useThree } from "@react-three/fiber";
 
 type GLTFResult = GLTF & {
@@ -41,6 +45,11 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
 
   // 타겟 정보
   const [target, setTarget] = useRecoilState(itemTargetState);
+  const [stateTarget, setStateTarget] = useState(target);
+
+  useEffect(() => {
+    setStateTarget(target);
+  }, [target]);
 
   const { scene, camera, gl } = useThree();
   const raycaster = new THREE.Raycaster();
@@ -51,6 +60,8 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
   }
 
   const [myItems, setMyItems] = useRecoilState(myItemsState);
+
+  const setItemsHeight = useSetRecoilState(itemsHeightState);
 
   const updateTagetItemPosition = (
     id: number,
@@ -68,7 +79,7 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
           x,
           y,
           z,
-          deg,
+          rotation: deg,
         };
         // 불변성 유지를 위한 새로운 배열 생성
         const newItems = [...myItems];
@@ -105,7 +116,7 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
         gl.domElement.removeEventListener("click", handleWindowClick);
       }
     };
-  }, [isDragging, target]);
+  }, [isDragging]);
 
   useFrame(({ mouse }) => {
     if (props.activePage === "myitems") {
@@ -139,16 +150,48 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
     const leftRotation = () => {
       let newRotation = (rotation - 10) % 360;
       setRotation(newRotation);
+      const copyArray = [...myItems];
+      myItems.forEach((getItem, index) => {
+        if (getItem.itemId === props.itemId) {
+          const newObj: any = { ...getItem };
+          newObj["rotation"] = newRotation;
+
+          copyArray[index] = newObj;
+        }
+      });
+      setItemsHeight([...copyArray]);
     };
 
     const rightRotation = () => {
       let newRotation = (rotation + 10) % 360;
       setRotation(newRotation);
+      const copyArray = [...myItems];
+      myItems.forEach((getItem, index) => {
+        if (getItem.itemId === props.itemId) {
+          const newObj: any = { ...getItem };
+          newObj["rotation"] = newRotation;
+
+          copyArray[index] = newObj;
+        }
+      });
+      setItemsHeight([...copyArray]);
     };
 
     const positionUp = () => {
+      console.log("함수 안의 타겟", target, "black chair에서 찍음");
+
       if (position.y < 3) {
         const newY = Number(position.y) + 0.2;
+        const copyArray = [...myItems];
+        myItems.forEach((getItem, index) => {
+          if (getItem.itemId === props.itemId) {
+            const newObj: any = { ...getItem };
+            newObj["y"] = newY;
+
+            copyArray[index] = newObj;
+          }
+        });
+        setItemsHeight([...copyArray]);
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };
@@ -156,23 +199,26 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
     const positionDown = () => {
       if (position.y > -2.5) {
         const newY = Number(position.y) - 0.2;
-        // atom에 변화된 포지션 저장
-        updateTagetItemPosition(
-          props.itemId,
-          position.x,
-          newY,
-          position.z,
-          rotation
-        );
+        const copyArray = [...myItems];
+        myItems.forEach((getItem, index) => {
+          if (getItem.itemId === props.itemId) {
+            const newObj: any = { ...getItem };
+            newObj["y"] = newY;
+
+            copyArray[index] = newObj;
+          }
+        });
+        setItemsHeight([...copyArray]);
         setPosition({ x: position.x, y: newY, z: position.z });
       }
     };
 
     const itemDelete = () => {
       updateTagetItemPosition(props.itemId, null, null, null, null);
+      setTarget(null);
     };
 
-    if (target === "Black_chair_1") {
+    if (stateTarget === "Black_chair_1") {
       console.log("버튼 실행", "Black_chair_1");
       props.rotationLeftButtonRef.current.addEventListener(
         "click",

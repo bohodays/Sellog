@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { IItemProps } from "@/typeModels/ItemShop/itemInterfaces";
 import ItemWrapper from "@/components/ItemShop/ItemWrapper/ItemWrapper";
 import { SDiv } from "./styles";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { myItemsState } from "@/recoil/myroom/atoms";
 import { itemDefaultInfo } from "@/utils/itemDefaultInfo";
 
@@ -50,7 +50,7 @@ const MyItemItem = ({ item }: IItemProps) => {
             item?.name === "undefined" ? "item__name name-hidden" : "item__name"
           }
         >
-          {item?.name}
+          {item?.name?.split("_").join(" ")}
         </div>
       </div>
     </SDiv>

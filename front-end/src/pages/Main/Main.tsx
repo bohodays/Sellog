@@ -31,7 +31,7 @@ import { M2_Main } from "@/components/Main/Models/M2_Main";
 import { M1_Main } from "@/components/Main/Models/M1_Main";
 import { M3_Main } from "@/components/Main/Models/M3_Main";
 import ToggleButton from "@/components/Main/ToggleButton/ToggleButton";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { userInfoState } from "@/recoil/myroom/atoms";
 import { MyRoomFont } from "@/components/Main/Models/Myroom_font";
 import { ItemShopFont } from "@/components/Main/Models/ItemShop_font";

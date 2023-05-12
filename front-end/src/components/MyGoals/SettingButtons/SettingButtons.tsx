@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { SArticle } from "./styles";
 import GoalsSettingModal from "../GoalsSettingModal/GoalsSettingModal";
 import { userInfoState } from "@/recoil/myroom/atoms";
