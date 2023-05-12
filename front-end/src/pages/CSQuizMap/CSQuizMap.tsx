@@ -9,7 +9,7 @@ import {
   PerspectiveCamera,
 } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState, useCallback } from "react";
 import { SButtonWrapper, SMain } from "./styles";
 import { PCFSoftShadowMap, RepeatWrapping, Vector2, Vector3 } from "three";
 import * as THREE from "three";
@@ -123,7 +123,10 @@ const Scene = ({ buttonRef, send, other }: any) => {
   draw();
 
   useEffect(() => {
-    other.draw
+    {other && other.map((ch:any) => (
+      ch.draw()
+    ))}
+    console.log("다른 사용자");
   }, [other]);
 
   function setSize() {
@@ -248,28 +251,29 @@ const Scene = ({ buttonRef, send, other }: any) => {
 const Main = () => {
   const navigate = useNavigate();
   const buttonRef = useRef<any>();
-  console.log(buttonRef.current);
 
   const [client, setClient] = useState<Stomp.Client | null>(null);
   const [other, setOther] = useState<any>([]);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const accessToken = localData.getAccessToken();
-  const group = useRef<THREE.Group | any>();
+  const userModelRef = useRef<any>();
+  const animations = useGLTF("/models/characters/f1.glb") as GLTFResult;
 
-  //raycaster
-  let destinationPoint = new Vector3();
-  let angle = 0;
-  let isPressed = false; // 마우스를 누르고 있는 상태
-  let moving = false;
+  const draw = useCallback(({  message, userModelRef, animations }:any) => {
+    const { actions } = useAnimations<GLTFActions | any>(animations);
+    console.log("hi111");
+    //raycaster
+    let destinationPoint = new Vector3();
+    let angle = 0;
+    let isPressed = false; // 마우스를 누르고 있는 상태
+    let moving = false;
 
-  function draw({ other }:any) {
-    const { actions } = useAnimations<GLTFActions | any>(other.animations, group);
-    if (other.userModelRef.current) {
+    if (userModelRef.current) {
       if (isPressed) {
-        destinationPoint.x = other.message.x;
+        destinationPoint.x = message.x;
         destinationPoint.y = 0.3;
-        destinationPoint.z = other.message.y;
-        other.userModelRef.current.lookAt(destinationPoint);
+        destinationPoint.z = message.y;
+        userModelRef.current.lookAt(destinationPoint);
 
         moving = true;
       }
@@ -277,20 +281,20 @@ const Main = () => {
       if (moving) {
         // 걸어가는 상태
         angle = Math.atan2(
-          destinationPoint.z - other.userModelRef.current.position.z,
-          destinationPoint.x - other.userModelRef.current.position.x
+          destinationPoint.z - userModelRef.current.position.z,
+          destinationPoint.x - userModelRef.current.position.x
         );
 
-        other.userModelRef.current.position.x += Math.cos(angle) * 0.08;
-        other.userModelRef.current.position.z += Math.sin(angle) * 0.08;
+        userModelRef.current.position.x += Math.cos(angle) * 0.08;
+        userModelRef.current.position.z += Math.sin(angle) * 0.08;
 
         actions["Idle"]?.stop();
         actions["Run"]?.play();
 
         if (
-          Math.abs(destinationPoint.x - other.userModelRef.current.position.x) <
+          Math.abs(destinationPoint.x - userModelRef.current.position.x) <
             0.04 &&
-          Math.abs(destinationPoint.z - other.userModelRef.current.position.z) < 0.03
+          Math.abs(destinationPoint.z - userModelRef.current.position.z) < 0.03
         ) {
           moving = false;
           console.log("멈춤");
@@ -301,7 +305,7 @@ const Main = () => {
         actions["Idle"]?.play();
       }
     }
-  }
+  }, []);
 
   // 소켓 연결
   useEffect(() => {
@@ -337,14 +341,17 @@ const Main = () => {
             default:
               CharacterComponent = <M3_Main />;
           }
-
           data = {
             message: received,
+            draw: () => {
+              // draw 함수 내에서 useRef와 useGLTF를 호출하고, other 객체에 저장합니다.
+              const userModelRef = useRef<any>();
+              const animations = useGLTF("/models/characters/f1.glb") as GLTFResult;
+              draw({ message: received, userModelRef, animations });
+            },
             character: CharacterComponent,
-            userModelRef: useRef<any>(),
-            animations: useGLTF("/models/characters/f1.glb") as GLTFResult,
-            draw : draw(data)
           }
+          console.log(data);
 
           setOther((other:any) => {
             const index = other.findIndex((item:any) => item.message.sender === received.sender);
@@ -375,7 +382,7 @@ const Main = () => {
         sender: userInfo.userId,
         x: mouseX,
         y: mouseY,
-        characterId: userInfo.characterId,
+        characterId: userInfo.characterId, 
         nickname: userInfo.nickname
     };
     client?.send("/pub/1", {}, JSON.stringify(message));
