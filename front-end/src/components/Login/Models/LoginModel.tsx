@@ -271,6 +271,6 @@ function LoginModel({ handler }: handlerType) {
   );
 }
 
-useGLTF.preload("/models/login.glb");
+// useGLTF.preload("/models/login.glb");
 
 export default LoginModel;

@@ -8,6 +8,15 @@ export const SSection = styled.section`
   flex-direction: column;
   justify-content: space-around;
   padding: 1vw;
+  .goHome__button {
+    /* display: flex;
+    justify-self: end; */
+    position: absolute;
+    bottom: 3vh;
+    right: 3vw;
+    font-size: 1.7rem;
+    color: #d8b904;
+  }
 `;
 
 export const SArticle = styled.article`

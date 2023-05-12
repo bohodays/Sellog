@@ -333,4 +333,4 @@ export function Room4(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-// useGLTF.preload("/models/room/room4.glb");
+// // useGLTF.preload("/models/room/room4.glb");

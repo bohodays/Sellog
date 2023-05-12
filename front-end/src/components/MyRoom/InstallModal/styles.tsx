@@ -12,6 +12,9 @@ export const SInstallModal = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  .modal__content {
+    padding-inline: 10%;
+  }
   a {
     color: black;
     border: black solid 1px;

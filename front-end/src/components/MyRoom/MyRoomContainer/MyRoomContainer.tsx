@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SMyRoom } from "./styles";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -11,7 +12,11 @@ import { Room4 } from "../Models/Room4";
 import { useRecoilState } from "recoil";
 import { itemTargetState, myItemsState } from "@/recoil/myroom/atoms";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCaretLeft,
+  faCaretRight,
+  faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 import Loading from "@/components/Loading/Loading";
 import pMinDelay from "p-min-delay";
 import Room2 from "../Models/Room2";
@@ -82,6 +87,11 @@ const MyRoomContainer = (props: IMyRoomProps) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const [target, setTarget] = useRecoilState(itemTargetState);
+
+  const homeNavigator = useNavigate();
+  const getOutHandler = () => {
+    homeNavigator("/main");
+  };
 
   // const [target, setTarget] = useState(null);
   const editButtonRef = useRef<any>();
@@ -174,6 +184,11 @@ const MyRoomContainer = (props: IMyRoomProps) => {
           Go Back
         </button>
       )}
+      <FontAwesomeIcon
+        icon={faRightFromBracket}
+        className="goHome__button"
+        onClick={getOutHandler}
+      />
     </SMyRoom>
   );
 };

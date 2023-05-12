@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { SProfile } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,24 +17,28 @@ import { apiUpdateUserInfo } from "@/api/user";
 import { IMyProfileUpdate } from "@/typeModels/user/userEditInfo";
 import { localData } from "@/utils/token";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+// recoil atoms
+import { userInfoState } from "@/recoil/myroom/atoms";
+import { useRecoilState } from "recoil";
 
 interface MyProfileProps {
-  userData: any;
-  setUserData: any;
   setIsEdit: any;
   isEdit: boolean;
 }
 
 function EditProfile(props: MyProfileProps) {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const [tempInfo, setTempInfo] = useState(userInfo);
+
   const nicknameRef: any = useRef("");
   const mottoRef: any = useRef("");
-  const emailRef: any = useRef("");
-  const tistoryRef: any = useRef("");
+  const contactRef: any = useRef("");
+  const blogRef: any = useRef("");
   const githubRef: any = useRef("");
 
   const [isModal, setIsModal] = useState<boolean>(false);
 
-  const profileImg: any = useRef(props.userData.img);
+  const profileImg: any = useRef(userInfo.img);
   const [newProfileImg, setNewProfileImg] = useState(profileImg.current);
   const [imgFile, setImgFile] = useState(""); // 미리보기 실제 파일(저장을 위한)
 
@@ -63,33 +68,103 @@ function EditProfile(props: MyProfileProps) {
     }
   };
 
+  // 개인정보 유효성 검사.
+
+  // 닉네임 유효성
+  function isValidNickName(nick: string) {
+    const nicknameRegex = /^[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9_-]{2,16}$/;
+    return nicknameRegex.test(nick);
+  }
+  // 좌우명 유효성
+  function isValidMotto(mo: string) {
+    const mottoRegex = /^[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9_-]{2,16}$/;
+    return mottoRegex.test(mo);
+  }
+  // 이메일 유효성
+  function isValidEmail(email: string) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  // 깃허브 유효성
+  // function isValidGithub(git: string) {
+  //   const githubRegex = /^[^\s@]+github[^\s@]+\.[^\s@]+$/;
+  // }
+  // 블로그 유효성
+  function isValidBlog(blog: string) {
+    const blogRegex =
+      /^(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+)\.([a-zA-Z0-9-.]+)(?:\/[^\s]*)?$/;
+    console.log(blog);
+
+    const matches = blog.match(blogRegex);
+    console.log(matches);
+
+    if (matches && matches.length >= 3) {
+      const subdomain = matches[1];
+      const topLevelDomain = matches[2];
+      return topLevelDomain === "tistory.com";
+    }
+    return false;
+  }
+
+  // 입력된 값 테스트
+  function isValid() {
+    let validNum = 0;
+    if (!isValidNickName(nicknameRef.current.value)) {
+      console.log("Nick Name", isValidNickName(nicknameRef.current.value));
+    } else {
+      // valid nickname
+      validNum++;
+    }
+    if (!isValidMotto(mottoRef.current.value)) {
+      console.log("Motto", isValidMotto(mottoRef.current.value));
+    } else {
+      // valid motto
+      validNum++;
+    }
+    if (!isValidEmail(contactRef.current.value)) {
+      console.log("Email");
+    } else {
+      // valid email
+      validNum++;
+    }
+    if (!isValidBlog(blogRef.current.value)) {
+      console.log("blog");
+    } else {
+      //valid blog
+      validNum++;
+    }
+    // 모두 만족하면 true 리턴
+    if (validNum === 4) {
+      return true;
+    } else {
+      return false;
+    }
+
+    // isValidGithub(githubRef.current.value);
+    // validNum ++
+  }
+  // 프로필 수정하는 함수
   const editHandler = () => {
     // api put 함수 넣기
     console.log({ newProfileImg });
-
-    props.setUserData({
-      ...props.userData,
+    setUserInfo({
+      ...userInfo,
       img: newProfileImg,
       nickname: nicknameRef.current.value,
-      email: emailRef.current.value,
+      email: contactRef.current.value,
       motto: mottoRef.current.value,
-      tistory: tistoryRef.current.value,
+      blog: blogRef.current.value,
       github: githubRef.current.value,
     });
 
-    // console.log("after", props.userData); IMyProfileUpdate
+    // console.log("after", userInfo); IMyProfileUpdate
     const editUserData: any = {
       nickname: nicknameRef.current.value,
       motto: mottoRef.current.value,
-      contact: emailRef.current.value,
-      blog: tistoryRef.current.value,
+      contact: contactRef.current.value,
+      blog: blogRef.current.value,
       github: githubRef.current.value,
     };
-
-    // console.log(JSON.stringify(editUserData));
-    // console.log("eidt", editUserData);
-
-    // console.log("blob", blob);
 
     const accessToken = localData.getAccessToken();
 
@@ -98,7 +173,42 @@ function EditProfile(props: MyProfileProps) {
         console.log("returned response", res?.data.response);
       });
     }
-    setIsModal(!isModal);
+  };
+
+  const gobackHandler = () => {
+    props.setIsEdit(!props.isEdit);
+  };
+  const confirmModalHandler = () => {
+    if (isValid()) {
+      setIsModal(!isModal);
+    } else {
+      return;
+      // 유효성 검사 실패한 부분 알려주기
+    }
+  };
+  const nickNameHandler = () => {
+    setTempInfo({
+      ...userInfo,
+      nickname: nicknameRef.current.value,
+    });
+  };
+  const mottoHandler = () => {
+    setTempInfo({
+      ...userInfo,
+      motto: mottoRef.current.value,
+    });
+  };
+  const contactHandler = () => {
+    setTempInfo({
+      ...userInfo,
+      contact: contactRef.current.value,
+    });
+  };
+  const blogHandler = () => {
+    setTempInfo({
+      ...userInfo,
+      blog: blogRef.current.value,
+    });
   };
 
   return (
@@ -125,10 +235,10 @@ function EditProfile(props: MyProfileProps) {
           />
 
           <div className="container__userinfo">
-            <p className="username">{props.userData.nickname}</p>
+            <p className="username">{userInfo.nickname}</p>
             <div className="point__container">
               <img className="sticker__coin" src={coin} alt="coin" />
-              <p>{props.userData.points}</p>
+              <p>{userInfo.points}</p>
             </div>
           </div>
         </div>
@@ -137,56 +247,59 @@ function EditProfile(props: MyProfileProps) {
             <p>NICK NAME</p>
             <input
               type="text"
-              placeholder={props.userData.nickname}
+              placeholder={userInfo.nickname}
+              defaultValue={userInfo.nickname}
               ref={nicknameRef}
+              onChange={nickNameHandler}
             />
           </div>
           <div className="box__edit box__motto">
             <p>MOTTO</p>
             <input
               type="text"
-              placeholder={props.userData.motto}
+              placeholder={userInfo.motto}
               ref={mottoRef}
+              defaultValue={userInfo.motto}
+              onChange={mottoHandler}
             />
           </div>
           <div className="box__edit box__email">
             <p>E-MAIL</p>
             <input
               type="text"
-              placeholder={props.userData.email}
-              ref={emailRef}
+              placeholder={userInfo.contact}
+              ref={contactRef}
+              defaultValue={userInfo.contact}
+              onChange={contactHandler}
             />
           </div>
           <div className="box__edit box__tistory">
             <p>BLOG</p>
             <input
               type="text"
-              placeholder={props.userData.tistory}
-              ref={tistoryRef}
-            />
-          </div>
-          <div className="box__edit box__github">
-            <p>GITHUB</p>
-            <input
-              type="text"
-              placeholder={props.userData.github}
-              ref={githubRef}
+              placeholder="ex) https://example.tistory.com"
+              ref={blogRef}
+              defaultValue={userInfo.blog}
+              onChange={blogHandler}
             />
           </div>
         </div>
         <div className="button__edit">
-          <FontAwesomeIcon icon={faLeftLong} />
-          <button className="button__goal" onClick={editHandler}>
+          {/* <FontAwesomeIcon icon={faLeftLong} onClick={gobackHandler} /> */}
+          <button className="button__goal" onClick={gobackHandler}>
+            <p>Go Back</p>
+          </button>
+          <button className="button__goal" onClick={confirmModalHandler}>
             <p>Confirm</p>
           </button>
         </div>
         <hr />
         <div className="platform-address">
           <div>
-            <a href={`${props.userData.github}`}>
+            <a href={`${userInfo.github}`}>
               <img src={github} className="sticker__github" alt="github Icon" />
             </a>
-            <a href={`${props.userData.tistory}`}>
+            <a href={`${userInfo.tistory}`}>
               <img src={tistory} className="sticker__tistory" alt="" />
             </a>
           </div>
@@ -198,6 +311,7 @@ function EditProfile(props: MyProfileProps) {
           setIsModal={setIsModal}
           isEdit={props.isEdit}
           setIsEdit={props.setIsEdit}
+          editHandler={editHandler}
         ></EditProfileModal>
       )}
     </SProfile>

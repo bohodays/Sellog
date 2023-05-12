@@ -7,7 +7,7 @@ function NoTarget() {
   return (
     <SNoTarget>
       <p>Target 설정 하세요</p>
-      <button className="button__goal">
+      <button className="button__goal" id="notarget__button">
         <Link to={"/mygoals"}>Set Target</Link>
       </button>
     </SNoTarget>
