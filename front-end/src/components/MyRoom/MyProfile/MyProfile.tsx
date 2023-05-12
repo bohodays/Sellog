@@ -8,10 +8,14 @@ import tistory from "@/assets/imgs/retro/tistoryIcon.png";
 import smileBottom from "@/assets/imgs/retro/smile_bottom.png";
 import coin from "@/assets/imgs/retro/coin.png";
 import { useEffect, useRef, useState } from "react";
-import { Link, Router } from "react-router-dom";
+import { Link, Router, useNavigate } from "react-router-dom";
 import NoTarget from "../NoTarget/NoTarget";
 import { apiGetAchievedRecordList, apiGetTodayRecord } from "@/api/record";
 import InstallModal from "../InstallModal/InstallModal";
+// recoil atoms
+import { userInfoState } from "@/recoil/myroom/atoms";
+import { useRecoilState } from "recoil";
+
 interface MyProfileProps {
   userData: any;
   setUserData: any;
@@ -20,6 +24,8 @@ interface MyProfileProps {
 }
 
 const MyProfile = (props: MyProfileProps) => {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+
   const profileImg: any = useRef(props.userData.img);
   const [newProfileImg, setNewProfileImg] = useState(profileImg.current);
   // 습관 설정이 하나도 안되어 있을 때 컴포넌트 나타남
@@ -27,7 +33,7 @@ const MyProfile = (props: MyProfileProps) => {
     props.userData.start_date
   );
   // 크롬 확장자 구현 되면 false로 초기화하기
-  const [isInstalled, setIsInstalled] = useState<boolean>(true);
+  const [isInstalled, setIsInstalled] = useState<boolean>(false);
   // 오늘 목표 달성 했는지
   const [isTodayGithub, setIsTodayGithub] = useState<boolean>(false);
   const [isTodayAlgo, setIsTodayAlgo] = useState<boolean>(false);
@@ -35,33 +41,40 @@ const MyProfile = (props: MyProfileProps) => {
   const [isTodayCS, setIsTodayCS] = useState<boolean>(false);
   const [isTodayFeed, setIsTodayFeed] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log("something changed", props.userData, isInstalled);
-  }, [props.userData, isInstalled]);
+  // 오늘 CS 문제, 피드 가는 링크
+  const csNavigator = useNavigate();
+  const feedNavigator = useNavigate();
 
   useEffect(() => {
+    console.log("something changed", userInfo, { isInstalled }, { isTarget });
+  }, [userInfo, isInstalled]);
+
+  useEffect(() => {
+    // 습관 실천 기록 가져오는 api
     apiGetAchievedRecordList().then((data: any) => {
       if (data.response) {
         console.log(data.response);
         setIsInstalled(true);
       }
     });
+    // 오늘 습관 실천
     apiGetTodayRecord().then((data: any) => {
-      console.log(data.response);
-      if (data.response) {
-        if (data.response.algo) {
+      console.log("apiGetTodayRecord", data.data.response);
+      if (data.data.response) {
+        if (data.data.response.algo) {
           setIsTodayAlgo(true);
         }
-        if (data.response.github) {
+        if (data.data.response.github) {
           setIsTodayGithub(true);
         }
-        if (data.response.blog) {
+        if (data.data.response.blog) {
+          console.log("blog committed");
           setIsTodayBlog(true);
         }
-        if (data.response.cs) {
+        if (data.data.response.cs) {
           setIsTodayCS(true);
         }
-        if (data.response.feed) {
+        if (data.data.response.feed) {
           setIsTodayFeed(true);
         }
       }
@@ -71,6 +84,12 @@ const MyProfile = (props: MyProfileProps) => {
   const userInfoHandler = () => {
     // console.log("user info", props.userData);
     props.setIsEdit(!props.isEdit);
+  };
+  const todayCSHandler = () => {
+    csNavigator("/csquiz");
+  };
+  const todayFeedHandler = () => {
+    feedNavigator("/feed");
   };
 
   return (
@@ -94,16 +113,18 @@ const MyProfile = (props: MyProfileProps) => {
             ref={profileImg}
           />
           <div className="container__userinfo">
-            <p className="username">{props.userData.nickname}</p>
+            <p className="username">{userInfo.nickname}</p>
             <div className="point__container">
               <img className="sticker__coin" src={coin} alt="coin" />
-              <p>{props.userData.points}</p>
+              <p>{userInfo.points}</p>
             </div>
           </div>
         </div>
         <div className="bottom__profile">
-          <p>{props.userData.motto}</p>
-          <FontAwesomeIcon icon={faPenToSquare} onClick={userInfoHandler} />
+          <p>{userInfo.motto}</p>
+          <button className="button__goal" onClick={userInfoHandler}>
+            Edit
+          </button>
         </div>
         <hr />
         {/* component 갈아끼우기 */}
@@ -116,8 +137,8 @@ const MyProfile = (props: MyProfileProps) => {
             <div className="container__habit-stats">
               github
               <div className="progress__bar progress__bar--github">
-                {props.userData.blogTarget ? (
-                  props.userData.blogTarget
+                {userInfo.githubTarget ? (
+                  userInfo.githubTarget
                 ) : (
                   <p>깃 허브 습관 설정 하세요</p>
                 )}
@@ -166,9 +187,12 @@ const MyProfile = (props: MyProfileProps) => {
             </div>
             <div className="container__habit-stats">
               CS
-              <div className="progress__bar progress__bar--CS">
+              <div
+                className="progress__bar progress__bar--CS"
+                onClick={todayCSHandler}
+              >
                 {props.userData.csTarget ? (
-                  props.userData.csTarget
+                  <p>오늘의 CS 문제</p>
                 ) : (
                   <p>매일 CS 문제 풀기</p>
                 )}
@@ -183,9 +207,12 @@ const MyProfile = (props: MyProfileProps) => {
             </div>
             <div className="container__habit-stats">
               Feed
-              <div className="progress__bar progress__bar--Feed">
+              <div
+                className="progress__bar progress__bar--Feed"
+                onClick={todayFeedHandler}
+              >
                 {props.userData.feedTarget ? (
-                  props.userData.feedTarget
+                  <p> 오늘의 피드 </p>
                 ) : (
                   <p> 뉴스 피드 습관을 설정하세요</p>
                 )}
@@ -204,12 +231,13 @@ const MyProfile = (props: MyProfileProps) => {
           </div>
         )}
         <div className="container__contact">
-          <div className="contact__text">Contact</div>
-          <div className="contact__info">
-            <p>
-              <FontAwesomeIcon icon={faEnvelope} /> {props.userData.contact}
-            </p>
-            <br />
+          <div className="contact__text">
+            Contact
+            <div className="contact__info">
+              <p>
+                <FontAwesomeIcon icon={faEnvelope} /> {props.userData.contact}
+              </p>
+            </div>
           </div>
           <div>
             <a href={`${props.userData.github}`}>
@@ -222,7 +250,8 @@ const MyProfile = (props: MyProfileProps) => {
         </div>
         <div className="platform-address"></div>
       </div>
-      {isInstalled ? null : (
+      {/*  */}
+      {isInstalled || isTarget ? null : (
         <InstallModal
           isInstalled={isInstalled}
           setIsInstalled={setIsInstalled}

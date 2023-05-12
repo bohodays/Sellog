@@ -3,7 +3,7 @@ import ItemItem from "../ItemItem/ItemItem";
 import { SSection, SDiv } from "./styles";
 import { apiGetCategorizedItemList } from "@/api/store";
 import { IItemProps, IShopItem } from "@/typeModels/ItemShop/iteminterfaces";
-
+import ItemModal from "../ItemModal.tsx/ItemModal";
 const dummyItemList = [
   {
     name: "chair",
@@ -79,6 +79,8 @@ interface categoryProps {
 const ItemList = ({ category }: categoryProps) => {
   const [page, setPage] = useState(0); // 현재 페이지
   const [totalPage, setTotalPage] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [item, setItem] = useState<IShopItem | null>(null);
 
   const [itemList, setItemList] = useState<IShopItem[] | null>(null);
 
@@ -111,13 +113,29 @@ const ItemList = ({ category }: categoryProps) => {
     }
     return arr;
   };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
   return (
     <>
+      {isModalOpen && item && (
+        <ItemModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          item={item}
+        ></ItemModal>
+      )}
       {itemList && (
         <SSection isEmpty={totalPage}>
           <SDiv>
             {itemList.map((item: IShopItem, index: number) => (
-              <ItemItem shopItem={item} key={item.id}></ItemItem>
+              <ItemItem
+                shopItem={item}
+                key={item.id}
+                setIsModalOpen={setIsModalOpen}
+                setItem={setItem}
+              ></ItemItem>
             ))}
           </SDiv>
           <div className="item__pagenation--wrapper">{pages()}</div>

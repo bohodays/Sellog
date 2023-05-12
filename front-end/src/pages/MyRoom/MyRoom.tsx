@@ -48,12 +48,7 @@ const MyRoom = () => {
       ) : !isEdit && activePage == "myitems" ? (
         <MyItems></MyItems>
       ) : (
-        <EditProfile
-          userData={user}
-          setUserData={setUser}
-          setIsEdit={setIsEdit}
-          isEdit={isEdit}
-        ></EditProfile>
+        <EditProfile setIsEdit={setIsEdit} isEdit={isEdit}></EditProfile>
       )}
       {/* <MyProfile userData={user} setActivePage={setActivePage}></MyProfile> */}
 

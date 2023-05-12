@@ -390,4 +390,4 @@ function Room2(props: JSX.IntrinsicElements["group"]) {
 
 export default React.memo(Room2);
 
-// useGLTF.preload("/models/room/room2.glb");
+// // useGLTF.preload("/models/room/room2.glb");

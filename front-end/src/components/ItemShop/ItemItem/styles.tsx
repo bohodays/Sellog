@@ -2,8 +2,11 @@ import styled from "styled-components";
 
 export const SArticle = styled.article`
   /* height: 30vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: calc(20% - 10px);
-  height: fit-content;
+  height: 38vh;
   color: white;
   padding: 1%;
   margin: 0% 1%;
@@ -18,10 +21,8 @@ export const SArticle = styled.article`
     inset 0 0 0.3rem var(--neon-border-color);
 
   .item__img {
-    /* height: 80%; */
     width: calc(100%);
-    height: calc(24vh);
-    /* width: 100%; */
+    height: calc(28vh);
   }
   .item__description__wrapper {
     display: flex;
