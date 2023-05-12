@@ -94,7 +94,7 @@ export default function Feed() {
 
   const feedHandler = () => {
     console.log({ newsfeed }, { page });
-    mostViewFeed.forEach((element: ReactNode) => {
+    mostViewFeed.forEach((element: any) => {
       console.log(element["title"]);
     });
   };
@@ -138,7 +138,7 @@ export default function Feed() {
             <div className="mostviewed__list">
               {/* <p> {mostViewFeed}</p> */}
               {isMostView &&
-                mostViewFeed.map((element: ReactNode, index: number) => {
+                mostViewFeed.map((element: any, index: number) => {
                   return (
                     <li key={index} className="mostview__element">
                       {element["title"]}

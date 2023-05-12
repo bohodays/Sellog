@@ -2,7 +2,6 @@ import { SDiv } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareCheck } from "@fortawesome/free-regular-svg-icons";
 import {
-  ICountDoneItem,
   IDoneItemProps,
 } from "@/typeModels/mygoals/myRecordInterfaces";
 // interface ICountDoneProps {
