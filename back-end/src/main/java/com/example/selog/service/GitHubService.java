@@ -92,24 +92,25 @@ public class GitHubService {
     //깃허브리스트와 응답 객체가 같은지 확인
     public boolean isIn(List<GitHub> list,String rName, String oName) {
 
-        GitHubDto dto = GitHubDto.builder()
-                .name(rName)
-                .userName(oName)
-                .build();
+        for(GitHub g : list) {
+            if(g.getName().equals(rName) && g.getMember().getNickname().equals(oName)) {
+                return true;
+            }
+        }
 
-        List<GitHubDto> arr = list.stream().map(GitHub::toGitHubDto).collect(Collectors.toList());
-
-        return arr.contains(dto);
+        return false;
     }
 
     public boolean isIn(Set<GitHubDto> set,String rName, String oName) {
 
-        GitHubDto dto = GitHubDto.builder()
-                .name(rName)
-                .userName(oName)
-                .build();
+        for(GitHubDto g : set) {
 
-        return set.contains(dto);
+            if(g.getUserName().equals(oName) && g.getName().equals(rName)) {
+                return true;
+            }
+        }
+
+        return false;
     }
     @Transactional
     public void makeWebHook(String gitAccessToken,String rName, String oName,Member member) {
