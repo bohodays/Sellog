@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SSection } from "./styles";
-import { presetsObj } from "@react-three/drei/helpers/environment-assets";
 import { TiChevronRightOutline, TiChevronLeftOutline } from "react-icons/ti";
+import { apiGetAccumulatedRecordList } from "@/api/record";
+import { IAccumulatedRecordList } from "@/typeModels/mygoals/myRecordInterfaces";
 
 const dummyAccumulateList = [
   {
-    goal: "github",
+    goal: "algo",
     number: 13,
   },
   {
@@ -13,7 +14,7 @@ const dummyAccumulateList = [
     number: 15,
   },
   {
-    goal: "algorithm",
+    goal: "github",
     number: 20,
   },
   {
@@ -21,12 +22,26 @@ const dummyAccumulateList = [
     number: 25,
   },
   {
-    goal: "cs quiz",
+    goal: "cs",
     number: 13,
   },
 ];
 
 const Accumulate = () => {
+  const [accumulatedList, setAccumulatedList] =
+    useState<IAccumulatedRecordList | null>(null);
+
+  useEffect(() => {
+    apiGetAccumulatedRecordList()
+      .then((r) => {
+        // console.log(r?.data.response);
+        setAccumulatedList(r?.data.response);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = 5;
 
@@ -37,6 +52,7 @@ const Accumulate = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
   return (
     <SSection>
       <div className="accumulate__container">
@@ -66,8 +82,70 @@ const Accumulate = () => {
         <div style={{ fontFamily: "ZCOOL KuaiLe" }}>
           {dummyAccumulateList[activeStep].goal}
         </div>
+
         <div className="number">
-          {dummyAccumulateList[activeStep].number}일째 유지 중입니다
+          {accumulatedList &&
+            accumulatedList[dummyAccumulateList[activeStep].goal]?.day}
+          일째 유지 중입니다
+        </div>
+
+        {/* map 돌리는 코드로 바꾸기 */}
+        <div className="acc__day__wrapper">
+          {accumulatedList && (
+            <div className="goal__container">
+              <div className="start__div">
+                {
+                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                    ?.start?.[0]
+                }
+                일
+              </div>
+              <div className="start__div">
+                {
+                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                    ?.mid?.[0]
+                }
+                일
+              </div>
+              <div className="start__div">
+                {
+                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                    ?.last?.[0]
+                }
+                일
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="acc__reward__wrapper">
+          {accumulatedList && (
+            <div className="reward__container">
+              <div className="reward__div reward1">
+                <div className="inner_idv">
+                  {
+                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                      ?.start?.[1]
+                  }
+                </div>
+              </div>
+              <div className="reward__div reward2">
+                <div className="inner_idv">
+                  {
+                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                      ?.mid?.[1]
+                  }
+                </div>
+              </div>
+              <div className="reward3__div">
+                <div className="reward3">
+                  {
+                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                      ?.last?.[1]
+                  }
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </SSection>

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import ItemItem from "../ItemItem/ItemItem";
 import { SSection, SDiv } from "./styles";
+import { apiGetCategorizedItemList } from "@/api/store";
+import { IItemProps, IShopItem } from "@/typeModels/ItemShop/iteminterfaces";
 
 const dummyItemList = [
   {
@@ -75,48 +77,53 @@ interface categoryProps {
 }
 
 const ItemList = ({ category }: categoryProps) => {
-  // dummyData filter해서 page 정하려고 임시로 만듦
-  const [page, setPage] = useState(1); // 현재 페이지
-  const perPage = 8; // 페이지당 보여줄 카드의 개수
-  const startIndex = (page - 1) * perPage;
-  const endIndex = startIndex + perPage;
+  const [page, setPage] = useState(0); // 현재 페이지
+  const [totalPage, setTotalPage] = useState(0);
+
+  const [itemList, setItemList] = useState<IShopItem[] | null>(null);
 
   useEffect(() => {
-    setPage(1);
+    setPage(0);
   }, [category]);
 
-  const selectedItemList = dummyItemList.filter((item, index) =>
-    category === "ALL" ? item : item.category === category
-  );
+  useEffect(() => {
+    apiGetCategorizedItemList(category.toLowerCase(), page)
+      .then((r) => {
+        setItemList(r?.data.response.content);
+        setTotalPage(r?.data.response.totalPages);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [category, page]);
 
   const pages = () => {
     let arr = [];
-    for (let i = 1; i < selectedItemList.length / perPage + 1; i++) {
+    for (let i = 0; i < totalPage; i++) {
       arr.push(
         <button
           className={i === page ? "page__btn--active" : "page__btn"}
           onClick={() => setPage(i)}
         >
-          {i}
+          {i + 1}
         </button>
       );
     }
     return arr;
   };
   return (
-    <SSection isEmpty={selectedItemList.length}>
-      <SDiv>
-        {dummyItemList
-          .filter((item, index) =>
-            category === "ALL" ? item : item.category === category
-          )
-          .slice(startIndex, endIndex)
-          .map((item, index) => (
-            <ItemItem item={item} key={`${index}`}></ItemItem>
-          ))}
-      </SDiv>
-      <div className="item__pagenation--wrapper">{pages()}</div>
-    </SSection>
+    <>
+      {itemList && (
+        <SSection isEmpty={totalPage}>
+          <SDiv>
+            {itemList.map((item: IShopItem, index: number) => (
+              <ItemItem shopItem={item} key={item.id}></ItemItem>
+            ))}
+          </SDiv>
+          <div className="item__pagenation--wrapper">{pages()}</div>
+        </SSection>
+      )}
+    </>
   );
 };
 

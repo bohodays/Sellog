@@ -13,6 +13,9 @@ function App() {
   const Login = React.lazy(() => import("./pages/Login/Login"));
   const Main = React.lazy(() => import("./pages/Main/Main"));
   const CSQuiz = React.lazy(() => import("./pages/CSQuiz/CSQuiz"));
+  const CSQuizResult = React.lazy(
+    () => import("./pages/CSQuizResult/CSQuizResult")
+  );
   const ItemShop = React.lazy(() => import("./pages/ItemShop/ItemShop"));
   const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
   const Feed = React.lazy(() => import("@/pages/Feed/Feed"));
@@ -22,28 +25,48 @@ function App() {
     () => import("./pages/OauthRedirect/OauthRedirect")
   );
   const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse/TermsOfUse"));
+  const CSQuizProgress = React.lazy(
+    () => import("./pages/CSQuizProgress/CSQuizProgress")
+  );
+  const CSQuizMap = React.lazy(() => import("./pages/CSQuizMap/CSQuizMap"));
+
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  // console.log(userInfo);
+
+  useEffect(() => {
+    const accessToken = localData.getAccessToken();
+    if (accessToken) {
+      apiGetUserInfo().then((res) => {
+        const userInfo = res?.data.response;
+        setUserInfo(userInfo);
+      });
+    }
+  }, []);
 
   return (
     <div className="App">
       {/* fallback 추가해야 됨 */}
       <Suspense>
-        <RecoilRoot>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/item-shop" element={<ItemShop />} />
-              <Route path="/main" element={<Main />} />
-              <Route path="/feed" element={<Feed />} />
-              <Route path="/myroom" element={<MyRoom />} />
-              <Route path="/mygoals" element={<MyGoals />} />
-              <Route path="/csquiz" element={<CSQuiz />} />
-              <Route path="/mygoals" element={<MyGoals />} />
-              <Route path="/oauth-login" element={<OauthRedirect />} />
-              <Route path="/termsOfUse" element={<TermsOfUse />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </RecoilRoot>
+        {/* <RecoilRoot> */}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/item-shop" element={<ItemShop />} />
+            <Route path="/main" element={<Main />} />
+            <Route path="/feed" element={<Feed />} />
+            <Route path="/myroom" element={<MyRoom />} />
+            <Route path="/mygoals" element={<MyGoals />} />
+            <Route path="/csquiz" element={<CSQuiz />} />
+            <Route path="/csquiz-progress" element={<CSQuizProgress />} />
+            <Route path="/csquiz-result" element={<CSQuizResult />} />
+            <Route path="/mygoals" element={<MyGoals />} />
+            <Route path="/oauth-login" element={<OauthRedirect />} />
+            <Route path="/termsOfUse" element={<TermsOfUse />} />
+            <Route path="/csQuizMap/:id" element={<CSQuizMap />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+        {/* </RecoilRoot> */}
       </Suspense>
     </div>
   );

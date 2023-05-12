@@ -5,6 +5,8 @@ import {
   useTexture,
   useAnimations,
   PerspectiveCamera,
+  OrbitControls,
+  OrthographicCamera,
 } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
@@ -23,6 +25,24 @@ import { NewCsQuiz } from "@/components/Main/Models/NewCsQuiz";
 import { F1_Main } from "@/components/Main/Models/F1_Main";
 import { useNavigate } from "react-router-dom";
 import { apiGetUserInfo } from "@/api/user";
+import { F2_Main } from "@/components/Main/Models/F2_Main";
+import { F3_Main } from "@/components/Main/Models/F3_Main";
+import { M2_Main } from "@/components/Main/Models/M2_Main";
+import { M1_Main } from "@/components/Main/Models/M1_Main";
+import { M3_Main } from "@/components/Main/Models/M3_Main";
+import ToggleButton from "@/components/Main/ToggleButton/ToggleButton";
+import { useRecoilState } from "recoil";
+import { userInfoState } from "@/recoil/myroom/atoms";
+import { MyRoomFont } from "@/components/Main/Models/Myroom_font";
+import { ItemShopFont } from "@/components/Main/Models/ItemShop_font";
+import { CSQuizFont } from "@/components/Main/Models/Csquiz_font";
+import { FeedFont } from "@/components/Main/Models/Feed_font";
+import { Car } from "@/components/Main/Models/Car";
+import { Ground } from "@/components/Main/Models/Ground";
+import { Tree } from "@/components/Main/Models/Tree";
+import { Stone } from "@/components/Main/Models/Stone";
+import { Grass } from "@/components/Main/Models/Grass";
+import { Floor } from "@/components/Main/Models/Floor";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -45,32 +65,30 @@ const Scene = ({ buttonRef }: any) => {
   ) as GLTFResult;
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
-  // 유저 정보
-  let userInfo;
-  useEffect(() => {
-    apiGetUserInfo().then((res) => {
-      userInfo = res?.data.response;
-      console.log(userInfo);
-    });
-  }, []);
-  console.log(userInfo);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
   const userModelRef = useRef<any>();
   const pointerRef = useRef<any>();
   const spotRef = useRef<any>();
   const spotRef2 = useRef<any>();
   const spotRef3 = useRef<any>();
+  const spotRef4 = useRef<any>();
   const houseRef = useRef<any>();
+  const houseFontRef = useRef<any>();
   const itemshopRef = useRef<any>();
+  const itemshopFontRef = useRef<any>();
   const csquizRef = useRef<any>();
+  const csquizFontRef = useRef<any>();
+  const feedRef = useRef<any>();
+  const feedFontRef = useRef<any>();
   const airBalloonRef = useRef<any>();
 
   // Texture
-  const floorTexture = useTexture(GridImg);
-  floorTexture.wrapS = RepeatWrapping;
-  floorTexture.wrapT = RepeatWrapping;
-  floorTexture.repeat.x = 10;
-  floorTexture.repeat.y = 10;
+  // const floorTexture = useTexture(GridImg);
+  // floorTexture.wrapS = RepeatWrapping;
+  // floorTexture.wrapT = RepeatWrapping;
+  // floorTexture.repeat.x = 10;
+  // floorTexture.repeat.y = 10;
 
   // Renderer
   const { gl, raycaster, clock, camera, scene } = useThree<any>();
@@ -114,8 +132,8 @@ const Scene = ({ buttonRef }: any) => {
           destinationPoint.x - userModelRef.current.position.x
         );
 
-        userModelRef.current.position.x += Math.cos(angle) * 0.06;
-        userModelRef.current.position.z += Math.sin(angle) * 0.06;
+        userModelRef.current.position.x += Math.cos(angle) * 0.08;
+        userModelRef.current.position.z += Math.sin(angle) * 0.08;
 
         camera.position.x = cameraPosition.x + userModelRef.current.position.x;
         camera.position.z = cameraPosition.z + userModelRef.current.position.z;
@@ -125,7 +143,7 @@ const Scene = ({ buttonRef }: any) => {
 
         if (
           Math.abs(destinationPoint.x - userModelRef.current.position.x) <
-            0.03 &&
+            0.04 &&
           Math.abs(destinationPoint.z - userModelRef.current.position.z) < 0.03
         ) {
           moving = false;
@@ -145,11 +163,18 @@ const Scene = ({ buttonRef }: any) => {
             console.log("집 나와!");
             buttonRef.current.style.zIndex = 100;
             buttonRef.current.style.opacity = 1;
+            buttonRef.current.children[0].innerText =
+              "😘 포인트로 원하는 아이템을 구매해보세요 ! 😘";
             // console.log(buttonRef.current.children[0].innerText);
 
             houseRef.current.visible = true;
             spotRef.current.material.color.set("seagreen");
             gsap.to(houseRef.current.position, {
+              duration: 1,
+              y: 0,
+              ease: "Bounce.easeOut",
+            });
+            gsap.to(houseFontRef.current.position, {
               duration: 1,
               y: 0,
               ease: "Bounce.easeOut",
@@ -168,9 +193,14 @@ const Scene = ({ buttonRef }: any) => {
             duration: 0.5,
             y: -5,
           });
+          gsap.to(houseFontRef.current.position, {
+            duration: 0.5,
+            y: -1,
+            ease: "Bounce.easeOut",
+          });
           gsap.to(camera.position, {
             duration: 1,
-            y: 8,
+            y: 10,
           });
           setTimeout(() => {
             houseRef.current.visible = false;
@@ -190,11 +220,14 @@ const Scene = ({ buttonRef }: any) => {
             buttonRef.current.style.opacity = 1;
             buttonRef.current.children[0].innerText =
               "😘 포인트로 원하는 아이템을 구매해보세요 ! 😘";
-            // console.log(buttonRef.current.children[0].innerText);
-
             itemshopRef.current.visible = true;
             spotRef2.current.material.color.set("seagreen");
             gsap.to(itemshopRef.current.position, {
+              duration: 1,
+              y: 0,
+              ease: "Bounce.easeOut",
+            });
+            gsap.to(itemshopFontRef.current.position, {
               duration: 1,
               y: 0,
               ease: "Bounce.easeOut",
@@ -213,9 +246,13 @@ const Scene = ({ buttonRef }: any) => {
             duration: 0.5,
             y: -2,
           });
+          gsap.to(itemshopFontRef.current.position, {
+            duration: 0.5,
+            y: -1,
+          });
           gsap.to(camera.position, {
             duration: 1,
-            y: 8,
+            y: 10,
           });
           setTimeout(() => {
             itemshopRef.current.visible = false;
@@ -241,6 +278,11 @@ const Scene = ({ buttonRef }: any) => {
               y: 0.5,
               ease: "Bounce.easeOut",
             });
+            gsap.to(csquizFontRef.current.position, {
+              duration: 1,
+              y: 0.5,
+              ease: "Bounce.easeOut",
+            });
             gsap.to(camera.position, {
               duration: 1,
               y: 4.5,
@@ -255,9 +297,13 @@ const Scene = ({ buttonRef }: any) => {
             duration: 0.5,
             y: -1,
           });
+          gsap.to(csquizFontRef.current.position, {
+            duration: 0.5,
+            y: -0.5,
+          });
           gsap.to(camera.position, {
             duration: 1,
-            y: 8,
+            y: 10,
           });
           setTimeout(() => {
             csquizRef.current.visible = false;
@@ -289,7 +335,9 @@ const Scene = ({ buttonRef }: any) => {
         item.object.name === "floor" ||
         item.object.name === "spot" ||
         item.object.name === "spot2" ||
-        item.object.name === "spot3"
+        item.object.name === "spot3" ||
+        item.object.name === "spot4" ||
+        item.object.name === "stone"
       ) {
         destinationPoint.x = item.point.x;
         destinationPoint.y = 0.3;
@@ -345,6 +393,8 @@ const Scene = ({ buttonRef }: any) => {
     }
   });
 
+  console.log(userInfo.characterId);
+
   return (
     <Suspense>
       {/* 빛 */}
@@ -363,48 +413,29 @@ const Scene = ({ buttonRef }: any) => {
         shadow-camera-near={-100}
         shadow-camera-far={100}
       />
-      <PerspectiveCamera makeDefault={true} far={1000} zoom={1.2} />
-      {/* <OrthographicCamera
-        makeDefault={true}
-        left={-(window.innerWidth / window.innerHeight)}
-        right={window.innerWidth / window.innerHeight}
-        top={1}
-        bottom={-1}
-        near={-1000}
-        far={1000}
-        zoom={80}
-      /> */}
+      {/* 카메라 */}
+      <PerspectiveCamera makeDefault={true} far={1000} zoom={1} />
 
       {/* 맵 바닥 */}
+      {/* <Ground name="floor" position={[0, 0, 0]} receiveShadow={true} /> */}
       <mesh name="floor" rotation={[-Math.PI / 2, 0, 0]} receiveShadow={true}>
-        <planeGeometry args={[100, 100]} />
-        <meshStandardMaterial map={floorTexture} />
+        <planeGeometry args={[50, 50]} />
+        <meshStandardMaterial color={"#5A9720"} />
       </mesh>
-
-      <F1_Main userModelRef={userModelRef} group={group} />
-      {/* 유저 캐릭터 */}
-      {/* <group ref={group} dispose={null} position={[0, 0.3, 0]}>
-        <group name="Scene">
-          <group
-            name="rig"
-            position={[0, -0.17, 0]}
-            castShadow={true}
-            receiveShadow={true}
-            ref={userModelRef}
-          >
-            <primitive object={nodes.root} />
-            <primitive object={nodes["MCH-torsoparent"]} />
-            <skinnedMesh
-              name="f_1"
-              geometry={nodes.f_1.geometry}
-              material={materials.characters}
-              skeleton={nodes.f_1.skeleton}
-              castShadow={true}
-              receiveShadow={true}
-            />
-          </group>
-        </group>
-      </group> */}
+      {/* <Floor scale={7} castShadow={true} /> */}
+      {userInfo && userInfo!.characterId === 0 ? (
+        <F1_Main userModelRef={userModelRef} group={group} />
+      ) : userInfo && userInfo!.characterId === 1 ? (
+        <F2_Main userModelRef={userModelRef} group={group} />
+      ) : userInfo && userInfo!.characterId === 2 ? (
+        <F3_Main userModelRef={userModelRef} group={group} />
+      ) : userInfo && userInfo!.characterId === 3 ? (
+        <M1_Main userModelRef={userModelRef} group={group} />
+      ) : userInfo && userInfo!.characterId === 4 ? (
+        <M2_Main userModelRef={userModelRef} group={group} />
+      ) : (
+        <M3_Main userModelRef={userModelRef} group={group} />
+      )}
 
       {/* 유저 캐릭터를 따라다니는 pointMesh */}
       <mesh
@@ -414,7 +445,8 @@ const Scene = ({ buttonRef }: any) => {
         position={[0, 0.01, 0]}
         receiveShadow={true}
       >
-        <planeGeometry args={[1, 1]} />
+        {/* <planeGeometry args={[1, 1]} /> */}
+        <circleGeometry args={[0.2, 32]} />
         <meshBasicMaterial color={"crimson"} transparent={true} opacity={0.5} />
       </mesh>
 
@@ -423,10 +455,11 @@ const Scene = ({ buttonRef }: any) => {
         ref={spotRef}
         name="spot"
         rotation={[-Math.PI / 2, 0, 0]}
-        position={[5, 0.005, 5]}
+        position={[10, 0.005, 10]}
         receiveShadow={true}
       >
-        <planeGeometry args={[3, 3]} />
+        {/* <planeGeometry args={[3, 3]} /> */}
+        <circleGeometry args={[2, 32]} />
         <meshStandardMaterial
           color={"yellow"}
           transparent={true}
@@ -438,7 +471,13 @@ const Scene = ({ buttonRef }: any) => {
       <House
         houseRef={houseRef}
         visible={false}
-        position={[5, -5, 3]}
+        position={[10, -5, 8]}
+        castShadow={true}
+      />
+      {/* 집 font */}
+      <MyRoomFont
+        houseFontRef={houseFontRef}
+        position={[5.8, -1, 10]}
         castShadow={true}
       />
 
@@ -447,10 +486,11 @@ const Scene = ({ buttonRef }: any) => {
         ref={spotRef2}
         name="spot2"
         rotation={[-Math.PI / 2, 0, 0]}
-        position={[5, 0.005, -10]}
+        position={[10, 0.005, -10]}
         receiveShadow={true}
       >
-        <planeGeometry args={[3, 3]} />
+        {/* <planeGeometry args={[3, 3]} /> */}
+        <circleGeometry args={[2, 32]} />
         <meshStandardMaterial
           color={"yellow"}
           transparent={true}
@@ -461,19 +501,22 @@ const Scene = ({ buttonRef }: any) => {
       <ItemShopMap
         itemshopRef={itemshopRef}
         visible={false}
-        position={[5.5, -2, -12]}
+        position={[10.5, -2, -12]}
         castShadow={true}
       />
+      {/* 아이템샵 폰트 */}
+      <ItemShopFont itemshopFontRef={itemshopFontRef} castShadow={true} />
 
       {/* cs quiz를 보이게 하는 spotMesh */}
       <mesh
         ref={spotRef3}
         name="spot3"
         rotation={[-Math.PI / 2, 0, 0]}
-        position={[-14, 0.005, -14]}
+        position={[-10, 0.005, -10]}
         receiveShadow={true}
       >
-        <planeGeometry args={[3, 3]} />
+        {/* <planeGeometry args={[3, 3]} /> */}
+        <circleGeometry args={[2, 32]} />
         <meshStandardMaterial
           color={"yellow"}
           transparent={true}
@@ -484,20 +527,117 @@ const Scene = ({ buttonRef }: any) => {
       <NewCsQuiz
         csquizRef={csquizRef}
         visible={false}
-        position={[-15, -1, -16]}
+        position={[-11, -1, -12]}
         castShadow={true}
       />
+      <CSQuizFont
+        csquizFontRef={csquizFontRef}
+        castShadow={true}
+        position={[-14.3, -0.5, -9.5]}
+      />
+
+      {/* Feed를 보이게 하는 spotMesh */}
+      <mesh
+        ref={spotRef4}
+        name="spot4"
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[-10, 0.005, 10]}
+        receiveShadow={true}
+      >
+        {/* <planeGeometry args={[3, 3]} /> */}
+        <circleGeometry args={[2, 32]} />
+        <meshStandardMaterial
+          color={"yellow"}
+          transparent={true}
+          opacity={0.5}
+        />
+      </mesh>
+
+      {/* Feed 모델 들어가야함 */}
+      {/* <ItemShopMap
+        itemshopRef={itemshopRef}
+        visible={false}
+        position={[5.5, -2, -12]}
+        castShadow={true}
+      /> */}
+      <FeedFont position={[-13.8, 0, 10]} />
 
       {/* 장식들 */}
-
       {/* 열기구 */}
-      <AirBalloon ref={airBalloonRef} position={[-5, 3, 0]} castShadow={true} />
-
+      <AirBalloon
+        ref={airBalloonRef}
+        position={[-15, 3, 0]}
+        castShadow={true}
+      />
       {/* 꽃 */}
-      <Flower position={[-2, 0, -22]} castShadow={true} />
-
+      <Flower position={[-2, 0, -20]} castShadow={true} />
       {/* 해와 구름비 */}
-      <Weather position={[24, 5, -5]} castShadow={true} />
+      <Weather position={[15, 5, 0]} castShadow={true} />
+      {/* 자동차 */}
+      <Car position={[-5, 0, 20]} castShadow={true} />
+      {/* 나무들 */}
+      <Tree position={[-3, 0, -20]} castShadow={true} />
+      <Tree position={[3, 0, -18]} castShadow={true} />
+      <Tree position={[4, 0, -22]} castShadow={true} />
+      <Tree position={[9, 0, -20]} castShadow={true} />
+      {/* 잔디 */}
+      <Grass position={[3, 0, 0]} castShadow={true} />
+      {/* <Grass position={[-4, 0, -0.5]} castShadow={true} /> */}
+      {/* 돌담길 */}
+      <group position={[0, 0, 0]}>
+        {/* 집 방향 안내 돌달김 */}
+        {/* <Stone
+          scale={1.1}
+          rotation={[0, THREE.MathUtils.degToRad(30), 0]}
+          position={[3, 0, 3]}
+          castShadow={true}
+        />
+        <Stone
+          scale={0.55}
+          position={[7, 0, 7]}
+          rotation={[0, THREE.MathUtils.degToRad(30), 0]}
+          castShadow={true}
+        /> */}
+        {/* 상점 방향 안내 돌담길 */}
+        {/* <Stone
+          scale={1.1}
+          position={[3, 0, -4]}
+          rotation={[0, THREE.MathUtils.degToRad(120), 0]}
+          castShadow={true}
+        />
+        <Stone
+          scale={0.5}
+          position={[7, 0, -8]}
+          rotation={[0, THREE.MathUtils.degToRad(100), 0]}
+          castShadow={true}
+        /> */}
+        {/* CS 퀴즈 방향 안내 돌담길 */}
+        {/* <Stone
+          scale={1.1}
+          rotation={[0, THREE.MathUtils.degToRad(30), 0]}
+          position={[-3.5, 0, -4]}
+          castShadow={true}
+        />
+        <Stone
+          scale={0.7}
+          rotation={[0, THREE.MathUtils.degToRad(30), 0]}
+          position={[-7, 0, -6.5]}
+          castShadow={true}
+        /> */}
+        {/* FEED 방향 안내 돌담길 */}
+        {/* <Stone
+          scale={1.3}
+          rotation={[0, THREE.MathUtils.degToRad(120), 0]}
+          position={[-4, 0, 4]}
+          castShadow={true}
+        />
+        <Stone
+          scale={0.6}
+          rotation={[0, THREE.MathUtils.degToRad(120), 0]}
+          position={[-6.2, 0, 7.8]}
+          castShadow={true}
+        /> */}
+      </group>
     </Suspense>
   );
 };
@@ -508,7 +648,9 @@ const Main = () => {
   console.log(buttonRef.current);
 
   const handleRouterMove = () => {
-    if (buttonRef.current.children[0].innerText.includes("cs")) {
+    if (buttonRef.current.children[0].innerText.includes("포인트")) {
+      navigate("/myroom");
+    } else if (buttonRef.current.children[0].innerText.includes("cs")) {
       navigate("/csquiz");
     } else if (buttonRef.current.children[0].innerText.includes("구매")) {
       navigate("/item-shop");
@@ -519,8 +661,19 @@ const Main = () => {
 
   return (
     <SMain>
-      <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
+      <ToggleButton />
+      <Canvas
+        style={{ background: "skyblue" }}
+        shadows={true}
+        gl={{ preserveDrawingBuffer: true }}
+      >
         <Scene buttonRef={buttonRef} />
+        {/* <OrbitControls
+          enableZoom={true}
+          // enableRotate={true}
+          // 쉬프트 마우스 왼쪽 이동 막는 기능
+          enablePan={false}
+        /> */}
       </Canvas>
       <SButtonWrapper ref={buttonRef}>
         <div className="btn-info">
