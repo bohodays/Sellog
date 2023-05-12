@@ -8,7 +8,7 @@ import { Button } from "@mui/material";
 import { KeyboardArrowLeft } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { apiGetQuizList } from "@/api/csQuiz";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { csQuizState } from "@/recoil/csquiz/atoms";
 
 const steps = [

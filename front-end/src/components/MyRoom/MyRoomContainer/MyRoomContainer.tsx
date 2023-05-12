@@ -9,8 +9,12 @@ import { IMyRoomProps } from "@/typeModels/MyRoom/MyroomInterfaces";
 import { Room1 } from "../Models/Room1";
 import { Room3 } from "../Models/Room3";
 import { Room4 } from "../Models/Room4";
-import { useRecoilState } from "recoil";
-import { itemTargetState, myItemsState } from "@/recoil/myroom/atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  itemTargetState,
+  itemsHeightState,
+  myItemsState,
+} from "@/recoil/myroom/atoms";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCaretLeft,
@@ -33,6 +37,8 @@ const Scene = ({
   editButtonRef,
   rotationLeftButtonRef,
   rotationRigthButtonRef,
+  deleteButtonRef,
+  goBackButtonRef,
 }: any) => {
   const { gl, camera } = useThree();
   gl.outputEncoding = sRGBEncoding;
@@ -42,11 +48,11 @@ const Scene = ({
   gl.shadowMap.type = PCFSoftShadowMap;
   gl.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 
-  if (activePage === "myitems") {
-    camera.position.x = 30.609999999999996;
-    camera.position.y = 33.06;
-    camera.position.z = 30.61;
-  }
+  // if (activePage === "myitems") {
+  //   camera.position.x = 30.609999999999996;
+  //   camera.position.y = 33.06;
+  //   camera.position.z = 30.61;
+  // }
 
   return (
     <>
@@ -77,6 +83,8 @@ const Scene = ({
           editButtonRef={editButtonRef}
           rotationLeftButtonRef={rotationLeftButtonRef}
           rotationRigthButtonRef={rotationRigthButtonRef}
+          deleteButtonRef={deleteButtonRef}
+          goBackButtonRef={goBackButtonRef}
         />
       </Suspense>
     </>
@@ -99,22 +107,21 @@ const MyRoomContainer = (props: IMyRoomProps) => {
   const rotationRigthButtonRef = useRef<any>();
   const upButtonRef = useRef<any>();
   const downButtonRef = useRef<any>();
+  const deleteButtonRef = useRef<any>();
+  const goBackButtonRef = useRef<any>();
 
   const [myItems, setMyItems] = useRecoilState(myItemsState);
+  const [itemsHeigth, setItemsHeight] = useRecoilState(itemsHeightState);
 
   const handleActivePage = () => {
-    props.setActivePage((prev: string) => {
-      return prev === "myprofile" ? "myitems" : "myprofile";
-    });
-
     if (props.activePage === "myitems") {
       const apiRequesArray: any = [];
-      myItems.forEach((item) => {
+      myItems.forEach((item, i) => {
         const requestObj: any = {};
         requestObj["x"] = item.x;
-        requestObj["y"] = item.y;
+        requestObj["y"] = itemsHeigth[i].y;
         requestObj["z"] = item.z;
-        requestObj["rotation"] = item.rotation;
+        requestObj["rotation"] = itemsHeigth[i].rotation;
         requestObj["id"] = item.id;
         requestObj["roomId"] = item.roomId;
         requestObj["itemId"] = item.itemId;
@@ -122,13 +129,16 @@ const MyRoomContainer = (props: IMyRoomProps) => {
         apiRequesArray.push(requestObj);
       });
       console.log(apiRequesArray);
+
       apiUpdateMyRoom(apiRequesArray).then((res) => {
-        console.log(res, "고백 버튼 결과");
+        console.log(res?.data.response, "고백 버튼 결과");
       });
     }
-  };
 
-  console.log(target);
+    props.setActivePage((prev: string) => {
+      return prev === "myprofile" ? "myitems" : "myprofile";
+    });
+  };
 
   return (
     <SMyRoom activePage={props.activePage}>
@@ -137,7 +147,7 @@ const MyRoomContainer = (props: IMyRoomProps) => {
           maxPolarAngle={Math.PI / 2.8}
           minZoom={50}
           maxZoom={200}
-          enableRotate={props.activePage === "myitems" ? false : true}
+          enableRotate={props.activePage === "myitems" ? true : true}
           // 쉬프트 마우스 왼쪽 이동 막는 기능
           enablePan={false}
         />
@@ -148,6 +158,8 @@ const MyRoomContainer = (props: IMyRoomProps) => {
           editButtonRef={editButtonRef}
           rotationLeftButtonRef={rotationLeftButtonRef}
           rotationRigthButtonRef={rotationRigthButtonRef}
+          deleteButtonRef={deleteButtonRef}
+          goBackButtonRef={goBackButtonRef}
         />
       </Canvas>
       <button className="myitems__btn" onClick={handleActivePage}>
@@ -176,11 +188,17 @@ const MyRoomContainer = (props: IMyRoomProps) => {
               />
             </button>
           </div>
-          <button className="myitem__delete">Delete</button>
+          <button ref={deleteButtonRef} className="myitem__delete">
+            Delete
+          </button>
         </>
       )}
       {props.activePage == "myitems" && (
-        <button className="myitemsGoback__btn" onClick={handleActivePage}>
+        <button
+          ref={goBackButtonRef}
+          className="myitemsGoback__btn"
+          onClick={handleActivePage}
+        >
           Go Back
         </button>
       )}
