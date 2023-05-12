@@ -12,6 +12,10 @@ import { Link, Router, useNavigate } from "react-router-dom";
 import NoTarget from "../NoTarget/NoTarget";
 import { apiGetAchievedRecordList, apiGetTodayRecord } from "@/api/record";
 import InstallModal from "../InstallModal/InstallModal";
+// recoil atoms
+import { userInfoState } from "@/recoil/myroom/atoms";
+import { useRecoilState } from "recoil";
+
 interface MyProfileProps {
   userData: any;
   setUserData: any;
@@ -20,6 +24,8 @@ interface MyProfileProps {
 }
 
 const MyProfile = (props: MyProfileProps) => {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+
   const profileImg: any = useRef(props.userData.img);
   const [newProfileImg, setNewProfileImg] = useState(profileImg.current);
   // 습관 설정이 하나도 안되어 있을 때 컴포넌트 나타남
@@ -40,23 +46,20 @@ const MyProfile = (props: MyProfileProps) => {
   const feedNavigator = useNavigate();
 
   useEffect(() => {
-    console.log(
-      "something changed",
-      props.userData,
-      { isInstalled },
-      { isTarget }
-    );
-  }, [props.userData, isInstalled]);
+    console.log("something changed", userInfo, { isInstalled }, { isTarget });
+  }, [userInfo, isInstalled]);
 
   useEffect(() => {
+    // 습관 실천 기록 가져오는 api
     apiGetAchievedRecordList().then((data: any) => {
       if (data.response) {
         console.log(data.response);
         setIsInstalled(true);
       }
     });
+    // 오늘 습관 실천
     apiGetTodayRecord().then((data: any) => {
-      console.log(data.response);
+      console.log(data);
       if (data.response) {
         if (data.response.algo) {
           setIsTodayAlgo(true);
@@ -109,15 +112,15 @@ const MyProfile = (props: MyProfileProps) => {
             ref={profileImg}
           />
           <div className="container__userinfo">
-            <p className="username">{props.userData.nickname}</p>
+            <p className="username">{userInfo.nickname}</p>
             <div className="point__container">
               <img className="sticker__coin" src={coin} alt="coin" />
-              <p>{props.userData.points}</p>
+              <p>{userInfo.points}</p>
             </div>
           </div>
         </div>
         <div className="bottom__profile">
-          <p>{props.userData.motto}</p>
+          <p>{userInfo.motto}</p>
           <button className="button__goal" onClick={userInfoHandler}>
             Edit
           </button>
@@ -133,8 +136,8 @@ const MyProfile = (props: MyProfileProps) => {
             <div className="container__habit-stats">
               github
               <div className="progress__bar progress__bar--github">
-                {props.userData.blogTarget ? (
-                  props.userData.blogTarget
+                {userInfo.githubTarget ? (
+                  userInfo.githubTarget
                 ) : (
                   <p>깃 허브 습관 설정 하세요</p>
                 )}

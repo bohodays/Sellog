@@ -94,12 +94,6 @@ export const SProfile = styled.section`
       width: 50%;
       height: 1.2rem;
       font-size: 1.1rem;
-      ${({ error }: any) =>
-        error &&
-        css`
-          border: red solid 1px;
-          background-color: black;
-        `}
     }
   }
 

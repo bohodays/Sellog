@@ -17,24 +17,28 @@ import { apiUpdateUserInfo } from "@/api/user";
 import { IMyProfileUpdate } from "@/typeModels/user/userEditInfo";
 import { localData } from "@/utils/token";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+// recoil atoms
+import { userInfoState } from "@/recoil/myroom/atoms";
+import { useRecoilState } from "recoil";
 
 interface MyProfileProps {
-  userData: any;
-  setUserData: any;
   setIsEdit: any;
   isEdit: boolean;
 }
 
 function EditProfile(props: MyProfileProps) {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const [tempInfo, setTempInfo] = useState(userInfo);
+
   const nicknameRef: any = useRef("");
   const mottoRef: any = useRef("");
-  const emailRef: any = useRef("");
+  const contactRef: any = useRef("");
   const blogRef: any = useRef("");
   const githubRef: any = useRef("");
 
   const [isModal, setIsModal] = useState<boolean>(false);
 
-  const profileImg: any = useRef(props.userData.img);
+  const profileImg: any = useRef(userInfo.img);
   const [newProfileImg, setNewProfileImg] = useState(profileImg.current);
   const [imgFile, setImgFile] = useState(""); // 미리보기 실제 파일(저장을 위한)
 
@@ -117,7 +121,7 @@ function EditProfile(props: MyProfileProps) {
       // valid motto
       validNum++;
     }
-    if (!isValidEmail(emailRef.current.value)) {
+    if (!isValidEmail(contactRef.current.value)) {
       console.log("Email");
     } else {
       // valid email
@@ -143,21 +147,21 @@ function EditProfile(props: MyProfileProps) {
   const editHandler = () => {
     // api put 함수 넣기
     console.log({ newProfileImg });
-    props.setUserData({
-      ...props.userData,
+    setUserInfo({
+      ...userInfo,
       img: newProfileImg,
       nickname: nicknameRef.current.value,
-      email: emailRef.current.value,
+      email: contactRef.current.value,
       motto: mottoRef.current.value,
       blog: blogRef.current.value,
       github: githubRef.current.value,
     });
 
-    // console.log("after", props.userData); IMyProfileUpdate
+    // console.log("after", userInfo); IMyProfileUpdate
     const editUserData: any = {
       nickname: nicknameRef.current.value,
       motto: mottoRef.current.value,
-      contact: emailRef.current.value,
+      contact: contactRef.current.value,
       blog: blogRef.current.value,
       github: githubRef.current.value,
     };
@@ -181,6 +185,30 @@ function EditProfile(props: MyProfileProps) {
       return;
       // 유효성 검사 실패한 부분 알려주기
     }
+  };
+  const nickNameHandler = () => {
+    setTempInfo({
+      ...userInfo,
+      nickname: nicknameRef.current.value,
+    });
+  };
+  const mottoHandler = () => {
+    setTempInfo({
+      ...userInfo,
+      motto: mottoRef.current.value,
+    });
+  };
+  const contactHandler = () => {
+    setTempInfo({
+      ...userInfo,
+      contact: contactRef.current.value,
+    });
+  };
+  const blogHandler = () => {
+    setTempInfo({
+      ...userInfo,
+      blog: blogRef.current.value,
+    });
   };
 
   return (
@@ -207,10 +235,10 @@ function EditProfile(props: MyProfileProps) {
           />
 
           <div className="container__userinfo">
-            <p className="username">{props.userData.nickname}</p>
+            <p className="username">{userInfo.nickname}</p>
             <div className="point__container">
               <img className="sticker__coin" src={coin} alt="coin" />
-              <p>{props.userData.points}</p>
+              <p>{userInfo.points}</p>
             </div>
           </div>
         </div>
@@ -219,24 +247,30 @@ function EditProfile(props: MyProfileProps) {
             <p>NICK NAME</p>
             <input
               type="text"
-              placeholder={props.userData.nickname}
+              placeholder={userInfo.nickname}
+              defaultValue={userInfo.nickname}
               ref={nicknameRef}
+              onChange={nickNameHandler}
             />
           </div>
           <div className="box__edit box__motto">
             <p>MOTTO</p>
             <input
               type="text"
-              placeholder={props.userData.motto}
+              placeholder={userInfo.motto}
               ref={mottoRef}
+              defaultValue={userInfo.motto}
+              onChange={mottoHandler}
             />
           </div>
           <div className="box__edit box__email">
             <p>E-MAIL</p>
             <input
               type="text"
-              placeholder={props.userData.email}
-              ref={emailRef}
+              placeholder={userInfo.contact}
+              ref={contactRef}
+              defaultValue={userInfo.contact}
+              onChange={contactHandler}
             />
           </div>
           <div className="box__edit box__tistory">
@@ -245,6 +279,8 @@ function EditProfile(props: MyProfileProps) {
               type="text"
               placeholder="ex) https://example.tistory.com"
               ref={blogRef}
+              defaultValue={userInfo.blog}
+              onChange={blogHandler}
             />
           </div>
         </div>
@@ -260,10 +296,10 @@ function EditProfile(props: MyProfileProps) {
         <hr />
         <div className="platform-address">
           <div>
-            <a href={`${props.userData.github}`}>
+            <a href={`${userInfo.github}`}>
               <img src={github} className="sticker__github" alt="github Icon" />
             </a>
-            <a href={`${props.userData.tistory}`}>
+            <a href={`${userInfo.tistory}`}>
               <img src={tistory} className="sticker__tistory" alt="" />
             </a>
           </div>
