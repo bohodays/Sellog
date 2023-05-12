@@ -119,6 +119,11 @@ public class GitHubService {
         log.info("페로 이름 : {}",rName);
         log.info("주인 이름 : {}",oName);
 
+        if(!member.getEmail().equals(oName)) {
+            log.info("다른 유저의 레포");
+            return;
+        }
+
         RestTemplate restTemplate = new RestTemplate();
 
         StringBuilder url = new StringBuilder();
@@ -167,8 +172,7 @@ public class GitHubService {
             gitHubRepository.save(github);
 
         } catch(Exception e) {
-            e.printStackTrace();
-            throw new CustomException(ErrorCode.WEBHOOK_CONFLICT);
+            log.info("이미존재함");
         }
 
     }
