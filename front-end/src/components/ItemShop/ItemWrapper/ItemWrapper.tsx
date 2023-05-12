@@ -65,6 +65,7 @@ import { Wood_desk_2 } from "./Models/Wood_desk_2";
 import { Wood_drawer_1 } from "./Models/Wood_drawer_1";
 import { Wood_shelve } from "./Models/Wood_shelve";
 import { Yellow_sofa_1 } from "./Models/Yellow_sofa_1";
+import { Wood_table_1 } from "./Models/Wood_table_1";
 
 const Scene = ({ shopItem }: IShopItemProps) => {
   const itemName = shopItem?.name;
@@ -211,6 +212,8 @@ const Scene = ({ shopItem }: IShopItemProps) => {
       ) : id == 61 ? (
         <Wood_shelve />
       ) : id == 62 ? (
+        <Wood_table_1 />
+      ) : id == 63 ? (
         <Yellow_sofa_1 />
       ) : null}
     </Suspense>
