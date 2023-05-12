@@ -88,10 +88,10 @@ public class Member extends BaseTime{
     @Column(name = "github_start_date")
     private LocalDateTime github_start_date;
 
-    @Column(name = "github_start_date")
+    @Column(name = "algo_start_date")
     private LocalDateTime algo_start_date;
 
-    @Column(name = "github_start_date")
+    @Column(name = "blog_start_date")
     private LocalDateTime blog_start_date;
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
