@@ -34,7 +34,9 @@ public class MemberDto {
     private String motto;
     private Integer characterId;
     private String contact;
-    private LocalDateTime start_date;
+    private LocalDateTime blog_start_date;
+    private LocalDateTime algo_start_date;
+    private LocalDateTime github_start_date;
 
 
     public static MemberDto of(Member member) {
@@ -43,7 +45,10 @@ public class MemberDto {
                 .githubTarget(member.getGithubTarget()).bojTarget(member.getBojTarget()).blogTarget(member.getBlogTarget()).feedTarget(member.getFeedTarget()).csTarget(member.getCsTarget())
                 .baekjoon(member.getBaekjoon()).blog(member.getBlog()).github(member.getGithub())
                 .motto(member.getMotto()).characterId(member.getCharacterId()).contact(member.getContact())
-                .points(member.getPoints()).start_date(member.getStart_date())
+                .points(member.getPoints())
+                .github_start_date(member.getGithub_start_date())
+                .algo_start_date(member.getAlgo_start_date())
+                .blog_start_date(member.getBlog_start_date())
                 .build();
     }
 }
