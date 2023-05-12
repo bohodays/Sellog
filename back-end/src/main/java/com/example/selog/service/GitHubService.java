@@ -93,7 +93,7 @@ public class GitHubService {
     public boolean isIn(List<GitHub> list,String rName, String oName) {
 
         for(GitHub g : list) {
-            if(g.getName().equals(rName) && g.getMember().getNickname().equals(oName)) {
+            if(g.getName().equals(rName) && g.getMember().getEmail().equals(oName)) {
                 return true;
             }
         }
