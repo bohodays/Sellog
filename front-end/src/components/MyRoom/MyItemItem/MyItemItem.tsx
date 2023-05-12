@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { IItemProps } from "@/typeModels/ItemShop/iteminterfaces";
 import ItemWrapper from "@/components/ItemShop/ItemWrapper/ItemWrapper";
 import { SDiv } from "./styles";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { myItemsState } from "@/recoil/myroom/atoms";
 import { itemDefaultInfo } from "@/utils/itemDefaultInfo";
 
@@ -23,7 +23,7 @@ const MyItemItem = ({ item }: IItemProps) => {
     const viewItem = {
       ...targetItem[0],
       x: 0,
-      y: itemPositionY,
+      y: Number(itemPositionY),
       z: 0,
       rotation: 0,
     };
@@ -50,11 +50,11 @@ const MyItemItem = ({ item }: IItemProps) => {
             item?.name === "undefined" ? "item__name name-hidden" : "item__name"
           }
         >
-          {item?.name}
+          {item?.name?.split("_").join(" ")}
         </div>
       </div>
     </SDiv>
   );
 };
 
-export default React.memo(MyItemItem);
+export default MyItemItem;
