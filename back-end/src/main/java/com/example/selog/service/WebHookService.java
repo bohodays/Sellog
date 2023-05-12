@@ -59,6 +59,10 @@ public class WebHookService {
         HashMap<String,Object> head_commit = (HashMap<String, Object>) request.get("head_commit");
 
         String repoName = (String)repository.get("name");
+
+        //웹훅 첫 요청이면 무시
+        if(head_commit.get("message") == null) return;
+
         String content = (String)head_commit.get("message");
         String who = (String)sender.get("login");
 
