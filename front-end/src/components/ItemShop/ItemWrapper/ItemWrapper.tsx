@@ -73,10 +73,10 @@ const Scene = ({ shopItem }: IShopItemProps) => {
 
   return (
     <Suspense>
-      <ambientLight color={"#ffffff"} intensity={0.7} />
+      <ambientLight color={"#ffffff"} intensity={0.5} />
       <directionalLight
         color={"#ffffff"}
-        intensity={1}
+        intensity={0.8}
         position={[1.5, 7, 3]}
         castShadow={true}
         shadow-camera-far={20}

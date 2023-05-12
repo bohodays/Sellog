@@ -30,9 +30,9 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"]) {
       <mesh
         geometry={nodes.Chair.geometry}
         material={materials["Black Leather"]}
-        position={[0.02, 0, -0.01]}
-        rotation={[0, -0.28, 0]}
-        scale={0.94}
+        position={[0, -2.5, -0]}
+        rotation={[0, -0.3, 0]}
+        scale={2}
       >
         <mesh geometry={nodes.Plane027.geometry} material={materials.Metal} />
         <mesh geometry={nodes.Plane029.geometry} material={materials.Metal} />

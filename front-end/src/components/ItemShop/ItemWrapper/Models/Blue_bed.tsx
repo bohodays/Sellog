@@ -32,7 +32,7 @@ export function Blue_bed(props: JSX.IntrinsicElements["group"]) {
       {...props}
       dispose={null}
       rotation={[
-        THREE.MathUtils.degToRad(20),
+        THREE.MathUtils.degToRad(50),
         THREE.MathUtils.degToRad(150),
         0,
       ]}

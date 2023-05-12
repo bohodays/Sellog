@@ -28,11 +28,17 @@ export function Black_coffeemachine_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/black_coffeemachine_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      scale={3}
+      rotation={[0, THREE.MathUtils.degToRad(-100), 0]}
+      position={[0, -1.5, 0]}
+    >
       <mesh
         geometry={nodes.Coffemaker.geometry}
         material={materials.Metal}
-        position={[-0.04, 1.9, 0.04]}
+        // position={[-0.04, 1.9, 0.04]}
         scale={1.11}
       >
         <mesh
@@ -53,7 +59,6 @@ export function Black_coffeemachine_1(props: JSX.IntrinsicElements["group"]) {
             geometry={nodes.Plane056.geometry}
             material={materials.black}
             position={[0.12, 0.26, 0]}
-            rotation={[0, 0, -0.82]}
           />
         </mesh>
       </mesh>

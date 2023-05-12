@@ -30,7 +30,23 @@ export function Black_teatable_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/black_teatable_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      scale={1.5}
+      position={[0, -2, 0]}
+      rotation={[0.3, 0.8, 0]}
+    >
+      <directionalLight
+        color={"#ffffff"}
+        intensity={2}
+        position={[1.5, 7, 3]}
+        castShadow={true}
+        shadow-camera-far={20}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-normalBias={0.05}
+      />
       <mesh
         geometry={nodes.Table001.geometry}
         material={materials.Metal}

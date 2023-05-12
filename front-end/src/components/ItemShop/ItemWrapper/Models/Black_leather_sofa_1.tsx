@@ -26,7 +26,17 @@ export function Black_leather_sofa_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/black_leather_sofa_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} position={[0, -2, 0]} scale={1.2}>
+      <directionalLight
+        color={"#ffffff"}
+        intensity={2}
+        position={[2, 7, 3]}
+        castShadow={true}
+        shadow-camera-far={20}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-normalBias={0.05}
+      />
       <mesh
         geometry={nodes.Sofa.geometry}
         material={materials["Leather.001"]}
