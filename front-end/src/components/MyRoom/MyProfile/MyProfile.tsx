@@ -59,21 +59,22 @@ const MyProfile = (props: MyProfileProps) => {
     });
     // 오늘 습관 실천
     apiGetTodayRecord().then((data: any) => {
-      console.log(data);
-      if (data.response) {
-        if (data.response.algo) {
+      console.log("apiGetTodayRecord", data.data.response);
+      if (data.data.response) {
+        if (data.data.response.algo) {
           setIsTodayAlgo(true);
         }
-        if (data.response.github) {
+        if (data.data.response.github) {
           setIsTodayGithub(true);
         }
-        if (data.response.blog) {
+        if (data.data.response.blog) {
+          console.log("blog committed");
           setIsTodayBlog(true);
         }
-        if (data.response.cs) {
+        if (data.data.response.cs) {
           setIsTodayCS(true);
         }
-        if (data.response.feed) {
+        if (data.data.response.feed) {
           setIsTodayFeed(true);
         }
       }
