@@ -57,4 +57,4 @@ export function F1(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/characters/f1.glb");
+// useGLTF.preload("/models/characters/f1.glb");
