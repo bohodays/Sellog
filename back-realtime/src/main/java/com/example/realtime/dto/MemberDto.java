@@ -4,16 +4,11 @@ import lombok.*;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RealTimeInfoDto {
-    private String roomId;
-    private Long sender;
-    private Double x;
-    private Double y;
-//    private Double z;
+public class MemberDto {
+    private Long userId;
     private String nickname;
     private Integer characterId;
 }
