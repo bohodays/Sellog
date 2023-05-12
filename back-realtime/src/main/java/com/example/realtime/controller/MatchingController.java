@@ -6,7 +6,6 @@ import com.example.realtime.exception.error.ErrorCode;
 import com.example.realtime.response.ErrorResponse;
 import com.example.realtime.response.SuccessResponse;
 import com.example.realtime.service.MemberService;
-import com.example.realtime.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -38,7 +37,6 @@ public class MatchingController {
     @GetMapping
     public ResponseEntity<?> matching(){
         try{
-            memberService.findMemberInfoByUserId(SecurityUtil.getCurrentMemberId());
             String roomId = UUID.randomUUID().toString() + "-matching"; //매칭 요청임을 구분
             return new ResponseEntity<>(new SuccessResponse(roomId),HttpStatus.OK);
         } catch(CustomException e){
