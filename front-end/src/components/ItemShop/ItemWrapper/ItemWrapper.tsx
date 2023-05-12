@@ -14,6 +14,14 @@ import { Blue_chair_1 } from "./Models/Blue_chair_1";
 import { Blue_chair_2 } from "./Models/Blue_chair_2";
 import { Blue_sofa_1 } from "./Models/Blue_sofa_1";
 import { Brown_table_1 } from "./Models/Brown_table_1";
+import { Blue_bed } from "./Models/Blue_bed";
+import { Brown_table_2 } from "./Models/Brown_table_2";
+import { Brown_table_3 } from "./Models/Brown_table_3";
+import { Brown_table_4 } from "./Models/Brown_table_4";
+import { Coffee_cup_1 } from "@/components/MyRoom/RoomEditContainer/Models/Coffee_cup_1";
+import { Elec_guitar_1 } from "./Models/Elec_guitar_1";
+import { Elec_guitar_2 } from "./Models/Elec_guitar_2";
+import { Elec_guitar_3 } from "./Models/Elec_guitar_3";
 
 const Scene = ({ shopItem }: IShopItemProps) => {
   const itemName = shopItem?.name;
@@ -42,13 +50,29 @@ const Scene = ({ shopItem }: IShopItemProps) => {
       ) : id === 7 ? (
         <Black_teatable_1 />
       ) : id === 8 ? (
-        <Blue_chair_1 />
+        <Blue_bed />
       ) : id === 9 ? (
-        <Blue_chair_2 />
+        <Blue_chair_1 />
       ) : id === 10 ? (
-        <Blue_sofa_1 />
+        <Blue_chair_2 />
       ) : id === 11 ? (
+        <Blue_sofa_1 />
+      ) : id === 12 ? (
         <Brown_table_1 />
+      ) : id === 13 ? (
+        <Brown_table_2 />
+      ) : id === 14 ? (
+        <Brown_table_3 />
+      ) : id === 15 ? (
+        <Brown_table_4 />
+      ) : id === 16 ? (
+        <Coffee_cup_1 />
+      ) : id === 17 ? (
+        <Elec_guitar_1 />
+      ) : id === 18 ? (
+        <Elec_guitar_2 />
+      ) : id === 19 ? (
+        <Elec_guitar_3 />
       ) : null}
     </Suspense>
   );

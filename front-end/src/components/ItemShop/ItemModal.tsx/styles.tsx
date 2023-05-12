@@ -6,7 +6,7 @@ export const SSection = styled.section`
   height: 100vh;
   top: 0%;
   left: 0%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 4;
 `;
 export const SDiv = styled.div`
@@ -17,6 +17,6 @@ export const SDiv = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 5;
-  background-color: rgba(56, 54, 54, 1);
+  background-color: rgb(255, 255, 255, 0.9);
   border-radius: 10px;
 `;

@@ -7,6 +7,7 @@ import * as THREE from "three";
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { useFrame } from "@react-three/fiber";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -20,12 +21,14 @@ type GLTFResult = GLTF & {
 };
 
 export function BedSide_light_1(props: JSX.IntrinsicElements["group"]) {
+  const modelRef = useRef<any>();
+
   const { nodes, materials } = useGLTF(
     "/models/items/bedside_light_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <group position={[0, -2, 0]} scale={1} rotation={[0.2, 0.1, 0]}>
+    <group {...props} dispose={null} ref={modelRef}>
+      <group position={[0, -2, 0]} scale={1}>
         <mesh
           geometry={nodes.Cylinder001_1.geometry}
           material={materials.Beige}
