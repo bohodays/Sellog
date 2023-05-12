@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-export const SSection = styled.section`
+export const SSection = styled.section<any>`
   height: 100%;
   width: 30%;
   background-color: #bac8c6;
   overflow-y: auto;
   overflow-x: hidden;
+
   ::-webkit-scrollbar {
     display: none;
   }

@@ -6,7 +6,6 @@ import {
   TiChevronRightOutline,
 } from "react-icons/ti";
 import { SSection } from "./styles";
-import { Ilbuni } from "@/components/Main/Models/Ilbuni";
 import React, { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -30,10 +29,12 @@ const UserInfoForm = ({ userId }: UserInformType) => {
 
   const handleLeftActive = () => {
     if (active > 0) setActive((prev) => prev - 1);
+    console.log(active);
   };
 
   const handleRightActive = () => {
     if (active < 5) setActive((prev) => prev + 1);
+    console.log(active);
   };
 
   const handleUpdateUserInfo = () => {
@@ -105,6 +106,8 @@ const UserInfoForm = ({ userId }: UserInformType) => {
             </div>
             <div className="input__wrapper blog">
               <input
+                value={blog}
+                onChange={(e) => setBlog(e.target.value)}
                 type="text"
                 className="input-blog"
                 placeholder="블로그 주소를 입력해주세요. (선택사항)"

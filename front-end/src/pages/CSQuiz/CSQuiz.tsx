@@ -7,19 +7,22 @@ import MobileStepper from "@mui/material/MobileStepper";
 import { Button } from "@mui/material";
 import { KeyboardArrowLeft } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { apiGetQuizList } from "@/api/csQuiz";
+import { useRecoilState } from "recoil";
+import { csQuizState } from "@/recoil/csquiz/atoms";
 
 const steps = [
-  "Computer Architecture",
   "Data Structure",
   "Operating System",
   "Database",
   "Network ",
-  "Software Engineering",
+  "Programming Common",
 ];
 
 const CSQuiz = () => {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
+  const [quizList, setQuizList] = useRecoilState(csQuizState);
   const maxSteps = steps.length;
 
   const handleNext = () => {
@@ -30,9 +33,32 @@ const CSQuiz = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  // activeStep을 입력하면 api 요청을 보낼 한글 카테고리로 변환하는 함수
+  const activeStepToCategory = (activeStep: number): string => {
+    if (activeStep === 0) return " 자료구조";
+    else if (activeStep === 1) return "운영체제";
+    else if (activeStep === 2) return "데이터베이스";
+    else if (activeStep === 3) return "네트워크";
+    else return "프로그래밍 공통";
+  };
+
+  const handleGetQuizList = () => {
+    const category = activeStepToCategory(activeStep);
+    apiGetQuizList(category).then((res) => {
+      setQuizList(res?.data.response);
+      navigate("/csquiz-progress");
+    });
+  };
+
   return (
-    <SMain>
-      <button className="go-to-home" onClick={() => navigate("/main")}>
+    <SMain activeStep={activeStep}>
+      <button
+        className="go-to-home"
+        onClick={() => {
+          navigate("/main");
+          window.location.reload();
+        }}
+      >
         HOME
       </button>
       <div className="main__info">
@@ -50,7 +76,7 @@ const CSQuiz = () => {
             onClick={handleBack}
             disabled={activeStep === 0}
           >
-            <TiChevronLeftOutline />
+            <TiChevronLeftOutline className="rigth__icon" />
           </button>
           <h1 className="steps">{steps[activeStep]}</h1>
           <button
@@ -58,11 +84,13 @@ const CSQuiz = () => {
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
           >
-            <TiChevronRightOutline />
+            <TiChevronRightOutline className="left__icon" />
           </button>
         </div>
         <div></div>
-        <button className="button__select">SELECT</button>
+        <button className="button__select" onClick={handleGetQuizList}>
+          SELECT
+        </button>
       </div>
     </SMain>
   );

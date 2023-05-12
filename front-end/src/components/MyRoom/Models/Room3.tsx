@@ -5,176 +5,123 @@ Command: npx gltfjsx@6.1.4 ./public/models/room/room3.glb -t
 
 import * as THREE from "three";
 import React, { useRef } from "react";
-import { useGLTF, OrthographicCamera } from "@react-three/drei";
+import { OrthographicCamera, useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
   nodes: {
     Plane: THREE.Mesh;
     Plane_1: THREE.Mesh;
-    Windows: THREE.Mesh;
-    Windows_Shapes: THREE.Mesh;
-    Windows_Frames: THREE.Mesh;
-    Shelves: THREE.Mesh;
-    Book0_1: THREE.Mesh;
-    Book0_2: THREE.Mesh;
-    Plane029: THREE.Mesh;
-    Plane029_1: THREE.Mesh;
-    Jar: THREE.Mesh;
-    ["abstract-expressionism-abstract-painting-acrylic-paint-1585325"]: THREE.Mesh;
+    Plane_2: THREE.Mesh;
+    Window: THREE.Mesh;
+    Plane021: THREE.Mesh;
+    Plane022: THREE.Mesh;
+    Plane023: THREE.Mesh;
+    Plane031: THREE.Mesh;
+    Plane034: THREE.Mesh;
+    Plane035: THREE.Mesh;
+    Door: THREE.Mesh;
+    Plane017: THREE.Mesh;
+    Plane024: THREE.Mesh;
+    Plane046: THREE.Mesh;
+    Plane036: THREE.Mesh;
+    Plane036_1: THREE.Mesh;
+    Light: THREE.Mesh;
+    Socket: THREE.Mesh;
+    Circle010: THREE.Mesh;
   };
   materials: {
-    White: THREE.MeshStandardMaterial;
+    Wall: THREE.MeshStandardMaterial;
     Floor: THREE.MeshStandardMaterial;
-    Windows: THREE.MeshStandardMaterial;
     ["default"]: THREE.MeshStandardMaterial;
     Wood: THREE.MeshStandardMaterial;
-    Book: THREE.MeshStandardMaterial;
-    ["Black.001"]: THREE.MeshStandardMaterial;
-    ["White.001"]: THREE.MeshStandardMaterial;
-    ["abstract-expressionism-abstract-painting-acrylic-paint-1585325"]: THREE.MeshStandardMaterial;
+    Window: THREE.MeshStandardMaterial;
+    ["default"]: THREE.MeshStandardMaterial;
+    Cloth: THREE.MeshPhysicalMaterial;
+    ["default"]: THREE.MeshStandardMaterial;
+    ["Milk Glass"]: THREE.MeshPhysicalMaterial;
+    Metal: THREE.MeshStandardMaterial;
+    ["Material.001"]: THREE.MeshStandardMaterial;
+    Poster: THREE.MeshStandardMaterial;
+    black: THREE.MeshStandardMaterial;
+    ["default"]: THREE.MeshStandardMaterial;
   };
 };
 
-export function Room3(props: JSX.IntrinsicElements["group"]) {
+export function Room3(props: JSX.IntrinsicElements["group"] | any) {
   const { nodes, materials } = useGLTF("/models/room/room3.glb") as GLTFResult;
-
   return (
     <group {...props} dispose={null} position={[0, -2.5, 0]}>
       <OrthographicCamera
         makeDefault={true}
         far={1000}
         near={0.1}
-        position={[30.61, 27.43, 30.61]}
-        rotation={[-0.68, 0.66, 0.46]}
+        position={[30.61, 33.06, 30.61]}
+        rotation={[-0.79, 0.62, 0.52]}
         zoom={62}
       />
-      <mesh geometry={nodes.Windows.geometry} material={materials.Windows} />
-      {/* <mesh
-        geometry={nodes.Windows_Shapes.geometry}
-        material={materials["default"]}
-      /> */}
-      <mesh
-        geometry={nodes.Windows_Frames.geometry}
-        material={materials.Wood}
-      />
-      <mesh
-        geometry={nodes.Shelves.geometry}
-        material={materials.Wood}
-        position={[-4, 0, -1.99]}
-      />
-      <group
-        position={[-3.74, 3.03, -0.96]}
-        rotation={[0, Math.PI / 2, 0]}
-        scale={1.38}
-      >
-        <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-        <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        <group position={[0.04, 0, -0.02]} scale={[1.4, 0.91, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.09, 0, 0]} scale={[0.85, 0.96, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.13, 0, 0.01]} scale={[0.85, 0.85, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.16, 0, 0]} scale={[0.85, 1.03, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.2, 0, -0.01]} scale={[1.94, 0.93, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.27, 0, 0]} scale={[1.4, 0.91, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.33, 0, 0.01]} scale={[0.85, 0.96, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.36, 0, 0]} scale={[0.85, 0.85, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.39, 0, 0]} scale={[1, 0.9, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.43, 0, -0.02]} scale={[1.4, 0.81, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.49, 0, 0]} scale={[0.85, 0.86, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.52, 0, 0.01]} scale={[0.85, 0.77, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.56, 0, 0]} scale={[0.85, 0.92, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.59, 0, -0.01]} scale={[1.94, 1.02, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.66, 0, 0]} scale={[1.4, 0.99, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.72, 0, 0.01]} scale={[0.85, 0.86, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-        <group position={[0.75, 0, 0]} scale={[0.85, 0.77, 1]}>
-          <mesh geometry={nodes.Book0_1.geometry} material={materials.Book} />
-          <mesh geometry={nodes.Book0_2.geometry} material={materials.White} />
-        </group>
-      </group>
-      <group
-        position={[-3.56, 3.93, -1.24]}
-        rotation={[0, 0.22, 0]}
-        scale={1.17}
-      >
-        <mesh geometry={nodes.Plane029.geometry} material={materials.White} />
+      <mesh material={materials["default"]}>
+        <mesh geometry={nodes.Plane021.geometry} material={materials.Wood} />
+        <mesh geometry={nodes.Plane022.geometry} material={materials.Wood} />
+        <mesh geometry={nodes.Plane023.geometry} material={materials.Window} />
         <mesh
-          geometry={nodes.Plane029_1.geometry}
-          material={materials["Black.001"]}
+          geometry={nodes.Plane031.geometry}
+          material={materials["default"]}
+          position={[-3.96, 4.33, 1.14]}
+        />
+        <mesh
+          geometry={nodes.Plane034.geometry}
+          material={materials.Cloth}
+          position={[-3.87, 4.21, 3.16]}
+        />
+        <mesh
+          geometry={nodes.Plane035.geometry}
+          material={materials.Cloth}
+          position={[-3.87, 4.21, -0.81]}
+        />
+      </mesh>
+      <mesh material={materials["default"]}>
+        <mesh geometry={nodes.Plane017.geometry} material={materials.Wood} />
+        <mesh
+          geometry={nodes.Plane024.geometry}
+          material={materials["Milk Glass"]}
+        />
+        <mesh
+          geometry={nodes.Plane046.geometry}
+          material={materials.Metal}
+          position={[-4.12, 1.78, -1.92]}
+        />
+      </mesh>
+      <group position={[2.24, 3.1, -3.99]}>
+        <mesh
+          geometry={nodes.Plane036.geometry}
+          material={materials["Material.001"]}
+        />
+        <mesh
+          geometry={nodes.Plane036_1.geometry}
+          material={materials.Poster}
         />
       </group>
       <mesh
-        geometry={nodes.Jar.geometry}
-        material={materials["White.001"]}
-        position={[-3.54, 3.93, -2.73]}
-        scale={0.42}
-      />
+        geometry={nodes.Light.geometry}
+        material={materials.Metal}
+        position={[2.24, 4.48, -4]}
+      ></mesh>
       <mesh
-        geometry={
-          nodes[
-            "abstract-expressionism-abstract-painting-acrylic-paint-1585325"
-          ].geometry
-        }
-        material={
-          materials[
-            "abstract-expressionism-abstract-painting-acrylic-paint-1585325"
-          ]
-        }
-        position={[-4, 3.28, 1.97]}
-        rotation={[Math.PI / 2, 0, -Math.PI / 2]}
-        scale={1.89}
-      />
-      <mesh geometry={nodes.Plane.geometry} material={materials.White} />
+        geometry={nodes.Socket.geometry}
+        material={materials.black}
+        position={[3.61, 0.59, -4]}
+      >
+        <mesh
+          geometry={nodes.Circle010.geometry}
+          material={materials["default"]}
+        />
+      </mesh>
+      <mesh geometry={nodes.Plane.geometry} material={materials.Wall} />
       <mesh geometry={nodes.Plane_1.geometry} material={materials.Floor} />
+      <mesh geometry={nodes.Plane_2.geometry} material={materials.Floor} />
     </group>
   );
 }
 
-useGLTF.preload("/models/room/room3.glb");
+// useGLTF.preload("/models/room/room3.glb");
