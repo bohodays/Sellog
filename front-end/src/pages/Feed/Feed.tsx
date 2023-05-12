@@ -103,7 +103,6 @@ export default function Feed() {
 
   const feedHandler = () => {
     console.log({ newsfeed }, { page });
-<<<<<<< HEAD
     mostViewFeed.forEach((element: any) => {
       console.log(element["title"]);
     });
@@ -112,10 +111,6 @@ export default function Feed() {
     console.log(i);
     if (i < 8) {
     }
-=======
-    // mostViewFeed.forEach((element: ReactNode) => {
-    // });
->>>>>>> 349a12a (feat : 페이지 이동, 작은 오류 수정 등등)
   };
 
   return (
