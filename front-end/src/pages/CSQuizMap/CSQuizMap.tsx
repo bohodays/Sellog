@@ -5,11 +5,8 @@ import { localData } from "@/utils/token";
 
 import {
   useGLTF,
-  useTexture,
   useAnimations,
   PerspectiveCamera,
-  OrbitControls,
-  OrthographicCamera,
 } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
@@ -124,6 +121,10 @@ const Scene = ({ buttonRef, send, other }: any) => {
   }
 
   draw();
+
+  useEffect(() => {
+    other.draw
+  }, [other]);
 
   function setSize() {
     camera.updateProjectionMatrix();
@@ -254,11 +255,6 @@ const Main = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const accessToken = localData.getAccessToken();
   const group = useRef<THREE.Group | any>();
-  const userModelRef = useRef<any>();
-  const { animations } = useGLTF(
-    "/models/characters/f1.glb"
-  ) as GLTFResult;
-  const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
   //raycaster
   let destinationPoint = new Vector3();
@@ -267,12 +263,13 @@ const Main = () => {
   let moving = false;
 
   function draw({ other }:any) {
-    if (userModelRef.current) {
+    const { actions } = useAnimations<GLTFActions | any>(other.animations, group);
+    if (other.userModelRef.current) {
       if (isPressed) {
         destinationPoint.x = other.message.x;
         destinationPoint.y = 0.3;
         destinationPoint.z = other.message.y;
-        userModelRef.current.lookAt(destinationPoint);
+        other.userModelRef.current.lookAt(destinationPoint);
 
         moving = true;
       }
@@ -280,20 +277,20 @@ const Main = () => {
       if (moving) {
         // 걸어가는 상태
         angle = Math.atan2(
-          destinationPoint.z - userModelRef.current.position.z,
-          destinationPoint.x - userModelRef.current.position.x
+          destinationPoint.z - other.userModelRef.current.position.z,
+          destinationPoint.x - other.userModelRef.current.position.x
         );
 
-        userModelRef.current.position.x += Math.cos(angle) * 0.08;
-        userModelRef.current.position.z += Math.sin(angle) * 0.08;
+        other.userModelRef.current.position.x += Math.cos(angle) * 0.08;
+        other.userModelRef.current.position.z += Math.sin(angle) * 0.08;
 
         actions["Idle"]?.stop();
         actions["Run"]?.play();
 
         if (
-          Math.abs(destinationPoint.x - userModelRef.current.position.x) <
+          Math.abs(destinationPoint.x - other.userModelRef.current.position.x) <
             0.04 &&
-          Math.abs(destinationPoint.z - userModelRef.current.position.z) < 0.03
+          Math.abs(destinationPoint.z - other.userModelRef.current.position.z) < 0.03
         ) {
           moving = false;
           console.log("멈춤");
@@ -311,52 +308,43 @@ const Main = () => {
     const socket = new SockJS("http://localhost:8083/real-time");
     const ws = Stomp.over(socket);
 
-    ws.connect({ Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY4Mzg2NzYyNn0.8plb7Hync2YS_ZqJau_7fxDzPqgmapGB-6U7-RRSO0y0-nQdfogzT00TSJ8ix2qKuzB-_XtfLjkXGHaXDHlUZg` }, () => {
+    ws.connect({ Authorization: `Bearer ${accessToken}` }, () => {
       setClient(ws);
 
       ws.subscribe('/sub/1', (message) => {
         const received = JSON.parse(message.body);
         let data = {};
         if (received.sender != userInfo.userId) {
-          console.log(received.sender);
-          {
-            received && received!.characterId === 0 ? (
-              data = {
-                message: received,
-                character : <F1_Main userModelRef={userModelRef} group={group} />
-              }
-            ) : received && received!.characterId === 1 ? (
-              data = {
-                message: received,
-                character : <F2_Main userModelRef={userModelRef} group={group} />
-              }
-            
-            ) : received && received!.characterId === 2 ? (
-              data = {
-                message: received,
-                character : <F3_Main userModelRef={userModelRef} group={group} />
-              }
-            ) : received && received!.characterId === 3 ? (
-              data = {
-                message: received,
-                character : <M1_Main userModelRef={userModelRef} group={group} />
-              }
-            
-          ) : received && received!.characterId === 4 ? (
-              data = {
-                message: received,
-                character: <M2_Main userModelRef={userModelRef} group={group} />
-                }
-          ) : (
-              data = {
-                message: received,
-                character : <M3_Main userModelRef={userModelRef} group={group} />
-              }
-            
-            )
+          let CharacterComponent;
+          let characterId = received.characterId;
+
+          switch(characterId) {
+            case 0:
+              CharacterComponent = <F1_Main />;
+              break;
+            case 1:
+              CharacterComponent = <F2_Main />;
+              break;
+            case 2:
+              CharacterComponent = <F3_Main />;
+              break;
+            case 3:
+              CharacterComponent = <M1_Main />;
+              break;
+            case 4:
+              CharacterComponent = <M2_Main />;
+              break;
+            default:
+              CharacterComponent = <M3_Main />;
           }
 
-          draw(data);
+          data = {
+            message: received,
+            character: CharacterComponent,
+            userModelRef: useRef<any>(),
+            animations: useGLTF("/models/characters/f1.glb") as GLTFResult,
+            draw : draw(data)
+          }
 
           setOther((other:any) => {
             const index = other.findIndex((item:any) => item.message.sender === received.sender);
@@ -370,9 +358,8 @@ const Main = () => {
               ];
             }
           });
-          
         }
-      },{ Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY4Mzg2NzYyNn0.8plb7Hync2YS_ZqJau_7fxDzPqgmapGB-6U7-RRSO0y0-nQdfogzT00TSJ8ix2qKuzB-_XtfLjkXGHaXDHlUZg` });
+      },{ Authorization: `Bearer ${accessToken}` });
     });
 
     return () => {
@@ -380,10 +367,6 @@ const Main = () => {
         ws.disconnect(() => {});
       }
     };
-  }, []);
-
-  useEffect(() => {
-    
   }, []);
 
   function send(mouseX:number, mouseY:number) {
