@@ -39,4 +39,4 @@ export function Brown_table_4(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/brown_table_4.glb");
+// useGLTF.preload("/models/items/brown_table_4.glb");

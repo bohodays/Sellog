@@ -203,4 +203,4 @@ export function Photo_frame_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/photo_frame_1.glb");
+// // useGLTF.preload("/models/items/photo_frame_1.glb");

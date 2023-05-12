@@ -104,4 +104,4 @@ export function Black_speaker_1(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/black_speaker_1.glb");
+// useGLTF.preload("/models/items/black_speaker_1.glb");

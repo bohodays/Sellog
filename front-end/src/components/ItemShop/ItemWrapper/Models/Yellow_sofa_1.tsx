@@ -43,4 +43,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/yellow_sofa_1.glb");
+// useGLTF.preload("/models/items/yellow_sofa_1.glb");

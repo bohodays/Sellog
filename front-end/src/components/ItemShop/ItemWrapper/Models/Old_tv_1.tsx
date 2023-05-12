@@ -59,4 +59,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/old_tv_1.glb");
+// useGLTF.preload("/models/items/old_tv_1.glb");

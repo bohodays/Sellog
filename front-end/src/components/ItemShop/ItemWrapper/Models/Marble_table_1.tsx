@@ -40,4 +40,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/marble_table_1.glb");
+// useGLTF.preload("/models/items/marble_table_1.glb");

@@ -42,4 +42,4 @@ export function BedSide_light_1(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/bedside_light_1.glb");
+// useGLTF.preload("/models/items/bedside_light_1.glb");

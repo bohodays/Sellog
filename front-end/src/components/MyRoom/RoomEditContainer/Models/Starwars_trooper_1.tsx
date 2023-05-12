@@ -222,4 +222,4 @@ export function Starwars_trooper_1(
   );
 }
 
-// useGLTF.preload("/models/items/starwars_trooper_1.glb");
+// // useGLTF.preload("/models/items/starwars_trooper_1.glb");

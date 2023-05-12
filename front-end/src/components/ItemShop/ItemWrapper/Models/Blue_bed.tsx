@@ -28,7 +28,15 @@ export function Blue_bed(props: JSX.IntrinsicElements["group"]) {
     "/models/items/blue_bed.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      rotation={[
+        THREE.MathUtils.degToRad(20),
+        THREE.MathUtils.degToRad(150),
+        0,
+      ]}
+    >
       <mesh geometry={nodes.Bed.geometry} material={materials.Wood2}>
         <mesh geometry={nodes.Plane010.geometry} material={materials.Bed} />
         <mesh
@@ -55,4 +63,4 @@ export function Blue_bed(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/blue_bed.glb");
+// useGLTF.preload("/models/items/blue_bed.glb");

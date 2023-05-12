@@ -209,4 +209,4 @@ export function White_sofa_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/white_sofa_1.glb");
+// // useGLTF.preload("/models/items/white_sofa_1.glb");

@@ -41,4 +41,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/tree_vase_1.glb");
+// useGLTF.preload("/models/items/tree_vase_1.glb");

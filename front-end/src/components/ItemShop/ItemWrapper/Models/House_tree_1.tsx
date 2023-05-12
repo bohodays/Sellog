@@ -49,4 +49,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/house_tree_1.glb");
+// useGLTF.preload("/models/items/house_tree_1.glb");

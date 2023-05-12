@@ -60,4 +60,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/imac_computer_1.glb");
+// useGLTF.preload("/models/items/imac_computer_1.glb");

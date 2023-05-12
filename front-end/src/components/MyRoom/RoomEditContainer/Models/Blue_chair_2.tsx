@@ -223,4 +223,4 @@ export function Blue_chair_2(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/blue_chair_2.glb");
+// // useGLTF.preload("/models/items/blue_chair_2.glb");

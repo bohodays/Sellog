@@ -205,4 +205,4 @@ export function Low_table_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/low_table_1.glb");
+// // useGLTF.preload("/models/items/low_table_1.glb");

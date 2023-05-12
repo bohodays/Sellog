@@ -146,4 +146,4 @@ export function Elec_guitar_2(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/elec_guitar_2.glb");
+// useGLTF.preload("/models/items/elec_guitar_2.glb");

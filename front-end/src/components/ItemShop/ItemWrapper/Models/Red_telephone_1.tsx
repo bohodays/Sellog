@@ -68,4 +68,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/red_telephone_1.glb");
+// useGLTF.preload("/models/items/red_telephone_1.glb");

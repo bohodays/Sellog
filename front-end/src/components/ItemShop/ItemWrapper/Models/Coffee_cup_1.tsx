@@ -49,4 +49,4 @@ export function Coffee_cup_1(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/coffee_cup_1.glb");
+// useGLTF.preload("/models/items/coffee_cup_1.glb");

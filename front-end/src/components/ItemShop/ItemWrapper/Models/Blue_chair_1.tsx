@@ -44,4 +44,4 @@ export function Blue_chair_1(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/blue_chair_1.glb");
+// useGLTF.preload("/models/items/blue_chair_1.glb");

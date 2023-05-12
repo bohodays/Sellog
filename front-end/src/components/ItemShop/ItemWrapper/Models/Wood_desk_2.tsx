@@ -61,4 +61,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/wood_desk_2.glb");
+// useGLTF.preload("/models/items/wood_desk_2.glb");

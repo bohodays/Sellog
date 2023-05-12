@@ -208,4 +208,4 @@ export function White_chair_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/white_chair_1.glb");
+// // useGLTF.preload("/models/items/white_chair_1.glb");

@@ -100,4 +100,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/retro_arcadegame_1.glb");
+// useGLTF.preload("/models/items/retro_arcadegame_1.glb");

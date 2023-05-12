@@ -25,11 +25,16 @@ export function Blue_sofa_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/blue_sofa_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
+      position={[0, -2.5, 0]}
+    >
       <mesh
         geometry={nodes.Sofa.geometry}
         material={materials.Sofa}
-        position={[-0.02, 0, -0.02]}
+        // position={[-0.02, 0, -0.02]}
       >
         <mesh
           geometry={nodes.Sofa_Cushions.geometry}
@@ -41,4 +46,4 @@ export function Blue_sofa_1(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/blue_sofa_1.glb");
+// useGLTF.preload("/models/items/blue_sofa_1.glb");

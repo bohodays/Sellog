@@ -195,4 +195,4 @@ export function Grey_bin_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/grey_bin_1.glb");
+// // useGLTF.preload("/models/items/grey_bin_1.glb");

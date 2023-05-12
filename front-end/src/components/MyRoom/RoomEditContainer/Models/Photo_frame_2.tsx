@@ -200,4 +200,4 @@ export function Photo_frame_2(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/photo_frame_2.glb");
+// // useGLTF.preload("/models/items/photo_frame_2.glb");

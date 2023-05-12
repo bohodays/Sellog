@@ -226,4 +226,4 @@ export function Katana_decoration_1(
   );
 }
 
-// useGLTF.preload("/models/items/katana_decoration_1.glb");
+// // useGLTF.preload("/models/items/katana_decoration_1.glb");

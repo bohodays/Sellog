@@ -225,4 +225,4 @@ export function Old_tv_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/old_tv_1.glb");
+// // useGLTF.preload("/models/items/old_tv_1.glb");

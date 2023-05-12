@@ -57,4 +57,4 @@ export function M3(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/characters/m3.glb");
+// useGLTF.preload("/models/characters/m3.glb");

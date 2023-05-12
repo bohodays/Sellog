@@ -53,4 +53,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/starwars_trooper_1.glb");
+// useGLTF.preload("/models/items/starwars_trooper_1.glb");

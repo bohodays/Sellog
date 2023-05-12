@@ -33,4 +33,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/photo_frame_2.glb");
+// useGLTF.preload("/models/items/photo_frame_2.glb");

@@ -32,4 +32,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/grey_bin_1.glb");
+// useGLTF.preload("/models/items/grey_bin_1.glb");

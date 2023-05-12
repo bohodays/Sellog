@@ -267,4 +267,4 @@ export function Teddybear_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/teddybear_1.glb");
+// // useGLTF.preload("/models/items/teddybear_1.glb");

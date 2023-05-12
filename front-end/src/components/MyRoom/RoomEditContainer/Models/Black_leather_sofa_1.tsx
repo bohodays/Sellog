@@ -230,4 +230,4 @@ export function Black_leather_sofa_1(
   );
 }
 
-// useGLTF.preload("/models/items/black_leather_sofa_1.glb");
+// // useGLTF.preload("/models/items/black_leather_sofa_1.glb");

@@ -231,4 +231,4 @@ export function Wood_chair_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/wood_chair_1.glb");
+// // useGLTF.preload("/models/items/wood_chair_1.glb");

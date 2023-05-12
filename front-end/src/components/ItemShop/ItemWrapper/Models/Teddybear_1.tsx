@@ -101,4 +101,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/teddybear_1.glb");
+// useGLTF.preload("/models/items/teddybear_1.glb");

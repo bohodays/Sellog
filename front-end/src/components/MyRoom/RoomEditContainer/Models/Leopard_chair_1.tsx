@@ -200,4 +200,4 @@ export function Leopard_chair_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/leopard_chair_1.glb");
+// // useGLTF.preload("/models/items/leopard_chair_1.glb");

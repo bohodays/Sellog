@@ -22,6 +22,7 @@ import { Coffee_cup_1 } from "@/components/MyRoom/RoomEditContainer/Models/Coffe
 import { Elec_guitar_1 } from "./Models/Elec_guitar_1";
 import { Elec_guitar_2 } from "./Models/Elec_guitar_2";
 import { Elec_guitar_3 } from "./Models/Elec_guitar_3";
+import { Katana_decoration_1 } from "./Models/Katana_decoration_1";
 
 const Scene = ({ shopItem }: IShopItemProps) => {
   const itemName = shopItem?.name;
@@ -29,7 +30,17 @@ const Scene = ({ shopItem }: IShopItemProps) => {
 
   return (
     <Suspense>
-      <ambientLight intensity={0.7} />
+      <ambientLight color={"#ffffff"} intensity={0.7} />
+      <directionalLight
+        color={"#ffffff"}
+        intensity={1}
+        position={[1.5, 7, 3]}
+        castShadow={true}
+        shadow-camera-far={20}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-normalBias={0.05}
+      />
       <PerspectiveCamera
         makeDefault={true}
         // far={500}
@@ -73,6 +84,8 @@ const Scene = ({ shopItem }: IShopItemProps) => {
         <Elec_guitar_2 />
       ) : id === 19 ? (
         <Elec_guitar_3 />
+      ) : id === 26 ? (
+        <Katana_decoration_1 />
       ) : null}
     </Suspense>
   );

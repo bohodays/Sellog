@@ -329,4 +329,4 @@ export function Wood_drawer_1(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/wood_drawer_1.glb");
+// // useGLTF.preload("/models/items/wood_drawer_1.glb");

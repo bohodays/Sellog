@@ -226,4 +226,4 @@ export function Wood_desk_0(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/wood_desk_0.glb");
+// // useGLTF.preload("/models/items/wood_desk_0.glb");

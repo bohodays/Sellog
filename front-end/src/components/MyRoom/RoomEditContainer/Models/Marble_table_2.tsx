@@ -209,4 +209,4 @@ export function Marble_table_2(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/items/marble_table_2.glb");
+// // useGLTF.preload("/models/items/marble_table_2.glb");

@@ -27,12 +27,13 @@ type GLTFResult = GLTF & {
   };
 };
 
-export function Model(props: JSX.IntrinsicElements["group"]) {
+export function Katana_decoration_1(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF(
     "/models/items/katana_decoration_1.glb"
   ) as GLTFResult;
   return (
     <group {...props} dispose={null}>
+      <ambientLight color={"#ffffff"} intensity={5} />
       <mesh
         geometry={nodes.Katana.geometry}
         material={materials.Wood}
@@ -58,4 +59,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/katana_decoration_1.glb");
+// useGLTF.preload("/models/items/katana_decoration_1.glb");

@@ -229,4 +229,4 @@ export function Black_coffeemachine_1(
   );
 }
 
-// useGLTF.preload("/models/items/black_coffeemachine_1.glb");
+// // useGLTF.preload("/models/items/black_coffeemachine_1.glb");

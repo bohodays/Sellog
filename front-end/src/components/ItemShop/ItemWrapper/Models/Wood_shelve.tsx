@@ -32,4 +32,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/items/wood_shelve.glb");
+// useGLTF.preload("/models/items/wood_shelve.glb");
