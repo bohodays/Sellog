@@ -2,7 +2,7 @@ import { loginState } from "@/recoil/user/atom";
 import { localData } from "@/utils/token";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 const OauthRedirect = () => {
   const params = useLocation();

@@ -6,7 +6,7 @@ import { OrbitControls } from "@react-three/drei";
 import { SMain } from "./styles";
 import LoginForm from "@/components/Login/LoginForm/LoginForm";
 import UserInfoForm from "@/components/Login/UserInfoForm/UserInfoForm";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { loginState } from "@/recoil/user/atom";
 import { useLocation } from "react-router-dom";
 import { apiGetUserInfo } from "@/api/user";
