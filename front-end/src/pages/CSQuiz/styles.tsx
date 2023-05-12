@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SMain = styled.main`
+export const SMain = styled.main<any>`
   position: relative;
   height: 100%;
   background-color: var(--color-beige);
@@ -90,6 +90,13 @@ export const SMain = styled.main`
       /* user-select: none;
       background: unset;
       border: unset; */
+    }
+
+    .rigth__icon {
+      color: ${(props) => (props.activeStep === 0 ? "#b9b9b9" : "white")};
+    }
+    .left__icon {
+      color: ${(props) => (props.activeStep === 4 ? "#b9b9b9" : "white")};
     }
   }
 

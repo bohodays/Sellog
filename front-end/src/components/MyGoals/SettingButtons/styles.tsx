@@ -29,6 +29,9 @@ export const SArticle = styled.article`
 
   .item2 {
     min-width: 8rem;
+    font-family: "ZCOOL KuaiLe", sans-serif;
+    font-size: 0.9vw;
+    font-weight: bold;
   }
 
   .purple {

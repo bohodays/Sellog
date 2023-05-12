@@ -234,5 +234,3 @@ export function House(props: JSX.IntrinsicElements["group"] | any) {
     </group>
   );
 }
-
-useGLTF.preload("/models/house.glb");

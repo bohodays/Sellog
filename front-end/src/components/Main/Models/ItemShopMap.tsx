@@ -109,5 +109,3 @@ export function ItemShopMap(props: JSX.IntrinsicElements["group"] | any) {
     </group>
   );
 }
-
-useGLTF.preload("/models/itemshop.glb");
