@@ -84,8 +84,14 @@ public class Member{
     @Column(name = "contact")
     private String contact;
 
-    @Column(name = "start_date")
-    private LocalDateTime start_date;
+    @Column(name = "github_start_date")
+    private LocalDateTime github_start_date;
+
+    @Column(name = "algo_start_date")
+    private LocalDateTime algo_start_date;
+
+    @Column(name = "blog_start_date")
+    private LocalDateTime blog_start_date;
 
     public MemberDto toDto() {
         return MemberDto.builder()

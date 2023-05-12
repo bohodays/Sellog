@@ -7,6 +7,7 @@ import com.example.selog.entity.Room;
 import com.example.selog.jwt.TokenProvider;
 import com.example.selog.repository.MemberRepository;
 import com.example.selog.repository.RoomRepository;
+import com.example.selog.service.GitHubService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +30,7 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
 
     private final TokenProvider jwtTokenProvider;
     private final MemberRepository memberRepository;
-    private final RoomRepository roomRepository;
+    private final GitHubService gitHubService;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     @Value("${social.login.redirectUrl}")
     private String redirectUrl;
@@ -63,6 +64,8 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
         if(member.getRoom() == null) newUser = 1;
 
         memberRepository.save(member);
+
+        gitHubService.synchronize(member.getUserId());
 
         StringBuilder sb = new StringBuilder();
         sb.append(redirectUrl).append("?refreshToken=")
