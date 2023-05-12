@@ -44,6 +44,9 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"] | any) {
 
   // 타겟 정보
   const [target, setTarget] = useRecoilState(itemTargetState);
+  useEffect(() => {
+    console.log("blackchair에서 target", target);
+  }, []);
 
   const { scene, camera, gl } = useThree();
   const raycaster = new THREE.Raycaster();
