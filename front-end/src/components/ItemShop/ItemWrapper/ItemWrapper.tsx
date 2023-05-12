@@ -1,26 +1,11 @@
 import React, { Suspense } from "react";
-import { Chair } from "../ItemItem/Models/Chair";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
+import { PerspectiveCamera } from "@react-three/drei";
+import { IShopItemProps } from "@/typeModels/ItemShop/iteminterfaces";
 
-const Scene = () => {
-  return (
-    <Suspense>
-      <ambientLight intensity={0.7} />
-      <Chair />
-    </Suspense>
-  );
-};
-
-const ItemWrapper = () => {
-  return (
-    <>
-      <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
-        <OrbitControls minZoom={80} maxZoom={200} enablePan={false} />
-        <Scene />
-      </Canvas>
-    </>
-  );
+const ItemWrapper = ({ shopItem }: IShopItemProps) => {
+  return <></>;
 };
 
 export default ItemWrapper;

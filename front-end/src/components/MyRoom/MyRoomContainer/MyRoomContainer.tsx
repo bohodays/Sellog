@@ -1,21 +1,47 @@
-import { Suspense } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { SMyRoom } from "./styles";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { CineonToneMapping, PCFSoftShadowMap, sRGBEncoding } from "three";
+// import { IMyRoomProps } from "@/typeModels/MyRoom/myRoomInterfaces";
+import { IMyRoomProps } from "@/typeModels/MyRoom/MyroomInterfaces";
 import { Room1 } from "../Models/Room1";
-import { Room2 } from "../Models/Room2";
 import { Room3 } from "../Models/Room3";
-import { Room15 } from "../Models/Room15";
+import { Room4 } from "../Models/Room4";
+import { useRecoilState } from "recoil";
+import { itemTargetState, myItemsState } from "@/recoil/myroom/atoms";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import Loading from "@/components/Loading/Loading";
+import pMinDelay from "p-min-delay";
+import Room2 from "../Models/Room2";
+import { IUpdateMyRoom, apiUpdateMyRoom } from "@/api/room";
 
-const Scene = () => {
-  const { gl } = useThree();
+const RoomEditContainer = React.lazy(
+  () => import("@/components/MyRoom/RoomEditContainer/RoomEditContainer")
+);
+
+const Scene = ({
+  activePage,
+  upButtonRef,
+  downButtonRef,
+  editButtonRef,
+  rotationLeftButtonRef,
+  rotationRigthButtonRef,
+}: any) => {
+  const { gl, camera } = useThree();
   gl.outputEncoding = sRGBEncoding;
   gl.toneMapping = CineonToneMapping;
   gl.toneMappingExposure = 1.75;
   gl.shadowMap.enabled = true;
   gl.shadowMap.type = PCFSoftShadowMap;
   gl.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
+
+  if (activePage === "myitems") {
+    camera.position.x = 30.609999999999996;
+    camera.position.y = 33.06;
+    camera.position.z = 30.61;
+  }
 
   return (
     <>
@@ -31,28 +57,123 @@ const Scene = () => {
           shadow-mapSize-height={2048}
           shadow-normalBias={0.05}
         />
+
+        {/* 방 테마 */}
         {/* <Room1 /> */}
-        {/* <Room2 /> */}
+        <Room2 />
         {/* <Room3 /> */}
-        <Room15 />
+        {/* <Room4 /> */}
+
+        {/* 방에 있는 아이템 */}
+        <RoomEditContainer
+          activePage={activePage}
+          upButtonRef={upButtonRef}
+          downButtonRef={downButtonRef}
+          editButtonRef={editButtonRef}
+          rotationLeftButtonRef={rotationLeftButtonRef}
+          rotationRigthButtonRef={rotationRigthButtonRef}
+        />
       </Suspense>
     </>
   );
 };
 
-const MyRoomContainer = () => {
+const MyRoomContainer = (props: IMyRoomProps) => {
+  const [isEdit, setIsEdit] = useState(false);
+
+  const [target, setTarget] = useRecoilState(itemTargetState);
+
+  // const [target, setTarget] = useState(null);
+  const editButtonRef = useRef<any>();
+  const rotationLeftButtonRef = useRef<any>();
+  const rotationRigthButtonRef = useRef<any>();
+  const upButtonRef = useRef<any>();
+  const downButtonRef = useRef<any>();
+
+  const [myItems, setMyItems] = useRecoilState(myItemsState);
+
+  const handleActivePage = () => {
+    props.setActivePage((prev: string) => {
+      return prev === "myprofile" ? "myitems" : "myprofile";
+    });
+
+    if (props.activePage === "myitems") {
+      const apiRequesArray: any = [];
+      myItems.forEach((item) => {
+        const requestObj: any = {};
+        requestObj["x"] = item.x;
+        requestObj["y"] = item.y;
+        requestObj["z"] = item.z;
+        requestObj["rotation"] = item.rotation;
+        requestObj["id"] = item.id;
+        requestObj["roomId"] = item.roomId;
+        requestObj["itemId"] = item.itemId;
+
+        apiRequesArray.push(requestObj);
+      });
+      console.log(apiRequesArray);
+      apiUpdateMyRoom(apiRequesArray).then((res) => {
+        console.log(res, "고백 버튼 결과");
+      });
+    }
+  };
+
+  console.log(target);
+
   return (
-    <SMyRoom>
+    <SMyRoom activePage={props.activePage}>
       <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
         <OrbitControls
           maxPolarAngle={Math.PI / 2.8}
           minZoom={50}
           maxZoom={200}
+          enableRotate={props.activePage === "myitems" ? false : true}
           // 쉬프트 마우스 왼쪽 이동 막는 기능
           enablePan={false}
         />
-        <Scene />
+        <Scene
+          activePage={props.activePage}
+          upButtonRef={upButtonRef}
+          downButtonRef={downButtonRef}
+          editButtonRef={editButtonRef}
+          rotationLeftButtonRef={rotationLeftButtonRef}
+          rotationRigthButtonRef={rotationRigthButtonRef}
+        />
       </Canvas>
+      <button className="myitems__btn" onClick={handleActivePage}>
+        My Items
+      </button>
+      {target && (
+        <>
+          <button ref={upButtonRef} className="myitem__up">
+            Up
+          </button>
+          <button ref={downButtonRef} className="myitem__down">
+            Down
+          </button>
+          <div className="myitem__rotation">
+            <button ref={rotationLeftButtonRef}>
+              <FontAwesomeIcon
+                className="rotation__button-icon"
+                icon={faCaretLeft}
+              />
+            </button>
+            <p>Rotation</p>
+            <button ref={rotationRigthButtonRef}>
+              <FontAwesomeIcon
+                className="rotation__button-icon"
+                icon={faCaretRight}
+              />
+            </button>
+          </div>
+          <button className="myitem__delete">Delete</button>
+        </>
+      )}
+      {props.activePage == "myitems" && (
+        <button className="myitemsGoback__btn" onClick={handleActivePage}>
+          Go Back
+        </button>
+      )}
     </SMyRoom>
   );
 };

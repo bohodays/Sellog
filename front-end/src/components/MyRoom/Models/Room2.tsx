@@ -5,261 +5,389 @@ Command: npx gltfjsx@6.1.4 ./public/models/room/room2.glb -t
 
 import * as THREE from "three";
 import React, { useRef } from "react";
-import { OrthographicCamera, useGLTF } from "@react-three/drei";
+import {
+  OrthographicCamera,
+  PerspectiveCamera,
+  useGLTF,
+} from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
   nodes: {
+    Plane: THREE.Mesh;
     Plane_1: THREE.Mesh;
     Plane_2: THREE.Mesh;
-    Pipe003: THREE.Mesh;
-    Pipe001: THREE.Mesh;
-    Pipe002: THREE.Mesh;
-    Pipe: THREE.Mesh;
-    Plane058: THREE.Mesh;
-    Plane058_1: THREE.Mesh;
-    Plane059: THREE.Mesh;
-    Plane059_1: THREE.Mesh;
-    Shelf: THREE.Mesh;
-    Paper004: THREE.Mesh;
-    Paper: THREE.Mesh;
-    Plane078: THREE.Mesh;
-    Plane079: THREE.Mesh;
-    Plane080: THREE.Mesh;
-    Plane081: THREE.Mesh;
-    Cable: THREE.Mesh;
-    Lamp: THREE.Mesh;
-    Circle005: THREE.Mesh;
-    Icosphere: THREE.Mesh;
-    Vert012: THREE.Mesh;
-    Plane067_1: THREE.Mesh;
-    Plane067_2: THREE.Mesh;
+    Windows: THREE.Mesh;
+    Cube001_1: THREE.Mesh;
+    Cube002: THREE.Mesh;
+    Cube003: THREE.Mesh;
+    Windows001: THREE.Mesh;
+    Plane001: THREE.Mesh;
+    Roundcube: THREE.Mesh;
+    Plane002: THREE.Mesh;
+    Circle002: THREE.Mesh;
+    Circle002_1: THREE.Mesh;
+    Circle002_2: THREE.Mesh;
+    Portrait: THREE.Mesh;
+    ["pexels-pixasquare-1123982"]: THREE.Mesh;
+    Portrait001: THREE.Mesh;
+    ["pexels-luis-dalvan-1770812"]: THREE.Mesh;
+    Portrait002: THREE.Mesh;
+    ["pexels-tatiana-fet-1105766"]: THREE.Mesh;
+    Shades: THREE.Mesh;
+    Shades001: THREE.Mesh;
+    Shades002: THREE.Mesh;
+    Shades003: THREE.Mesh;
+    Cylinder004: THREE.Mesh;
+    Cube009: THREE.Mesh;
+    Cube010: THREE.Mesh;
+    Cube011: THREE.Mesh;
+    Cube012: THREE.Mesh;
+    Cube013: THREE.Mesh;
+    Cube014: THREE.Mesh;
+    Cube015: THREE.Mesh;
+    Cube016: THREE.Mesh;
+    Cube017: THREE.Mesh;
+    Cube018: THREE.Mesh;
+    Cube019: THREE.Mesh;
+    Cube020: THREE.Mesh;
+    Cube021: THREE.Mesh;
+    Cube022: THREE.Mesh;
+    Cube023: THREE.Mesh;
+    Cube025: THREE.Mesh;
+    Cube026: THREE.Mesh;
+    Cube027: THREE.Mesh;
+    Cube028: THREE.Mesh;
+    Cube029: THREE.Mesh;
+    Cube030: THREE.Mesh;
+    Cube031: THREE.Mesh;
+    Cube032: THREE.Mesh;
+    Cube033: THREE.Mesh;
   };
   materials: {
-    wall: THREE.MeshStandardMaterial;
-    floor: THREE.MeshStandardMaterial;
-    metal: THREE.MeshStandardMaterial;
-    ["black-gloss"]: THREE.MeshStandardMaterial;
-    poster1: THREE.MeshStandardMaterial;
-    poster2: THREE.MeshStandardMaterial;
-    wood: THREE.MeshStandardMaterial;
-    white: THREE.MeshStandardMaterial;
-    black: THREE.MeshStandardMaterial;
-    red: THREE.MeshStandardMaterial;
-    book: THREE.MeshStandardMaterial;
+    Wall: THREE.MeshStandardMaterial;
+    Floor: THREE.MeshStandardMaterial;
+    Rim: THREE.MeshStandardMaterial;
+    ["default"]: THREE.MeshStandardMaterial;
+    ["Window.001"]: THREE.MeshStandardMaterial;
+    ["Wood.002"]: THREE.MeshStandardMaterial;
+    ["default"]: THREE.MeshStandardMaterial;
+    Gold: THREE.MeshStandardMaterial;
+    Wood: THREE.MeshStandardMaterial;
+    Mirror: THREE.MeshStandardMaterial;
+    Light: THREE.MeshStandardMaterial;
+    ["pexels-pixasquare-1123982"]: THREE.MeshStandardMaterial;
+    ["pexels-luis-dalvan-1770812"]: THREE.MeshStandardMaterial;
+    ["pexels-tatiana-fet-1105766"]: THREE.MeshStandardMaterial;
+    Curtain: THREE.MeshStandardMaterial;
+    Silver: THREE.MeshStandardMaterial;
   };
 };
 
-export function Room2(props: JSX.IntrinsicElements["group"]) {
+function Room2(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/models/room/room2.glb") as GLTFResult;
   return (
-    <group {...props} dispose={null} position={[0, -3, 0]}>
+    <group {...props} dispose={null} position={[0, -2.5, 0]}>
       <OrthographicCamera
         makeDefault={true}
         far={1000}
         near={0.1}
-        position={[30.61, 25.06, 30.61]}
+        position={[30.61, 33.06, 30.61]}
         rotation={[-0.79, 0.62, 0.52]}
         zoom={62}
       />
+      {/* <PerspectiveCamera makeDefault={true} far={1000} zoom={3} /> */}
       <mesh
-        geometry={nodes.Pipe003.geometry}
-        material={materials.metal}
-        position={[-3.66, 5.2, -0.02]}
-      />
-      <mesh
-        geometry={nodes.Pipe001.geometry}
-        material={materials.metal}
-        position={[-3.09, 5.2, 3.99]}
-      />
-      <mesh
-        geometry={nodes.Pipe002.geometry}
-        material={materials.metal}
-        position={[-3.91, 0, 1.72]}
-      />
-      <mesh
-        geometry={nodes.Pipe.geometry}
-        material={materials.metal}
-        position={[-3.91, 0, 1.86]}
-      />
-      <group position={[-0.74, 3.84, -4]}>
-        <mesh
-          geometry={nodes.Plane058.geometry}
-          material={materials["black-gloss"]}
-        />
-        <mesh
-          geometry={nodes.Plane058_1.geometry}
-          material={materials.poster1}
-        />
-      </group>
-      <group
-        position={[2.34, 3.71, -4.01]}
-        rotation={[0, 0, 0.07]}
-        scale={0.84}
+        // geometry={nodes.Windows.geometry}
+        material={materials["default"]}
+        position={[1.12, 2.78, -4]}
       >
         <mesh
-          geometry={nodes.Plane059.geometry}
-          material={materials["black-gloss"]}
+          geometry={nodes.Cube001_1.geometry}
+          material={materials["Window.001"]}
         />
         <mesh
-          geometry={nodes.Plane059_1.geometry}
-          material={materials.poster2}
+          geometry={nodes.Cube002.geometry}
+          material={materials["Wood.002"]}
         />
-      </group>
-      <mesh
-        geometry={nodes.Shelf.geometry}
-        material={materials.wood}
-        position={[-4, 3.91, -1.65]}
-      />
-      <mesh
-        geometry={nodes.Paper004.geometry}
-        material={materials.white}
-        position={[-3.99, 3.93, 0.88]}
-        rotation={[0.07, 0, -Math.PI / 2]}
-        scale={1.91}
-      />
-      <mesh
-        geometry={nodes.Paper.geometry}
-        material={materials.white}
-        position={[-3.98, 3.41, 0.37]}
-        rotation={[-0.1, 0, -Math.PI / 2]}
-        scale={1.24}
-      />
-      <mesh
-        geometry={nodes.Plane078.geometry}
-        material={materials.black}
-        position={[-3.55, 3.99, -0.37]}
-        rotation={[0, 0.15, 0]}
-      >
         <mesh
-          geometry={nodes.Plane079.geometry}
-          material={materials["black-gloss"]}
+          geometry={nodes.Cube003.geometry}
+          material={materials["Wood.002"]}
         />
       </mesh>
       <mesh
-        geometry={nodes.Plane080.geometry}
-        material={materials.black}
-        position={[-3.57, 3.99, -3.54]}
-        rotation={[0, -0.39, 0]}
+        // geometry={nodes.Windows001.geometry}
+        material={materials["default"]}
+        position={[-2.68, 2.78, -4]}
       >
         <mesh
-          geometry={nodes.Plane081.geometry}
-          material={materials["black-gloss"]}
+          geometry={nodes.Plane001.geometry}
+          material={materials["Wood.002"]}
+          position={[0, 0, -0.27]}
+        >
+          <mesh
+            geometry={nodes.Roundcube.geometry}
+            material={materials.Gold}
+            position={[0.86, -0.69, 0.21]}
+            scale={0.11}
+          />
+        </mesh>
+        <mesh
+          geometry={nodes.Plane002.geometry}
+          material={materials["Window.001"]}
+          position={[0, 0, -0.27]}
+        />
+      </mesh>
+      <group position={[-3.97, 3.67, 1.87]}>
+        <mesh geometry={nodes.Circle002.geometry} material={materials.Wood} />
+        <mesh
+          geometry={nodes.Circle002_1.geometry}
+          material={materials.Mirror}
+        />
+        <mesh
+          geometry={nodes.Circle002_2.geometry}
+          material={materials.Light}
+        />
+      </group>
+      <mesh
+        geometry={nodes.Portrait.geometry}
+        material={materials["Wood.002"]}
+        position={[-3.96, 3.91, -2.59]}
+        scale={1.06}
+      >
+        <mesh
+          geometry={nodes["pexels-pixasquare-1123982"].geometry}
+          material={materials["pexels-pixasquare-1123982"]}
+          position={[0.11, 0, 0]}
+          rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+          scale={1.23}
         />
       </mesh>
       <mesh
-        geometry={nodes.Cable.geometry}
-        material={materials["black-gloss"]}
-        position={[-3.91, 4.4, -0.35]}
+        geometry={nodes.Portrait001.geometry}
+        material={materials["Wood.002"]}
+        position={[-3.96, 3.77, -1.25]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        scale={1.06}
+      >
+        <mesh
+          geometry={nodes["pexels-luis-dalvan-1770812"].geometry}
+          material={materials["pexels-luis-dalvan-1770812"]}
+          position={[0.12, 0, 0]}
+          rotation={[-Math.PI, 0, -Math.PI / 2]}
+          scale={0.83}
+        />
+      </mesh>
+      <mesh
+        geometry={nodes.Portrait002.geometry}
+        material={materials["Wood.002"]}
+        position={[-3.96, 2.57, -1.72]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        scale={1.06}
+      >
+        <mesh
+          geometry={nodes["pexels-tatiana-fet-1105766"].geometry}
+          material={materials["pexels-tatiana-fet-1105766"]}
+          position={[0.11, 0, 0]}
+          rotation={[-Math.PI, 0, -Math.PI / 2]}
+          scale={0.81}
+        />
+      </mesh>
+      <mesh
+        geometry={nodes.Shades.geometry}
+        material={materials.Curtain}
+        position={[-0.06, 4.39, -4.17]}
       />
-      <group position={[-3.72, 4.3, -0.89]} rotation={[1.42, -1.57, 0]}>
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <group
-        position={[-3.72, 4.28, -1]}
-        rotation={[Math.PI / 2, -Math.PI / 2, 0]}
-        scale={[0.9, 0.67, 0.9]}
-      >
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <group
-        position={[-3.72, 4.29, -1.12]}
-        rotation={[Math.PI / 2, -Math.PI / 2, 0]}
-        scale={[0.96, 1.06, 0.96]}
-      >
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <group
-        position={[-3.72, 4.35, -1.2]}
-        rotation={[Math.PI / 2, -Math.PI / 2, 0]}
-        scale={[1.14, 0.67, 0.9]}
-      >
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <group
-        position={[-3.72, 4.29, -1.33]}
-        rotation={[Math.PI / 2, -Math.PI / 2, 0]}
-        scale={[0.96, 1.06, 0.96]}
-      >
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <group position={[-3.72, 4.32, -1.47]} rotation={[1.69, -Math.PI / 2, 0]}>
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <group
-        position={[-3.72, 4.28, -1.57]}
-        rotation={[Math.PI / 2, -Math.PI / 2, 0]}
-        scale={[0.9, 0.67, 0.9]}
-      >
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <group
-        position={[-3.72, 4.29, -1.7]}
-        rotation={[Math.PI / 2, -Math.PI / 2, 0]}
-        scale={[0.96, 1.06, 0.96]}
-      >
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <group
-        position={[-3.72, 4.35, -1.78]}
-        rotation={[Math.PI / 2, -Math.PI / 2, 0]}
-        scale={[1.14, 0.67, 0.9]}
-      >
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <group
-        position={[-3.72, 4.29, -1.9]}
-        rotation={[Math.PI / 2, -Math.PI / 2, 0]}
-        scale={[0.96, 1.06, 0.96]}
-      >
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <group
-        position={[-3.72, 4.35, -2.07]}
-        rotation={[1.93, -Math.PI / 2, 0]}
-        scale={[1.14, 0.67, 0.9]}
-      >
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <group
-        position={[-3.54, 4.09, -2.62]}
-        rotation={[0, 1.18, -Math.PI]}
-        scale={[0.96, 1.06, 0.96]}
-      >
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <group
-        position={[-3.52, 4.17, -2.68]}
-        rotation={[0, 1.31, -Math.PI]}
-        scale={[1.14, 0.67, 0.9]}
-      >
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <group
-        position={[-3.54, 4.3, -2.62]}
-        rotation={[-3.14, 1.48, 0]}
-        scale={[0.96, 1.06, 0.96]}
-      >
-        <mesh geometry={nodes.Plane067_1.geometry} material={materials.book} />
-        <mesh geometry={nodes.Plane067_2.geometry} material={materials.white} />
-      </group>
-      <mesh geometry={nodes.Plane_1.geometry} material={materials.wall} />
-      <mesh geometry={nodes.Plane_2.geometry} material={materials.floor} />
+      <mesh
+        geometry={nodes.Shades001.geometry}
+        material={materials.Curtain}
+        position={[2.31, 4.39, -4.17]}
+      />
+      <mesh
+        geometry={nodes.Shades002.geometry}
+        material={materials.Curtain}
+        position={[-2.69, 4.37, -4.17]}
+        scale={[0.83, 1, 1]}
+      />
+      <mesh
+        geometry={nodes.Shades003.geometry}
+        material={materials.Curtain}
+        position={[-2.69, 1.93, -4.17]}
+        scale={[0.83, 1, 1]}
+      />
+      {/* <mesh
+        geometry={nodes.Cylinder004.geometry}
+        material={materials.Silver}
+        position={[3.34, 1.98, -0.67]}
+      /> */}
+      <mesh
+        geometry={nodes.Cube009.geometry}
+        material={materials.Wall}
+        position={[-4, 3.96, 3.54]}
+        rotation={[-Math.PI, 0, -Math.PI / 2]}
+        scale={-1}
+      />
+      <mesh
+        geometry={nodes.Cube010.geometry}
+        material={materials.Wall}
+        position={[-4, 4.23, 3.77]}
+        rotation={[Math.PI, 0, Math.PI / 2]}
+        scale={[1, 1, 0.46]}
+      />
+      <mesh
+        geometry={nodes.Cube011.geometry}
+        material={materials.Wall}
+        position={[-4, 3.66, 3.77]}
+        rotation={[0, 0, -Math.PI / 2]}
+        scale={[1, 1, 0.46]}
+      />
+      <mesh
+        geometry={nodes.Cube012.geometry}
+        material={materials.Wall}
+        position={[-4, 4.22, 3.12]}
+        rotation={[0, 0, -Math.PI / 2]}
+      />
+      <mesh
+        geometry={nodes.Cube013.geometry}
+        material={materials.Wall}
+        position={[-4, 4.52, 3.54]}
+        rotation={[0, 0, Math.PI / 2]}
+        scale={-1}
+      />
+      <mesh
+        geometry={nodes.Cube014.geometry}
+        material={materials.Wall}
+        position={[-4, 3.93, 0.65]}
+        rotation={[0, 0, -Math.PI / 2]}
+      />
+      <mesh
+        geometry={nodes.Cube015.geometry}
+        material={materials.Wall}
+        position={[-4, 3.65, 0.16]}
+        rotation={[-Math.PI, 0, -Math.PI / 2]}
+        scale={-1}
+      />
+      <mesh
+        geometry={nodes.Cube016.geometry}
+        material={materials.Wall}
+        position={[-4, 3.92, -0.23]}
+        rotation={[0, 0, Math.PI / 2]}
+        scale={-1}
+      />
+      <mesh
+        geometry={nodes.Cube017.geometry}
+        material={materials.Wall}
+        position={[-4, 3.64, -0.71]}
+        rotation={[0, 0, -Math.PI / 2]}
+      />
+      <mesh
+        geometry={nodes.Cube018.geometry}
+        material={materials.Wall}
+        position={[-4, 3.35, -0.29]}
+        rotation={[Math.PI, 0, Math.PI / 2]}
+      />
+      <mesh
+        geometry={nodes.Cube019.geometry}
+        material={materials.Wall}
+        position={[-4, 3.04, -0.78]}
+        rotation={[0, 0, Math.PI / 2]}
+        scale={-1}
+      />
+      <mesh
+        geometry={nodes.Cube020.geometry}
+        material={materials.Wall}
+        position={[-4, 2.73, -0.39]}
+        rotation={[-Math.PI, 0, -Math.PI / 2]}
+        scale={-1}
+      />
+      <mesh
+        geometry={nodes.Cube021.geometry}
+        material={materials.Wall}
+        position={[-4, 4.23, 0.2]}
+        rotation={[0, 0, -Math.PI / 2]}
+      />
+      <mesh
+        geometry={nodes.Cube022.geometry}
+        material={materials.Wall}
+        position={[-4, 4.81, -0.57]}
+        rotation={[0, 0, -Math.PI / 2]}
+      />
+      <mesh
+        geometry={nodes.Cube023.geometry}
+        material={materials.Wall}
+        position={[-4, 4.5, -1.02]}
+        rotation={[-Math.PI, 0, -Math.PI / 2]}
+        scale={-1}
+      />
+      <mesh
+        geometry={nodes.Cube025.geometry}
+        material={materials.Wall}
+        position={[-4, 4.59, -3.21]}
+        rotation={[0, 0, -Math.PI / 2]}
+      />
+      <mesh
+        geometry={nodes.Cube026.geometry}
+        material={materials.Wall}
+        position={[-4, 1.81, -2.4]}
+        rotation={[-Math.PI, 0, -Math.PI / 2]}
+        scale={-1}
+      />
+      <mesh
+        geometry={nodes.Cube027.geometry}
+        material={materials.Wall}
+        position={[-4, 1.5, -2.02]}
+        rotation={[0, 0, -Math.PI / 2]}
+      />
+      <mesh
+        geometry={nodes.Cube028.geometry}
+        material={materials.Wall}
+        position={[-4, 0.52, -2.92]}
+        rotation={[0, 0, -Math.PI / 2]}
+      />
+      <mesh
+        geometry={nodes.Cube029.geometry}
+        material={materials.Wall}
+        position={[-4, 0.86, -3.36]}
+        rotation={[0, 0, Math.PI / 2]}
+        scale={-1}
+      />
+      <mesh
+        geometry={nodes.Cube030.geometry}
+        material={materials.Wall}
+        position={[-4, 0.53, -3.83]}
+        rotation={[Math.PI, 0, Math.PI / 2]}
+      />
+      <mesh
+        geometry={nodes.Cube031.geometry}
+        material={materials.Wall}
+        position={[-4, 2.28, 3.54]}
+        rotation={[Math.PI, 0, Math.PI / 2]}
+      />
+      <mesh
+        geometry={nodes.Cube032.geometry}
+        material={materials.Wall}
+        position={[-4, 2.55, 3.77]}
+        rotation={[0, 0, Math.PI / 2]}
+        scale={[-1, -1, -0.46]}
+      />
+      <mesh
+        geometry={nodes.Cube033.geometry}
+        material={materials.Wall}
+        position={[-4, 1.98, 3.77]}
+        rotation={[0, 0, -Math.PI / 2]}
+        scale={[1, 1, 0.46]}
+      />
+      <mesh geometry={nodes.Plane.geometry} material={materials.Wall} />
+      <mesh
+        geometry={nodes.Plane_1.geometry}
+        material={materials.Floor}
+        userData={{ ground: true }}
+      />
+      <mesh geometry={nodes.Plane_2.geometry} material={materials.Rim} />
     </group>
   );
 }
 
-useGLTF.preload("/models/room/room2.glb");
+export default React.memo(Room2);
+
+// useGLTF.preload("/models/room/room2.glb");

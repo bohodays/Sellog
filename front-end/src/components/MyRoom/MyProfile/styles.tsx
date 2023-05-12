@@ -16,8 +16,7 @@ export const SProfile = styled.section`
     transform: rotate(-7.58deg);
     margin-bottom: 12%;
   }
-  .img__profile {
-  }
+
   .sticker__smilebottom {
     position: absolute;
     width: 7rem;
@@ -32,7 +31,7 @@ export const SProfile = styled.section`
     text-align: center;
   }
   .img__profile {
-    width: 10rem;
+    width: 8rem;
     transform: matrix(1, 0.1, -0.1, 0.99, 0, 0);
   }
   .container__baseinfo {
@@ -41,24 +40,29 @@ export const SProfile = styled.section`
     text-align: center;
     font-family: "Slackey", cursive;
     padding-inline: 5%;
-
+    height: 40%;
     .username {
       font-size: 1.3rem;
       padding-right: 10%;
     }
   }
   .container__userinfo {
+    padding-right: 2vw;
     width: 50%;
 
     display: flex;
     flex-direction: column;
     align-items: end;
+    justify-content: center;
   }
+
   .point__container {
     display: flex;
     justify-content: space-evenly;
+    margin-top: 4vh;
     height: 25%;
     width: 45%;
+
     text-align: center;
     align-items: center;
     background-color: #dfc490;
@@ -71,6 +75,13 @@ export const SProfile = styled.section`
 
   .bottom__profile {
     margin-top: 4%;
+    display: flex;
+    align-content: space-around;
+    justify-content: space-around;
+    font-size: 1.4rem;
+    P {
+      font-size: 1.2rem;
+    }
   }
 
   .container__habit {
@@ -81,7 +92,7 @@ export const SProfile = styled.section`
     font-family: "Slackey", cursive;
     font-size: large;
     font-weight: 700;
-    height: 40%;
+    margin-block: 4%;
   }
   .container__habit-stats {
     display: flex;
@@ -92,7 +103,7 @@ export const SProfile = styled.section`
     font-size: 1rem;
   }
   .progress__bar {
-    width: 70%;
+    width: 60%;
     height: 2rem;
     display: flex;
     justify-content: center;
@@ -121,16 +132,32 @@ export const SProfile = styled.section`
     background-color: #5488a1;
     transform: rotate(-1.21deg);
   }
-  .button__goal {
+
+  .checked__today {
+    align-self: center;
+    justify-self: center;
+    width: 3vw;
+    height: 3vw;
+    font-size: 1.5rem;
     text-align: center;
-    align-items: center;
+  }
+
+  .button__goal {
     height: 2rem;
+    width: 6rem;
     display: flex;
+    /* text-align: center; */
+    justify-content: center;
     align-self: flex-end;
     background-color: #ffcc00;
-    border: solid 1px;
+    border: solid 3px;
     border-radius: 1rem 1rem 1rem 1rem;
     box-shadow: 1px 1px 1px 1px grey;
+    font-family: "Chicle";
+    font-size: 1.3rem;
+    a {
+      color: black;
+    }
   }
   .container__contact {
     /* border: solid 1px; */
@@ -153,15 +180,9 @@ export const SProfile = styled.section`
     }
   }
   .sticker__github {
-    position: absolute;
-    left: 2vw;
     width: 2.7rem;
-    bottom: 1.6vh;
   }
   .sticker__tistory {
-    position: absolute;
     width: 4rem;
-    left: 5vw;
-    bottom: 0vh;
   }
 `;

@@ -186,9 +186,7 @@ type GLTFResult = GLTF & {
 };
 
 export function Room1(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF(
-    "/models/room/retro_room.glb"
-  ) as GLTFResult;
+  const { nodes, materials } = useGLTF("/models/room/room1.glb") as GLTFResult;
   return (
     <group {...props} dispose={null} position={[0, -2.5, 0]}>
       <OrthographicCamera
@@ -378,5 +376,3 @@ export function Room1(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-useGLTF.preload("/models/room/retro_room.glb");
