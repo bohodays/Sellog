@@ -100,8 +100,14 @@ public class Member extends BaseTime{
     @Builder.Default
     private List<Record> recordList = new ArrayList<>();
 
-    @Column(name = "start_date")
-    private LocalDateTime start_date;
+    @Column(name = "github_start_date")
+    private LocalDateTime github_start_date;
+
+    @Column(name = "github_start_date")
+    private LocalDateTime algo_start_date;
+
+    @Column(name = "github_start_date")
+    private LocalDateTime blog_start_date;
 
     public void updateTistoryToken(String tistoryToken) {
         this.tistoryToken = tistoryToken;
@@ -132,7 +138,9 @@ public class Member extends BaseTime{
         this.feedTarget = targetDto.getFeedTarget();
         this.githubTarget = targetDto.getGithubTarget();
         this.csTarget = targetDto.getCsTarget();
-        this.start_date = LocalDateTime.now(); // 시작 시간 재 시작
+        this.github_start_date = LocalDateTime.now(); // 시작 시간 재 시작
+        this.algo_start_date = LocalDateTime.now();
+        this.blog_start_date = LocalDateTime.now();
     }
 
     public void updateMemberInfo(MemberUpdateDto memberUpdateDto){
@@ -151,7 +159,14 @@ public class Member extends BaseTime{
         this.points -= point;
     }
 
-    public void updateStartDate(LocalDateTime today) {
-        this.start_date = today;
+    public void updateAlgoStartDate(LocalDateTime today) {
+        this.algo_start_date = today;
     }
+    public void updateGitHUbStartDate(LocalDateTime today) {
+        this.github_start_date = today;
+    }
+    public void updateBlogStartDate(LocalDateTime today) {
+        this.blog_start_date = today;
+    }
+
 }

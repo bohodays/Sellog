@@ -216,10 +216,11 @@ public class WebHookService {
 
     public int earnPoints(Member member,String category){
         int result = 0;
-        if(member.getStart_date() == null) throw new CustomException(ErrorCode.NO_TARGET);
+        LocalDateTime startDate = getStartDate(member,category);
+        if(startDate == null) throw new CustomException(ErrorCode.NO_TARGET);
 
         //시작 날짜를 포함하므로 1더함
-        long diff = calculateDiff(member.getStart_date(),LocalDateTime.now()) + 1;
+        long diff = calculateDiff(startDate,LocalDateTime.now()) + 1;
 
         log.info("두 날짜의 차이 : {}",diff);
 
@@ -242,7 +243,7 @@ public class WebHookService {
         //시작으로부터 day일 이내였을 경우
         if(offset < 0) {
             rList = recordRepository.getUserRecordByUserIdAfterStartDate(member.getUserId(),
-                    member.getStart_date(),
+                    startDate,
                     LocalDateTime.now(),
                     category);
             progress = true;
@@ -250,8 +251,8 @@ public class WebHookService {
         //현재 날짜 구간을 포함하는 앞부분
         else {
             rList = recordRepository.getUserRecordByUserIdAfterStartDate(member.getUserId(),
-                    member.getStart_date().plusDays(offset * day),
-                    member.getStart_date().plusDays((offset+1) * day-1),
+                    startDate.plusDays(offset * day),
+                    startDate.plusDays((offset+1) * day-1),
                     category);
         }
 
@@ -260,11 +261,14 @@ public class WebHookService {
             //목표 달성실패했다면 시작시간을 현재시간으로 재설정
             if(rList.size() < cnt) {
                 log.info("목표 시간 초기화");
-                member.updateStartDate(LocalDateTime.now());
+
+                if(category.equals("github")) member.updateGitHUbStartDate(LocalDateTime.now());
+                else if(category.equals("blog")) member.updateBlogStartDate(LocalDateTime.now());
+                else if(category.equals("algo")) member.updateAlgoStartDate(LocalDateTime.now());
             }
             //현재 구간에서 목표를 달성한 경우라면 포인트 주기
             List<Record> recordList = recordRepository.getUserRecordByUserIdAfterStartDate(member.getUserId(),
-                    member.getStart_date().plusDays((offset+1) * day),
+                    startDate.plusDays((offset+1) * day),
                     LocalDateTime.now(),
                     category);
 
@@ -321,6 +325,13 @@ public class WebHookService {
         }
 
         return result;
+    }
+    public LocalDateTime getStartDate(Member member,String category) {
+        if(category.equals("github")) return member.getGithub_start_date();
+        else if(category.equals("blog")) return member.getBlog_start_date();
+        else if(category.equals("algo")) return member.getAlgo_start_date();
+
+        return LocalDateTime.now(); //oops
     }
 
     public String getType(Member member,String category) {
