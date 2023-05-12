@@ -3,7 +3,7 @@ import { SSection } from "./styles";
 import blueEye from "@/assets/imgs/retro/blue_eye.png";
 import MyItemList from "@/components/MyRoom/MyItemList/MyItemList";
 import { apiGetMyItemList } from "@/api/room";
-import { IItem } from "@/typeModels/ItemShop/itemInterfaces";
+import { IItem } from "@/typeModels/ItemShop/iteminterfaces";
 
 const itemCategories = [
   "all",

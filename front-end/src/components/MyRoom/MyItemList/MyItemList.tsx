@@ -4,7 +4,7 @@ import { SSection, SDiv } from "./styles";
 import { TiChevronRightOutline, TiChevronLeftOutline } from "react-icons/ti";
 import { apiGetMyItemList } from "@/api/room";
 import { myItemsType } from "@/recoil/myroom/atoms";
-import { IItem } from "@/typeModels/ItemShop/itemInterfaces";
+import { IItem } from "@/typeModels/ItemShop/iteminterfaces";
 
 type PropsType = {
   currentItemList: Array<IItem>;

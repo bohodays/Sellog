@@ -1,4 +1,3 @@
-import { Ilbuni } from "@/components/Main/Models/Ilbuni";
 import { OrbitControls, OrthographicCamera } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
 import React, { Suspense } from "react";
