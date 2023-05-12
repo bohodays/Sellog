@@ -17,7 +17,7 @@ export const SMyRoom = styled.section<any>`
     box-shadow: 1px 1px 3px black;
     position: absolute;
     bottom: 3.5vh;
-    right: 2.5vw;
+    right: 6vw;
     display: ${(props) => (props.activePage === "myprofile" ? "" : "none")};
   }
 
@@ -131,7 +131,16 @@ export const SMyRoom = styled.section<any>`
     box-shadow: 1px 1px 3px black;
     position: absolute;
     bottom: 3.5vh;
-    right: 2.5vw;
+    right: 6vw;
     display: ${(props) => (props.activePage === "myitems" ? "" : "none")};
+  }
+  .goHome__button {
+    /* display: flex;
+    justify-self: end; */
+    position: absolute;
+    bottom: 4.5vh;
+    right: 2.5vw;
+    font-size: 1.7rem;
+    color: #d8b904;
   }
 `;
