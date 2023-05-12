@@ -53,7 +53,7 @@ const ItemItem = ({ shopItem, setIsModalOpen, setItem }: IItemModalProps) => {
       {/* <ItemWrapper shopItem={shopItem} /> */}
 
       <div className="item__description__wrapper">
-        <div className="item__name">{shopItem?.name}</div>
+        <div className="item__name">{shopItem?.name?.split("_").join(" ")}</div>
         <div className="item__description">
           <div className="coin__wrapper">
             <img src={coin} className="coin"></img>

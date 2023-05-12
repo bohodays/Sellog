@@ -40,6 +40,10 @@ export function Bedside_light_1(props: JSX.IntrinsicElements["group"] | any) {
   // 타겟 정보
   const [target, setTarget] = useRecoilState(itemTargetState);
 
+  useEffect(() => {
+    console.log("초기", target);
+  }, []);
+
   const { scene, camera, gl } = useThree();
   const raycaster = new THREE.Raycaster();
 

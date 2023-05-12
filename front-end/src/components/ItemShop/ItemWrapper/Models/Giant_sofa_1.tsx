@@ -28,7 +28,7 @@ type GLTFResult = GLTF & {
   };
 };
 
-export function Model(props: JSX.IntrinsicElements["group"]) {
+export function Giant_sofa_1(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF(
     "/models/items/giant_sofa_1.glb"
   ) as GLTFResult;
