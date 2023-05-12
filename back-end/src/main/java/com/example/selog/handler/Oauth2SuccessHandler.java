@@ -65,7 +65,10 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
 
         memberRepository.save(member);
 
-        gitHubService.synchronize(member.getUserId());
+        //github등록이 된경우만
+        if(member.getGithubToken() != null) {
+            gitHubService.synchronize(member.getUserId());
+        }
 
         StringBuilder sb = new StringBuilder();
         sb.append(redirectUrl).append("?refreshToken=")
