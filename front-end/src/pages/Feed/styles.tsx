@@ -100,6 +100,10 @@ export const SBody = styled.div`
       /* display: hidden; */
       visibility: hidden;
     }
+    .intersection__div {
+      height: 15%;
+      border: solid 5px red;
+    }
   }
 `;
 

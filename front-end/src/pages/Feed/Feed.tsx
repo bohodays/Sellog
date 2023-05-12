@@ -165,7 +165,7 @@ export default function Feed() {
 
               return <FeedComponent key={index} props={feed}></FeedComponent>;
             })}
-          <div ref={observerRef}></div>
+          <div ref={observerRef} className="intersection__div"></div>
         </div>
         <img className="sticker1" src={LargeSmile} alt="스마일 큰거" />
       </SBody>
