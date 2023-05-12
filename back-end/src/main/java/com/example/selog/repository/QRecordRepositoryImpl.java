@@ -51,10 +51,10 @@ public class QRecordRepositoryImpl implements QRecordRepository{
     }
 
     @Override
-    public List<Record> findRecordByStartDay(Long userId, LocalDateTime startDate, LocalDateTime now) {
+    public List<Record> findRecordByStartDay(Long userId, LocalDateTime startDate, LocalDateTime now, String category) {
         return jpaQueryFactory
                 .selectFrom(record)
-                .where(record.member.userId.eq(userId).and(record.writing_time.between(startDate, now)))
+                .where(record.member.userId.eq(userId).and(record.writing_time.between(startDate, now)).and(record.category.eq(category)))
                 .orderBy(record.writing_time.asc())
                 .fetch();
     }
