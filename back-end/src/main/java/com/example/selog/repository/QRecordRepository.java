@@ -14,6 +14,6 @@ public interface QRecordRepository {
     public List<Record> getUserRecordByUserIdAfterStartDate(Long userId, LocalDateTime start_date,LocalDateTime end_date,String category);
     public List<Record> findRecordByMonth(Long userId, String year, String month);
     public List<Record> findRecordByToday(Long userId, Integer year, Integer month, Integer day);
-    public List<Record> findRecordByStartDay(Long userId, LocalDateTime startDate, LocalDateTime now);
+    public List<Record> findRecordByStartDay(Long userId, LocalDateTime startDate, LocalDateTime now, String category);
     public Map<String, Long> findAllRecordCount(Long userId);
 }
