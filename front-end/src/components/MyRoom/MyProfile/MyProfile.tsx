@@ -1,6 +1,7 @@
 import { SProfile } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
 import { faSquareCheck, faSquare } from "@fortawesome/free-regular-svg-icons";
 import profilePic from "@/assets/imgs/retro/profilePic.jpeg";
 import github from "@/assets/imgs/retro/github.png";
@@ -260,12 +261,6 @@ const MyProfile = (props: MyProfileProps) => {
         <div className="platform-address"></div>
       </div>
       {/*  */}
-      {isInstalled || isTarget ? null : (
-        <InstallModal
-          isInstalled={isInstalled}
-          setIsInstalled={setIsInstalled}
-        />
-      )}
     </SProfile>
   );
 };

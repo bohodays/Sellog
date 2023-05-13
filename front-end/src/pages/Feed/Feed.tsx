@@ -36,7 +36,7 @@ export default function Feed() {
   let options = {
     root: null,
     rootMargin: "0px",
-    threshold: 1.0,
+    threshold: 0.7,
   };
   let callback = (entries: any, observer: any) => {
     console.log({ lastPage });
@@ -141,7 +141,7 @@ export default function Feed() {
         </div>
         {/* <h2 className="logo">Logo</h2> */}
         <img className="sticker2" src={GreenFlower} alt="green flower" />
-        <button onClick={feedHandler}> panic button</button>
+        {/* <button onClick={feedHandler}> panic button</button> */}
       </SHeader>
       <SBody>
         <SSection>

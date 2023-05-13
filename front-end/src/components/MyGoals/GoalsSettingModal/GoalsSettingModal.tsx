@@ -130,6 +130,11 @@ const GoalsSettingModal = ({
                       userInfo[goalNameToTargetName[activeGoal]] &&
                       userInfo[goalNameToTargetName[activeGoal]][0]
                     }
+                    inputProps={{
+                      min: 1,
+                      max: 10,
+                    }}
+                    defaultValue={1}
                     sx={{
                       width: "2.5vw",
                       height: "100%",
@@ -146,8 +151,13 @@ const GoalsSettingModal = ({
                       userInfo[goalNameToTargetName[activeGoal]] &&
                       userInfo[goalNameToTargetName[activeGoal]][2]
                     }
+                    defaultValue={1}
                     variant="outlined"
                     type="number"
+                    inputProps={{
+                      min: 1,
+                      max: 10,
+                    }}
                     sx={{
                       width: "2.5vw",
                       height: "100%",

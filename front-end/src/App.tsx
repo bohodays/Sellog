@@ -49,7 +49,7 @@ function App() {
         {/* <RecoilRoot> */}
         <BrowserRouter>
           <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/item-shop" element={<ItemShop />} />
             <Route path="/main" element={<Main />} />
             <Route path="/feed" element={<Feed />} />
