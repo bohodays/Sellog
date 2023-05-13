@@ -87,7 +87,7 @@ const Scene = ({ shopItem }: IShopItemProps) => {
       <PerspectiveCamera
         makeDefault={true}
         // far={500}
-        position={[0, 0, 8]}
+        position={[0, 1, 8]}
       />
       {id === 1 ? (
         <BedSide_light_1 />
