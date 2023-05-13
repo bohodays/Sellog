@@ -15,5 +15,7 @@ public class MatchingDto implements Serializable {
     String roomId;
     String sessionId;
     LocalDateTime enterTime;
-
+    private Long userId;
+    private String nickname;
+    private Integer characterId;
 }
