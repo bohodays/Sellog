@@ -132,7 +132,11 @@ const GoalsSettingModal = ({
                     }
                     inputProps={{
                       min: 1,
-                      max: 10,
+                      max:
+                        userInfo[goalNameToTargetName[activeGoal]] == "algo" ||
+                        userInfo[goalNameToTargetName[activeGoal]] == "github"
+                          ? 3
+                          : 7,
                     }}
                     defaultValue={1}
                     sx={{
@@ -156,7 +160,7 @@ const GoalsSettingModal = ({
                     type="number"
                     inputProps={{
                       min: 1,
-                      max: 10,
+                      max: 1,
                     }}
                     sx={{
                       width: "2.5vw",
