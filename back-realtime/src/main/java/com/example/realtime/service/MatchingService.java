@@ -1,6 +1,7 @@
 package com.example.realtime.service;
 
 import com.example.realtime.dto.MatchingDto;
+import com.example.realtime.dto.MemberDto;
 import com.example.realtime.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +23,15 @@ public class MatchingService {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public void addMatchingMember(String roomId, String sessionId){
+    public void addMatchingMember(String roomId, String sessionId, MemberDto memberDto){
 
         MatchingDto matchingDto = MatchingDto.builder()
                 .roomId(roomId)
                 .sessionId(sessionId)
                 .enterTime(LocalDateTime.now())
+                .userId(memberDto.getUserId())
+                .characterId(memberDto.getCharacterId())
+                .nickname(memberDto.getNickname())
                 .build();
 
         rabbitTemplate.convertAndSend(EXCAHGE_NAME, routingKey, matchingDto); // rabbit MQ 전송

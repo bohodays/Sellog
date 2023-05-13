@@ -26,8 +26,8 @@ public class MatchingAlgorithm {
             result.put("succeed",false);
             return result;
         }else {
-            //5명이 모였을 경우에만
-            for (int i = 0; i < 5; i++) {
+            //2명이 모였을 경우에만
+            for (int i = 0; i < 2; i++) {
                 if (matchingWaitList.getMatchingResultList().isEmpty()) break;
 
                 MatchingDto user = matchingWaitList.getMatchingList().poll();

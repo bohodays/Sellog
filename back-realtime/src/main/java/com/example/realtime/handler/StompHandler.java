@@ -72,8 +72,10 @@ public class StompHandler implements ChannelInterceptor, ApplicationContextAware
             String sessionId = (String) message.getHeaders().get("simpSessionId");
 
             if(sp.length>=6 && sp[5].equals("matching")){
+                MemberDto memberDto = memberService.findMemberInfoByUserId(SecurityUtil.getCurrentMemberId());
+
                 accessor.getSessionAttributes().put("socketType", "matching");
-                matchingService.addMatchingMember(roomId, sessionId);
+                matchingService.addMatchingMember(roomId, sessionId, memberDto);
             }else{
                 MemberDto memberDto = memberService.findMemberInfoByUserId(SecurityUtil.getCurrentMemberId());
                 RealTimeInfoDto info = RealTimeInfoDto.builder()
