@@ -3,24 +3,30 @@ import { SMain, SHeader, SBody, SSection } from "./styles";
 import LargeSmile from "@/assets/imgs/retro/smile_large.png";
 import GreenFlower from "@/assets/imgs/retro/green_flower.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import {
   faMagnifyingGlass,
   faTag,
   faFireFlameCurved,
 } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef, useCallback } from "react";
 import FeedComponent from "@/components/Feed/FeedComponent";
 import { getFeedApi, getMostView } from "@/api/feed";
 
 export default function Feed() {
   const navigate = useNavigate();
+  const homeNavigator = useNavigate();
+  const getOutHandler = () => {
+    homeNavigator("/main");
+  };
   const [newsfeed, setNewsFeed] = useState<any>();
   const [mostViewFeed, setMostViewFeed] = useState<any>();
   // intersecting 판별용 상태
   const [isLoading, setIsLoading] = useState(false);
   const [isFeed, setIsFeed] = useState<boolean>(false);
   const [isMostView, setIsMostView] = useState<boolean>(false);
+  const [lastPage, setLastPage] = useState<number>(2);
   const [page, setPage] = useState(1);
   // let page = 1;
   const observerRef = useRef(null);
@@ -33,16 +39,17 @@ export default function Feed() {
     threshold: 1.0,
   };
   let callback = (entries: any, observer: any) => {
-    if (page < 9) {
+    if (page < lastPage) {
       entries.forEach((entry: any) => {
         // 관찰중인 태그가 교차할때 root와
         // page++;
         if (entry.isIntersecting) {
           // api call
-          console.log({ page }, "???????????");
 
           getFeedApi(page).then(({ data }: any) => {
-            setNewsFeed([...newsfeed, ...data.response]);
+            console.log("new", data.response);
+
+            setNewsFeed([...newsfeed, ...data.response.content]);
             setPage((prev) => prev + 1);
           });
         }
@@ -56,11 +63,12 @@ export default function Feed() {
     // 초기 데이터 불러오기
     if (newsfeed === undefined) {
       getFeedApi(page).then(({ data }: any | undefined) => {
-        setNewsFeed(data.response);
+        console.log(data.response);
+        setLastPage(data.response.pageable.pageSize);
+        setNewsFeed(data.response.content);
       });
     }
     if (mostViewFeed === undefined) {
-      console.log("hi");
       getMostView().then(({ data }: any) => {
         setMostViewFeed(data.response);
       });
@@ -73,7 +81,7 @@ export default function Feed() {
       setIsFeed(true);
     }
 
-    console.log("useEffect", mostViewFeed);
+    // console.log("useEffect", mostViewFeed);
     //observer  생성
     let observer = new IntersectionObserver(callback, options);
     // 감지할 대상이 undefined가 아닐때
@@ -82,7 +90,7 @@ export default function Feed() {
     }
     return () => {
       observer.disconnect();
-      console.log("disconnect", target);
+      // console.log("disconnect", target);
     };
   }, [target, newsfeed]);
 
@@ -90,6 +98,7 @@ export default function Feed() {
     if (mostViewFeed != undefined) {
       setIsMostView(true);
     }
+    console.log({ mostViewFeed });
   }, [mostViewFeed]);
 
   const feedHandler = () => {
@@ -103,6 +112,7 @@ export default function Feed() {
     if (i < 8) {
     }
   };
+
   return (
     <SMain>
       <SHeader>
@@ -141,7 +151,7 @@ export default function Feed() {
                 mostViewFeed.map((element: any, index: number) => {
                   return (
                     <li key={index} className="mostview__element">
-                      {element["title"]}
+                      <Link to={element.link}>{element["title"]}</Link>
                     </li>
                   );
                 })}
@@ -153,18 +163,17 @@ export default function Feed() {
             newsfeed.map((feed: ReactNode, index: number) => {
               // <p> {feed.company}</p>;
 
-              return (
-                <FeedComponent
-                  key={index}
-                  props={feed}
-                  onclick={viewHandler(index)}
-                ></FeedComponent>
-              );
+              return <FeedComponent key={index} props={feed}></FeedComponent>;
             })}
           <div ref={observerRef}></div>
         </div>
         <img className="sticker1" src={LargeSmile} alt="스마일 큰거" />
       </SBody>
+      <FontAwesomeIcon
+        icon={faRightFromBracket}
+        className="goHome__button"
+        onClick={getOutHandler}
+      />
     </SMain>
   );
 }

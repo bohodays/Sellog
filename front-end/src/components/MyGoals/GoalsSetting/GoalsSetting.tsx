@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SSection } from "./styles";
 import RetroPencil from "@/assets/imgs/retro/pencil_retro.png";
 import WorkHard from "@/assets/imgs/retro/work_hard.png";
@@ -10,6 +11,7 @@ import SmileAndLight from "@/assets/imgs/retro/smile_and_light.png";
 import GoalsSettingModal from "../GoalsSettingModal/GoalsSettingModal";
 
 const GoalsSetting: any = () => {
+  const mainNavigator = useNavigate();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeGoal, setActiveGoal] = useState<string>("github");
 

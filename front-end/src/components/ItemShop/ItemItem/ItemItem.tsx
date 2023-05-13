@@ -2,13 +2,23 @@ import { useEffect, useState } from "react";
 import { SArticle } from "./styles";
 import item_sample from "@/assets/imgs/retro/item_sample.png";
 import coin from "@/assets/imgs/retro/coin.png";
-import ItemWrapper from "../ItemWrapper/ItemWrapper";
-import { IShopItemProps } from "@/typeModels/ItemShop/iteminterfaces";
+import {
+  IShopItem,
+  IShopItemProps,
+} from "@/typeModels/ItemShop/iteminterfaces";
 import { apiBuyItem } from "@/api/store";
 import { userInfoState } from "@/recoil/myroom/atoms";
 import { useRecoilState } from "recoil";
+import ItemWrapper from "../ItemWrapper/ItemWrapper";
+import ItemModal from "../ItemModal.tsx/ItemModal";
+import { IModalProps } from "../ItemModal.tsx/ItemModal";
 
-const ItemItem = ({ shopItem }: IShopItemProps) => {
+interface IItemModalProps {
+  shopItem: IShopItem;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setItem: React.Dispatch<React.SetStateAction<IShopItem | null>>;
+}
+const ItemItem = ({ shopItem, setIsModalOpen, setItem }: IItemModalProps) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [mypoint, setMypoint] = useState(userInfo.points);
   const [possession, setPossession] = useState(shopItem.possession);
@@ -28,12 +38,22 @@ const ItemItem = ({ shopItem }: IShopItemProps) => {
       });
   };
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+    setItem(shopItem);
+  };
   return (
     <SArticle>
-      <img src={shopItem.path} className="item__img"></img>
-      {/* <ItemWrapper /> */}
+      {/* {isModalOpen && <ItemModal></ItemModal>} */}
+      <img
+        src={shopItem.path}
+        className="item__img"
+        onClick={handleOpenModal}
+      ></img>
+      {/* <ItemWrapper shopItem={shopItem} /> */}
+
       <div className="item__description__wrapper">
-        <div className="item__name">{shopItem?.name}</div>
+        <div className="item__name">{shopItem?.name?.split("_").join(" ")}</div>
         <div className="item__description">
           <div className="coin__wrapper">
             <img src={coin} className="coin"></img>

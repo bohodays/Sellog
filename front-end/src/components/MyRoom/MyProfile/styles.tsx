@@ -10,7 +10,7 @@ export const SProfile = styled.section`
     padding-left: 5%;
     height: 8%;
     font-size: 3rem;
-    font-family: "Chicle", cursive;
+    font-family: "Chicle";
     color: #cb4f4f;
     text-shadow: 3px 3px #484743;
     transform: rotate(-7.58deg);
@@ -30,21 +30,22 @@ export const SProfile = styled.section`
   .body__profile {
     text-align: center;
   }
+
   .img__profile {
     width: 8rem;
+    height: 8rem;
     transform: matrix(1, 0.1, -0.1, 0.99, 0, 0);
   }
   .container__baseinfo {
     display: flex;
     justify-content: space-around;
     text-align: center;
-    font-family: "Slackey", cursive;
+    font-family: "ZCOOL KuaiLe", cursive;
     padding-inline: 5%;
     height: 40%;
-    .username {
-      font-size: 1.3rem;
-      padding-right: 10%;
-    }
+    /* .username {
+      
+    } */
   }
   .container__userinfo {
     padding-right: 2vw;
@@ -54,6 +55,11 @@ export const SProfile = styled.section`
     flex-direction: column;
     align-items: end;
     justify-content: center;
+    .username {
+      font-family: "ZCOOL KuaiLe", "sans-serif";
+      font-size: 1.3rem;
+      padding-right: 10%;
+    }
   }
 
   .point__container {
@@ -74,13 +80,16 @@ export const SProfile = styled.section`
   }
 
   .bottom__profile {
-    margin-top: 4%;
+    margin-block: 4%;
+    margin-inline: 4%;
+    width: 90%;
     display: flex;
-    align-content: space-around;
-    justify-content: space-around;
+    align-content: center;
+    justify-content: space-between;
     font-size: 1.4rem;
     P {
       font-size: 1.2rem;
+      width: 70%;
     }
   }
 
@@ -89,7 +98,7 @@ export const SProfile = styled.section`
     flex-direction: column;
     align-items: center;
     padding-inline: 8%;
-    font-family: "Slackey", cursive;
+    font-family: "Slackey", sans-serif;
     font-size: large;
     font-weight: 700;
     margin-block: 4%;
@@ -163,6 +172,7 @@ export const SProfile = styled.section`
     /* border: solid 1px; */
     margin-top: 2%;
     display: flex;
+    height: 8%;
     justify-content: space-around;
   }
   .contact__text {
@@ -177,12 +187,14 @@ export const SProfile = styled.section`
     flex-direction: column;
     p {
       margin: 0%;
+      color: black;
     }
   }
   .sticker__github {
-    width: 2.7rem;
+    margin: 8px;
+    width: 2.5rem;
   }
   .sticker__tistory {
-    width: 4rem;
+    width: 3.5rem;
   }
 `;

@@ -67,3 +67,8 @@ export const myItemsState = atom<Array<myItemsType>>({
   key: "MyItems",
   default: [],
 });
+
+export const itemsHeightState = atom<Array<any>>({
+  key: "ItemHeight",
+  default: [],
+});

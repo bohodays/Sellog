@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const SProfile = styled.section`
   height: 100%;
@@ -16,8 +16,7 @@ export const SProfile = styled.section`
     transform: rotate(-7.58deg);
     margin-bottom: 12%;
   }
-  .img__profile {
-  }
+
   .sticker__smilebottom {
     position: absolute;
     width: 7rem;
@@ -97,8 +96,7 @@ export const SProfile = styled.section`
       font-size: 1.1rem;
     }
   }
-  .box__name {
-  }
+
   .box__motto {
   }
   .box__email {
@@ -175,7 +173,7 @@ export const SProfile = styled.section`
   }
   .button__edit {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     margin: 3%;
   }

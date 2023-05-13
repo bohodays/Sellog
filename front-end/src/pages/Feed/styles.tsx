@@ -19,6 +19,15 @@ export const SMain = styled.main`
     right: 5vw;
     top: 15vh;
   }
+  .goHome__button {
+    /* display: flex;
+    justify-self: end; */
+    position: absolute;
+    bottom: 3vh;
+    right: 3vw;
+    font-size: 1.7rem;
+    color: black;
+  }
 `;
 
 export const SHeader = styled.header`
@@ -131,5 +140,8 @@ export const SSection = styled.section`
     padding: 5%;
     height: 90%;
     overflow: auto;
+    a {
+      color: black;
+    }
   }
 `;

@@ -6,10 +6,12 @@ interface EditProps {
   setIsModal: any;
   isEdit: boolean;
   setIsEdit: any;
+  editHandler: () => void;
 }
 
 function EditProfileModal(props: EditProps) {
   const yesHandler = () => {
+    props.editHandler();
     props.setIsEdit(!props.isEdit);
     props.setIsModal(!props.isModal);
   };
