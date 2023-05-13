@@ -29,6 +29,12 @@ function App() {
     () => import("./pages/CSQuizProgress/CSQuizProgress")
   );
   const CSQuizMap = React.lazy(() => import("./pages/CSQuizMap/CSQuizMap"));
+  const CSQuizSelect = React.lazy(
+    () => import("./pages/CSQuizSelect/CSQuizSelect")
+  );
+  const CSQuizMatching = React.lazy(
+    () => import("./pages/CSQuizMatching/CSQuizMatching")
+  );
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
@@ -55,13 +61,15 @@ function App() {
             <Route path="/feed" element={<Feed />} />
             <Route path="/myroom" element={<MyRoom />} />
             <Route path="/mygoals" element={<MyGoals />} />
-            <Route path="/csquiz" element={<CSQuiz />} />
+            <Route path="/csquiz-select" element={<CSQuizSelect />} />
+            <Route path="/csquiz-solo" element={<CSQuiz />} />
             <Route path="/csquiz-progress" element={<CSQuizProgress />} />
             <Route path="/csquiz-result" element={<CSQuizResult />} />
+            <Route path="/csquiz-matching" element={<CSQuizMatching />} />
+            <Route path="/csQuizMap/:id" element={<CSQuizMap />} />
             <Route path="/mygoals" element={<MyGoals />} />
             <Route path="/oauth-login" element={<OauthRedirect />} />
             <Route path="/termsOfUse" element={<TermsOfUse />} />
-            <Route path="/csQuizMap/:id" element={<CSQuizMap />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

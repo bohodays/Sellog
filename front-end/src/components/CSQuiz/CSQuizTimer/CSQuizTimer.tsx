@@ -7,10 +7,6 @@ const CSQuizTimer = ({ activeStep, handleGoToExplanation }: any) => {
   const [timer, setTimer] = useState<number>(120);
 
   useEffect(() => {
-    if (timer === 0) {
-      console.log(77);
-    }
-
     const timerInterval = setInterval(() => {
       if (timer > 0) {
         setTimer((prev) => prev - 1);

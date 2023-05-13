@@ -24,16 +24,9 @@ type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
 export function F1_CS(props: JSX.IntrinsicElements["group"] | any) {
   const group = useRef<THREE.Group | any>();
-  const { nodes, materials, animations } = useGLTF(
+  const { nodes, materials } = useGLTF(
     "/models/characters/f1.glb"
   ) as GLTFResult;
-  const { actions } = useAnimations<GLTFActions | any>(animations, group);
-
-  useEffect(() => {
-    actions["Run"]?.play();
-  }, []);
-
-  console.log(props.otherUserModelRef1);
 
   return (
     <group ref={props.group} dispose={null} position={[0, 0.2, 0]}>
@@ -44,6 +37,7 @@ export function F1_CS(props: JSX.IntrinsicElements["group"] | any) {
           castShadow={true}
           receiveShadow={true}
           ref={props.otherUserModelRef1}
+          visible={false}
         >
           <primitive object={nodes.root} />
           <primitive object={nodes["MCH-torsoparent"]} />

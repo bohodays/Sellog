@@ -651,7 +651,7 @@ const Main = () => {
     if (buttonRef.current.children[0].innerText.includes("마이룸")) {
       navigate("/myroom");
     } else if (buttonRef.current.children[0].innerText.includes("cs")) {
-      navigate("/csquiz");
+      navigate("/csquiz-select");
     } else if (buttonRef.current.children[0].innerText.includes("구매")) {
       navigate("/item-shop");
     } else if (buttonRef.current.children[0].innerText.includes("ff")) {

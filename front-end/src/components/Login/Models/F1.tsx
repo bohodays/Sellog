@@ -7,6 +7,7 @@ import * as THREE from "three";
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { useLocation } from "react-router-dom";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -29,8 +30,14 @@ export function F1(props: JSX.IntrinsicElements["group"]) {
   ) as GLTFResult;
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
+  const location = useLocation();
+
   useEffect(() => {
-    actions["Song Jump"]?.play();
+    if (location.pathname.includes("matching")) {
+      actions["Idle"]?.play();
+    } else {
+      actions["Song Jump"]?.play();
+    }
   }, []);
 
   return (

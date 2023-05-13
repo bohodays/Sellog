@@ -25,7 +25,7 @@ type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 export function F1_Main(props: JSX.IntrinsicElements["group"] | any) {
   const group = useRef<THREE.Group | any>();
   const { nodes, materials, animations } = useGLTF(
-    "/models/characters/f1.glb"
+    "/models/csQuiz/f1.glb"
   ) as GLTFResult;
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
