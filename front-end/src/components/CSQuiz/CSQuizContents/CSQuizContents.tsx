@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SDiv, SSection } from "./styles";
 import "animate.css";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { csQuizState } from "@/recoil/csquiz/atoms";
 import CSQuizTimer from "../CSQuizTimer/CSQuizTimer";
 import { useNavigate } from "react-router-dom";

@@ -1,67 +1,67 @@
 import React, { useState } from "react";
-import { Bedside_light_1 } from "@/components/ItemShop/ItemItem/Models/Bedside_light_1";
-import { Black_chair_1 } from "@/components/ItemShop/ItemItem/Models/Black_chair_1";
-import { Black_coffeemachine_1 } from "@/components/ItemShop/ItemItem/Models/Black_coffeemachine_1";
-import { Black_cup_1 } from "@/components/ItemShop/ItemItem/Models/Black_cup_1";
-import { Black_leather_sofa_1 } from "@/components/ItemShop/ItemItem/Models/Black_leather_sofa_1";
-import { Black_speaker_1 } from "@/components/ItemShop/ItemItem/Models/Black_speaker_1";
-import { Black_teatable_1 } from "@/components/ItemShop/ItemItem/Models/Black_teatable_1";
-import { Blue_bed } from "@/components/ItemShop/ItemItem/Models/Blue_bed";
-import { Blue_chair_1 } from "@/components/ItemShop/ItemItem/Models/Blue_chair_1";
-import { Blue_chair_2 } from "@/components/ItemShop/ItemItem/Models/Blue_chair_2";
-import { Blue_sofa_1 } from "@/components/ItemShop/ItemItem/Models/Blue_sofa_1";
-import { Brown_table_1 } from "@/components/ItemShop/ItemItem/Models/Brown_table_1";
-import { Brown_table_2 } from "@/components/ItemShop/ItemItem/Models/Brown_table_2";
-import { Brown_table_3 } from "@/components/ItemShop/ItemItem/Models/Brown_table_3";
-import { Brown_table_4 } from "@/components/ItemShop/ItemItem/Models/Brown_table_4";
-import { Coffee_cup_1 } from "@/components/ItemShop/ItemItem/Models/Coffee_cup_1";
-import { Elec_guitar_1 } from "@/components/ItemShop/ItemItem/Models/Elec_guitar_1";
-import { Elec_guitar_2 } from "@/components/ItemShop/ItemItem/Models/Elec_guitar_2";
-import { Elec_guitar_3 } from "@/components/ItemShop/ItemItem/Models/Elec_guitar_3";
-import { Giant_sofa_1 } from "@/components/ItemShop/ItemItem/Models/Giant_sofa_1";
-import { Green_sofa_1 } from "@/components/ItemShop/ItemItem/Models/Green_sofa_1";
-import { Grey_bin_1 } from "@/components/ItemShop/ItemItem/Models/Grey_bin_1";
-import { Group_guitar_1 } from "@/components/ItemShop/ItemItem/Models/Group_guitar_1";
-import { House_tree_1 } from "@/components/ItemShop/ItemItem/Models/House_tree_1";
-import { Imac_computer_1 } from "@/components/ItemShop/ItemItem/Models/Imac_computer_1";
-import { Katana_decoration_1 } from "@/components/ItemShop/ItemItem/Models/Katana_decoration_1";
-import { Leopard_chair_1 } from "@/components/ItemShop/ItemItem/Models/Leopard_chair_1";
-import { Low_table_1 } from "@/components/ItemShop/ItemItem/Models/Low_table_1";
-import { Marble_table_1 } from "@/components/ItemShop/ItemItem/Models/Marble_table_1";
-import { Marble_table_2 } from "@/components/ItemShop/ItemItem/Models/Marble_table_2";
-import { Old_computer_1 } from "@/components/ItemShop/ItemItem/Models/Old_computer_1";
-import { Old_computer_2 } from "@/components/ItemShop/ItemItem/Models/Old_computer_2";
-import { Old_microwave_1 } from "@/components/ItemShop/ItemItem/Models/Old_microwave_1";
-import { Old_tv_1 } from "@/components/ItemShop/ItemItem/Models/Old_tv_1";
-import { Orange_sofa_1 } from "@/components/ItemShop/ItemItem/Models/Orange_sofa_1";
-import { Photo_frame_1 } from "@/components/ItemShop/ItemItem/Models/Photo_frame_1";
-import { Photo_frame_2 } from "@/components/ItemShop/ItemItem/Models/Photo_frame_2";
-import { Red_chair_1 } from "@/components/ItemShop/ItemItem/Models/Red_chair_1";
-import { Red_lights_1 } from "@/components/ItemShop/ItemItem/Models/Red_lights_1";
-import { Red_sofa_1 } from "@/components/ItemShop/ItemItem/Models/Red_sofa_1";
-import { Red_telephone_1 } from "@/components/ItemShop/ItemItem/Models/Red_telephone_1";
-import { Retro_arcadegame_1 } from "@/components/ItemShop/ItemItem/Models/Retro_arcadegame_1";
-import { Round_table_1 } from "@/components/ItemShop/ItemItem/Models/Round_table_1";
-import { Small_speaker_1 } from "@/components/ItemShop/ItemItem/Models/Small_speaker_1";
-import { Stall_white_chair_1 } from "@/components/ItemShop/ItemItem/Models/Stall_white_chair_1";
-import { Starwars_trooper_1 } from "@/components/ItemShop/ItemItem/Models/Starwars_trooper_1";
-import { Teddybear_1 } from "@/components/ItemShop/ItemItem/Models/Teddybear_1";
-import { Tree_vase_1 } from "@/components/ItemShop/ItemItem/Models/Tree_vase_1";
-import { Trooper_figure_1 } from "@/components/ItemShop/ItemItem/Models/Trooper_figure_1";
-import { White_chair_1 } from "@/components/ItemShop/ItemItem/Models/White_chair_1";
-import { White_controller_1 } from "@/components/ItemShop/ItemItem/Models/White_controller_1";
-import { White_skeleton_1 } from "@/components/ItemShop/ItemItem/Models/White_skeleton_1";
-import { White_sofa_1 } from "@/components/ItemShop/ItemItem/Models/White_sofa_1";
-import { White_table_1 } from "@/components/ItemShop/ItemItem/Models/White_table_1";
-import { Wine_glass_1 } from "@/components/ItemShop/ItemItem/Models/Wine_glass_1";
-import { Wood_chair_1 } from "@/components/ItemShop/ItemItem/Models/Wood_chair_1";
-import { Wood_desk_0 } from "@/components/ItemShop/ItemItem/Models/Wood_desk_0";
-import { Wood_desk_1 } from "@/components/ItemShop/ItemItem/Models/Wood_desk_1";
-import { Wood_desk_2 } from "@/components/ItemShop/ItemItem/Models/Wood_desk_2";
-import { Wood_drawer_1 } from "@/components/ItemShop/ItemItem/Models/Wood_drawer_1";
-import { Wood_shelve } from "@/components/ItemShop/ItemItem/Models/Wood_shelve";
-import { Wood_table_1 } from "@/components/ItemShop/ItemItem/Models/Wood_table_1";
-import { Yellow_sofa_1 } from "@/components/ItemShop/ItemItem/Models/Yellow_sofa_1";
+import { Bedside_light_1 } from "@/components/MyRoom/RoomEditContainer/Models/Bedside_light_1";
+import { Black_chair_1 } from "@/components/MyRoom/RoomEditContainer/Models/Black_chair_1";
+import { Black_coffeemachine_1 } from "@/components/MyRoom/RoomEditContainer/Models/Black_coffeemachine_1";
+import { Black_cup_1 } from "@/components/MyRoom/RoomEditContainer/Models/Black_cup_1";
+import { Black_leather_sofa_1 } from "@/components/MyRoom/RoomEditContainer/Models/Black_leather_sofa_1";
+import { Black_speaker_1 } from "@/components/MyRoom/RoomEditContainer/Models/Black_speaker_1";
+import { Black_teatable_1 } from "@/components/MyRoom/RoomEditContainer/Models/Black_teatable_1";
+import { Blue_bed } from "@/components/MyRoom/RoomEditContainer/Models/Blue_bed";
+import { Blue_chair_1 } from "@/components/MyRoom/RoomEditContainer/Models/Blue_chair_1";
+import { Blue_chair_2 } from "@/components/MyRoom/RoomEditContainer/Models/Blue_chair_2";
+import { Blue_sofa_1 } from "@/components/MyRoom/RoomEditContainer/Models/Blue_sofa_1";
+import { Brown_table_1 } from "@/components/MyRoom/RoomEditContainer/Models/Brown_table_1";
+import { Brown_table_2 } from "@/components/MyRoom/RoomEditContainer/Models/Brown_table_2";
+import { Brown_table_3 } from "@/components/MyRoom/RoomEditContainer/Models/Brown_table_3";
+import { Brown_table_4 } from "@/components/MyRoom/RoomEditContainer/Models/Brown_table_4";
+import { Coffee_cup_1 } from "@/components/MyRoom/RoomEditContainer/Models/Coffee_cup_1";
+import { Elec_guitar_1 } from "@/components/MyRoom/RoomEditContainer/Models/Elec_guitar_1";
+import { Elec_guitar_2 } from "@/components/MyRoom/RoomEditContainer/Models/Elec_guitar_2";
+import { Elec_guitar_3 } from "@/components/MyRoom/RoomEditContainer/Models/Elec_guitar_3";
+import { Giant_sofa_1 } from "@/components/MyRoom/RoomEditContainer/Models/Giant_sofa_1";
+import { Green_sofa_1 } from "@/components/MyRoom/RoomEditContainer/Models/Green_sofa_1";
+import { Grey_bin_1 } from "@/components/MyRoom/RoomEditContainer/Models/Grey_bin_1";
+import { Group_guitar_1 } from "@/components/MyRoom/RoomEditContainer/Models/Group_guitar_1";
+import { House_tree_1 } from "@/components/MyRoom/RoomEditContainer/Models/House_tree_1";
+import { Imac_computer_1 } from "@/components/MyRoom/RoomEditContainer/Models/Imac_computer_1";
+import { Katana_decoration_1 } from "@/components/MyRoom/RoomEditContainer/Models/Katana_decoration_1";
+import { Leopard_chair_1 } from "@/components/MyRoom/RoomEditContainer/Models/Leopard_chair_1";
+import { Low_table_1 } from "@/components/MyRoom/RoomEditContainer/Models/Low_table_1";
+import { Marble_table_1 } from "@/components/MyRoom/RoomEditContainer/Models/Marble_table_1";
+import { Marble_table_2 } from "@/components/MyRoom/RoomEditContainer/Models/Marble_table_2";
+import { Old_computer_1 } from "@/components/MyRoom/RoomEditContainer/Models/Old_computer_1";
+import { Old_computer_2 } from "@/components/MyRoom/RoomEditContainer/Models/Old_computer_2";
+import { Old_microwave_1 } from "@/components/MyRoom/RoomEditContainer/Models/Old_microwave_1";
+import { Old_tv_1 } from "@/components/MyRoom/RoomEditContainer/Models/Old_tv_1";
+import { Orange_sofa_1 } from "@/components/MyRoom/RoomEditContainer/Models/Orange_sofa_1";
+import { Photo_frame_1 } from "@/components/MyRoom/RoomEditContainer/Models/Photo_frame_1";
+import { Photo_frame_2 } from "@/components/MyRoom/RoomEditContainer/Models/Photo_frame_2";
+import { Red_chair_1 } from "@/components/MyRoom/RoomEditContainer/Models/Red_chair_1";
+import { Red_lights_1 } from "@/components/MyRoom/RoomEditContainer/Models/Red_lights_1";
+import { Red_sofa_1 } from "@/components/MyRoom/RoomEditContainer/Models/Red_sofa_1";
+import { Red_telephone_1 } from "@/components/MyRoom/RoomEditContainer/Models/Red_telephone_1";
+import { Retro_arcadegame_1 } from "@/components/MyRoom/RoomEditContainer/Models/Retro_arcadegame_1";
+import { Round_table_1 } from "@/components/MyRoom/RoomEditContainer/Models/Round_table_1";
+import { Small_speaker_1 } from "@/components/MyRoom/RoomEditContainer/Models/Small_speaker_1";
+import { Stall_white_chair_1 } from "@/components/MyRoom/RoomEditContainer/Models/Stall_white_chair_1";
+import { Starwars_trooper_1 } from "@/components/MyRoom/RoomEditContainer/Models/Starwars_trooper_1";
+import { Teddybear_1 } from "@/components/MyRoom/RoomEditContainer/Models/Teddybear_1";
+import { Tree_vase_1 } from "@/components/MyRoom/RoomEditContainer/Models/Tree_vase_1";
+import { Trooper_figure_1 } from "@/components/MyRoom/RoomEditContainer/Models/Trooper_figure_1";
+import { White_chair_1 } from "@/components/MyRoom/RoomEditContainer/Models/White_chair_1";
+import { White_controller_1 } from "@/components/MyRoom/RoomEditContainer/Models/White_controller_1";
+import { White_skeleton_1 } from "@/components/MyRoom/RoomEditContainer/Models/White_skeleton_1";
+import { White_sofa_1 } from "@/components/MyRoom/RoomEditContainer/Models/White_sofa_1";
+import { White_table_1 } from "@/components/MyRoom/RoomEditContainer/Models/White_table_1";
+import { Wine_glass_1 } from "@/components/MyRoom/RoomEditContainer/Models/Wine_glass_1";
+import { Wood_chair_1 } from "@/components/MyRoom/RoomEditContainer/Models/Wood_chair_1";
+import { Wood_desk_0 } from "@/components/MyRoom/RoomEditContainer/Models/Wood_desk_0";
+import { Wood_desk_1 } from "@/components/MyRoom/RoomEditContainer/Models/Wood_desk_1";
+import { Wood_desk_2 } from "@/components/MyRoom/RoomEditContainer/Models/Wood_desk_2";
+import { Wood_drawer_1 } from "@/components/MyRoom/RoomEditContainer/Models/Wood_drawer_1";
+import { Wood_shelve } from "@/components/MyRoom/RoomEditContainer/Models/Wood_shelve";
+import { Wood_table_1 } from "@/components/MyRoom/RoomEditContainer/Models/Wood_table_1";
+import { Yellow_sofa_1 } from "@/components/MyRoom/RoomEditContainer/Models/Yellow_sofa_1";
 import { useRecoilState } from "recoil";
 import { myItemsState } from "@/recoil/myroom/atoms";
 
@@ -72,6 +72,8 @@ const RoomEditContainer = ({
   editButtonRef,
   rotationLeftButtonRef,
   rotationRigthButtonRef,
+  deleteButtonRef,
+  goBackButtonRef,
 }: any) => {
   const [myItems, setMyItems] = useRecoilState(myItemsState);
 
@@ -92,6 +94,8 @@ const RoomEditContainer = ({
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 2) {
@@ -106,20 +110,24 @@ const RoomEditContainer = ({
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 3) {
               return (
                 <Black_coffeemachine_1
                   itemId={item.itemId}
-                  activePage={activePage}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 4) {
@@ -128,12 +136,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 5) {
@@ -142,12 +152,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 6) {
@@ -156,12 +168,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 7) {
@@ -170,12 +184,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 8) {
@@ -184,12 +200,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 9) {
@@ -198,12 +216,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 10) {
@@ -212,12 +232,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 11) {
@@ -226,12 +248,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 12) {
@@ -240,12 +264,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 13) {
@@ -254,12 +280,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 14) {
@@ -268,12 +296,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 15) {
@@ -282,12 +312,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 16) {
@@ -296,12 +328,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 17) {
@@ -310,12 +344,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 18) {
@@ -324,12 +360,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 19) {
@@ -338,12 +376,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 20) {
@@ -352,12 +392,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 21) {
@@ -366,12 +408,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 22) {
@@ -380,12 +424,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 23) {
@@ -394,12 +440,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 24) {
@@ -408,12 +456,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 25) {
@@ -422,12 +472,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 26) {
@@ -436,12 +488,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 27) {
@@ -450,12 +504,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 28) {
@@ -464,12 +520,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 29) {
@@ -478,12 +536,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 30) {
@@ -492,12 +552,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 31) {
@@ -506,12 +568,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 32) {
@@ -520,12 +584,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 33) {
@@ -534,12 +600,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 34) {
@@ -548,12 +616,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 35) {
@@ -562,12 +632,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 36) {
@@ -576,12 +648,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 37) {
@@ -590,12 +664,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 38) {
@@ -604,12 +680,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 39) {
@@ -618,12 +696,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 40) {
@@ -632,12 +712,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 41) {
@@ -646,12 +728,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 42) {
@@ -660,12 +744,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 43) {
@@ -674,12 +760,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 44) {
@@ -688,12 +776,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 45) {
@@ -702,12 +792,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 46) {
@@ -716,12 +808,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 47) {
@@ -730,12 +824,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 48) {
@@ -744,12 +840,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 49) {
@@ -758,12 +856,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 50) {
@@ -772,12 +872,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 51) {
@@ -786,12 +888,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 52) {
@@ -800,12 +904,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 53) {
@@ -814,12 +920,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 54) {
@@ -828,12 +936,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 55) {
@@ -842,12 +952,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 56) {
@@ -856,12 +968,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 57) {
@@ -870,12 +984,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 58) {
@@ -894,12 +1010,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 60) {
@@ -908,12 +1026,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 61) {
@@ -922,12 +1042,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 62) {
@@ -936,12 +1058,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             } else if (item.itemId === 63) {
@@ -950,12 +1074,14 @@ const RoomEditContainer = ({
                   itemId={item.itemId}
                   position={[item.x, item.y, item.z]}
                   deg={item.rotation}
+                  activePage={activePage}
                   upButtonRef={upButtonRef}
                   downButtonRef={downButtonRef}
-                  activePage={activePage}
                   editButtonRef={editButtonRef}
                   rotationLeftButtonRef={rotationLeftButtonRef}
                   rotationRigthButtonRef={rotationRigthButtonRef}
+                  deleteButtonRef={deleteButtonRef}
+                  goBackButtonRef={goBackButtonRef}
                 />
               );
             }

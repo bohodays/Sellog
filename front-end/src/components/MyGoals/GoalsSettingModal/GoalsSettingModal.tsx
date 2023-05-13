@@ -3,7 +3,7 @@ import { SDiv, SSection } from "./styles";
 import { TextField } from "@mui/material";
 import { IRecommendedGoals } from "@/typeModels/mygoals/myGoalInterfaces";
 import { apiUpdateUsergoal } from "@/api/user";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { userInfoState } from "@/recoil/myroom/atoms";
 import memo from "@/assets/imgs/retro/memo.png";
 

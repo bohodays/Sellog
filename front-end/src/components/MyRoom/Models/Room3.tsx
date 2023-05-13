@@ -124,4 +124,4 @@ export function Room3(props: JSX.IntrinsicElements["group"] | any) {
   );
 }
 
-// useGLTF.preload("/models/room/room3.glb");
+// // useGLTF.preload("/models/room/room3.glb");
