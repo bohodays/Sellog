@@ -1,6 +1,7 @@
 package com.example.selog.entity;
 
 import com.example.selog.dto.record.RecordDto;
+import com.example.selog.dto.record.RecordResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,6 +46,14 @@ public class Record extends BaseTime {
                 .type(category)
                 .writing_time(writing_time.toString())
                 .problemId(problemId)
+                .build();
+    }
+
+    public RecordResponseDto toRecordResponseDto() {
+        return RecordResponseDto.builder()
+                .created_date(getCreatedDate())
+                .message(content)
+                .type(category)
                 .build();
     }
 }

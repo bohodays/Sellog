@@ -2,6 +2,8 @@ package com.example.selog.service;
 
 import com.example.selog.dto.record.RecordDto;
 import com.example.selog.dto.record.RecordMaintainDto;
+import com.example.selog.dto.record.RecordRequestDto;
+import com.example.selog.dto.record.RecordResponseDto;
 import com.example.selog.entity.Member;
 import com.example.selog.entity.Record;
 import com.example.selog.exception.CustomException;
@@ -181,5 +183,20 @@ public class RecordService {
             points.add(10);
         }
         return points;
+    }
+
+    @Transactional
+    public RecordResponseDto insertRecord(Long userId, RecordRequestDto recordRequestDto) {
+
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(()->new CustomException(ErrorCode.NO_USER));
+
+        Record record = Record.builder()
+                .member(member)
+                .content(recordRequestDto.getMessage())
+                .category(recordRequestDto.getType())
+                .build();
+
+        return recordRepository.save(record).toRecordResponseDto();
     }
 }
