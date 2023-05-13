@@ -102,6 +102,7 @@ export const SBody = styled.div`
     }
     .intersection__div {
       height: 15%;
+      /* background-color: red; */
     }
   }
 `;
