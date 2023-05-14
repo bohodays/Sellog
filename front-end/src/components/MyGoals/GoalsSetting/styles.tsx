@@ -34,6 +34,26 @@ export const SSection = styled.section<any>`
     transform: rotate(-3deg);
   }
 
+  .info__btn {
+    position: absolute;
+    top: 2vh;
+    left: 1vw;
+    font-size: 3vh;
+    color: grey;
+    z-index: 5;
+  }
+
+  .info__message {
+    position: absolute;
+    top: 4vh;
+    left: 2.3vw;
+    font-size: 0.7vw;
+    background-color: rgb(75, 90, 125, 0.5);
+    color: white;
+    padding: 2px 3px;
+    border-radius: 20px;
+  }
+
   .content__wrapper {
     position: relative;
     text-align: center;

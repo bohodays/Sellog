@@ -11,6 +11,7 @@ import SmileAndLight from "@/assets/imgs/retro/smile_and_light.png";
 import GoalsSettingModal from "../GoalsSettingModal/GoalsSettingModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 const GoalsSetting: any = () => {
   const myRoomNavigator = useNavigate();
@@ -19,6 +20,16 @@ const GoalsSetting: any = () => {
   const toMyRoomHandler = () => {
     myRoomNavigator("/myroom");
   };
+
+  const [showInfoMessage, setShowInfoMessage] = useState(false);
+
+  function handleMouseEnter() {
+    setShowInfoMessage(true);
+  }
+
+  function handleMouseLeave() {
+    setShowInfoMessage(false);
+  }
 
   return (
     <SSection isOpen={isOpen}>
@@ -30,6 +41,16 @@ const GoalsSetting: any = () => {
         ></GoalsSettingModal>
       )}
       <div className="title__wrapper">
+        <button
+          className="info__btn"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <FontAwesomeIcon icon={faCircleInfo} fontSize={20} />
+        </button>
+        {showInfoMessage && (
+          <div className="info__message">목표 설정과 보상 체계 안내</div>
+        )}
         <p className="title">MY GOALS</p>
         <span>keep running to achieve your goal !</span>
         <img
