@@ -29,12 +29,10 @@ const UserInfoForm = ({ userId }: UserInformType) => {
 
   const handleLeftActive = () => {
     if (active > 0) setActive((prev) => prev - 1);
-    console.log(active);
   };
 
   const handleRightActive = () => {
     if (active < 5) setActive((prev) => prev + 1);
-    console.log(active);
   };
 
   const handleUpdateUserInfo = () => {
@@ -49,9 +47,7 @@ const UserInfoForm = ({ userId }: UserInformType) => {
         blog,
       };
       apiUpdateUserSignupInfo(data).then((res) => {
-        console.log(res);
-
-        navigate("/main");
+        navigate("/info");
       });
     }
   };

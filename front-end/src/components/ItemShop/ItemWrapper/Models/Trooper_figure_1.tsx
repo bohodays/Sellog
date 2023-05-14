@@ -38,17 +38,17 @@ export function Trooper_figure_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/trooper_figure_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} position={[0, -2, 0]} scale={3}>
       <mesh
         geometry={nodes.Figure002.geometry}
         material={materials["default"]}
-        position={[-3.67, 1.99, 3.28]}
+        // position={[-3.67, 1.99, 3.28]}
       >
         <mesh
           geometry={nodes.Circle016.geometry}
           material={materials["white.001"]}
           position={[0, 0.04, 0]}
-          rotation={[0, Math.PI / 2, 0]}
+          // rotation={[0, Math.PI / 2, 0]}
           scale={0.37}
         >
           <mesh

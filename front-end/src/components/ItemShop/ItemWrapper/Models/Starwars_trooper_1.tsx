@@ -26,7 +26,12 @@ export function Starwars_trooper_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/starwars_trooper_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      position={[0, -2, 0]}
+      rotation={[0, THREE.MathUtils.degToRad(-110), 0]}
+    >
       <mesh
         geometry={nodes.Circle011.geometry}
         material={materials.white}

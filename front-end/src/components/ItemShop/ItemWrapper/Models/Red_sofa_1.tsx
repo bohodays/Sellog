@@ -25,7 +25,12 @@ export function Red_sofa_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/red_sofa_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      position={[-0.5, -1.5, 0]}
+      rotation={[0.2, 2.5, 0]}
+    >
       <mesh
         geometry={nodes.Sofa.geometry}
         material={materials["red.001"]}

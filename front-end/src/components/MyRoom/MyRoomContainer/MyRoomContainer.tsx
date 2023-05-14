@@ -99,6 +99,7 @@ const MyRoomContainer = (props: IMyRoomProps) => {
   const homeNavigator = useNavigate();
   const getOutHandler = () => {
     homeNavigator("/main");
+    window.location.reload();
   };
 
   // const [target, setTarget] = useState(null);
@@ -128,11 +129,8 @@ const MyRoomContainer = (props: IMyRoomProps) => {
 
         apiRequesArray.push(requestObj);
       });
-      console.log(apiRequesArray);
 
-      apiUpdateMyRoom(apiRequesArray).then((res) => {
-        console.log(res?.data.response, "고백 버튼 결과");
-      });
+      apiUpdateMyRoom(apiRequesArray);
     }
 
     props.setActivePage((prev: string) => {

@@ -37,7 +37,13 @@ export function Old_computer_2(props: JSX.IntrinsicElements["group"]) {
     "/models/items/old_computer_2.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      scale={2}
+      position={[0, -5, 0]}
+      rotation={[0, -1.5, 0]}
+    >
       <mesh
         geometry={nodes.Keyboard001.geometry}
         material={materials["computer-beige"]}

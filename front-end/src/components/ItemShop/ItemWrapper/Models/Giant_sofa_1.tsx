@@ -33,13 +33,14 @@ export function Giant_sofa_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/giant_sofa_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.Plane001.geometry}
-        material={materials.Leather}
-        position={[0.12, 0, 0.02]}
-        scale={0.95}
-      >
+    <group
+      {...props}
+      dispose={null}
+      position={[-0.3, -1.5, 0]}
+      rotation={[0, THREE.MathUtils.degToRad(90), 0]}
+    >
+      <directionalLight color={"#FFFFFF"} intensity={1} position={[2, 5, 3]} />
+      <mesh geometry={nodes.Plane001.geometry} material={materials.Leather}>
         <mesh
           geometry={nodes.Plane002.geometry}
           material={materials["Leather Bright"]}

@@ -4,6 +4,14 @@ export const SMain = styled.main`
   position: relative;
   height: 100%;
   background-color: #000000;
+
+  .go-to-info {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    z-index: 10;
+    font-size: 2rem;
+  }
 `;
 
 export const SButtonWrapper = styled.div<any>`

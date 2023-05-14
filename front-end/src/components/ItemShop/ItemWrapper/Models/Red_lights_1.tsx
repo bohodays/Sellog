@@ -25,11 +25,17 @@ export function Red_lights_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/red_lights_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      scale={2}
+      position={[0, -5, 0]}
+      rotation={[0, -2, 0]}
+    >
       <pointLight
-        intensity={8152.71}
+        intensity={5}
         decay={2}
-        color="#ff7310"
+        color="#ffffff"
         position={[0.33, 2.97, 0.1]}
         rotation={[-Math.PI / 2, 0, 0]}
       />

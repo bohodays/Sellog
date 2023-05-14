@@ -14,6 +14,7 @@ const Record = () => {
   const homeNavigator = useNavigate();
   const getOutHandler = () => {
     homeNavigator("/main");
+    window.location.reload();
   };
   return (
     <SSection>

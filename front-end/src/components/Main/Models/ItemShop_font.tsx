@@ -7,6 +7,7 @@ import * as THREE from "three";
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { useLocation } from "react-router-dom";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -37,12 +38,15 @@ export function ItemShopFont(props: JSX.IntrinsicElements["group"] | any) {
     "/models/font/itemShop_font.glb"
   ) as GLTFResult;
 
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
     <group
       ref={props.itemshopFontRef}
       dispose={null}
       scale={3}
-      position={[5.5, -1, -10]}
+      position={currentPath.includes("info") ? [10.5, 0, 10] : [5.5, -1, -10]}
     >
       <mesh
         geometry={nodes.Object_9.geometry}

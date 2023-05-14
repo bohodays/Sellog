@@ -9,11 +9,16 @@ import RetroImg from "@/assets/imgs/retro/retro_img.png";
 import YellowFlower from "@/assets/imgs/retro/yellow_flower.png";
 import SmileAndLight from "@/assets/imgs/retro/smile_and_light.png";
 import GoalsSettingModal from "../GoalsSettingModal/GoalsSettingModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const GoalsSetting: any = () => {
-  const mainNavigator = useNavigate();
+  const myRoomNavigator = useNavigate();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeGoal, setActiveGoal] = useState<string>("github");
+  const toMyRoomHandler = () => {
+    myRoomNavigator("/myroom");
+  };
 
   return (
     <SSection isOpen={isOpen}>
@@ -38,6 +43,11 @@ const GoalsSetting: any = () => {
         <img className="sticker retro__spring" src={Spring} alt="spring" />
         <img className="sticker retro__img" src={RetroImg} alt="retro" />
         {/* 목표 설정 버튼들 */}
+        <FontAwesomeIcon
+          icon={faArrowLeft}
+          className="goback__button"
+          onClick={toMyRoomHandler}
+        />
         <SettingButtons setIsOpen={setIsOpen} setActiveGoal={setActiveGoal} />
         <img
           className="sticker retro__yellow-flower"
@@ -50,6 +60,9 @@ const GoalsSetting: any = () => {
           alt="smile_and_light"
         />
       </div>
+      {/* <button className="button__goal" onClick={toMyRoomHandler}>
+        My Room
+      </button> */}
     </SSection>
   );
 };

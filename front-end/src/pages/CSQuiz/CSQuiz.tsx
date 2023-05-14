@@ -55,11 +55,10 @@ const CSQuiz = () => {
       <button
         className="go-to-home"
         onClick={() => {
-          navigate("/main");
-          window.location.reload();
+          navigate("/csquiz-select");
         }}
       >
-        HOME
+        BACK
       </button>
       <div className="main__info">
         <div className="check-pattern">
