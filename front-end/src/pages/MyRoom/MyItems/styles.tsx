@@ -20,7 +20,7 @@ export const SSection = styled.section`
     margin-bottom: 3%;
     margin-inline: 3%;
     font-family: "Chicle";
-    font-size: 1rem;
+    font-size: 1.1rem;
 
     background-color: #ffcc00;
     border: solid 3px;
