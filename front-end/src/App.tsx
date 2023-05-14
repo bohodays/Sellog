@@ -1,9 +1,13 @@
-import React, { Suspense, useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import React, { Suspense, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import { RecoilRoot, useRecoilState } from "recoil";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { localData } from "./utils/token";
 import { apiGetUserInfo } from "./api/user";
 import { userInfoState } from "./recoil/myroom/atoms";
@@ -39,6 +43,15 @@ function App() {
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
+  // 로그인 안 되어있으면 login 페이지로 보냄
+  const PrivateRoute = () => {
+    return localStorage.getItem("accessToken") ? (
+      <Outlet />
+    ) : (
+      <Navigate to="/login" />
+    );
+  };
+
   useEffect(() => {
     const accessToken = localData.getAccessToken();
     if (accessToken) {
@@ -56,22 +69,24 @@ function App() {
         {/* <RecoilRoot> */}
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/item-shop" element={<ItemShop />} />
-            <Route path="/main" element={<Main />} />
-            <Route path="/feed" element={<Feed />} />
-            <Route path="/myroom" element={<MyRoom />} />
-            <Route path="/mygoals" element={<MyGoals />} />
-            <Route path="/csquiz-select" element={<CSQuizSelect />} />
-            <Route path="/csquiz-solo" element={<CSQuiz />} />
-            <Route path="/csquiz-progress" element={<CSQuizProgress />} />
-            <Route path="/csquiz-result" element={<CSQuizResult />} />
-            <Route path="/csquiz-matching" element={<CSQuizMatching />} />
-            <Route path="/csQuizMap/:id" element={<CSQuizMap />} />
-            <Route path="/mygoals" element={<MyGoals />} />
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="/" element={<Navigate to="/main" />} />
+              <Route path="/item-shop" element={<ItemShop />} />
+              <Route path="/main" element={<Main />} />
+              <Route path="/info" element={<Info />} />
+              <Route path="/feed" element={<Feed />} />
+              <Route path="/myroom" element={<MyRoom />} />
+              <Route path="/csquiz-select" element={<CSQuizSelect />} />
+              <Route path="/csquiz-solo" element={<CSQuiz />} />
+              <Route path="/csquiz-progress" element={<CSQuizProgress />} />
+              <Route path="/csquiz-result" element={<CSQuizResult />} />
+              <Route path="/csquiz-matching" element={<CSQuizMatching />} />
+              <Route path="/csQuizMap/:id" element={<CSQuizMap />} />
+              <Route path="/mygoals" element={<MyGoals />} />
+            </Route>
             <Route path="/oauth-login" element={<OauthRedirect />} />
             <Route path="/termsOfUse" element={<TermsOfUse />} />
-            <Route path="/info" element={<Info />} />
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

@@ -28,13 +28,19 @@ export function Wood_chair_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/wood_chair_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      // scale={4}
+      rotation={[0, -0.5, 0]}
+      position={[0, -2.7, 0]}
+    >
       <mesh
         geometry={nodes["Chair_-_Back"].geometry}
         material={materials.Wood}
-        position={[-0.01, 0, 2.48]}
-        rotation={[Math.PI, 0, Math.PI]}
-        scale={1.28}
+        // position={[-0.01, 0, 2.48]}
+        // rotation={[Math.PI, 0, Math.PI]}
+        scale={3}
       >
         <mesh
           geometry={nodes["Chair_-_Back_Cusion"].geometry}

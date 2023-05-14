@@ -73,10 +73,10 @@ const Scene = ({ shopItem }: IShopItemProps) => {
 
   return (
     <Suspense>
-      <ambientLight color={"#ffffff"} intensity={0.7} />
+      <ambientLight color={"#ffffff"} intensity={0.5} />
       <directionalLight
         color={"#ffffff"}
-        intensity={1}
+        intensity={0.8}
         position={[1.5, 7, 3]}
         castShadow={true}
         shadow-camera-far={20}
@@ -87,7 +87,7 @@ const Scene = ({ shopItem }: IShopItemProps) => {
       <PerspectiveCamera
         makeDefault={true}
         // far={500}
-        position={[0, 0, 8]}
+        position={[0, 1, 8]}
       />
       {id === 1 ? (
         <BedSide_light_1 />

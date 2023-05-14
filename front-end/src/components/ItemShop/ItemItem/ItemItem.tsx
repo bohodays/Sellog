@@ -45,11 +45,13 @@ const ItemItem = ({ shopItem, setIsModalOpen, setItem }: IItemModalProps) => {
   return (
     <SArticle>
       {/* {isModalOpen && <ItemModal></ItemModal>} */}
-      <img
-        src={shopItem.path}
-        className="item__img"
-        onClick={handleOpenModal}
-      ></img>
+      <div className="item__img__wrapper">
+        <img
+          src={shopItem.path}
+          className="item__img"
+          onClick={handleOpenModal}
+        ></img>
+      </div>
       {/* <ItemWrapper shopItem={shopItem} /> */}
 
       <div className="item__description__wrapper">
@@ -60,10 +62,13 @@ const ItemItem = ({ shopItem, setIsModalOpen, setItem }: IItemModalProps) => {
             {shopItem?.point}
           </div>
           {/* {item.category} */}
-          {possession}
-          <button className="buy__btn" onClick={buyItem}>
-            Buy
-          </button>
+          {possession ? (
+            <div className="purchased">Purchased</div>
+          ) : (
+            <button className="buy__btn" onClick={buyItem}>
+              Buy
+            </button>
+          )}
         </div>
       </div>
     </SArticle>

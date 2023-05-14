@@ -25,7 +25,17 @@ export function Stall_white_chair_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/stall_white_chair_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      scale={2}
+      position={[0, -2, 0]}
+      rotation={[
+        THREE.MathUtils.degToRad(20),
+        THREE.MathUtils.degToRad(-120),
+        0,
+      ]}
+    >
       <mesh
         geometry={nodes.Chair.geometry}
         material={materials.Sofa}
