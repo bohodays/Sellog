@@ -36,6 +36,7 @@ public class RabbitMQConfig {
 
             @Override
             public Object fromMessage(Message message) throws MessageConversionException {
+                log.info("rabbitmq 전송 받음 : {}",message);
                 if ("text/plain".equals(message.getMessageProperties().getContentType())) {
                     // 문자열 메시지인 경우
                     try {
