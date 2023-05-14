@@ -20,6 +20,7 @@ public class MatchingAlgorithm {
     static List<MatchingDto> matchingDtoList = new ArrayList<>();
 
     public Map<Object, Object> algorithm(){
+        matchingDtoList = new ArrayList<>();
         int size = matchingWaitList.getMatchingList().size();
         log.info("현재 매칭 대기 중 인원 : {}" ,size);
         if(size<2) {
