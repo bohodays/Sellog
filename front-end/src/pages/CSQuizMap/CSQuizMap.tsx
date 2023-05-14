@@ -9,6 +9,7 @@ import {
   PerspectiveCamera,
   useTexture,
   Line,
+  OrbitControls,
 } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState, useCallback } from "react";
@@ -17,7 +18,7 @@ import { PCFSoftShadowMap, RepeatWrapping, Vector2, Vector3 } from "three";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 import { F1_Main } from "@/components/Main/Models/F1_Main";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { F2_Main } from "@/components/Main/Models/F2_Main";
 import { F3_Main } from "@/components/Main/Models/F3_Main";
 import { M2_Main } from "@/components/Main/Models/M2_Main";
@@ -31,22 +32,12 @@ import { F3_CS } from "@/components/CSQuizMap/CharacterModels/F3_CS";
 import { M1_CS } from "@/components/CSQuizMap/CharacterModels/M1_CS";
 import { M2_CS } from "@/components/CSQuizMap/CharacterModels/M2_CS";
 import { M3_CS } from "@/components/CSQuizMap/CharacterModels/M3_CS";
-import { F1 } from "@/components/Login/Models/F1";
-import { F2 } from "@/components/Login/Models/F2";
-import { F3 } from "@/components/Login/Models/F3";
-import { M1 } from "@/components/Login/Models/M1";
-import { M2 } from "@/components/Login/Models/M2";
-import { M3 } from "@/components/Login/Models/M3";
-import { F1_Other } from "@/components/Login/Models/OtherModles/F1_Other";
-import { F2_Other } from "@/components/Login/Models/OtherModles/F2_Other";
-import { F3_Other } from "@/components/Login/Models/OtherModles/F3_Other";
-import { M1_Other } from "@/components/Login/Models/OtherModles/M1_Other";
-import { M2_Other } from "@/components/Login/Models/OtherModles/M2_Other";
-import { M3_Other } from "@/components/Login/Models/OtherModles/M3_Other";
 import GridImg from "../../assets/imgs/main/grid.png";
 import { OMark } from "./Models/OMark";
 import { XMark } from "./Models/XMark";
-import { apiGetRoomId } from "@/api/csQuiz";
+import { gsap } from "gsap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -62,60 +53,13 @@ type GLTFResult = GLTF & {
 type ActionName = "Idle" | "Run" | "Sad" | "Song Jump" | "Walk" | "Win";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
-// matching, landing 상태에서 내 캐릭터가 보여지는 Scene
-const SceneMyCharacter = () => {
-  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  const myCharacterId = userInfo.characterId;
-
-  return (
-    <Suspense>
-      <ambientLight intensity={0.7} />
-      {myCharacterId === 0 ? (
-        <F1_Other />
-      ) : myCharacterId === 1 ? (
-        <F2_Other />
-      ) : myCharacterId === 2 ? (
-        <F3_Other />
-      ) : myCharacterId === 3 ? (
-        <M1_Other />
-      ) : myCharacterId === 4 ? (
-        <M2_Other />
-      ) : (
-        <M3_Other />
-      )}
-    </Suspense>
-  );
-};
-
-// matching, landing 상태에서 상대 캐릭터가 보여지는 Scene
-const SceneOtherCharacter = ({ otherUser }: any) => {
-  return (
-    <Suspense>
-      <ambientLight intensity={0.7} />
-      {otherUser === 0 ? (
-        <F1 />
-      ) : otherUser === 1 ? (
-        <F2 />
-      ) : otherUser === 2 ? (
-        <F3 />
-      ) : otherUser === 3 ? (
-        <M1 />
-      ) : otherUser === 4 ? (
-        <M2 />
-      ) : otherUser === 5 ? (
-        <M3 />
-      ) : (
-        ""
-      )}
-    </Suspense>
-  );
-};
-
-let flag = false;
+let otherDestinationPoint = new Vector3();
+otherDestinationPoint.y = 0.03;
+let otherMoving = false;
 
 const Scene = ({
-  buttonRef,
   send,
+  userModelRef,
   otherUserModelRef1,
   otherUserModelRef2,
   otherUserModelRef3,
@@ -142,16 +86,46 @@ const Scene = ({
   const actions5 = useAnimations<GLTFActions | any>(animations, group5);
   const actions6 = useAnimations<GLTFActions | any>(animations, group6);
 
-  actions1.actions["Run"]?.play();
-  actions2.actions["Run"]?.play();
-  actions3.actions["Run"]?.play();
-  actions4.actions["Run"]?.play();
-  actions5.actions["Run"]?.play();
-  actions6.actions["Run"]?.play();
+  actions1.actions["Idle"]?.play();
+  actions2.actions["Idle"]?.play();
+  actions3.actions["Idle"]?.play();
+  actions4.actions["Idle"]?.play();
+  actions5.actions["Idle"]?.play();
+  actions6.actions["Idle"]?.play();
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
-  const userModelRef = useRef<any>();
+  const location = useLocation();
+  const otherUserCharacterId = location.state.otherUserChracterId;
+  const otherUserId = location.state.otherUserId;
+  const isLeft = userInfo.userId - otherUserId;
+
+  if (otherUserCharacterId === 0) {
+    if (otherUserModelRef1.current) {
+      otherUserModelRef1.current.visible = true;
+    }
+  } else if (otherUserCharacterId === 1) {
+    if (otherUserModelRef2.current) {
+      otherUserModelRef2.current.visible = true;
+    }
+  } else if (otherUserCharacterId === 2) {
+    if (otherUserModelRef3.current) {
+      otherUserModelRef3.current.visible = true;
+    }
+  } else if (otherUserCharacterId === 3) {
+    if (otherUserModelRef4.current) {
+      otherUserModelRef4.current.visible = true;
+    }
+  } else if (otherUserCharacterId === 4) {
+    if (otherUserModelRef5.current) {
+      otherUserModelRef5.current.visible = true;
+    }
+  } else if (otherUserCharacterId === 5) {
+    if (otherUserModelRef6.current) {
+      otherUserModelRef6.current.visible = true;
+    }
+  }
+
   const pointerRef = useRef<any>();
 
   // Texture
@@ -172,13 +146,32 @@ const Scene = ({
   let destinationPoint = new Vector3();
   let mouse = new Vector2();
   let angle = 0;
+  let otherAngle = 0;
   let isPressed = false; // 마우스를 누르고 있는 상태
   let moving = false;
 
   // 카메라 위치
-  const cameraPosition = new Vector3(0, 13, 10);
-  camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
-  camera.updateProjectionMatrix();
+  let cameraPosition: THREE.Vector3;
+  if (isLeft < 0) {
+    cameraPosition = new Vector3(0, 13, 10);
+    camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
+    camera.updateProjectionMatrix();
+    camera.position.x -= 2;
+  } else {
+    cameraPosition = new Vector3(0, 13, 10);
+    camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
+    camera.updateProjectionMatrix();
+    camera.position.x += 2;
+  }
+
+  // let otherUserPosition: { x: number; y: number; z: number };
+  // if (otherUserModelRef1.current) {
+  //   otherUserPosition = {
+  //     x: otherUserModelRef1.current.position.x,
+  //     y: otherUserModelRef1.current.position.x,
+  //     z: otherUserModelRef1.current.position.z,
+  //   };
+  // }
 
   function draw() {
     const delta = clock.getDelta();
@@ -224,7 +217,7 @@ const Scene = ({
 
         userModelRef.current.position.x += Math.cos(angle) * 0.08;
         userModelRef.current.position.z += Math.sin(angle) * 0.08;
-        send(userModelRef.current.position.x, userModelRef.current.position.z);
+        // send(userModelRef.current.position.x, userModelRef.current.position.z);
 
         camera.position.x = cameraPosition.x + userModelRef.current.position.x;
         camera.position.z = cameraPosition.z + userModelRef.current.position.z;
@@ -238,7 +231,6 @@ const Scene = ({
           Math.abs(destinationPoint.z - userModelRef.current.position.z) < 0.03
         ) {
           moving = false;
-          console.log("멈춤");
         }
       } else {
         actions["Run"]?.stop();
@@ -246,6 +238,222 @@ const Scene = ({
       }
     }
 
+    if (otherUserCharacterId === 0) {
+      if (otherUserModelRef1.current) {
+        if (otherMoving) {
+          otherAngle = Math.atan2(
+            otherDestinationPoint.z - otherUserModelRef1.current.position.z,
+            otherDestinationPoint.x - otherUserModelRef1.current.position.x
+          );
+
+          actions1.actions["Run"]?.play();
+          actions1.actions["Idle"]?.stop();
+
+          otherUserModelRef1.current.position.x += Math.cos(otherAngle) * 0.08;
+          otherUserModelRef1.current.position.z += Math.sin(otherAngle) * 0.08;
+
+          if (
+            Math.abs(
+              otherDestinationPoint.x - otherUserModelRef1.current.position.x
+            ) < 0.04 &&
+            Math.abs(
+              otherDestinationPoint.z - otherUserModelRef1.current.position.z
+            ) < 0.03
+          ) {
+            otherMoving = false;
+            actions1.actions["Run"]?.stop();
+            actions1.actions["Idle"]?.play();
+          }
+        } else {
+          actions1.actions["Run"]?.stop();
+          actions1.actions["Idle"]?.play();
+        }
+      } else {
+        actions1.actions["Run"]?.stop();
+        actions1.actions["Idle"]?.play();
+      }
+    }
+
+    if (otherUserCharacterId === 1) {
+      if (otherUserModelRef2.current) {
+        if (otherMoving) {
+          otherAngle = Math.atan2(
+            otherDestinationPoint.z - otherUserModelRef2.current.position.z,
+            otherDestinationPoint.x - otherUserModelRef2.current.position.x
+          );
+
+          actions2.actions["Run"]?.play();
+          actions2.actions["Idle"]?.stop();
+
+          otherUserModelRef2.current.position.x += Math.cos(otherAngle) * 0.08;
+          otherUserModelRef2.current.position.z += Math.sin(otherAngle) * 0.08;
+
+          if (
+            Math.abs(
+              otherDestinationPoint.x - otherUserModelRef2.current.position.x
+            ) < 0.04 &&
+            Math.abs(
+              otherDestinationPoint.z - otherUserModelRef2.current.position.z
+            ) < 0.03
+          ) {
+            otherMoving = false;
+            actions2.actions["Run"]?.stop();
+            actions2.actions["Idle"]?.play();
+          }
+        } else {
+          actions2.actions["Run"]?.stop();
+          actions2.actions["Idle"]?.play();
+        }
+      } else {
+        actions2.actions["Run"]?.stop();
+        actions2.actions["Idle"]?.play();
+      }
+    }
+
+    if (otherUserCharacterId === 2) {
+      if (otherUserModelRef3.current) {
+        if (otherMoving) {
+          otherAngle = Math.atan2(
+            otherDestinationPoint.z - otherUserModelRef3.current.position.z,
+            otherDestinationPoint.x - otherUserModelRef3.current.position.x
+          );
+
+          actions3.actions["Run"]?.play();
+          actions3.actions["Idle"]?.stop();
+
+          otherUserModelRef3.current.position.x += Math.cos(otherAngle) * 0.08;
+          otherUserModelRef3.current.position.z += Math.sin(otherAngle) * 0.08;
+
+          if (
+            Math.abs(
+              otherDestinationPoint.x - otherUserModelRef3.current.position.x
+            ) < 0.04 &&
+            Math.abs(
+              otherDestinationPoint.z - otherUserModelRef3.current.position.z
+            ) < 0.03
+          ) {
+            otherMoving = false;
+            actions3.actions["Run"]?.stop();
+            actions3.actions["Idle"]?.play();
+          }
+        } else {
+          actions3.actions["Run"]?.stop();
+          actions3.actions["Idle"]?.play();
+        }
+      } else {
+        actions3.actions["Run"]?.stop();
+        actions3.actions["Idle"]?.play();
+      }
+    }
+
+    if (otherUserCharacterId === 3) {
+      if (otherUserModelRef4.current) {
+        if (otherMoving) {
+          otherAngle = Math.atan2(
+            otherDestinationPoint.z - otherUserModelRef4.current.position.z,
+            otherDestinationPoint.x - otherUserModelRef4.current.position.x
+          );
+
+          actions4.actions["Run"]?.play();
+          actions4.actions["Idle"]?.stop();
+
+          otherUserModelRef4.current.position.x += Math.cos(otherAngle) * 0.08;
+          otherUserModelRef4.current.position.z += Math.sin(otherAngle) * 0.08;
+
+          if (
+            Math.abs(
+              otherDestinationPoint.x - otherUserModelRef4.current.position.x
+            ) < 0.04 &&
+            Math.abs(
+              otherDestinationPoint.z - otherUserModelRef4.current.position.z
+            ) < 0.03
+          ) {
+            otherMoving = false;
+            actions4.actions["Run"]?.stop();
+            actions4.actions["Idle"]?.play();
+          }
+        } else {
+          actions4.actions["Run"]?.stop();
+          actions4.actions["Idle"]?.play();
+        }
+      } else {
+        actions4.actions["Run"]?.stop();
+        actions4.actions["Idle"]?.play();
+      }
+    }
+
+    if (otherUserCharacterId === 4) {
+      if (otherUserModelRef5.current) {
+        if (otherMoving) {
+          otherAngle = Math.atan2(
+            otherDestinationPoint.z - otherUserModelRef5.current.position.z,
+            otherDestinationPoint.x - otherUserModelRef5.current.position.x
+          );
+
+          actions5.actions["Run"]?.play();
+          actions5.actions["Idle"]?.stop();
+
+          otherUserModelRef5.current.position.x += Math.cos(otherAngle) * 0.08;
+          otherUserModelRef5.current.position.z += Math.sin(otherAngle) * 0.08;
+
+          if (
+            Math.abs(
+              otherDestinationPoint.x - otherUserModelRef5.current.position.x
+            ) < 0.04 &&
+            Math.abs(
+              otherDestinationPoint.z - otherUserModelRef5.current.position.z
+            ) < 0.03
+          ) {
+            otherMoving = false;
+            actions5.actions["Run"]?.stop();
+            actions5.actions["Idle"]?.play();
+          }
+        } else {
+          actions5.actions["Run"]?.stop();
+          actions5.actions["Idle"]?.play();
+        }
+      } else {
+        actions5.actions["Run"]?.stop();
+        actions5.actions["Idle"]?.play();
+      }
+    }
+    if (otherUserCharacterId === 5) {
+      if (otherUserModelRef6.current) {
+        if (otherMoving) {
+          otherAngle = Math.atan2(
+            otherDestinationPoint.z - otherUserModelRef6.current.position.z,
+            otherDestinationPoint.x - otherUserModelRef6.current.position.x
+          );
+
+          actions6.actions["Run"]?.play();
+          actions6.actions["Idle"]?.stop();
+
+          otherUserModelRef6.current.position.x += Math.cos(otherAngle) * 0.08;
+          otherUserModelRef6.current.position.z += Math.sin(otherAngle) * 0.08;
+
+          if (
+            Math.abs(
+              otherDestinationPoint.x - otherUserModelRef6.current.position.x
+            ) < 0.04 &&
+            Math.abs(
+              otherDestinationPoint.z - otherUserModelRef6.current.position.z
+            ) < 0.03
+          ) {
+            otherMoving = false;
+            actions6.actions["Run"]?.stop();
+            actions6.actions["Idle"]?.play();
+          }
+        } else {
+          actions6.actions["Run"]?.stop();
+          actions6.actions["Idle"]?.play();
+        }
+      } else {
+        actions6.actions["Run"]?.stop();
+        actions6.actions["Idle"]?.play();
+      }
+    }
+
+    camera.updateProjectionMatrix();
     gl.render(scene, camera);
     gl.setAnimationLoop(draw);
   }
@@ -273,6 +481,7 @@ const Scene = ({
         destinationPoint.z = item.point.z;
         userModelRef.current.lookAt(destinationPoint);
 
+        send(destinationPoint.x, destinationPoint.z);
         moving = true;
 
         pointerRef.current.position.x = destinationPoint.x;
@@ -286,7 +495,6 @@ const Scene = ({
   function calculateMousePosition(e: MouseEvent | Touch) {
     mouse.x = (e.clientX / gl.domElement.clientWidth) * 2 - 1;
     mouse.y = -((e.clientY / gl.domElement.clientHeight) * 2 - 1);
-    // console.log(mouse.x + " : " + mouse.y);
   }
 
   // 변환된 마우스 좌표를 이용해 레이캐스팅
@@ -306,6 +514,12 @@ const Scene = ({
   gl.domElement.addEventListener("touchmove", (e: TouchEvent) => {
     isPressed = false;
   });
+
+  // useEffect(() => {
+  //   if (userModelRef.current) {
+  //     userModelRef.current.position.x += 2;
+  //   }
+  // }, []);
 
   // 경계선
   const points = [new Vector3(0, 0, 10), new Vector3(0, 0, -10)];
@@ -346,35 +560,59 @@ const Scene = ({
         <meshStandardMaterial map={floorTexture} />
       </mesh>
       {userInfo && userInfo!.characterId === 0 ? (
-        <F1_Main userModelRef={userModelRef} group={group} />
+        <F1_Main isLeft={isLeft} userModelRef={userModelRef} group={group} />
       ) : userInfo && userInfo!.characterId === 1 ? (
-        <F2_Main userModelRef={userModelRef} group={group} />
+        <F2_Main isLeft={isLeft} userModelRef={userModelRef} group={group} />
       ) : userInfo && userInfo!.characterId === 2 ? (
-        <F3_Main userModelRef={userModelRef} group={group} />
+        <F3_Main isLeft={isLeft} userModelRef={userModelRef} group={group} />
       ) : userInfo && userInfo!.characterId === 3 ? (
-        <M1_Main userModelRef={userModelRef} group={group} />
+        <M1_Main isLeft={isLeft} userModelRef={userModelRef} group={group} />
       ) : userInfo && userInfo!.characterId === 4 ? (
-        <M2_Main userModelRef={userModelRef} group={group} />
+        <M2_Main isLeft={isLeft} userModelRef={userModelRef} group={group} />
       ) : (
-        <M3_Main userModelRef={userModelRef} group={group} />
+        <M3_Main isLeft={isLeft} userModelRef={userModelRef} group={group} />
       )}
 
-      <F1_CS otherUserModelRef1={otherUserModelRef1} group={group1} />
-      <F2_CS otherUserModelRef={otherUserModelRef2} group={group2} />
-      <F3_CS otherUserModelRef={otherUserModelRef3} group={group3} />
-      <M1_CS otherUserModelRef={otherUserModelRef4} group={group4} />
-      <M2_CS otherUserModelRef={otherUserModelRef5} group={group5} />
-      <M3_CS otherUserModelRef={otherUserModelRef6} group={group6} />
+      <F1_CS
+        isLeft={isLeft}
+        otherUserModelRef1={otherUserModelRef1}
+        group={group1}
+      />
+      <F2_CS
+        isLeft={isLeft}
+        otherUserModelRef={otherUserModelRef2}
+        group={group2}
+      />
+      <F3_CS
+        isLeft={isLeft}
+        otherUserModelRef={otherUserModelRef3}
+        group={group3}
+      />
+      <M1_CS
+        isLeft={isLeft}
+        otherUserModelRef={otherUserModelRef4}
+        group={group4}
+      />
+      <M2_CS
+        isLeft={isLeft}
+        otherUserModelRef={otherUserModelRef5}
+        group={group5}
+      />
+      <M3_CS
+        isLeft={isLeft}
+        otherUserModelRef={otherUserModelRef6}
+        group={group6}
+      />
       {/* 유저 캐릭터를 따라다니는 pointMesh */}
       <mesh
         ref={pointerRef}
         name="point"
         rotation={[-Math.PI / 2, 0, 0]}
-        position={[0, 0.01, 0]}
+        position={[-2, 0.01, 0]}
         receiveShadow={true}
       >
         <circleGeometry args={[0.2, 32]} />
-        <meshBasicMaterial color={"crimson"} transparent={true} opacity={0.5} />
+        <meshBasicMaterial transparent={true} opacity={0.5} />
       </mesh>
     </Suspense>
   );
@@ -384,11 +622,27 @@ const Main = () => {
   const navigate = useNavigate();
   const buttonRef = useRef<any>();
 
+  const location = useLocation();
+  const otherUserCharacterId = location.state.otherUserChracterId;
+  const otherNickname = location.state.otherNickname || null;
+
   const [client, setClient] = useState<Stomp.Client | null>(null);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  // const [landingTimer, setLandingTimer] = useState<number>(5);
-  const landingTimerRef = useRef<HTMLSpanElement | any>(null);
+
+  // 타이머
+  const intervalRef = useRef<any>(null);
+  const stageRef = useRef(0);
+  const timerRef = useRef(0);
+  const barRef = useRef<any>(null);
+  const quizContentRef = useRef<any>(null);
+
   const accessToken = localData.getAccessToken();
+
+  // 나와 유저의 정답 개수
+  const myCorrectRef = useRef(0);
+  const otherCorrectRef = useRef(0);
+
+  const userModelRef = useRef<any>();
 
   // 상대 유저 모델
   const otherUserModelRef1 = useRef<any>();
@@ -398,8 +652,118 @@ const Main = () => {
   const otherUserModelRef5 = useRef<any>();
   const otherUserModelRef6 = useRef<any>();
 
-  // matching, landing, start
-  const [isState, setIsState] = useState("matching");
+  if (otherUserModelRef1.current) {
+    otherDestinationPoint.x = otherUserModelRef1.current.position.x;
+    otherDestinationPoint.y = otherUserModelRef1.current.position.y;
+    otherDestinationPoint.z = otherUserModelRef1.current.position.z;
+  }
+
+  // 문제 api 요청해서 받기
+  const quizList: any = [
+    {
+      content: "찬휘는 천재다.",
+      correct: "o",
+      answer: "아이디가 찬휘천재이기 때문이다.",
+    },
+    {
+      content: "호정 누나는 도현이형보다 술을 잘 마신다. ",
+      correct: "x",
+      answer: "나는 도현이형 편이다.",
+    },
+    {
+      content: "나는 프론트다",
+      correct: "x",
+      answer: "한화 비전가고 싶다... 나는 백엔드다",
+    },
+  ];
+
+  if (quizContentRef.current) {
+    quizContentRef.current.innerText = quizList[stageRef.current].content;
+  }
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      timerRef.current += 1;
+      if (timerRef.current > 19) {
+        // 다시 타이머 되돌리기
+        timerRef.current = 0;
+
+        // 정답 체크하기
+        if (quizList[stageRef.current].correct === "o") {
+          // o에 위치한다면
+          if (userModelRef.current.position.x < 0) myCorrectRef.current += 1;
+
+          if (otherUserCharacterId === 0) {
+            if (otherUserModelRef1.current.position.x < 0)
+              otherCorrectRef.current += 1;
+          } else if (otherUserCharacterId === 1) {
+            if (otherUserModelRef2.current.position.x < 0)
+              otherCorrectRef.current += 1;
+          } else if (otherUserCharacterId === 2) {
+            if (otherUserModelRef3.current.position.x < 0)
+              otherCorrectRef.current += 1;
+          } else if (otherUserCharacterId === 3) {
+            if (otherUserModelRef4.current.position.x < 0)
+              otherCorrectRef.current += 1;
+          } else if (otherUserCharacterId === 4) {
+            if (otherUserModelRef5.current.position.x < 0)
+              otherCorrectRef.current += 1;
+          } else if (otherUserCharacterId === 5) {
+            if (otherUserModelRef6.current.position.x < 0)
+              otherCorrectRef.current += 1;
+          }
+        } else if (quizList[stageRef.current].correct === "x") {
+          // x에 위치한다면
+          if (userModelRef.current.position.x > 0) myCorrectRef.current += 1;
+
+          if (otherUserCharacterId === 0) {
+            if (otherUserModelRef1.current.position.x > 0)
+              otherCorrectRef.current += 1;
+          } else if (otherUserCharacterId === 1) {
+            if (otherUserModelRef2.current.position.x > 0)
+              otherCorrectRef.current += 1;
+          } else if (otherUserCharacterId === 2) {
+            if (otherUserModelRef3.current.position.x > 0)
+              otherCorrectRef.current += 1;
+          } else if (otherUserCharacterId === 3) {
+            if (otherUserModelRef4.current.position.x > 0)
+              otherCorrectRef.current += 1;
+          } else if (otherUserCharacterId === 4) {
+            if (otherUserModelRef5.current.position.x > 0)
+              otherCorrectRef.current += 1;
+          } else if (otherUserCharacterId === 5) {
+            if (otherUserModelRef6.current.position.x > 0)
+              otherCorrectRef.current += 1;
+          }
+        }
+
+        // 다음 문제 보여주기
+        stageRef.current += 1;
+
+        // 3이면 결과 페이지로 이동시키기
+        if (stageRef.current === 3) {
+          clearInterval(intervalRef.current);
+          navigate("/csquiz-battle-result", {
+            state: {
+              myCorrect: myCorrectRef.current,
+              otherCorrect: otherCorrectRef.current,
+              otherUserCharacterId,
+              otherNickname,
+              quizList,
+            },
+          });
+        }
+        quizContentRef.current.innerText = quizList[stageRef.current].content;
+      } else {
+        const percentage = ((20 - timerRef.current) / 20) * 100;
+        barRef.current.style.width = `${percentage}%`;
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, []);
 
   // 소켓 연결
   useEffect(() => {
@@ -413,48 +777,39 @@ const Main = () => {
         "/sub/1",
         (message) => {
           const received = JSON.parse(message.body);
-          console.log({ received });
-
-          if (received.sender !== userInfo.userId) {
-            if (isState === "matching" && !flag) {
-              setIsState("landing");
-              setOtherUser(received.characterId);
-            }
-          }
 
           if (otherUserModelRef1.current) {
             if (received.sender !== userInfo.userId) {
               if (received.characterId === 0) {
-                otherUserModelRef1.current.position.x = received.x;
-                otherUserModelRef1.current.position.z = received.y;
-                otherUserModelRef1.current.visible = true;
-                // 왜 안되지...
-                let otherDestinationPoint = new Vector3(
-                  received.x,
-                  0.03,
-                  received.y
-                );
+                otherDestinationPoint.x = received.x;
+                otherDestinationPoint.z = received.y;
                 otherUserModelRef1.current.lookAt(otherDestinationPoint);
+                otherMoving = true;
               } else if (received.characterId === 1) {
-                otherUserModelRef2.current.position.x = received.x;
-                otherUserModelRef2.current.position.z = received.y;
-                otherUserModelRef2.current.visible = true;
+                otherDestinationPoint.x = received.x;
+                otherDestinationPoint.z = received.y;
+                otherUserModelRef2.current.lookAt(otherDestinationPoint);
+                otherMoving = true;
               } else if (received.characterId === 2) {
-                otherUserModelRef3.current.position.x = received.x;
-                otherUserModelRef3.current.position.z = received.y;
-                otherUserModelRef3.current.visible = true;
+                otherDestinationPoint.x = received.x;
+                otherDestinationPoint.z = received.y;
+                otherUserModelRef3.current.lookAt(otherDestinationPoint);
+                otherMoving = true;
               } else if (received.characterId === 3) {
-                otherUserModelRef4.current.position.x = received.x;
-                otherUserModelRef4.current.position.z = received.y;
-                otherUserModelRef4.current.visible = true;
+                otherDestinationPoint.x = received.x;
+                otherDestinationPoint.z = received.y;
+                otherUserModelRef4.current.lookAt(otherDestinationPoint);
+                otherMoving = true;
               } else if (received.characterId === 4) {
-                otherUserModelRef5.current.position.x = received.x;
-                otherUserModelRef5.current.position.z = received.y;
-                otherUserModelRef5.current.visible = true;
+                otherDestinationPoint.x = received.x;
+                otherDestinationPoint.z = received.y;
+                otherUserModelRef5.current.lookAt(otherDestinationPoint);
+                otherMoving = true;
               } else if (received.characterId === 5) {
-                otherUserModelRef6.current.position.x = received.x;
-                otherUserModelRef6.current.position.z = received.y;
-                otherUserModelRef6.current.visible = true;
+                otherDestinationPoint.x = received.x;
+                otherDestinationPoint.z = received.y;
+                otherUserModelRef6.current.lookAt(otherDestinationPoint);
+                otherMoving = true;
               }
             }
           }
@@ -482,75 +837,37 @@ const Main = () => {
     client?.send("/pub/1", {}, JSON.stringify(message));
   }
 
-  useEffect(() => {
-    if (isState === "landing") {
-      const landingTimerInterval = setInterval(() => {
-        if (landingTimerRef.current && landingTimerRef.current.innerText > 0) {
-          landingTimerRef.current.innerText = (
-            parseInt(landingTimerRef.current.innerText) - 1
-          ).toString();
-        } else if (landingTimerRef.current) {
-          clearInterval(landingTimerInterval);
-          flag = true;
-          setIsState("start");
-        }
-      }, 1000);
-      return () => clearInterval(landingTimerInterval);
-    }
-  }, [isState]);
-
-  const [otherUser, setOtherUser] = useState<any>(null);
-
   return (
-    <SMain>
-      {isState === "matching" || isState === "landing" ? (
-        <SSection>
-          <div className="page-state__wrapper"></div>
-          {isState === "matching" ? (
-            <div className="page-state">Matching</div>
-          ) : (
-            <div ref={landingTimerRef} className="page-state">
-              {5}
+    <>
+      <SMain>
+        <div className="quiz__wrapper">
+          <div className="timer">
+            <div ref={barRef} className="progress">
+              <FontAwesomeIcon className="timer__icon" icon={faClock} />
             </div>
-          )}
-          <div className="character__wrapper my-character">
-            <Canvas>
-              <SceneMyCharacter />
-            </Canvas>
-            <p className="my-character-name">{userInfo.nickname}</p>
           </div>
-          <div className="character__wrapper other-character">
-            <Canvas>
-              <SceneOtherCharacter otherUser={otherUser} />
-            </Canvas>
-          </div>
-        </SSection>
-      ) : isState === "start" ? (
-        <>
-          <div className="quiz__wrapper">
-            <p>찬휘는 천재다</p>
-          </div>
-          <Canvas
-            style={{ background: "skyblue" }}
-            shadows={true}
-            gl={{ preserveDrawingBuffer: true }}
-          >
-            <Scene
-              buttonRef={buttonRef}
-              send={send}
-              otherUserModelRef1={otherUserModelRef1}
-              otherUserModelRef2={otherUserModelRef2}
-              otherUserModelRef3={otherUserModelRef3}
-              otherUserModelRef4={otherUserModelRef4}
-              otherUserModelRef5={otherUserModelRef5}
-              otherUserModelRef6={otherUserModelRef6}
-            />
-          </Canvas>
-        </>
-      ) : (
-        ""
-      )}
-    </SMain>
+
+          <p ref={quizContentRef} className="quiz__content"></p>
+        </div>
+        <Canvas
+          style={{ background: "skyblue" }}
+          shadows={true}
+          gl={{ preserveDrawingBuffer: true }}
+        >
+          <Scene
+            buttonRef={buttonRef}
+            send={send}
+            userModelRef={userModelRef}
+            otherUserModelRef1={otherUserModelRef1}
+            otherUserModelRef2={otherUserModelRef2}
+            otherUserModelRef3={otherUserModelRef3}
+            otherUserModelRef4={otherUserModelRef4}
+            otherUserModelRef5={otherUserModelRef5}
+            otherUserModelRef6={otherUserModelRef6}
+          />
+        </Canvas>
+      </SMain>
+    </>
   );
 };
 
