@@ -1,6 +1,7 @@
 import React from "react";
 import { SMain } from "./styles";
 import CSImg from "@/assets/imgs/csquiz_img.png";
+import CSBattleImg from "@/assets/imgs/csquiz_battle_img.png";
 import { useNavigate } from "react-router-dom";
 
 const CSQuizSelect = () => {
@@ -36,11 +37,16 @@ const CSQuizSelect = () => {
             </p>
           </div>
         </div>
-        <div className="wrapper battle-play__wrapper">
+        <div
+          className="wrapper battle-play__wrapper"
+          onClick={() => {
+            navigate("/csquiz-matching");
+          }}
+        >
           <p className="battle-play__title">1 vs 1</p>
           <p className="battle-play__title">BATTLE</p>
           <div className="battle-play__info-wrapper">
-            <img className="cs-quiz__img" src={CSImg} alt="csquiz-solo" />
+            <img className="cs-quiz__img" src={CSBattleImg} alt="csquiz-solo" />
             <p className="battle-play__info">
               일대일 대결을 통해 당신의 CS 실력을 보여주세요.
             </p>

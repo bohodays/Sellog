@@ -50,7 +50,7 @@ export const SMain = styled.main`
     position: absolute;
     bottom: 3rem;
     left: 50%;
-    transform: (-50%);
+    transform: translateX(-50%);
     width: 8vw;
     height: 3rem;
     border-radius: 50%;

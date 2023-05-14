@@ -20,6 +20,7 @@ import { apiGetRoomId } from "@/api/csQuiz";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import { localData } from "@/utils/token";
+import { useNavigate } from "react-router-dom";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -84,30 +85,36 @@ const SceneOtherCharacter = ({ otherUser }: any) => {
   );
 };
 
+let navigateRoomId: string;
+
 const CSQuizMatching = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [client, setClient] = useState<Stomp.Client | null>(null);
 
-  // matching, landing, start
-  const [isState, setIsState] = useState("matching");
+  // matching : 유저와 매칭을 기다리는 중
+  // landing : 5초 후 퀴즈 풀이 페이지로 이동하는 상태
+  const [currentState, setCurrentState] = useState("matching");
+
+  // 상대 유저 모델
+  const [otherUser, setOtherUser] = useState<any>(null);
+  // 상대 유저 닉네임
+  const otherNickname = useRef<any>();
+  // 상대 유저 id
+  const [otherUserId, setOtherUserId] = useState<any>(null);
 
   // 매칭 후 5초 타이머
+  // 5초가 지나면 csQuizMap으로 라우터 이동
   const landingTimerRef = useRef<HTMLSpanElement | any>(null);
 
-  // 임시
-  let otherUser = 1;
-
   const accessToken = localData.getAccessToken();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     apiGetRoomId().then((res) => {
       const roomId = res?.data.response;
       const socket = new SockJS(`https://k8a404.p.ssafy.io/real-time`);
       const ws = Stomp.over(socket);
-
-      console.log({ res });
-
-      console.log({ roomId });
 
       ws.connect({ Authorization: `Bearer ${accessToken}` }, () => {
         setClient(ws);
@@ -116,7 +123,18 @@ const CSQuizMatching = () => {
           `/sub/${roomId}`,
           (message) => {
             const received = JSON.parse(message.body);
+
             console.log({ received });
+
+            if (received.sender !== userInfo.userId) {
+              navigateRoomId = received.roomId;
+
+              // 유저가 매칭되면 매칭된 유저의 캐릭터 모델 렌더링, 이름 변경 및 landing 상태로 변경
+              setOtherUser(received.characterId);
+              otherNickname.current.innerText = received.nickname;
+              setCurrentState("landing");
+              setOtherUserId(received.sender);
+            }
           },
           { Authorization: `Bearer ${accessToken}` }
         );
@@ -124,10 +142,41 @@ const CSQuizMatching = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (currentState === "landing") {
+      const landingTimeInterval = setInterval(() => {
+        if (landingTimerRef.current && landingTimerRef.current.innerText > 0) {
+          landingTimerRef.current.innerText = (
+            parseInt(landingTimerRef.current.innerText) - 1
+          ).toString();
+        } else if (landingTimerRef.current) {
+          clearInterval(landingTimeInterval);
+          navigate(`/csQuizMap/${navigateRoomId}`, {
+            state: {
+              otherUserChracterId: otherUser,
+              otherUserId: otherUserId,
+              otherNickname: otherNickname.current.innerText,
+            },
+          });
+        }
+      }, 1000);
+      return () => clearInterval(landingTimeInterval);
+    }
+  }, [currentState]);
+
   return (
     <SSection>
+      <button
+        className="go-to-home"
+        onClick={() => {
+          navigate("/main");
+          window.location.reload();
+        }}
+      >
+        HOME
+      </button>
       <div className="page-state__wrapper"></div>
-      {isState === "matching" ? (
+      {currentState === "matching" ? (
         <div className="page-state">Matching</div>
       ) : (
         <div ref={landingTimerRef} className="page-state">
@@ -144,6 +193,7 @@ const CSQuizMatching = () => {
         <Canvas>
           <SceneOtherCharacter otherUser={otherUser} />
         </Canvas>
+        <p ref={otherNickname} className="other-character-name"></p>
       </div>
     </SSection>
   );

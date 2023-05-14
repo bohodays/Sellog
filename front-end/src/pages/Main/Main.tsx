@@ -501,7 +501,7 @@ const Scene = ({ buttonRef }: any) => {
       >
         {/* <planeGeometry args={[1, 1]} /> */}
         <circleGeometry args={[0.2, 32]} />
-        <meshBasicMaterial color={"crimson"} transparent={true} opacity={0.5} />
+        <meshBasicMaterial transparent={true} opacity={0} />
       </mesh>
 
       {/* 집을 보이게 하는 spotMesh */}
