@@ -31,7 +31,13 @@ export function Old_microwave_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/old_microwave_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      scale={2.5}
+      position={[0, -7, 0]}
+      rotation={[0, -2, 0]}
+    >
       <mesh
         geometry={nodes.TV.geometry}
         material={materials["Painted Metal.001"]}

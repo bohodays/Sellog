@@ -22,12 +22,14 @@ export function Wood_shelve(props: JSX.IntrinsicElements["group"]) {
     "/models/items/wood_shelve.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.Case.geometry}
-        material={materials.Wood2}
-        position={[-0.02, -1.35, 0]}
-      />
+    <group
+      {...props}
+      dispose={null}
+      scale={1.3}
+      position={[0, -1.7, 0]}
+      rotation={[0, THREE.MathUtils.degToRad(180), 0]}
+    >
+      <mesh geometry={nodes.Case.geometry} material={materials.Wood2} />
     </group>
   );
 }

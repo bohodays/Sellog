@@ -34,11 +34,26 @@ export function White_skeleton_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/white_skeleton_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      scale={1.2}
+      position={[0, -2.4, 0]}
+      rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
+    >
+      <directionalLight
+        color={"#ffffff"}
+        intensity={-1}
+        position={[2, 7, 3]}
+        castShadow={true}
+        shadow-camera-far={20}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-normalBias={0.05}
+      />
       <mesh
         geometry={nodes.Skeleton.geometry}
         material={materials.Bronze}
-        position={[-3.05, 0.01, 3.1]}
         scale={1.21}
       >
         <group position={[0, -0.02, 0]} rotation={[0, 1.57, 0]} scale={1.85}>

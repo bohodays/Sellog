@@ -26,11 +26,21 @@ export function White_table_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/white_table_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      scale={2}
+      position={[0, -1, 0]}
+      rotation={[
+        THREE.MathUtils.degToRad(15),
+        THREE.MathUtils.degToRad(-120),
+        0,
+      ]}
+    >
       <mesh
         geometry={nodes.Table001.geometry}
         material={materials.Wood}
-        position={[1.04, 0, 0.71]}
+        // position={[1.04, 0, 0.71]}
       >
         <mesh geometry={nodes.Plane011.geometry} material={materials.Resin} />
         <mesh geometry={nodes.Plane012.geometry} material={materials.Metal} />
