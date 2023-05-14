@@ -34,6 +34,7 @@ const OauthRedirect = () => {
       // 기존 유저이면
     } else {
       navigate("/main");
+      window.location.reload();
     }
   }, []);
 

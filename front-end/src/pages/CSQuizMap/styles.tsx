@@ -1,8 +1,16 @@
 import styled from "styled-components";
 
-export const SMain = styled.main`
+export const SMain = styled.main<any>`
   position: relative;
   height: 100%;
+
+  @font-face {
+    font-family: "GmarketSansMedium";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+      format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
 
   .quiz__wrapper {
     position: absolute;
@@ -12,10 +20,49 @@ export const SMain = styled.main`
     z-index: 10;
 
     background-color: var(--color-white);
-    width: 24vw;
-    height: 20vh;
+    width: 36vw;
+    height: 24vh;
 
-    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    border-radius: 16px;
+
+    font-family: "GmarketSansMedium";
+
+    padding: 1rem;
+  }
+
+  .counting {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .timer {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+  }
+
+  .progress {
+    position: relative;
+    height: 1.5rem;
+    background-color: #ffa1a1;
+    border-radius: 20px;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .timer__icon {
+    font-size: 2rem;
+    position: absolute;
+    left: 0;
   }
 `;
 
