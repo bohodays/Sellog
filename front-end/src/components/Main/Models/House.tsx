@@ -7,6 +7,7 @@ import * as THREE from "three";
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { useLocation } from "react-router-dom";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -52,6 +53,7 @@ type GLTFResult = GLTF & {
 
 export function House(props: JSX.IntrinsicElements["group"] | any) {
   const { nodes, materials } = useGLTF("/models/house.glb") as GLTFResult;
+
   return (
     <group
       ref={props.houseRef}

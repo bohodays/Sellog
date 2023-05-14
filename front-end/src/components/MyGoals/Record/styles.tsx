@@ -9,6 +9,7 @@ export const SSection = styled.section`
   justify-content: space-around;
   padding: 1vw;
   .goHome__button {
+    cursor: pointer;
     /* display: flex;
     justify-self: end; */
     position: absolute;
