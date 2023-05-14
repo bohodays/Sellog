@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class SendMatching {
 
-    String url = "http://localhost:8083/matching/result";
+    String url = "https://k8a404.p.ssafy.io/matching/result";
 
     public void sendMatching(List<MatchingDto> send) {
 
