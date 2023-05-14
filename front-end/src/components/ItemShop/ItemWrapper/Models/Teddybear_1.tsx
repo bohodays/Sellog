@@ -34,7 +34,7 @@ export function Teddybear_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/teddybear_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} scale={2.3} position={[0, 1.7, 0]}>
       <mesh
         geometry={nodes.Plane056.geometry}
         material={materials.Dark}

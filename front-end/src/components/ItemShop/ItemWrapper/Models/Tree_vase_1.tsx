@@ -24,7 +24,7 @@ export function Tree_vase_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/tree_vase_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} scale={1.2} position={[0, -4.5, 0]}>
       <mesh
         geometry={nodes.Circle027.geometry}
         material={materials.Glass}

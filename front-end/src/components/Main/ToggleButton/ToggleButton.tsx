@@ -44,7 +44,7 @@ const ToggleButton = () => {
       </button>
       <button
         className="menu-item gardenList"
-        onClick={() => navigate("/csquiz")}
+        onClick={() => navigate("/csquiz-select")}
       >
         CS
       </button>

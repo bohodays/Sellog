@@ -28,7 +28,14 @@ export function Imac_computer_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/imac_computer_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      position={[0, -6.5, 0]}
+      scale={3}
+      rotation={[0, 0, 0]}
+    >
+      <directionalLight color={"#FFFFFF"} intensity={1} position={[2, 5, 3]} />
       <mesh
         geometry={nodes.Monitor001.geometry}
         material={materials.Steel}

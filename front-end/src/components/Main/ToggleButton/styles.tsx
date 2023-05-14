@@ -1,6 +1,14 @@
 import styled from "styled-components";
 
 export const SNav = styled.nav`
+  @font-face {
+    font-family: "GmarketSansMedium";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+      format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+
   position: absolute;
   top: 2rem;
   right: 4rem;
@@ -8,6 +16,7 @@ export const SNav = styled.nav`
 
   .menu-item,
   .menu-open-button {
+    font-family: "GmarketSansMedium";
     background-color: #ffec41;
     border-radius: 100%;
     width: 3.5rem;

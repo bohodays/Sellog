@@ -135,6 +135,7 @@ export const SMyRoom = styled.section<any>`
     display: ${(props) => (props.activePage === "myitems" ? "" : "none")};
   }
   .goHome__button {
+    cursor: pointer;
     /* display: flex;
     justify-self: end; */
     position: absolute;

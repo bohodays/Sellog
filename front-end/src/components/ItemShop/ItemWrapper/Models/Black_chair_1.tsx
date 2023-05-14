@@ -27,12 +27,22 @@ export function Black_chair_1(props: JSX.IntrinsicElements["group"]) {
   ) as GLTFResult;
   return (
     <group {...props} dispose={null}>
+      <directionalLight
+        color={"#ffffff"}
+        intensity={1.5}
+        position={[2, 7, 3]}
+        castShadow={true}
+        shadow-camera-far={20}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-normalBias={0.05}
+      />
       <mesh
         geometry={nodes.Chair.geometry}
         material={materials["Black Leather"]}
-        position={[0.02, 0, -0.01]}
-        rotation={[0, -0.28, 0]}
-        scale={0.94}
+        position={[0, -2.5, -0]}
+        rotation={[0, -0.3, 0]}
+        scale={2}
       >
         <mesh geometry={nodes.Plane027.geometry} material={materials.Metal} />
         <mesh geometry={nodes.Plane029.geometry} material={materials.Metal} />

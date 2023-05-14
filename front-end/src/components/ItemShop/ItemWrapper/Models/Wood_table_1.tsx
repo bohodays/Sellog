@@ -26,8 +26,18 @@ export function Wood_table_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/wood_table_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <group position={[0.01, 0, 0]}>
+    <group
+      {...props}
+      dispose={null}
+      position={[0, -2, 0]}
+      scale={1.8}
+      rotation={[
+        THREE.MathUtils.degToRad(7),
+        THREE.MathUtils.degToRad(-180),
+        0,
+      ]}
+    >
+      <group>
         <mesh
           geometry={nodes.Mesh.geometry}
           material={materials["Wood Dark"]}

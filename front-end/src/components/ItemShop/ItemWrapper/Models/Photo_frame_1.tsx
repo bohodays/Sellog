@@ -24,7 +24,13 @@ export function Photo_frame_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/photo_frame_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      scale={2}
+      position={[0, -6, 0]}
+      rotation={[0.2, -1.6, 0]}
+    >
       <group position={[-0.08, 2.95, -0.02]}>
         <mesh geometry={nodes.Plane015.geometry} material={materials.Poster} />
         <mesh

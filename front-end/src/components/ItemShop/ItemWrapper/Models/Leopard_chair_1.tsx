@@ -24,13 +24,15 @@ export function Leopard_chair_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/leopard_chair_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.Chair.geometry}
-        material={materials.Pattern}
-        position={[-0.2, 0, 0.68]}
-        rotation={[0, -0.63, 0]}
-      >
+    <group
+      {...props}
+      dispose={null}
+      scale={2}
+      position={[0, -2.5, 0]}
+      rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
+    >
+      <directionalLight color={"#FFFFFF"} intensity={1} position={[2, 5, 3]} />
+      <mesh geometry={nodes.Chair.geometry} material={materials.Pattern}>
         <mesh geometry={nodes.Plane043.geometry} material={materials.Wood} />
       </mesh>
     </group>

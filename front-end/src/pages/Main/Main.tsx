@@ -43,6 +43,9 @@ import { Tree } from "@/components/Main/Models/Tree";
 import { Stone } from "@/components/Main/Models/Stone";
 import { Grass } from "@/components/Main/Models/Grass";
 import { Floor } from "@/components/Main/Models/Floor";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { Feed } from "@/components/Main/Models/Feed";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -308,6 +311,57 @@ const Scene = ({ buttonRef }: any) => {
           setTimeout(() => {
             csquizRef.current.visible = false;
           }, 400);
+        } else if (
+          Math.abs(
+            spotRef4.current.position.x - userModelRef.current.position.x
+          ) < 1.5 &&
+          Math.abs(
+            spotRef4.current.position.z - userModelRef.current.position.z
+          ) < 1.5
+        ) {
+          if (!feedRef.current.visible) {
+            console.log("feed 나와!");
+            buttonRef.current.style.zIndex = 100;
+            buttonRef.current.style.opacity = 1;
+            buttonRef.current.children[0].innerText =
+              "😘 여러 IT 기술 블로그 포스트들을 모아 보세요 ! 😘";
+            feedRef.current.visible = true;
+            spotRef4.current.material.color.set("seagreen");
+            gsap.to(feedRef.current.position, {
+              duration: 1,
+              y: 0,
+              ease: "Bounce.easeOut",
+            });
+            gsap.to(feedFontRef.current.position, {
+              duration: 1,
+              y: 0,
+              ease: "Bounce.easeOut",
+            });
+            gsap.to(camera.position, {
+              duration: 1,
+              y: 4.5,
+            });
+          }
+        } else if (feedRef.current?.visible) {
+          console.log("cs퀴즈 들어가");
+          buttonRef.current.style.zIndex = -1;
+          buttonRef.current.style.opacity = 0;
+          spotRef4.current.material.color.set("yellow");
+          gsap.to(feedRef.current.position, {
+            duration: 0.5,
+            y: -4,
+          });
+          gsap.to(feedFontRef.current.position, {
+            duration: 0.5,
+            y: -1,
+          });
+          gsap.to(camera.position, {
+            duration: 1,
+            y: 10,
+          });
+          setTimeout(() => {
+            feedRef.current.visible = false;
+          }, 400);
         }
       } else {
         actions["Run"]?.stop();
@@ -554,13 +608,17 @@ const Scene = ({ buttonRef }: any) => {
       </mesh>
 
       {/* Feed 모델 들어가야함 */}
-      {/* <ItemShopMap
-        itemshopRef={itemshopRef}
+      <Feed
+        feedRef={feedRef}
         visible={false}
-        position={[5.5, -2, -12]}
+        position={[-10, -4, 8]}
         castShadow={true}
-      /> */}
-      <FeedFont position={[-13.8, 0, 10]} />
+      />
+      <FeedFont
+        feedFontRef={feedFontRef}
+        castShadow={true}
+        position={[-13.8, -1, 10]}
+      />
 
       {/* 장식들 */}
       {/* 열기구 */}
@@ -651,16 +709,24 @@ const Main = () => {
     if (buttonRef.current.children[0].innerText.includes("마이룸")) {
       navigate("/myroom");
     } else if (buttonRef.current.children[0].innerText.includes("cs")) {
-      navigate("/csquiz");
+      navigate("/csquiz-select");
     } else if (buttonRef.current.children[0].innerText.includes("구매")) {
       navigate("/item-shop");
-    } else if (buttonRef.current.children[0].innerText.includes("ff")) {
+    } else if (buttonRef.current.children[0].innerText.includes("IT")) {
       navigate("/feed");
     }
   };
 
   return (
     <SMain>
+      <button
+        className="go-to-info"
+        onClick={() => {
+          navigate("/info");
+        }}
+      >
+        <FontAwesomeIcon icon={faCircleInfo} />
+      </button>
       <ToggleButton />
       <Canvas
         style={{ background: "skyblue" }}

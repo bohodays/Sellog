@@ -29,7 +29,8 @@ export function Blue_sofa_1(props: JSX.IntrinsicElements["group"]) {
       {...props}
       dispose={null}
       rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
-      position={[0, -2.5, 0]}
+      position={[0, -2, 0]}
+      scale={1.5}
     >
       <mesh
         geometry={nodes.Sofa.geometry}

@@ -27,8 +27,20 @@ export function Brown_table_4(props: JSX.IntrinsicElements["group"]) {
       <mesh
         geometry={nodes.Table.geometry}
         material={materials.Wood}
-        position={[0, 0, 0.01]}
+        scale={1.3}
+        position={[0, -2, 0]}
+        rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
       >
+        <directionalLight
+          color={"#ffffff"}
+          intensity={1}
+          position={[2, 6, 3]}
+          castShadow={true}
+          shadow-camera-far={20}
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
+          shadow-normalBias={0.05}
+        />
         <mesh
           geometry={nodes.Vert.geometry}
           material={materials.Wood}

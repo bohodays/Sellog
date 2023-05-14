@@ -38,12 +38,18 @@ export function Black_speaker_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/black_speaker_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <group
-        position={[-0.03, 0, -0.05]}
-        rotation={[Math.PI, 0, Math.PI]}
-        scale={0.96}
-      >
+    <group {...props} dispose={null} scale={1.5} position={[0, -2, 0]}>
+      <group>
+        <directionalLight
+          color={"#ffffff"}
+          intensity={2}
+          position={[1.5, 7, 3]}
+          castShadow={true}
+          shadow-camera-far={20}
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
+          shadow-normalBias={0.05}
+        />
         <mesh geometry={nodes.Plane001.geometry} material={materials.Black} />
         <mesh
           geometry={nodes.Plane001_1.geometry}

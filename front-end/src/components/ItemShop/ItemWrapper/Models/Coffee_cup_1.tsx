@@ -25,20 +25,18 @@ export function Coffee_cup_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/coffee_cup_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.Cup001.geometry}
-        material={materials["White.002"]}
-        position={[0.03, 0.9, -0.01]}
-        rotation={[0, -0.84, 0]}
-        scale={0.77}
-      >
+    <group
+      {...props}
+      dispose={null}
+      scale={5}
+      position={[0, -1.5, 0]}
+      rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
+    >
+      <directionalLight color={"#ffffff"} intensity={1} position={[2, 5, 3]} />
+      <mesh geometry={nodes.Cup001.geometry} material={materials["White.002"]}>
         <mesh
           geometry={nodes.Circle094.geometry}
           material={materials["White.002"]}
-          position={[-0.01, -0.04, -0.01]}
-          rotation={[0, 1.03, 0]}
-          scale={1.03}
         />
         <mesh
           geometry={nodes.Cup002.geometry}

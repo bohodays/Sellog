@@ -22,13 +22,11 @@ export function Black_cup_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/black_cup_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} scale={10} position={[0, -2, 0]}>
+      <ambientLight color={"#ffffff"} intensity={1.0} />
       <mesh
         geometry={nodes.Circle013.geometry}
         material={materials["black.002"]}
-        position={[-0.01, 1.67, 0.02]}
-        rotation={[0, 0.97, 0]}
-        scale={1.15}
       />
     </group>
   );
