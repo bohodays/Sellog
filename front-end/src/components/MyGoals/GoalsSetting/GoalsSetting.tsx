@@ -21,15 +21,16 @@ const GoalsSetting: any = () => {
     myRoomNavigator("/myroom");
   };
 
+  // mouse hover시 info message
   const [showInfoMessage, setShowInfoMessage] = useState(false);
 
-  function handleMouseEnter() {
+  const handleMouseEnter = () => {
     setShowInfoMessage(true);
-  }
+  };
 
-  function handleMouseLeave() {
+  const handleMouseLeave = () => {
     setShowInfoMessage(false);
-  }
+  };
 
   return (
     <SSection isOpen={isOpen}>
