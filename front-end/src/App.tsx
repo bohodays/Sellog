@@ -40,6 +40,9 @@ function App() {
     () => import("./pages/CSQuizMatching/CSQuizMatching")
   );
   const Info = React.lazy(() => import("./pages/Info/Info"));
+  const CSQuizBattleResult = React.lazy(
+    () => import("./pages/CSQuizBattleResult/CSQuizBattleResult")
+  );
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
@@ -82,6 +85,7 @@ function App() {
               <Route path="/csquiz-result" element={<CSQuizResult />} />
               <Route path="/csquiz-matching" element={<CSQuizMatching />} />
               <Route path="/csQuizMap/:id" element={<CSQuizMap />} />
+              <Route path="/csquiz-battle-result" element={<CSQuizBattleResult />} />
               <Route path="/mygoals" element={<MyGoals />} />
             </Route>
             <Route path="/oauth-login" element={<OauthRedirect />} />

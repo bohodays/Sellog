@@ -7,6 +7,7 @@ import * as THREE from "three";
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { useLocation } from "react-router-dom";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -33,12 +34,27 @@ export function F2_Main(props: JSX.IntrinsicElements["group"] | any) {
   //   actions["Idle"]?.play();
   // }, []);
 
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
-    <group ref={props.group} dispose={null} position={[0, 0.2, 0]}>
+    <group
+      ref={props.group}
+      dispose={null}
+      // position={currentPath.includes("csQuizMap") ? [-2, 0.2, 0] : [0, 0.2, 0]}
+      position={[0, 0.2, 0]}
+    >
       <group name="Scene">
         <group
           name="rig"
-          position={[0, -0.17, 0]}
+          // position={[0, -0.17, 0]}
+          position={
+            !currentPath.includes("csQuizMap")
+              ? [0, -0.17, 0]
+              : props.isLeft < 0
+              ? [-2, -0.17, 0]
+              : [2, -0.17, 0]
+          }
           castShadow={true}
           receiveShadow={true}
           ref={props.userModelRef}

@@ -33,7 +33,7 @@ export function F1_CS(props: JSX.IntrinsicElements["group"] | any) {
       <group name="Scene">
         <group
           name="rig"
-          position={[0, -0.17, 0]}
+          position={props.isLeft < 0 ? [2, -0.17, 0] : [-2, -0.17, 0]}
           castShadow={true}
           receiveShadow={true}
           ref={props.otherUserModelRef1}

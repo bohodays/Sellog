@@ -23,7 +23,7 @@ type GLTFResult = GLTF & {
 type ActionName = "Idle" | "Run" | "Sad" | "Song Jump" | "Walk" | "Win";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
-export function F2_Other(props: JSX.IntrinsicElements["group"]) {
+export function F2_Other(props: JSX.IntrinsicElements["group"] | any) {
   const group = useRef<THREE.Group | any>();
   const { nodes, materials, animations } = useGLTF(
     "/models/otherCharacters/f2.glb"
@@ -32,11 +32,23 @@ export function F2_Other(props: JSX.IntrinsicElements["group"]) {
 
   const location = useLocation();
 
+  const result = props.result;
+
   useEffect(() => {
     if (location.pathname.includes("matching")) {
       actions["Idle"]?.play();
     } else {
-      actions["Song Jump"]?.play();
+      if (result) {
+        if (result === 0) {
+          actions["Idle"]?.play();
+        } else if (result > 0) {
+          actions["Win"]?.play();
+        } else if (result < 0) {
+          actions["Sad"]?.play();
+        }
+      } else {
+        actions["Song Jump"]?.play();
+      }
     }
   }, []);
 
