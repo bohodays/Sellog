@@ -19,6 +19,7 @@ export default function Feed() {
   const homeNavigator = useNavigate();
   const getOutHandler = () => {
     homeNavigator("/main");
+    window.location.reload();
   };
   const [newsfeed, setNewsFeed] = useState<any>();
   const [mostViewFeed, setMostViewFeed] = useState<any>();

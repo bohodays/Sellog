@@ -27,7 +27,7 @@ export function FeedFont(props: JSX.IntrinsicElements["group"] | any) {
     "/models/font/feed_font.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null} scale={4}>
+    <group ref={props.feedFontRef} {...props} dispose={null} scale={4}>
       <mesh
         geometry={nodes.Object_7.geometry}
         material={materials.material_22}
