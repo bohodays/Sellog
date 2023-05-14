@@ -88,12 +88,18 @@ export const SProfile = styled.section`
       width: 45%;
     }
     input {
+      outline: none;
       background-color: rgb(255, 255, 255, 0);
       border: none;
       border-bottom: #484743 solid 1px;
       width: 50%;
       height: 1.2rem;
       font-size: 1.1rem;
+    }
+    .error {
+      /* background-color: #ffffff; */
+      border-bottom: red solid 2px;
+      /* outline: #cb4f4f; */
     }
   }
 
@@ -115,15 +121,12 @@ export const SProfile = styled.section`
   }
 
   .button__goal {
-    /* align-self: center; */
     display: flex;
     align-items: center;
     justify-content: center;
-    /* justify-self: end; */
-    /* align-self: flex-end; */
-    height: 2rem;
-    /* width: 4rem; */
+    width: fit-content;
     margin: 0%;
+    padding-inline: 3%;
 
     font-family: "Chicle";
     font-size: 1.2rem;
@@ -132,7 +135,6 @@ export const SProfile = styled.section`
     border: solid 3px;
     border-radius: 1rem 1rem 1rem 1rem;
     box-shadow: 1px 1px 1px 1px grey;
-    width: 5vw;
     text-align: center;
     p {
       margin: 0%;

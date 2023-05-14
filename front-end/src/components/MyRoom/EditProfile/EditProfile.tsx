@@ -77,8 +77,11 @@ function EditProfile(props: MyProfileProps) {
   }
   // 좌우명 유효성
   function isValidMotto(mo: string) {
-    const mottoRegex = /^[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9_-]{2,16}$/;
-    return mottoRegex.test(mo);
+    if (mo.length > 0 && mo.length <= 31) {
+      return true;
+    } else {
+      return false;
+    }
   }
   // 이메일 유효성
   function isValidEmail(email: string) {
@@ -251,6 +254,7 @@ function EditProfile(props: MyProfileProps) {
               defaultValue={userInfo.nickname}
               ref={nicknameRef}
               onChange={nickNameHandler}
+              className={isValidNickName(userInfo.nickname) ? "" : "error"}
             />
           </div>
           <div className="box__edit box__motto">
@@ -261,6 +265,7 @@ function EditProfile(props: MyProfileProps) {
               ref={mottoRef}
               defaultValue={userInfo.motto}
               onChange={mottoHandler}
+              // className="error"
             />
           </div>
           <div className="box__edit box__email">

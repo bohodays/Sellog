@@ -4,6 +4,7 @@ import blueEye from "@/assets/imgs/retro/blue_eye.png";
 import MyItemList from "@/components/MyRoom/MyItemList/MyItemList";
 import { apiGetMyItemList } from "@/api/room";
 import { IItem } from "@/typeModels/ItemShop/iteminterfaces";
+import { useNavigate } from "react-router";
 
 const itemCategories = [
   "all",
@@ -18,6 +19,7 @@ const MyItems = () => {
   const [currentItemList, setCurrentItemList] = useState<Array<IItem>>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [isLast, setIsLast] = useState(false);
+  const shopNavigator = useNavigate();
 
   const handleSelectedCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
     const eventTarget = e.target as HTMLElement;
@@ -57,6 +59,10 @@ const MyItems = () => {
     });
   }, [currentPage, selectedCategory]);
 
+  const toShopHandler = () => {
+    shopNavigator("/item-shop");
+  };
+
   const handlePrevPage = () => {
     setCurrentPage(currentPage - 1);
   };
@@ -72,6 +78,9 @@ const MyItems = () => {
       <div className="title__wrapper">
         <img className="blueeye__img" src={blueEye}></img>
         <div className="title">My Items</div>
+        <button className="toshop__button" onClick={toShopHandler}>
+          SHOP
+        </button>
       </div>
       <div className="categories__box">
         {itemCategories.map((item, index) =>
