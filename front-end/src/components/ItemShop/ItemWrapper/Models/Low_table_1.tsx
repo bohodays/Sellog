@@ -23,11 +23,17 @@ export function Low_table_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/low_table_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      scale={1.8}
+      position={[0, -2, 0]}
+      rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
+    >
+      <directionalLight color={"#FFFFFF"} intensity={1} position={[2, 5, 3]} />
       <mesh
         geometry={nodes.Stereo_Table.geometry}
         material={materials["Wood Dark"]}
-        position={[-0.01, 0, -0.38]}
       >
         <mesh
           geometry={nodes.Stereo_Table_Legs.geometry}

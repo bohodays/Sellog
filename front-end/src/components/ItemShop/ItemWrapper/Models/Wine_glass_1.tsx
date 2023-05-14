@@ -22,11 +22,10 @@ export function Wine_glass_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/wine_glass_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} scale={4} position={[0, -2, 0]}>
       <mesh
         geometry={nodes.Circle008.geometry}
         material={materials.Glass}
-        position={[0.01, 0.75, 0.01]}
         scale={1.24}
       />
     </group>

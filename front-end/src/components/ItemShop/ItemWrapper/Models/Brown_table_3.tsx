@@ -27,7 +27,9 @@ export function Brown_table_3(props: JSX.IntrinsicElements["group"]) {
       <mesh
         geometry={nodes.Table.geometry}
         material={materials.wood}
-        position={[-0.11, 1.45, 0.13]}
+        scale={1.2}
+        position={[0, -0.5, 0]}
+        rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
       >
         <mesh geometry={nodes.Plane002.geometry} material={materials.wood} />
       </mesh>

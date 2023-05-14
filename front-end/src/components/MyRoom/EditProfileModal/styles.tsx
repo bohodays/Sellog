@@ -20,7 +20,7 @@ export const SModal = styled.div`
     /* justify-self: end; */
     /* align-self: flex-end; */
     height: 1.5rem;
-    /* width: 4rem; */
+    width: fit-content;
     /* margin: 0%; */
     margin-bottom: 3%;
     margin-inline: 3%;

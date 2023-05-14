@@ -24,7 +24,13 @@ export function Round_table_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/round_table_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      position={[0, -2, 0]}
+      scale={2}
+      rotation={[0.4, 0, 0]}
+    >
       <group position={[-0.03, 0, -0.07]} scale={0.88}>
         <mesh geometry={nodes.Mesh.geometry} material={materials.Planks} />
         <mesh geometry={nodes.Mesh_1.geometry} material={materials.Wood} />

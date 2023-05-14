@@ -32,14 +32,15 @@ export function Katana_decoration_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/katana_decoration_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <ambientLight color={"#ffffff"} intensity={5} />
-      <mesh
-        geometry={nodes.Katana.geometry}
-        material={materials.Wood}
-        position={[0, 1.09, 0]}
-        scale={0.78}
-      >
+    <group
+      {...props}
+      dispose={null}
+      position={[0, -1.5, 0]}
+      scale={2.5}
+      rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
+    >
+      <directionalLight color={"#FFFFFF"} intensity={3} position={[2, 5, 3]} />
+      <mesh geometry={nodes.Katana.geometry} material={materials.Wood}>
         <mesh geometry={nodes.Plane051.geometry} material={materials.Wood} />
         <mesh geometry={nodes.Plane052.geometry} material={materials.Wood} />
         <group position={[0, 0.8, -0.44]} scale={0.67}>

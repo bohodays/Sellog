@@ -81,4 +81,15 @@ export const SSection = styled.section<any>`
     bottom: 1rem;
     right: 1rem;
   }
+
+  .goback__button {
+    position: absolute;
+    width: 6rem;
+    top: 3rem;
+    left: 0.1rem;
+    font-size: 1.5rem;
+    a {
+      color: black;
+    }
+  }
 `;

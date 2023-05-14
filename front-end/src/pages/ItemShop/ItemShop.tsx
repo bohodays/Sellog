@@ -2,11 +2,17 @@ import { useState } from "react";
 import { SGhostContainer, SMain, SContainer } from "./styles";
 import red_ghost from "@/assets/imgs/retro/red_ghost.png";
 import yellow_ghost from "@/assets/imgs/retro/yellow_ghost.png";
-import { Link } from "react-router-dom";
 import ItemList from "@/components/ItemShop/ItemList/ItemList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const ItemShop = () => {
   const [selectedCategory, setSelectedCategory] = useState("ALL");
+  const homeNavigator = useNavigate();
+  const getOutHandler = () => {
+    homeNavigator("/main");
+  };
   const repeatDots = () => {
     let arr = [];
     for (let i = 0; i < 10; i++) {
@@ -27,25 +33,63 @@ const ItemShop = () => {
       </div>
       <SContainer>
         <div className="item__category--container">
-          <h6 className="item__category" onClick={handleSelectedCategory}>
+          <h6
+            className={
+              selectedCategory === "ALL"
+                ? "item__category__selected"
+                : "item__category"
+            }
+            onClick={handleSelectedCategory}
+          >
             ALL
           </h6>
-          <h6 className="item__category" onClick={handleSelectedCategory}>
+          <h6
+            className={
+              selectedCategory === "FURNITURE"
+                ? "item__category__selected"
+                : "item__category"
+            }
+            onClick={handleSelectedCategory}
+          >
             FURNITURE
           </h6>
-          <h6 className="item__category" onClick={handleSelectedCategory}>
+          <h6
+            className={
+              selectedCategory === "ELECTRONICS"
+                ? "item__category__selected"
+                : "item__category"
+            }
+            onClick={handleSelectedCategory}
+          >
             ELECTRONICS
           </h6>
-          <h6 className="item__category" onClick={handleSelectedCategory}>
+          <h6
+            className={
+              selectedCategory === "APPLIANCE"
+                ? "item__category__selected"
+                : "item__category"
+            }
+            onClick={handleSelectedCategory}
+          >
             APPLIANCE
           </h6>
-          <h6 className="item__category" onClick={handleSelectedCategory}>
+          <h6
+            className={
+              selectedCategory === "DECORATION"
+                ? "item__category__selected"
+                : "item__category"
+            }
+            onClick={handleSelectedCategory}
+          >
             DECORATION
           </h6>
         </div>
-        {/* <div> */}
         <ItemList category={selectedCategory}></ItemList>
-        {/* </div> */}
+        <FontAwesomeIcon
+          icon={faRightFromBracket}
+          className="goHome__button"
+          onClick={getOutHandler}
+        />
       </SContainer>
       <SGhostContainer position={"top"}>
         {repeatDots()}

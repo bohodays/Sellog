@@ -26,13 +26,24 @@ export function Blue_chair_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/blue_chair_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.Chair.geometry}
-        material={materials.Sofa}
-        position={[0.02, 0, -0.02]}
-        scale={1.05}
-      >
+    <group
+      {...props}
+      dispose={null}
+      position={[0, -2, 0]}
+      rotation={[0, THREE.MathUtils.degToRad(160), 0]}
+      scale={1.7}
+    >
+      <directionalLight
+        color={"#ffffff"}
+        intensity={2}
+        position={[1.5, 7, 3]}
+        castShadow={true}
+        shadow-camera-far={20}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-normalBias={0.05}
+      />
+      <mesh geometry={nodes.Chair.geometry} material={materials.Sofa}>
         <mesh geometry={nodes.Arm_Rest.geometry} material={materials.Steel} />
         <mesh
           geometry={nodes.Arm_Rest_Cushiion.geometry}

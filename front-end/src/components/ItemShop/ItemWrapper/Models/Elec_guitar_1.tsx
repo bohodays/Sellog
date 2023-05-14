@@ -42,20 +42,24 @@ export function Elec_guitar_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/elec_guitar_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.Stand002.geometry}
-        material={materials.Black}
-        position={[-0.07, 1.49, -0.08]}
-        rotation={[0, -0.67, 0]}
-        scale={1.04}
-      >
+    <group
+      {...props}
+      dispose={null}
+      scale={2.2}
+      position={[0, -2.5, 0]}
+      rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
+    >
+      {/* <directionalLight
+        color={"#FFFFFF"}
+        intensity={0.2}
+        position={[2, 5, 3]}
+      /> */}
+      <mesh geometry={nodes.Stand002.geometry} material={materials.Black}>
         <mesh
           geometry={nodes.Vert032.geometry}
           material={materials["Red.001"]}
           position={[0.01, 1.15, 0]}
           rotation={[-Math.PI, 0, -1.8]}
-          scale={1.12}
         >
           <mesh
             geometry={nodes.Circle031.geometry}

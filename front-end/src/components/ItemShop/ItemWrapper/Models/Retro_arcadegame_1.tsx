@@ -39,7 +39,13 @@ export function Retro_arcadegame_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/retro_arcadegame_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      scale={1.2}
+      position={[0, -2.5, 0]}
+      rotation={[0, -2, 0]}
+    >
       <group position={[0.03, 0, 0.02]} scale={1.13}>
         <mesh geometry={nodes.Plane050.geometry} material={materials.black} />
         <mesh

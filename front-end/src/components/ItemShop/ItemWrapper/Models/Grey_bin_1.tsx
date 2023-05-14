@@ -22,12 +22,19 @@ export function Grey_bin_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/grey_bin_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.Trash.geometry}
-        material={materials.grey}
-        position={[0.03, 0, -0.03]}
+    <group
+      {...props}
+      dispose={null}
+      scale={2.2}
+      position={[0, -2, 0]}
+      rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
+    >
+      <directionalLight
+        color={"#FFFFFF"}
+        intensity={0.8}
+        position={[2, 5, 3]}
       />
+      <mesh geometry={nodes.Trash.geometry} material={materials.grey} />
     </group>
   );
 }

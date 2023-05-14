@@ -65,6 +65,7 @@ import { Wood_desk_2 } from "./Models/Wood_desk_2";
 import { Wood_drawer_1 } from "./Models/Wood_drawer_1";
 import { Wood_shelve } from "./Models/Wood_shelve";
 import { Yellow_sofa_1 } from "./Models/Yellow_sofa_1";
+import { Wood_table_1 } from "./Models/Wood_table_1";
 
 const Scene = ({ shopItem }: IShopItemProps) => {
   const itemName = shopItem?.name;
@@ -72,10 +73,10 @@ const Scene = ({ shopItem }: IShopItemProps) => {
 
   return (
     <Suspense>
-      <ambientLight color={"#ffffff"} intensity={0.7} />
+      <ambientLight color={"#ffffff"} intensity={0.5} />
       <directionalLight
         color={"#ffffff"}
-        intensity={1}
+        intensity={0.8}
         position={[1.5, 7, 3]}
         castShadow={true}
         shadow-camera-far={20}
@@ -86,7 +87,7 @@ const Scene = ({ shopItem }: IShopItemProps) => {
       <PerspectiveCamera
         makeDefault={true}
         // far={500}
-        position={[0, 0, 8]}
+        position={[0, 1, 8]}
       />
       {id === 1 ? (
         <BedSide_light_1 />
@@ -211,6 +212,8 @@ const Scene = ({ shopItem }: IShopItemProps) => {
       ) : id == 61 ? (
         <Wood_shelve />
       ) : id == 62 ? (
+        <Wood_table_1 />
+      ) : id == 63 ? (
         <Yellow_sofa_1 />
       ) : null}
     </Suspense>

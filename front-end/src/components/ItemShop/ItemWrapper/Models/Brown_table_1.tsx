@@ -25,13 +25,24 @@ export function Brown_table_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/brown_table_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.Table.geometry}
-        material={materials.Wood}
-        position={[0, 0, -0.01]}
-        scale={0.87}
-      >
+    <group
+      {...props}
+      dispose={null}
+      scale={2}
+      position={[0, -1.5, 0]}
+      rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
+    >
+      <directionalLight
+        color={"#ffffff"}
+        intensity={2}
+        position={[2, 7, 3]}
+        castShadow={true}
+        shadow-camera-far={20}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-normalBias={0.05}
+      />
+      <mesh geometry={nodes.Table.geometry} material={materials.Wood}>
         <mesh geometry={nodes.Plane020.geometry} material={materials.Metal} />
         <mesh geometry={nodes.Plane042.geometry} material={materials.Metal} />
       </mesh>
