@@ -27,7 +27,7 @@ export default function Feed() {
   const [isLoading, setIsLoading] = useState(false);
   const [isFeed, setIsFeed] = useState<boolean>(false);
   const [isMostView, setIsMostView] = useState<boolean>(false);
-  const [lastPage, setLastPage] = useState<number>(2);
+  const [lastPage, setLastPage] = useState<boolean>(false);
   const [page, setPage] = useState(1);
   // let page = 1;
   const observerRef = useRef(null);
@@ -37,10 +37,12 @@ export default function Feed() {
   let options = {
     root: null,
     rootMargin: "0px",
-    threshold: 1.0,
+    threshold: 0.7,
   };
   let callback = (entries: any, observer: any) => {
-    if (page < lastPage) {
+    console.log({ lastPage });
+
+    if (lastPage == false) {
       entries.forEach((entry: any) => {
         // 관찰중인 태그가 교차할때 root와
         // page++;
@@ -49,7 +51,9 @@ export default function Feed() {
 
           getFeedApi(page).then(({ data }: any) => {
             console.log("new", data.response);
-
+            if (data.response.last) {
+              setLastPage(true);
+            }
             setNewsFeed([...newsfeed, ...data.response.content]);
             setPage((prev) => prev + 1);
           });
@@ -61,11 +65,13 @@ export default function Feed() {
 
   // 피드 불러오기
   useEffect(() => {
+    // console.log({ lastPage });
+
     // 초기 데이터 불러오기
     if (newsfeed === undefined) {
       getFeedApi(page).then(({ data }: any | undefined) => {
         console.log(data.response);
-        setLastPage(data.response.pageable.pageSize);
+        // setLastPage(data.response.pageable.pageSize);
         setNewsFeed(data.response.content);
       });
     }
@@ -103,10 +109,10 @@ export default function Feed() {
   }, [mostViewFeed]);
 
   const feedHandler = () => {
-    console.log({ newsfeed }, { page });
-    mostViewFeed.forEach((element: any) => {
-      console.log(element["title"]);
-    });
+    console.log({ newsfeed }, lastPage);
+    // mostViewFeed.forEach((element: any) => {
+    //   console.log(element["title"]);
+    // });
   };
   const viewHandler = (i: number) => {
     console.log(i);
@@ -136,7 +142,7 @@ export default function Feed() {
         </div>
         {/* <h2 className="logo">Logo</h2> */}
         <img className="sticker2" src={GreenFlower} alt="green flower" />
-        <button onClick={feedHandler}> panic button</button>
+        {/* <button onClick={feedHandler}> panic button</button> */}
       </SHeader>
       <SBody>
         <SSection>
@@ -166,7 +172,7 @@ export default function Feed() {
 
               return <FeedComponent key={index} props={feed}></FeedComponent>;
             })}
-          <div ref={observerRef}></div>
+          <div ref={observerRef} className="intersection__div"></div>
         </div>
         <img className="sticker1" src={LargeSmile} alt="스마일 큰거" />
       </SBody>
