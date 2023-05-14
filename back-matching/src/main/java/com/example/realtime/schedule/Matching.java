@@ -24,12 +24,15 @@ public class Matching {
 
     @Scheduled(fixedDelay = 5000, initialDelay = 1000) // 1초 후 5초마다 동작
     public void matching(){
+
         result = matchingAlgorithm.algorithm();
 
         successed = (boolean) result.get("succeed"); // 성사 여부
 
         if(successed){ // 성사되면 main server 전송
+            log.info("매칭 성공");
             send = (List<MatchingDto>) result.get("matchingResult");
+            log.info(send.toArray().toString());
             sendMatching.sendMatching(send);
         }
 
