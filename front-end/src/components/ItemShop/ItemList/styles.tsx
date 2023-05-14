@@ -18,30 +18,30 @@ export const SSection = styled.section<any>`
     border-radius: 30px;
     align-items: center;
     justify-content: center;
-    padding: 0.5% 3%;
+    padding: 0.3% 1.5%;
     /* width: fit-content; */
     position: fixed;
-    bottom: 2.5vh;
+    bottom: 3vh;
     /* left: 40%; */
   }
 
   .page__btn {
-    font-size: 1.3vw;
+    font-size: 1.2vw;
     font-weight: 600;
     color: navy;
     border-radius: 50%;
-    margin: 0% 1%;
+    margin: 0% 0.5%;
     background-color: white;
     /* border: none; */
     padding: 5px 10px;
   }
 
   .page__btn--active {
-    font-size: 1.3vw;
+    font-size: 1.2vw;
     font-weight: 600;
     color: white;
     border-radius: 50%;
-    margin: 0% 1%;
+    margin: 0% 0.5%;
     background-color: navy;
     /* border: none; */
     padding: 5px 10px;
@@ -55,7 +55,7 @@ export const SDiv = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   /* justify-content: space-evenly; */
-  margin-top: -3vh;
+  margin-top: -3.5vh;
   margin-left: 2.5vw;
   /* margin: 0vw 5vw; */
 

@@ -31,14 +31,14 @@ export function Black_coffeemachine_1(props: JSX.IntrinsicElements["group"]) {
     <group
       {...props}
       dispose={null}
-      scale={3}
-      rotation={[0, THREE.MathUtils.degToRad(-100), 0]}
+      scale={3.5}
+      rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
       position={[0, -1.5, 0]}
     >
+      <directionalLight color={"#FFFFFF"} intensity={1} position={[2, 5, 3]} />
       <mesh
         geometry={nodes.Coffemaker.geometry}
         material={materials.Metal}
-        // position={[-0.04, 1.9, 0.04]}
         scale={1.11}
       >
         <mesh

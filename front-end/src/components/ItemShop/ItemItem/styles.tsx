@@ -19,9 +19,20 @@ export const SArticle = styled.article`
     0 0 0.3rem var(--neon-border-color),
     inset 0 0 0.3rem var(--neon-border-color);
 
+  .item__img__wrapper {
+    width: calc(100%);
+    height: calc(25vh);
+    overflow: hidden;
+  }
   .item__img {
     width: calc(100%);
     height: calc(25vh);
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+
+  .item__img:hover {
+    transform: scale(1.1);
   }
 
   .item__description__wrapper {
@@ -54,8 +65,9 @@ export const SArticle = styled.article`
   .buy__btn {
     background-color: #a6e9c8;
     padding: 3% 4%;
-    border-radius: 10px;
+    border-radius: 20px;
     font-weight: 600;
+    font-size: 0.9vw;
   }
 
   .buy__btn:hover {
@@ -65,5 +77,14 @@ export const SArticle = styled.article`
       inset 0 0 0.01rem var(--neon-border-color),
       0 0 0.5rem var(--neon-border-color),
       inset 0 0 0.5rem var(--neon-border-color);
+  }
+
+  .purchased {
+    background-color: #3f3f3f;
+    padding: 3% 4%;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.8vw;
   }
 `;

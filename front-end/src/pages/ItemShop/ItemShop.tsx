@@ -2,11 +2,17 @@ import { useState } from "react";
 import { SGhostContainer, SMain, SContainer } from "./styles";
 import red_ghost from "@/assets/imgs/retro/red_ghost.png";
 import yellow_ghost from "@/assets/imgs/retro/yellow_ghost.png";
-import { Link } from "react-router-dom";
 import ItemList from "@/components/ItemShop/ItemList/ItemList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const ItemShop = () => {
   const [selectedCategory, setSelectedCategory] = useState("ALL");
+  const homeNavigator = useNavigate();
+  const getOutHandler = () => {
+    homeNavigator("/main");
+  };
   const repeatDots = () => {
     let arr = [];
     for (let i = 0; i < 10; i++) {
@@ -79,6 +85,11 @@ const ItemShop = () => {
           </h6>
         </div>
         <ItemList category={selectedCategory}></ItemList>
+        <FontAwesomeIcon
+          icon={faRightFromBracket}
+          className="goHome__button"
+          onClick={getOutHandler}
+        />
       </SContainer>
       <SGhostContainer position={"top"}>
         {repeatDots()}

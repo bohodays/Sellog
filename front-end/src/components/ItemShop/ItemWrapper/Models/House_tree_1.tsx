@@ -28,7 +28,7 @@ export function House_tree_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/house_tree_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null} position={[0, -2.5, 0]} scale={1.5}>
+    <group {...props} dispose={null} position={[0, -2.8, 0]} scale={1.5}>
       <mesh
         geometry={nodes.Vert.geometry}
         material={materials["White.001"]}

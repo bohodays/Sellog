@@ -33,20 +33,11 @@ export function Black_teatable_1(props: JSX.IntrinsicElements["group"]) {
     <group
       {...props}
       dispose={null}
-      scale={1.5}
+      scale={1.7}
       position={[0, -2, 0]}
-      rotation={[0.3, 0.8, 0]}
+      rotation={[0, THREE.MathUtils.degToRad(-90), 0]}
     >
-      <directionalLight
-        color={"#ffffff"}
-        intensity={2}
-        position={[1.5, 7, 3]}
-        castShadow={true}
-        shadow-camera-far={20}
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
-        shadow-normalBias={0.05}
-      />
+      <directionalLight color={"#FFFFFF"} intensity={2} position={[3, 5, 3]} />
       <mesh
         geometry={nodes.Table001.geometry}
         material={materials.Metal}

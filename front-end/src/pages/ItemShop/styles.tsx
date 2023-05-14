@@ -143,10 +143,10 @@ export const SGhostContainer = styled.div<any>`
   width: 35%;
 
   position: absolute;
-  bottom: ${(props) => (props.position === "bottom" ? "1.5%" : null)};
-  left: ${(props) => (props.position === "bottom" ? "1.5%" : null)};
-  top: ${(props) => (props.position === "top" ? "1.5%" : null)};
-  right: ${(props) => (props.position === "top" ? "1.5%" : null)};
+  bottom: ${(props) => (props.position === "bottom" ? "2vh" : null)};
+  left: ${(props) => (props.position === "bottom" ? "1.5vw" : null)};
+  top: ${(props) => (props.position === "top" ? "2vh" : null)};
+  right: ${(props) => (props.position === "top" ? "1.5vw" : null)};
 
   .dot {
     width: calc(0.5vw);
@@ -171,6 +171,13 @@ export const SContainer = styled.div`
   display: flex;
   width: 100%;
   height: 90%;
-  /* margin-left: 7.5%; */
-  /* margin-top: 3%; */
+
+  .goHome__button {
+    position: fixed;
+    bottom: 3vh;
+    right: 3vw;
+    height: 4vh;
+    cursor: pointer;
+    color: var(--neon-border-color);
+  }
 `;
