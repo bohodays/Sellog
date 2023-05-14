@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const SMain = styled.main`
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   position: relative;
   background-color: #1a1830;
   padding: 2%;
@@ -15,9 +15,8 @@ export const SMain = styled.main`
     font-family: "Exo 2", sans-serif;
     color: yellow;
     padding: 0.5% 1.5%;
-    /* margin-left: 1%; */
-    margin-top: 3%;
-    /* padding: 4rem 6rem 5.5rem; */
+    margin-top: 5vh;
+    margin-left: 2.5vw;
     border: 0.3rem solid rgba(137, 239, 245, 1);
     border-radius: 2rem;
     text-transform: uppercase;
@@ -32,7 +31,7 @@ export const SMain = styled.main`
       inset 0 0 0.5rem var(--neon-border-color);
   }
 
-  .item__category--container::-moz-selection {
+  /* .item__category--container::-moz-selection {
     background-color: var(--neon-border-color);
     color: var(--neon-text-color);
   }
@@ -40,7 +39,7 @@ export const SMain = styled.main`
   .item__category--container::selection {
     background-color: var(--neon-border-color);
     color: var(--neon-text-color);
-  }
+  } */
 
   .item__category--container:focus {
     outline: none;
@@ -48,6 +47,14 @@ export const SMain = styled.main`
 
   .item__category {
     cursor: pointer;
+    padding: 23% 0%;
+  }
+
+  .item__category__selected {
+    color: #f582dd;
+    text-shadow: 0 0 0.25rem #f582dd, 0 0 1rem #f582dd;
+    cursor: pointer;
+    padding: 23% 0%;
   }
 
   @keyframes flicker {
@@ -82,22 +89,15 @@ export const SMain = styled.main`
     }
   }
 
-  .item__category {
-    padding: 25% 0%;
-  }
-
   .sign__title {
     font-family: Neoneon;
     color: #f582dd;
-    font-size: calc(2.5vw - 10px);
+    font-size: calc(2.5vw - 5px);
   }
 
   .sign__title--container {
-    /* padding: 1%; */
-    /* font-style: italic; */
     font-family: "Exo 2", sans-serif;
     padding: 1% 3%;
-    /* padding: 4rem 6rem 5.5rem; */
     border: calc(1vw - 10px) solid #fff;
     border-radius: 0.5rem;
     text-transform: uppercase;

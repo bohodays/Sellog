@@ -9,11 +9,10 @@ export const SArticle = styled.article`
   height: 38vh;
   color: white;
   padding: 1%;
-  margin: 0% 1%;
+  margin: 0vw 2vw;
   border: 0.2rem solid rgba(137, 239, 245);
   border-radius: 2rem;
-  max-width: 100%;
-  max-height: 100%;
+  margin-bottom: 1vh;
   box-shadow: 0 0 0.3rem rgba(137, 239, 245),
     inset 0 0 0.05rem rgba(137, 239, 245), 0 0 0.01rem var(--neon-border-color),
     inset 0 0 0.05rem var(--neon-border-color),
@@ -22,8 +21,9 @@ export const SArticle = styled.article`
 
   .item__img {
     width: calc(100%);
-    height: calc(28vh);
+    height: calc(25vh);
   }
+
   .item__description__wrapper {
     display: flex;
     flex-direction: column;
@@ -42,12 +42,12 @@ export const SArticle = styled.article`
   }
 
   .coin {
-    height: 30px;
+    height: 3.5vh;
   }
 
   .item__name {
-    margin: 2% 5%;
-    font-size: calc(0.9vw);
+    margin: 1vh;
+    font-size: 1vw;
     font-weight: 600;
   }
 
@@ -56,5 +56,14 @@ export const SArticle = styled.article`
     padding: 3% 4%;
     border-radius: 10px;
     font-weight: 600;
+  }
+
+  .buy__btn:hover {
+    box-shadow: 0 0 0.25rem rgba(137, 239, 245, 1),
+      inset 0 0 0.25rem rgba(137, 239, 245, 1),
+      0 0 0.01rem var(--neon-border-color),
+      inset 0 0 0.01rem var(--neon-border-color),
+      0 0 0.5rem var(--neon-border-color),
+      inset 0 0 0.5rem var(--neon-border-color);
   }
 `;

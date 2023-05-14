@@ -27,25 +27,58 @@ const ItemShop = () => {
       </div>
       <SContainer>
         <div className="item__category--container">
-          <h6 className="item__category" onClick={handleSelectedCategory}>
+          <h6
+            className={
+              selectedCategory === "ALL"
+                ? "item__category__selected"
+                : "item__category"
+            }
+            onClick={handleSelectedCategory}
+          >
             ALL
           </h6>
-          <h6 className="item__category" onClick={handleSelectedCategory}>
+          <h6
+            className={
+              selectedCategory === "FURNITURE"
+                ? "item__category__selected"
+                : "item__category"
+            }
+            onClick={handleSelectedCategory}
+          >
             FURNITURE
           </h6>
-          <h6 className="item__category" onClick={handleSelectedCategory}>
+          <h6
+            className={
+              selectedCategory === "ELECTRONICS"
+                ? "item__category__selected"
+                : "item__category"
+            }
+            onClick={handleSelectedCategory}
+          >
             ELECTRONICS
           </h6>
-          <h6 className="item__category" onClick={handleSelectedCategory}>
+          <h6
+            className={
+              selectedCategory === "APPLIANCE"
+                ? "item__category__selected"
+                : "item__category"
+            }
+            onClick={handleSelectedCategory}
+          >
             APPLIANCE
           </h6>
-          <h6 className="item__category" onClick={handleSelectedCategory}>
+          <h6
+            className={
+              selectedCategory === "DECORATION"
+                ? "item__category__selected"
+                : "item__category"
+            }
+            onClick={handleSelectedCategory}
+          >
             DECORATION
           </h6>
         </div>
-        {/* <div> */}
         <ItemList category={selectedCategory}></ItemList>
-        {/* </div> */}
       </SContainer>
       <SGhostContainer position={"top"}>
         {repeatDots()}

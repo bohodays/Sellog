@@ -5,10 +5,10 @@ export const SSection = styled.section<any>`
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
-  width: 100%;
+  width: 100vw;
   /* height: 100%; */
   /* margin: 3%; */
-  margin-left: 10%;
+  /* margin-left: 2vw; */
   position: relative;
 
   .item__pagenation--wrapper {
@@ -20,13 +20,13 @@ export const SSection = styled.section<any>`
     justify-content: center;
     padding: 0.5% 3%;
     /* width: fit-content; */
-    /* position: absolute; */
-    /* bottom: -30%; */
+    position: fixed;
+    bottom: 2.5vh;
     /* left: 40%; */
   }
 
   .page__btn {
-    font-size: 1.3rem;
+    font-size: 1.3vw;
     font-weight: 600;
     color: navy;
     border-radius: 50%;
@@ -37,7 +37,7 @@ export const SSection = styled.section<any>`
   }
 
   .page__btn--active {
-    font-size: 1.3rem;
+    font-size: 1.3vw;
     font-weight: 600;
     color: white;
     border-radius: 50%;
@@ -51,8 +51,14 @@ export const SSection = styled.section<any>`
 export const SDiv = styled.div`
   display: flex;
   /* height: 100%; */
-  width: 100%;
+  width: 82vw;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  /* justify-content: space-evenly; */
+  margin-top: -3vh;
+  margin-left: 2.5vw;
+  /* margin: 0vw 5vw; */
+
   /* margin-top: -3%; */
   /* overflow: hidden; */
   /* justify-content: center; */
