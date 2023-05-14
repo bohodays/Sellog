@@ -1,9 +1,6 @@
 package com.example.selog.controller;
 
-import com.example.selog.dto.member.MemberDto;
-import com.example.selog.dto.member.SignUpDto;
-import com.example.selog.dto.member.TokenDto;
-import com.example.selog.dto.member.TokenRequestDto;
+import com.example.selog.dto.member.*;
 import com.example.selog.entity.Member;
 import com.example.selog.exception.CustomException;
 import com.example.selog.exception.error.ErrorCode;
@@ -16,10 +13,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+
+import java.nio.charset.StandardCharsets;
 
 import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -110,18 +111,50 @@ class MemberControllerTest {
 
     @Test
     void logout() throws Exception {
+        mockMvc.perform(get("/api/user/logout"))
+                .andExpect(status().isOk())
+                .andReturn();
     }
 
     @Test
     void deleteMember() throws Exception {
+        mockMvc.perform(delete("/api/user").with(csrf()))
+                .andExpect(status().isOk())
+                .andReturn();
     }
 
     @Test
     void updateTarget() throws Exception {
+        TargetDto targetDto = TargetDto.builder()
+                .bojTarget("1-1").blogTarget("7-1").feedTarget(true).githubTarget("1-1").csTarget(true)
+                .build();
+
+        mockMvc.perform(put("/api/user/target").with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(targetDto)))
+                .andExpect(status().isOk())
+                .andReturn();
     }
 
     @Test
     void updateMember() throws Exception {
+        MemberUpdateDto memberUpdateDto = MemberUpdateDto.builder()
+                        .contact("contact").nickname("nickname").motto("motto").blog("blog").github("github").build();
+
+        when(memberService.updateMember(any(),any(),any())).thenReturn(memberDto);
+        String json = new ObjectMapper().writeValueAsString(memberUpdateDto);
+        MockMultipartFile dto = new MockMultipartFile("memberUpdateDto", "memberUpdateDto", "application/json", json.getBytes(StandardCharsets.UTF_8));
+
+        MvcResult mvcResult = mockMvc.perform(multipart(HttpMethod.PUT,"/api/user")
+                        .file(dto).with(csrf()))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        SuccessResponse response = new ObjectMapper().readValue(mvcResult.getResponse().getContentAsString(), SuccessResponse.class);
+        MemberDto result = new ObjectMapper().convertValue(response.getResponse(), MemberDto.class);
+
+        assertThat(result.getEmail()).isEqualTo(memberDto.getEmail());
+
     }
 
     @Nested
@@ -189,18 +222,75 @@ class MemberControllerTest {
 
         @Test
         void logout() throws Exception {
+            doThrow(new CustomException(ErrorCode.NO_USER)).when(memberService).logout(any());
+            mockMvc.perform(get("/api/user/logout"))
+                    .andExpect(status().isNotFound())
+                    .andReturn();
+
+            doThrow(new RuntimeException()).when(memberService).logout(any());
+            mockMvc.perform(get("/api/user/logout"))
+                    .andExpect(status().isInternalServerError())
+                    .andReturn();
         }
 
         @Test
         void deleteMember() throws Exception {
+            doThrow(new CustomException(ErrorCode.NO_USER)).when(memberService).deleteMember(any());
+
+            mockMvc.perform(delete("/api/user").with(csrf()))
+                    .andExpect(status().isNotFound())
+                    .andReturn();
+
+            doThrow(new RuntimeException()).when(memberService).deleteMember(any());
+
+            mockMvc.perform(delete("/api/user").with(csrf()))
+                    .andExpect(status().isInternalServerError())
+                    .andReturn();
         }
 
         @Test
         void updateTarget() throws Exception {
+            TargetDto targetDto = TargetDto.builder()
+                    .bojTarget("1-1").blogTarget("7-1").feedTarget(true).githubTarget("1-1").csTarget(true)
+                    .build();
+
+            doThrow(new CustomException(ErrorCode.NO_USER)).when(memberService).updateTarget(any(), any());
+
+            mockMvc.perform(put("/api/user/target").with(csrf())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(new ObjectMapper().writeValueAsString(targetDto)))
+                    .andExpect(status().isNotFound())
+                    .andReturn();
+
+            doThrow(new RuntimeException()).when(memberService).updateTarget(any(), any());
+
+            mockMvc.perform(put("/api/user/target").with(csrf())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(new ObjectMapper().writeValueAsString(targetDto)))
+                    .andExpect(status().isInternalServerError())
+                    .andReturn();
         }
 
         @Test
         void updateMember() throws Exception {
+
+            MemberUpdateDto memberUpdateDto = MemberUpdateDto.builder()
+                    .contact("contact").nickname("nickname").motto("motto").blog("blog").github("github").build();
+
+            doThrow(new CustomException(ErrorCode.NO_USER)).when(memberService).updateMember(any(),any(),any());
+            String json = new ObjectMapper().writeValueAsString(memberUpdateDto);
+            MockMultipartFile dto = new MockMultipartFile("memberUpdateDto", "memberUpdateDto", "application/json", json.getBytes(StandardCharsets.UTF_8));
+
+            mockMvc.perform(multipart(HttpMethod.PUT,"/api/user")
+                            .file(dto).with(csrf()))
+                    .andExpect(status().isNotFound())
+                    .andReturn();
+
+            doThrow(new RuntimeException()).when(memberService).updateMember(any(),any(),any());
+            mockMvc.perform(multipart(HttpMethod.PUT,"/api/user")
+                            .file(dto).with(csrf()))
+                    .andExpect(status().isInternalServerError())
+                    .andReturn();
         }
     }
 }
