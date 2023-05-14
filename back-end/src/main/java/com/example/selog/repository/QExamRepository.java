@@ -9,4 +9,5 @@ public interface QExamRepository {
 
     public List<Exam> getExamListByRandom(Long start, Long end);
     public List<Exam> getExamListByCategory(String category);
+    public List<Exam> getRealTimeExamList();
 }

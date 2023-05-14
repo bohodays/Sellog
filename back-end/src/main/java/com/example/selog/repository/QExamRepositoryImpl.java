@@ -30,4 +30,13 @@ public class QExamRepositoryImpl implements QExamRepository{
                 .where(exam.category.eq(category))
                 .fetch();
     }
+
+    @Override
+    public List<Exam> getRealTimeExamList() {
+
+        return jpaQueryFactory
+                .selectFrom(exam)
+                .where(exam.category.eq("realtime"))
+                .fetch();
+    }
 }

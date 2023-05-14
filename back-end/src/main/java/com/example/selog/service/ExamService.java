@@ -42,4 +42,18 @@ public class ExamService {
                 .map(Exam::toExamDto)
                 .collect(Collectors.toList());
     }
+
+    public List<ExamDto> getRealTimeExamList() {
+
+        List<Exam> result = examRepository.getRealTimeExamList();
+
+        log.info("결과 개수 : {}",result.size());
+
+        int offset = (int)(Math.random() * (result.size() -3)+1);
+
+        return result.subList(offset,offset+3)
+                .stream()
+                .map(Exam::toExamDto)
+                .collect(Collectors.toList());
+    }
 }
