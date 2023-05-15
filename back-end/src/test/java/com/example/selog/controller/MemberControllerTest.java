@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 
 import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -47,7 +48,7 @@ class MemberControllerTest {
             .githubTarget("1-1").bojTarget("1-1").blogTarget("7-1").feedTarget(false).csTarget(false)
             .baekjoon("algo").blog("blog").github("github")
             .motto("motto").characterId(0).contact("contact").points(1000)
-//            .github_start_date(now()).algo_start_date(now()).blog_start_date(now())
+//            .github_start_date(LocalDateTime.now()).algo_start_date(LocalDateTime.now()).blog_start_date(LocalDateTime.now())
             .build();
 
 
