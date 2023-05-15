@@ -194,16 +194,13 @@ const Info = () => {
             1vs1 Battle에서는 다른 유저와 실시간 CS Quiz 대결을 할 수 있습니다.
           </p>
           <p>
-            매칭이 이루어지면 3개의 OX 퀴즈가 출제되며, 각 문제당 20초의
+            매칭이 이루어지면 3개의 OX 퀴즈가 출제되며, 각 문제당 10초의
             제한시간이 있습니다.
           </p>
         </section>
         <section className="section">
           <h2>04</h2>
           <p>Feed에서는 여러 IT 기술 블로그 포스트를 모아 볼 수 있습니다.</p>
-          <button className="go-to-home" onClick={handleMoveHome}>
-            HOME
-          </button>
         </section>
         <section className="section">
           <h2>05</h2>
@@ -213,7 +210,7 @@ const Info = () => {
             로그인을 진행하면 목표 달성 여부를 자동으로 체크하는 기능을 이용하실
             수 있습니다.{" "}
           </p>
-          <button className="go-to-home">
+          <button className="go-to-install">
             <Link
               to={
                 "https://chrome.google.com/webstore/detail/sellog/baafapflapkopdlopohcmebnadhkambm?hl=ko"
@@ -222,6 +219,9 @@ const Info = () => {
             >
               INSTALL
             </Link>
+          </button>
+          <button className="go-to-home" onClick={handleMoveHome}>
+            HOME
           </button>
         </section>
       </div>
