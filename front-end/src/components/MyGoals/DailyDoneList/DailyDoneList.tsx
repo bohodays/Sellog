@@ -17,6 +17,7 @@ const DailyDoneList = ({ selectedDateProps }: ISelectedDate) => {
   // modal
   const [isOpen, setIsOpen] = useState(false);
   const [activeType, setActiveType] = useState("");
+
   const handleOpen = (e: any) => {
     setIsOpen(true);
     console.log(e.target.id);

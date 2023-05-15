@@ -8,7 +8,7 @@ import { useRecoilState } from "recoil";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightLong, faSlash } from "@fortawesome/free-solid-svg-icons";
 import ItemModalStyle from "./ItemModalStyle";
 
 interface IItemModalProps {
@@ -55,10 +55,17 @@ const ItemItem = ({ shopItem, setIsModalOpen, setItem }: IItemModalProps) => {
               Will you buy {shopItem?.name?.split("_").join(" ")}?
             </p>
             <div className="buy__point">
-              <img src={coin} className="buy__modal__coin"></img> {mypoint}{" "}
+              <img src={coin} className="buy__modal__coin"></img>
+              <p className="cur__point">{mypoint}</p>
               <FontAwesomeIcon
                 icon={faArrowRightLong}
                 className="right__arrow"
+              />
+              <FontAwesomeIcon
+                icon={faSlash}
+                className="slash"
+                rotation={270}
+                size="lg"
               />
               <p className="after__point">
                 {shopItem?.point && mypoint - shopItem.point}
