@@ -21,7 +21,7 @@ function sendNotification(point) {
       eventTime: Date.now(),
     }, () => {
     });
-  }else if(point === -1){
+  }else if(point == -1){
     chrome.notifications.create({
       type: "basic",
       title: "SELLOG",
@@ -31,12 +31,22 @@ function sendNotification(point) {
       eventTime: Date.now(),
     }, () => {
     });
-  }else if(point === -2){
+  }else if(point == -2){
     chrome.notifications.create({
       type: "basic",
       title: "SELLOG",
       iconUrl: "../assets/sellogo.png",
       message: "목표를 설정해주세요.",
+      priority: 2, // -2 to 2 (highest)
+      eventTime: Date.now(),
+    }, () => {
+    });
+  }else{
+    chrome.notifications.create({
+      type: "basic",
+      title: "SELLOG",
+      iconUrl: "../assets/sellogo.png",
+      message: "기준점을 넘지 못해 기록이 인정되지 않습니다.",
       priority: 2, // -2 to 2 (highest)
       eventTime: Date.now(),
     }, () => {

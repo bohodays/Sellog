@@ -23,10 +23,10 @@ function createRecord(token, message, type, problemId) {
   if (xhr.status === 200) {
     // console.log(xhr.responseText);
     const point = JSON.parse(xhr.responseText).response;
-    // console.log(point);
+    console.log(point);
     if (point > 0 || point == -1) {
       // 메시지
-      // console.log(point);
+      console.log(point);
       chrome.runtime.sendMessage({
         message: "alarm",
         payload: { point },
