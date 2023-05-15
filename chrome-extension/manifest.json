@@ -151,7 +151,8 @@
         "scripts/storage.js",
         "scripts/enable.js",
         "scripts/tistory/tistory.js",
-        "scripts/tistory/uploadfunctions.js"
+        "scripts/tistory/uploadfunctions.js",
+        "library/spin.js"
       ],
       "run_at": "document_idle"
     },
@@ -167,7 +168,8 @@
         "scripts/storage.js",
         "scripts/enable.js",
         "scripts/velog/velog.js",
-        "scripts/velog/uploadfunctions.js"
+        "scripts/velog/uploadfunctions.js",
+        "library/spin.js"
       ],
       "run_at": "document_idle"
     }

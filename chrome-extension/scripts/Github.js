@@ -5,7 +5,7 @@ class GitHub {
 
   async createRecord(type, message, problemId) {
     // token, message, tree, parent
-    console.log('createRecord', 'message:', message, 'type:', type, 'problemId:', problemId);
+    // console.log('createRecord', 'message:', message, 'type:', type, 'problemId:', problemId);
     return createRecord(this.token, message, type, problemId);
   }
 }
@@ -21,12 +21,12 @@ function createRecord(token, message, type, problemId) {
   xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
   xhr.send(JSON.stringify({ message, type, problemId }));
   if (xhr.status === 200) {
-    console.log(xhr.responseText);
+    // console.log(xhr.responseText);
     const point = JSON.parse(xhr.responseText).response;
-
-    if (point > 0 || point === -1) {
+    // console.log(point);
+    if (point > 0 || point == -1) {
       // 메시지
-      console.log(point);
+      // console.log(point);
       chrome.runtime.sendMessage({
         message: "alarm",
         payload: { point },
@@ -35,7 +35,14 @@ function createRecord(token, message, type, problemId) {
     return JSON.parse(xhr.responseText);
   } else if (xhr.status === 409) {
     console.log("이미 제출 이력이 있습니다.")
-  } else {
+  } else if(xhr.status === 404) {
+    point = -2;
+    chrome.runtime.sendMessage({
+      message: "alarm",
+      payload: { point },
+    });
+  }
+  else {
     console.log(`Error: ${xhr.status} - ${xhr.statusText}`);
     throw new Error(xhr.statusText);
   }

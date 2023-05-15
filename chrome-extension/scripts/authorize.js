@@ -21,6 +21,7 @@ const localAuth = {
     } else {
       // eslint-disable-next-line
       const accessToken = url.match(/\&accessToken=([\w\/\-.,]+)/);
+      // console.log(accessToken);
       if (accessToken) {
         that.finish(accessToken[1]);
       }else {
@@ -68,12 +69,18 @@ const localAuth = {
 
 localAuth.init(); // load params.
 const link = window.location.href;
-
 /* Check for open pipe */
-if (window.location.host === 'k8a404.p.ssafy.io' && link.includes("refreshToken") && link.includes("accessToken")) {
+if (link.includes("k8a404.p.ssafy.io") && link.includes("refreshToken") && link.includes("accessToken")) {
   chrome.storage.local.get('pipe_Sellog', (data) => {
     if (data && data.pipe_Sellog) {
       localAuth.requestToken(link);
+    }
+  });
+}else if(link.includes("k8a404.p.ssafy.io")){
+  //k8a404 로컬스토리에 저장되어있는 토큰을 가져오기
+  chrome.storage.local.get('pipe_Sellog', (data) => {
+    if (data && data.pipe_Sellog && localStorage.getItem("accessToken") ) {
+      localAuth.finish(localStorage.getItem("accessToken"));
     }
   });
 }

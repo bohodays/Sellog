@@ -1,5 +1,5 @@
 // Set to true to enable console log
-// const debug = false;
+const debug = false;
 
 let loader;
 let ispublish  = false;
@@ -7,7 +7,7 @@ let content = '';
 let title = '';
 
 const currentUrl = window.location.href;
-console.log(currentUrl);
+// console.log(currentUrl);
 
 
 if (currentUrl.includes('velog.io')) startLoader();
@@ -31,7 +31,7 @@ function startLoader() {
 
   loader = setInterval(async () => {
     // 기능 Off시 작동하지 않도록 함
-    console.log(ispublish);
+    // console.log(ispublish);
     if (document.querySelector('[data-testid="publish"]') && !ispublish) {
       ispublish = true;
       const publishBtn = document.querySelector('[data-testid="publish"]');
@@ -53,17 +53,15 @@ function startLoader() {
 
           content = document.querySelector("#preview > div").textContent;
           const url = "https://velog.io" + document.querySelector('.username').textContent + title;
-          console.log(url);
+          // console.log(url);
           const message = `[Velog] Title: ${title}`+'\n'+ `URL: ${url}`+'\n' + `CONTENT : ${content}`;
 
-          console.log(message);
+          // console.log(message);
           uploadOnePostingOnSellog(message);
-          console.log("전송완");
         } catch(error){
           console.log(error);
         } finally {
           ispublish = false;
-          console.log("변경");
           content = '';
           title = '';
           startLoader();

@@ -1,12 +1,12 @@
 // Set to true to enable console log
-// const debug = false;
+const debug = false;
 
 let loader;
 let count  = 0;
 let content  = "";
 
 const currentUrl = window.location.href;
-console.log(currentUrl);
+// console.log(currentUrl);
 
 
 if (currentUrl.includes('tistory.com/manage/newpost')) startLoader();
@@ -36,7 +36,7 @@ function startLoader() {
       window.addEventListener('beforeunload', (e) => {
         try {
           e.preventDefault();
-          console.log("이벤트막아")
+          // console.log("이벤트막아")
           stopLoader();
           const title = document.querySelector("#post-title-inp").textContent;
           const url = document.querySelector("#editor-root > div:nth-child(42) > div > div > div > form > fieldset > div.layer_body > div > dl:nth-child(5) > dd > span").textContent + title;
@@ -46,7 +46,7 @@ function startLoader() {
           uploadOnePostingOnSellog(message)
             .then(() => {
               // 페이지 이동
-              console.log("다시 이동해");
+              // console.log("다시 이동해");
               publishBtn.click();
             })
           
