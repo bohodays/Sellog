@@ -21,8 +21,6 @@ export const apiGetUserInfo = async () => {
     const response = await api.get(`/user`);
     return response;
   } catch (e: any) {
-    console.log(e.response.status);
-
     if (e.response.status === 401) {
       return "accessTokenReNew";
     }
