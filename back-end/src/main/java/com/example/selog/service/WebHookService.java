@@ -200,8 +200,7 @@ public class WebHookService {
         requestBody.put("messages", messages);
 
         // 요청에 사용될 모델 설정
-        //requestBody.put("model", "gpt-3.5-turbo");
-        requestBody.put("model", "gpt-4-32k-0314");
+        requestBody.put("model", "gpt-3.5-turbo");
         // 완료시 생성할 최대 토큰수
         requestBody.put("max_tokens", 1500);
 
