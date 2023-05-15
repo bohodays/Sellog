@@ -47,6 +47,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Feed } from "@/components/Main/Models/Feed";
 
+// 이스터에그용 이미지
+import BloomerImg from "@/assets/imgs/main/bloomerImg.png";
+
 type GLTFResult = GLTF & {
   nodes: {
     f_1: THREE.SkinnedMesh;
@@ -85,13 +88,6 @@ const Scene = ({ buttonRef }: any) => {
   const feedRef = useRef<any>();
   const feedFontRef = useRef<any>();
   const airBalloonRef = useRef<any>();
-
-  // Texture
-  // const floorTexture = useTexture(GridImg);
-  // floorTexture.wrapS = RepeatWrapping;
-  // floorTexture.wrapT = RepeatWrapping;
-  // floorTexture.repeat.x = 10;
-  // floorTexture.repeat.y = 10;
 
   // Renderer
   const { gl, raycaster, clock, camera, scene } = useThree<any>();
@@ -447,7 +443,10 @@ const Scene = ({ buttonRef }: any) => {
     }
   });
 
-  console.log(userInfo.characterId);
+  // 이스터에그
+  // const bloomerTexture = useTexture(BloomerImg);
+  // bloomerTexture.wrapS = RepeatWrapping;
+  // bloomerTexture.wrapT = RepeatWrapping;
 
   return (
     <Suspense>
@@ -638,14 +637,15 @@ const Scene = ({ buttonRef }: any) => {
       <Tree position={[3, 0, -18]} castShadow={true} />
       <Tree position={[4, 0, -22]} castShadow={true} />
       <Tree position={[9, 0, -20]} castShadow={true} />
-      {/* 잔디 */}
-      {/* <Grass position={[3, 0, 0]} castShadow={true} />
-      <Grass position={[-4, 0, -2]} castShadow={true} />
-      <Grass position={[4, 0, 3]} castShadow={true} />
-      <Grass position={[-6, 0, 4]} castShadow={true} />
-      <Grass position={[0, 0, 10]} castShadow={true} /> */}
       {/* 돌담길 */}
       <group position={[0, 0, 0]}></group>
+
+      {/* 이스터에그 */}
+      {/* 블루머 */}
+      {/* <mesh name="test" position={[0, 0.1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[5, 5]} />
+        <meshStandardMaterial transparent={true} map={bloomerTexture} />
+      </mesh> */}
     </Suspense>
   );
 };
