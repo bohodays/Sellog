@@ -135,7 +135,10 @@ const MyProfile = (props: MyProfileProps) => {
           <NoTarget />
         ) : (
           <div className="container__habit">
-            Today
+            <div className="head__habit">
+              <div className="head__habit-today">Today</div>
+              <div className="head__habit-todo">To Do</div>
+            </div>
             <div className="container__habit-stats">
               github
               <div className="progress__bar progress__bar--github">

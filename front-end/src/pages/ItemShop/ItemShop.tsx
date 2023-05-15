@@ -84,6 +84,7 @@ const ItemShop = () => {
             DECORATION
           </h6>
         </div>
+        <div>My coin</div>
         <ItemList category={selectedCategory}></ItemList>
         <FontAwesomeIcon
           icon={faRightFromBracket}
