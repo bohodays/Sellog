@@ -1,37 +1,36 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SArticle } from "./styles";
-import item_sample from "@/assets/imgs/retro/item_sample.png";
 import coin from "@/assets/imgs/retro/coin.png";
-import {
-  IShopItem,
-  IShopItemProps,
-} from "@/typeModels/ItemShop/iteminterfaces";
+import { IShopItem } from "@/typeModels/ItemShop/iteminterfaces";
 import { apiBuyItem } from "@/api/store";
 import { userInfoState } from "@/recoil/myroom/atoms";
 import { useRecoilState } from "recoil";
-import ItemWrapper from "../ItemWrapper/ItemWrapper";
-import ItemModal from "../ItemModal.tsx/ItemModal";
-import { IModalProps } from "../ItemModal.tsx/ItemModal";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
+import ItemModalStyle from "./ItemModalStyle";
 
 interface IItemModalProps {
   shopItem: IShopItem;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setItem: React.Dispatch<React.SetStateAction<IShopItem | null>>;
 }
+
 const ItemItem = ({ shopItem, setIsModalOpen, setItem }: IItemModalProps) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [mypoint, setMypoint] = useState(userInfo.points);
   const [possession, setPossession] = useState(shopItem.possession);
+  const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
+  const handleOpen = () => setIsBuyModalOpen(true);
+  const handleClose = () => setIsBuyModalOpen(false);
 
-  // 이미 갖고 있는 아이템 possession 검사해서 못사게 하는거 추가
   const buyItem = () => {
     apiBuyItem(shopItem?.id)
       .then((r) => {
         setMypoint(r?.data.response);
         setPossession(1);
-        alert(
-          `구입이 완료 되었습니다. 내 포인트: ${mypoint} => ${r?.data.response}`
-        );
+        handleClose();
       })
       .catch((e) => {
         console.log(e);
@@ -44,7 +43,39 @@ const ItemItem = ({ shopItem, setIsModalOpen, setItem }: IItemModalProps) => {
   };
   return (
     <SArticle>
-      {/* {isModalOpen && <ItemModal></ItemModal>} */}
+      <Modal
+        open={isBuyModalOpen}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box component="div" sx={ItemModalStyle}>
+          <div className="buy__modal">
+            <p className="buy__question">
+              Will you buy {shopItem?.name?.split("_").join(" ")}?
+            </p>
+            <div className="buy__point">
+              <img src={coin} className="buy__modal__coin"></img> {mypoint}{" "}
+              <FontAwesomeIcon
+                icon={faArrowRightLong}
+                className="right__arrow"
+              />
+              <p className="after__point">
+                {shopItem?.point && mypoint - shopItem.point}
+              </p>
+            </div>
+            <div className="buy__btns__wrapper">
+              <button onClick={buyItem} className="buy__btn__yes">
+                Yes
+              </button>
+              <button onClick={handleClose} className="buy__btn__no">
+                No
+              </button>
+            </div>
+          </div>
+        </Box>
+      </Modal>
+
       <div className="item__img__wrapper">
         <img
           src={shopItem.path}
@@ -52,7 +83,6 @@ const ItemItem = ({ shopItem, setIsModalOpen, setItem }: IItemModalProps) => {
           onClick={handleOpenModal}
         ></img>
       </div>
-      {/* <ItemWrapper shopItem={shopItem} /> */}
 
       <div className="item__description__wrapper">
         <div className="item__name">{shopItem?.name?.split("_").join(" ")}</div>
@@ -61,11 +91,10 @@ const ItemItem = ({ shopItem, setIsModalOpen, setItem }: IItemModalProps) => {
             <img src={coin} className="coin"></img>
             {shopItem?.point}
           </div>
-          {/* {item.category} */}
           {possession ? (
             <div className="purchased">Purchased</div>
           ) : (
-            <button className="buy__btn" onClick={buyItem}>
+            <button className="buy__btn" onClick={handleOpen}>
               Buy
             </button>
           )}

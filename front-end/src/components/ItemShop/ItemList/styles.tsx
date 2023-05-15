@@ -51,7 +51,7 @@ export const SSection = styled.section<any>`
 export const SDiv = styled.div`
   display: flex;
   /* height: 100%; */
-  width: 82vw;
+  width: 80vw;
   flex-wrap: wrap;
   justify-content: flex-start;
   /* justify-content: space-evenly; */
