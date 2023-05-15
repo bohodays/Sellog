@@ -25,7 +25,6 @@ export const SMain = styled.main`
   }
 
   .section {
-    box-sizing: border-box;
     padding: 5rem;
     height: 100vh;
   }
@@ -48,8 +47,8 @@ export const SMain = styled.main`
     background-color: var(--color-yellow);
     color: var(--color-white);
     position: absolute;
-    bottom: 3rem;
-    left: 50%;
+    bottom: 25rem;
+    left: 75%;
     transform: translateX(-50%);
     width: 8vw;
     height: 3rem;
