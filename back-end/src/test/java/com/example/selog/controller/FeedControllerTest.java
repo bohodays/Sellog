@@ -1,6 +1,5 @@
 package com.example.selog.controller;
 
-import com.example.selog.dto.exam.ExamDto;
 import com.example.selog.dto.feed.FeedDto;
 import com.example.selog.response.SuccessResponse;
 import com.example.selog.service.FeedService;
@@ -18,10 +17,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import javax.servlet.http.Cookie;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +32,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = FeedController.class)
@@ -85,20 +89,27 @@ class FeedControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
 
-//        SuccessResponse response = new ObjectMapper().readValue(mvcResult.getResponse().getContentAsString(), SuccessResponse.class);
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.registerSubtypes(SliceImpl.class);
-//
-//        Slice<FeedDto> slice = objectMapper.readValue(response.getResponse(), new TypeReference<SliceImpl<FeedDto>>() {});
-//
-//        List<FeedDto> result = slice.getContent();
-//
-//        assertThat(result.size()).isEqualTo(feedDtoList.size());
     }
 
 
     @Test
     void feedDetail() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(put("/api/feeds/{feed_id}", 1L).with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        SuccessResponse response = new ObjectMapper().readValue(mvcResult.getResponse().getContentAsString(), SuccessResponse.class);
+        assertThat(response.getResponse()).isEqualTo("success");
+
+        MvcResult mvcResult2 = mockMvc.perform(put("/api/feeds/{feed_id}", 1)
+                        .cookie(new Cookie("feed_views", "1")) // 쿠키 설정
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+        SuccessResponse response2 = new ObjectMapper().readValue(mvcResult2.getResponse().getContentAsString(), SuccessResponse.class);
+        assertThat(response2.getResponse()).isEqualTo("success");
     }
 
     @Nested
@@ -126,6 +137,12 @@ class FeedControllerTest {
 
         @Test
         void feedDetail() throws Exception {
+            doThrow(new RuntimeException()).when(feedService).updateViews(any());
+
+            mockMvc.perform(put("/api/feeds/{feed_id}", 1L).with(csrf())
+                            .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isInternalServerError())
+                    .andReturn();
         }
     }
 }
