@@ -25,3 +25,13 @@ export const apiGetRoomId = async () => {
     console.log(e);
   }
 };
+
+// 실시간 문제에서 사용할 OX 문제 3개 가져오기
+export const apiGetOXQuiz = async () => {
+  try {
+    const response = await api.get(`/exam/real-time`);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};

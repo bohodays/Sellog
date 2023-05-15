@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface GitHubRepository extends JpaRepository<GitHub,Long>,QGitHubRepository {
 
+    GitHub findByWebhookId(Integer webhook_id);
 }

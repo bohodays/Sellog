@@ -156,6 +156,8 @@ export const SSection = styled.section`
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+
+    padding: 1rem;
   }
 
   .answer:hover + .explanation__wrapper {

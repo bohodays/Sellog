@@ -157,9 +157,18 @@ const CSQuizBattleResult = () => {
       </div>
       <div className="answer">explanation</div>
       <div className="explanation__wrapper">
-        <p className="explanation">{`1. ${quizList[0].answer}`}</p>
-        <p className="explanation">{`2. ${quizList[1].answer}`}</p>
-        <p className="explanation">{`3. ${quizList[2].answer}`}</p>
+        <div>
+          <p className="explanation">{`1. ${quizList[0].answer}`}</p>
+          <p className="explanation">{`${quizList[0].comment}`}</p>
+        </div>
+        <div>
+          <p className="explanation">{`2. ${quizList[1].answer}`}</p>
+          <p className="explanation">{`${quizList[1].comment}`}</p>
+        </div>
+        <div>
+          <p className="explanation">{`3. ${quizList[2].answer}`}</p>
+          <p className="explanation">{`${quizList[2].comment}`}</p>
+        </div>
       </div>
     </SSection>
   );

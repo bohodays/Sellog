@@ -1,11 +1,13 @@
 package com.example.realtime.controller;
 
+import com.example.realtime.dto.ExamDto;
 import com.example.realtime.dto.MatchingDto;
 import com.example.realtime.dto.RealTimeInfoDto;
 import com.example.realtime.exception.CustomException;
 import com.example.realtime.exception.error.ErrorCode;
 import com.example.realtime.response.ErrorResponse;
 import com.example.realtime.response.SuccessResponse;
+import com.example.realtime.service.ExamService;
 import com.example.realtime.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +36,7 @@ public class MatchingController {
 
     private final SimpMessageSendingOperations messagingTemplate;
 
+    private final ExamService examService;
     //매칭 요청을 한다.
     @GetMapping
     public ResponseEntity<?> matching(){
@@ -74,8 +77,12 @@ public class MatchingController {
                     .characterId(user2.getCharacterId())
                     .build();
 
+            List<ExamDto> eList = examService.getRealTimeExamList();
+
             messagingTemplate.convertAndSend("/sub/" + user1.getRoomId(), info2); //user1에게 user2 정보를
+            messagingTemplate.convertAndSend("/sub/" + user1.getRoomId(),eList);
             messagingTemplate.convertAndSend("/sub/" + user2.getRoomId(), info1);
+            messagingTemplate.convertAndSend("/sub/" + user2.getRoomId(),eList);
             return new ResponseEntity<>(new SuccessResponse("매칭 요청을 완료했습니다."),HttpStatus.OK);
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());

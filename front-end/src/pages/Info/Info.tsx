@@ -1,18 +1,19 @@
 import React, { Suspense, useEffect, useRef } from "react";
 import { SMain } from "./styles";
 import { Canvas, useThree } from "@react-three/fiber";
-import { PerspectiveCamera } from "@react-three/drei";
+import { PerspectiveCamera, useTexture } from "@react-three/drei";
 import { House } from "@/components/Main/Models/House";
 import { MyRoomFont } from "@/components/Main/Models/Myroom_font";
 import { ItemShopMap } from "@/components/Main/Models/ItemShopMap";
 import { NewCsQuiz } from "@/components/Main/Models/NewCsQuiz";
-import { PCFSoftShadowMap } from "three";
+import { PCFSoftShadowMap, RepeatWrapping } from "three";
 import { gsap } from "gsap";
 import { ItemShopFont } from "@/components/Main/Models/ItemShop_font";
 import { CSQuizFont } from "@/components/Main/Models/Csquiz_font";
-import { useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Feed } from "@/components/Main/Models/Feed";
 import { FeedFont } from "@/components/Main/Models/Feed_font";
+import ChromeImg from "@/assets/imgs/retro/chrome_logo.png";
 
 const Scene = () => {
   const houseRef = useRef<any>();
@@ -52,8 +53,14 @@ const Scene = () => {
       x: 10,
       z: -10,
     },
+    {
+      x: -5,
+      z: -20,
+    },
   ];
+
   let currentSection = 0;
+
   function setSection() {
     const newSection = Math.round(window.scrollY / window.innerHeight);
 
@@ -69,6 +76,11 @@ const Scene = () => {
 
   window.addEventListener("resize", setSize);
   window.addEventListener("scroll", setSection);
+
+  // Texture
+  const floorTexture = useTexture(ChromeImg);
+  floorTexture.wrapS = RepeatWrapping;
+  floorTexture.wrapT = RepeatWrapping;
 
   return (
     <Suspense>
@@ -109,16 +121,24 @@ const Scene = () => {
         position={[7, 0, 10]}
         castShadow={true}
       />
-      <ItemShopFont itemshopFontRef={itemshopFontRef} position={[7, 0, 10]} />
+      <ItemShopFont
+        itemshopFontRef={itemshopFontRef}
+        position={[7, 0, 10]}
+        castShadow={true}
+      />
 
       {/* CS 퀴즈 */}
       <NewCsQuiz csquizRef={csquizRef} position={[-10, 0.1, 0]} />
       <CSQuizFont position={[-13, 0.5, 0]} />
 
       {/* Feed */}
-      {/* 임시 모델 */}
-      <Feed position={[10, 0, -10]} />
+      <Feed position={[10, 0, -10]} castShadow={true} />
       <FeedFont position={[14, 0, -10]} />
+
+      <mesh name="chrome" position={[-7, 2.5, -20]}>
+        <planeGeometry args={[3, 5]} />
+        <meshStandardMaterial map={floorTexture} />
+      </mesh>
     </Suspense>
   );
 };
@@ -183,6 +203,25 @@ const Info = () => {
           <p>Feed에서는 여러 IT 기술 블로그 포스트를 모아 볼 수 있습니다.</p>
           <button className="go-to-home" onClick={handleMoveHome}>
             HOME
+          </button>
+        </section>
+        <section className="section">
+          <h2>05</h2>
+          <p>아래의 링크를 통해 Chrome 웹 스토어에서 Sellog를 설치해주세요. </p>
+          <p>설치 후 확장 프로그램의 Github나 Tistory 버튼을 클릭하여</p>
+          <p>
+            로그인을 진행하면 목표 달성 여부를 자동으로 체크하는 기능을 이용하실
+            수 있습니다.{" "}
+          </p>
+          <button className="go-to-home">
+            <Link
+              to={
+                "https://chrome.google.com/webstore/detail/sellog/baafapflapkopdlopohcmebnadhkambm?hl=ko"
+              }
+              target="_blank"
+            >
+              INSTALL
+            </Link>
           </button>
         </section>
       </div>
