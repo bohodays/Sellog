@@ -248,7 +248,7 @@ export function Black_teatable_1(props: JSX.IntrinsicElements["group"] | any) {
     props.downButtonRef.current &&
     props.deleteButtonRef.current
   ) {
-    if (target === "Bedside_light_1") {
+    if (target === "Black_teatable_1") {
       props.rotationLeftButtonRef.current.addEventListener("click", () => {
         setRotationLeft(true);
       });
