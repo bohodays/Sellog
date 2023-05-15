@@ -6,6 +6,7 @@ import {
   Routes,
   Navigate,
   Outlet,
+  useNavigate,
 } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { localData } from "./utils/token";
@@ -85,7 +86,10 @@ function App() {
               <Route path="/csquiz-result" element={<CSQuizResult />} />
               <Route path="/csquiz-matching" element={<CSQuizMatching />} />
               <Route path="/csQuizMap/:id" element={<CSQuizMap />} />
-              <Route path="/csquiz-battle-result" element={<CSQuizBattleResult />} />
+              <Route
+                path="/csquiz-battle-result"
+                element={<CSQuizBattleResult />}
+              />
               <Route path="/mygoals" element={<MyGoals />} />
             </Route>
             <Route path="/oauth-login" element={<OauthRedirect />} />
