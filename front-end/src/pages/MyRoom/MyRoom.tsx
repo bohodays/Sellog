@@ -27,29 +27,17 @@ const MyRoom = () => {
   const [myItems, setMyItems] = useRecoilState(myItemsState);
   const setItemsHeight = useSetRecoilState(itemsHeightState);
 
-  // 여기서 유저가 가지고 있는 아이템 API 호출해서 가지고 있는 아이템들 myItemsState atom에 넣기
   const itemsArray = [];
   useEffect(() => {
     apiGetTotalMyItems().then((res) => {
       setMyItems(res?.data.response);
       setItemsHeight(res?.data.response);
     });
-    // .then(() => {
-    //   myItems.forEach((item) => {
-    //     const itemInfo = {
-    //       itemId: item.itemId,
-    //       y: item.y,
-    //     };
-    //     itemsArray.push(itemInfo);
-    //   });
-    //   setItemsHeight(itemsArray);
-    // });
   }, []);
 
   return (
     <SMain>
       {/* 좌측 내 프로필 */}
-
       {!isEdit && activePage === "myprofile" ? (
         <MyProfile
           userData={user}
@@ -62,7 +50,6 @@ const MyRoom = () => {
       ) : (
         <EditProfile setIsEdit={setIsEdit} isEdit={isEdit}></EditProfile>
       )}
-      {/* <MyProfile userData={user} setActivePage={setActivePage}></MyProfile> */}
 
       {/* 우측 마이룸 */}
       <MyRoomContainer
