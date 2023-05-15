@@ -84,7 +84,7 @@ public class WebHookService {
         if(gitHub == null) {
             gitHubRepository.save(GitHub.builder()
                             .member(member)
-                            .webhook_id(webhookId)
+                            .webhookId(webhookId)
                             .name(repoName)
                             .build());
         }

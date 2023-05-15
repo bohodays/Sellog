@@ -165,7 +165,7 @@ public class GitHubService {
 
             GitHub github = GitHub.builder()
                     .name(rName)
-                    .webhook_id(webhook_id)
+                    .webhookId(webhook_id)
                     .member(member)
                     .build();
 
@@ -206,7 +206,7 @@ public class GitHubService {
                     .append(member.getEmail()+"/")
                     .append(g.getName()+"/")
                     .append("hooks/")
-                    .append(g.getWebhook_id());
+                    .append(g.getWebhookId());
 
             log.info("request url : {}", url);
 
