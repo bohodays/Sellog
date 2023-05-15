@@ -46,32 +46,25 @@ function App() {
   );
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  let isReNew = false;
 
   // 로그인 안 되어있으면 login 페이지로 보냄
   const PrivateRoute = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-      const accessToken = localData.getAccessToken();
-      if (accessToken) {
-        apiGetUserInfo().then((res) => {
-          if (res === "accessTokenReNew") {
-            navigate("/login");
-          } else {
-            const userInfo = res?.data.response;
-            setUserInfo(userInfo);
-          }
-        });
-      }
-    }, []);
-
     return localStorage.getItem("accessToken") ? (
       <Outlet />
     ) : (
       <Navigate to="/login" />
     );
   };
+
+  useEffect(() => {
+    const accessToken = localData.getAccessToken();
+    if (accessToken) {
+      apiGetUserInfo().then((res) => {
+        const userInfo = res?.data.response;
+        setUserInfo(userInfo);
+      });
+    }
+  }, []);
 
   return (
     <div className="App">
@@ -80,7 +73,7 @@ function App() {
         {/* <RecoilRoot> */}
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={isReNew ? <Login /> : <PrivateRoute />}>
+            <Route path="/" element={<PrivateRoute />}>
               <Route path="/" element={<Navigate to="/main" />} />
               <Route path="/item-shop" element={<ItemShop />} />
               <Route path="/main" element={<Main />} />
