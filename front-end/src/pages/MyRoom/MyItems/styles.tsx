@@ -10,6 +10,30 @@ export const SSection = styled.section`
   overflow-y: auto;
   overflow-x: hidden;
 
+  .toshop__button {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.5rem;
+    width: fit-content;
+    margin-bottom: 3%;
+    margin-inline: 3%;
+    font-family: "Chicle";
+    font-size: 1.1rem;
+
+    background-color: #ffcc00;
+    border: solid 3px;
+    border-radius: 1rem 1rem 1rem 1rem;
+    box-shadow: 1px 1px 1px 1px grey;
+    width: 5vw;
+    text-align: center;
+    p {
+      margin: 0%;
+      padding: 0%;
+    }
+  }
+
   ::-webkit-scrollbar {
     width: 12px;
   }

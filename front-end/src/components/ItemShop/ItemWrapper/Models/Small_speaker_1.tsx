@@ -24,13 +24,14 @@ export function Small_speaker_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/small_speaker_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.Plane080.geometry}
-        material={materials.black}
-        position={[0, 3.99, 0]}
-        rotation={[0, -0.39, 0]}
-      >
+    <group
+      {...props}
+      dispose={null}
+      scale={2.5}
+      position={[0, -1.5, 0]}
+      rotation={[0.2, -2.1, 0]}
+    >
+      <mesh geometry={nodes.Plane080.geometry} material={materials.black}>
         <mesh
           geometry={nodes.Plane081.geometry}
           material={materials["black-gloss"]}

@@ -31,7 +31,7 @@ export function Old_tv_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/old_tv_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} scale={2.5} position={[0, -6, 0]}>
       <mesh
         geometry={nodes.TV.geometry}
         material={materials.black}

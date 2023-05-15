@@ -1,9 +1,11 @@
 package com.example.realtime.service;
 
 import com.example.realtime.dto.MatchingDto;
+import com.example.realtime.dto.MemberDto;
 import com.example.realtime.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -22,14 +24,22 @@ public class MatchingService {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public void addMatchingMember(String roomId, String sessionId){
+    public void addMatchingMember(String roomId, String sessionId, MemberDto memberDto){
 
         MatchingDto matchingDto = MatchingDto.builder()
                 .roomId(roomId)
                 .sessionId(sessionId)
                 .enterTime(LocalDateTime.now())
+                .userId(memberDto.getUserId())
+                .characterId(memberDto.getCharacterId())
+                .nickname(memberDto.getNickname())
                 .build();
 
-        rabbitTemplate.convertAndSend(EXCAHGE_NAME, routingKey, matchingDto); // rabbit MQ 전송
+        log.info("매칭 요청 전송 : {}",roomId);
+        try {
+            rabbitTemplate.convertAndSend( EXCAHGE_NAME, routingKey, matchingDto);
+        } catch (AmqpException e) {
+           log.info("rabbitmq 전송 실패 : {}", e.getMessage());
+        }
     }
 }

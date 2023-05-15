@@ -7,6 +7,7 @@ import * as THREE from "three";
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { useLocation } from "react-router-dom";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -22,15 +23,33 @@ type GLTFResult = GLTF & {
 type ActionName = "Idle" | "Run" | "Sad" | "Song Jump" | "Walk" | "Win";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
-export function M1(props: JSX.IntrinsicElements["group"]) {
+export function M1(props: JSX.IntrinsicElements["group"] | any) {
   const group = useRef<THREE.Group | any>();
   const { nodes, materials, animations } = useGLTF(
     "/models/characters/m1.glb"
   ) as GLTFResult;
   const { actions } = useAnimations<GLTFActions | any>(animations, group);
 
+  const location = useLocation();
+
+  const result = props.result;
+
   useEffect(() => {
-    actions["Song Jump"]?.play();
+    if (location.pathname.includes("matching")) {
+      actions["Idle"]?.play();
+    } else {
+      if (result) {
+        if (result === 0) {
+          actions["Idle"]?.play();
+        } else if (result > 0) {
+          actions["Win"]?.play();
+        } else if (result < 0) {
+          actions["Sad"]?.play();
+        }
+      } else {
+        actions["Song Jump"]?.play();
+      }
+    }
   }, []);
 
   return (

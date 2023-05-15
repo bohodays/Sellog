@@ -36,7 +36,13 @@ export function White_controller_1(props: JSX.IntrinsicElements["group"]) {
     "/models/items/white_controller_1.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      position={[0, -3, 0]}
+      scale={3}
+      rotation={[THREE.MathUtils.degToRad(30), THREE.MathUtils.degToRad(30), 0]}
+    >
       <mesh
         geometry={nodes.Plane022.geometry}
         material={nodes.Plane022.material}

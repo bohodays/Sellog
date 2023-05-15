@@ -11,12 +11,12 @@ export const SSection = styled.section`
 `;
 export const SDiv = styled.div`
   position: fixed;
-  width: 30vw;
-  height: 60vh;
+  width: 50vw;
+  height: 70vh;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 5;
-  background-color: rgb(255, 255, 255, 0.9);
+  background-color: rgb(200, 200, 200, 0.8);
   border-radius: 10px;
 `;

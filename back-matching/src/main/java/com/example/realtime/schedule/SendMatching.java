@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -16,7 +17,7 @@ import java.util.List;
 @Service
 public class SendMatching {
 
-    String url = "http://k8a404.p.ssafy.io:8083/api/matching/result";
+    String url = "https://k8a404.p.ssafy.io/matching/result";
 
     public void sendMatching(List<MatchingDto> send) {
 
@@ -29,6 +30,6 @@ public class SendMatching {
 
         HttpEntity<?> requestMessage = new HttpEntity<>(send, httpHeaders);
 
-        restTemplate.postForEntity(url, requestMessage, List.class);
+        restTemplate.exchange(url, HttpMethod.POST, requestMessage, String.class);
     }
 }

@@ -40,8 +40,6 @@ const CSQuizContents = () => {
     }
   };
 
-  console.log({ activeStep, correctCount });
-
   return (
     <>
       {isExplanation ? (

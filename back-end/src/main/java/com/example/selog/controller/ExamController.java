@@ -46,4 +46,16 @@ public class ExamController {
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/real-time")
+    public ResponseEntity<?> getRealTimeExam() {
+        log.info("real-time exam list호출");
+
+        try{
+            return new ResponseEntity<>(new SuccessResponse(examService.getRealTimeExamList()), HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

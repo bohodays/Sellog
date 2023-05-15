@@ -20,6 +20,8 @@ export const SMain = styled.main`
     top: 15vh;
   }
   .goHome__button {
+    cursor: pointer;
+    cursor: pointer;
     /* display: flex;
     justify-self: end; */
     position: absolute;
@@ -27,6 +29,11 @@ export const SMain = styled.main`
     right: 3vw;
     font-size: 1.7rem;
     color: black;
+    transition: all 300ms linear;
+  }
+
+  .goHome__button:hover {
+    color: var(--color-yellow);
   }
 `;
 
@@ -99,6 +106,10 @@ export const SBody = styled.div`
     ::-webkit-scrollbar {
       /* display: hidden; */
       visibility: hidden;
+    }
+    .intersection__div {
+      height: 15%;
+      /* background-color: red; */
     }
   }
 `;

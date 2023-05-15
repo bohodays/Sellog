@@ -1,6 +1,7 @@
 import { SProfile } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
 import { faSquareCheck, faSquare } from "@fortawesome/free-regular-svg-icons";
 import profilePic from "@/assets/imgs/retro/profilePic.jpeg";
 import github from "@/assets/imgs/retro/github.png";
@@ -29,9 +30,7 @@ const MyProfile = (props: MyProfileProps) => {
   const profileImg: any = useRef(props.userData.img);
   const [newProfileImg, setNewProfileImg] = useState(profileImg.current);
   // 습관 설정이 하나도 안되어 있을 때 컴포넌트 나타남
-  const [isTarget, setIsTarget] = useState<string | null>(
-    props.userData.start_date
-  );
+  const [isTarget, setIsTarget] = useState<boolean>(false);
   // 크롬 확장자 구현 되면 false로 초기화하기
   const [isInstalled, setIsInstalled] = useState<boolean>(false);
   // 오늘 목표 달성 했는지
@@ -50,6 +49,17 @@ const MyProfile = (props: MyProfileProps) => {
   }, [userInfo, isInstalled]);
 
   useEffect(() => {
+    // if (userInfoState.)
+    console.log(userInfo);
+    if (
+      !userInfo.algo_start_date ||
+      !userInfo.blog_start_date ||
+      !userInfo.github_start_date ||
+      !userInfo.feedTarget ||
+      !userInfo.csTarget
+    ) {
+      setIsTarget(true);
+    }
     // 습관 실천 기록 가져오는 api
     apiGetAchievedRecordList().then((data: any) => {
       if (data.response) {
@@ -251,12 +261,6 @@ const MyProfile = (props: MyProfileProps) => {
         <div className="platform-address"></div>
       </div>
       {/*  */}
-      {isInstalled || isTarget ? null : (
-        <InstallModal
-          isInstalled={isInstalled}
-          setIsInstalled={setIsInstalled}
-        />
-      )}
     </SProfile>
   );
 };

@@ -28,12 +28,22 @@ export function Blue_chair_2(props: JSX.IntrinsicElements["group"]) {
   ) as GLTFResult;
   return (
     <group {...props} dispose={null}>
+      <directionalLight
+        color={"#ffffff"}
+        intensity={2}
+        position={[1.5, 7, 3]}
+        castShadow={true}
+        shadow-camera-far={20}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-normalBias={0.05}
+      />
       <mesh
         geometry={nodes.chair001.geometry}
         material={materials.Red}
-        position={[0, 0, 0]}
-        rotation={[0, -0.45, 0]}
-        scale={1.3}
+        position={[0, -2, 0]}
+        scale={2.5}
+        rotation={[0, THREE.MathUtils.degToRad(70), 0]}
       >
         <mesh
           geometry={nodes.BezierCircle.geometry}
@@ -45,13 +55,11 @@ export function Blue_chair_2(props: JSX.IntrinsicElements["group"]) {
           geometry={nodes.Vert002.geometry}
           material={materials.Metal}
           position={[0, 0.77, 0]}
-          scale={0.99}
         />
         <mesh
           geometry={nodes.Vert003.geometry}
           material={materials.Red}
           position={[0, 0.77, 0]}
-          scale={0.99}
         />
       </mesh>
     </group>

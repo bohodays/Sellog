@@ -20,15 +20,16 @@ public class MatchingAlgorithm {
     static List<MatchingDto> matchingDtoList = new ArrayList<>();
 
     public Map<Object, Object> algorithm(){
+        matchingDtoList = new ArrayList<>();
         int size = matchingWaitList.getMatchingList().size();
-
-        if(size<5) {
+        log.info("현재 매칭 대기 중 인원 : {}" ,size);
+        if(size<2) {
             result.put("succeed",false);
             return result;
         }else {
-            //5명이 모였을 경우에만
-            for (int i = 0; i < 5; i++) {
-                if (matchingWaitList.getMatchingResultList().isEmpty()) break;
+            //2명이 모였을 경우에만
+            for (int i = 0; i < 2; i++) {
+                if (matchingWaitList.getMatchingList().isEmpty()) break;
 
                 MatchingDto user = matchingWaitList.getMatchingList().poll();
                 if (matchingWaitList.getBadList().contains(user.getSessionId())) {
@@ -37,6 +38,8 @@ public class MatchingAlgorithm {
                     i--;
                 } else {
                     matchingDtoList.add(user); //매칭 성사
+                    matchingWaitList.getMatchingList().remove(i);
+                    i--;
                 }
             }
 

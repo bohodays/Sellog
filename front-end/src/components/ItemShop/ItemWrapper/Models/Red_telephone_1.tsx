@@ -33,9 +33,9 @@ export function Red_telephone_1(props: JSX.IntrinsicElements["group"]) {
       <mesh
         geometry={nodes.Plane040.geometry}
         material={materials["Red Gloss"]}
-        position={[0.59, 2.73, -1.14]}
-        rotation={[0, -0.71, 0]}
-        scale={0.94}
+        position={[0, -1, 0]}
+        rotation={[0, -2, 0]}
+        scale={2.5}
       >
         <mesh
           geometry={nodes.Circle016.geometry}

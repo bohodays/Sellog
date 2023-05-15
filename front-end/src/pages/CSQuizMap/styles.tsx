@@ -1,9 +1,69 @@
 import styled from "styled-components";
 
-export const SMain = styled.main`
+export const SMain = styled.main<any>`
   position: relative;
   height: 100%;
-  background-color: #000000;
+
+  @font-face {
+    font-family: "GmarketSansMedium";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+      format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .quiz__wrapper {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    background-color: var(--color-white);
+    width: 36vw;
+    height: 24vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    border-radius: 16px;
+
+    font-family: "GmarketSansMedium";
+
+    padding: 1rem;
+  }
+
+  .counting {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .timer {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+  }
+
+  .progress {
+    position: relative;
+    height: 1.5rem;
+    background-color: #ffa1a1;
+    border-radius: 20px;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .timer__icon {
+    font-size: 2rem;
+    position: absolute;
+    left: 0;
+  }
 `;
 
 export const SButtonWrapper = styled.div<any>`
@@ -18,49 +78,81 @@ export const SButtonWrapper = styled.div<any>`
   transform: translateX(-50%);
   text-align: center;
   font-family: "omyu_pretty";
+`;
 
-  .btn-info {
-    margin-bottom: 2rem;
+export const SSection = styled.section`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+
+  height: 100%;
+  background: linear-gradient(-80deg, #db929d 50%, #fbf4e4 50%);
+
+  .character__wrapper {
+    width: 35vw;
+    height: 60%;
+    transform: translateY(-3rem);
   }
 
-  .btn {
-    font-family: "omyu_pretty";
-    --side-shadow-color: hsl(40, 100%, 30%);
-    --ground-shadow-color: hsl(0, 0%, 10%);
-    --background-color: hsl(40, 100%, 50%);
-    --text-color: white;
-    --font-size: 30pt;
-    --basis-perspective: rotateX(20deg);
-    font-size: var(--font-size);
-    padding: 0.5em 1em;
-    border: none;
-    border-radius: 48%;
-    background: var(--background-color);
-    color: var(--text-color);
-    box-shadow: 0 6px 0px var(--side-shadow-color),
-      0 10px 12px var(--ground-shadow-color),
-      inset 0 0px 0px var(--ground-shadow-color);
-    transition: all 200ms ease-in-out;
-    cursor: pointer;
-    user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
+  .page-state__wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-    /* transform: translateX(-50%); */
-    /* transform: translateX(-50%); */
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    background-color: var(--color-yellow);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Chicle";
+    font-size: 2vw;
+
+    /* margin: 5% auto; */
+    border: 6px solid #fff;
+
+    border-color: #fff #000000 #000000 #fff;
+    animation: spin 800ms infinite linear;
+
+    @keyframes spin {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -50%) rotate(359deg);
+      }
+    }
   }
 
-  .btn:hover {
-    /* transform: translateY(5px); */
-    box-shadow: 0 1px 0px var(--side-shadow-color),
-      0 2px 4px var(--ground-shadow-color),
-      inset 0 0px 0px var(--ground-shadow-color);
+  .page-state {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-family: "Chicle";
+    font-size: 2vw;
   }
 
-  .btn:active {
-    /* transform: translateY(6px); */
-    box-shadow: 0 0px 0px var(--side-shadow-color),
-      0 -1px 0px var(--ground-shadow-color),
-      inset 0 4px 8px 2px var(--ground-shadow-color);
+  .my-character-name {
+    @font-face {
+      font-family: "GmarketSansMedium";
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+        format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    font-family: "GmarketSansMedium";
+
+    font-size: 1.5vw;
+    margin: auto;
+    text-align: center;
+    margin-top: 2rem;
   }
 `;

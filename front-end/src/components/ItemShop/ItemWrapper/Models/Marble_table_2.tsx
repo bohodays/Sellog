@@ -28,7 +28,13 @@ export function Marble_table_2(props: JSX.IntrinsicElements["group"]) {
     "/models/items/marble_table_2.glb"
   ) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      scale={1.3}
+      position={[-0.5, -1.5, -1]}
+      rotation={[0, -2, 0]}
+    >
       <mesh
         geometry={nodes.Plane009.geometry}
         material={materials.Marble}
