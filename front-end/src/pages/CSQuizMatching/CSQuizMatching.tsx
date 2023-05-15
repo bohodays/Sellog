@@ -130,8 +130,6 @@ const CSQuizMatching = () => {
 
             if (received.sender !== userInfo.userId) {
               if (Object.keys(received).length === 3) {
-                console.log({ received }, "여기로 안 오나???????????");
-
                 setQuizList(received);
                 setCurrentState("landing");
               }
