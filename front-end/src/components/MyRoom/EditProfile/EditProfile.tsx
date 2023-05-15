@@ -50,7 +50,6 @@ function EditProfile(props: MyProfileProps) {
   // 이미지변화 생겼을때
   const onChange: any = (e: any) => {
     const currentImg = e.target.files[0];
-    console.log("currentImg", currentImg); // 바뀐 파일 불러와짐
     if (currentImg) {
       const newImgReader = new FileReader();
       // 인스턴스 생성 되었을때
@@ -64,7 +63,7 @@ function EditProfile(props: MyProfileProps) {
         setImgFile(currentImg);
       };
     } else {
-      console.log("change error", profilePic);
+      // console.log("change error", profilePic);
     }
   };
 
@@ -113,38 +112,51 @@ function EditProfile(props: MyProfileProps) {
   function isValid() {
     let validNum = 0;
     if (!isValidNickName(nicknameRef.current.value)) {
-      console.log("Nick Name", isValidNickName(nicknameRef.current.value));
+      nicknameRef.current.classList.add("empty");
     } else {
+      nicknameRef.current.classList.remove("empty");
       // valid nickname
       validNum++;
     }
+
     if (!isValidMotto(mottoRef.current.value)) {
-      console.log("Motto", isValidMotto(mottoRef.current.value));
+      mottoRef.current.classList.add("empty");
     } else {
+      mottoRef.current.classList.remove("empty");
       // valid motto
       validNum++;
     }
-    if (!isValidEmail(contactRef.current.value)) {
-      console.log("Email");
+
+    if (contactRef.current.value) {
+      if (!isValidEmail(contactRef.current.value)) {
+        contactRef.current.classList.add("empty");
+        validNum--;
+      } else {
+        contactRef.current.classList.remove("empty");
+        // valid email
+      }
     } else {
-      // valid email
-      validNum++;
+      contactRef.current.classList.remove("empty");
     }
-    if (!isValidBlog(blogRef.current.value)) {
-      console.log("blog");
+
+    if (blogRef.current.value) {
+      if (!isValidBlog(blogRef.current.value)) {
+        blogRef.current.classList.add("empty");
+        validNum--;
+      } else {
+        blogRef.current.classList.remove("empty");
+        //valid blog
+      }
     } else {
-      //valid blog
-      validNum++;
+      blogRef.current.classList.remove("empty");
     }
+
     // 모두 만족하면 true 리턴
-    if (validNum === 4) {
+    if (validNum === 2) {
       return true;
     } else {
       return false;
     }
-
-    // isValidGithub(githubRef.current.value);
-    // validNum ++
   }
   // 프로필 수정하는 함수
   const editHandler = () => {
