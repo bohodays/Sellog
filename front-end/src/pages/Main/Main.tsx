@@ -639,63 +639,13 @@ const Scene = ({ buttonRef }: any) => {
       <Tree position={[4, 0, -22]} castShadow={true} />
       <Tree position={[9, 0, -20]} castShadow={true} />
       {/* 잔디 */}
-      <Grass position={[3, 0, 0]} castShadow={true} />
-      {/* <Grass position={[-4, 0, -0.5]} castShadow={true} /> */}
+      {/* <Grass position={[3, 0, 0]} castShadow={true} />
+      <Grass position={[-4, 0, -2]} castShadow={true} />
+      <Grass position={[4, 0, 3]} castShadow={true} />
+      <Grass position={[-6, 0, 4]} castShadow={true} />
+      <Grass position={[0, 0, 10]} castShadow={true} /> */}
       {/* 돌담길 */}
-      <group position={[0, 0, 0]}>
-        {/* 집 방향 안내 돌달김 */}
-        {/* <Stone
-          scale={1.1}
-          rotation={[0, THREE.MathUtils.degToRad(30), 0]}
-          position={[3, 0, 3]}
-          castShadow={true}
-        />
-        <Stone
-          scale={0.55}
-          position={[7, 0, 7]}
-          rotation={[0, THREE.MathUtils.degToRad(30), 0]}
-          castShadow={true}
-        /> */}
-        {/* 상점 방향 안내 돌담길 */}
-        {/* <Stone
-          scale={1.1}
-          position={[3, 0, -4]}
-          rotation={[0, THREE.MathUtils.degToRad(120), 0]}
-          castShadow={true}
-        />
-        <Stone
-          scale={0.5}
-          position={[7, 0, -8]}
-          rotation={[0, THREE.MathUtils.degToRad(100), 0]}
-          castShadow={true}
-        /> */}
-        {/* CS 퀴즈 방향 안내 돌담길 */}
-        {/* <Stone
-          scale={1.1}
-          rotation={[0, THREE.MathUtils.degToRad(30), 0]}
-          position={[-3.5, 0, -4]}
-          castShadow={true}
-        />
-        <Stone
-          scale={0.7}
-          rotation={[0, THREE.MathUtils.degToRad(30), 0]}
-          position={[-7, 0, -6.5]}
-          castShadow={true}
-        /> */}
-        {/* FEED 방향 안내 돌담길 */}
-        {/* <Stone
-          scale={1.3}
-          rotation={[0, THREE.MathUtils.degToRad(120), 0]}
-          position={[-4, 0, 4]}
-          castShadow={true}
-        />
-        <Stone
-          scale={0.6}
-          rotation={[0, THREE.MathUtils.degToRad(120), 0]}
-          position={[-6.2, 0, 7.8]}
-          castShadow={true}
-        /> */}
-      </group>
+      <group position={[0, 0, 0]}></group>
     </Suspense>
   );
 };

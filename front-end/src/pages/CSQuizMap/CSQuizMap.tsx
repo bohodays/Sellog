@@ -628,6 +628,8 @@ const Main = () => {
   const otherNickname = location.state.otherNickname || null;
   const quizList = location.state.quizList;
 
+  console.log({ location, quizList }, "!!!!!!!!!");
+
   const [client, setClient] = useState<Stomp.Client | null>(null);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
