@@ -29,7 +29,7 @@ public class GitHub extends BaseTime {
     private Member member;
 
     @Column(name = "webhook_id")
-    private Integer webhook_id;
+    private Integer webhookId;
 
     public GitHubDto toGitHubDto() {
         return GitHubDto.builder()
