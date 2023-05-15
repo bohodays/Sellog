@@ -10,6 +10,7 @@ import Modal from "@mui/material/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faSlash } from "@fortawesome/free-solid-svg-icons";
 import ItemModalStyle from "./ItemModalStyle";
+import { apiGetUserInfo } from "@/api/user";
 
 interface IItemModalProps {
   shopItem: IShopItem;
@@ -31,6 +32,7 @@ const ItemItem = ({ shopItem, setIsModalOpen, setItem }: IItemModalProps) => {
         setMypoint(r?.data.response);
         setPossession(1);
         handleClose();
+        setUserInfo({ ...userInfo, points: r?.data.response });
       })
       .catch((e) => {
         console.log(e);

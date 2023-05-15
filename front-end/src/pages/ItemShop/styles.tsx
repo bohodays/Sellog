@@ -5,7 +5,14 @@ export const SMain = styled.main`
   width: 100vw;
   position: relative;
   background-color: #1a1830;
-  padding: 2%;
+  padding: 2vw;
+
+  .left__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 2.5vw;
+  }
 
   .item__category--container {
     text-align: center;
@@ -14,9 +21,8 @@ export const SMain = styled.main`
     font-style: italic;
     font-family: "Exo 2", sans-serif;
     color: yellow;
-    padding: 0.5% 1.5%;
+    padding: 0.5vh 1vw;
     margin-top: 5vh;
-    margin-left: 2.5vw;
     border: 0.3rem solid rgba(137, 239, 245, 1);
     border-radius: 2rem;
     text-transform: uppercase;
@@ -30,16 +36,6 @@ export const SMain = styled.main`
       0 0 0.5rem var(--neon-border-color),
       inset 0 0 0.5rem var(--neon-border-color);
   }
-
-  /* .item__category--container::-moz-selection {
-    background-color: var(--neon-border-color);
-    color: var(--neon-text-color);
-  }
-
-  .item__category--container::selection {
-    background-color: var(--neon-border-color);
-    color: var(--neon-text-color);
-  } */
 
   .item__category--container:focus {
     outline: none;
@@ -179,5 +175,41 @@ export const SContainer = styled.div`
     height: 4vh;
     cursor: pointer;
     color: var(--neon-border-color);
+  }
+
+  .mycoin__box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    align-items: center;
+    border: 3px solid rgba(137, 239, 245, 1);
+    padding: 1vh;
+    margin-top: 3.5vh;
+    border-radius: 20px;
+
+    p {
+      font-size: 0.8vw;
+    }
+  }
+  .mycoin__wrapper {
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 0.9vw;
+    font-weight: bold;
+    margin-top: 0.3vh;
+  }
+
+  .coin__icon {
+    height: 3vh;
+    animation: rotate_image 1.1s linear 2;
+    transform-origin: 50% 50%;
+  }
+
+  @keyframes rotate_image {
+    100% {
+      transform: rotateY(360deg);
+    }
   }
 `;

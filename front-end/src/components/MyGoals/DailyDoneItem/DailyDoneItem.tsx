@@ -40,45 +40,20 @@ const DailyDoneItem = ({ doneItem }: IDoneItemProps) => {
   };
   return (
     <SDiv onClick={handleModalClick}>
-      <div style={{ display: "flex", textAlign: "center" }}>
-        <div
-          style={{
-            width: "30%",
-          }}
-        >
-          <div
-            style={{
-              textAlign: "center",
-              padding: "3px",
-              borderBottom: "2px solid lightgrey",
-              borderRight: "2px solid lightgrey",
-            }}
-          >
+      <div className="doneItem__container">
+        <div className="doneItem__left__column">
+          <div className="doneItem__left__category">
             {category[doneItem.type][0]}
           </div>
-          <p>{repo ? repo : null}</p>
+          <p className="doneItem__title">{repo ? repo : null}</p>
         </div>
-        <div
-          style={{
-            width: "70%",
-          }}
-        >
-          <div
-            style={{
-              textAlign: "center",
-              padding: "3px",
-              borderBottom: "2px solid lightgrey",
-            }}
-          >
+        <div className="doneItem__right__column">
+          <div className="doneItem__right__category">
             {category[doneItem.type][1]}
           </div>
-          <p style={{ fontSize: "0.8vw" }}>{message ? message : null}</p>
-          <p>
-            {link && (
-              <a href={link} style={{ color: "red", wordWrap: "break-word" }}>
-                {link}
-              </a>
-            )}
+          <p className="doneItem__msg">{message ? message : null}</p>
+          <p className="doneItem__msg doneItem__link">
+            {link && <a href={link}>{link}</a>}
           </p>
         </div>
       </div>
