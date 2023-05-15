@@ -293,6 +293,8 @@ public class WebHookService {
                 if(category.equals("github")) member.updateGitHUbStartDate(LocalDateTime.now());
                 else if(category.equals("blog")) member.updateBlogStartDate(LocalDateTime.now());
                 else if(category.equals("algo")) member.updateAlgoStartDate(LocalDateTime.now());
+                else if(category.equals("cs")) member.updateCsStartDate(LocalDateTime.now());
+                else if(category.equals("feed")) member.updateFeedStartDate(LocalDateTime.now());
             }
             //현재 구간에서 목표를 달성한 경우라면 포인트 주기
             List<Record> recordList = recordRepository.getUserRecordByUserIdAfterStartDate(member.getUserId(),
@@ -358,6 +360,8 @@ public class WebHookService {
         if(category.equals("github")) return member.getGithub_start_date();
         else if(category.equals("blog")) return member.getBlog_start_date();
         else if(category.equals("algo")) return member.getAlgo_start_date();
+        else if(category.equals("cs")) return member.getCs_start_date();
+        else if(category.equals("feed")) return member.getFeed_start_date();
 
         return LocalDateTime.now(); //oops
     }
