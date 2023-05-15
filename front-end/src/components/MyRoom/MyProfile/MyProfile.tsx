@@ -45,12 +45,6 @@ const MyProfile = (props: MyProfileProps) => {
   const feedNavigator = useNavigate();
 
   useEffect(() => {
-    console.log("something changed", userInfo, { isInstalled }, { isTarget });
-  }, [userInfo, isInstalled]);
-
-  useEffect(() => {
-    // if (userInfoState.)
-    console.log(userInfo);
     if (
       !userInfo.algo_start_date ||
       !userInfo.blog_start_date ||
@@ -69,7 +63,6 @@ const MyProfile = (props: MyProfileProps) => {
     });
     // 오늘 습관 실천
     apiGetTodayRecord().then((data: any) => {
-      console.log("apiGetTodayRecord", data.data.response);
       if (data.data.response) {
         if (data.data.response.algo) {
           setIsTodayAlgo(true);
@@ -78,15 +71,12 @@ const MyProfile = (props: MyProfileProps) => {
           setIsTodayGithub(true);
         }
         if (data.data.response.blog) {
-          console.log("blog committed");
           setIsTodayBlog(true);
         }
         if (data.data.response.cs) {
           setIsTodayCS(true);
         }
         if (data.data.response.feed) {
-          console.log("fedd read");
-
           setIsTodayFeed(true);
         }
       }
@@ -94,7 +84,6 @@ const MyProfile = (props: MyProfileProps) => {
   }, []);
   // 유저 개인정보 수정하는 함수
   const userInfoHandler = () => {
-    // console.log("user info", props.userData);
     props.setIsEdit(!props.isEdit);
   };
   const todayCSHandler = () => {
