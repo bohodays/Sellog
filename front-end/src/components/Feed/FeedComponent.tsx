@@ -2,11 +2,17 @@ import React, { useEffect } from "react";
 import { SArticle } from "./styles";
 import { Link } from "react-router-dom";
 import { addVisitApi } from "@/api/feed";
+import { addFeedRecordApi } from "@/api/record";
 
 export default function FeedComponent({ props }: any) {
   // console.log(props, "aa");
   function feedHandler() {
-    console.log(props.feedId, "feedId");
+    // console.log(props.feedId, "feedId");
+    const postFeed = {
+      type: "feed",
+      message: "feed 기록 추가하기",
+    };
+    addFeedRecordApi(postFeed).then((res) => console.log(res));
     addVisitApi(props.feedId);
   }
   // useEffect(() => {

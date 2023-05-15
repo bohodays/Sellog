@@ -132,11 +132,7 @@ const GoalsSettingModal = ({
                     }
                     inputProps={{
                       min: 1,
-                      max:
-                        userInfo[goalNameToTargetName[activeGoal]] == "algo" ||
-                        userInfo[goalNameToTargetName[activeGoal]] == "github"
-                          ? 3
-                          : 7,
+                      max: 3,
                     }}
                     defaultValue={1}
                     sx={{

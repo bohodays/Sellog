@@ -19,6 +19,7 @@ export default function Feed() {
   const homeNavigator = useNavigate();
   const getOutHandler = () => {
     homeNavigator("/main");
+    window.location.reload();
   };
   const [newsfeed, setNewsFeed] = useState<any>();
   const [mostViewFeed, setMostViewFeed] = useState<any>();
@@ -125,6 +126,7 @@ export default function Feed() {
         <div className="home">
           <button
             className="go-to-home"
+            key={1}
             onClick={() => {
               navigate("/main");
               window.location.reload();
@@ -146,19 +148,24 @@ export default function Feed() {
       <SBody>
         <SSection>
           <div className="mostviewed">
-            <FontAwesomeIcon
-              icon={faFireFlameCurved}
-              style={{ color: "red" }}
-            />
-            <span> 가장 많이 본 피드</span>
+            <p>
+              <FontAwesomeIcon
+                icon={faFireFlameCurved}
+                style={{ color: "red" }}
+              />
+              가장 많이 본 피드
+            </p>
             <div className="mostviewed__list">
               {/* <p> {mostViewFeed}</p> */}
               {isMostView &&
                 mostViewFeed.map((element: any, index: number) => {
                   return (
-                    <li key={index} className="mostview__element">
-                      <Link to={element.link}>{element["title"]}</Link>
-                    </li>
+                    <>
+                      <li key={index} className="mostview__element">
+                        <Link to={element.link}>{element["title"]}</Link>
+                        <span> views: {element["views"]}</span>
+                      </li>
+                    </>
                   );
                 })}
             </div>

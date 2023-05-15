@@ -9,3 +9,8 @@ export interface IFeed {
 export interface IFeedProps {
   props?: object;
 }
+
+export interface IRecordCSFeed {
+  type: string;
+  message: string;
+}
