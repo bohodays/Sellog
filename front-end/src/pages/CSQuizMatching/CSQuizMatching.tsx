@@ -16,7 +16,7 @@ import { F3_Other } from "@/components/Login/Models/OtherModles/F3_Other";
 import { M1_Other } from "@/components/Login/Models/OtherModles/M1_Other";
 import { M2_Other } from "@/components/Login/Models/OtherModles/M2_Other";
 import { M3_Other } from "@/components/Login/Models/OtherModles/M3_Other";
-import { apiGetRoomId } from "@/api/csQuiz";
+import { apiGetOXQuiz, apiGetRoomId } from "@/api/csQuiz";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import { localData } from "@/utils/token";
@@ -110,6 +110,45 @@ const CSQuizMatching = () => {
 
   const navigate = useNavigate();
 
+  const quizList = [
+    {
+      option1: "o",
+      option2: "x",
+      option3: null,
+      option4: null,
+      answer: "x",
+      category: "realtime",
+      comment:
+        "time-slice는 운영체제가 하나의 프로세스를 실행시키는 시간을 말하며",
+      quest:
+        "운영체제 스케쥴러 중 round-robin에서 time slice를 늘리면 response-time이 빨라진다.",
+    },
+    {
+      option1: "o",
+      option2: "x",
+      option3: null,
+      option4: null,
+      answer: "x",
+      category: "realtime",
+      comment:
+        "time-slice는 운영체제가 하나의 프로세스를 실행시키는 시간을 말하며",
+      quest:
+        "운영체제 스케쥴러 중 round-robin에서 time slice를 늘리면 response-time이 빨라진다.",
+    },
+    {
+      option1: "o",
+      option2: "x",
+      option3: null,
+      option4: null,
+      answer: "x",
+      category: "realtime",
+      comment:
+        "time-slice는 운영체제가 하나의 프로세스를 실행시키는 시간을 말하며",
+      quest:
+        "운영체제 스케쥴러 중 round-robin에서 time slice를 늘리면 response-time이 빨라진다.",
+    },
+  ];
+
   useEffect(() => {
     apiGetRoomId().then((res) => {
       const roomId = res?.data.response;
@@ -156,6 +195,7 @@ const CSQuizMatching = () => {
               otherUserChracterId: otherUser,
               otherUserId: otherUserId,
               otherNickname: otherNickname.current.innerText,
+              quizList,
             },
           });
         }

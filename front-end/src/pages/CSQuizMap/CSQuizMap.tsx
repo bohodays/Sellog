@@ -38,6 +38,7 @@ import { XMark } from "./Models/XMark";
 import { gsap } from "gsap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { apiGetOXQuiz } from "@/api/csQuiz";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -215,8 +216,8 @@ const Scene = ({
           destinationPoint.x - userModelRef.current.position.x
         );
 
-        userModelRef.current.position.x += Math.cos(angle) * 0.08;
-        userModelRef.current.position.z += Math.sin(angle) * 0.08;
+        userModelRef.current.position.x += Math.cos(angle) * 0.1;
+        userModelRef.current.position.z += Math.sin(angle) * 0.1;
         // send(userModelRef.current.position.x, userModelRef.current.position.z);
 
         camera.position.x = cameraPosition.x + userModelRef.current.position.x;
@@ -249,8 +250,8 @@ const Scene = ({
           actions1.actions["Run"]?.play();
           actions1.actions["Idle"]?.stop();
 
-          otherUserModelRef1.current.position.x += Math.cos(otherAngle) * 0.08;
-          otherUserModelRef1.current.position.z += Math.sin(otherAngle) * 0.08;
+          otherUserModelRef1.current.position.x += Math.cos(otherAngle) * 0.1;
+          otherUserModelRef1.current.position.z += Math.sin(otherAngle) * 0.1;
 
           if (
             Math.abs(
@@ -285,8 +286,8 @@ const Scene = ({
           actions2.actions["Run"]?.play();
           actions2.actions["Idle"]?.stop();
 
-          otherUserModelRef2.current.position.x += Math.cos(otherAngle) * 0.08;
-          otherUserModelRef2.current.position.z += Math.sin(otherAngle) * 0.08;
+          otherUserModelRef2.current.position.x += Math.cos(otherAngle) * 0.1;
+          otherUserModelRef2.current.position.z += Math.sin(otherAngle) * 0.1;
 
           if (
             Math.abs(
@@ -321,8 +322,8 @@ const Scene = ({
           actions3.actions["Run"]?.play();
           actions3.actions["Idle"]?.stop();
 
-          otherUserModelRef3.current.position.x += Math.cos(otherAngle) * 0.08;
-          otherUserModelRef3.current.position.z += Math.sin(otherAngle) * 0.08;
+          otherUserModelRef3.current.position.x += Math.cos(otherAngle) * 0.1;
+          otherUserModelRef3.current.position.z += Math.sin(otherAngle) * 0.1;
 
           if (
             Math.abs(
@@ -357,8 +358,8 @@ const Scene = ({
           actions4.actions["Run"]?.play();
           actions4.actions["Idle"]?.stop();
 
-          otherUserModelRef4.current.position.x += Math.cos(otherAngle) * 0.08;
-          otherUserModelRef4.current.position.z += Math.sin(otherAngle) * 0.08;
+          otherUserModelRef4.current.position.x += Math.cos(otherAngle) * 0.1;
+          otherUserModelRef4.current.position.z += Math.sin(otherAngle) * 0.1;
 
           if (
             Math.abs(
@@ -393,8 +394,8 @@ const Scene = ({
           actions5.actions["Run"]?.play();
           actions5.actions["Idle"]?.stop();
 
-          otherUserModelRef5.current.position.x += Math.cos(otherAngle) * 0.08;
-          otherUserModelRef5.current.position.z += Math.sin(otherAngle) * 0.08;
+          otherUserModelRef5.current.position.x += Math.cos(otherAngle) * 0.1;
+          otherUserModelRef5.current.position.z += Math.sin(otherAngle) * 0.1;
 
           if (
             Math.abs(
@@ -428,8 +429,8 @@ const Scene = ({
           actions6.actions["Run"]?.play();
           actions6.actions["Idle"]?.stop();
 
-          otherUserModelRef6.current.position.x += Math.cos(otherAngle) * 0.08;
-          otherUserModelRef6.current.position.z += Math.sin(otherAngle) * 0.08;
+          otherUserModelRef6.current.position.x += Math.cos(otherAngle) * 0.1;
+          otherUserModelRef6.current.position.z += Math.sin(otherAngle) * 0.1;
 
           if (
             Math.abs(
@@ -625,6 +626,7 @@ const Main = () => {
   const location = useLocation();
   const otherUserCharacterId = location.state.otherUserChracterId;
   const otherNickname = location.state.otherNickname || null;
+  const quizList = location.state.quizList;
 
   const [client, setClient] = useState<Stomp.Client | null>(null);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
@@ -658,38 +660,15 @@ const Main = () => {
     otherDestinationPoint.z = otherUserModelRef1.current.position.z;
   }
 
-  // 문제 api 요청해서 받기
-  const quizList: any = [
-    {
-      content: "찬휘는 천재다.",
-      correct: "o",
-      answer: "아이디가 찬휘천재이기 때문이다.",
-    },
-    {
-      content: "호정 누나는 도현이형보다 술을 잘 마신다. ",
-      correct: "x",
-      answer: "나는 도현이형 편이다.",
-    },
-    {
-      content: "나는 프론트다",
-      correct: "x",
-      answer: "한화 비전가고 싶다... 나는 백엔드다",
-    },
-  ];
-
-  if (quizContentRef.current) {
-    quizContentRef.current.innerText = quizList[stageRef.current].content;
-  }
-
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       timerRef.current += 1;
-      if (timerRef.current > 19) {
+      if (timerRef.current > 10) {
         // 다시 타이머 되돌리기
         timerRef.current = 0;
 
         // 정답 체크하기
-        if (quizList[stageRef.current].correct === "o") {
+        if (quizList[stageRef.current].answer === "o") {
           // o에 위치한다면
           if (userModelRef.current.position.x < 0) myCorrectRef.current += 1;
 
@@ -712,7 +691,7 @@ const Main = () => {
             if (otherUserModelRef6.current.position.x < 0)
               otherCorrectRef.current += 1;
           }
-        } else if (quizList[stageRef.current].correct === "x") {
+        } else if (quizList[stageRef.current].answer === "x") {
           // x에 위치한다면
           if (userModelRef.current.position.x > 0) myCorrectRef.current += 1;
 
@@ -753,9 +732,9 @@ const Main = () => {
             },
           });
         }
-        quizContentRef.current.innerText = quizList[stageRef.current].content;
+        quizContentRef.current.innerText = quizList[stageRef.current].quest;
       } else {
-        const percentage = ((20 - timerRef.current) / 20) * 100;
+        const percentage = ((11 - timerRef.current) / 11) * 100;
         barRef.current.style.width = `${percentage}%`;
       }
     }, 1000);
@@ -764,6 +743,10 @@ const Main = () => {
       clearInterval(intervalRef.current);
     };
   }, []);
+
+  if (quizContentRef.current) {
+    quizContentRef.current.innerText = quizList[stageRef.current].quest;
+  }
 
   // 소켓 연결
   useEffect(() => {
