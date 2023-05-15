@@ -93,6 +93,11 @@ public class Member extends BaseTime{
 
     @Column(name = "blog_start_date")
     private LocalDateTime blog_start_date;
+    @Column(name = "cs_start_date")
+    private LocalDateTime cs_start_date;
+
+    @Column(name = "feed_start_date")
+    private LocalDateTime feed_start_date;
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Builder.Default

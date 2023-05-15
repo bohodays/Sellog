@@ -147,12 +147,8 @@ public class Member extends BaseTime{
         this.github_start_date = LocalDateTime.now(); // 시작 시간 재 시작
         this.algo_start_date = LocalDateTime.now();
         this.blog_start_date = LocalDateTime.now();
-        if(targetDto.getCsTarget()){
-            this.cs_start_date = LocalDateTime.now();
-        }
-        if(targetDto.getFeedTarget()){
-            this.feed_start_date = LocalDateTime.now();
-        }
+        this.cs_start_date = LocalDateTime.now();
+        this.feed_start_date = LocalDateTime.now();
     }
 
     public void updateMemberInfo(MemberUpdateDto memberUpdateDto){

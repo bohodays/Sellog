@@ -70,6 +70,9 @@ public class RecordService {
         List<Record> recordList = recordRepository.findRecordByStartDay(userId, member.getAlgo_start_date(), now, "algo");
         recordList.addAll(recordRepository.findRecordByStartDay(userId, member.getGithub_start_date(), now, "github"));
         recordList.addAll(recordRepository.findRecordByStartDay(userId, member.getBlog_start_date(), now, "blog"));
+        recordList.addAll(recordRepository.findRecordByStartDay(userId, member.getBlog_start_date(), now, "cs"));
+        recordList.addAll(recordRepository.findRecordByStartDay(userId, member.getBlog_start_date(), now, "feed"));
+
         return toHashMap(recordList);
     }
 
@@ -138,6 +141,12 @@ public class RecordService {
                     .mid(new int[]{66, 40})
                     .build());
         }
+        long diff = ChronoUnit.DAYS.between(member.getCs_start_date(),LocalDateTime.now());
+        result.put("cs",RecordMaintainDto.builder()
+                .day(diff).build());
+        diff = ChronoUnit.DAYS.between(member.getFeed_start_date(),LocalDateTime.now());
+        result.put("feed",RecordMaintainDto.builder()
+                .day(diff).build());
 
         return result;
     }
