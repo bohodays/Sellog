@@ -134,9 +134,17 @@ export const SSection = styled.section`
     margin-block: 5%;
     border-radius: 20px;
     height: 90%;
-    padding: 4%;
+    /* padding: 4%; */
     padding-inline: 8%;
+    /* padding-block: 8%; */
     box-shadow: 2px 2px 1px 1px grey;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    p {
+      margin-block: 0.5rem;
+      font-size: 1.2rem;
+    }
   }
 
   .mostviewed ::-webkit-scrollbar {
