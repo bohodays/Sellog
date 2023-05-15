@@ -6,6 +6,7 @@ import {
   Routes,
   Navigate,
   Outlet,
+  useNavigate,
 } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { localData } from "./utils/token";
@@ -45,25 +46,32 @@ function App() {
   );
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  let isReNew = false;
 
   // 로그인 안 되어있으면 login 페이지로 보냄
   const PrivateRoute = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      const accessToken = localData.getAccessToken();
+      if (accessToken) {
+        apiGetUserInfo().then((res) => {
+          if (res === "accessTokenReNew") {
+            navigate("/login");
+          } else {
+            const userInfo = res?.data.response;
+            setUserInfo(userInfo);
+          }
+        });
+      }
+    }, []);
+
     return localStorage.getItem("accessToken") ? (
       <Outlet />
     ) : (
       <Navigate to="/login" />
     );
   };
-
-  useEffect(() => {
-    const accessToken = localData.getAccessToken();
-    if (accessToken) {
-      apiGetUserInfo().then((res) => {
-        const userInfo = res?.data.response;
-        setUserInfo(userInfo);
-      });
-    }
-  }, []);
 
   return (
     <div className="App">
@@ -72,7 +80,7 @@ function App() {
         {/* <RecoilRoot> */}
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<PrivateRoute />}>
+            <Route path="/" element={isReNew ? <Login /> : <PrivateRoute />}>
               <Route path="/" element={<Navigate to="/main" />} />
               <Route path="/item-shop" element={<ItemShop />} />
               <Route path="/main" element={<Main />} />
@@ -85,7 +93,10 @@ function App() {
               <Route path="/csquiz-result" element={<CSQuizResult />} />
               <Route path="/csquiz-matching" element={<CSQuizMatching />} />
               <Route path="/csQuizMap/:id" element={<CSQuizMap />} />
-              <Route path="/csquiz-battle-result" element={<CSQuizBattleResult />} />
+              <Route
+                path="/csquiz-battle-result"
+                element={<CSQuizBattleResult />}
+              />
               <Route path="/mygoals" element={<MyGoals />} />
             </Route>
             <Route path="/oauth-login" element={<OauthRedirect />} />

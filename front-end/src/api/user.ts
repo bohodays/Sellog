@@ -20,8 +20,12 @@ export const apiGetUserInfo = async () => {
   try {
     const response = await api.get(`/user`);
     return response;
-  } catch (e) {
-    console.log(e);
+  } catch (e: any) {
+    console.log(e.response.status);
+
+    if (e.response.status === 401) {
+      return "accessTokenReNew";
+    }
   }
 };
 
