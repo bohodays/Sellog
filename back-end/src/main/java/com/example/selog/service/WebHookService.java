@@ -1,11 +1,13 @@
 package com.example.selog.service;
 
 import com.example.selog.dto.record.RecordRequestDto;
+import com.example.selog.entity.GitHub;
 import com.example.selog.entity.Member;
 import com.example.selog.entity.Record;
 import com.example.selog.exception.CustomException;
 import com.example.selog.exception.OpenAIException;
 import com.example.selog.exception.error.ErrorCode;
+import com.example.selog.repository.GitHubRepository;
 import com.example.selog.repository.MemberRepository;
 import com.example.selog.repository.RecordRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,8 @@ public class WebHookService {
 
     private RecordRepository recordRepository;
     private MemberRepository memberRepository;
+    private GitHubRepository gitHubRepository;
+
     private Map<String,Integer> score;
     private final RestTemplate restTemplate = restTemplate();
 
@@ -40,9 +44,11 @@ public class WebHookService {
 
     @Autowired
     public WebHookService(RecordRepository recordRepository,
-                          MemberRepository memberRepository) {
+                          MemberRepository memberRepository,
+                          GitHubRepository gitHubRepository) {
         this.recordRepository = recordRepository;
         this.memberRepository = memberRepository;
+        this.gitHubRepository = gitHubRepository;
 
         this.score = new HashMap<>();
         score.put("github",10);
@@ -69,6 +75,19 @@ public class WebHookService {
         log.info("유저네임 {}",who);
         Member member = memberRepository.findByEmail(who)
                 .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
+
+        //github_repo에 없었다면 저장
+
+        Integer webhookId = (Integer)repository.get("id");
+        GitHub gitHub = gitHubRepository.findByWebhookId(webhookId);
+
+        if(gitHub == null) {
+            gitHubRepository.save(GitHub.builder()
+                            .member(member)
+                            .webhook_id(webhookId)
+                            .name(repoName)
+                            .build());
+        }
 
         earnPoints(member,"github");
 
