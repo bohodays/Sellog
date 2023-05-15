@@ -43,10 +43,11 @@ export const SSection = styled.section`
 
   .doneCount__wrapper {
     width: 100%;
-    height: 5vh;
+    height: 6.5vh;
     padding: 3vh 2vw;
     font-family: "Quantico";
     display: flex;
+    position: relative;
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid rgba(229, 229, 229, 0.2);

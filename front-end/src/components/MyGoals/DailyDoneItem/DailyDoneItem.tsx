@@ -3,37 +3,84 @@ import { SDiv } from "./styles";
 import { IDoneItemProps } from "@/typeModels/mygoals/myRecordInterfaces";
 
 const DailyDoneItem = ({ doneItem }: IDoneItemProps) => {
-  const [message, setMessage] = useState<any>();
+  const [repo, setRepo] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
+  const [link, setLink] = useState<string | null>(null);
   const category: any = {
     github: ["repository", "commit messgage"],
     feed: ["title", "post link"],
-    algo: ["problem"],
+    algo: ["problem", "link"],
   };
-  let repo = "";
 
   useEffect(() => {
     if (doneItem?.type === "github") {
-      repo = doneItem.message.split("/")[0];
+      setRepo(doneItem.message.split("/")[0]);
       setMessage(doneItem.message.split("/")[1]);
     } else if (doneItem?.type === "algo") {
-      console.log("최초", doneItem.message);
-      setMessage(doneItem.message.replaceAll("[문제 링크]", ""));
-      setMessage(doneItem.message.replaceAll("]", ""));
-      setMessage(doneItem.message.replaceAll("[", ""));
+      const openingBracketIndex = doneItem.message.indexOf("[문제 링크]");
+      const closingBracketIndex = doneItem.message.indexOf(
+        ")",
+        openingBracketIndex
+      );
+
+      const frontLink = doneItem.message
+        .substring(0, openingBracketIndex)
+        .trim();
+      const problemLink = doneItem.message.substring(
+        openingBracketIndex + 8,
+        closingBracketIndex
+      );
+
+      setRepo(frontLink);
+      setLink(problemLink);
     }
   }, []);
-  console.log(repo, message);
+  const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
   return (
-    <SDiv>
-      <div className="doneItem__wrapper">
-        {message}
-        {/* {doneItem?.message} */}
-        <p>
-          {category[doneItem.type][0]} : {repo ? repo : null}
-        </p>
-        <p>
-          {category[doneItem.type][1]} : {message ? message : null}
-        </p>
+    <SDiv onClick={handleModalClick}>
+      <div style={{ display: "flex", textAlign: "center" }}>
+        <div
+          style={{
+            width: "30%",
+          }}
+        >
+          <div
+            style={{
+              textAlign: "center",
+              padding: "3px",
+              borderBottom: "2px solid lightgrey",
+              borderRight: "2px solid lightgrey",
+            }}
+          >
+            {category[doneItem.type][0]}
+          </div>
+          <p>{repo ? repo : null}</p>
+        </div>
+        <div
+          style={{
+            width: "70%",
+          }}
+        >
+          <div
+            style={{
+              textAlign: "center",
+              padding: "3px",
+              borderBottom: "2px solid lightgrey",
+            }}
+          >
+            {category[doneItem.type][1]}
+          </div>
+          <p style={{ fontSize: "0.8vw" }}>{message ? message : null}</p>
+          <p>
+            {link && (
+              <a href={link} style={{ color: "red", wordWrap: "break-word" }}>
+                {link}
+              </a>
+            )}
+          </p>
+        </div>
       </div>
     </SDiv>
   );
