@@ -79,9 +79,12 @@ public class WebHookService {
         //github_repo에 없었다면 저장
 
         Integer webhookId = (Integer)repository.get("id");
+        log.info("webhookId {}",webhookId);
+
         GitHub gitHub = gitHubRepository.findByWebhookId(webhookId);
 
         if(gitHub == null) {
+            log.info("webhook은 있지만 디비에 없음");
             gitHubRepository.save(GitHub.builder()
                             .member(member)
                             .webhookId(webhookId)
