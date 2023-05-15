@@ -110,44 +110,7 @@ const CSQuizMatching = () => {
 
   const navigate = useNavigate();
 
-  const quizList = [
-    {
-      option1: "o",
-      option2: "x",
-      option3: null,
-      option4: null,
-      answer: "x",
-      category: "realtime",
-      comment:
-        "time-slice는 운영체제가 하나의 프로세스를 실행시키는 시간을 말하며",
-      quest:
-        "운영체제 스케쥴러 중 round-robin에서 time slice를 늘리면 response-time이 빨라진다.",
-    },
-    {
-      option1: "o",
-      option2: "x",
-      option3: null,
-      option4: null,
-      answer: "x",
-      category: "realtime",
-      comment:
-        "time-slice는 운영체제가 하나의 프로세스를 실행시키는 시간을 말하며",
-      quest:
-        "운영체제 스케쥴러 중 round-robin에서 time slice를 늘리면 response-time이 빨라진다.",
-    },
-    {
-      option1: "o",
-      option2: "x",
-      option3: null,
-      option4: null,
-      answer: "x",
-      category: "realtime",
-      comment:
-        "time-slice는 운영체제가 하나의 프로세스를 실행시키는 시간을 말하며",
-      quest:
-        "운영체제 스케쥴러 중 round-robin에서 time slice를 늘리면 response-time이 빨라진다.",
-    },
-  ];
+  const [quizList, setQuizList] = useState<any>([]);
 
   useEffect(() => {
     apiGetRoomId().then((res) => {
@@ -166,13 +129,20 @@ const CSQuizMatching = () => {
             console.log({ received });
 
             if (received.sender !== userInfo.userId) {
-              navigateRoomId = received.roomId;
+              if (Object.keys(received).length === 3) {
+                console.log({ received }, "여기로 안 오나???????????");
 
-              // 유저가 매칭되면 매칭된 유저의 캐릭터 모델 렌더링, 이름 변경 및 landing 상태로 변경
-              setOtherUser(received.characterId);
-              otherNickname.current.innerText = received.nickname;
-              setCurrentState("landing");
-              setOtherUserId(received.sender);
+                setQuizList(received);
+                setCurrentState("landing");
+              }
+              if (Object.keys(received).length === 6) {
+                navigateRoomId = received.roomId;
+
+                // 유저가 매칭되면 매칭된 유저의 캐릭터 모델 렌더링, 이름 변경 및 landing 상태로 변경
+                setOtherUser(received.characterId);
+                otherNickname.current.innerText = received.nickname;
+                setOtherUserId(received.sender);
+              }
             }
           },
           { Authorization: `Bearer ${accessToken}` }
@@ -190,6 +160,8 @@ const CSQuizMatching = () => {
           ).toString();
         } else if (landingTimerRef.current) {
           clearInterval(landingTimeInterval);
+          console.log(quizList, "???????????????????????????");
+
           navigate(`/csQuizMap/${navigateRoomId}`, {
             state: {
               otherUserChracterId: otherUser,
