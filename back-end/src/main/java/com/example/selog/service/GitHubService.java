@@ -116,7 +116,7 @@ public class GitHubService {
     public void makeWebHook(String gitAccessToken,String rName, String oName,Member member) {
         //DB에 없는 레포지토리라면 webhook 생성해주기
 
-        log.info("페로 이름 : {}",rName);
+        log.info("레포 이름 : {}",rName);
         log.info("주인 이름 : {}",oName);
 
         if(!member.getEmail().equals(oName)) {
