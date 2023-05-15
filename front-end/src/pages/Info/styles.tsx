@@ -43,7 +43,7 @@ export const SMain = styled.main`
     text-align: right;
   }
 
-  .go-to-home {
+  .go-to-install {
     background-color: var(--color-yellow);
     color: var(--color-white);
     position: absolute;
@@ -55,6 +55,22 @@ export const SMain = styled.main`
     border-radius: 50%;
     border: 3px solid black;
     /* padding: 0.5rem 0.8rem; */
+    font-size: 1.6rem;
+    font-family: "Chicle", cursive;
+  }
+
+  .go-to-home {
+    /* z-index: 100; */
+    background-color: var(--color-green);
+    color: var(--color-white);
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    width: 8vw;
+    height: 3rem;
+    border-radius: 50%;
+    border: 3px solid black;
+    padding: 0.5rem 0.8rem;
     font-size: 1.6rem;
     font-family: "Chicle", cursive;
   }

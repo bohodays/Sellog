@@ -11,10 +11,7 @@ const CSQuizResult = () => {
   const correctCount = location.state.correctCount;
   const date = new Date();
   const navigate = useNavigate();
-  console.log(location);
   const finishQuizHandler = () => {
-    console.log(date);
-
     const postCS = {
       type: "cs",
       message: `cs ${date}`,
@@ -42,7 +39,7 @@ const CSQuizResult = () => {
       </div>
       <p className="result">{`${correctCount} / 5`}</p>
       <div>
-        <button className="restart" onClick={() => navigate("/csquiz")}>
+        <button className="restart" onClick={() => navigate("/csquiz-select")}>
           RESTART
         </button>
       </div>
