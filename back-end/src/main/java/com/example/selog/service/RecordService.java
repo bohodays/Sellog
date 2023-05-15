@@ -195,6 +195,7 @@ public class RecordService {
                 .member(member)
                 .content(recordRequestDto.getMessage())
                 .category(recordRequestDto.getType())
+                .writing_time(LocalDateTime.now())
                 .build();
 
         return recordRepository.save(record).toRecordResponseDto();
