@@ -1,4 +1,5 @@
 import getApiInstance from "./http";
+import { IRecordCSFeed } from "@/typeModels/Feed/feedinterfaces";
 
 const api = getApiInstance();
 
@@ -49,5 +50,16 @@ export const apiGetChartList = async () => {
     return response;
   } catch (e) {
     console.log(e);
+  }
+};
+
+// 피드 읽은 기록 남기기
+export const addFeedRecordApi = async (data: IRecordCSFeed) => {
+  try {
+    console.log(data);
+    const response = await api.post(`/record`, data);
+    return response;
+  } catch (error) {
+    console.log(error);
   }
 };

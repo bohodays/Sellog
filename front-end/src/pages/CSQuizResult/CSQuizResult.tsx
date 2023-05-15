@@ -4,13 +4,25 @@ import { SMain } from "./styles";
 import Star from "@/assets/imgs/retro/star.png";
 import SmileLarge from "@/assets/imgs/retro/smile_large.png";
 import Smile from "@/assets/imgs/retro/smile.png";
+import { addFeedRecordApi } from "@/api/record";
 
 const CSQuizResult = () => {
   const location = useLocation();
   const correctCount = location.state.correctCount;
-
+  const date = new Date();
   const navigate = useNavigate();
   console.log(location);
+  const finishQuizHandler = () => {
+    console.log(date);
+
+    const postCS = {
+      type: "cs",
+      message: `cs ${date}`,
+    };
+    addFeedRecordApi(postCS);
+    navigate("/main");
+    window.location.reload();
+  };
 
   return (
     <SMain>
@@ -19,8 +31,7 @@ const CSQuizResult = () => {
       <button
         className="go-to-home"
         onClick={() => {
-          navigate("/main");
-          window.location.reload();
+          finishQuizHandler();
         }}
       >
         HOME
