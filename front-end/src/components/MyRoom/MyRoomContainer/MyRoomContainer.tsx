@@ -92,8 +92,6 @@ const Scene = ({
 };
 
 const MyRoomContainer = (props: IMyRoomProps) => {
-  const [isEdit, setIsEdit] = useState(false);
-
   const [target, setTarget] = useRecoilState(itemTargetState);
 
   const homeNavigator = useNavigate();
@@ -160,9 +158,11 @@ const MyRoomContainer = (props: IMyRoomProps) => {
           goBackButtonRef={goBackButtonRef}
         />
       </Canvas>
-      <button className="myitems__btn" onClick={handleActivePage}>
-        My Items
-      </button>
+      {props.isEdit ? null : (
+        <button className="myitems__btn" onClick={handleActivePage}>
+          My Items
+        </button>
+      )}
       {target && (
         <>
           <button ref={upButtonRef} className="myitem__up">

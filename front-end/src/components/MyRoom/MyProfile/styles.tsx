@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const SProfile = styled.section`
-  height: 100%;
-  width: 30%;
+  height: 100vh;
+  width: 30vw;
   background-color: #e4d1b0;
 
   .head {
     margin-top: 2%;
     padding-left: 5%;
-    height: 8%;
+    height: 8vh;
     font-size: 3rem;
     font-family: "Chicle";
     color: #cb4f4f;
@@ -28,12 +28,13 @@ export const SProfile = styled.section`
     height: 100%;
   }
   .body__profile {
+    height: 80vh;
     text-align: center;
   }
 
   .img__profile {
-    width: 8rem;
-    height: 8rem;
+    width: 7rem;
+    height: 7rem;
     transform: matrix(1, 0.1, -0.1, 0.99, 0, 0);
   }
   .container__baseinfo {
@@ -42,7 +43,7 @@ export const SProfile = styled.section`
     text-align: center;
     font-family: "ZCOOL KuaiLe", cursive;
     padding-inline: 5%;
-    height: 40%;
+    /* height: 40%; */
     /* .username {
       
     } */
@@ -56,7 +57,7 @@ export const SProfile = styled.section`
     align-items: end;
     justify-content: center;
     .username {
-      font-family: "ZCOOL KuaiLe", "sans-serif";
+      font-family: "GmarketSansMedium", "sans-serif";
       font-size: 1.3rem;
       padding-right: 10%;
     }
@@ -66,8 +67,8 @@ export const SProfile = styled.section`
     display: flex;
     justify-content: space-evenly;
     margin-top: 4vh;
-    height: 25%;
-    width: 45%;
+    height: fit-content;
+    width: fit-content;
 
     text-align: center;
     align-items: center;
@@ -88,6 +89,7 @@ export const SProfile = styled.section`
     justify-content: space-between;
     font-size: 1.4rem;
     P {
+      font-family: "GmarketSansMedium";
       font-size: 1.2rem;
       width: 70%;
     }
@@ -97,11 +99,26 @@ export const SProfile = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
+
     padding-inline: 8%;
     font-family: "Slackey", sans-serif;
     font-size: large;
     font-weight: 700;
     margin-block: 4%;
+    .head__habit {
+      display: flex;
+      height: 2rem;
+      padding-inline-start: 2rem;
+      /* justify-content: space-around; */
+    }
+    .head__habit-today {
+      margin-inline: 5vw;
+      margin-inline-start: 9vw;
+    }
+    .head__habit-todo {
+      margin-inline-start: 2vw;
+      width: 9vw;
+    }
   }
   .container__habit-stats {
     display: flex;
@@ -162,7 +179,7 @@ export const SProfile = styled.section`
     border: solid 3px;
     border-radius: 1rem 1rem 1rem 1rem;
     box-shadow: 1px 1px 1px 1px grey;
-    font-family: "Chicle";
+    font-family: "Chicle", "GmarketSansMedium";
     font-size: 1.3rem;
     a {
       color: black;

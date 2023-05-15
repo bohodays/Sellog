@@ -284,7 +284,7 @@ function EditProfile(props: MyProfileProps) {
             <p>E-MAIL</p>
             <input
               type="text"
-              placeholder={userInfo.contact}
+              placeholder="ex) sellog@gmail.com"
               ref={contactRef}
               defaultValue={userInfo.contact}
               onChange={contactHandler}

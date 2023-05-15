@@ -17,6 +17,7 @@ import { F3_Other } from "@/components/Login/Models/OtherModles/F3_Other";
 import { M1_Other } from "@/components/Login/Models/OtherModles/M1_Other";
 import { M2_Other } from "@/components/Login/Models/OtherModles/M2_Other";
 import { M3_Other } from "@/components/Login/Models/OtherModles/M3_Other";
+import { addFeedRecordApi } from "@/api/record";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -94,7 +95,7 @@ const SceneOtherCharacter = () => {
 
 const CSQuizBattleResult = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-
+  const date = new Date();
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -105,13 +106,25 @@ const CSQuizBattleResult = () => {
   const otherUserCharacterId = location.state.otherUserCharacterId;
   const quizList = location.state.quizList;
 
+  //
+  const finishQuizHandler = () => {
+    // console.log(date);
+
+    const postCS = {
+      type: "cs",
+      message: `cs battle_${date}`,
+    };
+    addFeedRecordApi(postCS);
+    navigate("/main");
+    window.location.reload();
+  };
+
   return (
     <SSection>
       <button
         className="go-to-home"
         onClick={() => {
-          navigate("/main");
-          window.location.reload();
+          finishQuizHandler();
         }}
       >
         HOME
