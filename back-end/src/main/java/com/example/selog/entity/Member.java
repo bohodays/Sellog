@@ -109,6 +109,12 @@ public class Member extends BaseTime{
     @Column(name = "blog_start_date")
     private LocalDateTime blog_start_date;
 
+    @Column(name = "cs_start_date")
+    private LocalDateTime cs_start_date;
+
+    @Column(name = "feed_start_date")
+    private LocalDateTime feed_start_date;
+
     public void updateTistoryToken(String tistoryToken) {
         this.tistoryToken = tistoryToken;
     }
@@ -141,6 +147,12 @@ public class Member extends BaseTime{
         this.github_start_date = LocalDateTime.now(); // 시작 시간 재 시작
         this.algo_start_date = LocalDateTime.now();
         this.blog_start_date = LocalDateTime.now();
+        if(targetDto.getCsTarget()){
+            this.cs_start_date = LocalDateTime.now();
+        }
+        if(targetDto.getFeedTarget()){
+            this.feed_start_date = LocalDateTime.now();
+        }
     }
 
     public void updateMemberInfo(MemberUpdateDto memberUpdateDto){
@@ -167,6 +179,12 @@ public class Member extends BaseTime{
     }
     public void updateBlogStartDate(LocalDateTime today) {
         this.blog_start_date = today;
+    }
+    public void updateCsStartDate(LocalDateTime today) {
+        this.cs_start_date = today;
+    }
+    public void updateFeedStartDate(LocalDateTime today) {
+        this.feed_start_date = today;
     }
 
 }
