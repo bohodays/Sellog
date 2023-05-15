@@ -77,6 +77,8 @@ const MyProfile = (props: MyProfileProps) => {
           setIsTodayCS(true);
         }
         if (data.data.response.feed) {
+          console.log("fedd read");
+
           setIsTodayFeed(true);
         }
       }
