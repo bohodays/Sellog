@@ -56,7 +56,7 @@ export const SProfile = styled.section`
     align-items: end;
     justify-content: center;
     .username {
-      font-family: "ZCOOL KuaiLe", "sans-serif";
+      font-family: "omyu_pretty", "sans-serif";
       font-size: 1.3rem;
       padding-right: 10%;
     }
@@ -88,6 +88,7 @@ export const SProfile = styled.section`
     justify-content: space-between;
     font-size: 1.4rem;
     P {
+      font-family: "omyu_pretty";
       font-size: 1.2rem;
       width: 70%;
     }

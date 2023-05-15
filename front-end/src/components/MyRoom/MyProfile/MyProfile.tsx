@@ -12,7 +12,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link, Router, useNavigate } from "react-router-dom";
 import NoTarget from "../NoTarget/NoTarget";
 import { apiGetAchievedRecordList, apiGetTodayRecord } from "@/api/record";
-import InstallModal from "../InstallModal/InstallModal";
 // recoil atoms
 import { userInfoState } from "@/recoil/myroom/atoms";
 import { useRecoilState } from "recoil";
@@ -141,7 +140,9 @@ const MyProfile = (props: MyProfileProps) => {
               github
               <div className="progress__bar progress__bar--github">
                 {userInfo.githubTarget ? (
-                  userInfo.githubTarget
+                  <>
+                    {`${userInfo["githubTarget"][0]} 일 ${userInfo["githubTarget"][2]} 커밋`}
+                  </>
                 ) : (
                   <p>깃 허브 습관 설정 하세요</p>
                 )}
@@ -158,7 +159,9 @@ const MyProfile = (props: MyProfileProps) => {
               blog
               <div className="progress__bar progress__bar--blog">
                 {props.userData.blogTarget ? (
-                  props.userData.blogTarget
+                  <>
+                    {`${userInfo["blogTarget"][0]} 일 ${userInfo["blogTarget"][2]} 포스팅`}
+                  </>
                 ) : (
                   <p> 블로그 습관을 설정 하세요</p>
                 )}
@@ -175,7 +178,9 @@ const MyProfile = (props: MyProfileProps) => {
               algorithm
               <div className="progress__bar progress__bar--algorithm">
                 {props.userData.bojTarget ? (
-                  props.userData.bojTarget
+                  <>
+                    {`${userInfo["bojTarget"][0]} 일 ${userInfo["bojTarget"][2]} 문제`}
+                  </>
                 ) : (
                   <p> 알고리즘 습관을 설정 하세요</p>
                 )}
@@ -238,7 +243,7 @@ const MyProfile = (props: MyProfileProps) => {
             Contact
             <div className="contact__info">
               <p>
-                <FontAwesomeIcon icon={faEnvelope} /> {props.userData.contact}
+                <FontAwesomeIcon icon={faEnvelope} /> {userInfo.contact}
               </p>
             </div>
           </div>
