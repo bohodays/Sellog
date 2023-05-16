@@ -57,7 +57,7 @@ class RecordRepositoryTest {
         Record record_1 = recordRepository.save(record);
         recordRepository.save(record2);
 
-        Record result = recordRepository.findByProblemIdAndCategory("problemId","category")
+        Record result = recordRepository.findByProblemIdAndCategoryAndMember("problemId","category", member)
                 .orElseThrow(() -> new CustomException(ErrorCode.CONFLICT_ALGO));
 
         assertThat(result.getProblemId()).isEqualTo(record_1.getProblemId());
