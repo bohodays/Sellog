@@ -10,7 +10,7 @@ export const SProfile = styled.section`
     padding-left: 5%;
     height: 8%;
     font-size: 3rem;
-    font-family: "Chicle", cursive;
+    font-family: Chicle, cursive;
     color: #cb4f4f;
     text-shadow: 3px 3px #484743;
     transform: rotate(-7.58deg);
@@ -41,11 +41,12 @@ export const SProfile = styled.section`
     display: flex;
     justify-content: space-around;
     text-align: center;
-    font-family: "Slackey", cursive;
+    font-family: ZCOOL KuaiLe, cursive;
     padding-inline: 5%;
 
     .username {
       font-size: 1.3rem;
+      font-family: ZCOOL KuaiLe;
       padding-right: 10%;
     }
   }
@@ -149,13 +150,7 @@ export const SProfile = styled.section`
     display: flex;
     justify-content: space-around;
   }
-  .contact__text {
-    /* border: solid 1px; */
-    /* padding-top: 3%; */
-    font-size: 1rem;
-    font-family: "Slackey", cursive;
-    color: #817d7d;
-  }
+
   .contact__info {
     display: flex;
     flex-direction: column;
@@ -186,5 +181,30 @@ export const SProfile = styled.section`
     border: 3px solid red !important;
     border-radius: 4px;
     padding: 0.8rem 0.5rem;
+  }
+  .withdraw__button {
+    display: flex;
+    height: 4vh;
+    width: fit-content;
+    margin: 0.5vw;
+    padding-inline: 1vw;
+
+    font-family: "ZCOOL KuaiLe";
+    font-size: 1rem;
+
+    background-color: #acacac;
+    border: solid 3px;
+    border-radius: 1rem 1rem 1rem 1rem;
+    box-shadow: 1px 1px 1px 1px grey;
+    text-align: center;
+    p {
+      height: fit-content;
+    }
+  }
+  .withdraw__box {
+    height: 20vh;
+    display: flex;
+    justify-content: end;
+    align-items: end;
   }
 `;

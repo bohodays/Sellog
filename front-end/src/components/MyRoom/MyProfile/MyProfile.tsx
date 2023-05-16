@@ -38,6 +38,8 @@ const MyProfile = (props: MyProfileProps) => {
   const [isTodayBlog, setIsTodayBlog] = useState<boolean>(false);
   const [isTodayCS, setIsTodayCS] = useState<boolean>(false);
   const [isTodayFeed, setIsTodayFeed] = useState<boolean>(false);
+  // 마우스 호버시 포인터 바꾸는 변수
+  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   // 오늘 CS 문제, 피드 가는 링크
   const csNavigator = useNavigate();
@@ -93,7 +95,12 @@ const MyProfile = (props: MyProfileProps) => {
   const todayFeedHandler = () => {
     feedNavigator("/feed");
   };
-
+  const mouseHandler = () => {
+    setIsHovered(true);
+  };
+  const containerStyles = {
+    cursor: isHovered ? "pointer" : "default",
+  };
   return (
     <SProfile>
       <div className="head"> ABOUT ME</div>
@@ -203,7 +210,9 @@ const MyProfile = (props: MyProfileProps) => {
                 onClick={todayCSHandler}
               >
                 {props.userData.csTarget ? (
-                  <p>오늘의 CS 문제</p>
+                  <p onMouseOver={mouseHandler} style={containerStyles}>
+                    오늘의 CS 문제
+                  </p>
                 ) : (
                   <p>매일 CS 문제 풀기</p>
                 )}
@@ -223,7 +232,9 @@ const MyProfile = (props: MyProfileProps) => {
                 onClick={todayFeedHandler}
               >
                 {props.userData.feedTarget ? (
-                  <p> 오늘의 피드 </p>
+                  <p onMouseOver={mouseHandler} style={containerStyles}>
+                    오늘의 피드
+                  </p>
                 ) : (
                   <p> 뉴스 피드 습관을 설정하세요</p>
                 )}

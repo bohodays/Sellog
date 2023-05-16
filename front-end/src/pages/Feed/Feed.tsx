@@ -73,6 +73,7 @@ export default function Feed() {
         console.log(data.response);
         // setLastPage(data.response.pageable.pageSize);
         setNewsFeed(data.response.content);
+        setPage(() => page + 1);
       });
     }
     if (mostViewFeed === undefined) {
@@ -153,7 +154,7 @@ export default function Feed() {
                 icon={faFireFlameCurved}
                 style={{ color: "red", marginRight: "5px" }}
               />
-              가장 많이 본 피드
+              &nbsp;&nbsp;가장 많이 본 피드
             </p>
             <div className="mostviewed__list">
               {/* <p> {mostViewFeed}</p> */}
