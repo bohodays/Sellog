@@ -50,7 +50,7 @@ import { Feed } from "@/components/Main/Models/Feed";
 // 이스터에그용 이미지
 import { RoomDirect } from "@/components/Main/Models/Room_direct";
 import { ShopDirect } from "@/components/Main/Models/Shop_direct";
-import { CSDirect } from "@/components/Main/Models/Cs_direct";
+import { CSDirect } from "@/components/Main/Models/CS_direct";
 import { FeedDirect } from "@/components/Main/Models/Feed_direct";
 import { Deco } from "@/components/Main/Models/Deco";
 import { Maker } from "@/components/Main/Models/Maker";
