@@ -14,7 +14,7 @@ class GitHub {
  * @param {string} token - the token
  * @param {string} message - the commit message
  */
-async function createRecord(token, message, type, problemId) {
+function createRecord(token, message, type, problemId) {
   const xhr = new XMLHttpRequest();
   xhr.open('POST', 'https://k8a404.p.ssafy.io/api/webhook/chrome', false);
   xhr.setRequestHeader('Authorization', `Bearer ${token}`);
@@ -22,7 +22,7 @@ async function createRecord(token, message, type, problemId) {
   xhr.send(JSON.stringify({ message, type, problemId }));
   if (xhr.status === 200) {
     // console.log(xhr.responseText);
-    const point = await JSON.parse(xhr.responseText).response;
+    const point = JSON.parse(xhr.responseText).response;
     console.log(point);
     if (point > 0 || point == -1) {
       // 메시지
@@ -33,7 +33,6 @@ async function createRecord(token, message, type, problemId) {
       },
       );
       sleep(3500);
-      console.log("???");
       return JSON.parse(xhr.responseText);
     }
     
