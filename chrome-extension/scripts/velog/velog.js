@@ -52,7 +52,7 @@ function startLoader() {
           // }
 
           content = document.querySelector("#preview > div").textContent;
-          const url = "https://velog.io" + document.querySelector('.username').textContent + title;
+          const url = "https://velog.io" + document.querySelector('.username').textContent + document.querySelector('.username').nextElementSibling.value;
           // console.log(url);
           const message = `[Velog] Title: ${title}`+'\n'+ `URL: ${url}`+'\n' + `CONTENT : ${content}`;
 
