@@ -8,7 +8,7 @@ export const SSection = styled.section`
   height: 40vh;
   width: 30vw;
   border-radius: 20px;
-  border: 2px solid #423e33;
+  /* border: 2px solid #423e33; */
   box-shadow: 5px 5px 3px #423e33;
 
   .goal_logo {

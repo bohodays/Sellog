@@ -20,7 +20,7 @@ const DailyDoneList = ({ selectedDateProps }: ISelectedDate) => {
 
   const handleOpen = (e: any) => {
     setIsOpen(true);
-    console.log(e.target.id);
+    // console.log(e.target.id);
     setActiveType(e.target.id);
   };
 
@@ -146,19 +146,19 @@ const DailyDoneList = ({ selectedDateProps }: ISelectedDate) => {
         )}
         {/* csquiz */}
         {dailyDoneList?.["cs"] && (
-          <div className="doneCount__wrapper" onClick={handleOpen} id="cs">
+          <div className="doneCount__wrapper__cs" onClick={handleOpen} id="cs">
             <div>
               <FontAwesomeIcon icon={faSquareCheck} />
               <span className="type">csquiz</span>
             </div>
             <span className="count">quiz {dailyDoneList?.["cs"]?.length}</span>
-            {isOpen && activeType === "cs" && (
+            {/* {isOpen && activeType === "cs" && (
               <DailyDoneModal
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
                 dailyDoneList={dailyDoneList?.["cs"]}
               ></DailyDoneModal>
-            )}
+            )} */}
           </div>
         )}
         <img className="rainbow__img" src={rainbow}></img>

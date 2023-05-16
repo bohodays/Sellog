@@ -58,6 +58,19 @@ export const SSection = styled.section`
     background-color: rgba(229, 229, 229, 0.2);
   }
 
+  .doneCount__wrapper__cs {
+    width: 100%;
+    height: 6.5vh;
+    padding: 3vh 2vw;
+    font-family: "Quantico";
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgba(229, 229, 229, 0.2);
+    background-color: rgb(88, 95, 111);
+  }
+
   .type {
     margin-left: 0.8vw;
     font-size: 1.2vw;

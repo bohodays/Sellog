@@ -9,7 +9,7 @@ export const SSection = styled.section`
   align-items: center;
   background-color: #f3ebd9;
   border-radius: 20px;
-  border: 2px solid #423e33;
+  /* border: 2px solid #423e33; */
   box-shadow: 5px 5px 3px #423e33;
   padding: 1vw;
 `;
