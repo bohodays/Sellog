@@ -14,7 +14,7 @@ const LoginForm = ({ isVisible }: PropsType) => {
   return (
     <SSection isVisible={isVisible}>
       <div className="button__wrapper">
-        <h1>서비스 이름</h1>
+        <h1>Sellog</h1>
         <div>
           <button
             className="github"

@@ -55,6 +55,8 @@ const MyRoom = () => {
       <MyRoomContainer
         activePage={activePage}
         setActivePage={setActivePage}
+        setIsEdit={setIsEdit}
+        isEdit={isEdit}
       ></MyRoomContainer>
     </SMain>
   );

@@ -11,7 +11,10 @@ const CSQuizResult = () => {
   const correctCount = location.state.correctCount;
   const date = new Date();
   const navigate = useNavigate();
+  console.log(location);
   const finishQuizHandler = () => {
+    console.log(date);
+
     const postCS = {
       type: "cs",
       message: `cs ${date}`,
