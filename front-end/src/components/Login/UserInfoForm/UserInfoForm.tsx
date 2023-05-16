@@ -6,7 +6,7 @@ import {
   TiChevronRightOutline,
 } from "react-icons/ti";
 import { SSection } from "./styles";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import UserCharacter from "../UserCharacter/UserCharacter";
@@ -24,6 +24,9 @@ const UserInfoForm = ({ userId }: UserInformType) => {
   const [email, setEmail] = useState<string>();
   const [github, setGithub] = useState<string>();
   const [blog, setBlog] = useState<string>();
+
+  const nicknameRef = useRef<HTMLDivElement>(null); // 닉네임
+  const mottoRef = useRef<HTMLDivElement>(null); // 좌우명
 
   const navigate = useNavigate();
 
@@ -49,6 +52,12 @@ const UserInfoForm = ({ userId }: UserInformType) => {
       apiUpdateUserSignupInfo(data).then((res) => {
         navigate("/info");
       });
+    } else {
+      if (!nickname) nicknameRef.current?.classList.add("empty");
+      else nicknameRef.current?.classList.remove("empty");
+
+      if (!motto) mottoRef.current?.classList.add("empty");
+      else mottoRef.current?.classList.remove("empty");
     }
   };
 
@@ -64,7 +73,7 @@ const UserInfoForm = ({ userId }: UserInformType) => {
             />
           </div>
           <div className="right-wapper">
-            <div className="input__wrapper nickname">
+            <div ref={nicknameRef} className="input__wrapper nickname">
               <input
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
@@ -73,13 +82,14 @@ const UserInfoForm = ({ userId }: UserInformType) => {
                 placeholder="이름을 입력해주세요."
               />
             </div>
-            <div className="input__wrapper motto">
+            <div ref={mottoRef} className="input__wrapper motto">
               <input
                 value={motto}
                 onChange={(e) => setMotto(e.target.value)}
                 type="text"
                 className="input-nintroduceame"
                 placeholder="한 문장으로 나를 표현해주세요."
+                maxLength={30}
               />
             </div>
             <div className="input__wrapper email">

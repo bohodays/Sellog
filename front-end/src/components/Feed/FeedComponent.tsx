@@ -10,7 +10,7 @@ export default function FeedComponent({ props }: any) {
     // console.log(props.feedId, "feedId");
     const postFeed = {
       type: "feed",
-      message: "feed 기록 추가하기",
+      message: `${props.title}_${props.link}`,
     };
     addFeedRecordApi(postFeed).then((res) => console.log(res));
     addVisitApi(props.feedId);

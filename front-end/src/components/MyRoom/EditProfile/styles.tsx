@@ -19,7 +19,7 @@ export const SProfile = styled.section`
 
   .sticker__smilebottom {
     position: absolute;
-    width: 7rem;
+    width: 7vw;
     left: 20vw;
     top: 5vh;
   }
@@ -33,7 +33,8 @@ export const SProfile = styled.section`
     text-align: center;
   }
   .img__profile {
-    width: 10rem;
+    width: 9vw;
+    height: 9vw;
     transform: matrix(1, 0.1, -0.1, 0.99, 0, 0);
   }
   .container__baseinfo {
@@ -116,6 +117,7 @@ export const SProfile = styled.section`
   .box__edit {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding-block: 3%;
     width: 90%;
   }
@@ -178,5 +180,11 @@ export const SProfile = styled.section`
     justify-content: space-evenly;
     align-items: center;
     margin: 3%;
+  }
+
+  .empty {
+    border: 3px solid red !important;
+    border-radius: 4px;
+    padding: 0.8rem 0.5rem;
   }
 `;

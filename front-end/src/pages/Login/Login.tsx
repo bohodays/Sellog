@@ -43,8 +43,6 @@ const Login = () => {
     setVisible(!isVisible);
   };
 
-  console.log(userInfoUpdate, "유저 정보 업데이트 상태");
-
   return (
     <SMain>
       {!isLoggedIn && (

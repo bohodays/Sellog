@@ -194,19 +194,4 @@ public class RecordService {
         return points;
     }
 
-    @Transactional
-    public RecordResponseDto insertRecord(Long userId, RecordRequestDto recordRequestDto) {
-
-        Member member = memberRepository.findById(userId)
-                .orElseThrow(()->new CustomException(ErrorCode.NO_USER));
-
-        Record record = Record.builder()
-                .member(member)
-                .content(recordRequestDto.getMessage())
-                .category(recordRequestDto.getType())
-                .writing_time(LocalDateTime.now())
-                .build();
-
-        return recordRepository.save(record).toRecordResponseDto();
-    }
 }

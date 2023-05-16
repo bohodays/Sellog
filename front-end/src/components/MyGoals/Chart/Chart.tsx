@@ -28,7 +28,7 @@ const Chart = () => {
   const [chartLabel, setChartLabel] = useState<string[]>([]);
   const [chartData, setChartData] = useState<any>([]);
 
-  const maxValue = Number(Math.max(...chartData) + 10);
+  const maxValue = Number(Math.max(...chartData) + 4);
 
   const data = {
     labels: chartLabel,
@@ -38,14 +38,14 @@ const Chart = () => {
         data: chartData,
         backgroundColor: "rgba(255, 255, 255, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
-        borderWidth: 3,
+        borderWidth: 2,
       },
     ],
   };
 
   const options: any = {
-    maintainAspectRatio: true,
-    responsive: true,
+    // maintainAspectRatio: true,
+    // responsive: true,
 
     plugins: {
       legend: {
@@ -54,14 +54,32 @@ const Chart = () => {
           font: {
             size: 15,
           },
-          // 목표 달성 정도 라벨 색깔
-          // color: "rgb(255, 99, 132)",
+          // TOTAL 기록 횟수 라벨 색깔
+          // color: "black",
         },
       },
       tooltip: {
         padding: 10, // 패딩 크기
-        titleFont: { size: 16, weight: "bold" },
+        titleFont: { size: 15, weight: "500" },
         bodyFont: { size: 14 },
+        // callbacks: {
+        //   label: function (tooltipItem, context) {
+        //     console.log(tooltipItem);
+        //     console.log(context);
+        //     var index = tooltipItem.index;
+        //     var value = data.dataset[0].data[index];
+
+        //     var duplicates = data.dataset[0].data.filter(function (dataValue) {
+        //       return dataValue === value;
+        //     });
+
+        //     if (duplicates.length > 1) {
+        //       return "Value: " + value;
+        //     } else {
+        //       return value;
+        //     }
+        //   },
+        // },
       },
     },
 
@@ -79,23 +97,20 @@ const Chart = () => {
             size: 15,
             weight: "500",
           },
-          // color: "gray",
+          color: "black",
         },
-        // angleLines: { lineWidth: 1, color: "gray" },
+        angleLines: { lineWidth: 1, color: "lightgrey" },
         grid: {
-          // color: "gray", // 눈금 색상 변경
-          // lineWidth: 1, // 눈금 두께 변경
+          color: "lightgrey", // 눈금 색상 변경
+          lineWidth: 1, // 눈금 두께 변경
         },
       },
     },
   };
 
-  // console.log("charts", chartLabel, chartData);
-
   useEffect(() => {
     apiGetChartList()
       .then((r) => {
-        // console.log(r?.data.response);
         setChartList(r?.data.response);
         const labels = Object.keys(r?.data.response);
         const datas = Object.values(r?.data.response);
