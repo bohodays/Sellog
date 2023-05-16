@@ -14,14 +14,14 @@ import java.io.UnsupportedEncodingException;
 @Service
 public class MatchingListener {
 
-    private final MatchingWaitList matchingWaitList;
+    private final MatchingQueue matchingQueue;
 
     @RabbitListener(queues = "sellog.bad.queues") // 매칭 중간에 나간자
     public void receiveMessage(final Message message) throws UnsupportedEncodingException {
         log.info(message.toString());
         log.info( new String(message.getBody(), "UTF-8"));
         String sessionId = new String(message.getBody(), "UTF-8");
-        matchingWaitList.getBadList().add(sessionId);
+        matchingQueue.getBadList().add(sessionId);
     }
 
     @RabbitListener(queues = "sellog.queues") // 매칭 요청자
@@ -30,6 +30,6 @@ public class MatchingListener {
         log.info("receive message : " + matchingDto.toString());
 
         // 매칭 대기자 추가
-        matchingWaitList.getMatchingList().add(matchingDto);
+        matchingQueue.getMatchingQueue().add(matchingDto);
     }
 }
