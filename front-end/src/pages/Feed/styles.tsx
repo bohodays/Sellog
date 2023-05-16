@@ -96,6 +96,7 @@ export const SBody = styled.div`
   height: 70%;
   justify-content: space-evenly;
   display: flex;
+  width: 85vw;
   /* overflow-y: auto; */
   ::-webkit-scrollbar {
     display: none;
@@ -116,55 +117,43 @@ export const SBody = styled.div`
 `;
 
 export const SSection = styled.section`
-  width: 18%;
+  /* width: 18%; */
+  width: 16vw;
   display: flex;
   flex-direction: column;
   /* justify-content: space-around; */
-  input {
-    width: 95%;
-    height: 15%;
-  }
 
-  .keyword__button {
-    background-color: var(--color-dark-white);
-    border-radius: 4px;
-    margin: 1px;
-  }
   .mostviewed {
     background-color: var(--color-white);
     margin-block: 5%;
     border-radius: 20px;
     height: 90%;
     /* padding: 4%; */
-    padding-inline: 8%;
+    padding-inline: 1vw;
     /* padding-block: 8%; */
     box-shadow: 2px 2px 1px 1px grey;
     display: flex;
     flex-direction: column;
     text-align: center;
-    p {
-      margin-block-start: 3vh;
-<<<<<<< HEAD
-      font-size: 1.2rem;
-=======
-      font-size: 1.1rem;
->>>>>>> bb583b36480c6f5cad8f896889d3805e2b7b837b
-    }
   }
 
   .mostviewed ::-webkit-scrollbar {
     width: 0rem;
   }
-
+  .mostviewed__title {
+    font-size: 1.1rem;
+    margin-block: 1rem;
+  }
   .mostview__element {
+    display: flex;
     overflow-x: hidden;
-    margin-block: 10%;
+    justify-self: center;
+    width: 16vw;
+    /* margin-block: 10%; */
     transition: all 300ms linear;
     border-radius: 12px;
-    padding: 0.5rem 1rem;
-    li {
-      height: 2vh;
-    }
+    /* margin-block: 0.7rem; */
+    /* padding: 0.5rem 1rem; */
   }
 
   .mostview__element:hover {
@@ -172,17 +161,33 @@ export const SSection = styled.section`
   }
 
   .mostviewed__list {
-    padding: 5%;
-    height: 90%;
     overflow: auto;
     a {
       color: black;
     }
   }
+  .mostview__content {
+    display: flex;
+    flex-direction: column;
+    width: 14vw;
+    padding-inline: 0.4vw;
+    margin-block: 1vh;
+    text-align: justify;
 
+    /* justify-items: end; */
+  }
+  .mostview__count {
+    display: flex;
+    justify-content: end;
+  }
   .view__wrapper {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: end;
+    font-size: 15px;
+    p {
+    }
+    /* align-items: center; */
+    /* height: 2vh; */
   }
 `;

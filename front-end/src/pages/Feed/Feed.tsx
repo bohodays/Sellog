@@ -149,7 +149,7 @@ export default function Feed() {
       <SBody>
         <SSection>
           <div className="mostviewed">
-            <p>
+            <p className="mostviewed__title">
               <FontAwesomeIcon
                 icon={faFireFlameCurved}
                 style={{ color: "red", marginRight: "5px" }}
@@ -161,23 +161,28 @@ export default function Feed() {
               {isMostView &&
                 mostViewFeed.map((element: any, index: number) => {
                   return (
-                    <>
+                    <div className="mostview__element">
                       <Link to={element.link} target="_blank">
-                        <li key={index} className="mostview__element">
-                          {element["title"] > 20
-                            ? element["title"].slice(0, 5) + "..."
-                            : element["title"]}
-                          <br />
-                          <span className="view__wrapper">
+                        <div className="mostview__content">
+                          <p key={index}>
+                            {element["title"].length > 25
+                              ? element["title"].slice(0, 25) + "..."
+                              : element["title"]}
+                          </p>
+                          <div className="mostview__count">
                             <FontAwesomeIcon
                               icon={faEye}
-                              style={{ marginRight: "0.5rem" }}
+                              style={{
+                                marginRight: "0.5rem",
+                                fontSize: "10px",
+                                alignSelf: "center",
+                              }}
                             />
-                            {element["views"]}
-                          </span>
-                        </li>
+                            <p>{element["views"]}</p>
+                          </div>
+                        </div>
                       </Link>
-                    </>
+                    </div>
                   );
                 })}
             </div>
