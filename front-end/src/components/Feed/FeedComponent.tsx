@@ -20,18 +20,28 @@ export default function FeedComponent({ props }: any) {
   // }, [props.visit]);
   return (
     <SArticle>
-      <div className="feed__card">
-        <Link rel="stylesheet" to={props.link} onClick={feedHandler}>
-          <p>{props.title}</p>
-        </Link>
-        <div className="feed__card-info">
-          <p className="feed__card-source">출처: {props.company}</p>
-          <div className="feed__card-detail">
-            <p> {props.views}view </p>
-            <p> {props.pub_date.slice(0, 10)}</p>
+      <Link
+        className="container"
+        rel="stylesheet"
+        to={props.link}
+        onClick={feedHandler}
+        target="_blank"
+      >
+        <div className="feed__card">
+          <p style={{ marginBottom: "1rem" }}>
+            {props.title.length > 32
+              ? props.title.slice(0, 32) + " ..."
+              : props.title}
+          </p>
+          <div className="feed__card-info">
+            <p className="feed__card-source">출처: {props.company}</p>
+            <div className="feed__card-detail">
+              <p> {props.views}view </p>
+              <p> {props.pub_date.slice(0, 10)}</p>
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     </SArticle>
   );
 }
