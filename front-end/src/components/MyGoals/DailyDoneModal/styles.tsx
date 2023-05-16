@@ -33,7 +33,8 @@ export const SDiv = styled.div`
     display: flex;
     width: 100%;
     text-align: center;
-    padding: 0.5vh 0vw;
+    padding: 0.3vh 0vw;
+    font-weight: 600;
     border-bottom: 1px solid lightgrey;
     background-color: rgba(0, 0, 0, 0.1);
   }

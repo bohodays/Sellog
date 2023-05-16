@@ -36,8 +36,8 @@ export const SSection = styled.section<any>`
 
   .info__btn {
     position: absolute;
-    top: 2vh;
-    left: 1vw;
+    top: 5vh;
+    left: 1.5vw;
     font-size: 3vh;
     color: grey;
     z-index: 5;
@@ -45,11 +45,14 @@ export const SSection = styled.section<any>`
 
   .info__message {
     position: absolute;
-    top: 4vh;
-    left: 2.3vw;
+    top: 7vh;
+    left: 2.5vw;
     font-size: 0.7vw;
-    background-color: rgb(75, 90, 125, 0.5);
-    color: white;
+    /* background-color: rgb(75, 90, 125, 0.8); */
+    background-color: white;
+    height: 30vh;
+    width: 23vw;
+    color: black;
     padding: 2px 3px;
     border-radius: 20px;
   }

@@ -12,22 +12,44 @@ export const SDiv = styled.div`
     border-bottom: 1px solid lightgrey;
   }
 
+  .doneItem__left__column {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    word-wrap: break-word;
+    justify-content: center;
+  }
+
   .doneItem__title {
     font-size: 0.85vw;
-    padding: 0vh 0.2vw;
+    /* padding: 0.5vh 0.2vw; */
+    font-family: "GmarketSansMedium";
+    padding: 0vw 0.2vw;
+  }
+
+  .doneItem__right__column {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    /* word-wrap: break-word; */
+    justify-content: center;
   }
 
   .doneItem__msg {
     font-size: 0.9vw;
-    padding: 0.2vh 0.2vw;
+    font-family: "GmarketSansMedium";
+    padding: 0vw 0.2vw;
+    flex: 0 0 100%;
   }
 
   .doneItem__link {
     a {
       /* color: rgb(255, 157, 157); */
       color: black;
-      word-wrap: break-word;
+      word-break: break-word;
       text-decoration: underline;
+      font-family: "Quantico";
+      flex: 0 0 100%;
     }
   }
 `;
