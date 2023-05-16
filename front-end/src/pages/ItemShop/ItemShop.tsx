@@ -96,7 +96,6 @@ const ItemShop = () => {
             </div>
           </div>
         </div>
-        <div>My coin</div>
         <ItemList category={selectedCategory}></ItemList>
         <FontAwesomeIcon
           icon={faRightFromBracket}
