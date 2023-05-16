@@ -148,12 +148,18 @@ public class RecordService {
         result.put("feed",RecordMaintainDto.builder()
                 .day(diff).build());
 
-        result.getOrDefault("github",RecordMaintainDto.builder()
-                .day(diff).build());
-        result.getOrDefault("blog",RecordMaintainDto.builder()
-                .day(diff).build());
-        result.getOrDefault("alog",RecordMaintainDto.builder()
-                .day(diff).build());
+        if(result.get("github") == null){
+            result.put("github",RecordMaintainDto.builder()
+                    .day(diff).build());
+        }
+        if(result.get("blog") == null){
+            result.put("blog",RecordMaintainDto.builder()
+                    .day(diff).build());
+        }
+        if(result.get("algo") == null){
+            result.put("algo", RecordMaintainDto.builder()
+                    .day(diff).build());
+        }
 
         return result;
     }
