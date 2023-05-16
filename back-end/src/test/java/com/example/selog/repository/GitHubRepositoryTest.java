@@ -39,10 +39,10 @@ class GitHubRepositoryTest {
             .build();
 
     private final GitHub github1 = GitHub.builder()
-            .name("name").webhook_id(1).member(member)
+            .name("name").webhookId(1).member(member)
             .build();
     GitHub github2 = GitHub.builder()
-            .name("name").webhook_id(2).member(member)
+            .name("name").webhookId(2).member(member)
             .build();
 
     @Test
