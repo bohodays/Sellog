@@ -1,6 +1,7 @@
 package com.example.selog.service;
 
 import com.example.selog.dto.record.RecordRequestDto;
+import com.example.selog.dto.record.RecordResponseDto;
 import com.example.selog.entity.GitHub;
 import com.example.selog.entity.Member;
 import com.example.selog.entity.Record;
@@ -157,6 +158,24 @@ public class WebHookService {
                         .build());
 
         return result;
+    }
+
+    @Transactional
+    public RecordResponseDto insertRecord(Long userId, RecordRequestDto recordRequestDto) {
+
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(()->new CustomException(ErrorCode.NO_USER));
+
+        Record record = Record.builder()
+                .member(member)
+                .content(recordRequestDto.getMessage())
+                .category(recordRequestDto.getType())
+                .writing_time(LocalDateTime.now())
+                .build();
+
+        earnPoints(member,recordRequestDto.getType());
+
+        return recordRepository.save(record).toRecordResponseDto();
     }
 
     public String chatGptResponse(String title,String content) {

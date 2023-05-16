@@ -23,6 +23,7 @@ import org.springframework.core.ParameterizedTypeReference;
 
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
 
@@ -92,11 +93,16 @@ public class CustomOauth2UserService implements OAuth2UserService<OAuth2UserRequ
                     .nickname(attributes.getName())
                     .img("1")
                     .points(0)
-                    .githubTarget("")
-                    .bojTarget("")
-                    .blogTarget("")
+                    .githubTarget("1-1")
+                    .bojTarget("1-1")
+                    .blogTarget("7-1")
                     .csTarget(false)
                     .feedTarget(false)
+                    .github_start_date(LocalDateTime.now())
+                    .algo_start_date(LocalDateTime.now())
+                    .blog_start_date(LocalDateTime.now())
+                    .cs_start_date(LocalDateTime.now())
+                    .feed_start_date(LocalDateTime.now())
                     .authority(Authority.ROLE_USER)
                     .password(passwordEncoder.encode("1234"))
                     .build();
