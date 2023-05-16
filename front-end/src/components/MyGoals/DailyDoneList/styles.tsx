@@ -42,14 +42,16 @@ export const SSection = styled.section`
   }
 
   .doneCount__wrapper {
-    width: 30vw;
-    height: 5vh;
+    width: 100%;
+    height: 6.5vh;
     padding: 3vh 2vw;
     font-family: "Quantico";
     display: flex;
+    position: relative;
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid rgba(229, 229, 229, 0.2);
+    cursor: pointer;
   }
 
   .doneCount__wrapper:hover {
@@ -78,4 +80,5 @@ export const SDiv = styled.div`
   justify-content: flex-start;
   height: 100%;
   padding: 8% 0%;
+  width: 100%;
 `;
