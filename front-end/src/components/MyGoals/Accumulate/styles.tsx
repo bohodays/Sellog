@@ -43,13 +43,20 @@ export const SSection = styled.section`
     font-size: 1vw;
   }
   .acc__day__wrapper {
-    width: 100%;
+    width: 80%;
     height: 3vh;
   }
   .goal__container {
+    border-radius: 20px;
+    background: rgb(255, 109, 109);
+    background: linear-gradient(
+      140deg,
+      rgba(255, 109, 109, 1) 0%,
+      rgba(254, 218, 206, 1) 100%
+    );
     display: flex;
 
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .reward__container {
   }
@@ -67,12 +74,12 @@ export const SSection = styled.section`
   }
 
   .acc__reward__wrapper {
-    width: 100%;
+    width: 80%;
   }
   .reward__container {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     color: white;
   }
   .reward__div {
@@ -122,5 +129,18 @@ export const SSection = styled.section`
     border-radius: 50%;
 
     background-color: #ab5a00;
+  }
+
+  .recommend {
+    font-family: "GmarketSansMedium";
+    font-size: 1vw;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  .reward__hidden {
+    visibility: hidden;
   }
 `;
