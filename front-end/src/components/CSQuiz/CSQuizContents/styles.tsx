@@ -124,7 +124,7 @@ export const SDiv = styled.div`
     padding: 0.5rem 0.8rem;
     font-size: 1.2vw;
     user-select: none;
-    margin-top: 3rem;
+    /* margin-top: 3rem; */
     transition: all 300ms ease-in;
     font-family: "GmarketSansMedium";
   }
@@ -135,5 +135,10 @@ export const SDiv = styled.div`
 
   .comment {
     margin: 0 4rem;
+  }
+
+  .correct__result {
+    text-align: center;
+    margin-bottom: 2rem;
   }
 `;
