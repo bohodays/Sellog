@@ -25,7 +25,6 @@ export const SSection = styled.section<any>`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     user-select: none;
   }
 
