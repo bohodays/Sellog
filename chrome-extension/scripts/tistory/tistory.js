@@ -48,13 +48,13 @@ function startLoader() {
               // 페이지 이동
               console.log("다시 이동해");
               publishBtn.click();
+              
             })
           
         } catch(error){
           console.log(error);
         }
       });
-      
     });
 
     

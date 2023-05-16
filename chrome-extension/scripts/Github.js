@@ -14,7 +14,7 @@ class GitHub {
  * @param {string} token - the token
  * @param {string} message - the commit message
  */
-function createRecord(token, message, type, problemId) {
+async function createRecord(token, message, type, problemId) {
   const xhr = new XMLHttpRequest();
   xhr.open('POST', 'https://k8a404.p.ssafy.io/api/webhook/chrome', false);
   xhr.setRequestHeader('Authorization', `Bearer ${token}`);
@@ -22,7 +22,7 @@ function createRecord(token, message, type, problemId) {
   xhr.send(JSON.stringify({ message, type, problemId }));
   if (xhr.status === 200) {
     // console.log(xhr.responseText);
-    const point = JSON.parse(xhr.responseText).response;
+    const point = await JSON.parse(xhr.responseText).response;
     console.log(point);
     if (point > 0 || point == -1) {
       // 메시지
@@ -30,11 +30,11 @@ function createRecord(token, message, type, problemId) {
       chrome.runtime.sendMessage({
         message: "alarm",
         payload: { point },
-      });
-      setTimeout(function() {
-        console.log("제출");
-        return JSON.parse(xhr.responseText);
-      }, 4000);
+      },
+      );
+      sleep(3500);
+      console.log("???");
+      return JSON.parse(xhr.responseText);
     }
     
   } else if (xhr.status === 409) {
@@ -50,4 +50,9 @@ function createRecord(token, message, type, problemId) {
     // console.log(`Error: ${xhr.status} - ${xhr.statusText}`);
     // throw new Error(xhr.statusText);
   }
+}
+
+function sleep(ms) {
+  var start = Date.now() + ms;
+  while (Date.now() < start) {}
 }

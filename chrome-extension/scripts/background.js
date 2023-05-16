@@ -54,9 +54,11 @@ function sendNotification(point) {
   }
 }
 
-function handleMessage(request, sender, sendResponse) {
+async function handleMessage(request, sender, sendResponse) {
+  console.log(request);
   if (request && request.message == "alarm") {
-    sendNotification(
+    console.log("g2g2");
+    await sendNotification(
       request.payload.point,
     );
   }
