@@ -31,9 +31,10 @@ function createRecord(token, message, type, problemId) {
         message: "alarm",
         payload: { point },
       });
-    setTimeout(function() {
+      setTimeout(function() {
+        console.log("제출");
         return JSON.parse(xhr.responseText);
-    }, 2000);
+      }, 4000);
     }
     
   } else if (xhr.status === 409) {
