@@ -127,7 +127,6 @@ const GoalsSettingModal = ({
     <SSection isOpen={isOpen} onClick={handleModalClose}>
       <SDiv onClick={handleModalClick}>
         <div className="modal">
-          {/* <div>{activeGoal}</div> */}
           <div className="recommended__goal__wrapper">
             <h1>추천 설정</h1>
             <div className="set__goal">{recommendedGoals[activeGoal]}</div>

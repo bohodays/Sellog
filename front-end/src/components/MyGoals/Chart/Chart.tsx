@@ -36,7 +36,6 @@ const Chart = () => {
       {
         label: "TOTAL 기록 횟수",
         data: chartData,
-        // backgroundColor: "rgba(255, 255, 255, 0.2)",
         backgroundColor: "rgba(255, 255, 255, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 2,
@@ -60,27 +59,9 @@ const Chart = () => {
         },
       },
       tooltip: {
-        padding: 10, // 패딩 크기
-        titleFont: { size: 15, weight: "500" },
-        bodyFont: { size: 14 },
-        // callbacks: {
-        //   label: function (tooltipItem, context) {
-        //     console.log(tooltipItem);
-        //     console.log(context);
-        //     var index = tooltipItem.index;
-        //     var value = data.dataset[0].data[index];
-
-        //     var duplicates = data.dataset[0].data.filter(function (dataValue) {
-        //       return dataValue === value;
-        //     });
-
-        //     if (duplicates.length > 1) {
-        //       return "Value: " + value;
-        //     } else {
-        //       return value;
-        //     }
-        //   },
-        // },
+        padding: 8, // 패딩 크기
+        titleFont: { size: 12, weight: "500" },
+        bodyFont: { size: 13 },
       },
     },
 

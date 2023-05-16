@@ -42,18 +42,8 @@ const GoalsSetting: any = () => {
         ></GoalsSettingModal>
       )}
       <div className="title__wrapper">
-        {/* <button
-          className="info__btn"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <FontAwesomeIcon icon={faCircleInfo} fontSize={20} />
-        </button> */}
-
         <p className="title">MY GOALS</p>
-        <span style={{ textShadow: "1px 2px gray" }}>
-          keep running to achieve your goal !
-        </span>
+        <span>keep running to achieve your goal !</span>
         <img
           className="sticker retro__pencil"
           src={RetroPencil}
@@ -63,13 +53,13 @@ const GoalsSetting: any = () => {
       </div>
       <div className="content__wrapper">
         <img className="sticker retro__spring" src={Spring} alt="spring" />
-        {/* <img className="sticker retro__img" src={RetroImg} alt="retro" /> */}
-        {/* 목표 설정 버튼들 */}
+        <img className="sticker retro__img" src={RetroImg} alt="retro" />
         {/* <FontAwesomeIcon
           icon={faArrowLeft}
           className="goback__button"
           onClick={toMyRoomHandler}
         /> */}
+        {/* 목표 설정 버튼들 */}
         <button
           className="info__btn"
           onMouseEnter={handleMouseEnter}
