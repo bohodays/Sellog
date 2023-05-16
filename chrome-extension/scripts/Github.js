@@ -31,8 +31,11 @@ function createRecord(token, message, type, problemId) {
         message: "alarm",
         payload: { point },
       });
+    setTimeout(function() {
+        return JSON.parse(xhr.responseText);
+    }, 2000);
     }
-    return JSON.parse(xhr.responseText);
+    
   } else if (xhr.status === 409) {
     console.log("이미 제출 이력이 있습니다.")
   } else if(xhr.status === 404) {
