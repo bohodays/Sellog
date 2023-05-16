@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const SArticle = styled.article`
   width: 90%;
   height: 24%;
-  /* margin-bottom: 3%; */
+  margin-bottom: 3%;
   /* padding-bottom: 1%; */
   display: flex;
   flex-direction: column;
@@ -18,9 +18,10 @@ export const SArticle = styled.article`
     /* height: 50%; */
 
     /* margin-block: 3%; */
-    padding-inline: 3%;
+    /* padding-inline: 3%;
     padding-block: 1%;
-    padding-bottom: 2%;
+    padding-bottom: 2%; */
+    padding: 1.5rem 2rem;
 
     display: flex;
     flex-direction: column;
@@ -53,5 +54,10 @@ export const SArticle = styled.article`
     p {
       padding-inline: 2%;
     }
+  }
+
+  .container {
+    width: 100%;
+    height: 500px;
   }
 `;

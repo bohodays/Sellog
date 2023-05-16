@@ -39,7 +39,7 @@ export const SMain = styled.main`
 
 export const SHeader = styled.header`
   height: 20%;
-  margin-bottom: 4%;
+  margin-bottom: 3%;
 
   .home {
     /* position: absolute; */
@@ -70,6 +70,7 @@ export const SHeader = styled.header`
     font-family: "Chicle", cursive;
     font-size: 4rem;
     justify-content: center;
+    transform: translateY(-2rem);
   }
   .title__text {
     margin: 0%;
@@ -154,7 +155,15 @@ export const SSection = styled.section`
   .mostview__element {
     overflow-x: hidden;
     margin-block: 10%;
+    transition: all 300ms linear;
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
   }
+
+  .mostview__element:hover {
+    background: #e2e2e2;
+  }
+
   .mostviewed__list {
     padding: 5%;
     height: 90%;
@@ -162,5 +171,11 @@ export const SSection = styled.section`
     a {
       color: black;
     }
+  }
+
+  .view__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
