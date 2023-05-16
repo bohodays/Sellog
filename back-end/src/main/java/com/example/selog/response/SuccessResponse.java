@@ -10,6 +10,10 @@ public class SuccessResponse {
     private String code;
     private Object response;
 
+    public SuccessResponse() {
+
+    }
+
     public SuccessResponse(Object response) {
         this.httpStatus = HttpStatus.OK;
         this.code = "200";
