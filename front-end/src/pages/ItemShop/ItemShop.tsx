@@ -6,8 +6,12 @@ import ItemList from "@/components/ItemShop/ItemList/ItemList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { userInfoState } from "@/recoil/myroom/atoms";
+import { useRecoilState } from "recoil";
+import coin from "@/assets/imgs/retro/coin.png";
 
 const ItemShop = () => {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const homeNavigator = useNavigate();
   const getOutHandler = () => {
@@ -32,57 +36,65 @@ const ItemShop = () => {
         <h1 className="sign__title">ITEM SHOP</h1>
       </div>
       <SContainer>
-        <div className="item__category--container">
-          <h6
-            className={
-              selectedCategory === "ALL"
-                ? "item__category__selected"
-                : "item__category"
-            }
-            onClick={handleSelectedCategory}
-          >
-            ALL
-          </h6>
-          <h6
-            className={
-              selectedCategory === "FURNITURE"
-                ? "item__category__selected"
-                : "item__category"
-            }
-            onClick={handleSelectedCategory}
-          >
-            FURNITURE
-          </h6>
-          <h6
-            className={
-              selectedCategory === "ELECTRONICS"
-                ? "item__category__selected"
-                : "item__category"
-            }
-            onClick={handleSelectedCategory}
-          >
-            ELECTRONICS
-          </h6>
-          <h6
-            className={
-              selectedCategory === "APPLIANCE"
-                ? "item__category__selected"
-                : "item__category"
-            }
-            onClick={handleSelectedCategory}
-          >
-            APPLIANCE
-          </h6>
-          <h6
-            className={
-              selectedCategory === "DECORATION"
-                ? "item__category__selected"
-                : "item__category"
-            }
-            onClick={handleSelectedCategory}
-          >
-            DECORATION
-          </h6>
+        <div className="left__wrapper">
+          <div className="item__category--container">
+            <h6
+              className={
+                selectedCategory === "ALL"
+                  ? "item__category__selected"
+                  : "item__category"
+              }
+              onClick={handleSelectedCategory}
+            >
+              ALL
+            </h6>
+            <h6
+              className={
+                selectedCategory === "FURNITURE"
+                  ? "item__category__selected"
+                  : "item__category"
+              }
+              onClick={handleSelectedCategory}
+            >
+              FURNITURE
+            </h6>
+            <h6
+              className={
+                selectedCategory === "ELECTRONICS"
+                  ? "item__category__selected"
+                  : "item__category"
+              }
+              onClick={handleSelectedCategory}
+            >
+              ELECTRONICS
+            </h6>
+            <h6
+              className={
+                selectedCategory === "APPLIANCE"
+                  ? "item__category__selected"
+                  : "item__category"
+              }
+              onClick={handleSelectedCategory}
+            >
+              APPLIANCE
+            </h6>
+            <h6
+              className={
+                selectedCategory === "DECORATION"
+                  ? "item__category__selected"
+                  : "item__category"
+              }
+              onClick={handleSelectedCategory}
+            >
+              DECORATION
+            </h6>
+          </div>
+          <div className="mycoin__box">
+            <div className="mycoin__wrapper">
+              <img src={coin} className="coin__icon"></img>
+              {userInfo.points}
+            </div>
+          </div>
         </div>
         <div>My coin</div>
         <ItemList category={selectedCategory}></ItemList>

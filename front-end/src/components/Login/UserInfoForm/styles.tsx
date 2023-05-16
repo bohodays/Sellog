@@ -98,4 +98,8 @@ export const SSection = styled.section`
     background: rgba(255, 210, 210, 0.3);
     box-shadow: #ffffff 0px 0px 7px 2px;
   }
+
+  .empty {
+    border: 2px solid red;
+  }
 `;
