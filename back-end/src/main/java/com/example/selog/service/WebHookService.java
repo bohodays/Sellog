@@ -165,12 +165,12 @@ public class WebHookService {
         question.append(title).append("\n");
         question.append(content+"\n");
         question.append("Please read the above korean text and evaluate it according to the following criteria.\n" +
-                "1.Does the writing exceed 300 characters in length in korean? (10 points)\n" +
-                "2.Does the writing contain content that is merely filler to meet the word count?(10 points)\n" +
-                "3.Is there a correlation between the title of the writing and its content? (20 points)\n" +
-                "4.Does the writing involve repetitive use of unknown characters?(20 points)\n" +
-                "5.Are the Korean spellings and grammar correct? (20 points)\n" +
-                "6.Does the writing demonstrate professionalism? (20 points)\n" +
+                "1.Does the writing exceed 300 words in korean? (total 10 points)\n" +
+                "2.Does not the writing contain content that is merely filler to meet the word count?(total 10 points)\n" +
+                "3.Is there a correlation between the title of the writing and its content? (total 20 points)\n" +
+                "4.Does not the writing involve repetitive use of the specific characters?(total 20 points)\n" +
+                "5.Are the spellings and grammar correct? (total 20 points)\n" +
+                "6.Does the writing demonstrate professionalism? (total 20 points)\n" +
 
                 "\n" +
                 "question: \"Please return 'pass' if the total score is 50 or higher, and 'fail' if it is lower, using no more than 10 characters.\"");
