@@ -17,6 +17,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -98,14 +101,51 @@ public class RecordController {
     }
 
     @PostMapping
-    public ResponseEntity<?> insertRecord(@RequestBody RecordRequestDto recordRequestDto) {
+    public ResponseEntity<?> insertRecord(HttpServletRequest request, HttpServletResponse response,@RequestBody RecordRequestDto recordRequestDto) {
+
+        log.info("insert record! 호출");
+
         try{
-            return new ResponseEntity<>(new SuccessResponse(webHookService.insertRecord(SecurityUtil.getCurrentMemberId(),recordRequestDto)), HttpStatus.OK);
+
+            Cookie[] cookies = request.getCookies();
+
+            if(cookies != null) {
+
+                //쿠키값에 feed_views가 없었다면
+                if(!checkCookies(cookies,recordRequestDto.getFeedId())) {
+                    Cookie newCookie = new Cookie("feed_record"+recordRequestDto.getFeedId(),recordRequestDto.getFeedId().toString());
+                    newCookie.setMaxAge(60*60*2); //2시간으로 설정
+                    response.addCookie(newCookie);
+                    return new ResponseEntity<>(new SuccessResponse(webHookService.insertRecord(SecurityUtil.getCurrentMemberId(),recordRequestDto)), HttpStatus.OK);
+                }
+            }
+            //쿠키자체가 없었다면
+            else {
+                Cookie newCookie = new Cookie("feed_record"+recordRequestDto.getFeedId(),recordRequestDto.getFeedId().toString());
+                newCookie.setMaxAge(60*60*2); //2시간으로 설정
+                response.addCookie(newCookie);
+                return new ResponseEntity<>(new SuccessResponse(webHookService.insertRecord(SecurityUtil.getCurrentMemberId(),recordRequestDto)), HttpStatus.OK);
+            }
+
+            return new ResponseEntity<>(new SuccessResponse("already read"), HttpStatus.OK);
+
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
         } catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    private boolean checkCookies(Cookie[] cookies,long feed_id) {
+
+        for(Cookie cookie : cookies) {
+
+            if(cookie.getName().equals("feed_record"+feed_id)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
