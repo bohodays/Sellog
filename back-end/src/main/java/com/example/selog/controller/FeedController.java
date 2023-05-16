@@ -61,8 +61,8 @@ public class FeedController {
             if(cookies != null) {
 
                 //쿠키값에 feed_views가 없었다면
-                if(!checkCookies(cookies)) {
-                    Cookie newCookie = new Cookie("feed_views",feed_id.toString());
+                if(!checkCookies(cookies,feed_id)) {
+                    Cookie newCookie = new Cookie("feed_views"+feed_id,feed_id.toString());
                     newCookie.setMaxAge(60*60*2); //2시간으로 설정
                     response.addCookie(newCookie);
                     feedService.updateViews(feed_id);
@@ -70,7 +70,7 @@ public class FeedController {
             }
             //쿠키자체가 없었다면
             else {
-                Cookie newCookie = new Cookie("feed_views",feed_id.toString());
+                Cookie newCookie = new Cookie("feed_views"+feed_id,feed_id.toString());
                 newCookie.setMaxAge(60*60*2); //2시간으로 설정
                 response.addCookie(newCookie);
                 feedService.updateViews(feed_id);
@@ -83,11 +83,11 @@ public class FeedController {
         }
     }
 
-    private boolean checkCookies(Cookie[] cookies) {
+    private boolean checkCookies(Cookie[] cookies,long feed_id) {
 
         for(Cookie cookie : cookies) {
 
-            if(cookie.getName().equals("feed_views")) {
+            if(cookie.getName().equals("feed_views"+feed_id)) {
                 return true;
             }
         }

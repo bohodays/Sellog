@@ -11,4 +11,5 @@ public class RecordRequestDto {
     private String type;
     private String message;
     private String problemId;
+    private Long feedId;
 }

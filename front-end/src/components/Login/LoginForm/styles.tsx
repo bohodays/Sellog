@@ -24,7 +24,8 @@ export const SSection = styled.section<any>`
     color: #ff401e;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: center;
     user-select: none;
   }
 
@@ -45,6 +46,8 @@ export const SSection = styled.section<any>`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 0px;
+    margin-top: 2rem;
   }
 
   .tistory {
@@ -67,5 +70,13 @@ export const SSection = styled.section<any>`
     height: 1.2rem;
     font-size: 48px;
     left: 1rem;
+  }
+
+  img {
+    width: 5rem;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 0;
+    margin-top: 0;
   }
 `;

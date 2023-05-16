@@ -112,7 +112,7 @@ public class WebHookService {
 
         //블로그인 경우
         if(!recordRequestDto.getProblemId().equals("")){
-            Optional<Record> record = recordRepository.findByProblemIdAndCategory(recordRequestDto.getProblemId(), recordRequestDto.getType());
+            Optional<Record> record = recordRepository.findByProblemIdAndCategoryAndMember(recordRequestDto.getProblemId(), recordRequestDto.getType(), member);
             if(record.isPresent()){
                 throw new CustomException(ErrorCode.CONFLICT_ALGO);
             }
