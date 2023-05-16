@@ -43,7 +43,7 @@ function createRecord(token, message, type, problemId) {
     });
   }
   else {
-    console.log(`Error: ${xhr.status} - ${xhr.statusText}`);
-    throw new Error(xhr.statusText);
+    // console.log(`Error: ${xhr.status} - ${xhr.statusText}`);
+    // throw new Error(xhr.statusText);
   }
 }

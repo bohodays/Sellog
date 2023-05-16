@@ -55,6 +55,11 @@ function sendNotification(point) {
 }
 
 function handleMessage(request, sender, sendResponse) {
+  if (request && request.message == "alarm") {
+    sendNotification(
+      request.payload.point,
+    );
+  }
   if (request && request.closeWebPage === true && request.isSuccess === true) {
     /* Set username */
     chrome.storage.local.set(
@@ -95,11 +100,7 @@ function handleMessage(request, sender, sendResponse) {
   } else if (request && request.sender == "baekjoon" && request.task == "SolvedApiCall") {
     SolvedApiCall(request.problemId).then((res) => sendResponse(res));
     //sendResponse(SolvedApiCall(request.problemId))
-  } else if (request && request.message == "alarm") {
-    sendNotification(
-      request.payload.point,
-    );
-  }
+  } 
   return true;
 }
 

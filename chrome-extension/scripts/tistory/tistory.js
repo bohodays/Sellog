@@ -39,7 +39,7 @@ function startLoader() {
           // console.log("이벤트막아")
           stopLoader();
           const title = document.querySelector("#post-title-inp").textContent;
-          const url = document.querySelector("#editor-root > div:nth-child(42) > div > div > div > form > fieldset > div.layer_body > div > dl:nth-child(5) > dd > span").textContent + title;
+          const url = document.querySelector("#editor-root > div:nth-child(42) > div > div > div > form > fieldset > div.layer_body > div > dl:nth-child(5) > dd > span").textContent + document.querySelector("#urlPublish").value;
           const message = `[Tistory] Title: ${title}`+'\n'+ `URL: ${url}`+'\n' + `CONTENT : ${content}`;
 
           console.log(message);
