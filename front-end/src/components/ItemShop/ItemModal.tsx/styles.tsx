@@ -17,6 +17,6 @@ export const SDiv = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 5;
-  background-color: rgb(200, 200, 200, 0.8);
+  background-color: rgb(255, 255, 255, 0.9);
   border-radius: 10px;
 `;

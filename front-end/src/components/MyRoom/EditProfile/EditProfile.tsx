@@ -13,8 +13,11 @@ import tistory from "@/assets/imgs/retro/tistoryIcon.png";
 import smileBottom from "@/assets/imgs/retro/smile_bottom.png";
 import coin from "@/assets/imgs/retro/coin.png";
 import { useRef, useState } from "react";
+// api
 import { apiUpdateUserInfo } from "@/api/user";
+
 import { IMyProfileUpdate } from "@/typeModels/user/userEditInfo";
+import WithdrawModal from "@/components/MyRoom/WithdrawModal/WithdrawModal";
 import { localData } from "@/utils/token";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 // recoil atoms
@@ -42,6 +45,8 @@ function EditProfile(props: MyProfileProps) {
   const [newProfileImg, setNewProfileImg] = useState(profileImg.current);
   const [imgFile, setImgFile] = useState(""); // 미리보기 실제 파일(저장을 위한)
 
+  // 탈퇴 모달 상태
+  const [isOutModal, setIsOutModal] = useState(false);
   // 프로필 사진 바꾸는 로직
   function profileHandler() {
     profileImg.current.click();
@@ -225,7 +230,10 @@ function EditProfile(props: MyProfileProps) {
       blog: blogRef.current.value,
     });
   };
-
+  const outHandler = () => {
+    setIsOutModal(!isOutModal);
+    // apiDelUserInfo().then(() => console.log("탈퇴가 완료되었습니다."));
+  };
   return (
     <SProfile>
       <div className="head"> EDIT ME</div>
@@ -311,6 +319,11 @@ function EditProfile(props: MyProfileProps) {
           </button>
         </div>
         <hr />
+        <div className="withdraw__box">
+          <button className="withdraw__button" onClick={outHandler}>
+            회원 탈퇴
+          </button>
+        </div>
         <div className="platform-address">
           <div>
             <a href={`${userInfo.github}`}>
@@ -330,6 +343,12 @@ function EditProfile(props: MyProfileProps) {
           setIsEdit={props.setIsEdit}
           editHandler={editHandler}
         ></EditProfileModal>
+      )}
+      {isOutModal && (
+        <WithdrawModal
+          isOutModal={isOutModal}
+          setIsOutModal={setIsOutModal}
+        ></WithdrawModal>
       )}
     </SProfile>
   );

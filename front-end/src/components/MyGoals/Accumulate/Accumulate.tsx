@@ -34,7 +34,6 @@ const Accumulate = () => {
   useEffect(() => {
     apiGetAccumulatedRecordList()
       .then((r) => {
-        // console.log(r?.data.response);
         setAccumulatedList(r?.data.response);
       })
       .catch((e) => {
@@ -65,11 +64,15 @@ const Accumulate = () => {
             <TiChevronLeftOutline size={40} />
           </button>
           <div>
-            <img
-              className="goal_logo"
-              src={`./src/assets/imgs/${dummyAccumulateList[activeStep].goal}_logo.png`}
-              alt="logo"
-            ></img>
+            <p
+              style={{
+                fontFamily: "ZCOOL KuaiLe",
+                fontSize: "1.5rem",
+                margin: "0 2rem",
+              }}
+            >
+              {dummyAccumulateList[activeStep].goal}
+            </p>
           </div>
           <button
             className="nav left"
@@ -79,71 +82,112 @@ const Accumulate = () => {
             <TiChevronRightOutline size={40} />
           </button>
         </div>
-        <div style={{ fontFamily: "ZCOOL KuaiLe" }}>
-          {dummyAccumulateList[activeStep].goal}
-        </div>
 
         <div className="number">
           {accumulatedList &&
-            accumulatedList[dummyAccumulateList[activeStep].goal]?.day}
+            Number(accumulatedList[dummyAccumulateList[activeStep].goal]?.day) +
+              1}
           일째 유지 중입니다
         </div>
 
         {/* map 돌리는 코드로 바꾸기 */}
-        <div className="acc__day__wrapper">
+        <div
+          className={
+            dummyAccumulateList[activeStep].goal === "cs"
+              ? "acc__day__wrapper hidden"
+              : dummyAccumulateList[activeStep].goal === "feed"
+              ? "acc__day__wrapper hidden"
+              : "acc__day__wrapper"
+          }
+        >
           {accumulatedList && (
-            <div className="goal__container">
-              <div className="start__div">
-                {
-                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                    ?.start?.[0]
-                }
-                일
-              </div>
-              <div className="start__div">
-                {
-                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                    ?.mid?.[0]
-                }
-                일
-              </div>
-              <div className="start__div">
-                {
-                  accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                    ?.last?.[0]
-                }
-                일
-              </div>
+            <div
+              className={
+                accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                  ?.start === null
+                  ? "null__container"
+                  : "goal__container"
+              }
+            >
+              {accumulatedList[dummyAccumulateList[activeStep]?.goal]?.start ===
+              null ? (
+                <div className="recommend">
+                  추천 설정이 아니면 누적 보상을 얻지 못합니다.
+                </div>
+              ) : (
+                <>
+                  <div className="start__div">
+                    {
+                      accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                        ?.start?.[0]
+                    }
+                    일
+                  </div>
+                  <div className="start__div">
+                    {
+                      accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                        ?.mid?.[0]
+                    }
+                    일
+                  </div>
+                  <div className="start__div">
+                    {
+                      accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                        ?.last?.[0]
+                    }
+                    일
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>
-        <div className="acc__reward__wrapper">
+        <div
+          className={
+            dummyAccumulateList[activeStep].goal === "cs"
+              ? "acc__reward__wrapper hidden"
+              : dummyAccumulateList[activeStep].goal === "feed"
+              ? "acc__reward__wrapper hidden"
+              : "acc__reward__wrapper"
+          }
+        >
           {accumulatedList && (
-            <div className="reward__container">
-              <div className="reward__div reward1">
-                <div className="inner_idv">
-                  {
-                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                      ?.start?.[1]
-                  }
-                </div>
-              </div>
-              <div className="reward__div reward2">
-                <div className="inner_idv">
-                  {
-                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                      ?.mid?.[1]
-                  }
-                </div>
-              </div>
-              <div className="reward3__div">
-                <div className="reward3">
-                  {
-                    accumulatedList[dummyAccumulateList[activeStep]?.goal]
-                      ?.last?.[1]
-                  }
-                </div>
-              </div>
+            <div
+              className={
+                accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                  ?.start === null
+                  ? "reward__container reward__hidden"
+                  : "reward__container"
+              }
+            >
+              {
+                <>
+                  <div className="reward__div reward1">
+                    <div className="inner_idv">
+                      {
+                        accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                          ?.start?.[1]
+                      }
+                    </div>
+                  </div>
+                  <div className="reward__div reward2">
+                    <div className="inner_idv">
+                      {
+                        accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                          ?.mid?.[1]
+                      }
+                    </div>
+                  </div>
+                  <div className="reward3__div">
+                    <div className="reward3">
+                      {
+                        accumulatedList[dummyAccumulateList[activeStep]?.goal]
+                          ?.last?.[1]
+                      }
+                    </div>
+                  </div>
+                </>
+              }
             </div>
           )}
         </div>

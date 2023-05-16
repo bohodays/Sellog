@@ -143,7 +143,7 @@ export const SSection = styled.section`
     flex-direction: column;
     text-align: center;
     p {
-      margin-block: 0.5rem;
+      margin-block-start: 3vh;
       font-size: 1.2rem;
     }
   }

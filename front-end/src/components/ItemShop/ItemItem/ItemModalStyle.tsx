@@ -32,7 +32,8 @@ const ItemModalStyle = () => {
     ".buy__question": {
       textAlign: "center",
       fontSize: "1.1vw",
-      fontFamily: "Slackey",
+      // fontFamily: "Slackey",
+      fontWeight: "600",
     },
 
     ".buy__btn__no": {
@@ -74,12 +75,29 @@ const ItemModalStyle = () => {
 
     ".cur__point": {
       position: "relative",
+      display: "flex",
+      alignItems: "center",
     },
+
     ".slash": {
       fontWeight: "900",
       position: "absolute",
-      left: "38%",
+      // right: "0.5%",
       color: "red",
+    },
+
+    ".lack__msg": {
+      // fontFamily: "Voces",
+      display: "flex",
+      alignItems: "center",
+      fontSize: "1.3vw",
+      fontWeight: "600",
+    },
+
+    ".lack__coin": {
+      color: "hotpink",
+      margin: "0vw 1vw",
+      fontSize: "1.8vw",
     },
   };
 };
