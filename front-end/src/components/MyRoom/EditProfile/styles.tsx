@@ -116,6 +116,7 @@ export const SProfile = styled.section`
   .box__edit {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding-block: 3%;
     width: 90%;
   }
@@ -178,5 +179,11 @@ export const SProfile = styled.section`
     justify-content: space-evenly;
     align-items: center;
     margin: 3%;
+  }
+
+  .empty {
+    border: 3px solid red !important;
+    border-radius: 4px;
+    padding: 0.8rem 0.5rem;
   }
 `;
