@@ -149,14 +149,17 @@ public class RecordService {
                 .day(diff).build());
 
         if(result.get("github") == null){
+            diff = ChronoUnit.DAYS.between(member.getGithub_start_date(),LocalDateTime.now());
             result.put("github",RecordMaintainDto.builder()
                     .day(diff).build());
         }
         if(result.get("blog") == null){
+            diff = ChronoUnit.DAYS.between(member.getBlog_start_date(),LocalDateTime.now());
             result.put("blog",RecordMaintainDto.builder()
                     .day(diff).build());
         }
         if(result.get("algo") == null){
+            diff = ChronoUnit.DAYS.between(member.getAlgo_start_date(),LocalDateTime.now());
             result.put("algo", RecordMaintainDto.builder()
                     .day(diff).build());
         }
