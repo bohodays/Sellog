@@ -90,7 +90,6 @@ const ItemShop = () => {
             </h6>
           </div>
           <div className="mycoin__box">
-            <p>MY COIN</p>
             <div className="mycoin__wrapper">
               <img src={coin} className="coin__icon"></img>
               {userInfo.points}

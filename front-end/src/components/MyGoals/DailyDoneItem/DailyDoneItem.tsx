@@ -3,6 +3,7 @@ import { SDiv } from "./styles";
 import { IDoneItemProps } from "@/typeModels/mygoals/myRecordInterfaces";
 
 const DailyDoneItem = ({ doneItem }: IDoneItemProps) => {
+  console.log(doneItem);
   const [repo, setRepo] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [link, setLink] = useState<string | null>(null);
@@ -10,6 +11,8 @@ const DailyDoneItem = ({ doneItem }: IDoneItemProps) => {
     github: ["repository", "commit messgage"],
     feed: ["title", "post link"],
     algo: ["problem", "link"],
+    blog: ["title", "link"],
+    cs: ["problem", "category"],
   };
 
   useEffect(() => {

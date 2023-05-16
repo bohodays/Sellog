@@ -207,6 +207,11 @@ export const SContainer = styled.div`
     transform-origin: 50% 50%;
   }
 
+  .coin__icon:hover {
+    animation: rotate_image 1.1s linear infinite;
+    transform-origin: 50% 50%;
+  }
+
   @keyframes rotate_image {
     100% {
       transform: rotateY(360deg);
