@@ -4,7 +4,7 @@ const ItemModalStyle = () => {
     top: "50%",
     left: "60%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: "fit-content",
     bgcolor: "black",
     border: "2px solid #a6e9c8",
     boxShadow: 22,
@@ -13,29 +13,39 @@ const ItemModalStyle = () => {
 
     ".buy__modal": {
       color: "white",
-      fontWeight: 600,
     },
 
     ".buy__btn__yes": {
       backgroundColor: "#a6e9c8",
-      padding: "2% 3%",
+      padding: "0.3vw",
       borderRadius: "20px",
       fontWeight: "600",
       fontSize: "0.9vw",
       marginRight: "0.5vw",
+      border: "2px solid #a6e9c8",
+    },
+
+    ".buy__btn__yes:hover": {
+      border: "2px solid hotpink",
     },
 
     ".buy__question": {
       textAlign: "center",
-      fontSize: "1.2vw",
+      fontSize: "1.1vw",
+      fontFamily: "Slackey",
     },
 
     ".buy__btn__no": {
       backgroundColor: "#a6e9c8",
-      padding: "2% 3%",
+      padding: "0.3vw",
       borderRadius: "20px",
       fontWeight: "600",
       fontSize: "0.9vw",
+      border: "2px solid #a6e9c8",
+    },
+
+    ".buy__btn__no:hover": {
+      border: "2px solid hotpink",
     },
 
     ".buy__btns__wrapper": {
@@ -56,9 +66,20 @@ const ItemModalStyle = () => {
 
     ".after__point": {
       fontSize: "1.1vw",
+      fontWeight: "600",
     },
     ".right__arrow": {
       margin: "10px",
+    },
+
+    ".cur__point": {
+      position: "relative",
+    },
+    ".slash": {
+      fontWeight: "900",
+      position: "absolute",
+      left: "38%",
+      color: "red",
     },
   };
 };

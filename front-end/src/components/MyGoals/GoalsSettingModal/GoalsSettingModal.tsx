@@ -35,6 +35,8 @@ const GoalsSettingModal = ({
   activeGoal,
 }: IGoalSettingModalProps) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  // 입력 값 에러 일때 Textfield에 줄 속성
+  const [error, setError] = useState<boolean>(false);
 
   // feed, cs true false 여부
   const [doIt, setDoIt] = useState(userInfo[goalNameToTargetName[activeGoal]]);
@@ -102,6 +104,20 @@ const GoalsSettingModal = ({
   const handleOXBtn = () => {
     setDoIt((prev: boolean) => !prev);
   };
+  const updateHandler = () => {
+    console.log({ activeGoal }, "///////");
+    console.log({ day });
+
+    if ((activeGoal == "algo" || activeGoal == "github") && day < 4) {
+      console.log("왜.....................");
+
+      updateMyGoal(activeGoal);
+      setIsOpen(!isOpen);
+    } else {
+      setError(true);
+      setIsOpen(isOpen);
+    }
+  };
 
   return (
     <SSection isOpen={isOpen} onClick={handleModalClose}>
@@ -117,11 +133,12 @@ const GoalsSettingModal = ({
             <div className="set__goal">
               {activeGoal === "feed" || activeGoal === "cs quiz" ? (
                 <button onClick={handleOXBtn} className="OX_btn">
-                  {doIt ? "O" : "X"}
+                  {doIt ? "1일 1회" : "설정 안함"}
                 </button>
               ) : (
                 <>
                   <TextField
+                    error={error}
                     id="custom__goal__day"
                     variant="outlined"
                     type="number"
@@ -171,10 +188,7 @@ const GoalsSettingModal = ({
               )}
             </div>
           </div>
-          <button
-            className="update__btn"
-            onClick={() => updateMyGoal(activeGoal)}
-          >
+          <button className="update__btn" onClick={updateHandler}>
             완료
           </button>
           <img src={memo} className="memo__png"></img>
