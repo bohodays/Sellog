@@ -14,7 +14,6 @@ const CSQuizContents = () => {
   const [isExplanation, setIsExplanation] = useState(false);
 
   const navigate = useNavigate();
-  console.log(quizList);
 
   const handleGoToExplanation = () => {
     if (
@@ -44,7 +43,14 @@ const CSQuizContents = () => {
     <>
       {isExplanation ? (
         <SDiv>
-          <h3 className="comment">{quizList[activeStep].comment}</h3>
+          <div>
+            <h1 className="correct__result">
+              {activeFontColor === Number(quizList[activeStep].answer)
+                ? "정답 !"
+                : "오답 !"}
+            </h1>
+            <h3 className="comment">{quizList[activeStep].comment}</h3>
+          </div>
           <button className="submit" onClick={handleGoToQuiz}>
             {activeStep === 4 ? "결과 보기" : "다음"}
           </button>
