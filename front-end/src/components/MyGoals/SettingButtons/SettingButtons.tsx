@@ -59,11 +59,15 @@ const SettingButtons = ({ setIsOpen, setActiveGoal }: IModalProps) => {
       </button>
       <button onClick={() => handleModalOpen("feed")}>
         <p className="item1 blue">feed</p>
-        <p className="item2">{userInfo["feedTarget"] ? "1 일 1 피드" : "X"}</p>
+        <p className="item2">
+          {userInfo["feedTarget"] ? "1 일 1 피드" : "설정 안함"}
+        </p>
       </button>
       <button onClick={() => handleModalOpen("cs quiz")}>
         <p className="item1 green">cs quiz</p>
-        <p className="item2">{userInfo["csTarget"] ? "1 일 1 문제" : "X"}</p>
+        <p className="item2">
+          {userInfo["csTarget"] ? "1 일 1 문제" : "설정 안함"}
+        </p>
       </button>
     </SArticle>
   );
