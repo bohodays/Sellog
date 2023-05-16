@@ -3,7 +3,7 @@ import { SMain, SHeader, SBody, SSection } from "./styles";
 import LargeSmile from "@/assets/imgs/retro/smile_large.png";
 import GreenFlower from "@/assets/imgs/retro/green_flower.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import {
   faMagnifyingGlass,
   faTag,
@@ -151,7 +151,7 @@ export default function Feed() {
             <p>
               <FontAwesomeIcon
                 icon={faFireFlameCurved}
-                style={{ color: "red" }}
+                style={{ color: "red", marginRight: "5px" }}
               />
               가장 많이 본 피드
             </p>
@@ -161,10 +161,19 @@ export default function Feed() {
                 mostViewFeed.map((element: any, index: number) => {
                   return (
                     <>
-                      <li key={index} className="mostview__element">
-                        <Link to={element.link}>{element["title"]}</Link>
-                        <span> views: {element["views"]}</span>
-                      </li>
+                      <Link to={element.link} target="_blank">
+                        <li key={index} className="mostview__element">
+                          {element["title"]}
+                          <br />
+                          <span className="view__wrapper">
+                            <FontAwesomeIcon
+                              icon={faEye}
+                              style={{ marginRight: "0.5rem" }}
+                            />
+                            {element["views"]}
+                          </span>
+                        </li>
+                      </Link>
                     </>
                   );
                 })}
@@ -174,8 +183,6 @@ export default function Feed() {
         <div className="feed__box">
           {isFeed &&
             newsfeed.map((feed: ReactNode, index: number) => {
-              // <p> {feed.company}</p>;
-
               return <FeedComponent key={index} props={feed}></FeedComponent>;
             })}
           <div ref={observerRef} className="intersection__div"></div>
