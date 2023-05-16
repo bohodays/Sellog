@@ -144,7 +144,7 @@ export const SSection = styled.section`
     text-align: center;
     p {
       margin-block-start: 3vh;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
   }
 
@@ -158,6 +158,9 @@ export const SSection = styled.section`
     transition: all 300ms linear;
     border-radius: 12px;
     padding: 0.5rem 1rem;
+    li {
+      height: 2vh;
+    }
   }
 
   .mostview__element:hover {

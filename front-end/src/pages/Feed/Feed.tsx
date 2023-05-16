@@ -164,7 +164,9 @@ export default function Feed() {
                     <>
                       <Link to={element.link} target="_blank">
                         <li key={index} className="mostview__element">
-                          {element["title"]}
+                          {element["title"] > 20
+                            ? element["title"].slice(0, 5) + "..."
+                            : element["title"]}
                           <br />
                           <span className="view__wrapper">
                             <FontAwesomeIcon
