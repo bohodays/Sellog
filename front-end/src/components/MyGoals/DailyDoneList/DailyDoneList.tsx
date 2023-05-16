@@ -20,7 +20,7 @@ const DailyDoneList = ({ selectedDateProps }: ISelectedDate) => {
 
   const handleOpen = (e: any) => {
     setIsOpen(true);
-    console.log(e.target.id);
+    // console.log(e.target.id);
     setActiveType(e.target.id);
   };
 
