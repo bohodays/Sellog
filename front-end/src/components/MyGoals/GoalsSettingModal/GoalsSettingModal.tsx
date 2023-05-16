@@ -108,9 +108,13 @@ const GoalsSettingModal = ({
     console.log({ activeGoal }, "///////");
     console.log({ day });
 
-    if ((activeGoal == "algo" || activeGoal == "github") && day < 4) {
-      console.log("왜.....................");
-
+    if ((activeGoal == "algorithm" || activeGoal == "github") && day < 4) {
+      updateMyGoal(activeGoal);
+      setIsOpen(!isOpen);
+    } else if (activeGoal == "blog" && day < 10) {
+      updateMyGoal(activeGoal);
+      setIsOpen(!isOpen);
+    } else if (activeGoal == "feed" || activeGoal == "cs quiz") {
       updateMyGoal(activeGoal);
       setIsOpen(!isOpen);
     } else {
@@ -147,10 +151,11 @@ const GoalsSettingModal = ({
                       userInfo[goalNameToTargetName[activeGoal]] &&
                       userInfo[goalNameToTargetName[activeGoal]][0]
                     }
-                    inputProps={{
-                      min: 1,
-                      max: 3,
-                    }}
+                    inputProps={
+                      activeGoal == "blog"
+                        ? { min: 1, max: 7 }
+                        : { min: 1, max: 3 }
+                    }
                     defaultValue={1}
                     sx={{
                       width: "2.5vw",
@@ -188,6 +193,23 @@ const GoalsSettingModal = ({
               )}
             </div>
           </div>
+          {error ? (
+            activeGoal == "github" || activeGoal == "algorithm" ? (
+              <>
+                <p> 최대 3일까지 가능합니다.</p>
+              </>
+            ) : (
+              <>
+                <p> 최대 9일까지 가능합니다.</p>
+              </>
+            )
+          ) : null}
+
+          {/* {error && (activeGoal=='github' || activeGoal =='algo') ? (
+            <>
+              <p> 3이하</p>
+            </>
+          ) : null} */}
           <button className="update__btn" onClick={updateHandler}>
             완료
           </button>

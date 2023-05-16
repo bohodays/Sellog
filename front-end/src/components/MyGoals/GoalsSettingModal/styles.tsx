@@ -82,5 +82,9 @@ export const SDiv = styled.div`
     height: 100%;
     width: 100%;
     padding: 5vw;
+    p {
+      font-size: 1rem;
+      color: #bd0000;
+    }
   }
 `;

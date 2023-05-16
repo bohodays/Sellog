@@ -88,7 +88,7 @@ const MyProfile = (props: MyProfileProps) => {
     props.setIsEdit(!props.isEdit);
   };
   const todayCSHandler = () => {
-    csNavigator("/csquiz");
+    csNavigator("/csquiz-select");
   };
   const todayFeedHandler = () => {
     feedNavigator("/feed");
