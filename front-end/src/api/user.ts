@@ -78,3 +78,13 @@ export const apiUpdateUserInfo = async (data: any, pic?: any) => {
     console.log(e);
   }
 };
+
+// 회원탈퇴
+export const apiDelUserInfo = async () => {
+  try {
+    const response = await api.delete(`/user`);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};

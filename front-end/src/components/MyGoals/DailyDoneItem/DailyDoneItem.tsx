@@ -3,7 +3,7 @@ import { SDiv } from "./styles";
 import { IDoneItemProps } from "@/typeModels/mygoals/myRecordInterfaces";
 
 const DailyDoneItem = ({ doneItem }: IDoneItemProps) => {
-  console.log(doneItem);
+  // console.log(doneItem, "doneItem");
   const [repo, setRepo] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [link, setLink] = useState<string | null>(null);
@@ -36,6 +36,27 @@ const DailyDoneItem = ({ doneItem }: IDoneItemProps) => {
 
       setRepo(frontLink);
       setLink(problemLink);
+    } else if (doneItem?.type === "feed") {
+      setRepo(doneItem.message.split("_")[0]);
+      setLink(doneItem.message.split("_")[1]);
+    } else if (doneItem?.type === "blog") {
+      // Title 추출
+      let titleStartIndex = doneItem.message.indexOf("Title:") + 7; // "Title:" 이후 인덱스
+      let titleEndIndex = doneItem.message.indexOf("\n", titleStartIndex); // 줄바꿈 문자 이전 인덱스
+      let slicedTitle = doneItem.message
+        .substring(titleStartIndex, titleEndIndex)
+        .trim();
+
+      // URL 추출
+      let urlStartIndex = doneItem.message.indexOf("URL:") + 5; // "URL:" 이후 인덱스
+      let urlEndIndex = doneItem.message.indexOf("\n", urlStartIndex); // 줄바꿈 문자 이전 인덱스
+      let slicedUrl = doneItem.message
+        .substring(urlStartIndex, urlEndIndex)
+        .trim();
+
+      console.log(slicedTitle, slicedUrl, "blog");
+      setRepo(slicedTitle);
+      setLink(slicedUrl);
     }
   }, []);
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -45,15 +66,9 @@ const DailyDoneItem = ({ doneItem }: IDoneItemProps) => {
     <SDiv onClick={handleModalClick}>
       <div className="doneItem__container">
         <div className="doneItem__left__column">
-          <div className="doneItem__left__category">
-            {category[doneItem.type][0]}
-          </div>
           <p className="doneItem__title">{repo ? repo : null}</p>
         </div>
         <div className="doneItem__right__column">
-          <div className="doneItem__right__category">
-            {category[doneItem.type][1]}
-          </div>
           <p className="doneItem__msg">{message ? message : null}</p>
           <p className="doneItem__msg doneItem__link">
             {link && <a href={link}>{link}</a>}

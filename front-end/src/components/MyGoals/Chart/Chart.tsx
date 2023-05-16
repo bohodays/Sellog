@@ -36,6 +36,7 @@ const Chart = () => {
       {
         label: "TOTAL 기록 횟수",
         data: chartData,
+        // backgroundColor: "rgba(255, 255, 255, 0.2)",
         backgroundColor: "rgba(255, 255, 255, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 2,
@@ -52,7 +53,7 @@ const Chart = () => {
         labels: {
           // This more specific font property overrides the global property
           font: {
-            size: 15,
+            size: 12,
           },
           // TOTAL 기록 횟수 라벨 색깔
           // color: "black",

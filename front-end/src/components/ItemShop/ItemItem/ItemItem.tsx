@@ -52,36 +52,53 @@ const ItemItem = ({ shopItem, setIsModalOpen, setItem }: IItemModalProps) => {
         aria-describedby="modal-modal-description"
       >
         <Box component="div" sx={ItemModalStyle}>
-          <div className="buy__modal">
-            <p className="buy__question">
-              Will you buy {shopItem?.name?.split("_").join(" ")}?
-            </p>
-            <div className="buy__point">
-              <img src={coin} className="buy__modal__coin"></img>
-              <p className="cur__point">{mypoint}</p>
-              <FontAwesomeIcon
-                icon={faArrowRightLong}
-                className="right__arrow"
-              />
-              <FontAwesomeIcon
-                icon={faSlash}
-                className="slash"
-                rotation={270}
-                size="lg"
-              />
-              <p className="after__point">
-                {shopItem?.point && mypoint - shopItem.point}
+          {shopItem.point != undefined && shopItem?.point <= mypoint ? (
+            <div className="buy__modal">
+              <p className="buy__question">
+                Will you buy {shopItem?.name?.split("_").join(" ")}?
               </p>
+              <div className="buy__point">
+                <img src={coin} className="buy__modal__coin"></img>
+                {/* <p className="cur__point">{mypoint}</p> */}
+                <div className="cur__point">
+                  <FontAwesomeIcon
+                    icon={faSlash}
+                    className="slash"
+                    rotation={270}
+                    size="lg"
+                  />
+                  {mypoint}
+                </div>
+                <FontAwesomeIcon
+                  icon={faArrowRightLong}
+                  className="right__arrow"
+                />
+                <p className="after__point">
+                  {shopItem?.point && mypoint - shopItem.point}
+                </p>
+              </div>
+              <div className="buy__btns__wrapper">
+                <button onClick={buyItem} className="buy__btn__yes">
+                  Yes
+                </button>
+                <button onClick={handleClose} className="buy__btn__no">
+                  No
+                </button>
+              </div>
             </div>
-            <div className="buy__btns__wrapper">
-              <button onClick={buyItem} className="buy__btn__yes">
-                Yes
-              </button>
-              <button onClick={handleClose} className="buy__btn__no">
-                No
-              </button>
+          ) : (
+            <div className="buy__modal buy__question">
+              {shopItem.point != undefined && (
+                <div className="lack__msg">
+                  You need{" "}
+                  <p className="lack__coin">
+                    {Math.abs(mypoint - shopItem?.point)}{" "}
+                  </p>
+                  coin more. 😥
+                </div>
+              )}
             </div>
-          </div>
+          )}
         </Box>
       </Modal>
 

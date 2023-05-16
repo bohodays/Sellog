@@ -42,6 +42,34 @@ const GoalsSetting: any = () => {
         ></GoalsSettingModal>
       )}
       <div className="title__wrapper">
+        {/* <button
+          className="info__btn"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <FontAwesomeIcon icon={faCircleInfo} fontSize={20} />
+        </button> */}
+
+        <p className="title">MY GOALS</p>
+        <span style={{ textShadow: "1px 2px gray" }}>
+          keep running to achieve your goal !
+        </span>
+        <img
+          className="sticker retro__pencil"
+          src={RetroPencil}
+          alt="retro_pencil"
+        />
+        <img className="sticker retro__work" src={WorkHard} alt="work_hard" />
+      </div>
+      <div className="content__wrapper">
+        <img className="sticker retro__spring" src={Spring} alt="spring" />
+        {/* <img className="sticker retro__img" src={RetroImg} alt="retro" /> */}
+        {/* 목표 설정 버튼들 */}
+        {/* <FontAwesomeIcon
+          icon={faArrowLeft}
+          className="goback__button"
+          onClick={toMyRoomHandler}
+        /> */}
         <button
           className="info__btn"
           onMouseEnter={handleMouseEnter}
@@ -52,24 +80,6 @@ const GoalsSetting: any = () => {
         {showInfoMessage && (
           <div className="info__message">목표 설정과 보상 체계 안내</div>
         )}
-        <p className="title">MY GOALS</p>
-        <span>keep running to achieve your goal !</span>
-        <img
-          className="sticker retro__pencil"
-          src={RetroPencil}
-          alt="retro_pencil"
-        />
-        <img className="sticker retro__work" src={WorkHard} alt="work_hard" />
-      </div>
-      <div className="content__wrapper">
-        <img className="sticker retro__spring" src={Spring} alt="spring" />
-        <img className="sticker retro__img" src={RetroImg} alt="retro" />
-        {/* 목표 설정 버튼들 */}
-        <FontAwesomeIcon
-          icon={faArrowLeft}
-          className="goback__button"
-          onClick={toMyRoomHandler}
-        />
         <SettingButtons setIsOpen={setIsOpen} setActiveGoal={setActiveGoal} />
         <img
           className="sticker retro__yellow-flower"
@@ -82,9 +92,6 @@ const GoalsSetting: any = () => {
           alt="smile_and_light"
         />
       </div>
-      {/* <button className="button__goal" onClick={toMyRoomHandler}>
-        My Room
-      </button> */}
     </SSection>
   );
 };

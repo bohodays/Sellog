@@ -48,7 +48,18 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Feed } from "@/components/Main/Models/Feed";
 
 // 이스터에그용 이미지
-import BloomerImg from "@/assets/imgs/main/bloomerImg.png";
+import { RoomDirect } from "@/components/Main/Models/Room_direct";
+import { ShopDirect } from "@/components/Main/Models/Shop_direct";
+import { CSDirect } from "@/components/Main/Models/Cs_direct";
+import { FeedDirect } from "@/components/Main/Models/Feed_direct";
+import { Deco } from "@/components/Main/Models/Deco";
+import { Maker } from "@/components/Main/Models/Maker";
+import { DoLearn } from "@/components/Main/Models/DoLearn";
+import { Bloomer } from "@/components/Main/Models/Bloomer";
+import { OBaekWon } from "@/components/Main/Models/Obaek";
+import { TanTanMen } from "@/components/Main/Models/Tantan";
+import { Osakak } from "@/components/Main/Models/Osakak";
+import { Sellog } from "@/components/Main/Models/Sellog";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -637,15 +648,65 @@ const Scene = ({ buttonRef }: any) => {
       <Tree position={[3, 0, -18]} castShadow={true} />
       <Tree position={[4, 0, -22]} castShadow={true} />
       <Tree position={[9, 0, -20]} castShadow={true} />
-      {/* 돌담길 */}
-      <group position={[0, 0, 0]}></group>
+
+      {/* 방향 표시 푯말 */}
+      <RoomDirect
+        scale={0.8}
+        position={[2, 0, 2]}
+        rotation={[0, -THREE.MathUtils.degToRad(140), 0]}
+      />
+      <Deco scale={0.4} position={[0.8, 0, 0.9]} />
+      <ShopDirect
+        scale={0.8}
+        position={[2, 0, -2]}
+        rotation={[0, -THREE.MathUtils.degToRad(50), 0]}
+      />
+      <Deco scale={0.4} position={[0.8, 0, -3.1]} />
+      <CSDirect
+        scale={0.8}
+        position={[-2, 0, -2]}
+        rotation={[0, -THREE.MathUtils.degToRad(140), 0]}
+      />
+      <Deco scale={0.4} position={[-3.2, 0, -3.1]} />
+      <FeedDirect
+        scale={0.8}
+        position={[-2, 0, 2]}
+        rotation={[0, -THREE.MathUtils.degToRad(50), 0]}
+      />
+      <Deco scale={0.4} position={[-3.2, 0, 0.9]} />
 
       {/* 이스터에그 */}
-      {/* 블루머 */}
-      {/* <mesh name="test" position={[0, 0.1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[5, 5]} />
-        <meshStandardMaterial transparent={true} map={bloomerTexture} />
-      </mesh> */}
+      <Maker scale={0.7} position={[5, 0, -1]} />
+      <DoLearn
+        scale={0.6}
+        position={[-20, 0, 2]}
+        rotation={[0, -THREE.MathUtils.degToRad(20), 0]}
+      />
+      <Bloomer
+        scale={0.6}
+        position={[17, 0, 16]}
+        rotation={[0, -THREE.MathUtils.degToRad(30), 0]}
+      />
+      <Sellog
+        scale={0.6}
+        position={[18, 0, -7]}
+        rotation={[0, THREE.MathUtils.degToRad(15), 0]}
+      />
+      <OBaekWon
+        scale={0.6}
+        position={[-20, 0, -15]}
+        rotation={[0, THREE.MathUtils.degToRad(15), 0]}
+      />
+      <TanTanMen
+        scale={0.6}
+        position={[15, 0, -19]}
+        rotation={[0, -THREE.MathUtils.degToRad(15), 0]}
+      />
+      <Osakak
+        scale={0.6}
+        position={[4, 0, 18]}
+        rotation={[0, THREE.MathUtils.degToRad(15), 0]}
+      />
     </Suspense>
   );
 };
@@ -684,12 +745,6 @@ const Main = () => {
         gl={{ preserveDrawingBuffer: true }}
       >
         <Scene buttonRef={buttonRef} />
-        {/* <OrbitControls
-          enableZoom={true}
-          // enableRotate={true}
-          // 쉬프트 마우스 왼쪽 이동 막는 기능
-          enablePan={false}
-        /> */}
       </Canvas>
       <SButtonWrapper ref={buttonRef}>
         <div className="btn-info">
