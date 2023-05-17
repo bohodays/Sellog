@@ -206,28 +206,28 @@ public class WebHookService {
 
         Map<String, Object> requestBody = new HashMap<>();
 
-//        List<HashMap<String,Object>> messages = new ArrayList<>();
-//
-//        HashMap<String,Object> system = new HashMap<>();
-//        HashMap<String,Object> user = new HashMap<>();
-//        HashMap<String,Object> assistance = new HashMap<>();
-//        HashMap<String,Object> ask = new HashMap<>();
-//
-//        system.put("role","system");
-//        system.put("content","You are a helpful assistant.");
-//        user.put("role","user");
-//        user.put("content","ㅋㅋㅋㅋㅋㅋ \n\nCan you evaluate above article pass or fail for me?");
-//        assistance.put("role","assistant");
-//        assistance.put("content","fail");
-//        ask.put("role","user");
-//        ask.put("content",question.toString());
-//
-//        messages.add(system);
-//        messages.add(user);
-//        messages.add(assistance);
-//        messages.add(ask);
-//        // 요청 질문
-//        requestBody.put("messages", messages);
+        List<HashMap<String,Object>> messages = new ArrayList<>();
+
+        HashMap<String,Object> system = new HashMap<>();
+        HashMap<String,Object> user = new HashMap<>();
+        HashMap<String,Object> assistance = new HashMap<>();
+        HashMap<String,Object> ask = new HashMap<>();
+
+        system.put("role","system");
+        system.put("content","You are a helpful assistant.");
+        user.put("role","user");
+        user.put("content","ㅋㅋㅋㅋㅋㅋ \n\nCan you evaluate above article pass or fail for me?");
+        assistance.put("role","assistant");
+        assistance.put("content","fail");
+        ask.put("role","user");
+        ask.put("content",question.toString());
+
+        messages.add(system);
+        messages.add(user);
+        messages.add(assistance);
+        messages.add(ask);
+        // 요청 질문
+        requestBody.put("messages", messages);
 
         // 요청에 사용될 모델 설정
         requestBody.put("model", "gpt-3.5-turbo");
