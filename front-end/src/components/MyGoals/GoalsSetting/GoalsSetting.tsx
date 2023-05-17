@@ -34,6 +34,12 @@ const GoalsSetting: any = () => {
 
   return (
     <SSection isOpen={isOpen}>
+      <FontAwesomeIcon
+        icon={faArrowLeft}
+        className="goback__button"
+        onClick={toMyRoomHandler}
+        style={{ fontSize: "22px" }}
+      />
       {isOpen && (
         <GoalsSettingModal
           isOpen={isOpen}
@@ -54,11 +60,6 @@ const GoalsSetting: any = () => {
       <div className="content__wrapper">
         <img className="sticker retro__spring" src={Spring} alt="spring" />
         <img className="sticker retro__img" src={RetroImg} alt="retro" />
-        {/* <FontAwesomeIcon
-          icon={faArrowLeft}
-          className="goback__button"
-          onClick={toMyRoomHandler}
-        /> */}
         {/* 목표 설정 버튼들 */}
         <button
           className="info__btn"

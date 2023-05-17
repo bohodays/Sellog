@@ -24,7 +24,7 @@ import {
 import pMinDelay from "p-min-delay";
 import Room2 from "../Models/Room2";
 import { IUpdateMyRoom, apiUpdateMyRoom } from "@/api/room";
-import Loading from "@/pages/Loading/Loading";
+import Loading from "@/components/Loading/Loading";
 
 const RoomEditContainer = React.lazy(
   () => import("@/components/MyRoom/RoomEditContainer/RoomEditContainer")

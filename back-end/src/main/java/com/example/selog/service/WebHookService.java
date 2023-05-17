@@ -194,42 +194,40 @@ public class WebHookService {
         question.append(title).append("\n");
         question.append(content+"\n");
         question.append("Please read the above korean text and evaluate it according to the following criteria.\n" +
-                "1.Does the writing exceed 300 words in korean? (total 10 points)\n" +
-                "2.Does not the writing contain content that is merely filler to meet the word count?(total 10 points)\n" +
-                "3.Is there a correlation between the title of the writing and its content? (total 20 points)\n" +
-                "4.Does not the writing involve repetitive use of the specific characters?(total 20 points)\n" +
-                "5.Are the spellings and grammar correct? (total 20 points)\n" +
-                "6.Does the writing demonstrate professionalism? (total 20 points)\n" +
-
-                "\n" +
-                "question: \"Please return 'pass' if the total score is 50 or higher, and 'fail' if it is lower, using no more than 10 characters.\"");
+                "1. Is the topic interesting? (10 points)\n2. Does the article provide valuable content? (10 points)\n"+
+                "3. Does the article have a clear structure? (10 points)\n4. Does the article have an appropriate length? (10 points)\n"+
+                "5. Does the article provide ample examples? (10 points)\n6. Is the readability good? (10 points)\n" +
+                "7. Are there minimal typos or spelling errors in the article? (10 points)\n8.Is the article original? (10 points)\n"+
+                "9. Are meaningless words like 'ㅋㅋㅋㅋㅋㅋ' or 'zzzzz' or 'ggggg' minimized in the article? (10 points)\n" +
+                "10.Is there coherence between the title and content? (10 points)\n"+
+                "question: Please evaluate the given text according to the criteria below, using a total score of 100 points.");
 
         System.setProperty("https.protocols","TLSv1.2");
 
         Map<String, Object> requestBody = new HashMap<>();
 
-        List<HashMap<String,Object>> messages = new ArrayList<>();
-
-        HashMap<String,Object> system = new HashMap<>();
-        HashMap<String,Object> user = new HashMap<>();
-        HashMap<String,Object> assistance = new HashMap<>();
-        HashMap<String,Object> ask = new HashMap<>();
-
-        system.put("role","system");
-        system.put("content","You are a helpful assistant.");
-        user.put("role","user");
-        user.put("content","ㅋㅋㅋㅋㅋㅋ \n\nCan you evaluate above article pass or fail for me?");
-        assistance.put("role","assistant");
-        assistance.put("content","fail");
-        ask.put("role","user");
-        ask.put("content",question.toString());
-
-        messages.add(system);
-        messages.add(user);
-        messages.add(assistance);
-        messages.add(ask);
-        // 요청 질문
-        requestBody.put("messages", messages);
+//        List<HashMap<String,Object>> messages = new ArrayList<>();
+//
+//        HashMap<String,Object> system = new HashMap<>();
+//        HashMap<String,Object> user = new HashMap<>();
+//        HashMap<String,Object> assistance = new HashMap<>();
+//        HashMap<String,Object> ask = new HashMap<>();
+//
+//        system.put("role","system");
+//        system.put("content","You are a helpful assistant.");
+//        user.put("role","user");
+//        user.put("content","ㅋㅋㅋㅋㅋㅋ \n\nCan you evaluate above article pass or fail for me?");
+//        assistance.put("role","assistant");
+//        assistance.put("content","fail");
+//        ask.put("role","user");
+//        ask.put("content",question.toString());
+//
+//        messages.add(system);
+//        messages.add(user);
+//        messages.add(assistance);
+//        messages.add(ask);
+//        // 요청 질문
+//        requestBody.put("messages", messages);
 
         // 요청에 사용될 모델 설정
         requestBody.put("model", "gpt-3.5-turbo");

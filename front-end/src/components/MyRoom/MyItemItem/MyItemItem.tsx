@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { IItemProps } from "@/typeModels/ItemShop/iteminterfaces";
-import ItemWrapper from "@/components/ItemShop/ItemWrapper/ItemWrapper";
 import { SDiv } from "./styles";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { myItemsState } from "@/recoil/myroom/atoms";
