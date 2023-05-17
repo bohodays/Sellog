@@ -2,6 +2,7 @@ import { IUserSignup } from "@/typeModels/user/userSignup";
 import { IUserGoalSetting } from "@/typeModels/mygoals/myGoalInterfaces";
 import { IMyProfileUpdate } from "@/typeModels/user/userEditInfo";
 import getApiInstance from "./http";
+import { localData } from "@/utils/token";
 
 const api = getApiInstance();
 
@@ -15,13 +16,51 @@ export const apiGetUserRecord = async (userId: number) => {
   }
 };
 
+export const apiRefreshToken = async () => {
+  const accessToken = localData.getAccessToken();
+  console.log("a", accessToken);
+  const refreshToken = localData.getRefreshToken();
+  console.log("r", refreshToken);
+  const data = {
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+  };
+  try {
+    const response = await api.post(`/user/access`, data);
+    return response;
+  } catch (e) {
+    console.log("error", e);
+  }
+};
+
 // 유저 정보 조회
 export const apiGetUserInfo = async () => {
   try {
     const response = await api.get(`/user`);
     return response;
-  } catch (e) {
+  } catch (e: any) {
     console.log(e);
+    if (e.response && e.response.status === 401) {
+      // 토큰 만료 에러 처리
+
+      try {
+        // 토큰 갱신 API 호출
+        const refreshTokenResponse = await api.post("/user/access", {
+          accessToken: localData.getAccessToken(),
+          refreshToken: localData.getRefreshToken(),
+        });
+        // 새로운 accessToken으로 유저 정보 조회
+        const newAccessToken = refreshTokenResponse.data.accessToken;
+        const newResponse = await api.get(`/user`, {
+          headers: {
+            Authorization: `Bearer ${newAccessToken}`,
+          },
+        });
+        return newResponse;
+      } catch (refreshError) {
+        console.log("토큰 갱신 실패:", refreshError);
+      }
+    }
   }
 };
 

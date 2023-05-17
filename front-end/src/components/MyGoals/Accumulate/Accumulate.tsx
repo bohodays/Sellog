@@ -5,6 +5,7 @@ import { apiGetAccumulatedRecordList } from "@/api/record";
 import { IAccumulatedRecordList } from "@/typeModels/mygoals/myRecordInterfaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { apiRefreshToken } from "@/api/user";
 
 const dummyAccumulateList = [
   {
@@ -43,6 +44,10 @@ const Accumulate = () => {
       .catch((e) => {
         console.log(e);
       });
+    apiRefreshToken().then((r) => {
+      console.log(r);
+      console.log(r?.data, "data");
+    });
   }, []);
 
   const [activeStep, setActiveStep] = useState(0);
