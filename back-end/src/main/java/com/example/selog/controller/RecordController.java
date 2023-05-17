@@ -107,27 +107,34 @@ public class RecordController {
 
         try{
 
-            Cookie[] cookies = request.getCookies();
+            if(recordRequestDto.getType().equals("cs")) {
+                return new ResponseEntity<>(new SuccessResponse(webHookService.insertRecord(SecurityUtil.getCurrentMemberId(),recordRequestDto)), HttpStatus.OK);
+            }
+            //feed
+            else {
+                Cookie[] cookies = request.getCookies();
 
-            if(cookies != null) {
+                if(cookies != null) {
 
-                //쿠키값에 feed_views가 없었다면
-                if(!checkCookies(cookies,recordRequestDto.getFeedId())) {
+                    //쿠키값에 feed_views가 없었다면
+                    if(!checkCookies(cookies,recordRequestDto.getFeedId())) {
+                        Cookie newCookie = new Cookie("feed_record"+recordRequestDto.getFeedId(),recordRequestDto.getFeedId().toString());
+                        newCookie.setMaxAge(60*60*2); //2시간으로 설정
+                        response.addCookie(newCookie);
+                        return new ResponseEntity<>(new SuccessResponse(webHookService.insertRecord(SecurityUtil.getCurrentMemberId(),recordRequestDto)), HttpStatus.OK);
+                    }
+                }
+                //쿠키자체가 없었다면
+                else {
                     Cookie newCookie = new Cookie("feed_record"+recordRequestDto.getFeedId(),recordRequestDto.getFeedId().toString());
                     newCookie.setMaxAge(60*60*2); //2시간으로 설정
                     response.addCookie(newCookie);
                     return new ResponseEntity<>(new SuccessResponse(webHookService.insertRecord(SecurityUtil.getCurrentMemberId(),recordRequestDto)), HttpStatus.OK);
                 }
-            }
-            //쿠키자체가 없었다면
-            else {
-                Cookie newCookie = new Cookie("feed_record"+recordRequestDto.getFeedId(),recordRequestDto.getFeedId().toString());
-                newCookie.setMaxAge(60*60*2); //2시간으로 설정
-                response.addCookie(newCookie);
-                return new ResponseEntity<>(new SuccessResponse(webHookService.insertRecord(SecurityUtil.getCurrentMemberId(),recordRequestDto)), HttpStatus.OK);
-            }
 
-            return new ResponseEntity<>(new SuccessResponse("already read"), HttpStatus.OK);
+                return new ResponseEntity<>(new SuccessResponse("already read"), HttpStatus.OK);
+
+            }
 
         } catch(CustomException e){
             return new ResponseEntity<>(new ErrorResponse(e.getErrorCode().getHttpStatus(),e.getMessage()), e.getErrorCode().getHttpStatus());
