@@ -117,9 +117,9 @@ public class WebHookService {
             if(record.isPresent()){
                 throw new CustomException(ErrorCode.CONFLICT_ALGO);
             }
-        }
-
-        else {
+        }else if(recordRequestDto.getMessage().equals("")){
+            return earnPoints(member,recordRequestDto.getType()); // cs, feed 크롬 확장자 요청 (포인트 계산만 수행)
+        } else {
             //message parsing
             StringTokenizer st = new StringTokenizer(recordRequestDto.getMessage(),"\n");
 
