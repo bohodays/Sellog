@@ -191,7 +191,7 @@ public class WebHookService {
                 "7. Are there minimal typos or spelling errors in the article? (10 points)\n8.Is the article original? (10 points)\n"+
                 "9. Are meaningless words like 'ㅋㅋㅋㅋㅋㅋ' or 'zzzzz' or 'ggggg' minimized in the article? (10 points)\n" +
                 "10.Is there coherence between the title and content? (10 points)\n"+
-                "question: Please evaluate the given text according to the criteria below, using a total score of 100 points.");
+                "question:Please return 'pass' if the total score is 50 or higher, and 'fail' if it is lower, using no more than 10 characters.");
 
         System.setProperty("https.protocols","TLSv1.2");
 
