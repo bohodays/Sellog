@@ -120,6 +120,9 @@ public class RecordController {
                     if(!checkCookies(cookies,recordRequestDto.getFeedId())) {
                         Cookie newCookie = new Cookie("feed_record"+recordRequestDto.getFeedId(),recordRequestDto.getFeedId().toString());
                         newCookie.setMaxAge(60*60*2); //2시간으로 설정
+                        newCookie.setHttpOnly(true);
+//                        newCookie.setSecure(true);
+//                        newCookie.setDomain("None");
                         response.addCookie(newCookie);
                         return new ResponseEntity<>(new SuccessResponse(webHookService.insertRecord(SecurityUtil.getCurrentMemberId(),recordRequestDto)), HttpStatus.OK);
                     }
@@ -128,6 +131,9 @@ public class RecordController {
                 else {
                     Cookie newCookie = new Cookie("feed_record"+recordRequestDto.getFeedId(),recordRequestDto.getFeedId().toString());
                     newCookie.setMaxAge(60*60*2); //2시간으로 설정
+                    newCookie.setHttpOnly(true);
+//                    newCookie.setSecure(true);
+//                    newCookie.setDomain("None");
                     response.addCookie(newCookie);
                     return new ResponseEntity<>(new SuccessResponse(webHookService.insertRecord(SecurityUtil.getCurrentMemberId(),recordRequestDto)), HttpStatus.OK);
                 }

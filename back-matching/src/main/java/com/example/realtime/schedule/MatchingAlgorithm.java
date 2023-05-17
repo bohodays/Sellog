@@ -42,6 +42,14 @@ public class MatchingAlgorithm {
                 }
             }
 
+            if(matchingDtoList.size() < 2){
+                for(MatchingDto matchingDto : matchingDtoList){
+                    matchingQueue.getMatchingQueue().add(matchingDto);
+                }
+                result.put("succeed",false);
+                return result;
+            }
+
             result.put("succeed", true);
             result.put("matchingResult", matchingDtoList);
 
