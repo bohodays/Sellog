@@ -69,7 +69,9 @@ const DailyDoneItem = ({ doneItem }: IDoneItemProps) => {
           <p className="doneItem__title">{repo ? repo : null}</p>
         </div>
         <div className="doneItem__right__column">
-          <p className="doneItem__msg">{message ? message : null}</p>
+          <p className={message ? "doneItem__msg" : ""}>
+            {message ? message : null}
+          </p>
           <p className="doneItem__msg doneItem__link">
             {link && <a href={link}>{link}</a>}
           </p>
