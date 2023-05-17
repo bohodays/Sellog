@@ -248,6 +248,8 @@ public class WebHookService {
 
     public RestTemplate restTemplate() {
 
+        RestTemplate restTemplate = new RestTemplate();
+
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
         interceptors.add((request, body, execution) -> {
             request.getHeaders().setContentType(MediaType.APPLICATION_JSON);
