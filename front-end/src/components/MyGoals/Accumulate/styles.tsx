@@ -10,6 +10,7 @@ export const SSection = styled.section`
   border-radius: 20px;
   /* border: 2px solid #423e33; */
   box-shadow: 5px 5px 3px #423e33;
+  font-family: "GmarketSansMedium";
 
   .goal_logo {
     height: 70px;
@@ -42,6 +43,7 @@ export const SSection = styled.section`
     text-align: center;
     font-weight: 600;
     font-size: 1vw;
+    font-family: "GmarketSansMedium";
   }
   .acc__day__wrapper {
     width: 80%;
@@ -135,7 +137,7 @@ export const SSection = styled.section`
   .recommend {
     font-family: "GmarketSansMedium";
     font-size: 1vw;
-    margin-top: 1vh;
+    margin-top: 2vh;
   }
 
   .hidden {

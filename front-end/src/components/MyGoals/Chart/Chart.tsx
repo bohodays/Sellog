@@ -53,6 +53,7 @@ const Chart = () => {
           // This more specific font property overrides the global property
           font: {
             size: 12,
+            family: "GmarketSansMedium",
           },
           // TOTAL 기록 횟수 라벨 색깔
           // color: "black",
@@ -60,8 +61,17 @@ const Chart = () => {
       },
       tooltip: {
         padding: 8, // 패딩 크기
-        titleFont: { size: 12, weight: "500" },
-        bodyFont: { size: 13 },
+        // titleFont: { size: 12, weight: "500" },
+        // bodyFont: { size: 13 },
+        bodyFont: {
+          size: 13,
+          family: "GmarketSansMedium", // Add your font here to change the font of your tooltip body
+        },
+        titleFont: {
+          size: 12,
+          weight: "500",
+          family: "GmarketSansMedium", // Add your font here to change the font of your tooltip title
+        },
       },
     },
 
@@ -78,6 +88,7 @@ const Chart = () => {
           font: {
             size: 15,
             weight: "500",
+            family: "GmarketSansMedium",
           },
           color: "black",
         },

@@ -115,15 +115,7 @@ const Accumulate = () => {
         </div>
 
         {/* map 돌리는 코드로 바꾸기 */}
-        <div
-          className={
-            dummyAccumulateList[activeStep].goal === "cs"
-              ? "acc__day__wrapper hidden"
-              : dummyAccumulateList[activeStep].goal === "feed"
-              ? "acc__day__wrapper hidden"
-              : "acc__day__wrapper"
-          }
-        >
+        <div className="acc__day__wrapper">
           {accumulatedList && (
             <div
               className={
@@ -137,15 +129,11 @@ const Accumulate = () => {
               {accumulatedList[dummyAccumulateList[activeStep]?.goal]?.start ===
               null ? (
                 <div className="recommend">
-                  추천 설정이 아니면 누적 보상을 얻지 못합니다.
-                </div>
-              ) : dummyAccumulateList[activeStep].goal === "cs" ? (
-                <div className="recommend">
-                  CS QUIZ는 누적 보상 제도가 적용되지 않습니다.
-                </div>
-              ) : dummyAccumulateList[activeStep].goal === "feed" ? (
-                <div className="recommend">
-                  FEED는 누적 보상 제도가 적용되지 않습니다.
+                  {dummyAccumulateList[activeStep].goal === "cs"
+                    ? "CS QUIZ는 누적 보상 제도가 적용되지 않습니다."
+                    : dummyAccumulateList[activeStep].goal === "feed"
+                    ? "FEED는 누적 보상 제도가 적용되지 않습니다."
+                    : " 추천 설정이 아니면 누적 보상을 얻지 못합니다."}
                 </div>
               ) : (
                 <>
