@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SArticle = styled.article`
   width: 90%;
-  height: 24%;
+  /* height: 24%; */
   margin-bottom: 3%;
   /* padding-bottom: 1%; */
   display: flex;
@@ -15,7 +15,7 @@ export const SArticle = styled.article`
 
   .feed__card {
     width: 95%;
-    /* height: 50%; */
+    height: 15vh;
 
     /* margin-block: 3%; */
     /* padding-inline: 3%;
@@ -51,6 +51,7 @@ export const SArticle = styled.article`
     width: 50%;
     font-size: small;
     font-weight: 400;
+    font-size: 1vw;
     p {
       padding-inline: 2%;
     }
@@ -58,6 +59,6 @@ export const SArticle = styled.article`
 
   .container {
     width: 100%;
-    height: 500px;
+    /* height: 500px; */
   }
 `;

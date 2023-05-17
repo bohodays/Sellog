@@ -21,10 +21,11 @@ export const SDiv = styled.div`
   }
 
   .doneItem__title {
-    font-size: 0.85vw;
+    font-size: 0.8vw;
     /* padding: 0.5vh 0.2vw; */
     font-family: "GmarketSansMedium";
     padding: 0vw 0.2vw;
+    word-break: break-word;
   }
 
   .doneItem__right__column {
@@ -36,7 +37,7 @@ export const SDiv = styled.div`
   }
 
   .doneItem__msg {
-    font-size: 0.9vw;
+    font-size: 0.8vw;
     font-family: "GmarketSansMedium";
     padding: 0vw 0.2vw;
     flex: 0 0 100%;

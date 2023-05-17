@@ -102,4 +102,10 @@ export const SSection = styled.section`
   .empty {
     border: 2px solid red;
   }
+
+  .enabled {
+    color: #adadad;
+    opacity: 0.1;
+    cursor: default;
+  }
 `;

@@ -60,6 +60,8 @@ import { OBaekWon } from "@/components/Main/Models/Obaek";
 import { TanTanMen } from "@/components/Main/Models/Tantan";
 import { Osakak } from "@/components/Main/Models/Osakak";
 import { Sellog } from "@/components/Main/Models/Sellog";
+import { Learnway } from "@/components/Main/Models/Learnway";
+import { Ydg } from "@/components/Main/Models/Ydg";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -151,10 +153,11 @@ const Scene = ({ buttonRef }: any) => {
         actions["Idle"]?.stop();
         actions["Run"]?.play();
 
+        // 범위 신경쓰기
         if (
           Math.abs(destinationPoint.x - userModelRef.current.position.x) <
-            0.04 &&
-          Math.abs(destinationPoint.z - userModelRef.current.position.z) < 0.03
+            0.08 &&
+          Math.abs(destinationPoint.z - userModelRef.current.position.z) < 0.08
         ) {
           moving = false;
           console.log("멈춤");
@@ -706,6 +709,16 @@ const Scene = ({ buttonRef }: any) => {
         scale={0.6}
         position={[4, 0, 18]}
         rotation={[0, THREE.MathUtils.degToRad(15), 0]}
+      />
+      <Learnway
+        scale={0.6}
+        position={[-20, 0, 18]}
+        rotation={[0, THREE.MathUtils.degToRad(20), 0]}
+      />
+      <Ydg
+        scale={0.5}
+        position={[-10, 0, 1]}
+        rotation={[0, -THREE.MathUtils.degToRad(15), 0]}
       />
     </Suspense>
   );
