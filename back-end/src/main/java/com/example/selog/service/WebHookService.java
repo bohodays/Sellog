@@ -36,7 +36,9 @@ public class WebHookService {
     private GitHubRepository gitHubRepository;
 
     private Map<String,Integer> score;
-    private final RestTemplate restTemplate = restTemplate();
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Value("${OPEN_AI_KEY}")
     private String OPEN_AI_KEY;
@@ -57,6 +59,14 @@ public class WebHookService {
         score.put("algo",15);
         score.put("feed",5);
         score.put("cs",2);
+
+        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+        interceptors.add((request, body, execution) -> {
+            request.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+            request.getHeaders().setBearerAuth(OPEN_AI_KEY);
+            return execution.execute(request, body);
+        });
+        restTemplate.setInterceptors(interceptors);
     }
     @Transactional
     public void createRecord(HashMap<String, Object> request) {
@@ -248,7 +258,6 @@ public class WebHookService {
     }
 
     public RestTemplate restTemplate() {
-        RestTemplate restTemplate = new RestTemplate();
 
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
         interceptors.add((request, body, execution) -> {
