@@ -50,12 +50,11 @@ const Login = () => {
       )}
 
       {/* 유저 정보 입력 폼 */}
-      {/* {userInfoUpdate ? (
+      {userInfoUpdate ? (
         <UserInfoForm userId={userId} />
       ) : (
         <LoginForm isVisible={isVisible} />
-      )} */}
-      <UserInfoForm userId={userId} />
+      )}
 
       <Canvas shadows={true} gl={{ preserveDrawingBuffer: true }}>
         <OrbitControls
