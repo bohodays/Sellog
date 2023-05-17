@@ -45,10 +45,8 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(oAuthAttributes.getEmail(),"1234");
 
         log.info(authenticationToken.toString());
-        // 2. 실제로 검증 (사용자 비밀번호 체크) 이 이루어지는 부분
-        Authentication auth = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
-        TokenDto tokenDto = jwtTokenProvider.createTokenDto(auth);
+        Authentication auth = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
         log.info("accessToken : {}",oAuthAttributes.getAccessToken());
         log.info("social login user email: {} ",oAuthAttributes.getEmail());
@@ -58,12 +56,22 @@ public class Oauth2SuccessHandler implements AuthenticationSuccessHandler {
         Long userId = member.getUserId();
         int newUser = 0;
 
-        member.updateRefreshToken(tokenDto.getRefreshToken());
 
+        TokenDto tokenDto;
         //새로 등록한 유저
-        if(member.getRoom() == null) newUser = 1;
-
-        memberRepository.save(member);
+        if(member.getRoom() == null) {
+            newUser = 1;
+            tokenDto = jwtTokenProvider.createTokenDto(auth);
+            member.updateRefreshToken(tokenDto.getRefreshToken());
+            memberRepository.save(member);
+        }else if(jwtTokenProvider.validateToken(member.getRefreshToken())){
+            tokenDto = jwtTokenProvider.createAccessToken(auth, member.getRefreshToken());
+        }else{
+            //refresh가 만료되었다면
+            tokenDto = jwtTokenProvider.createTokenDto(auth);
+            member.updateRefreshToken(tokenDto.getRefreshToken());
+            memberRepository.save(member);
+        }
 
         //github등록이 된경우만
         if(member.getGithubToken() != null) {
