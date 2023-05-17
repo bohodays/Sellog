@@ -80,6 +80,30 @@ public class TokenProvider implements InitializingBean {
                 .build();
     }
 
+    public TokenDto createAccessToken(Authentication authentication, String refreshToken){
+        String authorities = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
+
+        long now = (new Date()).getTime();
+
+        // Access Token 생성 -> 유저 정보도 담는다.
+        Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
+        String accessToken = Jwts.builder()
+                .setSubject(authentication.getName())       // payload "sub": "name"
+                .claim(AUTHORITIES_KEY, authorities)        // payload "auth": "ROLE_USER"
+                .setExpiration(accessTokenExpiresIn)        // payload "exp": 1516239022 (예시)
+                .signWith(key, SignatureAlgorithm.HS512)    // header "alg": "HS512"
+                .compact();
+
+        return TokenDto.builder()
+                .grantType(BEARER_TYPE)
+                .accessToken(accessToken)
+                .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
+                .refreshToken(refreshToken)
+                .build();
+    }
+
     // 토큰을 받아 Authentication 객체를 리턴
     // 세션 안에 SecurityContext가 있고 그 안에 Authentication 객체가 존재
     public Authentication getAuthentication(String accessToken) {
