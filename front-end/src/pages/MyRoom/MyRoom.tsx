@@ -8,7 +8,7 @@ import {
   userInfoState,
 } from "@/recoil/myroom/atoms";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import MyItems from "@/pages/MyRoom/MyItems/MyItems";
 import EditProfile from "@/components/MyRoom/EditProfile/EditProfile";
 import { apiGetMyItemList, apiGetTotalMyItems } from "@/api/room";

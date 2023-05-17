@@ -23,10 +23,17 @@ const UserCharacter = ({
         <UserCharacterWrapper active={active} />
       </div>
       <div className="button-wrapper">
-        <button className="nav left" onClick={handleLeftActive}>
+        <button
+          disabled={active === 0}
+          className={active === 0 ? "nav left enabled" : "nav left"}
+          onClick={handleLeftActive}
+        >
           <TiChevronLeft />
         </button>
-        <button className="nav right" onClick={handleRightActive}>
+        <button
+          className={active === 5 ? "nav right enabled" : "nav right"}
+          onClick={handleRightActive}
+        >
           <TiChevronRight />
         </button>
       </div>

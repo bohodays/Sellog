@@ -10,6 +10,7 @@ export const SSection = styled.section`
   border-radius: 20px;
   /* border: 2px solid #423e33; */
   box-shadow: 5px 5px 3px #423e33;
+  font-family: "GmarketSansMedium";
 
   .goal_logo {
     height: 70px;
@@ -19,7 +20,7 @@ export const SSection = styled.section`
   .steps__wrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
   }
 
   .accumulate__container {
@@ -30,17 +31,19 @@ export const SSection = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    position: relative;
   }
 
   .number {
     background-color: #ff9d9d;
     border-radius: 20px;
-    width: 80%;
-    padding: 8px;
+    /* width: 80%; */
+    padding: 8px 18px;
     font-family: "ZCOOL KuaiLe", sans-serif;
     text-align: center;
     font-weight: 600;
     font-size: 1vw;
+    font-family: "GmarketSansMedium";
   }
   .acc__day__wrapper {
     width: 80%;
@@ -134,6 +137,7 @@ export const SSection = styled.section`
   .recommend {
     font-family: "GmarketSansMedium";
     font-size: 1vw;
+    margin-top: 2vh;
   }
 
   .hidden {
@@ -142,5 +146,27 @@ export const SSection = styled.section`
 
   .reward__hidden {
     visibility: hidden;
+  }
+
+  .info__btn {
+    position: absolute;
+    top: 0vh;
+    left: 0vw;
+    font-size: 3vh;
+    color: grey;
+    z-index: 5;
+  }
+
+  .info__message {
+    position: absolute;
+    top: 2vh;
+    left: 1.2vw;
+    font-size: 0.7vw;
+    background-color: white;
+    height: 30vh;
+    width: 23vw;
+    color: black;
+    padding: 2px 3px;
+    border-radius: 20px;
   }
 `;

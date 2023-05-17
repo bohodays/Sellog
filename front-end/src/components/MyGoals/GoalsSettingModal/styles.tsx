@@ -7,6 +7,7 @@ export const SSection = styled.section<any>`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  font-family: "GmarketSansMedium";
 
   .recommended__goal__wrapper {
     display: flex;
@@ -38,6 +39,7 @@ export const SSection = styled.section<any>`
     border: 2px solid #083d4f;
     border-radius: 20px;
     font-weight: 900;
+    font-family: "GmarketSansMedium";
   }
 
   .update__btn:hover {
@@ -55,6 +57,7 @@ export const SSection = styled.section<any>`
     background-color: #e8dda1;
     font-weight: 600;
     font-family: "ZCOOL KuaiLe", serif;
+    font-family: "GmarketSansMedium";
   }
 
   .OX_btn {
