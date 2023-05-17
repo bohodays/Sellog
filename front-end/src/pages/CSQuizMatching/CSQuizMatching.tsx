@@ -126,8 +126,6 @@ const CSQuizMatching = () => {
           (message) => {
             const received = JSON.parse(message.body);
 
-            console.log({ received });
-
             if (received.sender !== userInfo.userId) {
               if (Object.keys(received).length === 3) {
                 setQuizList(received);
@@ -158,7 +156,6 @@ const CSQuizMatching = () => {
           ).toString();
         } else if (landingTimerRef.current) {
           clearInterval(landingTimeInterval);
-          console.log(quizList, "???????????????????????????");
 
           navigate(`/csQuizMap/${navigateRoomId}`, {
             state: {
@@ -166,6 +163,7 @@ const CSQuizMatching = () => {
               otherUserId: otherUserId,
               otherNickname: otherNickname.current.innerText,
               quizList,
+              navigateRoomId,
             },
           });
         }

@@ -36,6 +36,8 @@ const Accumulate = () => {
   useEffect(() => {
     apiGetAccumulatedRecordList()
       .then((r) => {
+        console.log(r?.data.response);
+
         setAccumulatedList(r?.data.response);
       })
       .catch((e) => {
