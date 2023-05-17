@@ -38,6 +38,12 @@ const ToggleButton = () => {
       </button>
       <button
         className="menu-item gardenList"
+        onClick={() => navigate("/mygoals")}
+      >
+        GOAL
+      </button>
+      <button
+        className="menu-item gardenList"
         onClick={() => navigate("/item-shop")}
       >
         SHOP
