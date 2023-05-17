@@ -59,14 +59,6 @@ public class WebHookService {
         score.put("algo",15);
         score.put("feed",5);
         score.put("cs",2);
-
-        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
-        interceptors.add((request, body, execution) -> {
-            request.getHeaders().setContentType(MediaType.APPLICATION_JSON);
-            request.getHeaders().setBearerAuth(OPEN_AI_KEY);
-            return execution.execute(request, body);
-        });
-        restTemplate.setInterceptors(interceptors);
     }
     @Transactional
     public void createRecord(HashMap<String, Object> request) {
@@ -190,6 +182,14 @@ public class WebHookService {
 
     public String chatGptResponse(String title,String content) {
 
+        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+        interceptors.add((request, body, execution) -> {
+            request.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+            request.getHeaders().setBearerAuth(OPEN_AI_KEY);
+            return execution.execute(request, body);
+        });
+        restTemplate.setInterceptors(interceptors);
+
         StringBuilder question = new StringBuilder();
         question.append(title).append("\n");
         question.append(content+"\n");
@@ -257,18 +257,18 @@ public class WebHookService {
         }
     }
 
-    public RestTemplate restTemplate() {
-
-        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
-        interceptors.add((request, body, execution) -> {
-            request.getHeaders().setContentType(MediaType.APPLICATION_JSON);
-            request.getHeaders().setBearerAuth(OPEN_AI_KEY);
-            return execution.execute(request, body);
-        });
-        restTemplate.setInterceptors(interceptors);
-
-        return restTemplate;
-    }
+//    public RestTemplate restTemplate() {
+//
+//        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+//        interceptors.add((request, body, execution) -> {
+//            request.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+//            request.getHeaders().setBearerAuth(OPEN_AI_KEY);
+//            return execution.execute(request, body);
+//        });
+//        restTemplate.setInterceptors(interceptors);
+//
+//        return restTemplate;
+//    }
 
     public int earnPoints(Member member,String category){
         int result = 0;
