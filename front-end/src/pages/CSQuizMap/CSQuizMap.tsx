@@ -228,8 +228,8 @@ const Scene = ({
 
         if (
           Math.abs(destinationPoint.x - userModelRef.current.position.x) <
-            0.04 &&
-          Math.abs(destinationPoint.z - userModelRef.current.position.z) < 0.03
+            0.08 &&
+          Math.abs(destinationPoint.z - userModelRef.current.position.z) < 0.08
         ) {
           moving = false;
         }
@@ -627,8 +627,7 @@ const Main = () => {
   const otherUserCharacterId = location.state.otherUserChracterId;
   const otherNickname = location.state.otherNickname || null;
   const quizList = location.state.quizList;
-
-  console.log({ location, quizList }, "!!!!!!!!!");
+  const navigateRoomId = location.state.navigateRoomId;
 
   const [client, setClient] = useState<Stomp.Client | null>(null);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
@@ -759,7 +758,7 @@ const Main = () => {
       setClient(ws);
 
       ws.subscribe(
-        "/sub/1",
+        `/sub/${navigateRoomId}`,
         (message) => {
           const received = JSON.parse(message.body);
 
@@ -812,7 +811,7 @@ const Main = () => {
 
   function send(mouseX: number, mouseY: number) {
     const message = {
-      roomId: "1",
+      roomId: `${navigateRoomId}`,
       sender: userInfo.userId,
       x: mouseX,
       y: mouseY,
