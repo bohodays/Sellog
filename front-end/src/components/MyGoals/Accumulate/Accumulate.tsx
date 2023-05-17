@@ -3,6 +3,8 @@ import { SSection } from "./styles";
 import { TiChevronRightOutline, TiChevronLeftOutline } from "react-icons/ti";
 import { apiGetAccumulatedRecordList } from "@/api/record";
 import { IAccumulatedRecordList } from "@/typeModels/mygoals/myRecordInterfaces";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 const dummyAccumulateList = [
   {
@@ -54,23 +56,45 @@ const Accumulate = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  // mouse hover시 info message
+  const [showInfoMessage, setShowInfoMessage] = useState(false);
+
+  const handleMouseEnter = () => {
+    setShowInfoMessage(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowInfoMessage(false);
+  };
+
   return (
     <SSection>
       <div className="accumulate__container">
+        <button
+          className="info__btn"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <FontAwesomeIcon icon={faCircleInfo} fontSize={20} />
+        </button>
+
+        {showInfoMessage && (
+          <div className="info__message">목표 설정과 보상 체계 안내</div>
+        )}
         <div className="steps__wrapper">
           <button
             className="nav right"
             onClick={handleBack}
             disabled={activeStep === 0}
           >
-            <TiChevronLeftOutline size={40} />
+            <TiChevronLeftOutline size={30} />
           </button>
           <div>
             <p
               style={{
                 fontFamily: "ZCOOL KuaiLe",
-                fontSize: "1.5rem",
-                margin: "0 2rem",
+                fontSize: "1.8vw",
+                margin: "0 2vw",
               }}
             >
               {dummyAccumulateList[activeStep].goal}
@@ -81,7 +105,7 @@ const Accumulate = () => {
             onClick={handleNext}
             disabled={activeStep === 4}
           >
-            <TiChevronRightOutline size={40} />
+            <TiChevronRightOutline size={30} />
           </button>
         </div>
 
@@ -93,7 +117,7 @@ const Accumulate = () => {
         </div>
 
         {/* map 돌리는 코드로 바꾸기 */}
-        <div className={"acc__day__wrapper"}>
+        <div className="acc__day__wrapper">
           {accumulatedList && (
             <div
               className={
@@ -103,13 +127,14 @@ const Accumulate = () => {
                   : "goal__container"
               }
             >
+              {/* feed랑 cs 왜 안돼 */}
               {accumulatedList[dummyAccumulateList[activeStep]?.goal]?.start ===
               null ? (
                 <div className="recommend">
                   {dummyAccumulateList[activeStep].goal === "cs"
-                    ? "cs는 누적보상 제도가 적용되지 않습니다."
+                    ? "CS QUIZ는 누적 보상 제도가 적용되지 않습니다."
                     : dummyAccumulateList[activeStep].goal === "feed"
-                    ? "feed는 누적보상 제도가 적용되지 않습니다."
+                    ? "FEED는 누적 보상 제도가 적용되지 않습니다."
                     : " 추천 설정이 아니면 누적 보상을 얻지 못합니다."}
                 </div>
               ) : (

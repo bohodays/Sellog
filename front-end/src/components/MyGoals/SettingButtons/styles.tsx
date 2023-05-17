@@ -32,6 +32,7 @@ export const SArticle = styled.article`
     font-family: "ZCOOL KuaiLe", sans-serif;
     font-size: 0.9vw;
     font-weight: bold;
+    /* font-family: "GmarketSansMedium"; */
   }
 
   .purple {

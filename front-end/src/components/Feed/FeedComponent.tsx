@@ -5,12 +5,11 @@ import { addVisitApi } from "@/api/feed";
 import { addFeedRecordApi } from "@/api/record";
 
 export default function FeedComponent({ props }: any) {
-  // console.log(props, "aa");
   function feedHandler() {
-    // console.log(props.feedId, "feedId");
     const postFeed = {
       type: "feed",
       message: `${props.title}_${props.link}`,
+      feedId: `${props.feedId}`,
     };
     addFeedRecordApi(postFeed).then((res) => console.log(res));
     addVisitApi(props.feedId);

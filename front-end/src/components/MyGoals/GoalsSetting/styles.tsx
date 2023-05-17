@@ -13,22 +13,26 @@ export const SSection = styled.section<any>`
 
   .title__wrapper {
     position: relative;
-    padding-left: 1.5rem;
+    padding-left: 2vw;
+    /* text-align: center; */
 
     span {
+      text-align: center;
       font-family: "ZCOOL KuaiLe", sans-serif;
-      color: var(--color-white);
-      font-size: 1.5rem;
+      color: white;
+      font-size: 1.5vw;
+      text-shadow: 1px 2px gray;
+      padding-left: 0.5vw;
     }
   }
 
   .title {
-    font-size: 4rem;
+    font-size: 3.5vw;
     font-family: "Chicle", cursive;
     margin: 0;
-    padding-top: 2.5rem;
+    padding-top: 4vh;
 
-    padding-bottom: 2.5rem;
+    padding-bottom: 5vh;
     color: #4b5a7d;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     transform: rotate(-3deg);
@@ -78,8 +82,8 @@ export const SSection = styled.section<any>`
   }
 
   .retro__work {
-    top: 5rem;
-    right: 4.2rem;
+    top: 3.5vw;
+    right: 6vw;
   }
 
   .retro__spring {
@@ -89,9 +93,9 @@ export const SSection = styled.section<any>`
   }
 
   .retro__img {
-    width: 6rem;
-    top: 2.5rem;
-    right: 1.2rem;
+    width: 4vw;
+    top: 4vh;
+    right: 1vw;
   }
 
   .retro__yellow-flower {

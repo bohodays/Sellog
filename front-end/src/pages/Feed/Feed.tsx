@@ -70,7 +70,7 @@ export default function Feed() {
     // 초기 데이터 불러오기
     if (newsfeed === undefined) {
       getFeedApi(page).then(({ data }: any | undefined) => {
-        console.log(data.response);
+        // console.log(data.response);
         // setLastPage(data.response.pageable.pageSize);
         setNewsFeed(data.response.content);
         setPage(() => page + 1);
@@ -149,33 +149,44 @@ export default function Feed() {
       <SBody>
         <SSection>
           <div className="mostviewed">
-            <p>
+            <p className="mostviewed__title">
               <FontAwesomeIcon
                 icon={faFireFlameCurved}
                 style={{ color: "red", marginRight: "5px" }}
               />
-              &nbsp;&nbsp;가장 많이 본 피드
+              &nbsp;가장 많이 본 피드&nbsp;
+              <FontAwesomeIcon
+                icon={faFireFlameCurved}
+                style={{ color: "red", marginRight: "5px" }}
+              />
             </p>
             <div className="mostviewed__list">
               {/* <p> {mostViewFeed}</p> */}
               {isMostView &&
                 mostViewFeed.map((element: any, index: number) => {
                   return (
-                    <>
+                    <div className="mostview__element">
                       <Link to={element.link} target="_blank">
-                        <li key={index} className="mostview__element">
-                          {element["title"]}
-                          <br />
-                          <span className="view__wrapper">
+                        <div className="mostview__content">
+                          <p key={index}>
+                            {element["title"].length > 25
+                              ? element["title"].slice(0, 25) + "..."
+                              : element["title"]}
+                          </p>
+                          <div className="mostview__count">
                             <FontAwesomeIcon
                               icon={faEye}
-                              style={{ marginRight: "0.5rem" }}
+                              style={{
+                                marginRight: "0.5rem",
+                                fontSize: "10px",
+                                alignSelf: "center",
+                              }}
                             />
-                            {element["views"]}
-                          </span>
-                        </li>
+                            <p>{element["views"]}</p>
+                          </div>
+                        </div>
                       </Link>
-                    </>
+                    </div>
                   );
                 })}
             </div>
