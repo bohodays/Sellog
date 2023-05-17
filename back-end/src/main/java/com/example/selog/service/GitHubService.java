@@ -26,6 +26,8 @@ public class GitHubService {
     private final MemberRepository memberRepository;
     private final GitHubRepository gitHubRepository;
 
+    private final RestTemplate restTemplate;
+
     @Transactional
     public void synchronize(Long user_id) {
 
@@ -124,7 +126,7 @@ public class GitHubService {
             return;
         }
 
-        RestTemplate restTemplate = new RestTemplate();
+//        RestTemplate restTemplate = new RestTemplate();
 
         StringBuilder url = new StringBuilder();
 

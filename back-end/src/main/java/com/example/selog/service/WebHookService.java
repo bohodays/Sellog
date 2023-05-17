@@ -36,7 +36,9 @@ public class WebHookService {
     private GitHubRepository gitHubRepository;
 
     private Map<String,Integer> score;
-    private final RestTemplate restTemplate = restTemplate();
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Value("${OPEN_AI_KEY}")
     private String OPEN_AI_KEY;
@@ -180,6 +182,14 @@ public class WebHookService {
 
     public String chatGptResponse(String title,String content) {
 
+        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+        interceptors.add((request, body, execution) -> {
+            request.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+            request.getHeaders().setBearerAuth(OPEN_AI_KEY);
+            return execution.execute(request, body);
+        });
+        restTemplate.setInterceptors(interceptors);
+
         StringBuilder question = new StringBuilder();
         question.append(title).append("\n");
         question.append(content+"\n");
@@ -247,19 +257,18 @@ public class WebHookService {
         }
     }
 
-    public RestTemplate restTemplate() {
-        RestTemplate restTemplate = new RestTemplate();
-
-        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
-        interceptors.add((request, body, execution) -> {
-            request.getHeaders().setContentType(MediaType.APPLICATION_JSON);
-            request.getHeaders().setBearerAuth(OPEN_AI_KEY);
-            return execution.execute(request, body);
-        });
-        restTemplate.setInterceptors(interceptors);
-
-        return restTemplate;
-    }
+//    public RestTemplate restTemplate() {
+//
+//        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+//        interceptors.add((request, body, execution) -> {
+//            request.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+//            request.getHeaders().setBearerAuth(OPEN_AI_KEY);
+//            return execution.execute(request, body);
+//        });
+//        restTemplate.setInterceptors(interceptors);
+//
+//        return restTemplate;
+//    }
 
     public int earnPoints(Member member,String category){
         int result = 0;
