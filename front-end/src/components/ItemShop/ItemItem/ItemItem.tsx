@@ -61,12 +61,12 @@ const ItemItem = ({ shopItem, setIsModalOpen, setItem }: IItemModalProps) => {
                 <img src={coin} className="buy__modal__coin"></img>
                 {/* <p className="cur__point">{mypoint}</p> */}
                 <div className="cur__point">
-                  <FontAwesomeIcon
+                  {/* <FontAwesomeIcon
                     icon={faSlash}
                     className="slash"
                     rotation={270}
                     size="lg"
-                  />
+                  /> */}
                   {mypoint}
                 </div>
                 <FontAwesomeIcon

@@ -85,6 +85,10 @@ export const SSection = styled.section`
     width: 10vw;
     text-align: center;
   }
+
+  h4 {
+    font-family: "GmarketSansMedium";
+  }
 `;
 
 export const SDiv = styled.div`

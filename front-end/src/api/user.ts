@@ -50,7 +50,7 @@ export const apiGetUserInfo = async () => {
           refreshToken: localData.getRefreshToken(),
         });
         // 새로운 accessToken으로 유저 정보 조회
-        const newAccessToken = refreshTokenResponse.data.accessToken;
+        const newAccessToken = refreshTokenResponse.data.response.accessToken;
         const newResponse = await api.get(`/user`, {
           headers: {
             Authorization: `Bearer ${newAccessToken}`,

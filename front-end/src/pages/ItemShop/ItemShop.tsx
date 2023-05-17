@@ -98,11 +98,11 @@ const ItemShop = () => {
           </div>
         </div>
         <ItemList category={selectedCategory}></ItemList>
-        {/* <FontAwesomeIcon
+        <FontAwesomeIcon
           icon={faRightFromBracket}
           className="goHome__button"
           onClick={getOutHandler}
-        /> */}
+        />
       </SContainer>
       <SGhostContainer position={"top"}>
         {repeatDots()}
