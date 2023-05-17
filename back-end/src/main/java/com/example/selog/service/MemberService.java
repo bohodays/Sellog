@@ -45,9 +45,9 @@ public class MemberService {
             Authentication authentication = tokenProvider.getAuthentication(tokenRequestDto.getAccessToken());
             member = memberRepository.findById(Long.parseLong(authentication.getName()))
                     .orElseThrow(() -> new CustomException(ErrorCode.NO_LOGIN));
-            if (!member.getRefreshToken().equals(tokenRequestDto.getRefreshToken())) {
-                throw new CustomException(ErrorCode.NO_USER);
-            }
+//            if (!member.getRefreshToken().equals(tokenRequestDto.getRefreshToken())) {
+//                throw new CustomException(ErrorCode.NO_USER);
+//            }
             tokenDto = tokenProvider.createTokenDto(authentication);
         }
         else {
