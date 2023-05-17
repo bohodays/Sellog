@@ -818,7 +818,7 @@ const Main = () => {
       characterId: userInfo.characterId,
       nickname: userInfo.nickname,
     };
-    client?.send("/pub/1", {}, JSON.stringify(message));
+    client?.send(`/pub/${navigateRoomId}`, {}, JSON.stringify(message));
   }
 
   return (
