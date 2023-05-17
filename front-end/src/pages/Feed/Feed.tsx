@@ -70,7 +70,7 @@ export default function Feed() {
     // 초기 데이터 불러오기
     if (newsfeed === undefined) {
       getFeedApi(page).then(({ data }: any | undefined) => {
-        console.log(data.response);
+        // console.log(data.response);
         // setLastPage(data.response.pageable.pageSize);
         setNewsFeed(data.response.content);
         setPage(() => page + 1);
@@ -154,7 +154,11 @@ export default function Feed() {
                 icon={faFireFlameCurved}
                 style={{ color: "red", marginRight: "5px" }}
               />
-              &nbsp;&nbsp;가장 많이 본 피드
+              &nbsp;가장 많이 본 피드&nbsp;
+              <FontAwesomeIcon
+                icon={faFireFlameCurved}
+                style={{ color: "red", marginRight: "5px" }}
+              />
             </p>
             <div className="mostviewed__list">
               {/* <p> {mostViewFeed}</p> */}

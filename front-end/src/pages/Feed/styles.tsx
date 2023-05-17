@@ -91,7 +91,7 @@ export const SHeader = styled.header`
   }
 `;
 export const SBody = styled.div`
-  margin-inline: 10%;
+  margin-inline: 12%;
   /* margin-block: 3%; */
   height: 70%;
   justify-content: space-evenly;
@@ -110,7 +110,7 @@ export const SBody = styled.div`
       visibility: hidden;
     }
     .intersection__div {
-      height: 15%;
+      height: 10vh;
       /* background-color: red; */
     }
   }
@@ -118,9 +118,10 @@ export const SBody = styled.div`
 
 export const SSection = styled.section`
   /* width: 18%; */
-  width: 16vw;
+  width: 18vw;
   display: flex;
   flex-direction: column;
+  font-family: "GmarketSansMedium";
   /* justify-content: space-around; */
 
   .mostviewed {
@@ -134,7 +135,6 @@ export const SSection = styled.section`
     box-shadow: 2px 2px 1px 1px grey;
     display: flex;
     flex-direction: column;
-    text-align: center;
   }
 
   .mostviewed ::-webkit-scrollbar {
@@ -142,18 +142,20 @@ export const SSection = styled.section`
   }
   .mostviewed__title {
     font-size: 1.1rem;
+    font-weight: 900;
     margin-block: 1rem;
+    text-align: center;
   }
   .mostview__element {
     display: flex;
-    overflow-x: hidden;
-    justify-self: center;
-    width: 16vw;
-    /* margin-block: 10%; */
+    justify-content: center;
+    width: 15.5vw;
+    /* height: 11vh; */
+    border-radius: 20px;
+    /* padding: 0.5vh; */
+    padding-inline: 1vh;
     transition: all 300ms linear;
-    border-radius: 12px;
-    /* margin-block: 0.7rem; */
-    /* padding: 0.5rem 1rem; */
+    margin-block: 0.5vh;
   }
 
   .mostview__element:hover {
@@ -161,8 +163,13 @@ export const SSection = styled.section`
   }
 
   .mostviewed__list {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
     overflow: auto;
     a {
+      width: fit-content;
       color: black;
     }
   }
@@ -173,8 +180,6 @@ export const SSection = styled.section`
     padding-inline: 0.4vw;
     margin-block: 1vh;
     text-align: justify;
-
-    /* justify-items: end; */
   }
   .mostview__count {
     display: flex;
@@ -187,7 +192,5 @@ export const SSection = styled.section`
     font-size: 15px;
     p {
     }
-    /* align-items: center; */
-    /* height: 2vh; */
   }
 `;
