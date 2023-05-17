@@ -144,11 +144,11 @@ public class Member extends BaseTime{
         this.feedTarget = targetDto.getFeedTarget();
         this.githubTarget = targetDto.getGithubTarget();
         this.csTarget = targetDto.getCsTarget();
-        this.github_start_date = LocalDateTime.now(); // 시작 시간 재 시작
-        this.algo_start_date = LocalDateTime.now();
-        this.blog_start_date = LocalDateTime.now();
-        this.cs_start_date = LocalDateTime.now();
-        this.feed_start_date = LocalDateTime.now();
+        if(targetDto.getGithubTarget() != null) this.github_start_date = LocalDateTime.now(); // 시작 시간 재 시작
+        if(targetDto.getBojTarget() != null) this.algo_start_date = LocalDateTime.now();
+        if(targetDto.getBlogTarget() != null) this.blog_start_date = LocalDateTime.now();
+        if(targetDto.getCsTarget() != null) this.cs_start_date = LocalDateTime.now();
+        if(targetDto.getFeedTarget() != null) this.feed_start_date = LocalDateTime.now();
     }
 
     public void updateMemberInfo(MemberUpdateDto memberUpdateDto){
