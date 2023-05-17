@@ -91,11 +91,12 @@ export const SHeader = styled.header`
   }
 `;
 export const SBody = styled.div`
-  margin-inline: 10%;
+  margin-inline: 12%;
   /* margin-block: 3%; */
   height: 70%;
   justify-content: space-evenly;
   display: flex;
+  width: 85vw;
   /* overflow-y: auto; */
   ::-webkit-scrollbar {
     display: none;
@@ -109,55 +110,52 @@ export const SBody = styled.div`
       visibility: hidden;
     }
     .intersection__div {
-      height: 15%;
+      height: 10vh;
       /* background-color: red; */
     }
   }
 `;
 
 export const SSection = styled.section`
-  width: 18%;
+  /* width: 18%; */
+  width: 18vw;
   display: flex;
   flex-direction: column;
+  font-family: "GmarketSansMedium";
   /* justify-content: space-around; */
-  input {
-    width: 95%;
-    height: 15%;
-  }
 
-  .keyword__button {
-    background-color: var(--color-dark-white);
-    border-radius: 4px;
-    margin: 1px;
-  }
   .mostviewed {
     background-color: var(--color-white);
     margin-block: 5%;
     border-radius: 20px;
     height: 90%;
     /* padding: 4%; */
-    padding-inline: 8%;
+    padding-inline: 1vw;
     /* padding-block: 8%; */
     box-shadow: 2px 2px 1px 1px grey;
     display: flex;
     flex-direction: column;
-    text-align: center;
-    p {
-      margin-block-start: 3vh;
-      font-size: 1.2rem;
-    }
   }
 
   .mostviewed ::-webkit-scrollbar {
     width: 0rem;
   }
-
+  .mostviewed__title {
+    font-size: 1.1rem;
+    font-weight: 900;
+    margin-block: 1rem;
+    text-align: center;
+  }
   .mostview__element {
-    overflow-x: hidden;
-    margin-block: 10%;
+    display: flex;
+    justify-content: center;
+    width: 15.5vw;
+    /* height: 11vh; */
+    border-radius: 20px;
+    /* padding: 0.5vh; */
+    padding-inline: 1vh;
     transition: all 300ms linear;
-    border-radius: 12px;
-    padding: 0.5rem 1rem;
+    margin-block: 0.5vh;
   }
 
   .mostview__element:hover {
@@ -165,17 +163,34 @@ export const SSection = styled.section`
   }
 
   .mostviewed__list {
-    padding: 5%;
-    height: 90%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
     overflow: auto;
     a {
+      width: fit-content;
       color: black;
     }
   }
-
+  .mostview__content {
+    display: flex;
+    flex-direction: column;
+    width: 14vw;
+    padding-inline: 0.4vw;
+    margin-block: 1vh;
+    text-align: justify;
+  }
+  .mostview__count {
+    display: flex;
+    justify-content: end;
+  }
   .view__wrapper {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: end;
+    font-size: 15px;
+    p {
+    }
   }
 `;
