@@ -66,13 +66,14 @@ import { Wood_drawer_1 } from "./Models/Wood_drawer_1";
 import { Wood_shelve } from "./Models/Wood_shelve";
 import { Yellow_sofa_1 } from "./Models/Yellow_sofa_1";
 import { Wood_table_1 } from "./Models/Wood_table_1";
+import Loading from "@/components/Loading/Loading";
 
 const Scene = ({ shopItem }: IShopItemProps) => {
   const itemName = shopItem?.name;
   const id = shopItem?.id;
 
   return (
-    <Suspense>
+    <Suspense fallback={<Loading />}>
       <ambientLight color={"#ffffff"} intensity={0.5} />
       <directionalLight
         color={"#ffffff"}
