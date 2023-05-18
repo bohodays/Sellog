@@ -204,7 +204,9 @@ public class RecordService {
     public List<Integer> point(int day, List<Integer> points){
         if(day == 21 || day == 66){
             points.add(20);
-        }else{
+        } else if(day == 1){
+            points.add(0);
+        } else{
             points.add(10);
         }
         return points;
