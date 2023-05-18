@@ -14,8 +14,10 @@ const ItemShop = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const homeNavigator = useNavigate();
+  const myItemNavigator = useNavigate();
   const getOutHandler = () => {
     homeNavigator("/main");
+    window.location.reload();
   };
   const repeatDots = () => {
     let arr = [];
@@ -29,7 +31,9 @@ const ItemShop = () => {
     const eventTarget = e.target as HTMLElement;
     setSelectedCategory(eventTarget.innerText);
   };
-
+  const toMyItem = () => {
+    myItemNavigator("/myroom");
+  };
   return (
     <SMain>
       <div className="sign__title--container">
@@ -103,6 +107,9 @@ const ItemShop = () => {
           className="goHome__button"
           onClick={getOutHandler}
         />
+        <div className="myItem__button" onClick={toMyItem}>
+          My Room
+        </div>
       </SContainer>
       <SGhostContainer position={"top"}>
         {repeatDots()}

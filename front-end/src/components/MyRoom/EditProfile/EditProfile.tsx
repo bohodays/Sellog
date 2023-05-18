@@ -166,12 +166,12 @@ function EditProfile(props: MyProfileProps) {
   // 프로필 수정하는 함수
   const editHandler = () => {
     // api put 함수 넣기
-    console.log({ newProfileImg });
+    // console.log({ newProfileImg });
     setUserInfo({
       ...userInfo,
       img: newProfileImg,
       nickname: nicknameRef.current.value,
-      email: contactRef.current.value,
+      contact: contactRef.current.value,
       motto: mottoRef.current.value,
       blog: blogRef.current.value,
       github: githubRef.current.value,

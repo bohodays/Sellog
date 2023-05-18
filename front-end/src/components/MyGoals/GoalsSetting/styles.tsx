@@ -50,14 +50,29 @@ export const SSection = styled.section<any>`
     position: absolute;
     top: 7vh;
     left: 2.5vw;
-    font-size: 0.7vw;
-    /* background-color: rgb(75, 90, 125, 0.8); */
-    background-color: white;
+    font-size: 0.8vw;
+    font-weight: bold;
+    background-color: #2c2e2ef4;
     height: 30vh;
     width: 23vw;
-    color: black;
+    color: #f4f4f4;
     padding: 2px 3px;
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    text-align: start;
+
+    padding: 1rem;
+    padding-inline: 1.5rem;
+    p {
+      margin-block: 0.5vh;
+      line-height: 3vh;
+    }
+    span {
+      color: red;
+    }
   }
 
   .content__wrapper {
