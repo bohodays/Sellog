@@ -201,11 +201,6 @@ export default function Feed() {
         </div>
         <img className="sticker1" src={LargeSmile} alt="스마일 큰거" />
       </SBody>
-      <FontAwesomeIcon
-        icon={faRightFromBracket}
-        className="goHome__button"
-        onClick={getOutHandler}
-      />
     </SMain>
   );
 }

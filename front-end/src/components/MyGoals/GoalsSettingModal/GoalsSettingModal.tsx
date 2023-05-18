@@ -177,7 +177,7 @@ const GoalsSettingModal = ({
                     type="number"
                     inputProps={{
                       min: 1,
-                      max: 1,
+                      max: 3,
                     }}
                     sx={{
                       width: "2.5vw",
