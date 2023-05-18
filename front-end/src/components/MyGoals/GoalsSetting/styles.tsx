@@ -13,7 +13,7 @@ export const SSection = styled.section<any>`
 
   .title__wrapper {
     position: relative;
-    padding-left: 2vw;
+    padding-left: 2.5vw;
     /* text-align: center; */
 
     span {
@@ -22,7 +22,6 @@ export const SSection = styled.section<any>`
       color: white;
       font-size: 1.5vw;
       text-shadow: 1px 2px gray;
-      padding-left: 0.5vw;
     }
   }
 
@@ -30,7 +29,7 @@ export const SSection = styled.section<any>`
     font-size: 3.5vw;
     font-family: "Chicle", cursive;
     margin: 0;
-    padding-top: 4vh;
+    padding-top: 6vh;
 
     padding-bottom: 5vh;
     color: #4b5a7d;
@@ -92,8 +91,8 @@ export const SSection = styled.section<any>`
   }
 
   .retro__pencil {
-    top: 1rem;
-    right: 2rem;
+    top: 4vh;
+    right: 2vw;
   }
 
   .retro__work {
@@ -126,12 +125,14 @@ export const SSection = styled.section<any>`
 
   .goback__button {
     position: absolute;
-    width: 6rem;
-    top: 3rem;
-    left: 0.1rem;
+    width: 3vw;
+    top: 2.5vh;
+    left: 0.5vw;
     font-size: 1.5rem;
     a {
       color: black;
     }
+    z-index: 4;
+    cursor: pointer;
   }
 `;

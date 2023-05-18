@@ -43,6 +43,10 @@ const Accumulate = () => {
       .catch((e) => {
         console.log(e);
       });
+    // apiRefreshToken().then((r) => {
+    //   console.log(r);
+    //   console.log(r?.data.response.accessToken, "data");
+    // });
   }, []);
 
   const [activeStep, setActiveStep] = useState(0);
@@ -207,7 +211,7 @@ const Accumulate = () => {
                     ? "CS QUIZ는 누적 보상 제도가 적용되지 않습니다."
                     : dummyAccumulateList[activeStep].goal === "feed"
                     ? "FEED는 누적 보상 제도가 적용되지 않습니다."
-                    : " 추천 설정이 아니면 누적 보상을 얻지 못합니다."}
+                    : "추천 설정이 아니면 누적 보상 제도가 적용되지 않습니다."}
                 </div>
               ) : (
                 <>

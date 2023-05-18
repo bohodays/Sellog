@@ -126,6 +126,15 @@ export const SNav = styled.nav`
     transition-duration: 180ms;
   }
 
+  .menu-item:nth-child(6) {
+    -webkit-transition-duration: 180ms;
+    transition-duration: 180ms;
+  }
+  .menu-item:nth-child(7) {
+    -webkit-transition-duration: 180ms;
+    transition-duration: 180ms;
+  }
+
   .menu-open-button {
     z-index: 2;
     -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -185,6 +194,12 @@ export const SNav = styled.nav`
     -webkit-transition-duration: 480ms;
     -webkit-transform: translate3d(0, 104.99997px, 0);
     transform: translate3d(0, 240px, 0);
+  }
+  .menu-open:checked ~ .menu-item:nth-child(7) {
+    transition-duration: 480ms;
+    -webkit-transition-duration: 480ms;
+    -webkit-transform: translate3d(0, 104.99997px, 0);
+    transform: translate3d(0, 300px, 0);
   }
 
   .gardenList {
