@@ -17,6 +17,7 @@ const ItemShop = () => {
   const myItemNavigator = useNavigate();
   const getOutHandler = () => {
     homeNavigator("/main");
+    window.location.reload();
   };
   const repeatDots = () => {
     let arr = [];
