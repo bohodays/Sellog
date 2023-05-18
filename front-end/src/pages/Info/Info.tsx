@@ -205,7 +205,7 @@ const Info = () => {
         <section className="section">
           <h2>05</h2>
           <p>아래의 링크를 통해 Chrome 웹 스토어에서 Sellog를 설치해주세요. </p>
-          <p>설치 후 확장 프로그램의 Github나 Tistory 버튼을 클릭하여</p>
+          <p>설치 후 확장 프로그램의 Github 버튼을 클릭하여</p>
           <p>
             로그인을 진행하면 목표 달성 여부를 자동으로 체크하는 기능을 이용하실
             수 있습니다.{" "}
