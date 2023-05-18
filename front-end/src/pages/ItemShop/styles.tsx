@@ -130,6 +130,38 @@ export const SMain = styled.main`
       box-shadow: none;
     }
   }
+  .myItem__button {
+    border: 3px red solid;
+    position: absolute;
+    bottom: 2.5vh;
+    right: 7vw;
+
+    text-align: center;
+    /* font-size: calc(2.5vw - 10px); */
+    font-weight: 900;
+    font-style: italic;
+    font-family: "Exo 2", sans-serif;
+    color: white;
+    padding: 1vh 1vw;
+    /* margin-top: 5vh; */
+    border: 0.2rem solid rgba(137, 239, 245, 1);
+    border-radius: 2rem;
+    /* text-transform: uppercase; */
+    animation: flicker 1.5s infinite alternate;
+    width: fit-content;
+    height: fit-content;
+    box-shadow: 0 0 0.25rem rgba(137, 239, 245, 1),
+      inset 0 0 0.25rem rgba(137, 239, 245, 1),
+      0 0 0.01rem var(--neon-border-color),
+      inset 0 0 0.01rem var(--neon-border-color),
+      0 0 0.5rem var(--neon-border-color),
+      inset 0 0 0.5rem var(--neon-border-color);
+
+    cursor: pointer;
+  }
+  .myItem__button:hover {
+    color: yellow;
+  }
 `;
 
 export const SGhostContainer = styled.div<any>`
