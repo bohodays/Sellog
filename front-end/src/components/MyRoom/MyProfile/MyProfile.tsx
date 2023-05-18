@@ -84,6 +84,7 @@ const MyProfile = (props: MyProfileProps) => {
         }
       }
     });
+    console.log({ userInfo });
   }, []);
   // 유저 개인정보 수정하는 함수
   const userInfoHandler = () => {
@@ -208,11 +209,10 @@ const MyProfile = (props: MyProfileProps) => {
               <div
                 className="progress__bar progress__bar--CS"
                 onClick={todayCSHandler}
+                onMouseOver={mouseHandler}
               >
                 {props.userData.csTarget ? (
-                  <p onMouseOver={mouseHandler} style={containerStyles}>
-                    오늘의 CS 문제
-                  </p>
+                  <p style={containerStyles}>오늘의 CS 문제</p>
                 ) : (
                   <p>매일 CS 문제 풀기</p>
                 )}
@@ -262,12 +262,20 @@ const MyProfile = (props: MyProfileProps) => {
             </div>
           </div>
           <div>
-            <a href={`${props.userData.github}`}>
-              <img src={github} className="sticker__github" alt="github Icon" />
-            </a>
-            <a href={`${props.userData.blog}`}>
-              <img src={tistory} className="sticker__tistory" alt="" />
-            </a>
+            {userInfo.email && (
+              <a href={`https://github.com/${userInfo.email}`}>
+                <img
+                  src={github}
+                  className="sticker__github"
+                  alt="github Icon"
+                />
+              </a>
+            )}
+            {userInfo.blog ? (
+              <a href={`${userInfo.blog}`}>
+                <img src={tistory} className="sticker__tistory" alt="" />
+              </a>
+            ) : null}
           </div>
         </div>
         <div className="platform-address"></div>

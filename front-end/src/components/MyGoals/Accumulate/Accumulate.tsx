@@ -4,7 +4,7 @@ import { TiChevronRightOutline, TiChevronLeftOutline } from "react-icons/ti";
 import { apiGetAccumulatedRecordList } from "@/api/record";
 import { IAccumulatedRecordList } from "@/typeModels/mygoals/myRecordInterfaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo, faTable } from "@fortawesome/free-solid-svg-icons";
 
 const dummyAccumulateList = [
   {
@@ -58,6 +58,7 @@ const Accumulate = () => {
 
   // mouse hover시 info message
   const [showInfoMessage, setShowInfoMessage] = useState(false);
+  const [showTableMessage, setShowTableMessage] = useState(false);
 
   const handleMouseEnter = () => {
     setShowInfoMessage(true);
@@ -65,6 +66,13 @@ const Accumulate = () => {
 
   const handleMouseLeave = () => {
     setShowInfoMessage(false);
+  };
+
+  const handleTableMouseEnter = () => {
+    setShowTableMessage(true);
+  };
+  const handleTableMouseLeave = () => {
+    setShowTableMessage(false);
   };
 
   return (
@@ -77,10 +85,74 @@ const Accumulate = () => {
         >
           <FontAwesomeIcon icon={faCircleInfo} fontSize={20} />
         </button>
+        <button
+          className="table__btn"
+          onMouseEnter={handleTableMouseEnter}
+          onMouseLeave={handleTableMouseLeave}
+        >
+          <FontAwesomeIcon icon={faTable} />
+        </button>
 
         {showInfoMessage && (
-          <div className="info__message">목표 설정과 보상 체계 안내</div>
+          <div className="info__message">
+            <p>
+              셀로그가 제안하는 습관 목표를 꾸준히 실천하시면 누적 보상을 통해
+              더 많은 포인트를 획득하실수 있습니다!
+            </p>
+            <p>
+              <span>6일, 11일</span>
+              째에 누적 보상이 지급됩니다. <span> 21, 66일</span> 째에는 기본
+              보상의 2배를 받을 수 있습니다.
+            </p>
+            <p>사용자 설정 습관의 경우 누적 보상을 제공하지 않습니다.</p>
+            <p>피드와 CS퀴즈는 누적 보상을 제공하지 않습니다.</p>
+          </div>
         )}
+
+        {showTableMessage && (
+          <div className="table__message">
+            <table>
+              <tr>
+                <td></td>
+                <td>기본 보상</td>
+                <td>누적 보상</td>
+                <td>21,66일 보상</td>
+              </tr>
+              <tr>
+                <td>Github</td>
+                <td>10</td>
+                <td>10</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>Blog</td>
+                <td>20</td>
+                <td>x</td>
+                <td>40</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Algorithm</td>
+                <td>15</td>
+                <td>10</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>CS Quiz</td>
+                <td>5</td>
+                <td>x</td>
+                <td>x</td>
+              </tr>
+              <tr>
+                <td>Feed</td>
+                <td>2</td>
+                <td>x</td>
+                <td>x</td>
+              </tr>
+            </table>
+          </div>
+        )}
+
         <div className="steps__wrapper">
           <button
             className="nav right"

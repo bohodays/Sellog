@@ -129,7 +129,7 @@ export const SProfile = styled.section`
     font-size: 1rem;
   }
   .progress__bar {
-    width: 60%;
+    width: 13vw;
     height: 2rem;
     display: flex;
     justify-content: center;
@@ -153,6 +153,9 @@ export const SProfile = styled.section`
   .progress__bar--CS {
     background-color: #6eb78d;
     transform: rotate(0.52deg);
+  }
+  .progress__bar--CS:hover {
+    cursor: pointer;
   }
   .progress__bar--Feed {
     background-color: #5488a1;
