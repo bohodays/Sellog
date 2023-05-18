@@ -24,7 +24,7 @@
         <td align="center">REST API<br/>Spring Boot<br/>DataBase<br/>GitHub API<br/>WebSocket<br/>RSS Feed<br/>Chrome Extension</td>
         <td align="center">UI/UX<br/>React<br/>3D Modeling<br/>Three.js<br/>MyGoals<br/>ItemShop<br/>Chart<br/>Calendar</td>
         <td align="center">UI/UX<br/>React<br/>3D Modeling<br/>Three.js<br/>Main<br/>MyRoom<br/>WebSocket<br/>CS Quiz</td>
-        <td align="center">REST API<br/>Spring Boot<br/>DataBase<br/>Chrome Extension<br/>WebSocket<br/>???<br/>???</td>
+        <td align="center">REST API<br/>Spring Boot<br/>DataBase<br/>Chrome Extension<br/>WebSocket<br/>Member<br/>Record</td>
     </tr>
 </table>
 
@@ -100,18 +100,15 @@
 
 ## 🗂️ 시스템 아키텍처
 
-|                                                        시스템 아키텍처                                                        |
-| :---------------------------------------------------------------------------------------------------------------------------: |
-| ![system_architecture](https://user-images.githubusercontent.com/64126100/230015421-0be88a10-d545-4666-9488-c4bfe5eeb0b5.png) |
+|                                           시스템 아키텍처                                            |
+| :--------------------------------------------------------------------------------------------------: |
+| ![system](https://github.com/bohodays/Project/assets/109454527/ca003525-4a2f-471c-a651-afd97af816d8) |
 
 <br/>
 
 ## **🎨 Design**
 
-<details> <summary>3D Modeling</summary> <div markdown="1"><img src="https://user-images.githubusercontent.com/64126100/230253426-64cc88da-af86-4535-a3d0-b8da67048779.png"><img src="https://user-images.githubusercontent.com/64126100/230253431-a987281b-1b3f-459e-8032-c4f577a27ecf.png"><img src="https://user-images.githubusercontent.com/64126100/230253450-e6f89e09-4019-45c5-8936-f3a5b5bea5b3.png">
-</div> </details>
-
-<div><a href="https://www.figma.com/file/0EYeah40AUaCqrz3LBbDVV/A205?node-id=65-272997&t=axOg9kUYmLQ8QU2F-0">Figma</a></div>
+<div><a href="https://www.figma.com/file/m1hh7SxQVn2Neq9uthUvWT/A404?type=design&node-id=0-1&t=w5LjZDQ2ZnLKLtXp-0">Figma</a></div>
 
 <br />
 
@@ -508,69 +505,6 @@ C:.
 ```
 
 </details>
-<br />
-
-## 💡 구글 플레이스토어 출시
-
-![image-20230410022509686](Readme.assets/image-20230410022509686.png)
-
-<br />
-
-## 📚 추천 알고리즘
-
-- 음악 추천 알고리즘은 다음과 같이 이루어집니다.
-
-  - 특정 감정에 대해 과거 유저데이터가 있다면 과거 데이터 활용합니다.
-
-    1. 음악데이터는 각 음악마다 태그데이터를 가지고 있습니다.
-    2. 과거 음악 데이터들을 태그기반으로 벡터화 시키고 모두 더합니다.
-    3. 2에서 만든 벡터를 ''유저-태그 매트릭스''라고 합니다.
-    4. 각 음악들은 태그를 가지고있기에 이것을 ''음악-태그 매트릭스''라고 합니다.
-    5. 유저-태그 매트릭스와 음악-태크 매트릭스를 각각 numpy의 svd 알고리즘을 활용하여 행렬분해합니다.
-    6. 5를 거치면 유저-잠재요인 매트릭스와 음악-잠재요인 매트릭스를 구할 수 있습니다.
-    7. 유저-잠재요인 매트릭스와 음악 잠재요인 매트릭스의 전치행렬을 내적하면 (1,음악개수)의 행렬 나옵니다.
-    8. 7에서 구한 리스트에서 가장 높은 N개의 음악을 추천합니다(과거 유저가 들은 음악과 특저 음악의 상관관계를 의미합니다)
-
-  - 특정 감정에 대해 과거 유저데이터가 없다면 현재 유저의 유사한 유저의 데이터 활용합니다.
-    1. 회원가입시 음악 취향을 받아 다중선택 가능하도록 합니다.
-    2. 선택한것은 1, 선택하지 않은 것은 0으로 바꿔 벡터로 바꾼뒤 코사인 유사도로 유사한 유저 찾습니다.
-    3. 유사한 유저가 특정감정일 때 어떤 노래를 들었는지 확인해서 찾은 노래와 유사한 노래를 추천합니다.
-    4. 유사한 노래는 TF-IDF방식을 활용합니다.
-    5. 음악을 문서, 태그를 단어라고 생각하면 음악 태그기반의 유사한 음악을 찾는문제는 단어기반의 유사한 문서를 찾는 문제로 바뀝니다.
-    6. 하나의 단어가 단일문서에서 여러번 등장하면 TF값은 증가하고, 여러문서에서 등장하면 IDF가 감소합니다.
-    7. 이런식으로 구한 TF와 IDF를 곱해 가중치를 구하면 하나의 문서에는 여러 TF-IDF값이 들어갑니다.
-    8. 이것을 벡터화하고 코사인유사도를 이용하면 비슷한 노래를 찾을 수 있습니다.
-  - 위 2가지 모두 해당되지 않으면 유저들이 가장 많이 선택한 음악이 추천됩니다.
-    1. 유저들이 가장 많이 들었던 노래 5가지를 추천합니다.
-       <br />
-
-## 📚 텍스트 분석 알고리즘
-
-- BERT
-
-  - BERT : Bidirectional Encoder Representations for Transformers
-  - 자연어 처리를 위한 모델로, 기존 일방향 Decoder 방식과는 달리 양방향으로 문장을 분석합니다.
-  - 일방향의 Decoder는 새로운 문장에 적합한 반면, BERT는 양방향으로 분석에 초점이 맞춰져 있습니다.
-
-- koBERT
-
-  - 기존 BERT 모델에 한국어 학습 신경망을 추가한 koBERT 모델을 사용합니다.
-  - koBERT를 채택한 이유 : 한국어 자연어 처리 모델 중 가장 높은 정확도를 보이고, 감정이나 긍/부정을 분석하는 프로젝트에서 널리 활용됩니다.
-
-- Pre Training : BERT는 수백만개의 텍스트 데이터를 사전 학습했습니다.
-  - 문장을 Attention 행렬(문장에서의 단어 순서, 문장 시작과 끝 구별, 상황별 중요한 단어 및 문맥 이해, 오타 처리를 수치로 나타낸 행렬)로 변경합니다.
-    문장 중 단어 하나를 가린 후 그 단어를 예측하는 방식으로 학습합니다.
-- Fine Tuning : 이후 이 모델에 목적에 맞는 신경망을 추가합니다.
-
-  - 문장 + 감정 벡터 (16만개) 데이터를 학습했습니다.
-  - 기쁨 0, 안정 1, ….
-  - 모델이 완성된 후, 문장을 입력하면 각 감정과 얼마나 일치하는지 정도를 나타내는 비율이 도출됩니다.
-
-- 모델 개선 관련
-  - kFold를 이용하여 교차 검증(cross-validation)으로 train 데이터로의 과적합을 방지했습니다.
-  - 5회에서 10회로 변경했습니다.
-  - 최적의 epoch을 찾고자 노력했습니다.
-  - 학습 데이터를 순차적으로 추가했습니다.
 
 <br />
 
