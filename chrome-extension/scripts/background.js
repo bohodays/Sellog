@@ -10,19 +10,58 @@ async function SolvedApiCall(problemId) {
 // 알림을 띄워주는 함수
 function sendNotification(point) {
   console.log("알림창");
-  chrome.notifications.create({
-    type: "basic",
-    title: "SELLOG",
-    iconUrl: "../assets/sellogo.png",
-    message: point + "포인트가 적립되었습니다.",
-    priority: 2, // -2 to 2 (highest)
-
-    eventTime: Date.now(),
-  }, () => {
-  });
+  if(point > 0){
+    chrome.notifications.create({
+      type: "basic",
+      title: "SELLOG",
+      iconUrl: "../assets/sellogo.png",
+      message: point + "포인트가 적립되었습니다.",
+      priority: 2, // -2 to 2 (highest)
+  
+      eventTime: Date.now(),
+    }, () => {
+    });
+  }else if(point == -1){
+    chrome.notifications.create({
+      type: "basic",
+      title: "SELLOG",
+      iconUrl: "../assets/sellogo.png",
+      message: "기준점을 넘지 못해 기록이 인정되지 않습니다.",
+      priority: 2, // -2 to 2 (highest)
+      eventTime: Date.now(),
+    }, () => {
+    });
+  }else if(point == -2){
+    chrome.notifications.create({
+      type: "basic",
+      title: "SELLOG",
+      iconUrl: "../assets/sellogo.png",
+      message: "목표를 설정해주세요.",
+      priority: 2, // -2 to 2 (highest)
+      eventTime: Date.now(),
+    }, () => {
+    });
+  }else{
+    chrome.notifications.create({
+      type: "basic",
+      title: "SELLOG",
+      iconUrl: "../assets/sellogo.png",
+      message: "기준점을 넘지 못해 기록이 인정되지 않습니다.",
+      priority: 2, // -2 to 2 (highest)
+      eventTime: Date.now(),
+    }, () => {
+    });
+  }
 }
 
 function handleMessage(request, sender, sendResponse) {
+  console.log(request);
+  if (request && request.message == "alarm") {
+    console.log("g2g2");
+    sendNotification(
+      request.payload.point,
+    );
+  }
   if (request && request.closeWebPage === true && request.isSuccess === true) {
     /* Set username */
     chrome.storage.local.set(
@@ -63,11 +102,7 @@ function handleMessage(request, sender, sendResponse) {
   } else if (request && request.sender == "baekjoon" && request.task == "SolvedApiCall") {
     SolvedApiCall(request.problemId).then((res) => sendResponse(res));
     //sendResponse(SolvedApiCall(request.problemId))
-  } else if (request && request.message == "alarm") {
-    sendNotification(
-      request.payload.point,
-    );
-  }
+  } 
   return true;
 }
 

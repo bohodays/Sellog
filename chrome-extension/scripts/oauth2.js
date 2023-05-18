@@ -5,8 +5,8 @@ const oAuth2 = {
    */
   init() {
     this.KEY = 'Sellog_token';
-    this.GITHUB_ACCESS_TOKEN_URL = 'http://k8a404.p.ssafy.io:8080/oauth2/authorization/github';
-    this.TISTORY_ACCESS_TOKEN_URL = 'http://k8a404.p.ssafy.io:8080/oauth2/authorization/tistory';
+    this.GITHUB_ACCESS_TOKEN_URL = 'https://k8a404.p.ssafy.io/oauth2/authorization/github';
+    this.TISTORY_ACCESS_TOKEN_URL = 'https://k8a404.p.ssafy.io/oauth2/authorization/tistory';
   },
 
   /**
