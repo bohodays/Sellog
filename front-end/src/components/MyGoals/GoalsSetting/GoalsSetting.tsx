@@ -69,7 +69,19 @@ const GoalsSetting: any = () => {
           <FontAwesomeIcon icon={faCircleInfo} fontSize={20} />
         </button>
         {showInfoMessage && (
-          <div className="info__message">목표 설정과 보상 체계 안내</div>
+          <div className="info__message">
+            <p>셀로그 추천 또는 사용자 맞춤형 목표를 설정 할 수 있습니다.</p>
+            <p>
+              아래의 카테고리를 선택하면, 사용자가 원하는 습관 목표를 재설정 할
+              수 있습니다.
+            </p>
+            <p>
+              목표 재설정시 습관 실천 기록 유지 기간이 초기화 되니{" "}
+              <span> 신중히 변경</span>
+              하시길 바랍니다.
+            </p>
+            <p>목표를 달성 할때마다 포인트를 획득 하실 수 있습니다.</p>
+          </div>
         )}
         <SettingButtons setIsOpen={setIsOpen} setActiveGoal={setActiveGoal} />
         <img
