@@ -13,7 +13,7 @@ import { CSQuizFont } from "@/components/Main/Models/Csquiz_font";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Feed } from "@/components/Main/Models/Feed";
 import { FeedFont } from "@/components/Main/Models/Feed_font";
-import ChromeImg from "@/assets/imgs/retro/chrome_logo.png";
+import ChromeImg from "@/assets/imgs/retro/chrome_extension.png";
 
 const Scene = () => {
   const houseRef = useRef<any>();

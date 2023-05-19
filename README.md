@@ -519,7 +519,6 @@ C:.
 
 ### I. 회원가입 및 로그인
 
-
 - GitHub ID를 통한 소셜 로그인으로 서비스를 이용할 수 있습니다.
 - 신규 회원이라면 소셜로그인 후 캐릭터, 이름, 좌우명을 필수 사항으로 입력받으며, 이메일, GitHub, 블로그 주소를 선택 사항으로 입력받습니다. 입력받은 정보는 메인 페이지 및 MyRoom 페이지에서 활용됩니다.
 
@@ -538,7 +537,6 @@ C:.
 
 ### III. Main 페이지
 
-
 - 유저의 캐릭터와 맵이 3D로 표시되며, 마우스 클릭을 통해 맵을 자유롭게 이동할 수 있습니다.
 - 각 페이지의 Spot으로 이동하면 해당 페이지로 이동할 수 있는 버튼이 나타납니다.
 - 우측 상단의 토글 버튼을 통해서도 원하는 페이지로 이동할 수 있습니다.
@@ -546,7 +544,6 @@ C:.
 <br />
 
 ### IV. My Room 페이지
-
 
 - MyRoom의 좌측 탭에서는 유저의 프로필 정보와 유저가 설정한 습관을 확인할 수 있습니다.
 - 우측 탭에서는 유저의 3D 방을 볼 수 있습니다.
@@ -559,6 +556,7 @@ C:.
 - My Goals 페이지에서는 5가지(Github, Blog, Algorithm, Feed, CS Quiz)의 습관을 설정할 수 있고, 달성한 습관들에 대한 통계 및 상세 정보를 확인할 수 있습니다.
 
 - 습관 설정
+
   - 좌측 탭에서 각 습관 설정 버튼을 누르면 모달을 통해 유저가 원하는 습관 주기를 설정할 수 있습니다.
   - 습관 주기는 추천 주기가 제시되며, 추천 주기로 설정할 시 누적보상을 획득할 수 있습니다.
 
@@ -572,7 +570,6 @@ C:.
 
 ### VI. Item Shop 페이지
 
-
 - Item Shop 페이지에서는 습관 달성을 통해 획득한 포인트로 아이템을 구매할 수 있습니다.
 - 아이템들은 카테고리로 구분되어 있으며, 좌측 버튼을 통해 카테고리별 아이템을 확인할 수 있습니다.
 - 각 아이템을 클릭하면 미리보기 화면이 3D로 제공되며, 마우스를 통해 회전시켜 다양한 각도에서 아이템을 확인할 수 있습니다.
@@ -581,7 +578,6 @@ C:.
 
 ### VII. CS Quiz 페이지 (1) - Solo Play
 
-
 - Solo Play에서는 5가지(Data Structure, Operating System, Database, Network, Programming Common)의 영역 중 한 가지를 선택하면 5문제가 출제됩니다.
 - 각 문제는 4지선다로 이루어져 있으며, 2분의 제한시간이 있습니다.
 
@@ -589,15 +585,12 @@ C:.
 
 ### VII. CS Quiz 페이지 (2) - 1vs1 Battle
 
-
 - 1vs1 Battle에서는 다른 유저와 실시간 CS Quiz 대결을 할 수 있습니다.
 - 매칭이 이루어지면 3개의 OX 퀴즈가 출제되며, 각 문제당 10초의 제한시간이 있습니다.
 
-
 <br>
 
 ### VIII. Feed 페이지
-
 
 - 개발자 피드 페이지에서는 유명 IT 기업들의 기술 블로그를 모아 볼 수 있습니다.
 - 좌측 nav바에서는 조회수가 높은 게시글 10개를 확인 할 수 있습니다.
@@ -606,19 +599,41 @@ C:.
 
 ### VIII. Feed 페이지
 
-
 - 개발자 피드 페이지에서는 유명 IT 기업들의 기술 블로그를 모아 볼 수 있습니다.
 - 좌측 nav바에서는 조회수가 높은 게시글 10개를 확인 할 수 있습니다.
 
 <br>
 
-### IX. 자동화 시스템
+### IX. 자동화 시스템 (1) - Blog Posting
 
-- ??
-- ??
+- 유저가 블로그 글을 작성하면 Sellog의 Chrome Extension을 통해 자동으로 감지하여 습관 달성 여부를 판단합니다.
+- ChatGPT를 통해 유저가 작성한 글을 검증하여 자체 필터링을 합니다.
 
 <br>
 
+### IX. 자동화 시스템 (2) - Algorithm
+
+- 유저가 온라인 저지 사이트에서 알고리즘 문제를 풀면 Sellog의 Chrome Extension을 통해 자동으로 감지하여 습관 달성 여부를 판단합니다.
+
+<br>
+
+### IX. 자동화 시스템 (3) - Github
+
+- 유저가 Github에 commit을 하면 Sellog의 Chrome Extension을 통해 자동으로 감지하여 습관 달성 여부를 판단합니다.
+
+<br>
+
+### IX. 자동화 시스템 (4) - CS Quiz
+
+- 유저가 Sellog의 CS Quiz 서비스를 이용하면 자동으로 감지하여 습관 달성 여부를 판단합니다.
+
+<br>
+
+### IX. 자동화 시스템 (5) - Github
+
+- 유저가 Sellog의 Feed 서비스를 이용하면 자동으로 감지하여 습관 달성 여부를 판단합니다.
+
+<br>
 
 ## 🎥 [UCC 보러가기](https://www.youtube.com/watch?v=uhn50fvD4cY)
 
@@ -630,15 +645,15 @@ C:.
 
 ### I. Jira Burn Down Chart
 
-<details> <summary>1주차</summary> <div markdown="1"><img src="https://user-images.githubusercontent.com/64126100/230014235-3f1ba93b-b134-4b36-b13c-d8a590439ccd.JPG"></div> </details>
+<details> <summary>1주차</summary> <div markdown="1"><img src="https://github.com/sellog/test1/assets/131835931/476b9fe7-e519-46ee-9825-e12830c9ac0e"></div> </details>
 
-<details> <summary>2주차</summary> <div markdown="1"><img src="https://user-images.githubusercontent.com/64126100/230014703-00590df0-1b25-419a-b869-93694ca93a12.JPG"></div> </details>
+<details> <summary>2주차</summary> <div markdown="1"><img src="https://github.com/sellog/test1/assets/131835931/409163f4-4d3a-479f-9c4f-0accdc28debd"></div> </details>
 
-<details> <summary>3주차</summary> <div markdown="1"><img src="https://user-images.githubusercontent.com/64126100/230014712-00683054-e22c-49e3-a412-8ddc47d37834.JPG"></div> </details>
+<details> <summary>3주차</summary> <div markdown="1"><img src="https://github.com/sellog/test1/assets/131835931/220a722a-ef05-4a88-bc47-a69cfd349deb"></div> </details>
 
-<details> <summary>4주차</summary> <div markdown="1"><img src="https://user-images.githubusercontent.com/64126100/230014721-4398409a-7455-4c90-804e-35c726f4dde9.JPG"></div> </details>
-
-<details> <summary>5주차</summary> <div markdown="1"></div> </details>
+<details> <summary>4주차</summary> <div markdown="1"><img src="https://github.com/sellog/test1/assets/131835931/89f35b44-d0cc-4f33-bf6d-565ccbb66e0f"></div> </details>
+<details> <summary>5주차</summary> <div markdown="1"><img src="https://github.com/sellog/test1/assets/131835931/89f35b44-d0cc-4f33-bf6d-565ccbb66e0f"></div> </details>
+<details> <summary>6주차</summary> <div markdown="1"><img src="https://github.com/sellog/test1/assets/131835931/45930f5d-548d-4de9-9140-fd131be3d92e"></div> </details>
 
 <br />
 
