@@ -56,6 +56,14 @@ export const apiGetUserInfo = async () => {
             Authorization: `Bearer ${newAccessToken}`,
           },
         });
+
+        // localData.setAccessToken(
+        //   refreshTokenResponse.data.response.accessToken
+        // );
+
+        // localData.setRefreshToken(
+        //   refreshTokenResponse.data.response.refreshToken
+        // );
         return newResponse;
       } catch (refreshError) {
         console.log("토큰 갱신 실패:", refreshError);
