@@ -1,3 +1,1 @@
-front-end
-project
-.머지
+Sellog Project
