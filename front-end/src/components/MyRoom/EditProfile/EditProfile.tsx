@@ -100,10 +100,10 @@ function EditProfile(props: MyProfileProps) {
   function isValidBlog(blog: string) {
     const blogRegex =
       /^(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+)\.([a-zA-Z0-9-.]+)(?:\/[^\s]*)?$/;
-    console.log(blog);
+    // console.log(blog);
 
     const matches = blog.match(blogRegex);
-    console.log(matches);
+    // console.log(matches);
 
     if (matches && matches.length >= 3) {
       const subdomain = matches[1];
@@ -190,7 +190,7 @@ function EditProfile(props: MyProfileProps) {
 
     if (accessToken) {
       apiUpdateUserInfo(editUserData, imgFile).then((res) => {
-        console.log("returned response", res?.data.response);
+        // console.log("returned response", res?.data.response);
       });
     }
   };

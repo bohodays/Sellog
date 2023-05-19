@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect } from "react";
 import "./App.css";
+import { SDiv } from "./AppStyles";
 import {
   BrowserRouter,
   Route,
@@ -71,6 +72,9 @@ function App() {
       {/* fallback 추가해야 됨 */}
       <Suspense>
         {/* <RecoilRoot> */}
+        <SDiv>
+          <span>The width of the screen is too small. Please widen it! 😥</span>
+        </SDiv>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<PrivateRoute />}>

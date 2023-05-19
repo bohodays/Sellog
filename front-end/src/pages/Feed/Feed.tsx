@@ -40,7 +40,7 @@ export default function Feed() {
     threshold: 0.7,
   };
   let callback = (entries: any, observer: any) => {
-    console.log({ lastPage });
+    // console.log({ lastPage });
 
     if (lastPage == false) {
       entries.forEach((entry: any) => {
@@ -50,7 +50,7 @@ export default function Feed() {
           // api call
 
           getFeedApi(page).then(({ data }: any) => {
-            console.log("new", data.response);
+            // console.log("new", data.response);
             if (data.response.last) {
               setLastPage(true);
             }
@@ -106,17 +106,17 @@ export default function Feed() {
     if (mostViewFeed != undefined) {
       setIsMostView(true);
     }
-    console.log({ mostViewFeed });
+    // console.log({ mostViewFeed });
   }, [mostViewFeed]);
 
   const feedHandler = () => {
-    console.log({ newsfeed }, lastPage);
+    // console.log({ newsfeed }, lastPage);
     // mostViewFeed.forEach((element: any) => {
     //   console.log(element["title"]);
     // });
   };
   const viewHandler = (i: number) => {
-    console.log(i);
+    // console.log(i);
     if (i < 8) {
     }
   };

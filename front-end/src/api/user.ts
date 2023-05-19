@@ -18,9 +18,9 @@ export const apiGetUserRecord = async (userId: number) => {
 
 export const apiRefreshToken = async () => {
   const accessToken = localData.getAccessToken();
-  console.log("a", accessToken);
+  // console.log("a", accessToken);
   const refreshToken = localData.getRefreshToken();
-  console.log("r", refreshToken);
+  // console.log("r", refreshToken);
   const data = {
     accessToken: accessToken,
     refreshToken: refreshToken,
@@ -29,7 +29,7 @@ export const apiRefreshToken = async () => {
     const response = await api.post(`/user/access`, data);
     return response;
   } catch (e) {
-    console.log("error", e);
+    console.log(e);
   }
 };
 
@@ -56,9 +56,18 @@ export const apiGetUserInfo = async () => {
             Authorization: `Bearer ${newAccessToken}`,
           },
         });
+
+        // localData.setAccessToken(
+        //   refreshTokenResponse.data.response.accessToken
+        // );
+
+        // localData.setRefreshToken(
+        //   refreshTokenResponse.data.response.refreshToken
+        // );
         return newResponse;
       } catch (refreshError) {
-        console.log("토큰 갱신 실패:", refreshError);
+        // console.log("토큰 갱신 실패:", refreshError);
+        console.log(e);
       }
     }
   }
@@ -76,7 +85,7 @@ export const apiUpdateUsergoal = async (data: IUserGoalSetting) => {
 
 // 유저 회원가입 정보 수정
 export const apiUpdateUserSignupInfo = async (data: IUserSignup) => {
-  console.log(data, "회원정보 수정 api 보내기 전 데이터");
+  // console.log(data, "회원정보 수정 api 보내기 전 데이터");
 
   try {
     const response = await api.put(`/user/signup`, data);
@@ -91,7 +100,7 @@ export const apiUpdateUserSignupInfo = async (data: IUserSignup) => {
 export const apiUpdateUserInfo = async (data: any, pic?: any) => {
   // console.log("개인정보 수정 api 보내기 전 데이터", data, pic);
   const formData = new FormData();
-  console.log(typeof pic);
+  // console.log(typeof pic);
 
   const blob = new Blob([JSON.stringify(data)], {
     type: "application/json",

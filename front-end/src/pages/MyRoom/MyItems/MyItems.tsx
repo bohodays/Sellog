@@ -29,7 +29,7 @@ const MyItems = () => {
 
   useEffect(() => {
     apiGetMyItemList(selectedCategory, currentPage).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res?.data.response.last) {
         setIsLast(true);
       } else {
