@@ -11,7 +11,10 @@ export default function FeedComponent({ props }: any) {
       message: `${props.title}_${props.link}`,
       feedId: `${props.feedId}`,
     };
-    addFeedRecordApi(postFeed).then((res) => console.log(res));
+    addFeedRecordApi(postFeed).then((res) =>
+      // console.log(res)
+      {}
+    );
     addVisitApi(props.feedId);
   }
   // useEffect(() => {

@@ -4,8 +4,6 @@ import getApiInstance from "./http";
 const api = getApiInstance();
 // 피드 페이지 단위로 읽기
 export const getFeedApi = async (page: number) => {
-  console.log("api", { page });
-
   try {
     const response = await api.get(`/feeds?size=8&&page=${page}`);
     return response;

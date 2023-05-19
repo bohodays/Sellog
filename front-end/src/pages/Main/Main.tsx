@@ -160,7 +160,7 @@ const Scene = ({ buttonRef }: any) => {
           Math.abs(destinationPoint.z - userModelRef.current.position.z) < 0.08
         ) {
           moving = false;
-          console.log("멈춤");
+          // console.log("멈춤");
         }
 
         // 마이룸
@@ -173,7 +173,7 @@ const Scene = ({ buttonRef }: any) => {
           ) < 1.5
         ) {
           if (!houseRef.current.visible) {
-            console.log("집 나와!");
+            // console.log("집 나와!");
             buttonRef.current.style.zIndex = 100;
             buttonRef.current.style.opacity = 1;
             buttonRef.current.children[0].innerText =
@@ -198,7 +198,7 @@ const Scene = ({ buttonRef }: any) => {
             });
           }
         } else if (houseRef.current?.visible) {
-          console.log("집 들어가");
+          // console.log("집 들어가");
           buttonRef.current.style.zIndex = -1;
           buttonRef.current.style.opacity = 0;
           spotRef.current.material.color.set("yellow");
@@ -228,7 +228,7 @@ const Scene = ({ buttonRef }: any) => {
           ) < 1.5
         ) {
           if (!itemshopRef.current.visible) {
-            console.log("상점 나와!");
+            // console.log("상점 나와!");
             buttonRef.current.style.zIndex = 100;
             buttonRef.current.style.opacity = 1;
             buttonRef.current.children[0].innerText =
@@ -251,7 +251,7 @@ const Scene = ({ buttonRef }: any) => {
             });
           }
         } else if (itemshopRef.current?.visible) {
-          console.log("상점 들어가");
+          // console.log("상점 들어가");
           buttonRef.current.style.zIndex = -1;
           buttonRef.current.style.opacity = 0;
           spotRef2.current.material.color.set("yellow");
@@ -279,7 +279,7 @@ const Scene = ({ buttonRef }: any) => {
           ) < 1.5
         ) {
           if (!csquizRef.current.visible) {
-            console.log("cs퀴즈 나와!");
+            // console.log("cs퀴즈 나와!");
             buttonRef.current.style.zIndex = 100;
             buttonRef.current.style.opacity = 1;
             buttonRef.current.children[0].innerText =
@@ -302,7 +302,7 @@ const Scene = ({ buttonRef }: any) => {
             });
           }
         } else if (csquizRef.current?.visible) {
-          console.log("cs퀴즈 들어가");
+          // console.log("cs퀴즈 들어가");
           buttonRef.current.style.zIndex = -1;
           buttonRef.current.style.opacity = 0;
           spotRef3.current.material.color.set("yellow");
@@ -330,7 +330,7 @@ const Scene = ({ buttonRef }: any) => {
           ) < 1.5
         ) {
           if (!feedRef.current.visible) {
-            console.log("feed 나와!");
+            // console.log("feed 나와!");
             buttonRef.current.style.zIndex = 100;
             buttonRef.current.style.opacity = 1;
             buttonRef.current.children[0].innerText =
@@ -353,7 +353,7 @@ const Scene = ({ buttonRef }: any) => {
             });
           }
         } else if (feedRef.current?.visible) {
-          console.log("cs퀴즈 들어가");
+          // console.log("cs퀴즈 들어가");
           buttonRef.current.style.zIndex = -1;
           buttonRef.current.style.opacity = 0;
           spotRef4.current.material.color.set("yellow");
@@ -727,7 +727,7 @@ const Scene = ({ buttonRef }: any) => {
 const Main = () => {
   const navigate = useNavigate();
   const buttonRef = useRef<any>();
-  console.log(buttonRef.current);
+  // console.log(buttonRef.current);
 
   const handleRouterMove = () => {
     if (buttonRef.current.children[0].innerText.includes("마이룸")) {

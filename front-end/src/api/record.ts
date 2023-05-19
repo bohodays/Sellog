@@ -56,7 +56,6 @@ export const apiGetChartList = async () => {
 // 피드 읽은 기록 남기기
 export const addFeedRecordApi = async (data: IRecordCSFeed) => {
   try {
-    console.log(data);
     const response = await api.post(`/record`, data);
     return response;
   } catch (error) {

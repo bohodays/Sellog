@@ -25,7 +25,7 @@ const DailyDoneModal = ({ isOpen, setIsOpen, dailyDoneList }: IModalProps) => {
     cs: ["problem", "category"],
   };
 
-  console.log(dailyDoneList, "DL");
+  // console.log(dailyDoneList, "DL");
   return (
     <SSection onClick={handleModalClose}>
       {dailyDoneList && dailyDoneList[0].type === "cs" ? (
