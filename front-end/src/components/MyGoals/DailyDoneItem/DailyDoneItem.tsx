@@ -54,7 +54,7 @@ const DailyDoneItem = ({ doneItem }: IDoneItemProps) => {
         .substring(urlStartIndex, urlEndIndex)
         .trim();
 
-      console.log(slicedTitle, slicedUrl, "blog");
+      // console.log(slicedTitle, slicedUrl, "blog");
       setRepo(slicedTitle);
       setLink(slicedUrl);
     }

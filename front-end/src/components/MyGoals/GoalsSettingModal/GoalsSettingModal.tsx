@@ -105,8 +105,8 @@ const GoalsSettingModal = ({
     setDoIt((prev: boolean) => !prev);
   };
   const updateHandler = () => {
-    console.log({ activeGoal }, "///////");
-    console.log({ day });
+    // console.log({ activeGoal }, "///////");
+    // console.log({ day });
 
     if ((activeGoal == "algorithm" || activeGoal == "github") && day < 4) {
       updateMyGoal(activeGoal);

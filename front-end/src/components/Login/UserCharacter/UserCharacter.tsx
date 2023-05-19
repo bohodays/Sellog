@@ -15,7 +15,7 @@ const UserCharacter = ({
   handleLeftActive,
   handleRightActive,
 }: ActiveType) => {
-  console.log(active);
+  // console.log(active);
 
   return (
     <>

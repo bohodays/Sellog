@@ -58,7 +58,7 @@ const MyProfile = (props: MyProfileProps) => {
     // 습관 실천 기록 가져오는 api
     apiGetAchievedRecordList().then((data: any) => {
       if (data.response) {
-        console.log(data.response);
+        // console.log(data.response);
         setIsInstalled(true);
       }
     });
