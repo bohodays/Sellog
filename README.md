@@ -117,13 +117,6 @@
 
 <details> <summary>ERD</summary> <div markdown="1"><img src="https://github.com/bohodays/Algorithm_problem_solving/assets/109454527/bded2bf2-bd88-41f7-aa24-29555ee92e74"></div> </details>
 
-<details> <summary>MySQL Detail</summary> <div markdown="1"><img src="https://user-images.githubusercontent.com/64126100/230243088-df17aac9-e15f-4c75-bf5f-d445b4eef335.JPG">
-    <img src="https://user-images.githubusercontent.com/64126100/230243099-ef319822-c126-420f-8b9b-c9fb3b5c8974.JPG">
-    <img src="https://user-images.githubusercontent.com/64126100/230243117-e9f81ddf-903d-42cd-bd22-a232fec70878.JPG">
-    <img src ="https://user-images.githubusercontent.com/64126100/230243126-09c5a54c-7b9b-4f8f-9468-d93e4a8485d0.JPG">
-    <img src ="https://user-images.githubusercontent.com/64126100/230243133-5cbb9f10-d9c2-4c52-bec5-63868603bc4d.JPG">
-    <img src ="https://user-images.githubusercontent.com/64126100/230243065-d8b65b54-1d52-4626-9115-24b949a2a982.JPG">
-    <img src ="https://user-images.githubusercontent.com/64126100/230244596-b10aeaa5-2ba0-4834-9e5b-c12c54b4c30b.JPG"></div> </details>
 
 <br />
 
@@ -133,163 +126,771 @@
 
 ```java
 C:.
-+---flory
-|   +---.vscode
-|   +---exec
-|   +---nginx
-|   +---public
-|   |   +---models
-|   |   |   \---flowers
-|   |   \---videos
-|   \---src
-|       +---assets
-|       |   +---gltfs
-|       |   |   \---flowers
-|       |   +---imgs
-|       |   |   +---button
-|       |   |   +---flower_bgicon
-|       |   |   +---flower_icon
-|       |   |   +---info
-|       |   |   +---login
-|       |   |   +---lotties
-|       |   |   +---profile_icon
-|       |   |   \---weather_icon
-|       |   \---mp3
-|       +---components
-|       |   +---common
-|       |   |   +---Accordion
-|       |   |   +---Avatar
-|       |   |   +---BackButton
-|       |   |   +---Button
-|       |   |   +---Chip
-|       |   |   +---CommentInput
-|       |   |   +---CreateInput
-|       |   |   +---CreateInputLine
-|       |   |   +---FloatWrapper
-|       |   |   +---Graph
-|       |   |   |   +---Bar
-|       |   |   |   \---Pie
-|       |   |   +---List
-|       |   |   +---Modal
-|       |   |   |   +---AlertModal
-|       |   |   |   \---BasicModal
-|       |   |   +---Navbar
-|       |   |   +---Post
-|       |   |   +---ProfileCard
-|       |   |   +---ScrollToTop
-|       |   |   +---ScrollToTopButton
-|       |   |   +---SettingPopover
-|       |   |   +---StyledIcons
-|       |   |   +---Tabs
-|       |   |   \---ToggleButton
-|       |   +---Diary
-|       |   |   +---DiaryComment
-|       |   |   +---DiaryDate
-|       |   |   +---DiaryDatePicker
-|       |   |   +---DiaryFlower
-|       |   |   +---DiaryList
-|       |   |   +---DiaryListItem
-|       |   |   +---DiaryLocationModal
-|       |   |   +---DiaryMusicButton.tsx
-|       |   |   +---DiaryMusicItem
-|       |   |   +---DiaryTotalList
-|       |   |   +---DiaryWeather
-|       |   |   +---GroupItems
-|       |   |   +---GroupTag
-|       |   |   \---GroupTagWrapper
-|       |   +---FlowerCreate
-|       |   +---Flowers
-|       |   +---Garden
-|       |   |   +---Beach
-|       |   |   +---Camp
-|       |   |   +---GardenCalendar
-|       |   |   +---Park
-|       |   |   \---Siba
-|       |   +---GardenTheme
-|       |   +---Group
-|       |   |   +---GroupSearchInput
-|       |   |   +---GroupUnJoinList
-|       |   |   \---GroupUnJoinListITem
-|       |   +---GuestBook
-|       |   |   +---GuestBookComment
-|       |   |   \---GuestBookModel
-|       |   +---Info
-|       |   |   +---RotatingText
-|       |   |   \---SubTitle
-|       |   +---Main
-|       |   |   \---MainFlowerAsset
-|       |   +---Map
-|       |   |   +---BasicMap
-|       |   |   +---CommunityMap
-|       |   |   +---MapFilterModal
-|       |   |   +---MapSearchInput
-|       |   |   +---SearchMap
-|       |   |   \---StaticMap
-|       |   +---MyPage
-|       |   |   +---DistPanel
-|       |   |   +---GroupCreateModal
-|       |   |   +---GroupEditModal
-|       |   |   +---GroupEmotionPanel
-|       |   |   +---GroupPanel
-|       |   |   +---GroupSignUpComment
-|       |   |   \---MyPageEditModal
-|       |   \---User
-|       |       +---UserLoginErrorModal
-|       |       +---UserLoginForm
-|       |       \---UserSignupForm
-|       +---models
-|       |   +---common
-|       |   +---diary
-|       |   +---diaryCreate
-|       |   +---garden
-|       |   +---Group
-|       |   +---guestBook
-|       |   +---map
-|       |   +---user
-|       |   \---weather
-|       +---pages
-|       |   +---Diary
-|       |   +---DiaryCeate
-|       |   +---DiaryDetail
-|       |   +---DiaryMusicSelect
-|       |   +---DiarySelect
-|       |   +---Garden
-|       |   +---GardenEdit
-|       |   +---GardenList
-|       |   +---GardenOther
-|       |   +---GardenTheme
-|       |   +---GroupList
-|       |   +---GroupSignUpList
-|       |   +---GuestBook
-|       |   +---GuestBookCreate
-|       |   +---Info
-|       |   +---Loading
-|       |   +---Login
-|       |   +---Main
-|       |   +---Map
-|       |   +---MyPage
-|       |   +---NotFound
-|       |   +---OauthRedirect
-|       |   +---Setting
-|       |   |   +---ConditionsOfService
-|       |   |   +---FindPassword
-|       |   |   \---Intro
-|       |   +---Signup
-|       |   \---SignupMusicSelect
-|       +---redux
-|       |   +---modules
-|       |   |   +---diary
-|       |   |   +---diaryCreate
-|       |   |   +---garden
-|       |   |   +---group
-|       |   |   +---guestBook
-|       |   |   +---music
-|       |   |   +---user
-|       |   |   \---weather
-|       |   \---utils
-|       \---utils
-\---flory-app
-    \---assets
+│  README.md
+│
+└─front-end
+    │  .gitignore
+    │  Dockerfile
+    │  index.html
+    │  package-lock.json
+    │  package.json
+    │  README.md
+    │  tsconfig.json
+    │  tsconfig.node.json
+    │  vite.config.ts
+    │
+    ├─nginx
+    │      nginx.conf
+    │
+    ├─public
+    │  │  vite.svg
+    │  │
+    │  └─models
+    │      │  bloomer.glb
+    │      │  car.glb
+    │      │  clouds.glb
+    │      │  cs_direct.glb
+    │      │  deco.glb
+    │      │  DoLearn.glb
+    │      │  feed.glb
+    │      │  feed_direct.glb
+    │      │  floor.glb
+    │      │  flower.glb
+    │      │  grass.glb
+    │      │  ground.glb
+    │      │  house.glb
+    │      │  itemshop.glb
+    │      │  learnway.glb
+    │      │  login.glb
+    │      │  maker.glb
+    │      │  newCsQuiz.glb
+    │      │  obaek.glb
+    │      │  osakak.glb
+    │      │  room_direct.glb
+    │      │  Sellog.glb
+    │      │  shop_direct.glb
+    │      │  stone.glb
+    │      │  tantan.glb
+    │      │  tree.glb
+    │      │  weather.glb
+    │      │  ydg.glb
+    │      │
+    │      ├─characters
+    │      │      f1.glb
+    │      │      f2.glb
+    │      │      f3.glb
+    │      │      m1.glb
+    │      │      m2.glb
+    │      │      m3.glb
+    │      │
+    │      ├─csQuiz
+    │      │      f1.glb
+    │      │      f2.glb
+    │      │      f3.glb
+    │      │      m1.glb
+    │      │      m2.glb
+    │      │      m3.glb
+    │      │      oMark.glb
+    │      │      xMark.glb
+    │      │
+    │      ├─font
+    │      │      csquiz_font.glb
+    │      │      feed_font.glb
+    │      │      itemShop_font.glb
+    │      │      myroom_font.glb
+    │      │
+    │      ├─items
+    │      │      bedside_light_1.glb
+    │      │      black_chair_1.glb
+    │      │      black_coffeemachine_1.glb
+    │      │      black_cup_1.glb
+    │      │      black_leather_sofa_1.glb
+    │      │      black_speaker_1.glb
+    │      │      black_teatable_1.glb
+    │      │      blue_bed.glb
+    │      │      blue_chair_1.glb
+    │      │      blue_chair_2.glb
+    │      │      blue_sofa_1.glb
+    │      │      brown_table_1.glb
+    │      │      brown_table_2.glb
+    │      │      brown_table_3.glb
+    │      │      brown_table_4.glb
+    │      │      coffee_cup_1.glb
+    │      │      elec_guitar_1.glb
+    │      │      elec_guitar_2.glb
+    │      │      elec_guitar_3.glb
+    │      │      giant_sofa_1.glb
+    │      │      green_sofa_1.glb
+    │      │      grey_bin_1.glb
+    │      │      group_guitar_1.glb
+    │      │      house_tree_1.glb
+    │      │      imac_computer_1.glb
+    │      │      katana_decoration_1.glb
+    │      │      leopard_chair_1.glb
+    │      │      low_table_1.glb
+    │      │      marble_table_1.glb
+    │      │      marble_table_2.glb
+    │      │      old_computer_1.glb
+    │      │      old_computer_2.glb
+    │      │      old_microwave_1.glb
+    │      │      old_tv_1.glb
+    │      │      orange_sofa_1.glb
+    │      │      photo_frame_1.glb
+    │      │      photo_frame_2.glb
+    │      │      red_chair_1.glb
+    │      │      red_lights_1.glb
+    │      │      red_sofa_1.glb
+    │      │      red_telephone_1.glb
+    │      │      retro_arcadegame_1.glb
+    │      │      round_table_1.glb
+    │      │      small_speaker_1.glb
+    │      │      stall_white_chair_1.glb
+    │      │      starwars_trooper_1.glb
+    │      │      teddybear_1.glb
+    │      │      tree_vase_1.glb
+    │      │      trooper_figure_1.glb
+    │      │      white_chair_1.glb
+    │      │      white_controller_1.glb
+    │      │      white_skeleton_1.glb
+    │      │      white_sofa_1.glb
+    │      │      white_table_1.glb
+    │      │      wine_glass_1.glb
+    │      │      wood_chair_1.glb
+    │      │      wood_desk_0.glb
+    │      │      wood_desk_1.glb
+    │      │      wood_desk_2.glb
+    │      │      wood_drawer_1.glb
+    │      │      wood_shelve.glb
+    │      │      wood_table_1.glb
+    │      │      yellow_sofa_1.glb
+    │      │
+    │      ├─otherCharacters
+    │      │      f1.glb
+    │      │      f2.glb
+    │      │      f3.glb
+    │      │      m1.glb
+    │      │      m2.glb
+    │      │      m3.glb
+    │      │
+    │      └─room
+    │              room1.glb
+    │              room2.glb
+    │              room3.glb
+    │              room4.glb
+    │
+    └─src
+        │  App.css
+        │  App.tsx
+        │  AppStyles.tsx
+        │  index.css
+        │  main.tsx
+        │  vite-env.d.ts
+        │
+        ├─api
+        │      csQuiz.ts
+        │      feed.ts
+        │      http.ts
+        │      record.ts
+        │      room.ts
+        │      store.ts
+        │      user.ts
+        │
+        ├─assets
+        │  │  react.svg
+        │  │
+        │  ├─font
+        │  │      Neoneon.otf
+        │  │
+        │  └─imgs
+        │      │  algo_logo.png
+        │      │  blog_logo.png
+        │      │  csquiz_battle_img.png
+        │      │  csquiz_img.png
+        │      │  cs_logo.png
+        │      │  feed_logo.png
+        │      │  github_logo.png
+        │      │  Loading.json
+        │      │  logo.png
+        │      │  tistory_logo.png
+        │      │  turtle-loading.json
+        │      │
+        │      ├─items
+        │      │      bedside_light_1.png
+        │      │      big_car_1.png
+        │      │      black_chair_1.png
+        │      │      black_coffeemachine_1.png
+        │      │      black_cup_1.png
+        │      │      black_leather_sofa_1.png
+        │      │      black_speaker_1.png
+        │      │      black_teatable_1.png
+        │      │      blue_car_1.png
+        │      │      blue_chair_1.png
+        │      │      blue_chair_2.png
+        │      │      blue_sofa_1.png
+        │      │      brown_table_1.png
+        │      │      brown_table_2.png
+        │      │      brown_table_3.png
+        │      │      brown_table_4.png
+        │      │      coffee_cup_1.png
+        │      │      elec_guitar_1.png
+        │      │      elec_guitar_2.png
+        │      │      elec_guitar_3.png
+        │      │      giant_sofa_1.png
+        │      │      green_sofa_1.png
+        │      │      grey_bin_1.png
+        │      │      group_guitar_1.png
+        │      │      house_tree_1.png
+        │      │      imac_computer_1.png
+        │      │      katana_decoration_1.png
+        │      │      leopard_chair_1.png
+        │      │      low_table_1.png
+        │      │      marble_table_1.png
+        │      │      marble_table_2.png
+        │      │      old_computer_1.png
+        │      │      old_computer_2.png
+        │      │      old_microwave_1.png
+        │      │      old_tv_1.png
+        │      │      orange_sofa_1.png
+        │      │      photo_frame_1.png
+        │      │      photo_frame_2.png
+        │      │      red_car_1.png
+        │      │      red_chair_1.png
+        │      │      red_lights_1.png
+        │      │      red_sofa_1.png
+        │      │      red_telephone_1.png
+        │      │      retro_arcadegame_1.png
+        │      │      round_table_1.png
+        │      │      small_speaker_1.png
+        │      │      stall_white_chair_1.png
+        │      │      starwars_trooper_1.png
+        │      │      teddybear_1.png
+        │      │      tree_vase_1.png
+        │      │      trooper_figure_1.png
+        │      │      white_controller_1.png
+        │      │      white_skeleton_1.png
+        │      │      white_sofa_1.png
+        │      │      white_table_1.png
+        │      │      wine_glass_1.png
+        │      │      wood_chair_1.png
+        │      │      wood_desk_1.png
+        │      │      wood_desk_2.png
+        │      │      wood_drawer_1.png
+        │      │      wood_table_1.png
+        │      │      yellow_sofa_1.png
+        │      │
+        │      ├─itemShop
+        │      │      cool.png
+        │      │      rainbow.png
+        │      │
+        │      ├─main
+        │      │      bloomerImg.png
+        │      │      grid.png
+        │      │
+        │      └─retro
+        │              404NotFound.png
+        │              blue_eye.png
+        │              chrome_logo.png
+        │              coin.png
+        │              github.png
+        │              githubIcon.png
+        │              green_flower.png
+        │              item_sample.png
+        │              memo.png
+        │              pencil_retro.png
+        │              profile tape.png
+        │              profilePic.jpeg
+        │              red_ghost.png
+        │              retro_img.png
+        │              smile.png
+        │              smile_and_light.png
+        │              smile_bottom.png
+        │              smile_computer.png
+        │              smile_large.png
+        │              spring.png
+        │              star.png
+        │              tistoryIcon.png
+        │              work_hard.png
+        │              yellow_flower.png
+        │              yellow_ghost.png
+        │
+        ├─components
+        │  ├─common
+        │  │  └─Button
+        │  │          Button.tsx
+        │  │          styles.tsx
+        │  │
+        │  ├─CSQuiz
+        │  │  ├─CSQuizContents
+        │  │  │      CSQuizContents.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  └─CSQuizTimer
+        │  │          CSQuizTimer.tsx
+        │  │          styles.tsx
+        │  │
+        │  ├─CSQuizMap
+        │  │  └─CharacterModels
+        │  │          F1_CS.tsx
+        │  │          F2_CS.tsx
+        │  │          F3_CS.tsx
+        │  │          M1_CS.tsx
+        │  │          M2_CS.tsx
+        │  │          M3_CS.tsx
+        │  │
+        │  ├─Feed
+        │  │      FeedComponent.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─ItemShop
+        │  │  ├─ItemItem
+        │  │  │      ItemItem.tsx
+        │  │  │      ItemModalStyle.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  ├─ItemList
+        │  │  │      ItemList.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  ├─ItemModal.tsx
+        │  │  │      ItemModal.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  └─ItemWrapper
+        │  │      │  ItemWrapper.tsx
+        │  │      │
+        │  │      └─Models
+        │  │              Bedside_light_1.tsx
+        │  │              Black_chair_1.tsx
+        │  │              Black_coffeemachine_1.tsx
+        │  │              Black_cup_1.tsx
+        │  │              Black_leather_sofa_1.tsx
+        │  │              Black_speaker_1.tsx
+        │  │              Black_teatable_1.tsx
+        │  │              Blue_bed.tsx
+        │  │              Blue_chair_1.tsx
+        │  │              Blue_chair_2.tsx
+        │  │              Blue_sofa_1.tsx
+        │  │              Brown_table_1.tsx
+        │  │              Brown_table_2.tsx
+        │  │              Brown_table_3.tsx
+        │  │              Brown_table_4.tsx
+        │  │              Coffee_cup_1.tsx
+        │  │              Elec_guitar_1.tsx
+        │  │              Elec_guitar_2.tsx
+        │  │              Elec_guitar_3.tsx
+        │  │              Giant_sofa_1.tsx
+        │  │              Green_sofa_1.tsx
+        │  │              Grey_bin_1.tsx
+        │  │              Group_guitar_1.tsx
+        │  │              House_tree_1.tsx
+        │  │              Imac_computer_1.tsx
+        │  │              Katana_decoration_1.tsx
+        │  │              Leopard_chair_1.tsx
+        │  │              Low_table_1.tsx
+        │  │              Marble_table_1.tsx
+        │  │              Marble_table_2.tsx
+        │  │              Old_computer_1.tsx
+        │  │              Old_computer_2.tsx
+        │  │              Old_microwave_1.tsx
+        │  │              Old_tv_1.tsx
+        │  │              Orange_sofa_1.tsx
+        │  │              Photo_frame_1.tsx
+        │  │              Photo_frame_2.tsx
+        │  │              Red_chair_1.tsx
+        │  │              Red_lights_1.tsx
+        │  │              Red_sofa_1.tsx
+        │  │              Red_telephone_1.tsx
+        │  │              Retro_arcadegame_1.tsx
+        │  │              Round_table_1.tsx
+        │  │              Small_speaker_1.tsx
+        │  │              Stall_white_chair_1.tsx
+        │  │              Starwars_trooper_1.tsx
+        │  │              Teddybear_1.tsx
+        │  │              Tree_vase_1.tsx
+        │  │              Trooper_figure_1.tsx
+        │  │              White_chair_1.tsx
+        │  │              White_controller_1.tsx
+        │  │              White_skeleton_1.tsx
+        │  │              White_sofa_1.tsx
+        │  │              White_table_1.tsx
+        │  │              Wine_glass_1.tsx
+        │  │              Wood_chair_1.tsx
+        │  │              Wood_desk_0.tsx
+        │  │              Wood_desk_1.tsx
+        │  │              Wood_desk_2.tsx
+        │  │              Wood_drawer_1.tsx
+        │  │              Wood_shelve.tsx
+        │  │              Wood_table_1.tsx
+        │  │              Yellow_sofa_1.tsx
+        │  │
+        │  ├─Loading
+        │  │      Loading.tsx
+        │  │
+        │  ├─Login
+        │  │  ├─LoginForm
+        │  │  │      LoginForm.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  ├─Models
+        │  │  │  │  CameraAndLight.tsx
+        │  │  │  │  F1.tsx
+        │  │  │  │  F2.tsx
+        │  │  │  │  F3.tsx
+        │  │  │  │  LoginModel.tsx
+        │  │  │  │  M1.tsx
+        │  │  │  │  M2.tsx
+        │  │  │  │  M3.tsx
+        │  │  │  │
+        │  │  │  └─OtherModles
+        │  │  │          F1_Other.tsx
+        │  │  │          F2_Other.tsx
+        │  │  │          F3_Other.tsx
+        │  │  │          M1_Other.tsx
+        │  │  │          M2_Other.tsx
+        │  │  │          M3_Other.tsx
+        │  │  │
+        │  │  ├─UserCharacter
+        │  │  │      styles.tsx
+        │  │  │      UserCharacter.tsx
+        │  │  │
+        │  │  ├─UserCharacterWrapper
+        │  │  │      styles.tsx
+        │  │  │      UserCharacterWrapper.tsx
+        │  │  │
+        │  │  └─UserInfoForm
+        │  │          styles.tsx
+        │  │          UserInfoForm.tsx
+        │  │
+        │  ├─Main
+        │  │  ├─Models
+        │  │  │      AirBalloon.tsx
+        │  │  │      Bloomer.tsx
+        │  │  │      Car.tsx
+        │  │  │      Csquiz_font.tsx
+        │  │  │      CS_direct.tsx
+        │  │  │      Deco.tsx
+        │  │  │      DoLearn.tsx
+        │  │  │      F1_Main.tsx
+        │  │  │      F2_Main.tsx
+        │  │  │      F3_Main.tsx
+        │  │  │      Feed.tsx
+        │  │  │      Feed_direct.tsx
+        │  │  │      Feed_font.tsx
+        │  │  │      Floor.tsx
+        │  │  │      Flower.tsx
+        │  │  │      Grass.tsx
+        │  │  │      Ground.tsx
+        │  │  │      House.tsx
+        │  │  │      ItemShopMap.tsx
+        │  │  │      ItemShop_font.tsx
+        │  │  │      Learnway.tsx
+        │  │  │      M1_Main.tsx
+        │  │  │      M2_Main.tsx
+        │  │  │      M3_Main.tsx
+        │  │  │      Maker.tsx
+        │  │  │      Myroom_font.tsx
+        │  │  │      NewCsQuiz.tsx
+        │  │  │      Obaek.tsx
+        │  │  │      Osakak.tsx
+        │  │  │      Room_direct.tsx
+        │  │  │      Sellog.tsx
+        │  │  │      Shop_direct.tsx
+        │  │  │      Stone.tsx
+        │  │  │      Tantan.tsx
+        │  │  │      Tree.tsx
+        │  │  │      Weather.tsx
+        │  │  │      Ydg.tsx
+        │  │  │
+        │  │  └─ToggleButton
+        │  │          styles.tsx
+        │  │          ToggleButton.tsx
+        │  │
+        │  ├─MyGoals
+        │  │  ├─Accumulate
+        │  │  │      Accumulate.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  ├─Chart
+        │  │  │      Chart.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  ├─DailyDoneItem
+        │  │  │      DailyDoneItem.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  ├─DailyDoneList
+        │  │  │      DailyDoneList.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  ├─DailyDoneModal
+        │  │  │      DailyDoneModal.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  ├─GoalsSetting
+        │  │  │      GoalsSetting.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  ├─GoalsSettingModal
+        │  │  │      GoalsSettingModal.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  ├─RCalendar
+        │  │  │      RCalendar.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  ├─Record
+        │  │  │      Record.tsx
+        │  │  │      styles.tsx
+        │  │  │
+        │  │  └─SettingButtons
+        │  │          SettingButtons.tsx
+        │  │          styles.tsx
+        │  │
+        │  └─MyRoom
+        │      ├─EditProfile
+        │      │      EditProfile.tsx
+        │      │      styles.tsx
+        │      │
+        │      ├─EditProfileModal
+        │      │      EditProfileModal.tsx
+        │      │      styles.tsx
+        │      │
+        │      ├─InstallModal
+        │      │      InstallModal.tsx
+        │      │      styles.tsx
+        │      │
+        │      ├─Models
+        │      │      Room1.tsx
+        │      │      Room2.tsx
+        │      │      Room3.tsx
+        │      │      Room4.tsx
+        │      │
+        │      ├─MyItemItem
+        │      │      MyItemItem.tsx
+        │      │      styles.tsx
+        │      │
+        │      ├─MyItemList
+        │      │      MyItemList.tsx
+        │      │      styles.tsx
+        │      │
+        │      ├─MyProfile
+        │      │      MyProfile.tsx
+        │      │      styles.tsx
+        │      │
+        │      ├─MyRoomContainer
+        │      │      MyRoomContainer.tsx
+        │      │      styles.tsx
+        │      │
+        │      ├─NoTarget
+        │      │      NoTarget.tsx
+        │      │      styles.tsx
+        │      │
+        │      ├─RoomEditContainer
+        │      │  │  RoomEditContainer.tsx
+        │      │  │
+        │      │  └─Models
+        │      │          Bedside_light_1.tsx
+        │      │          Black_chair_1.tsx
+        │      │          Black_coffeemachine_1.tsx
+        │      │          Black_cup_1.tsx
+        │      │          Black_leather_sofa_1.tsx
+        │      │          Black_speaker_1.tsx
+        │      │          Black_teatable_1.tsx
+        │      │          Blue_bed.tsx
+        │      │          Blue_chair_1.tsx
+        │      │          Blue_chair_2.tsx
+        │      │          Blue_sofa_1.tsx
+        │      │          Brown_table_1.tsx
+        │      │          Brown_table_2.tsx
+        │      │          Brown_table_3.tsx
+        │      │          Brown_table_4.tsx
+        │      │          Coffee_cup_1.tsx
+        │      │          Elec_guitar_1.tsx
+        │      │          Elec_guitar_2.tsx
+        │      │          Elec_guitar_3.tsx
+        │      │          Giant_sofa_1.tsx
+        │      │          Green_sofa_1.tsx
+        │      │          Grey_bin_1.tsx
+        │      │          Group_guitar_1.tsx
+        │      │          House_tree_1.tsx
+        │      │          Imac_computer_1.tsx
+        │      │          Katana_decoration_1.tsx
+        │      │          Leopard_chair_1.tsx
+        │      │          Low_table_1.tsx
+        │      │          Marble_table_1.tsx
+        │      │          Marble_table_2.tsx
+        │      │          Old_computer_1.tsx
+        │      │          Old_computer_2.tsx
+        │      │          Old_microwave_1.tsx
+        │      │          Old_tv_1.tsx
+        │      │          Orange_sofa_1.tsx
+        │      │          Photo_frame_1.tsx
+        │      │          Photo_frame_2.tsx
+        │      │          Red_chair_1.tsx
+        │      │          Red_lights_1.tsx
+        │      │          Red_sofa_1.tsx
+        │      │          Red_telephone_1.tsx
+        │      │          Retro_arcadegame_1.tsx
+        │      │          Round_table_1.tsx
+        │      │          Small_speaker_1.tsx
+        │      │          Stall_white_chair_1.tsx
+        │      │          Starwars_trooper_1.tsx
+        │      │          Teddybear_1.tsx
+        │      │          Tree_vase_1.tsx
+        │      │          Trooper_figure_1.tsx
+        │      │          White_chair_1.tsx
+        │      │          White_controller_1.tsx
+        │      │          White_skeleton_1.tsx
+        │      │          White_sofa_1.tsx
+        │      │          White_table_1.tsx
+        │      │          Wine_glass_1.tsx
+        │      │          Wood_chair_1.tsx
+        │      │          Wood_desk_0.tsx
+        │      │          Wood_desk_1.tsx
+        │      │          Wood_desk_2.tsx
+        │      │          Wood_drawer_1.tsx
+        │      │          Wood_shelve.tsx
+        │      │          Wood_table_1.tsx
+        │      │          Yellow_sofa_1.tsx
+        │      │
+        │      ├─RoomEditItems
+        │      │  └─Models
+        │      │          ChairEdit.tsx
+        │      │          WoodDeskEdit.tsx
+        │      │
+        │      └─WithdrawModal
+        │              styles.tsx
+        │              WithdrawModal.tsx
+        │
+        ├─pages
+        │  ├─CSQuiz
+        │  │      CSQuiz.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─CSQuizBattleResult
+        │  │      CSQuizBattleResult.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─CSQuizMap
+        │  │  │  CSQuizMap.tsx
+        │  │  │  styles.tsx
+        │  │  │
+        │  │  └─Models
+        │  │          OMark.tsx
+        │  │          XMark.tsx
+        │  │
+        │  ├─CSQuizMatching
+        │  │      CSQuizMatching.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─CSQuizProgress
+        │  │      CSQuizProgress.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─CSQuizResult
+        │  │      CSQuizResult.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─CSQuizSelect
+        │  │      CSQuizSelect.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─Feed
+        │  │      Feed.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─Info
+        │  │      Info.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─ItemShop
+        │  │      ItemShop.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─Login
+        │  │      Login.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─Main
+        │  │      Main.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─MyGoals
+        │  │      MyGoals.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─MyRoom
+        │  │  │  MyRoom.tsx
+        │  │  │  styles.tsx
+        │  │  │
+        │  │  └─MyItems
+        │  │          MyItems.tsx
+        │  │          styles.tsx
+        │  │
+        │  ├─NotFound
+        │  │      NotFound.tsx
+        │  │      styles.tsx
+        │  │
+        │  ├─OauthRedirect
+        │  │      OauthRedirect.tsx
+        │  │
+        │  └─TermsOfUse
+        │          styles.tsx
+        │          TermsOfUse.tsx
+        │
+        ├─recoil
+        │  ├─csquiz
+        │  │      atoms.tsx
+        │  │      selectors.tsx
+        │  │      useCSquiz.tsx
+        │  │
+        │  ├─feed
+        │  │      atoms.tsx
+        │  │      selectors.tsx
+        │  │      useFeed.tsx
+        │  │
+        │  ├─itemshop
+        │  │      atoms.tsx
+        │  │      selectors.tsx
+        │  │      useItemshop.tsx
+        │  │
+        │  ├─mainpage
+        │  │      atoms.tsx
+        │  │      selectors.tsx
+        │  │      useMainpage.tsx
+        │  │
+        │  ├─mygoals
+        │  │      atoms.tsx
+        │  │
+        │  ├─myroom
+        │  │      atoms.tsx
+        │  │      myroom.tsx
+        │  │      selectors.tsx
+        │  │
+        │  └─user
+        │          atom.ts
+        │
+        ├─typeModels
+        │  ├─Feed
+        │  │      feedinterfaces.ts
+        │  │
+        │  ├─ItemShop
+        │  │      iteminterfaces.ts
+        │  │
+        │  ├─mygoals
+        │  │      myGoalInterfaces.ts
+        │  │      myRecordInterfaces.ts
+        │  │
+        │  ├─MyRoom
+        │  │      MyroomInterfaces.ts
+        │  │
+        │  └─user
+        │          userEditInfo.ts
+        │          userSignup.ts
+        │
+        └─utils
+                itemDefaultInfo.ts
+                token.ts
 ```
 
 </details>
@@ -298,211 +899,476 @@ C:.
 
 ```java
 C:.
-+---.gradle
-|   +---7.6.1
-|   |   +---checksums
-|   |   +---dependencies-accessors
-|   |   +---executionHistory
-|   |   +---fileChanges
-|   |   +---fileHashes
-|   |   \---vcsMetadata
-|   +---buildOutputCleanup
-|   \---vcs-1
-+---build
-|   +---classes
-|   |   \---java
-|   |       +---main
-|   |       |   \---com
-|   |       |       \---exmaple
-|   |       |           \---flory
-|   |       |               +---config
-|   |       |               +---controller
-|   |       |               +---dto
-|   |       |               |   +---comment
-|   |       |               |   +---diary
-|   |       |               |   +---emotion
-|   |       |               |   +---flower
-|   |       |               |   +---garden
-|   |       |               |   +---guest
-|   |       |               |   +---member
-|   |       |               |   +---music
-|   |       |               |   +---oauth
-|   |       |               |   \---team
-|   |       |               +---entity
-|   |       |               +---exception
-|   |       |               |   \---error
-|   |       |               +---handler
-|   |       |               +---jwt
-|   |       |               +---repository
-|   |       |               +---response
-|   |       |               +---service
-|   |       |               \---util
-|   |       \---test
-|   |           \---com
-|   |               \---exmaple
-|   |                   \---flory
-|   |                       +---config
-|   |                       +---controller
-|   |                       +---repository
-|   |                       \---service
-|   +---generated
-|   |   +---'querydsl'
-|   |   |   \---com
-|   |   |       \---exmaple
-|   |   |           \---flory
-|   |   |               \---entity
-|   |   \---sources
-|   |       +---annotationProcessor
-|   |       |   \---java
-|   |       |       +---main
-|   |       |       \---test
-|   |       \---headers
-|   |           \---java
-|   |               +---main
-|   |               \---test
-|   +---jacoco
-|   +---libs
-|   +---reports
-|   |   +---jacoco
-|   |   |   \---test
-|   |   |       \---html
-|   |   |           +---com.exmaple.flory
-|   |   |           +---com.exmaple.flory.config
-|   |   |           +---com.exmaple.flory.controller
-|   |   |           +---com.exmaple.flory.dto.comment
-|   |   |           +---com.exmaple.flory.dto.diary
-|   |   |           +---com.exmaple.flory.dto.emotion
-|   |   |           +---com.exmaple.flory.dto.flower
-|   |   |           +---com.exmaple.flory.dto.garden
-|   |   |           +---com.exmaple.flory.dto.guest
-|   |   |           +---com.exmaple.flory.dto.member
-|   |   |           +---com.exmaple.flory.dto.music
-|   |   |           +---com.exmaple.flory.dto.oauth
-|   |   |           +---com.exmaple.flory.dto.team
-|   |   |           +---com.exmaple.flory.entity
-|   |   |           +---com.exmaple.flory.exception
-|   |   |           +---com.exmaple.flory.exception.error
-|   |   |           +---com.exmaple.flory.handler
-|   |   |           +---com.exmaple.flory.jwt
-|   |   |           +---com.exmaple.flory.response
-|   |   |           +---com.exmaple.flory.service
-|   |   |           +---com.exmaple.flory.util
-|   |   |           \---jacoco-resources
-|   |   \---tests
-|   |       \---test
-|   |           +---classes
-|   |           +---css
-|   |           +---js
-|   |           \---packages
-|   +---resources
-|   |   +---main
-|   |   \---test
-|   |       \---img
-|   +---test-results
-|   |   \---test
-|   |       \---binary
-|   \---tmp
-|       +---bootJar
-|       +---compileJava
-|       |   \---compileTransaction
-|       |       +---annotation-output
-|       |       +---compile-output
-|       |       |   \---com
-|       |       |       \---exmaple
-|       |       |           \---flory
-|       |       |               +---config
-|       |       |               +---controller
-|       |       |               +---dto
-|       |       |               |   +---comment
-|       |       |               |   +---diary
-|       |       |               |   +---emotion
-|       |       |               |   +---flower
-|       |       |               |   +---garden
-|       |       |               |   +---guest
-|       |       |               |   +---member
-|       |       |               |   +---music
-|       |       |               |   +---oauth
-|       |       |               |   \---team
-|       |       |               +---entity
-|       |       |               +---exception
-|       |       |               |   \---error
-|       |       |               +---handler
-|       |       |               +---jwt
-|       |       |               +---repository
-|       |       |               +---response
-|       |       |               \---service
-|       |       +---header-output
-|       |       \---stash-dir
-|       +---compileQuerydsl
-|       +---compileTestJava
-|       |   \---compileTransaction
-|       |       +---annotation-output
-|       |       +---compile-output
-|       |       |   \---com
-|       |       |       \---exmaple
-|       |       |           \---flory
-|       |       |               +---config
-|       |       |               +---controller
-|       |       |               +---repository
-|       |       |               \---service
-|       |       +---header-output
-|       |       \---stash-dir
-|       +---expandedArchives
-|       |   \---org.jacoco.agent-0.8.7.jar_3a83c50b4a016f281c4e9f3500d16b55
-|       |       +---META-INF
-|       |       |   \---maven
-|       |       |       \---org.jacoco
-|       |       |           \---org.jacoco.agent
-|       |       \---org
-|       |           \---jacoco
-|       |               \---agent
-|       +---jacocoTestCoverageVerification
-|       +---jar
-|       \---test
-+---gradle
-|   \---wrapper
-\---src
-    +---main
-    |   +---java
-    |   |   \---com
-    |   |       \---exmaple
-    |   |           \---flory
-    |   |               +---config
-    |   |               +---controller
-    |   |               +---dto
-    |   |               |   +---comment
-    |   |               |   +---diary
-    |   |               |   +---emotion
-    |   |               |   +---flower
-    |   |               |   +---garden
-    |   |               |   +---guest
-    |   |               |   +---member
-    |   |               |   +---music
-    |   |               |   +---oauth
-    |   |               |   \---team
-    |   |               +---entity
-    |   |               +---exception
-    |   |               |   \---error
-    |   |               +---handler
-    |   |               +---jwt
-    |   |               +---repository
-    |   |               +---response
-    |   |               +---service
-    |   |               \---util
-    |   \---resources
-    \---test
-        +---java
-        |   \---com
-        |       \---exmaple
-        |           \---flory
-        |               +---config
-        |               +---controller
-        |               +---handler
-        |               +---repository
-        |               \---service
-        \---resources
-            \---img
-
+│  README.md
+│
+├─back-end
+│  │  .gitignore
+│  │  build.gradle
+│  │  Dockerfile
+│  │  gradlew
+│  │  gradlew.bat
+│  │  settings.gradle
+│  │
+│  ├─gradle
+│  │  └─wrapper
+│  │          gradle-wrapper.jar
+│  │          gradle-wrapper.properties
+│  │
+│  └─src
+│      ├─main
+│      │  ├─java
+│      │  │  └─com
+│      │  │      └─example
+│      │  │          └─selog
+│      │  │              │  SelogApplication.java
+│      │  │              │
+│      │  │              ├─config
+│      │  │              │      JasyptConfig.java
+│      │  │              │      JpaAuditingConfiguration.java
+│      │  │              │      QueryDslConfig.java
+│      │  │              │      RestTemplateConfig.java
+│      │  │              │      S3Config.java
+│      │  │              │      SecurityConfig.java
+│      │  │              │
+│      │  │              ├─controller
+│      │  │              │      ExamController.java
+│      │  │              │      FeedController.java
+│      │  │              │      GitHubController.java
+│      │  │              │      MemberController.java
+│      │  │              │      RecordController.java
+│      │  │              │      RoomController.java
+│      │  │              │      StoreController.java
+│      │  │              │      WebHookController.java
+│      │  │              │
+│      │  │              ├─dto
+│      │  │              │  ├─exam
+│      │  │              │  │      ExamDto.java
+│      │  │              │  │
+│      │  │              │  ├─feed
+│      │  │              │  │      FeedDto.java
+│      │  │              │  │
+│      │  │              │  ├─github
+│      │  │              │  │      GitHubDto.java
+│      │  │              │  │
+│      │  │              │  ├─member
+│      │  │              │  │      MemberDto.java
+│      │  │              │  │      MemberUpdateDto.java
+│      │  │              │  │      SignUpDto.java
+│      │  │              │  │      TargetDto.java
+│      │  │              │  │      TokenDto.java
+│      │  │              │  │      TokenRequestDto.java
+│      │  │              │  │
+│      │  │              │  ├─oauth
+│      │  │              │  │      OAuthAttributes.java
+│      │  │              │  │
+│      │  │              │  ├─record
+│      │  │              │  │      RecordDto.java
+│      │  │              │  │      RecordMaintainDto.java
+│      │  │              │  │      RecordRequestDto.java
+│      │  │              │  │      RecordResponseDto.java
+│      │  │              │  │
+│      │  │              │  ├─room
+│      │  │              │  │      StoreItemDto.java
+│      │  │              │  │      UserItemDto.java
+│      │  │              │  │
+│      │  │              │  └─store
+│      │  │              │          ItemDto.java
+│      │  │              │
+│      │  │              ├─entity
+│      │  │              │      Authority.java
+│      │  │              │      BaseTime.java
+│      │  │              │      Exam.java
+│      │  │              │      Feed.java
+│      │  │              │      GitHub.java
+│      │  │              │      Item.java
+│      │  │              │      Member.java
+│      │  │              │      Record.java
+│      │  │              │      Room.java
+│      │  │              │      UserItem.java
+│      │  │              │
+│      │  │              ├─exception
+│      │  │              │  │  CustomException.java
+│      │  │              │  │  JwtAccessDeniedHandler.java
+│      │  │              │  │  JwtAuthenticationEntryPoint.java
+│      │  │              │  │  OpenAIException.java
+│      │  │              │  │
+│      │  │              │  └─error
+│      │  │              │          ErrorCode.java
+│      │  │              │
+│      │  │              ├─handler
+│      │  │              │      CustomOAuth2UserRequestEntityConverter.java
+│      │  │              │      CustomRequestEntityConverter.java
+│      │  │              │      CustomTokenResponseConverter.java
+│      │  │              │      Oauth2FailHandler.java
+│      │  │              │      Oauth2SuccessHandler.java
+│      │  │              │
+│      │  │              ├─jwt
+│      │  │              │      JwtFilter.java
+│      │  │              │      JwtSecurityConfig.java
+│      │  │              │      TokenProvider.java
+│      │  │              │
+│      │  │              ├─repository
+│      │  │              │      ExamRepository.java
+│      │  │              │      FeedRepository.java
+│      │  │              │      GitHubRepository.java
+│      │  │              │      ItemRepository.java
+│      │  │              │      MemberRepository.java
+│      │  │              │      QExamRepository.java
+│      │  │              │      QExamRepositoryImpl.java
+│      │  │              │      QFeedRepository.java
+│      │  │              │      QFeedRepositoryImpl.java
+│      │  │              │      QGitHubRepository.java
+│      │  │              │      QGitHubRepositoryImpl.java
+│      │  │              │      QItemUserItemRepository.java
+│      │  │              │      QItemUserItemRepositoryImpl.java
+│      │  │              │      QRecordRepository.java
+│      │  │              │      QRecordRepositoryImpl.java
+│      │  │              │      QRoomRepository.java
+│      │  │              │      QUserItemRepository.java
+│      │  │              │      QUserItemRepositoryImpl.java
+│      │  │              │      RecordRepository.java
+│      │  │              │      RoomRepository.java
+│      │  │              │      UserItemRepository.java
+│      │  │              │
+│      │  │              ├─response
+│      │  │              │      ErrorResponse.java
+│      │  │              │      SuccessResponse.java
+│      │  │              │
+│      │  │              ├─service
+│      │  │              │      CustomOauth2UserService.java
+│      │  │              │      CustomUserDetailsService.java
+│      │  │              │      ExamService.java
+│      │  │              │      FeedService.java
+│      │  │              │      GitHubService.java
+│      │  │              │      MemberService.java
+│      │  │              │      RecordService.java
+│      │  │              │      RoomService.java
+│      │  │              │      S3Uploader.java
+│      │  │              │      StoreService.java
+│      │  │              │      WebHookService.java
+│      │  │              │
+│      │  │              └─util
+│      │  │                      SecurityUtil.java
+│      │  │
+│      │  └─resources
+│      │          application.properties
+│      │
+│      └─test
+│          ├─java
+│          │  └─com
+│          │      └─example
+│          │          └─selog
+│          │              │  SelogApplicationTests.java
+│          │              │
+│          │              ├─config
+│          │              │      JasyptConfigTest.java
+│          │              │      TestConfig.java
+│          │              │
+│          │              ├─controller
+│          │              │      ExamControllerTest.java
+│          │              │      FeedControllerTest.java
+│          │              │      GitHubControllerTest.java
+│          │              │      MemberControllerTest.java
+│          │              │      RecordControllerTest.java
+│          │              │      RoomControllerTest.java
+│          │              │      StoreControllerTest.java
+│          │              │      WebHookControllerTest.java
+│          │              │
+│          │              ├─jwt
+│          │              │      JwtFilterTest.java
+│          │              │      TokenProviderTest.java
+│          │              │
+│          │              ├─repository
+│          │              │      ExamRepositoryTest.java
+│          │              │      FeedRepositoryTest.java
+│          │              │      GitHubRepositoryTest.java
+│          │              │      ItemRepositoryTest.java
+│          │              │      MemberRepositoryTest.java
+│          │              │      RecordRepositoryTest.java
+│          │              │      RoomRepositoryTest.java
+│          │              │      UserItemRepositoryTest.java
+│          │              │
+│          │              └─service
+│          │                      ExamServiceTest.java
+│          │                      FeedServiceTest.java
+│          │                      GitHubServiceTest.java
+│          │
+│          └─resources
+│                  application-test.properties
+│
+├─back-matching
+│  │  .gitignore
+│  │  build.gradle
+│  │  Dockerfile
+│  │  gradlew
+│  │  gradlew.bat
+│  │  settings.gradle
+│  │
+│  ├─gradle
+│  │  └─wrapper
+│  │          gradle-wrapper.jar
+│  │          gradle-wrapper.properties
+│  │
+│  └─src
+│      ├─main
+│      │  ├─java
+│      │  │  └─com
+│      │  │      └─example
+│      │  │          └─realtime
+│      │  │              │  MatchingApplication.java
+│      │  │              │
+│      │  │              ├─config
+│      │  │              │      RabbitMQConfig.java
+│      │  │              │
+│      │  │              ├─dto
+│      │  │              │      MatchingDto.java
+│      │  │              │
+│      │  │              └─schedule
+│      │  │                      Matching.java
+│      │  │                      MatchingAlgorithm.java
+│      │  │                      MatchingListener.java
+│      │  │                      MatchingQueue.java
+│      │  │                      SendMatching.java
+│      │  │
+│      │  └─resources
+│      │          application.properties
+│      │
+│      └─test
+│          └─java
+│              └─com
+│                  └─example
+│                      └─realtime
+│                              MatchingApplicationTests.java
+│
+├─back-realtime
+│  │  .gitignore
+│  │  build.gradle
+│  │  Dockerfile
+│  │  gradlew
+│  │  gradlew.bat
+│  │  settings.gradle
+│  │
+│  ├─gradle
+│  │  └─wrapper
+│  │          gradle-wrapper.jar
+│  │          gradle-wrapper.properties
+│  │
+│  └─src
+│      ├─main
+│      │  ├─java
+│      │  │  └─com
+│      │  │      └─example
+│      │  │          └─realtime
+│      │  │              │  RealtimeApplication.java
+│      │  │              │
+│      │  │              ├─config
+│      │  │              │      JasyptConfig.java
+│      │  │              │      QueryDslConfig.java
+│      │  │              │      RabbitMQConfig.java
+│      │  │              │      SecurityConfig.java
+│      │  │              │      WebSocketConfig.java
+│      │  │              │
+│      │  │              ├─controller
+│      │  │              │      MatchingController.java
+│      │  │              │      RealTimeController.java
+│      │  │              │
+│      │  │              ├─dto
+│      │  │              │      ExamDto.java
+│      │  │              │      MatchingDto.java
+│      │  │              │      MemberDto.java
+│      │  │              │      RealTimeInfoDto.java
+│      │  │              │
+│      │  │              ├─entity
+│      │  │              │      Authority.java
+│      │  │              │      Exam.java
+│      │  │              │      Member.java
+│      │  │              │
+│      │  │              ├─exception
+│      │  │              │  │  CustomException.java
+│      │  │              │  │
+│      │  │              │  └─error
+│      │  │              │          ErrorCode.java
+│      │  │              │
+│      │  │              ├─handler
+│      │  │              │      StompHandler.java
+│      │  │              │      WebSocketEventListener.java
+│      │  │              │
+│      │  │              ├─jwt
+│      │  │              │      TokenProvider.java
+│      │  │              │
+│      │  │              ├─repository
+│      │  │              │      ExamRepository.java
+│      │  │              │      MemberRepository.java
+│      │  │              │      QExamRepository.java
+│      │  │              │      QExamRepositoryImpl.java
+│      │  │              │
+│      │  │              ├─response
+│      │  │              │      ErrorResponse.java
+│      │  │              │      SuccessResponse.java
+│      │  │              │
+│      │  │              ├─service
+│      │  │              │      ChatService.java
+│      │  │              │      ExamService.java
+│      │  │              │      MatchingService.java
+│      │  │              │      MemberService.java
+│      │  │              │
+│      │  │              └─util
+│      │  │                      SecurityUtil.java
+│      │  │
+│      │  └─resources
+│      │          application.properties
+│      │
+│      └─test
+│          └─java
+│              └─com
+│                  └─example
+│                      └─realtime
+│                              RealtimeApplicationTests.java
+│
+├─back-schedule
+│  │  .gitignore
+│  │  build.gradle
+│  │  Dockerfile
+│  │  gradlew
+│  │  gradlew.bat
+│  │  settings.gradle
+│  │
+│  ├─gradle
+│  │  └─wrapper
+│  │          gradle-wrapper.jar
+│  │          gradle-wrapper.properties
+│  │
+│  └─src
+│      ├─main
+│      │  ├─java
+│      │  │  └─com
+│      │  │      └─example
+│      │  │          └─estable
+│      │  │              │  EstableApplication.java
+│      │  │              │
+│      │  │              ├─config
+│      │  │              │      JpaAuditingConfiguration.java
+│      │  │              │
+│      │  │              ├─dto
+│      │  │              │      FeedDto.java
+│      │  │              │      RecordDto.java
+│      │  │              │
+│      │  │              ├─entity
+│      │  │              │      Authority.java
+│      │  │              │      BaseTime.java
+│      │  │              │      Feed.java
+│      │  │              │      Member.java
+│      │  │              │      Record.java
+│      │  │              │
+│      │  │              ├─repository
+│      │  │              │      FeedRepository.java
+│      │  │              │      MemberRepository.java
+│      │  │              │      RecordRepository.java
+│      │  │              │
+│      │  │              ├─schedule
+│      │  │              │  ├─baekjoon
+│      │  │              │  │      CrawlingService.java
+│      │  │              │  │
+│      │  │              │  └─feed
+│      │  │              │          FeedService.java
+│      │  │              │
+│      │  │              └─util
+│      │  │                      RSSReader.java
+│      │  │
+│      │  └─resources
+│      │          application.properties
+│      │
+│      └─test
+│          └─java
+│              └─com
+│                  └─example
+│                      └─estable
+│                              EstableApplicationTests.java
+│
+├─chrome-extension
+│  │  .eslintrc
+│  │  .gitignore
+│  │  .prettierrc
+│  │  LICENSE
+│  │  manifest.json
+│  │  package.json
+│  │  popup.html
+│  │  popup.js
+│  │  README.md
+│  │  rules.json
+│  │  welcome.html
+│  │  welcome.js
+│  │
+│  ├─assets
+│  │      profile1.png
+│  │      ribbon.png
+│  │      sellogo.png
+│  │      smile.png
+│  │      tag.png
+│  │      tistory.png
+│  │      tornado.png
+│  │
+│  ├─css
+│  │  │  popup.css
+│  │  │  welcome.css
+│  │  │
+│  │  ├─baekjoon
+│  │  │      inject.css
+│  │  │
+│  │  ├─programmers
+│  │  │      inject.css
+│  │  │
+│  │  └─swexpertacademy
+│  │          inject.css
+│  │
+│  ├─library
+│  │      FileSaver.min.js
+│  │      jquery-3.3.1.min.js
+│  │      jszip.min.js
+│  │      semantic.min.js
+│  │      sha1.min.js
+│  │      spin.js
+│  │
+│  └─scripts
+│      │  authorize.js
+│      │  background.js
+│      │  enable.js
+│      │  Github.js
+│      │  oauth2.js
+│      │  storage.js
+│      │  toast.js
+│      │  util.js
+│      │
+│      ├─baekjoon
+│      │      baekjoon.js
+│      │      parsing.js
+│      │      storage.js
+│      │      uploadfunctions.js
+│      │      util.js
+│      │      variables.js
+│      │
+│      ├─programmers
+│      │      parsing.js
+│      │      programmers.js
+│      │      uploadfunctions.js
+│      │      util.js
+│      │      variables.js
+│      │
+│      ├─swexpertacademy
+│      │      parsing.js
+│      │      storage.js
+│      │      swexpertacademy.js
+│      │      uploadfunctions.js
+│      │      util.js
+│      │      variables.js
+│      │
+│      ├─tistory
+│      │      tistory.js
+│      │      uploadfunctions.js
+│      │
+│      └─velog
+│              uploadfunctions.js
+│              velog.js
 ```
 
 </details>
