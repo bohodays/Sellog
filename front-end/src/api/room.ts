@@ -25,7 +25,7 @@ export interface IUpdateMyRoom {
 // 아이템 위치 수정, 삭제 / 삭제 시 x,y,z에 null 넣어서 보내기
 export const apiUpdateMyRoom = async (data: Array<IUpdateMyRoom>) => {
   try {
-    console.log({ data });
+    // console.log({ data });
 
     const response = await api.put(`/room`, data);
     return response;

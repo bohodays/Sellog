@@ -105,11 +105,11 @@ export function WoodDeskEdit(props: JSX.IntrinsicElements["group"] | any) {
   // 물체 회전
   if (props.rotationButtonRef.current) {
     // if (props.target === "woodDesk") {
-    console.log(target, 1);
+    // console.log(target, 1);
 
     if (target === "woodDesk") {
       props.rotationButtonRef.current.addEventListener("click", () => {
-        console.log("click", 1);
+        // console.log("click", 1);
         setRotation((rotation + 10) % 360);
       });
     }

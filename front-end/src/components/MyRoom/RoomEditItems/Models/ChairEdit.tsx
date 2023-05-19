@@ -98,11 +98,11 @@ export function ChairEdit(props: JSX.IntrinsicElements["group"] | any) {
 
   // 물체 회전
   if (props.rotationButtonRef.current) {
-    console.log(target, 2);
+    // console.log(target, 2);
 
     if (target === "chair") {
       props.rotationButtonRef.current.addEventListener("click", () => {
-        console.log("click", 2);
+        // console.log("click", 2);
         setRotation((rotation + 10) % 360);
       });
     }
