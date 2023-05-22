@@ -49,7 +49,7 @@ export const apiGetUserInfo = async () => {
     const response = await api.get(`/user`);
     return response;
   } catch (e: any) {
-    console.log(e);
+    // console.log(e);
     if (e.response && e.response.status === 401) {
       const accessToken = localData.getAccessToken();
       const refreshToken = localData.getRefreshToken();

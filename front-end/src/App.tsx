@@ -47,6 +47,7 @@ function App() {
   );
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const accessToken = localData.getAccessToken();
 
   // 로그인 안 되어있으면 login 페이지로 보냄
   const PrivateRoute = () => {
@@ -60,12 +61,16 @@ function App() {
   useEffect(() => {
     const accessToken = localData.getAccessToken();
     if (accessToken) {
-      apiGetUserInfo().then((res) => {
-        const userInfo = res?.data.response;
-        setUserInfo(userInfo);
-      });
+      apiGetUserInfo()
+        .then((res) => {
+          const userInfo = res?.data.response;
+          setUserInfo(userInfo);
+        })
+        .catch((e) => {
+          console.log("userinfo app", e);
+        });
     }
-  }, []);
+  }, [accessToken]);
 
   return (
     <div className="App">
