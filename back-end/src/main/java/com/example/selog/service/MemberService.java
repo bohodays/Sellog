@@ -1,6 +1,8 @@
 package com.example.selog.service;
 
 import com.example.selog.dto.member.*;
+import com.example.selog.dto.oauth.OAuthAttributes;
+import com.example.selog.entity.Authority;
 import com.example.selog.entity.Member;
 import com.example.selog.entity.Room;
 import com.example.selog.exception.CustomException;
@@ -11,14 +13,16 @@ import com.example.selog.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -28,6 +32,7 @@ public class MemberService {
     private final TokenProvider tokenProvider;
     private final RoomRepository roomRepository;
     private final S3Uploader s3Uploader;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     @Transactional(readOnly = true)
     public MemberDto findMemberInfoByUserId(Long userId) {
@@ -56,7 +61,10 @@ public class MemberService {
             }
             member = memberRepository.findByRefreshToken(tokenRequestDto.getRefreshToken())
                     .orElseThrow(() -> new CustomException(ErrorCode.NO_USER));
-            Authentication authentication = new UsernamePasswordAuthenticationToken(member.getUserId(), null, new ArrayList<>());
+
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(member.getEmail(),"1234");
+
+            Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
             tokenDto = tokenProvider.createTokenDto(authentication);
         }
 
