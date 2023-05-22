@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SGhostContainer, SMain, SContainer } from "./styles";
 import red_ghost from "@/assets/imgs/retro/red_ghost.png";
 import yellow_ghost from "@/assets/imgs/retro/yellow_ghost.png";
@@ -9,8 +9,18 @@ import { useNavigate } from "react-router-dom";
 import { userInfoState } from "@/recoil/myroom/atoms";
 import { useRecoilState } from "recoil";
 import coin from "@/assets/imgs/retro/coin.png";
+import { apiRefreshToken } from "@/api/user";
 
 const ItemShop = () => {
+  useEffect(() => {
+    apiRefreshToken()
+      .then((r) => {
+        console.log("갱신", r);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const homeNavigator = useNavigate();
