@@ -81,7 +81,7 @@ const DailyDoneList = ({ selectedDateProps }: ISelectedDate) => {
               ></DailyDoneModal>
             )}
             <span className="count" onClick={handleOpen}>
-              {dailyDoneList?.["github"]?.length}
+              commit {dailyDoneList?.["github"]?.length}
             </span>
           </div>
         )}
@@ -132,7 +132,9 @@ const DailyDoneList = ({ selectedDateProps }: ISelectedDate) => {
               <FontAwesomeIcon icon={faSquareCheck} />
               <span className="type">feed</span>
             </div>
-            <span className="count">{dailyDoneList?.["feed"]?.length}</span>
+            <span className="count">
+              feed {dailyDoneList?.["feed"]?.length}
+            </span>
             {isOpen && activeType === "feed" && (
               <DailyDoneModal
                 isOpen={isOpen}

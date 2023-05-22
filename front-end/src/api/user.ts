@@ -26,10 +26,20 @@ export const apiRefreshToken = async () => {
     refreshToken: refreshToken,
   };
   try {
-    const response = await api.post(`/user/access`, data);
-    return response;
-  } catch (e) {
-    console.log(e);
+    const refreshTokenResponse = await api.post(`/user/access`, data);
+    const newAccessToken = refreshTokenResponse.data.response.accessToken;
+    const newResponse = await api.get(`/user`, {
+      headers: {
+        Authorization: `Bearer ${newAccessToken}`,
+      },
+    });
+
+    localData.setAccessToken(refreshTokenResponse.data.response.accessToken);
+
+    localData.setRefreshToken(refreshTokenResponse.data.response.refreshToken);
+    return newResponse;
+  } catch (refreshError) {
+    console.log("토큰 갱신 실패:", refreshError);
   }
 };
 
@@ -41,14 +51,17 @@ export const apiGetUserInfo = async () => {
   } catch (e: any) {
     console.log(e);
     if (e.response && e.response.status === 401) {
+      const accessToken = localData.getAccessToken();
+      const refreshToken = localData.getRefreshToken();
+      const data = {
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+      };
       // 토큰 만료 에러 처리
 
       try {
         // 토큰 갱신 API 호출
-        const refreshTokenResponse = await api.post("/user/access", {
-          accessToken: localData.getAccessToken(),
-          refreshToken: localData.getRefreshToken(),
-        });
+        const refreshTokenResponse = await api.post(`/user/access`, data);
         // 새로운 accessToken으로 유저 정보 조회
         const newAccessToken = refreshTokenResponse.data.response.accessToken;
         const newResponse = await api.get(`/user`, {
@@ -57,13 +70,13 @@ export const apiGetUserInfo = async () => {
           },
         });
 
-        // localData.setAccessToken(
-        //   refreshTokenResponse.data.response.accessToken
-        // );
+        localData.setAccessToken(
+          refreshTokenResponse.data.response.accessToken
+        );
 
-        // localData.setRefreshToken(
-        //   refreshTokenResponse.data.response.refreshToken
-        // );
+        localData.setRefreshToken(
+          refreshTokenResponse.data.response.refreshToken
+        );
         return newResponse;
       } catch (refreshError) {
         // console.log("토큰 갱신 실패:", refreshError);
