@@ -56,7 +56,7 @@ public class TokenProvider implements InitializingBean {
                 .collect(Collectors.joining(","));
 
         long now = (new Date()).getTime();
-
+        log.info(authorities);
         // Access Token 생성 -> 유저 정보도 담는다.
         Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
         String accessToken = Jwts.builder()
@@ -85,6 +85,7 @@ public class TokenProvider implements InitializingBean {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
+        log.info(authorities);
         long now = (new Date()).getTime();
 
         // Access Token 생성 -> 유저 정보도 담는다.
