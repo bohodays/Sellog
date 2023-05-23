@@ -66,12 +66,16 @@
 
 ## 🛠️ 기술 스택
 
-<img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=#007396" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=for-the-badge&logo=JSON Web Tokens&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=for-the-badge&logo=Spring Security&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <br>
+<img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=#007396" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=for-the-badge&logo=JSON Web Tokens&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=for-the-badge&logo=Spring Security&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>   <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/RabbitMQ-F7DF1E?style=for-the-badge&color=FF6600&logo=RabbitMQ&logoColor=FFFFFF" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/Amazon+S3-F7DF1E?style=for-the-badge&color=569A31&logo=Amazon+S3&logoColor=FFFFFF" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<br>
 <img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=Gradle&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=NGINX&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <br>
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
-<img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;" /> 
+<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;" /> 
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <br>
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
-<img src="https://img.shields.io/badge/ThreeJs-000000?style=for-the-badge&logo=Three.js&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/Node.js-339939?style=for-the-badge&logo=Node.js&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<img src="https://img.shields.io/badge/ThreeJs-000000?style=for-the-badge&logo=Three.js&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/Blender-000000?style=for-the-badge&color=F5792A&logo=Blender&logoColor=FFFFFF" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <img src="https://img.shields.io/badge/Node.js-339939?style=for-the-badge&logo=Node.js&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <br>
 <img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=Jira&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
 <img src="https://img.shields.io/badge/GitLab-FCA121?style=for-the-badge&logo=GitLab&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
 
@@ -79,32 +83,41 @@
 
 <details><summary> <b> 상세 기술스택 및 버전</b> </summary>
 
-| 구분     | 기술스택        | 상세내용           | 버전      |
-| -------- | --------------- | ------------------ | --------- |
-| 공통     | 형상관리        | Gitlab             | \-        |
-|          | 이슈관리        | Jira               | \-        |
-|          | 커뮤니케이션    | Mattermost, Notion | \-        |
-| BackEnd  | DB              | MySQL              | 8.0.21    |
-|          |                 | JPA                | \-        |
-|          |                 | QueryDSL           | \-        |
-|          | Java            | OpenJDK            | 11.0.16.1 |
-|          | Spring          | Spring Boot        | 2.4.5     |
-|          | IDE             | IntelliJ           | \-        |
-|          | Build           | Gradle             | 7.5.1     |
-| FrontEnd | HTML5           |                    | \-        |
-|          | CSS3            |                    | \-        |
-|          | JavaScript(ES6) |                    | \-        |
-|          | React           | React              | 18.2.0    |
-|          |                 | styled-components  | 5.3.6     |
-|          |                 | axios              | 1.2.3     |
-|          |                 | Three.js           | 0.151.3   |
-|          | IDE             | Visual Studio Code | 1.75.1    |
-| Server   | Server          | AWS EC2            | \-        |
-|          | Server          | AWS EC2 S3         | \-        |
-|          | Server          | Nginx              | 1.18.0    |
-|          | 배포            | Docker             | 20.10.23  |
-|          | 배포            | Jenkins            | 2.378.1   |
-| Test     | test            | Postman            | 10.9.4    |
+| 구분       | 기술스택               | 버전        |
+| -------- | ------------------ | --------- |
+| General  | Gitlab             | -         |
+|          | Jira               | \-        |
+|          | Mattermost, Notion | \-        |
+| BackEnd  | OpenJDK            | 11.0.16.1 |
+|          | Spring Boot        | 2.4.5     |
+|          | Gradle             | 7.5.1     |
+|          | JPA                | \-        |
+|          | JWT                | 0.11.5    |
+|          | QueryDSL           | \-        |
+|          | IntelliJ           | 2022.3.1  |
+| FrontEnd | HTML5              | \-        |
+|          | CSS3               | \-        |
+|          | Javascript         | \-        |
+|          | Typescript         | 4.9.3     |
+|          | React              | 18.2.0    |
+|          | Recoil             | 0.7.7     |
+|          | styled-components  | 5.3.9     |
+|          | axios              | 1.3.5     |
+|          | Three.js           | 0.151.3   |
+|          | Vite               | 4.2.0     |
+|          | Visual Studio Code | 1.75.1    |
+| Database | MySQL              | 8.0.21    |
+|          | RabbitMQ           | 3.8.28    |
+| Server   | AWS EC2            | \-        |
+|          | AWS EC2 S3         | \-        |
+|          | Nginx              | 1.18.0    |
+|          | Docker             | 20.10.23  |
+|          | Jenkins            | 2.378.1   |
+| Test     | Postman            | 10.9.4    |
+|          | JUnit5             | \-        |
+|          | Mockito            | \-        |
+|          | Jacoco             | 0.8.7     |
+
 
 </details>
 
