@@ -12,15 +12,6 @@ import coin from "@/assets/imgs/retro/coin.png";
 import { apiRefreshToken } from "@/api/user";
 
 const ItemShop = () => {
-  useEffect(() => {
-    apiRefreshToken()
-      .then((r) => {
-        console.log("갱신", r);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const homeNavigator = useNavigate();
