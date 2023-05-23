@@ -43,10 +43,6 @@ const Accumulate = () => {
       .catch((e) => {
         console.log(e);
       });
-    // apiRefreshToken().then((r) => {
-    //   console.log(r);
-    //   console.log(r?.data.response.accessToken, "data");
-    // });
   }, []);
 
   const [activeStep, setActiveStep] = useState(0);

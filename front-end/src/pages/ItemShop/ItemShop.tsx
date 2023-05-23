@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { userInfoState } from "@/recoil/myroom/atoms";
 import { useRecoilState } from "recoil";
 import coin from "@/assets/imgs/retro/coin.png";
-import { apiRefreshToken } from "@/api/user";
 
 const ItemShop = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
