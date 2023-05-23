@@ -84,7 +84,7 @@ const MyProfile = (props: MyProfileProps) => {
         }
       }
     });
-    console.log({ userInfo });
+    // console.log({ userInfo });
   }, []);
   // 유저 개인정보 수정하는 함수
   const userInfoHandler = () => {
