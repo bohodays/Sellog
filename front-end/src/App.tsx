@@ -70,7 +70,7 @@ function App() {
           console.log("userinfo app", e);
         });
     }
-  }, [accessToken]);
+  }, []);
 
   return (
     <div className="App">
